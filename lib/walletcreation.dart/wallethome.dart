@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:momerlin/walletcreation.dart/walletseed.dart';
 
 class WalletHomePage extends StatefulWidget {
@@ -93,7 +94,12 @@ class _WalletHomePage extends State<WalletHomePage> {
                         height: 30,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WalletTwo()));
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: MediaQuery.of(context).size.height * 0.09,
