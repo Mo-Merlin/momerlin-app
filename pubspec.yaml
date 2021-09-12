@@ -35,6 +35,13 @@ dependencies:
   #bitcoin
   bitcoins: ^1.0.5
   bip32:
+  #sqlite
+  sqflite: ^2.0.0+4
+  
+  # Object Compare
+  equatable: ^2.0.3
+  #loader
+  awesome_loader: ^0.0.3
 
 dev_dependencies:
   flutter_test:

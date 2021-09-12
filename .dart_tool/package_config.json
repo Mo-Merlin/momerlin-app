@@ -20,6 +20,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "awesome_loader",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/awesome_loader-0.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
+    },
+    {
       "name": "base_x",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/base_x-1.0.1",
       "packageUri": "lib/",
@@ -100,6 +106,12 @@
     {
       "name": "cupertino_icons",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-1.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "equatable",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/equatable-2.0.3",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -278,6 +290,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "sqflite",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+4",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "sqflite_common",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite_common-2.0.1+1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "stack_trace",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.10.0",
       "packageUri": "lib/",
@@ -292,6 +316,12 @@
     {
       "name": "string_scanner",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/string_scanner-1.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "synchronized",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/synchronized-3.0.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
     },
@@ -350,7 +380,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-09-11T03:46:01.288306Z",
+  "generated": "2021-09-12T15:09:49.378606Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

@@ -1,3 +1,4 @@
+import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,9 @@ class MyApp extends StatelessWidget {
       title: 'Momerlin',
       theme: ThemeData(
         primarySwatch: Colors.blue,
+        textTheme: GoogleFonts.poppinsTextTheme(),
+        primaryTextTheme: GoogleFonts.poppinsTextTheme().copyWith(),
+        accentTextTheme: GoogleFonts.poppinsTextTheme(),
       ),
       home: WalletHomePage(),
     );
