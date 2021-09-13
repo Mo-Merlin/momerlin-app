@@ -1,4 +1,0 @@
-#Fri Sep 10 09:15:20 IST 2021
-base.0=E\:\\Pavithra\\dm\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
-path.0=classes.dex
-renamed.0=classes.dex

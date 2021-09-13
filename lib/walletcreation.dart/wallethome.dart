@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:momerlin/walletcreation.dart/walletseed.dart';
 
 class WalletHomePage extends StatefulWidget {
@@ -9,6 +11,24 @@ class WalletHomePage extends StatefulWidget {
 }
 
 class _WalletHomePage extends State<WalletHomePage> {
+  var userLanguage, lang = [];
+  @override
+  void initState() {
+    super.initState();
+    getUserLanguage();
+  }
+
+  // ignore: todo
+  //TODO :languagestart
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+  }
+  // ignore: todo
+  //TODO: LanguageEnd
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +61,11 @@ class _WalletHomePage extends State<WalletHomePage> {
                         height: 20,
                       ),
                       Text(
-                        "Hey there,\nyou new here?",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['heythereyounewhere'] != null)
+                            ? "${userLanguage['heythereyounewhere']}"
+                            : "Hey there,\nyou new here?",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             color: blue,
@@ -74,7 +98,11 @@ class _WalletHomePage extends State<WalletHomePage> {
                                 color: white,
                               ),
                               Text(
-                                "Create Wallet",
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['createWallet'] != null)
+                                    ? "${userLanguage['createWallet']}"
+                                    : "Create Wallet",
                                 style: GoogleFonts.poppins(
                                     color: white,
                                     letterSpacing: 1,
@@ -93,7 +121,12 @@ class _WalletHomePage extends State<WalletHomePage> {
                         height: 30,
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WalletTwo()));
+                        },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.7,
                           height: MediaQuery.of(context).size.height * 0.09,
@@ -109,7 +142,11 @@ class _WalletHomePage extends State<WalletHomePage> {
                                 color: white,
                               ),
                               Text(
-                                "Import Wallet",
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['importWallet'] != null)
+                                    ? "${userLanguage['importWallet']}"
+                                    : "Import Wallet",
                                 style: GoogleFonts.poppins(
                                     color: white,
                                     letterSpacing: 1,
@@ -129,7 +166,11 @@ class _WalletHomePage extends State<WalletHomePage> {
                         child: Row(
                           children: [
                             Text(
-                              "Terms & Conditions",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['termsConditions'] != null)
+                                  ? "${userLanguage['termsConditions']}"
+                                  : "Terms & Conditions",
                               style: GoogleFonts.poppins(
                                   color: button,
                                   letterSpacing: 1,
@@ -138,7 +179,11 @@ class _WalletHomePage extends State<WalletHomePage> {
                             ),
                             Spacer(),
                             Text(
-                              "Privacy Policy",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['privacyPolicy'] != null)
+                                  ? "${userLanguage['privacyPolicy']}"
+                                  : "Privacy Policy",
                               style: GoogleFonts.poppins(
                                   color: button,
                                   letterSpacing: 1,
