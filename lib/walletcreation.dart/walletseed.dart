@@ -66,7 +66,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
               decoration: BoxDecoration(
                 image: DecorationImage(
                     image: AssetImage(
-                      "asstes/images/seed.png",
+                      "assets/images/seed.png",
                     ),
                     fit: BoxFit.fill),
               ),
