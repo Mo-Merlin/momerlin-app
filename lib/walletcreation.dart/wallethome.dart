@@ -38,7 +38,7 @@ class _WalletHomePage extends State<WalletHomePage> {
           color: Color(0xff6C6AEB),
           image: DecorationImage(
               image: AssetImage(
-                "asstes/images/Login2.png",
+                "assets/images/Login2.png",
               ),
               fit: BoxFit.fill),
         ),

@@ -27,6 +27,29 @@ class UserDataSource extends DataSource {
       transaction: udata[0]['transaction'],
       nikecom: udata[0]['nikecom'],
       minago: udata[0]['minago'],
+      sendfunds: udata[0]['sendfunds'],
+      iwanttosend: udata[0]['iwanttosend'],
+      to: udata[0]['to'],
+      scanqrcode: udata[0]['scanqrcode'],
+      btcaddress: udata[0]['btcaddress'],
+      pleasedoublecheckyourrecipientsinfo: udata[0]
+          ['pleasedoublecheckyourrecipientsinfo'],
+      sendnow: udata[0]['sendnow'],
+      pastefromclipboard: udata[0]['pastefromclipboard'],
+      justlikemagicyourealldone: udata[0]['justlikemagicyourealldone'],
+      thoughitmaytakeourmagicminstoreachyourdestination: udata[0]
+          ['thoughitmaytakeourmagicminstoreachyourdestination'],
+      sendmore: udata[0]['sendmore'],
+      gohome: udata[0]['gohome'],
+      yourprofile: udata[0]['yourprofile'],
+      momoomer: udata[0]['momoomer'],
+      earnofreferredearnings: udata[0]['earnofreferredearnings'],
+      minwithdraw: udata[0]['minwithdraw'],
+      currentgasfeeestimated: udata[0]['currentgasfeeestimated'],
+      selectcurrency: udata[0]['selectcurrency'],
+      support: udata[0]['support'],
+      followus: udata[0]['followus'],
+      aboutus: udata[0]['aboutus'],
     ));
 
     final List<Map<String, dynamic>> maps = await db.query(languageTable);

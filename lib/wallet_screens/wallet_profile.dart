@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,6 +12,24 @@ class WalletProfile extends StatefulWidget {
 }
 
 class _WalletProfileState extends State<WalletProfile> {
+  var userLanguage, lang = [];
+  @override
+  void initState() {
+    super.initState();
+    getUserLanguage();
+  }
+
+  // ignore: todo
+  //TODO :languagestart
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+  }
+
+  // ignore: todo
+  //TODO: LanguageEnd
   String _chosenValue;
   @override
   Widget build(BuildContext context) {
@@ -49,7 +68,11 @@ class _WalletProfileState extends State<WalletProfile> {
                     Padding(
                       padding: const EdgeInsets.only(left: 20),
                       child: Text(
-                        "YOUR PROFILE",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['yourprofile'] != null)
+                            ? "${userLanguage['yourprofile']}"
+                            : "YOUR PROFILE",
                         style: GoogleFonts.poppins(
                           color: Colors.white,
                           fontSize: 17,
@@ -100,7 +123,11 @@ class _WalletProfileState extends State<WalletProfile> {
                             width: 200,
                             //color: Colors.orange,
                             child: Text(
-                              "Momo Omer",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['momoomer'] != null)
+                                  ? "${userLanguage['momoomer']}"
+                                  : "Momo Omer",
                               style: GoogleFonts.poppins(
                                   color: Colors.white,
                                   fontSize: 25,
@@ -159,7 +186,12 @@ class _WalletProfileState extends State<WalletProfile> {
                           child: Padding(
                             padding: const EdgeInsets.only(top: 5, left: 20),
                             child: Text(
-                              "Earn 1% of referred earnings",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['earnofreferredearnings'] !=
+                                          null)
+                                  ? "${userLanguage['earnofreferredearnings']}"
+                                  : "Earn 1% of referred earnings",
                               style: GoogleFonts.poppins(
                                   color: blue1,
                                   fontSize: 10,
@@ -189,7 +221,11 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(left: 0, top: 15),
                           child: Text(
-                            "MIN WITHDRAW",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['minwithdraw'] != null)
+                                ? "${userLanguage['minwithdraw']}"
+                                : "MIN WITHDRAW",
                             style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -224,7 +260,12 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(right: 13, top: 5),
                           child: Text(
-                            "Current gas fee estimated",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['currentgasfeeestimated'] !=
+                                        null)
+                                ? "${userLanguage['currentgasfeeestimated']}"
+                                : "Current gas fee estimated",
                             style: GoogleFonts.poppins(
                               fontSize: 10,
                               fontWeight: FontWeight.w500,
@@ -264,7 +305,11 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(left: 0, top: 30),
                           child: Text(
-                            "SELECT CURRENCY",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['selectcurrency'] != null)
+                                ? "${userLanguage['selectcurrency']}"
+                                : "SELECT CURRENCY",
                             style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -348,7 +393,11 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(right: 50, top: 20),
                           child: Text(
-                            "SUPPORT",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['support'] != null)
+                                ? "${userLanguage['support']}"
+                                : "SUPPORT",
                             style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -395,7 +444,11 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(right: 0, top: 20),
                           child: Text(
-                            "FOLLOW US",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['followus'] != null)
+                                ? "${userLanguage['followus']}"
+                                : "FOLLOW US",
                             style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
@@ -461,7 +514,11 @@ class _WalletProfileState extends State<WalletProfile> {
                         Padding(
                           padding: const EdgeInsets.only(left: 23, top: 35),
                           child: Text(
-                            "FOLLOW US",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['aboutus'] != null)
+                                ? "${userLanguage['aboutus']}"
+                                : "ABOUT US",
                             style: GoogleFonts.poppins(
                               fontSize: 15,
                               fontWeight: FontWeight.w600,

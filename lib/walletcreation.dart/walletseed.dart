@@ -6,6 +6,8 @@ import 'package:momerlin/theme/theme.dart';
 
 import 'package:bip39/bip39.dart' as bip39;
 import 'package:bitcoins/bitcoins.dart' as bitcoins;
+import 'package:momerlin/walletcreation.dart/walletseed1.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletSeedPage extends StatefulWidget {
   @override
@@ -15,7 +17,7 @@ class WalletSeedPage extends StatefulWidget {
 class _WalletSeedPage extends State<WalletSeedPage> {
   var userLanguage, lang = [];
 
-  var seed1;
+  var seed1, seed;
   bool loading = false;
   @override
   void initState() {
@@ -38,10 +40,11 @@ class _WalletSeedPage extends State<WalletSeedPage> {
   //TODO: LanguageEnd
 
 // ignore: todo
+
 //TODO: seed & address creation
   void createaddress() async {
     // loading = false;
-    final seed = bip39.generateMnemonic();
+    seed = bip39.generateMnemonic();
 
     var walletMain = bitcoins.WalletBTC(
         seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.mainnet);
@@ -61,48 +64,68 @@ class _WalletSeedPage extends State<WalletSeedPage> {
   Widget build(BuildContext context) {
     return loading == true
         ? Scaffold(
+            backgroundColor: backgroundcolor,
+            appBar: AppBar(
+              backgroundColor: backgroundcolor,
+              leading: Container(
+                padding: EdgeInsets.all(5),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50), color: button),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: white,
+                      size: 30,
+                    ),
+                  ),
+                ),
+              ),
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Spacer(),
+                  Image.asset("assets/images/MOMERLIN.png"),
+                  Spacer(),
+                  LinearPercentIndicator(
+                    width: 102.0,
+                    lineHeight: 25.0,
+                    percent: 0.1,
+                    center: Text(
+                      "10%",
+                      style: GoogleFonts.poppins(
+                          color: white,
+                          letterSpacing: 1,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    // trailing: Icon(Icons.mood),
+                    linearStrokeCap: LinearStrokeCap.roundAll,
+                    backgroundColor: Colors.grey,
+                    progressColor: blue,
+                  ),
+                ],
+              ),
+            ),
             body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage(
-                      "asstes/images/seed.png",
-                    ),
-                    fit: BoxFit.fill),
-              ),
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //       image: AssetImage(
+              //         "asstes/images/seed.png",
+              //       ),
+              //       fit: BoxFit.fill),
+              // ),
               child: SingleChildScrollView(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
-                    SizedBox(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        InkWell(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Container(
-                            width: 50,
-                            height: 50,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(50),
-                                color: button),
-                            child: Icon(
-                              Icons.arrow_back,
-                              color: white,
-                              size: 30,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                    SizedBox(
-                      height: 20,
-                    ),
                     Text(
                       (lang.length != null &&
                               lang.length != 0 &&
@@ -117,7 +140,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 10,
                     ),
                     Text(
                       (lang.length != null &&
@@ -130,6 +153,9 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           letterSpacing: 1,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
+                    ),
+                    SizedBox(
+                      height: 10,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
@@ -163,8 +189,10 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                     ),
                     InkWell(
                       onTap: () {
-                        // Navigator.push(context,
-                        //     MaterialPageRoute(builder: (_) => WalletSeedPage()));
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (_) => WalletSeedCheckPage(seed1)));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
