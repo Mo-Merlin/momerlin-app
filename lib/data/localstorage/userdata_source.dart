@@ -19,6 +19,14 @@ class UserDataSource extends DataSource {
       writedownthesewordsinorder: udata[0]['writedownthesewordsinorder'],
       recoverykey: udata[0]['recoverykey'],
       ihavewrittenthemdown: udata[0]['ihavewrittenthemdown'],
+      yourBalanceIs: udata[0]['yourBalanceIs'],
+      sats: udata[0]['sats'],
+      send: udata[0]['send'],
+      receive: udata[0]['receive'],
+      earn: udata[0]['earn'],
+      transaction: udata[0]['transaction'],
+      nikecom: udata[0]['nikecom'],
+      minago: udata[0]['minago'],
     ));
 
     final List<Map<String, dynamic>> maps = await db.query(languageTable);

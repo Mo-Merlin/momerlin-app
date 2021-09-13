@@ -8,18 +8,34 @@ class LanguageEntity extends Entity<int> {
       termsConditions,
       writedownthesewordsinorder,
       recoverykey,
-      ihavewrittenthemdown;
-  LanguageEntity(
-      {int id,
-      this.heythereyounewhere,
-      this.createWallet,
-      this.importWallet,
-      this.privacyPolicy,
-      this.termsConditions,
-      this.writedownthesewordsinorder,
-      this.recoverykey,
-      this.ihavewrittenthemdown})
-      : super(id);
+      ihavewrittenthemdown,
+      yourBalanceIs,
+      sats,
+      send,
+      receive,
+      earn,
+      transaction,
+      nikecom,
+      minago;
+  LanguageEntity({
+    int id,
+    this.heythereyounewhere,
+    this.createWallet,
+    this.importWallet,
+    this.privacyPolicy,
+    this.termsConditions,
+    this.writedownthesewordsinorder,
+    this.recoverykey,
+    this.ihavewrittenthemdown,
+    this.yourBalanceIs,
+    this.sats,
+    this.send,
+    this.receive,
+    this.earn,
+    this.transaction,
+    this.nikecom,
+    this.minago,
+  }) : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -32,7 +48,15 @@ class LanguageEntity extends Entity<int> {
       'termsConditions': termsConditions,
       'writedownthesewordsinorder': writedownthesewordsinorder,
       'recoverykey': recoverykey,
-      'ihavewrittenthemdown': ihavewrittenthemdown
+      'ihavewrittenthemdown': ihavewrittenthemdown,
+      'yourBalanceIs': yourBalanceIs,
+      'sats': sats,
+      'send': send,
+      'receive': receive,
+      'earn': earn,
+      'transaction': transaction,
+      'nikecom': nikecom,
+      'minago': minago,
     };
   }
 
@@ -46,6 +70,14 @@ class LanguageEntity extends Entity<int> {
         termsConditions,
         writedownthesewordsinorder,
         recoverykey,
-        ihavewrittenthemdown
+        ihavewrittenthemdown,
+        yourBalanceIs,
+        sats,
+        send,
+        receive,
+        earn,
+        transaction,
+        nikecom,
+        minago,
       ];
 }
