@@ -14,6 +14,9 @@ class WalletSeedPage extends StatefulWidget {
 
 class _WalletSeedPage extends State<WalletSeedPage> {
   var userLanguage, lang = [];
+
+  var seed1;
+  bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -33,13 +36,11 @@ class _WalletSeedPage extends State<WalletSeedPage> {
 
   // ignore: todo
   //TODO: LanguageEnd
-  var seed1;
-  bool loading = false;
 
 // ignore: todo
 //TODO: seed & address creation
   void createaddress() async {
-    loading = false;
+    // loading = false;
     final seed = bip39.generateMnemonic();
 
     var walletMain = bitcoins.WalletBTC(
@@ -58,9 +59,9 @@ class _WalletSeedPage extends State<WalletSeedPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: loading == true
-          ? Container(
+    return loading == true
+        ? Scaffold(
+            body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               decoration: BoxDecoration(
@@ -192,13 +193,13 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                   ],
                 ),
               ),
-            )
-          : Center(
-              child: AwesomeLoader(
-                loaderType: AwesomeLoader.AwesomeLoader3,
-                color: backgroundcolor,
-              ),
             ),
-    );
+          )
+        : Center(
+            child: AwesomeLoader(
+              loaderType: AwesomeLoader.AwesomeLoader3,
+              color: backgroundcolor,
+            ),
+          );
   }
 }
