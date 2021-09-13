@@ -64,7 +64,7 @@ class _WalletSucess extends State<WalletSucess> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Spacer(),
-            Image.asset("asstes/images/MOMERLIN.png"),
+            Image.asset("assets/images/MOMERLIN.png"),
             Spacer(),
             LinearPercentIndicator(
               width: 102.0,
@@ -99,7 +99,7 @@ class _WalletSucess extends State<WalletSucess> {
           child: Column(
             children: [
               Image.asset(
-                "asstes/images/btc.png",
+                "assets/images/btc.png",
               ),
               Text(
                 (lang.length != null &&
@@ -127,7 +127,7 @@ class _WalletSucess extends State<WalletSucess> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       Image.asset(
-                        "asstes/images/btcoin.png",
+                        "assets/images/btcoin.png",
                       ),
                       SizedBox(
                         width: 10,

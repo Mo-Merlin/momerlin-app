@@ -90,7 +90,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Spacer(),
-                  Image.asset("asstes/images/MOMERLIN.png"),
+                  Image.asset("assets/images/MOMERLIN.png"),
                   Spacer(),
                   LinearPercentIndicator(
                     width: 102.0,
