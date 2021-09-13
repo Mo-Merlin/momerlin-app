@@ -1,8 +1,12 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
+import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
+import 'package:momerlin/wallet_screens/wallet_send.dart';
 
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
@@ -12,6 +16,25 @@ class WalletTwo extends StatefulWidget {
 }
 
 class _WalletTwoState extends State<WalletTwo> {
+  var userLanguage, lang = [];
+  @override
+  void initState() {
+    super.initState();
+    getUserLanguage();
+  }
+
+  // ignore: todo
+  //TODO :languagestart
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+  }
+
+  // ignore: todo
+  //TODO: LanguageEnd
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -62,7 +85,11 @@ class _WalletTwoState extends State<WalletTwo> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Text(
-                          "Your balance is",
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['yourBalanceIs'] != null)
+                              ? "${userLanguage['yourBalanceIs']}"
+                              : "Your balance is",
                           style: GoogleFonts.poppins(
                             fontSize: 25,
                             fontWeight: FontWeight.bold,
@@ -77,18 +104,16 @@ class _WalletTwoState extends State<WalletTwo> {
                           children: [
                             RichText(
                               text: TextSpan(
-                                text: '355',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 75,
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.white,
-                                ),
                                 children: <TextSpan>[
                                   TextSpan(
-                                    text: '.00',
+                                    text: (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['355'] != null)
+                                        ? "${userLanguage['355']}"
+                                        : '355',
                                     style: GoogleFonts.montserrat(
-                                      fontSize: 15,
-                                      //fontWeight: FontWeight.bold,
+                                      fontSize: 70,
+                                      fontWeight: FontWeight.bold,
                                       color: Colors.white,
                                     ),
                                   ),
@@ -96,17 +121,35 @@ class _WalletTwoState extends State<WalletTwo> {
                                   //   text: 'SATs',
                                   //   style: GoogleFonts.poppins(
                                   //     fontSize: 15,
-                                  //     //fontWeight: FontWeight.bold,
+                                  //     fontFeatures: [
+                                  //       FontFeature.superscripts()
+                                  //     ],
                                   //     color: Colors.black,
                                   //   ),
                                   // ),
+                                  TextSpan(
+                                    text: (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['.00'] != null)
+                                        ? "${userLanguage['.00']}"
+                                        : '.00',
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 25,
+                                      fontFeatures: [FontFeature.subscripts()],
+                                      color: Colors.white,
+                                    ),
+                                  ),
                                 ],
                               ),
                             ),
                             Padding(
                               padding: const EdgeInsets.only(top: 15),
                               child: Text(
-                                "SATs",
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['sats'] != null)
+                                    ? "${userLanguage['sats']}"
+                                    : "SATs",
                                 style: GoogleFonts.montserrat(
                                   fontSize: 15,
                                 ),
@@ -125,7 +168,11 @@ class _WalletTwoState extends State<WalletTwo> {
                         ),
                         child: Center(
                           child: Text(
-                            "0.64USD",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['0.64USD'] != null)
+                                ? "${userLanguage['0.64USD']}"
+                                : "0.64USD",
                             style: GoogleFonts.montserrat(
                               fontSize: 13,
                               color: Colors.white,
@@ -142,43 +189,61 @@ class _WalletTwoState extends State<WalletTwo> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      Container(
-                          height: 130,
-                          width: 110,
-                          //color: button,
-                          decoration: BoxDecoration(
-                            color: button,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    color: Colors.green[300],
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.arrow_upward,
-                                          color: Colors.white,
-                                        )),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => WalletSend()));
+                        },
+                        child: Container(
+                            height: 130,
+                            width: 110,
+                            //color: button,
+                            decoration: BoxDecoration(
+                              color: button,
+                              borderRadius: BorderRadius.circular(10),
+                            ),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 25),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      color: Colors.green[300],
+                                      child: IconButton(
+                                          onPressed: () {
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        WalletSend()));
+                                          },
+                                          icon: Icon(
+                                            Icons.arrow_upward,
+                                            color: Colors.white,
+                                          )),
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 15),
-                                child: Text(
-                                  "Send",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 15, color: Colors.grey),
-                                ),
-                              )
-                            ],
-                          )),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['send'] != null)
+                                        ? "${userLanguage['send']}"
+                                        : "Send",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 15, color: Colors.grey),
+                                  ),
+                                )
+                              ],
+                            )),
+                      ),
                       Container(
                           height: 130,
                           width: 110,
@@ -209,7 +274,11 @@ class _WalletTwoState extends State<WalletTwo> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Text(
-                                  "Receive",
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['receive'] != null)
+                                      ? "${userLanguage['receive']}"
+                                      : "Receive",
                                   style: GoogleFonts.poppins(
                                       fontSize: 15, color: Colors.grey),
                                 ),
@@ -246,7 +315,11 @@ class _WalletTwoState extends State<WalletTwo> {
                               Padding(
                                 padding: const EdgeInsets.only(top: 15),
                                 child: Text(
-                                  "Receive",
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['earn'] != null)
+                                      ? "${userLanguage['earn']}"
+                                      : "Earn",
                                   style: GoogleFonts.poppins(
                                       fontSize: 15, color: Colors.grey),
                                 ),
@@ -295,7 +368,11 @@ class _WalletTwoState extends State<WalletTwo> {
                               Padding(
                                 padding: const EdgeInsets.only(left: 20),
                                 child: Text(
-                                  "Transaction",
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['transaction'] != null)
+                                      ? "${userLanguage['transaction']}"
+                                      : "Transaction",
                                   style: GoogleFonts.poppins(
                                     fontSize: 20,
                                     color: Colors.white,
@@ -348,14 +425,22 @@ class _WalletTwoState extends State<WalletTwo> {
                                     )),
                               ),
                               title: Text(
-                                'Nike.com',
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['nikecom'] != null)
+                                    ? "${userLanguage['nikecom']}"
+                                    : 'Nike.com',
                                 style: GoogleFonts.poppins(
                                     fontSize: 18,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white),
                               ),
                               subtitle: Text(
-                                '3 min ago',
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['minago'] != null)
+                                    ? "${userLanguage['minago']}"
+                                    : '3 min ago',
                                 style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -371,7 +456,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                 child: Center(
                                   child: RichText(
                                     text: TextSpan(
-                                      text: '-12.00 ',
+                                      text: (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['-12.00'] != null)
+                                          ? "${userLanguage['-12.00']}"
+                                          : '-12.00 ',
                                       style: GoogleFonts.montserrat(
                                         fontSize: 15,
                                         fontWeight: FontWeight.w500,
@@ -379,7 +468,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                       ),
                                       children: <TextSpan>[
                                         TextSpan(
-                                          text: ' SATS',
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['sats'] != null)
+                                              ? "${userLanguage['sats']}"
+                                              : ' sats',
                                           style: GoogleFonts.montserrat(
                                             fontSize: 12,
                                             color: Colors.orangeAccent,
