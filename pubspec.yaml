@@ -37,7 +37,8 @@ dependencies:
   bip32:
   #sqlite
   sqflite: ^2.0.0+4
-  
+  #search
+  flappy_search_bar: 1.4.1
   # Object Compare
   equatable: ^2.0.3
   #loader

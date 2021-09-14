@@ -5,6 +5,8 @@ import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
+import 'bankcreation.dart';
+
 class WalletSucess extends StatefulWidget {
   @override
   _WalletSucess createState() => _WalletSucess();
@@ -115,8 +117,8 @@ class _WalletSucess extends State<WalletSucess> {
               ),
               InkWell(
                 onTap: () {
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => WalletSeedPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (_) => BankCreation()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
