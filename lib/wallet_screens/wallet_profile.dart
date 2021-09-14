@@ -33,59 +33,48 @@ class _WalletProfileState extends State<WalletProfile> {
   String _chosenValue;
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-        child: Scaffold(
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: backgroundcolor,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 30,
+              // width: 30,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['yourprofile'] != null)
+              ? "${userLanguage['yourprofile']}"
+              : "YOUR PROFILE",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       backgroundColor: backgroundcolor,
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: 70,
-              width: MediaQuery.of(context).size.width,
-              //color: Colors.amber,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 20),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Container(
-                        height: 50,
-                        width: 50,
-                        color: button,
-                        child: IconButton(
-                            onPressed: () {
-                              Navigator.pop(context);
-                            },
-                            icon: Icon(
-                              Icons.arrow_back,
-                              color: Colors.white,
-                            )),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 20),
-                      child: Text(
-                        (lang.length != null &&
-                                lang.length != 0 &&
-                                userLanguage['yourprofile'] != null)
-                            ? "${userLanguage['yourprofile']}"
-                            : "YOUR PROFILE",
-                        style: GoogleFonts.poppins(
-                          color: Colors.white,
-                          fontSize: 17,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-            Container(
-              height: 180,
+              height: MediaQuery.of(context).size.height * 0.2,
               width: MediaQuery.of(context).size.width,
               //color: Colors.amber,
               child: Row(
@@ -535,6 +524,6 @@ class _WalletProfileState extends State<WalletProfile> {
           ],
         ),
       ),
-    ));
+    );
   }
 }

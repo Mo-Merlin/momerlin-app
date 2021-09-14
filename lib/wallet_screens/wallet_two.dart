@@ -40,9 +40,29 @@ class _WalletTwoState extends State<WalletTwo> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
+      appBar: AppBar(
+        backgroundColor: blue1,
+        elevation: 0,
+        leading: ClipRRect(
+          borderRadius: BorderRadius.circular(30),
+          child: Container(
+            // height: 30,
+            // width: 30,
+            color: blue1,
+            child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                )),
+          ),
+        ),
+      ),
       body: Stack(children: [
         Container(
-          height: 460,
+          height: MediaQuery.of(context).size.height * 0.6,
           width: MediaQuery.of(context).size.width,
           //color: Colors.amber,
           child: Column(
@@ -52,7 +72,7 @@ class _WalletTwoState extends State<WalletTwo> {
                 child: Container(
                   // duration: Duration(milliseconds: 200),
                   //color: blue1,
-                  height: 315,
+                  height: MediaQuery.of(context).size.height * 0.32,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: blue1,
@@ -61,7 +81,7 @@ class _WalletTwoState extends State<WalletTwo> {
                     alignment: Alignment.center,
                     children: [
                       Positioned(
-                        top: 40,
+                        top: 15,
                         child: Center(
                           child: InkWell(
                             onTap: () {
@@ -85,7 +105,7 @@ class _WalletTwoState extends State<WalletTwo> {
                         ),
                       ),
                       Positioned(
-                        top: 100,
+                        top: 80,
                         child: Text(
                           (lang.length != null &&
                                   lang.length != 0 &&
@@ -100,7 +120,7 @@ class _WalletTwoState extends State<WalletTwo> {
                         ),
                       ),
                       Positioned(
-                        top: 130,
+                        top: 110,
                         child: Text(
                           '355',
                           style: GoogleFonts.montserrat(
@@ -111,7 +131,7 @@ class _WalletTwoState extends State<WalletTwo> {
                         ),
                       ),
                       Positioned(
-                        top: 170,
+                        top: 150,
                         left: 270,
                         child: Text(
                           '.00',
@@ -123,7 +143,7 @@ class _WalletTwoState extends State<WalletTwo> {
                       ),
                       Positioned(
                         left: 270,
-                        top: 145,
+                        top: 125,
                         child: Text(
                           (lang.length != null &&
                                   lang.length != 0 &&
@@ -137,7 +157,7 @@ class _WalletTwoState extends State<WalletTwo> {
                         ),
                       ),
                       Positioned(
-                        top: 230,
+                        top: 200,
                         child: Container(
                           // color: button,
                           height: 40,
