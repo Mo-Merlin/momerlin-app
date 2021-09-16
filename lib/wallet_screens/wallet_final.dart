@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_send.dart';
+import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class WalletFinal extends StatefulWidget {
@@ -39,7 +39,7 @@ class _WalletFinalState extends State<WalletFinal> {
         backgroundColor: backgroundcolor,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Container(
@@ -119,7 +119,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletSend()));
+                                    builder: (context) => WalletChallenges()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
