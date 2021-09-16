@@ -1,4 +1,5 @@
 import 'package:momerlin/data/entities/language_entity.dart';
+import 'package:momerlin/data/entities/user_entity.dart';
 
 import 'data_source.dart';
 
@@ -8,6 +9,30 @@ class UserDataSource extends DataSource {
   String get tableName => 'User';
   String get tableSeed => 'Seed';
   String get languageTable => 'LanguageTable';
+  @override
+  Future<List<UserEntity>> all() async {
+    checkDatabaseConnection();
+    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    return List.generate(maps.length, (i) {
+      return UserEntity(
+        id: maps[i]['id'],
+        name: maps[i]['name'],
+        walletaddress: maps[i]['walletaddress'],
+        btctestaddress: maps[i]['btctestaddress'],
+        btcmainaddress: maps[i]['btcmainaddress'],
+        seed: maps[i]['seed'],
+        currency: maps[i]['currency'],
+        language: maps[i]['language'],
+      );
+    });
+  }
+
+  Future<bool> checkUserData() async {
+    await checkDatabaseConnection();
+    int id = 1;
+    final maps = await db.query(tableName, where: '"id" = $id');
+    return (maps.length == 0) ? false : true;
+  }
 
   Future<bool> saveLang(dynamic udata) async {
     await insertLang(LanguageEntity(
@@ -61,6 +86,27 @@ class UserDataSource extends DataSource {
     await checkDatabaseConnection();
     final maps = await db.query(languageTable);
 
+    return maps;
+  }
+
+  Future<bool> save(dynamic udata, String key) async {
+    await insert(UserEntity(
+      userId: udata['email'],
+      name: udata['firstName'],
+      walletaddress: udata['address'],
+      btctestaddress: udata['btcTestnetAddress'],
+      btcmainaddress: udata['btcMainnetAddress'],
+      seed: key,
+      currency: 'USD',
+      language: udata['selectedLanguage'],
+    ));
+    final List<Map<String, dynamic>> maps = await db.query(tableName);
+    return maps != null;
+  }
+
+  Future<dynamic> getUser() async {
+    await checkDatabaseConnection();
+    final maps = await db.query(tableName);
     return maps;
   }
 

@@ -38,7 +38,7 @@ class _WalletProfileState extends State<WalletProfile> {
         backgroundColor: backgroundcolor,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Container(

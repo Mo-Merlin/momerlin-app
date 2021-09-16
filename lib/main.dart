@@ -1,9 +1,18 @@
+import 'package:bitcoins/pgpwordlist/pgpwordlist.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:momerlin/bloc/authentication_bloc.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 import 'package:flutter/material.dart';
+import './simpleBlocObserver.dart';
 
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = SimpleBlocObserver();
+  runApp(BlocProvider(
+    create: (context) => AuthenticationBloc()..add(AppStarted()),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -18,7 +27,20 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: GoogleFonts.poppinsTextTheme().copyWith(),
         accentTextTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      home: WalletHomePage(),
+      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return WalletHomePage();
+          } else if (state is Unauthenticated) {
+            return WalletHomePage();
+          } else {
+            return Container(
+              color: Colors.white,
+            );
+          }
+        },
+      ),
+      // home: WalletHomePage(),
     );
   }
 }
