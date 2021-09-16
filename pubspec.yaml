@@ -32,6 +32,9 @@ dependencies:
   google_fonts:
   #seedcreation
   bip39:
+  #web3
+  
+  web3dart: ^2.0.0-dev.9
   #bitcoin
   bitcoins: ^1.0.5
   bip32:

@@ -224,6 +224,18 @@
       "languageVersion": "2.0"
     },
     {
+      "name": "isolate",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/isolate-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "json_rpc_2",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/json_rpc_2-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.10",
       "packageUri": "lib/",
@@ -392,10 +404,22 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "uuid",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/uuid-2.2.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
+    },
+    {
       "name": "vector_math",
       "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/vector_math-2.1.0",
       "packageUri": "lib/",
       "languageVersion": "2.12"
+    },
+    {
+      "name": "web3dart",
+      "rootUri": "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/web3dart-2.0.0-dev.9",
+      "packageUri": "lib/",
+      "languageVersion": "2.2"
     },
     {
       "name": "win32",
@@ -428,7 +452,7 @@
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2021-09-16T15:07:43.108205Z",
+  "generated": "2021-09-16T16:12:29.468872Z",
   "generator": "pub",
   "generatorVersion": "2.13.4"
 }

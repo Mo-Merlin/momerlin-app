@@ -16,12 +16,10 @@ class UserDataSource extends DataSource {
     return List.generate(maps.length, (i) {
       return UserEntity(
         id: maps[i]['id'],
-        name: maps[i]['name'],
         walletaddress: maps[i]['walletaddress'],
         btctestaddress: maps[i]['btctestaddress'],
         btcmainaddress: maps[i]['btcmainaddress'],
         seed: maps[i]['seed'],
-        currency: maps[i]['currency'],
         language: maps[i]['language'],
       );
     });
@@ -89,15 +87,14 @@ class UserDataSource extends DataSource {
     return maps;
   }
 
-  Future<bool> save(dynamic udata, String key) async {
+  Future<bool> save(
+    dynamic udata,
+  ) async {
     await insert(UserEntity(
-      userId: udata['email'],
-      name: udata['firstName'],
       walletaddress: udata['address'],
       btctestaddress: udata['btcTestnetAddress'],
       btcmainaddress: udata['btcMainnetAddress'],
-      seed: key,
-      currency: 'USD',
+      seed: udata['seed'],
       language: udata['selectedLanguage'],
     ));
     final List<Map<String, dynamic>> maps = await db.query(tableName);

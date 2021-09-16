@@ -2,6 +2,7 @@ import 'package:bitcoins/pgpwordlist/pgpwordlist.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/bloc/authentication_bloc.dart';
+import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 import 'package:flutter/material.dart';
 import './simpleBlocObserver.dart';
@@ -30,7 +31,7 @@ class MyApp extends StatelessWidget {
       home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
         builder: (context, state) {
           if (state is Authenticated) {
-            return WalletHomePage();
+            return WalletTwo();
           } else if (state is Unauthenticated) {
             return WalletHomePage();
           } else {

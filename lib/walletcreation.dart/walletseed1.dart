@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/walletcreation.dart/walletsucess.dart';
+
+import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletSeedCheckPage extends StatefulWidget {
-  WalletSeedCheckPage(this.seed);
+  WalletSeedCheckPage(this.seed, this.seed1);
   final seed;
+  final seed1;
 
   @override
   _WalletSeedCheckPage createState() => _WalletSeedCheckPage();
@@ -37,8 +42,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     print(widget.seed);
     selectedseed = widget.seed;
     selectedseed.shuffle();
-    print("$selectedseed");
     super.initState();
+    print(widget.seed1);
     loading = false;
     getUserLanguage();
   }
@@ -55,7 +60,36 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
 
   // ignore: todo
   //TODO: LanguageEnd
+  storeUser() async {
+    String _pk = Web3.privateKeyFromMnemonic(widget.seed1);
+    var walletMain = bitcoins.WalletBTC(
+        seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.mainnet);
+    print(walletMain.getAddress(0));
+    var walletTest = bitcoins.WalletBTC(
+        seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.testnet3);
+    print(walletTest.getAddress(0));
+    String _address = await Web3().getAddressFromPrivateKey(_pk);
+    print(_address);
 
+    final usersave = await UserRepository().storeUser({
+      "address": _address,
+      "btcTestnetAddress": walletTest.getAddress(0),
+      "btcMainnetAddress": walletMain.getAddress(0),
+      "seed": widget.seed1,
+      "language": "English"
+    });
+    if (usersave == true) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => WalletSucess()));
+    } else {
+      print("PAVITHRA");
+    }
+    print("usersave$usersave");
+  }
+  // String _pk = Web3.privateKeyFromMnemonic(seed);
+
+  // String _address = await Web3.getAddressFromPrivateKey(_pk);
+  // print("addrwss $_address");
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -225,8 +259,14 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               ),
               InkWell(
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => WalletSucess()));
+                  // if (seedlength == 12) {
+                  //   widget.seed == seed1
+                  // ?
+                  storeUser();
+                  // Navigator.push(context,
+                  //     MaterialPageRoute(builder: (_) => WalletSucess()));
+                  // // : _modalBottomSheetMenu3();
+                  // }
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width,
@@ -255,6 +295,75 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
           ),
         ),
       ),
+    );
+  }
+
+  void _modalBottomSheetMenu3() {
+    showModalBottomSheet(
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      // enableDrag: false,
+      builder: (builder) {
+        return new Padding(
+          padding: EdgeInsets.all(30),
+          child: Container(
+            height: 280,
+            child: Column(
+              children: <Widget>[
+                SizedBox(
+                  height: 30,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.close,
+                      color: Colors.red,
+                      size: 25,
+                    ),
+                    Text(
+                      "Seed is wrong",
+                      style: (TextStyle(
+                          fontSize: 20, fontWeight: FontWeight.bold)),
+                      textAlign: TextAlign.start, // has impact
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 30,
+                ),
+                Text(
+                  'Please enter valid seed',
+                  style: TextStyle(fontSize: 20),
+                ),
+                SizedBox(
+                  height: 25,
+                ),
+                Divider(color: blue),
+                SizedBox(
+                  height: 9,
+                ),
+                FlatButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (BuildContext context) => this.widget));
+                  },
+                  child: Text(
+                    'Ok, Got it',
+                    style: TextStyle(color: blue, fontSize: 20),
+                  ),
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
