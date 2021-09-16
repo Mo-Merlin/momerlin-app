@@ -157,62 +157,52 @@ class _WalletSendState extends State<WalletSend> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
+      appBar: AppBar(
+        backgroundColor: backgroundcolor,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 50,
+              // width: 50,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['sendfunds'] != null)
+              ? "${userLanguage['sendfunds']}"
+              : "SEND FUNDS",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
               //color: Colors.amber,
-              height: MediaQuery.of(context).size.height * 0.52,
+              height: MediaQuery.of(context).size.height * 0.45,
               child: SingleChildScrollView(
                 child: Column(
                   children: [
                     Container(
-                      height: 70,
-                      width: MediaQuery.of(context).size.width,
-                      //color: Colors.amber,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 20),
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                color: button,
-                                child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['sendfunds'] != null)
-                                    ? "${userLanguage['sendfunds']}"
-                                    : "SEND FUNDS",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 17,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    Container(
-                      height: 70,
+                      height: MediaQuery.of(context).size.height / 12,
                       width: MediaQuery.of(context).size.width,
                       //color: Colors.blueAccent,
                       child: Padding(
@@ -232,7 +222,7 @@ class _WalletSendState extends State<WalletSend> {
                       ),
                     ),
                     Container(
-                      height: 100,
+                      height: MediaQuery.of(context).size.height / 8,
                       width: MediaQuery.of(context).size.width,
                       //color: Colors.amber,
                       child: Stack(
@@ -542,7 +532,7 @@ class _WalletSendState extends State<WalletSend> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height * 0.49,
+              height: MediaQuery.of(context).size.height * 0.45,
               width: MediaQuery.of(context).size.width,
               decoration: BoxDecoration(
                   color: button,
