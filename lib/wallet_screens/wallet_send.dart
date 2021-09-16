@@ -36,78 +36,6 @@ class _WalletSendState extends State<WalletSend> {
   // ignore: todo
   //TODO: LanguageEnd
 
-  // void _showModelSheet() {
-  //   showBottomSheet(
-  //       backgroundColor: backgroundcolor,
-  //       context: context,
-  //       builder: (context) {
-  //         return Container(
-  //           height: 390,
-  //           width: MediaQuery.of(context).size.width,
-  //           decoration: BoxDecoration(
-  //               color: button,
-  //               borderRadius: BorderRadius.only(
-  //                 topLeft: Radius.circular(20),
-  //                 topRight: Radius.circular(20),
-  //               )),
-  //           child: Column(children: [
-  //             Padding(
-  //               padding: const EdgeInsets.only(top: 5),
-  //               child: Container(
-  //                 height: 40,
-  //                 width: 200,
-  //                 // ignore: deprecated_member_use
-  //                 child: RaisedButton(
-  //                   shape: RoundedRectangleBorder(
-  //                       borderRadius: BorderRadius.circular(25)),
-  //                   onPressed: () {},
-  //                   color: Colors.black.withOpacity(0.5),
-  //                   child: Row(
-  //                     mainAxisAlignment: MainAxisAlignment.spaceAround,
-  //                     children: <Widget>[
-  //                       Icon(
-  //                         Icons.copy,
-  //                         color: blue1,
-  //                         size: 15,
-  //                       ),
-  //                       Text(
-  //                         'PASTE FROM CLIPBOARD',
-  //                         style: TextStyle(
-  //                           fontSize: 11,
-  //                           fontWeight: FontWeight.w700,
-  //                           color: Colors.white,
-  //                         ),
-  //                       ),
-  //                     ],
-  //                   ),
-  //                 ),
-  //               ),
-  //             ),
-  //             Row(children: [
-  //               buildButton("1"),
-  //               buildButton("2"),
-  //               buildButton("3"),
-  //             ]),
-  //             Row(children: [
-  //               buildButton("4"),
-  //               buildButton("5"),
-  //               buildButton("6"),
-  //             ]),
-  //             Row(children: [
-  //               buildButton("7"),
-  //               buildButton("8"),
-  //               buildButton("9"),
-  //             ]),
-  //             Row(children: [
-  //               buildButton("*"),
-  //               buildButton("0"),
-  //               buildButton1(""),
-  //             ]),
-  //           ]),
-  //         );
-  //       });
-  // }
-
   Widget buildButton(String buttonText) {
     return new Expanded(
       child: new MaterialButton(
@@ -161,7 +89,7 @@ class _WalletSendState extends State<WalletSend> {
         backgroundColor: backgroundcolor,
         elevation: 0,
         leading: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(5.0),
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Container(
