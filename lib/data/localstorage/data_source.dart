@@ -6,7 +6,10 @@ import 'dbconfig.dart';
 abstract class DataSource {
   Database db;
 
+  String get tableName;
   String get languageTable;
+
+  String get primaryKey;
 
   Future<void> open() async {
     var databasesPath = await getDatabasesPath();
@@ -24,6 +27,26 @@ abstract class DataSource {
     DatabaseConfig.createTableQueries.forEach((createTableQuery) async {
       await db.execute(createTableQuery);
     });
+  }
+
+//Insert a record
+  Future<void> insert(Entity model) async {
+    await checkDatabaseConnection();
+    await db.insert(
+      tableName,
+      model.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+  }
+
+// update a record
+  Future<void> update(Entity model) async {
+    await checkDatabaseConnection();
+    await db.update(
+      tableName,
+      model.toMap(),
+      where: 'id = 1',
+    );
   }
 
   // Get a record
@@ -46,6 +69,16 @@ abstract class DataSource {
     );
   }
 
+// delete a record
+  Future<void> delete(int id) async {
+    await checkDatabaseConnection();
+    await db.delete(
+      tableName,
+      where: '$primaryKey = ?',
+      whereArgs: [id],
+    );
+  }
+
   Future<void> deleteLang() async {
     await checkDatabaseConnection();
     await db.rawDelete('DELETE FROM $languageTable');
@@ -54,6 +87,8 @@ abstract class DataSource {
   // delete all records
   Future<void> deleteAll() async {
     await checkDatabaseConnection();
+
+    await db.rawDelete('DELETE FROM $tableName');
     await db.rawDelete('DELETE FROM $languageTable');
   }
 
