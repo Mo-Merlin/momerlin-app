@@ -11,4 +11,10 @@ class UserRepository {
       return false;
     }
   }
+
+  Future<bool> storeUser(dynamic udata) async {
+    var save = UserDataSource().save(udata);
+    print("save $save");
+    return save;
+  }
 }

@@ -5,7 +5,6 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 
 import 'package:bip39/bip39.dart' as bip39;
-import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:momerlin/walletcreation.dart/walletseed1.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
@@ -41,17 +40,17 @@ class _WalletSeedPage extends State<WalletSeedPage> {
 
 // ignore: todo
 
+// ignore: todo
 //TODO: seed & address creation
   void createaddress() async {
     // loading = false;
     seed = bip39.generateMnemonic();
 
-    var walletMain = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.mainnet);
-    print(walletMain.getAddress(0));
-    var walletTest = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.testnet3);
-    print(walletTest.getAddress(0));
+    // String _pk = Web3.privateKeyFromMnemonic(seed);
+
+    // String _address = await Web3.getAddressFromPrivateKey(_pk);
+    // print("addrwss $_address");
+
     var seed2 = seed.split(" ");
 
     seed1 = seed2;
@@ -192,7 +191,8 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (_) => WalletSeedCheckPage(seed1)));
+                                builder: (_) =>
+                                    WalletSeedCheckPage(seed1, seed)));
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
