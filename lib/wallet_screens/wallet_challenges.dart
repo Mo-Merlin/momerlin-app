@@ -283,7 +283,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         //color: Colors.amber,
                         child: Center(
                           child: Text(
-                            "RECENT WINNERS",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['recentwinners'] != null)
+                                ? "${userLanguage['recentwinners']}"
+                                : "RECENT WINNERS",
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -299,7 +303,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: Text(
-                            "VIEW MORE",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['viewmore'] != null)
+                                ? "${userLanguage['viewmore']}"
+                                : "VIEW MORE",
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
@@ -463,7 +471,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         //color: Colors.amber,
                         child: Center(
                           child: Text(
-                            "JOIN A CHALLENGE",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['joinachallenge'] != null)
+                                ? "${userLanguage['joinachallenge']}"
+                                : "JOIN A CHALLENGE",
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -479,7 +491,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: Text(
-                            "VIEW MORE",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['viewmore'] != null)
+                                ? "${userLanguage['viewmore']}"
+                                : "VIEW MORE",
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
@@ -633,7 +649,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         //color: Colors.amber,
                         child: Center(
                           child: Text(
-                            "LEADERBOARD",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['leaderboard'] != null)
+                                ? "${userLanguage['leaderboard']}"
+                                : "LEADERBOARD",
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
@@ -649,7 +669,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             borderRadius: BorderRadius.circular(10)),
                         child: Center(
                           child: Text(
-                            "VIEW MORE",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['viewmore'] != null)
+                                ? "${userLanguage['viewmore']}"
+                                : "VIEW MORE",
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
@@ -833,7 +857,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       ),
                     ),
                     Text(
-                      "CREATE A CHALLENGE",
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['createachallenge'] != null)
+                          ? "${userLanguage['createachallenge']}"
+                          : "CREATE A CHALLENGE",
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontSize: 15,
