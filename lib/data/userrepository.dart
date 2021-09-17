@@ -1,4 +1,9 @@
+import 'localstorage/auth_header.dart';
 import 'localstorage/userdata_source.dart';
+import 'dart:async';
+import 'dart:convert';
+
+import 'package:http/http.dart' as http;
 
 class UserRepository {
   Future<bool> isSignedIn() async {
@@ -16,5 +21,49 @@ class UserRepository {
     var save = UserDataSource().save(udata);
     print("save $save");
     return save;
+  }
+
+  Future<bool> storeToken(String token) async {
+    var save = UserDataSource().savetoken(token);
+    return save;
+  }
+
+  Future<dynamic> updateToken(data) async {
+    print(data);
+    try {
+      // var config = await Firestore.instance.collection('config').getDocuments();
+      // var url = config.documents[0].data['API_URL_GAM'];
+      var body = json.encode(data);
+      print("body $body");
+      var url = "http://192.168.43.124:8000/api/";
+
+      var res = await http.post('${url + "set_access_token"}',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: body);
+      var checkres = jsonDecode(res.body);
+      print("checkres $checkres");
+      return checkres;
+    } catch (e) {
+      print("error");
+      print("Error" + e);
+    }
+  }
+
+  Future<dynamic> getTransaction() async {
+    try {
+      var url = "http://192.168.43.124:8000/api/";
+
+      var res = await http.get(
+        '${url + "transactions"}',
+      );
+      var checkres = jsonDecode(res.body);
+      ;
+      return checkres;
+    } catch (e) {
+      print("error");
+      print("Error" + e);
+    }
   }
 }

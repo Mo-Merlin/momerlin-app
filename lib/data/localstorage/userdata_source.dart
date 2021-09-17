@@ -1,4 +1,5 @@
 import 'package:momerlin/data/entities/language_entity.dart';
+import 'package:momerlin/data/entities/token_entity.dart';
 import 'package:momerlin/data/entities/user_entity.dart';
 
 import 'data_source.dart';
@@ -6,6 +7,7 @@ import 'data_source.dart';
 class UserDataSource extends DataSource {
   String get primaryKey => 'id';
 
+  String get tableToken => 'Token';
   String get tableName => 'User';
   String get tableSeed => 'Seed';
   String get languageTable => 'LanguageTable';
@@ -30,6 +32,19 @@ class UserDataSource extends DataSource {
     int id = 1;
     final maps = await db.query(tableName, where: '"id" = $id');
     return (maps.length == 0) ? false : true;
+  }
+
+  Future<String> gettoken() async {
+    await checkDatabaseConnection();
+    final maps = await db.query(tableToken);
+    return maps[0]["token"].toString();
+  }
+
+  Future<bool> savetoken(String token) async {
+    await checkDatabaseConnection();
+    await insertToken(TokenEntity(token: token));
+    final List<Map<String, dynamic>> maps = await db.query(tableToken);
+    return maps != null;
   }
 
   Future<bool> saveLang(dynamic udata) async {

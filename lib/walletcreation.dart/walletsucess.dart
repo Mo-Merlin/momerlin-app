@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-
-import 'bankcreation.dart';
+import 'package:plaid_flutter/plaid_flutter.dart';
 
 class WalletSucess extends StatefulWidget {
   @override
@@ -13,14 +13,26 @@ class WalletSucess extends StatefulWidget {
 }
 
 class _WalletSucess extends State<WalletSucess> {
+  PlaidLink _plaidLinkToken;
   var userLanguage, lang = [];
   bool loading = false;
   var selectedseed;
+
   @override
   void initState() {
     super.initState();
     loading = false;
     getUserLanguage();
+    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
+      token: "link-sandbox-c82a7b27-c325-4ba2-93c3-109e5ee301a2",
+    );
+
+    _plaidLinkToken = PlaidLink(
+      configuration: linkTokenConfiguration,
+      onSuccess: _onSuccessCallback,
+      onEvent: _onEventCallback,
+      onExit: _onExitCallback,
+    );
   }
 
   int seedlength = 0;
@@ -35,6 +47,33 @@ class _WalletSucess extends State<WalletSucess> {
 
   // ignore: todo
   //TODO: LanguageEnd
+  Future<void> _onSuccessCallback(
+      String publicToken, LinkSuccessMetadata metadata) async {
+    final usertoken =
+        await UserRepository().updateToken({"public_token": publicToken});
+    print("UserTokne $usertoken");
+    final usersave = await UserRepository().storeUser({"token": publicToken});
+    if (usersave == true) {
+      Navigator.push(
+          context, MaterialPageRoute(builder: (_) => WalletSucess()));
+    } else {
+      print("PAVITHRA");
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
+  }
+
+  void _onEventCallback(String event, LinkEventMetadata metadata) {
+    print("onEvent: $event, metadata: ${metadata.description()}");
+  }
+
+  void _onExitCallback(LinkError error, LinkExitMetadata metadata) {
+    print("onExit metadata: ${metadata.description()}");
+
+    if (error != null) {
+      print("onExit error: ${error.description()}");
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -116,10 +155,7 @@ class _WalletSucess extends State<WalletSucess> {
                 height: 70,
               ),
               InkWell(
-                onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (_) => BankCreation()));
-                },
+                onTap: () => _plaidLinkToken.open(),
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.height / 10,

@@ -9,6 +9,7 @@ abstract class DataSource {
   String get tableName;
   String get languageTable;
 
+  String get tableToken;
   String get primaryKey;
 
   Future<void> open() async {
@@ -88,8 +89,18 @@ abstract class DataSource {
   Future<void> deleteAll() async {
     await checkDatabaseConnection();
 
+    await db.rawDelete('DELETE FROM $tableToken');
     await db.rawDelete('DELETE FROM $tableName');
     await db.rawDelete('DELETE FROM $languageTable');
+  }
+
+  Future<void> insertToken(Entity model) async {
+    await checkDatabaseConnection();
+    await db.insert(
+      tableToken,
+      model.toMap(),
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
   }
 
   // close database connection

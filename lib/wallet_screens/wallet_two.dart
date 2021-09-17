@@ -1,8 +1,11 @@
 import 'dart:math';
 import 'dart:ui';
 
+// import 'package:intl/intl.dart';
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -20,6 +23,7 @@ class _WalletTwoState extends State<WalletTwo> {
   var userLanguage, lang = [];
   @override
   void initState() {
+    getTransaction();
     super.initState();
     getUserLanguage();
   }
@@ -36,6 +40,15 @@ class _WalletTwoState extends State<WalletTwo> {
   // ignore: todo
   //TODO: LanguageEnd
 
+  List<Transaction> transactions1 = [];
+  Future<void> getTransaction() async {
+    var res = await UserRepository().getTransaction();
+    transactions1 = [];
+    for (var i = 0; i < res["transactions"].length; i++) {
+      transactions1.add(Transaction.fromJson(res["transactions"][i]));
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,21 +56,8 @@ class _WalletTwoState extends State<WalletTwo> {
       appBar: AppBar(
         backgroundColor: blue1,
         elevation: 0,
-        leading: ClipRRect(
-          borderRadius: BorderRadius.circular(30),
-          child: Container(
-            // height: 30,
-            // width: 30,
-            color: blue1,
-            child: IconButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                icon: Icon(
-                  Icons.arrow_back,
-                  color: Colors.white,
-                )),
-          ),
+        leading: SizedBox(
+          height: 0,
         ),
       ),
       body: Stack(children: [
@@ -423,85 +423,90 @@ class _WalletTwoState extends State<WalletTwo> {
                   padding: const EdgeInsets.only(top: 40),
                   child: ListView.builder(
                     controller: myscrollController,
-                    itemCount: 25,
+                    itemCount: transactions1.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Container(
-                          child: ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
+                      return transactions1[index].merchantName == null
+                          ? SizedBox()
+                          : Padding(
+                              padding: const EdgeInsets.only(top: 20),
                               child: Container(
-                                  height: 60,
-                                  width: 60,
-                                  color: Colors.black54,
-                                  child: Image.network(
-                                    "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
-                                    fit: BoxFit.cover,
-                                  )),
-                            ),
-                            title: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['nikecom'] != null)
-                                  ? "${userLanguage['nikecom']}"
-                                  : 'Nike.com',
-                              style: GoogleFonts.poppins(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white),
-                            ),
-                            subtitle: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['minago'] != null)
-                                  ? "${userLanguage['minago']}"
-                                  : '3 min ago',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: Colors.white,
-                              ),
-                            ),
-                            trailing: Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Color(0xff707070).withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Center(
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: (lang.length != null &&
-                                            lang.length != 0 &&
-                                            userLanguage['-12.00'] != null)
-                                        ? "${userLanguage['-12.00']}"
-                                        : '-12.00 ',
-                                    style: GoogleFonts.montserrat(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w500,
-                                      color: Colors.white,
+                                child: ListTile(
+                                  //   leading: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //         height: 60,
+                                  //         width: 60,
+                                  //         color: Colors.black54,
+                                  //         child: Image.network(
+                                  //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
+                                  //           fit: BoxFit.cover,
+                                  //         )),
+                                  //   ),
+                                  title: Container(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: Text(
+                                      transactions1[index].merchantName,
+                                      style: GoogleFonts.poppins(
+                                          fontSize: 18,
+                                          fontWeight: FontWeight.w600,
+                                          color: Colors.white),
                                     ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: (lang.length != null &&
-                                                lang.length != 0 &&
-                                                userLanguage['sats'] != null)
-                                            ? "${userLanguage['sats']}"
-                                            : ' sats',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 12,
-                                          color: Colors.orangeAccent,
-                                        ),
+                                  ),
+                                  subtitle: Container(
+                                    padding: EdgeInsets.only(left: 20),
+                                    child: Text(
+                                      (DateFormat.yMMMd().format(
+                                              transactions1[index].date))
+                                          .toString(),
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.white,
                                       ),
-                                    ],
+                                    ),
+                                  ),
+                                  trailing: Container(
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff707070).withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
+                                    child: Stack(
+                                        alignment: Alignment.center,
+                                        children: [
+                                          Positioned(
+                                            left: 14,
+                                            top: 10,
+                                            child: Text(
+                                              (transactions1[index]
+                                                          .amount
+                                                          .floorToDouble() -
+                                                      transactions1[index]
+                                                          .amount)
+                                                  .toStringAsFixed(2),
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w500,
+                                                color: Colors.white,
+                                              ),
+                                            ),
+                                          ),
+                                          Positioned(
+                                            left: 50,
+                                            top: 15,
+                                            child: Text(
+                                              ' sats',
+                                              style: GoogleFonts.montserrat(
+                                                fontSize: 12,
+                                                color: Colors.orangeAccent,
+                                              ),
+                                            ),
+                                          ),
+                                        ]),
                                   ),
                                 ),
                               ),
-                            ),
-                          ),
-                        ),
-                      );
+                            );
                     },
                   ),
                 ),
@@ -549,4 +554,23 @@ class CurvedBottomClipper extends CustomClipper<Path> {
     // basically that means that clipping will be redrawn on any changes
     return true;
   }
+}
+
+class Transaction {
+  Transaction({
+    this.amount,
+    this.date,
+    this.merchantName,
+  });
+
+  double amount;
+  DateTime date;
+  String merchantName;
+
+  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+        amount: json["amount"].toDouble(),
+        date: DateTime.parse(json["date"]),
+        merchantName:
+            json["merchant_name"] == null ? null : json["merchant_name"],
+      );
 }

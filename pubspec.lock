@@ -207,6 +207,11 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_web_plugins:
+    dependency: transitive
+    description: flutter
+    source: sdk
+    version: "0.0.0"
   font_awesome_flutter:
     dependency: "direct main"
     description:
@@ -256,6 +261,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.19"
+  intl:
+    dependency: "direct main"
+    description:
+      name: intl
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.15.8"
   isolate:
     dependency: transitive
     description:
@@ -263,6 +275,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.1"
+  js:
+    dependency: transitive
+    description:
+      name: js
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.6.3"
   json_rpc_2:
     dependency: transitive
     description:
@@ -354,6 +373,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "3.1.0"
+  plaid_flutter:
+    dependency: "direct main"
+    description:
+      name: plaid_flutter
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.3"
   platform:
     dependency: transitive
     description:
