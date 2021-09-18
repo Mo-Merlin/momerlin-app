@@ -42,7 +42,7 @@ class _WalletHomePage extends State<WalletHomePage> {
               ),
               fit: BoxFit.fill),
         ),
-        child: SingleChildScrollView(
+        child: Container(
           padding: EdgeInsets.only(left: 20, right: 20, top: 270),
           child: Container(
             height: MediaQuery.of(context).size.height,
@@ -69,7 +69,6 @@ class _WalletHomePage extends State<WalletHomePage> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             color: blue,
-                            letterSpacing: 1,
                             fontSize: 30,
                             fontWeight: FontWeight.w600),
                       ),
@@ -105,7 +104,6 @@ class _WalletHomePage extends State<WalletHomePage> {
                                     : "Create Wallet",
                                 style: GoogleFonts.poppins(
                                     color: white,
-                                    letterSpacing: 1,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -149,7 +147,6 @@ class _WalletHomePage extends State<WalletHomePage> {
                                     : "Import Wallet",
                                 style: GoogleFonts.poppins(
                                     color: white,
-                                    letterSpacing: 1,
                                     fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -173,7 +170,6 @@ class _WalletHomePage extends State<WalletHomePage> {
                                   : "Terms & Conditions",
                               style: GoogleFonts.poppins(
                                   color: button,
-                                  letterSpacing: 1,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
                             ),
@@ -186,7 +182,6 @@ class _WalletHomePage extends State<WalletHomePage> {
                                   : "Privacy Policy",
                               style: GoogleFonts.poppins(
                                   color: button,
-                                  letterSpacing: 1,
                                   fontSize: 14,
                                   fontWeight: FontWeight.w400),
                             ),

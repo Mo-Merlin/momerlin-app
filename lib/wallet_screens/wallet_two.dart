@@ -2,6 +2,8 @@ import 'dart:math';
 import 'dart:ui';
 
 // import 'package:intl/intl.dart';
+import 'package:awesome_loader/awesome_loader.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -11,6 +13,8 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
+import 'package:plaid_flutter/plaid_flutter.dart';
+import 'package:qr_flutter/qr_flutter.dart';
 
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
@@ -20,18 +24,27 @@ class WalletTwo extends StatefulWidget {
 }
 
 class _WalletTwoState extends State<WalletTwo> {
-  var userLanguage, lang = [];
+  PlaidLink _plaidLinkToken;
+  var userLanguage, user, lang = [];
+  bool loading = false;
+  var selectedseed;
+  var linktoken;
   @override
   void initState() {
+    loading = true;
+    getToken();
     getTransaction();
     super.initState();
     getUserLanguage();
   }
 
+  var splitvalue = '0.0';
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
+    user = await UserDataSource().getUser();
+    // print(user[0]["walletaddress"]);
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -39,301 +52,389 @@ class _WalletTwoState extends State<WalletTwo> {
 
   // ignore: todo
   //TODO: LanguageEnd
-
+  var balance = 0.00;
   List<Transaction> transactions1 = [];
   Future<void> getTransaction() async {
+    setState(() {
+      loading = false;
+    });
     var res = await UserRepository().getTransaction();
+    setState(() {
+      loading = false;
+    });
     transactions1 = [];
     for (var i = 0; i < res["transactions"].length; i++) {
       transactions1.add(Transaction.fromJson(res["transactions"][i]));
+      var transamount = res["transactions"][i]["amount"] + balance;
+      print(transamount);
+      balance = (transamount - transamount.floorToDouble()) * 100;
+    }
+    var balance1 = balance.toString();
+    List result = balance1.split('.');
+    print(result);
+    splitvalue = result[1];
+    // splitvalue = balance.toString();
+  }
+
+  Future<void> getToken() async {
+    final usertoken1 = await UserRepository().getToken();
+    linktoken = usertoken1["link_token"];
+    print("token $linktoken");
+    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
+      token: usertoken1["link_token"],
+    );
+
+    _plaidLinkToken = PlaidLink(
+      configuration: linkTokenConfiguration,
+      onSuccess: _onSuccessCallback,
+      onEvent: _onEventCallback,
+      onExit: _onExitCallback,
+    );
+
+    print("UserTokne $usertoken1");
+  }
+
+  Future<void> _onSuccessCallback(
+      String publicToken, LinkSuccessMetadata metadata) async {
+    final usertoken =
+        await UserRepository().updateToken({"public_token": publicToken});
+    print("UserTokne $usertoken");
+    final usersave = await UserRepository().storeUser({"token": publicToken});
+
+    if (usersave == true) {
+      // Navigator.push(
+      //     context, MaterialPageRoute(builder: (_) => WalletSucess()));
+    } else {
+      print("PAVITHRA");
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
+  }
+
+  void _onEventCallback(String event, LinkEventMetadata metadata) {
+    print("onEvent: $event, metadata: ${metadata.description()}");
+  }
+
+  void _onExitCallback(LinkError error, LinkExitMetadata metadata) {
+    print("onExit metadata: ${metadata.description()}");
+
+    if (error != null) {
+      print("onExit error: ${error.description()}");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: backgroundcolor,
-      appBar: AppBar(
-        backgroundColor: blue1,
-        elevation: 0,
-        leading: SizedBox(
-          height: 0,
-        ),
-      ),
-      body: Stack(children: [
-        Container(
-          height: MediaQuery.of(context).size.height * 0.6,
-          width: MediaQuery.of(context).size.width,
-          //color: Colors.amber,
-          child: Column(
-            children: [
-              ClipPath(
-                clipper: CurvedBottomClipper(),
-                child: Container(
-                  // duration: Duration(milliseconds: 200),
-                  //color: blue1,
-                  height: MediaQuery.of(context).size.height * 0.32,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                    color: blue1,
-                  ),
-                  child: Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        top: 15,
-                        child: Center(
-                          child: InkWell(
+    return loading == true
+        ? Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: white,
+            child: Center(
+              child: AwesomeLoader(
+                loaderType: AwesomeLoader.AwesomeLoader3,
+                color: backgroundcolor,
+              ),
+            ),
+          )
+        : Scaffold(
+            backgroundColor: backgroundcolor,
+            appBar: AppBar(
+              backgroundColor: blue1,
+              elevation: 0,
+              leading: SizedBox(
+                height: 0,
+              ),
+            ),
+            body: Stack(children: [
+              Container(
+                height: MediaQuery.of(context).size.height * 0.6,
+                width: MediaQuery.of(context).size.width,
+                //color: Colors.amber,
+                child: Column(
+                  children: [
+                    ClipPath(
+                      clipper: CurvedBottomClipper(),
+                      child: Container(
+                        // duration: Duration(milliseconds: 200),
+                        //color: blue1,
+                        height: MediaQuery.of(context).size.height * 0.32,
+                        width: MediaQuery.of(context).size.width,
+                        decoration: BoxDecoration(
+                          color: blue1,
+                        ),
+                        child: Stack(
+                          alignment: Alignment.center,
+                          children: [
+                            Positioned(
+                              top: 15,
+                              child: Center(
+                                child: InkWell(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                WalletProfile()));
+                                  },
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 60,
+                                      width: 60,
+                                      child: Image.network(
+                                        'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 80,
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['yourBalanceIs'] != null)
+                                    ? "${userLanguage['yourBalanceIs']}"
+                                    : "Your balance is",
+                                style: GoogleFonts.poppins(
+                                  fontSize: 25,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 110,
+                              child: Text(
+                                balance.toStringAsFixed(2),
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 50,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            ),
+                            // Positioned(
+                            //   top: 150,
+                            //   left: 270,
+                            //   child: Text(
+                            //     ".$splitvalue.",
+                            //     style: GoogleFonts.montserrat(
+                            //         fontSize: 25,
+                            //         color: Colors.white,
+                            //         fontWeight: FontWeight.w600),
+                            //   ),
+                            // ),
+                            Positioned(
+                              left: 270,
+                              top: 125,
+                              child: Text(
+                                "Gwei",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 200,
+                              child: Container(
+                                // color: button,
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff707070).withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['0.64USD'] != null)
+                                        ? "${userLanguage['0.64USD']}"
+                                        : "0.64USD",
+                                    style: GoogleFonts.montserrat(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w400,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 15),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          GestureDetector(
                             onTap: () {
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => WalletProfile()));
+                                      builder: (context) => WalletSend()));
                             },
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                height: 60,
-                                width: 60,
-                                child: Image.network(
-                                  'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-                                  fit: BoxFit.cover,
+                            child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height / 6.3,
+                                width: MediaQuery.of(context).size.width / 4.3,
+                                //color: button,
+                                decoration: BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 25),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          color: Colors.green[300],
+                                          child: IconButton(
+                                              onPressed: () {
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WalletSend()));
+                                              },
+                                              icon: Icon(
+                                                Icons.arrow_upward,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 15),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['send'] != null)
+                                            ? "${userLanguage['send']}"
+                                            : "Send",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 15,
+                                          color: Colors.grey,
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                    )
+                                  ],
+                                )),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              _showReceiveMobile();
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height / 6.3,
+                              width: MediaQuery.of(context).size.width / 4.3,
+                              //color: button,
+                              decoration: BoxDecoration(
+                                color: button,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: InkWell(
+                                onTap: () {
+                                  _showReceiveMobile();
+                                },
+                                child: Column(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 25),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 50,
+                                          width: 50,
+                                          color: blue1,
+                                          child: IconButton(
+                                              onPressed: () {
+                                                _showReceiveMobile();
+                                              },
+                                              icon: Icon(
+                                                Icons.arrow_downward,
+                                                color: Colors.white,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 15),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['receive'] != null)
+                                            ? "${userLanguage['receive']}"
+                                            : "Receive",
+                                        style: GoogleFonts.poppins(
+                                            fontSize: 15,
+                                            color: Colors.grey,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),
                           ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 80,
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage['yourBalanceIs'] != null)
-                              ? "${userLanguage['yourBalanceIs']}"
-                              : "Your balance is",
-                          style: GoogleFonts.poppins(
-                            fontSize: 25,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 110,
-                        child: Text(
-                          '355',
-                          style: GoogleFonts.montserrat(
-                            fontSize: 70,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 150,
-                        left: 270,
-                        child: Text(
-                          '.00',
-                          style: GoogleFonts.montserrat(
-                              fontSize: 25,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                      Positioned(
-                        left: 270,
-                        top: 125,
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage['sats'] != null)
-                              ? "${userLanguage['sats']}"
-                              : "SATs",
-                          style: GoogleFonts.montserrat(
-                            fontSize: 17,
-                            fontWeight: FontWeight.w400,
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 200,
-                        child: Container(
-                          // color: button,
-                          height: 40,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: Color(0xff707070).withOpacity(0.4),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Center(
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['0.64USD'] != null)
-                                  ? "${userLanguage['0.64USD']}"
-                                  : "0.64USD",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 13,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(top: 15),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WalletSend()));
-                      },
-                      child: Container(
-                          height: MediaQuery.of(context).size.height / 6.3,
-                          width: MediaQuery.of(context).size.width / 4.3,
-                          //color: button,
-                          decoration: BoxDecoration(
-                            color: button,
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Column(
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(top: 25),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    color: Colors.green[300],
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) =>
-                                                      WalletSend()));
-                                        },
-                                        icon: Icon(
-                                          Icons.arrow_upward,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.only(top: 15),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['send'] != null)
-                                      ? "${userLanguage['send']}"
-                                      : "Send",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 15,
-                                    color: Colors.grey,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              )
-                            ],
-                          )),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 6.3,
-                      width: MediaQuery.of(context).size.width / 4.3,
-                      //color: button,
-                      decoration: BoxDecoration(
-                        color: button,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                color: blue1,
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      Icons.arrow_downward,
-                                      color: Colors.white,
-                                    )),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['receive'] != null)
-                                  ? "${userLanguage['receive']}"
-                                  : "Receive",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 6.3,
-                      width: MediaQuery.of(context).size.width / 4.3,
+                          Container(
+                            height: MediaQuery.of(context).size.height / 6.3,
+                            width: MediaQuery.of(context).size.width / 4.3,
 
-                      //color: button,
-                      decoration: BoxDecoration(
-                        color: button,
-                        borderRadius: BorderRadius.circular(10),
-                      ),
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 25),
-                            child: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                height: 50,
-                                width: 50,
-                                color: Colors.orange[300],
-                                child: IconButton(
-                                    onPressed: () {},
-                                    icon: Icon(
-                                      FontAwesomeIcons.dollarSign,
-                                      color: Colors.white,
-                                    )),
-                              ),
+                            //color: button,
+                            decoration: BoxDecoration(
+                              color: button,
+                              borderRadius: BorderRadius.circular(10),
                             ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 15),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['earn'] != null)
-                                  ? "${userLanguage['earn']}"
-                                  : "Earn",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 15,
-                                  color: Colors.grey,
-                                  fontWeight: FontWeight.w400),
+                            child: Column(
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 25),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 50,
+                                      width: 50,
+                                      color: Colors.orange[300],
+                                      child: IconButton(
+                                          // onPressed: () {},
+                                          onPressed: () =>
+                                              _plaidLinkToken.open(),
+                                          icon: Icon(
+                                            FontAwesomeIcons.dollarSign,
+                                            color: Colors.white,
+                                          )),
+                                    ),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 15),
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['earn'] != null)
+                                        ? "${userLanguage['earn']}"
+                                        : "Earn",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 15,
+                                        color: Colors.grey,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ],
@@ -342,179 +443,285 @@ class _WalletTwoState extends State<WalletTwo> {
                   ],
                 ),
               ),
+              SizedBox(
+                height: 10,
+              ),
+              DraggableScrollableSheet(
+                initialChildSize: 0.4,
+                minChildSize: 0.4,
+                maxChildSize: 0.7,
+                builder: (BuildContext context, myscrollController) {
+                  return Container(
+                    decoration: BoxDecoration(
+                      color: button,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(40),
+                        topRight: Radius.circular(40),
+                      ),
+                    ),
+                    //color: button,
+                    child: Stack(
+                      // crossAxisAlignment: CrossAxisAlignment,
+                      alignment: Alignment.topCenter,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20),
+                          child: Container(
+                            height: 4,
+                            width: 50,
+                            decoration: BoxDecoration(
+                                color: Color(0xffE4E4E4),
+                                borderRadius: BorderRadius.circular(10)),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 40),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.only(left: 20),
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['transaction'] != null)
+                                      ? "${userLanguage['transaction']}"
+                                      : "Transaction",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 20,
+                                    color: Colors.white,
+                                    fontWeight: FontWeight.w500,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        transactions1.length == 0
+                            ? Padding(
+                                padding: EdgeInsets.only(
+                                    top: 60, left: 20, right: 20),
+                                child: Center(
+                                  child: Text(
+                                    "Do you want to see your transaction Please click Earn button and login your plaid account",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.white, fontSize: 17),
+                                  ),
+                                ),
+                              )
+                            : Padding(
+                                padding: EdgeInsets.only(top: 50),
+                                // top: 50,
+                                child: ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: AlwaysScrollableScrollPhysics(),
+                                  controller: myscrollController,
+                                  itemCount: transactions1.length,
+                                  // padding: EdgeInsets.zero,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return transactions1[index].merchantName ==
+                                            null
+                                        ? SizedBox()
+                                        : Column(
+                                            children: [
+                                              Container(
+                                                child: ListTile(
+                                                  // contentPadding: EdgeInsets.only(
+                                                  //     top: 0, bottom: 0),
+                                                  //   leading: ClipRRect(
+                                                  //     borderRadius: BorderRadius.circular(30),
+                                                  //     child: Container(
+                                                  //         height: 60,
+                                                  //         width: 60,
+                                                  //         color: Colors.black54,
+                                                  //         child: Image.network(
+                                                  //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
+                                                  //           fit: BoxFit.cover,
+                                                  //         )),
+                                                  //   ),
+                                                  title: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20),
+                                                    child: Text(
+                                                      transactions1[index]
+                                                          .merchantName,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 18,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600,
+                                                              color:
+                                                                  Colors.white),
+                                                    ),
+                                                  ),
+                                                  subtitle: Container(
+                                                    padding: EdgeInsets.only(
+                                                        left: 20),
+                                                    child: Text(
+                                                      (DateFormat.yMMMd()
+                                                              .format(
+                                                                  transactions1[
+                                                                          index]
+                                                                      .date))
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 12,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  trailing: Container(
+                                                    height: 40,
+                                                    width: 100,
+                                                    decoration: BoxDecoration(
+                                                      color: Color(0xff707070)
+                                                          .withOpacity(0.4),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10),
+                                                    ),
+                                                    child: Stack(
+                                                        alignment:
+                                                            Alignment.center,
+                                                        children: [
+                                                          Positioned(
+                                                            left: 14,
+                                                            top: 10,
+                                                            child: Text(
+                                                              ((transactions1[index]
+                                                                              .amount -
+                                                                          transactions1[index]
+                                                                              .amount
+                                                                              .floorToDouble()) *
+                                                                      100)
+                                                                  .toStringAsFixed(
+                                                                      1),
+                                                              style: GoogleFonts
+                                                                  .montserrat(
+                                                                fontSize: 15,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500,
+                                                                color: Colors
+                                                                    .white,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                          Positioned(
+                                                            left: 50,
+                                                            top: 15,
+                                                            child: Text(
+                                                              ' Gwei',
+                                                              style: GoogleFonts
+                                                                  .montserrat(
+                                                                fontSize: 12,
+                                                                color: Colors
+                                                                    .orangeAccent,
+                                                              ),
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          );
+                                  },
+                                ),
+                              ),
+                      ],
+                    ),
+                  );
+                },
+              )
+            ]),
+          );
+  }
+
+  _showReceiveMobile() {
+    showModalBottomSheet(
+      backgroundColor: Colors.white,
+      isScrollControlled: true,
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      builder: (builder) {
+        return new Wrap(children: <Widget>[
+          Container(
+            padding: EdgeInsets.all(18),
+            child: receiveContent(),
+          ),
+        ]);
+      },
+    );
+  }
+
+  Widget receiveContent() {
+    return Column(
+      children: <Widget>[
+        Container(
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "Receive",
+                style: TextStyle(fontSize: 22, color: Colors.black),
+              ),
+              IconButton(
+                icon: Icon(Icons.close, color: Colors.black),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
             ],
           ),
         ),
         SizedBox(
           height: 10,
         ),
-        DraggableScrollableSheet(
-          initialChildSize: 0.4,
-          minChildSize: 0.4,
-          maxChildSize: 0.7,
-          builder: (BuildContext context, myscrollController) {
-            return Stack(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    color: button,
-                    borderRadius: BorderRadius.only(
-                      topLeft: Radius.circular(40),
-                      topRight: Radius.circular(40),
-                    ),
-                  ),
-                  //color: button,
-                  child: Column(
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20),
-                        child: Container(
-                          height: 4,
-                          width: 50,
-                          decoration: BoxDecoration(
-                              color: Color(0xffE4E4E4),
-                              borderRadius: BorderRadius.circular(10)),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 20),
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['transaction'] != null)
-                                    ? "${userLanguage['transaction']}"
-                                    : "Transaction",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 20,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                            ),
-                            // Padding(
-                            //   padding: const EdgeInsets.only(right: 20),
-                            //   child: ClipRRect(
-                            //     borderRadius: BorderRadius.circular(10),
-                            //     child: Container(
-                            //       height: 40,
-                            //       width: 40,
-                            //       color: Colors.black54,
-                            //       child: IconButton(
-                            //           onPressed: () {},
-                            //           icon: Icon(
-                            //             Icons.search,
-                            //             color: blue1,
-                            //           )),
-                            //     ),
-                            //   ),
-                            // ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 40),
-                  child: ListView.builder(
-                    controller: myscrollController,
-                    itemCount: transactions1.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return transactions1[index].merchantName == null
-                          ? SizedBox()
-                          : Padding(
-                              padding: const EdgeInsets.only(top: 20),
-                              child: Container(
-                                child: ListTile(
-                                  //   leading: ClipRRect(
-                                  //     borderRadius: BorderRadius.circular(30),
-                                  //     child: Container(
-                                  //         height: 60,
-                                  //         width: 60,
-                                  //         color: Colors.black54,
-                                  //         child: Image.network(
-                                  //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
-                                  //           fit: BoxFit.cover,
-                                  //         )),
-                                  //   ),
-                                  title: Container(
-                                    padding: EdgeInsets.only(left: 20),
-                                    child: Text(
-                                      transactions1[index].merchantName,
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white),
-                                    ),
-                                  ),
-                                  subtitle: Container(
-                                    padding: EdgeInsets.only(left: 20),
-                                    child: Text(
-                                      (DateFormat.yMMMd().format(
-                                              transactions1[index].date))
-                                          .toString(),
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                      ),
-                                    ),
-                                  ),
-                                  trailing: Container(
-                                    height: 40,
-                                    width: 100,
-                                    decoration: BoxDecoration(
-                                      color: Color(0xff707070).withOpacity(0.4),
-                                      borderRadius: BorderRadius.circular(10),
-                                    ),
-                                    child: Stack(
-                                        alignment: Alignment.center,
-                                        children: [
-                                          Positioned(
-                                            left: 14,
-                                            top: 10,
-                                            child: Text(
-                                              (transactions1[index]
-                                                          .amount
-                                                          .floorToDouble() -
-                                                      transactions1[index]
-                                                          .amount)
-                                                  .toStringAsFixed(2),
-                                              style: GoogleFonts.montserrat(
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Positioned(
-                                            left: 50,
-                                            top: 15,
-                                            child: Text(
-                                              ' sats',
-                                              style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: Colors.orangeAccent,
-                                              ),
-                                            ),
-                                          ),
-                                        ]),
-                                  ),
-                                ),
-                              ),
-                            );
-                    },
-                  ),
-                ),
-              ],
-            );
-          },
-        )
-      ]),
+        QrImage(
+          data: user[0]["walletaddress"],
+          size: 200.0,
+        ),
+        SizedBox(
+          height: 10,
+        ),
+        Text(
+          user[0]["walletaddress"],
+          style: TextStyle(fontSize: 14, color: Colors.black),
+        ),
+        SizedBox(
+          height: 35,
+        ),
+        Container(
+          height: 50,
+          width: 250,
+          child: RaisedButton(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(12.0),
+                side: BorderSide(color: Colors.white)),
+            onPressed: () async {
+              FlutterClipboard.copy(
+                // widget.xumCoinMainNetAddress,
+                user[0]["walletaddress"],
+              ).then(
+                (result) {
+                  Navigator.of(context).pop();
+                  // AppToast()
+                  //     .showSuccess(context: context, msg: "XUM Address Copied");
+                },
+              );
+            },
+            color: blue1,
+            textColor: Colors.white,
+            child: Text("Copy", style: TextStyle(fontSize: 14)),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -1,0 +1,505 @@
+define(['dart_sdk'], (function load__packages__plaid_flutter__src__metadata_dart(dart_sdk) {
+  'use strict';
+  const core = dart_sdk.core;
+  const _interceptors = dart_sdk._interceptors;
+  const dart = dart_sdk.dart;
+  const dartx = dart_sdk.dartx;
+  var metadata = Object.create(dart.library);
+  var $add = dartx.add;
+  dart._checkModuleNullSafetyMode(false);
+  var T = {
+    JSArrayOfLinkAccount: () => (T.JSArrayOfLinkAccount = dart.constFn(_interceptors.JSArray$(metadata.LinkAccount)))()
+  };
+  const CT = Object.create({
+    _: () => (C, CT)
+  });
+  var I = [
+    "file:///C:/src/flutter/.pub-cache/hosted/pub.dartlang.org/plaid_flutter-2.1.3/lib/src/metadata.dart",
+    "package:plaid_flutter/src/metadata.dart"
+  ];
+  var code$ = dart.privateName(metadata, "LinkError.code");
+  var type$ = dart.privateName(metadata, "LinkError.type");
+  var message$ = dart.privateName(metadata, "LinkError.message");
+  var displayMessage$ = dart.privateName(metadata, "LinkError.displayMessage");
+  metadata.LinkError = class LinkError extends core.Object {
+    get code() {
+      return this[code$];
+    }
+    set code(value) {
+      super.code = value;
+    }
+    get type() {
+      return this[type$];
+    }
+    set type(value) {
+      super.type = value;
+    }
+    get message() {
+      return this[message$];
+    }
+    set message(value) {
+      super.message = value;
+    }
+    get displayMessage() {
+      return this[displayMessage$];
+    }
+    set displayMessage(value) {
+      super.displayMessage = value;
+    }
+    static fromJson(json) {
+      return new metadata.LinkError.new({code: core.String.as(dart.dsend(json, '_get', ["errorCode"])), type: core.String.as(dart.dsend(json, '_get', ["errorType"])), message: core.String.as(dart.dsend(json, '_get', ["errorMessage"])), displayMessage: core.String.as(dart.dsend(json, '_get', ["errorDisplayMessage"]))});
+    }
+    description() {
+      return "[code: " + dart.str(this.code) + ", type: " + dart.str(this.type) + ", message: " + dart.str(this.message) + ", displayMessage: " + dart.str(this.displayMessage) + "]";
+    }
+  };
+  (metadata.LinkError.new = function(opts) {
+    let code = opts && 'code' in opts ? opts.code : null;
+    if (code == null) dart.nullFailed(I[0], 18, 19, "code");
+    let type = opts && 'type' in opts ? opts.type : null;
+    if (type == null) dart.nullFailed(I[0], 19, 19, "type");
+    let message = opts && 'message' in opts ? opts.message : null;
+    if (message == null) dart.nullFailed(I[0], 20, 19, "message");
+    let displayMessage = opts && 'displayMessage' in opts ? opts.displayMessage : null;
+    if (displayMessage == null) dart.nullFailed(I[0], 21, 19, "displayMessage");
+    this[code$] = code;
+    this[type$] = type;
+    this[message$] = message;
+    this[displayMessage$] = displayMessage;
+    ;
+  }).prototype = metadata.LinkError.prototype;
+  dart.addTypeTests(metadata.LinkError);
+  dart.addTypeCaches(metadata.LinkError);
+  dart.setMethodSignature(metadata.LinkError, () => ({
+    __proto__: dart.getMethods(metadata.LinkError.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkError, I[1]);
+  dart.setFieldSignature(metadata.LinkError, () => ({
+    __proto__: dart.getFields(metadata.LinkError.__proto__),
+    code: dart.finalFieldType(core.String),
+    type: dart.finalFieldType(core.String),
+    message: dart.finalFieldType(core.String),
+    displayMessage: dart.finalFieldType(core.String)
+  }));
+  var id$ = dart.privateName(metadata, "LinkInstitution.id");
+  var name$ = dart.privateName(metadata, "LinkInstitution.name");
+  metadata.LinkInstitution = class LinkInstitution extends core.Object {
+    get id() {
+      return this[id$];
+    }
+    set id(value) {
+      super.id = value;
+    }
+    get name() {
+      return this[name$];
+    }
+    set name(value) {
+      super.name = value;
+    }
+    static fromJson(json) {
+      return new metadata.LinkInstitution.new({id: core.String.as(dart.dsend(json, '_get', ["id"])), name: core.String.as(dart.dsend(json, '_get', ["name"]))});
+    }
+    description() {
+      return "id: " + dart.str(this.id) + ", name: " + dart.str(this.name);
+    }
+  };
+  (metadata.LinkInstitution.new = function(opts) {
+    let id = opts && 'id' in opts ? opts.id : null;
+    if (id == null) dart.nullFailed(I[0], 47, 19, "id");
+    let name = opts && 'name' in opts ? opts.name : null;
+    if (name == null) dart.nullFailed(I[0], 48, 19, "name");
+    this[id$] = id;
+    this[name$] = name;
+    ;
+  }).prototype = metadata.LinkInstitution.prototype;
+  dart.addTypeTests(metadata.LinkInstitution);
+  dart.addTypeCaches(metadata.LinkInstitution);
+  dart.setMethodSignature(metadata.LinkInstitution, () => ({
+    __proto__: dart.getMethods(metadata.LinkInstitution.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkInstitution, I[1]);
+  dart.setFieldSignature(metadata.LinkInstitution, () => ({
+    __proto__: dart.getFields(metadata.LinkInstitution.__proto__),
+    id: dart.finalFieldType(core.String),
+    name: dart.finalFieldType(core.String)
+  }));
+  var id$0 = dart.privateName(metadata, "LinkAccount.id");
+  var mask$ = dart.privateName(metadata, "LinkAccount.mask");
+  var name$0 = dart.privateName(metadata, "LinkAccount.name");
+  var type$0 = dart.privateName(metadata, "LinkAccount.type");
+  var subtype$ = dart.privateName(metadata, "LinkAccount.subtype");
+  var verificationStatus$ = dart.privateName(metadata, "LinkAccount.verificationStatus");
+  metadata.LinkAccount = class LinkAccount extends core.Object {
+    get id() {
+      return this[id$0];
+    }
+    set id(value) {
+      super.id = value;
+    }
+    get mask() {
+      return this[mask$];
+    }
+    set mask(value) {
+      super.mask = value;
+    }
+    get name() {
+      return this[name$0];
+    }
+    set name(value) {
+      super.name = value;
+    }
+    get type() {
+      return this[type$0];
+    }
+    set type(value) {
+      super.type = value;
+    }
+    get subtype() {
+      return this[subtype$];
+    }
+    set subtype(value) {
+      super.subtype = value;
+    }
+    get verificationStatus() {
+      return this[verificationStatus$];
+    }
+    set verificationStatus(value) {
+      super.verificationStatus = value;
+    }
+    static fromJson(json) {
+      return new metadata.LinkAccount.new({id: core.String.as(dart.dsend(json, '_get', ["id"])), name: core.String.as(dart.dsend(json, '_get', ["name"])), mask: core.String.as(dart.dsend(json, '_get', ["mask"])), type: core.String.as(dart.dsend(json, '_get', ["type"])), subtype: core.String.as(dart.dsend(json, '_get', ["subtype"])), verificationStatus: core.String.as(dart.dsend(json, '_get', ["verificationStatus"]))});
+    }
+    description() {
+      return "[id: " + dart.str(this.id) + ", mask: " + dart.str(this.mask) + ", name: " + dart.str(this.name) + ", type: " + dart.str(this.type) + ", subtype: " + dart.str(this.subtype) + ", verification_status: " + dart.str(this.verificationStatus) + "]";
+    }
+  };
+  (metadata.LinkAccount.new = function(opts) {
+    let id = opts && 'id' in opts ? opts.id : null;
+    if (id == null) dart.nullFailed(I[0], 90, 19, "id");
+    let mask = opts && 'mask' in opts ? opts.mask : null;
+    if (mask == null) dart.nullFailed(I[0], 91, 19, "mask");
+    let name = opts && 'name' in opts ? opts.name : null;
+    if (name == null) dart.nullFailed(I[0], 92, 19, "name");
+    let type = opts && 'type' in opts ? opts.type : null;
+    if (type == null) dart.nullFailed(I[0], 93, 19, "type");
+    let subtype = opts && 'subtype' in opts ? opts.subtype : null;
+    if (subtype == null) dart.nullFailed(I[0], 94, 19, "subtype");
+    let verificationStatus = opts && 'verificationStatus' in opts ? opts.verificationStatus : null;
+    if (verificationStatus == null) dart.nullFailed(I[0], 95, 19, "verificationStatus");
+    this[id$0] = id;
+    this[mask$] = mask;
+    this[name$0] = name;
+    this[type$0] = type;
+    this[subtype$] = subtype;
+    this[verificationStatus$] = verificationStatus;
+    ;
+  }).prototype = metadata.LinkAccount.prototype;
+  dart.addTypeTests(metadata.LinkAccount);
+  dart.addTypeCaches(metadata.LinkAccount);
+  dart.setMethodSignature(metadata.LinkAccount, () => ({
+    __proto__: dart.getMethods(metadata.LinkAccount.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkAccount, I[1]);
+  dart.setFieldSignature(metadata.LinkAccount, () => ({
+    __proto__: dart.getFields(metadata.LinkAccount.__proto__),
+    id: dart.finalFieldType(core.String),
+    mask: dart.finalFieldType(core.String),
+    name: dart.finalFieldType(core.String),
+    type: dart.finalFieldType(core.String),
+    subtype: dart.finalFieldType(core.String),
+    verificationStatus: dart.finalFieldType(core.String)
+  }));
+  var linkSessionId$ = dart.privateName(metadata, "LinkSuccessMetadata.linkSessionId");
+  var institution$ = dart.privateName(metadata, "LinkSuccessMetadata.institution");
+  var accounts$ = dart.privateName(metadata, "LinkSuccessMetadata.accounts");
+  metadata.LinkSuccessMetadata = class LinkSuccessMetadata extends core.Object {
+    get linkSessionId() {
+      return this[linkSessionId$];
+    }
+    set linkSessionId(value) {
+      super.linkSessionId = value;
+    }
+    get institution() {
+      return this[institution$];
+    }
+    set institution(value) {
+      super.institution = value;
+    }
+    get accounts() {
+      return this[accounts$];
+    }
+    set accounts(value) {
+      super.accounts = value;
+    }
+    static fromJson(json) {
+      let accountsArray = T.JSArrayOfLinkAccount().of([]);
+      for (let accountInfo of core.Iterable.as(dart.dsend(json, '_get', ["accounts"]))) {
+        accountsArray[$add](metadata.LinkAccount.fromJson(accountInfo));
+      }
+      return new metadata.LinkSuccessMetadata.new({linkSessionId: core.String.as(dart.dsend(json, '_get', ["linkSessionId"])), institution: metadata.LinkInstitution.fromJson(dart.dsend(json, '_get', ["institution"])), accounts: accountsArray});
+    }
+    description() {
+      let description = "linkSessionId: " + dart.str(this.linkSessionId) + ", institution.id: " + dart.str(this.institution.id) + ", institution.name: " + dart.str(this.institution.name) + ", accounts: ";
+      for (let a of this.accounts) {
+        description = description + dart.notNull(a.description());
+      }
+      return description;
+    }
+  };
+  (metadata.LinkSuccessMetadata.new = function(opts) {
+    let linkSessionId = opts && 'linkSessionId' in opts ? opts.linkSessionId : null;
+    if (linkSessionId == null) dart.nullFailed(I[0], 126, 19, "linkSessionId");
+    let institution = opts && 'institution' in opts ? opts.institution : null;
+    if (institution == null) dart.nullFailed(I[0], 127, 19, "institution");
+    let accounts = opts && 'accounts' in opts ? opts.accounts : null;
+    if (accounts == null) dart.nullFailed(I[0], 128, 19, "accounts");
+    this[linkSessionId$] = linkSessionId;
+    this[institution$] = institution;
+    this[accounts$] = accounts;
+    ;
+  }).prototype = metadata.LinkSuccessMetadata.prototype;
+  dart.addTypeTests(metadata.LinkSuccessMetadata);
+  dart.addTypeCaches(metadata.LinkSuccessMetadata);
+  dart.setMethodSignature(metadata.LinkSuccessMetadata, () => ({
+    __proto__: dart.getMethods(metadata.LinkSuccessMetadata.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkSuccessMetadata, I[1]);
+  dart.setFieldSignature(metadata.LinkSuccessMetadata, () => ({
+    __proto__: dart.getFields(metadata.LinkSuccessMetadata.__proto__),
+    linkSessionId: dart.finalFieldType(core.String),
+    institution: dart.finalFieldType(metadata.LinkInstitution),
+    accounts: dart.finalFieldType(core.List$(metadata.LinkAccount))
+  }));
+  var status$ = dart.privateName(metadata, "LinkExitMetadata.status");
+  var requestId$ = dart.privateName(metadata, "LinkExitMetadata.requestId");
+  var linkSessionId$0 = dart.privateName(metadata, "LinkExitMetadata.linkSessionId");
+  var institution$0 = dart.privateName(metadata, "LinkExitMetadata.institution");
+  metadata.LinkExitMetadata = class LinkExitMetadata extends core.Object {
+    get status() {
+      return this[status$];
+    }
+    set status(value) {
+      super.status = value;
+    }
+    get requestId() {
+      return this[requestId$];
+    }
+    set requestId(value) {
+      super.requestId = value;
+    }
+    get linkSessionId() {
+      return this[linkSessionId$0];
+    }
+    set linkSessionId(value) {
+      super.linkSessionId = value;
+    }
+    get institution() {
+      return this[institution$0];
+    }
+    set institution(value) {
+      super.institution = value;
+    }
+    static fromJson(json) {
+      return new metadata.LinkExitMetadata.new({status: core.String.as(dart.dsend(json, '_get', ["status"])), requestId: core.String.as(dart.dsend(json, '_get', ["requestId"])), linkSessionId: core.String.as(dart.dsend(json, '_get', ["linkSessionId"])), institution: metadata.LinkInstitution.fromJson(dart.dsend(json, '_get', ["institution"]))});
+    }
+    description() {
+      return "status: " + dart.str(this.status) + ", linkSessionId: " + dart.str(this.linkSessionId) + ", requestId: " + dart.str(this.requestId) + ", institution.id: " + dart.str(this.institution.id) + ", institution.name: " + dart.str(this.institution.name);
+    }
+  };
+  (metadata.LinkExitMetadata.new = function(opts) {
+    let status = opts && 'status' in opts ? opts.status : null;
+    if (status == null) dart.nullFailed(I[0], 179, 19, "status");
+    let requestId = opts && 'requestId' in opts ? opts.requestId : null;
+    if (requestId == null) dart.nullFailed(I[0], 180, 19, "requestId");
+    let linkSessionId = opts && 'linkSessionId' in opts ? opts.linkSessionId : null;
+    if (linkSessionId == null) dart.nullFailed(I[0], 181, 19, "linkSessionId");
+    let institution = opts && 'institution' in opts ? opts.institution : null;
+    if (institution == null) dart.nullFailed(I[0], 182, 19, "institution");
+    this[status$] = status;
+    this[requestId$] = requestId;
+    this[linkSessionId$0] = linkSessionId;
+    this[institution$0] = institution;
+    ;
+  }).prototype = metadata.LinkExitMetadata.prototype;
+  dart.addTypeTests(metadata.LinkExitMetadata);
+  dart.addTypeCaches(metadata.LinkExitMetadata);
+  dart.setMethodSignature(metadata.LinkExitMetadata, () => ({
+    __proto__: dart.getMethods(metadata.LinkExitMetadata.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkExitMetadata, I[1]);
+  dart.setFieldSignature(metadata.LinkExitMetadata, () => ({
+    __proto__: dart.getFields(metadata.LinkExitMetadata.__proto__),
+    status: dart.finalFieldType(core.String),
+    requestId: dart.finalFieldType(core.String),
+    linkSessionId: dart.finalFieldType(core.String),
+    institution: dart.finalFieldType(metadata.LinkInstitution)
+  }));
+  var errorCode$ = dart.privateName(metadata, "LinkEventMetadata.errorCode");
+  var errorMesssage$ = dart.privateName(metadata, "LinkEventMetadata.errorMesssage");
+  var errorType$ = dart.privateName(metadata, "LinkEventMetadata.errorType");
+  var exitStatus$ = dart.privateName(metadata, "LinkEventMetadata.exitStatus");
+  var institutionId$ = dart.privateName(metadata, "LinkEventMetadata.institutionId");
+  var institutionName$ = dart.privateName(metadata, "LinkEventMetadata.institutionName");
+  var institutionSearchQuery$ = dart.privateName(metadata, "LinkEventMetadata.institutionSearchQuery");
+  var linkSessionId$1 = dart.privateName(metadata, "LinkEventMetadata.linkSessionId");
+  var mfaType$ = dart.privateName(metadata, "LinkEventMetadata.mfaType");
+  var requestId$0 = dart.privateName(metadata, "LinkEventMetadata.requestId");
+  var timestamp$ = dart.privateName(metadata, "LinkEventMetadata.timestamp");
+  var viewName$ = dart.privateName(metadata, "LinkEventMetadata.viewName");
+  metadata.LinkEventMetadata = class LinkEventMetadata extends core.Object {
+    get errorCode() {
+      return this[errorCode$];
+    }
+    set errorCode(value) {
+      super.errorCode = value;
+    }
+    get errorMesssage() {
+      return this[errorMesssage$];
+    }
+    set errorMesssage(value) {
+      super.errorMesssage = value;
+    }
+    get errorType() {
+      return this[errorType$];
+    }
+    set errorType(value) {
+      super.errorType = value;
+    }
+    get exitStatus() {
+      return this[exitStatus$];
+    }
+    set exitStatus(value) {
+      super.exitStatus = value;
+    }
+    get institutionId() {
+      return this[institutionId$];
+    }
+    set institutionId(value) {
+      super.institutionId = value;
+    }
+    get institutionName() {
+      return this[institutionName$];
+    }
+    set institutionName(value) {
+      super.institutionName = value;
+    }
+    get institutionSearchQuery() {
+      return this[institutionSearchQuery$];
+    }
+    set institutionSearchQuery(value) {
+      super.institutionSearchQuery = value;
+    }
+    get linkSessionId() {
+      return this[linkSessionId$1];
+    }
+    set linkSessionId(value) {
+      super.linkSessionId = value;
+    }
+    get mfaType() {
+      return this[mfaType$];
+    }
+    set mfaType(value) {
+      super.mfaType = value;
+    }
+    get requestId() {
+      return this[requestId$0];
+    }
+    set requestId(value) {
+      super.requestId = value;
+    }
+    get timestamp() {
+      return this[timestamp$];
+    }
+    set timestamp(value) {
+      super.timestamp = value;
+    }
+    get viewName() {
+      return this[viewName$];
+    }
+    set viewName(value) {
+      super.viewName = value;
+    }
+    static fromJson(json) {
+      return new metadata.LinkEventMetadata.new({viewName: core.String.as(dart.dsend(json, '_get', ["viewName"])), exitStatus: core.String.as(dart.dsend(json, '_get', ["exitStatus"])), mfaType: core.String.as(dart.dsend(json, '_get', ["mfaType"])), requestId: core.String.as(dart.dsend(json, '_get', ["requestId"])), timestamp: core.String.as(dart.dsend(json, '_get', ["timestamp"])), linkSessionId: core.String.as(dart.dsend(json, '_get', ["linkSessionId"])), institutionName: core.String.as(dart.dsend(json, '_get', ["institutionName"])), institutionId: core.String.as(dart.dsend(json, '_get', ["institutionId"])), institutionSearchQuery: core.String.as(dart.dsend(json, '_get', ["institutionSearchQuery"])), errorType: core.String.as(dart.dsend(json, '_get', ["errorType"])), errorCode: core.String.as(dart.dsend(json, '_get', ["errorCode"])), errorMesssage: core.String.as(dart.dsend(json, '_get', ["errorMessage"]))});
+    }
+    description() {
+      return "viewName: " + dart.str(this.viewName) + ", exitStatus: " + dart.str(this.exitStatus) + ", mfaType: " + dart.str(this.mfaType) + ", requestId: " + dart.str(this.requestId) + ", timestamp: " + dart.str(this.timestamp) + ", linkSessionId: " + dart.str(this.linkSessionId) + ", institutionId: " + dart.str(this.institutionId) + ", institutionName: " + dart.str(this.institutionName) + ", institutionSearchQuery: " + dart.str(this.institutionSearchQuery) + ", errorType: " + dart.str(this.errorType) + ", errorCode: " + dart.str(this.errorCode) + ", errorMesssage: " + dart.str(this.errorMesssage);
+    }
+  };
+  (metadata.LinkEventMetadata.new = function(opts) {
+    let viewName = opts && 'viewName' in opts ? opts.viewName : null;
+    if (viewName == null) dart.nullFailed(I[0], 238, 19, "viewName");
+    let exitStatus = opts && 'exitStatus' in opts ? opts.exitStatus : null;
+    if (exitStatus == null) dart.nullFailed(I[0], 239, 19, "exitStatus");
+    let mfaType = opts && 'mfaType' in opts ? opts.mfaType : null;
+    if (mfaType == null) dart.nullFailed(I[0], 240, 19, "mfaType");
+    let requestId = opts && 'requestId' in opts ? opts.requestId : null;
+    if (requestId == null) dart.nullFailed(I[0], 241, 19, "requestId");
+    let timestamp = opts && 'timestamp' in opts ? opts.timestamp : null;
+    if (timestamp == null) dart.nullFailed(I[0], 242, 19, "timestamp");
+    let linkSessionId = opts && 'linkSessionId' in opts ? opts.linkSessionId : null;
+    if (linkSessionId == null) dart.nullFailed(I[0], 243, 19, "linkSessionId");
+    let institutionName = opts && 'institutionName' in opts ? opts.institutionName : null;
+    if (institutionName == null) dart.nullFailed(I[0], 244, 19, "institutionName");
+    let institutionId = opts && 'institutionId' in opts ? opts.institutionId : null;
+    if (institutionId == null) dart.nullFailed(I[0], 245, 19, "institutionId");
+    let institutionSearchQuery = opts && 'institutionSearchQuery' in opts ? opts.institutionSearchQuery : null;
+    if (institutionSearchQuery == null) dart.nullFailed(I[0], 246, 19, "institutionSearchQuery");
+    let errorType = opts && 'errorType' in opts ? opts.errorType : null;
+    if (errorType == null) dart.nullFailed(I[0], 247, 19, "errorType");
+    let errorCode = opts && 'errorCode' in opts ? opts.errorCode : null;
+    if (errorCode == null) dart.nullFailed(I[0], 248, 19, "errorCode");
+    let errorMesssage = opts && 'errorMesssage' in opts ? opts.errorMesssage : null;
+    if (errorMesssage == null) dart.nullFailed(I[0], 249, 19, "errorMesssage");
+    this[viewName$] = viewName;
+    this[exitStatus$] = exitStatus;
+    this[mfaType$] = mfaType;
+    this[requestId$0] = requestId;
+    this[timestamp$] = timestamp;
+    this[linkSessionId$1] = linkSessionId;
+    this[institutionName$] = institutionName;
+    this[institutionId$] = institutionId;
+    this[institutionSearchQuery$] = institutionSearchQuery;
+    this[errorType$] = errorType;
+    this[errorCode$] = errorCode;
+    this[errorMesssage$] = errorMesssage;
+    ;
+  }).prototype = metadata.LinkEventMetadata.prototype;
+  dart.addTypeTests(metadata.LinkEventMetadata);
+  dart.addTypeCaches(metadata.LinkEventMetadata);
+  dart.setMethodSignature(metadata.LinkEventMetadata, () => ({
+    __proto__: dart.getMethods(metadata.LinkEventMetadata.__proto__),
+    description: dart.fnType(core.String, [])
+  }));
+  dart.setLibraryUri(metadata.LinkEventMetadata, I[1]);
+  dart.setFieldSignature(metadata.LinkEventMetadata, () => ({
+    __proto__: dart.getFields(metadata.LinkEventMetadata.__proto__),
+    errorCode: dart.finalFieldType(core.String),
+    errorMesssage: dart.finalFieldType(core.String),
+    errorType: dart.finalFieldType(core.String),
+    exitStatus: dart.finalFieldType(core.String),
+    institutionId: dart.finalFieldType(core.String),
+    institutionName: dart.finalFieldType(core.String),
+    institutionSearchQuery: dart.finalFieldType(core.String),
+    linkSessionId: dart.finalFieldType(core.String),
+    mfaType: dart.finalFieldType(core.String),
+    requestId: dart.finalFieldType(core.String),
+    timestamp: dart.finalFieldType(core.String),
+    viewName: dart.finalFieldType(core.String)
+  }));
+  dart.trackLibraries("packages/plaid_flutter/src/metadata.dart", {
+    "package:plaid_flutter/src/metadata.dart": metadata
+  }, {
+  }, '{"version":3,"sourceRoot":"","sources":["metadata.dart"],"names":[],"mappings":";;;;;;;;;;;;;;;;;;;;;;;;IAIe;;;;;;IAGA;;;;;;IAGA;;;;;;IAIA;;;;;;oBASsB;AACjC,YAAO,kDACK,WAAJ,IAAI,WAAC,qCACD,WAAJ,IAAI,WAAC,wCACE,WAAJ,IAAI,WAAC,kDACM,WAAJ,IAAI,WAAC;IAEzB;;AAGE,YAAO,AAAgF,sBAAvE,aAAI,sBAAS,aAAI,yBAAY,gBAAO,gCAAmB,uBAAc;IACvF;;;QAjBgB;;QACA;;QACA;;QACA;;IAHA;IACA;IACA;IACA;;EACd;;;;;;;;;;;;;;;;;;IAmBW;;;;;;IAGA;;;;;;oBAO4B;AACvC,YAAO,sDACG,WAAJ,IAAI,WAAC,8BACC,WAAJ,IAAI,WAAC;IAEf;;AAGE,YAAO,AAAsB,mBAAhB,WAAE,sBAAS;IAC1B;;;QAbgB;;QACA;;IADA;IACA;;EACd;;;;;;;;;;;;;;;;;;;;IAiBW;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IASA;;;;;;oBAWwB;AACnC,YAAO,kDACG,WAAJ,IAAI,WAAC,8BACC,WAAJ,IAAI,WAAC,gCACD,WAAJ,IAAI,WAAC,gCACD,WAAJ,IAAI,WAAC,mCACE,WAAJ,IAAI,WAAC,iDACU,WAAJ,IAAI,WAAC;IAE7B;;AAGE,YAAO,AAA+G,oBAAxG,WAAE,sBAAS,aAAI,sBAAS,aAAI,sBAAS,aAAI,yBAAY,gBAAO,qCAAwB,2BAAkB;IACtH;;;QArBgB;;QACA;;QACA;;QACA;;QACA;;QACA;;IALA;IACA;IACA;IACA;IACA;IACA;;EACd;;;;;;;;;;;;;;;;;;;;;IAqBW;;;;;;IAGS;;;;;;IAGE;;;;;;oBAQqB;AACzB,0BAAgB;AAElC,eAAa,gCAAmB,WAAJ,IAAI,WAAC;AACqB,QAApD,AAAc,aAAD,OAAiB,8BAAS,WAAW;;AAGpD,YAAO,qEACc,WAAJ,IAAI,WAAC,iCACS,kCAAa,WAAJ,IAAI,WAAC,4BACjC,aAAa;IAE3B;;AAGS,wBACH,AAAqH,6BAApG,sBAAa,gCAAoB,AAAY,uBAAG,kCAAsB,AAAY,yBAAK;AAE5G,eAAiB,IAAK;AACU,QAA9B,cAAA,AAAY,WAAD,gBAAI,AAAE,CAAD;;AAGlB,YAAO,YAAW;IACpB;;;QA5BgB;;QACA;;QACA;;IAFA;IACA;IACA;;EACd;;;;;;;;;;;;;;;;;;;IAsCW;;;;;;IAGA;;;;;;IAGA;;;;;;IAGS;;;;;;oBASoB;AACxC,YAAO,2DACO,WAAJ,IAAI,WAAC,uCACE,WAAJ,IAAI,WAAC,8CACG,WAAJ,IAAI,WAAC,iCACS,kCAAa,WAAJ,IAAI,WAAC;IAE/C;;AAGE,YAAO,AAAiJ,uBAAvI,eAAM,+BAAkB,sBAAa,2BAAc,kBAAS,gCAAoB,AAAY,uBAAG,kCAAsB,AAAY;IACpJ;;;QAjBgB;;QACA;;QACA;;QACA;;IAHA;IACA;IACA;IACA;;EACd;;;;;;;;;;;;;;;;;;;;;;;;;;;;IAmBW;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;IAGA;;;;;;oBAiB8B;AACzC,YAAO,8DACS,WAAJ,IAAI,WAAC,0CACC,WAAJ,IAAI,WAAC,yCACJ,WAAJ,IAAI,WAAC,wCACC,WAAJ,IAAI,WAAC,0CACD,WAAJ,IAAI,WAAC,8CACG,WAAJ,IAAI,WAAC,oDACC,WAAJ,IAAI,WAAC,oDACH,WAAJ,IAAI,WAAC,2DACQ,WAAJ,IAAI,WAAC,uDACd,WAAJ,IAAI,WAAC,0CACD,WAAJ,IAAI,WAAC,8CACG,WAAJ,IAAI,WAAC;IAExB;;AAGE,YAAO,AAA8U,yBAAlU,iBAAQ,4BAAe,mBAAU,yBAAY,gBAAO,2BAAc,kBAAS,2BAAc,kBAAS,+BAAkB,sBAAa,+BAAkB,sBAAa,iCAAoB,wBAAe,wCAA2B,+BAAsB,2BAAc,kBAAS,2BAAc,kBAAS,+BAAkB;IACzU;;;QAjCgB;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;QACA;;IAXA;IACA;IACA;IACA;IACA;IACA;IACA;IACA;IACA;IACA;IACA;IACA;;EACd","file":"../../../../../../../../../E:/packages/plaid_flutter/src/metadata.dart.lib.js"}');
+  // Exports:
+  return {
+    src__metadata: metadata
+  };
+}));
+
+//# sourceMappingURL=metadata.dart.lib.js.map

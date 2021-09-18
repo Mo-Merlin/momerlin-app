@@ -28,20 +28,20 @@ class MyApp extends StatelessWidget {
         primaryTextTheme: GoogleFonts.poppinsTextTheme().copyWith(),
         accentTextTheme: GoogleFonts.poppinsTextTheme(),
       ),
-      // home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
-      //   builder: (context, state) {
-      //     if (state is Authenticated) {
-      //       return WalletTwo();
-      //     } else if (state is Unauthenticated) {
-      //       return WalletHomePage();
-      //     } else {
-      //       return Container(
-      //         color: Colors.white,
-      //       );
-      //     }
-      //   },
-      // ),
-      home: WalletHomePage(),
+      home: BlocBuilder<AuthenticationBloc, AuthenticationState>(
+        builder: (context, state) {
+          if (state is Authenticated) {
+            return WalletTwo();
+          } else if (state is Unauthenticated) {
+            return WalletHomePage();
+          } else {
+            return Container(
+              color: Colors.white,
+            );
+          }
+        },
+      ),
+      // home: WalletHomePage(),
     );
   }
 }

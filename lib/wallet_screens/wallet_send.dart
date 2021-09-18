@@ -1,10 +1,18 @@
+import 'dart:math';
 import 'dart:ui';
 
+import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_final.dart';
+import 'package:virtual_keyboard/virtual_keyboard.dart';
+import 'package:web3dart/web3dart.dart';
 
 class WalletSend extends StatefulWidget {
   const WalletSend({Key key}) : super(key: key);
@@ -14,7 +22,7 @@ class WalletSend extends StatefulWidget {
 }
 
 class _WalletSendState extends State<WalletSend> {
-  var userLanguage, lang = [];
+  var userLanguage, user, lang = [];
   double widthbtc = 110;
   String output = "0";
 
@@ -22,12 +30,16 @@ class _WalletSendState extends State<WalletSend> {
   void initState() {
     super.initState();
     getUserLanguage();
+
+    _controller = TextEditingController(text: _scanBarcode);
   }
 
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
+
+    user = await UserDataSource().getUser();
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -36,50 +48,9 @@ class _WalletSendState extends State<WalletSend> {
   // ignore: todo
   //TODO: LanguageEnd
 
-  Widget buildButton(String buttonText) {
-    return new Expanded(
-      child: new MaterialButton(
-        padding: new EdgeInsets.all(15),
-        child: new Text(
-          buttonText,
-          style: GoogleFonts.poppins(
-            fontSize: 28,
-            fontWeight: FontWeight.w600,
-            color: Colors.white,
-          ),
-        ),
-        onPressed: () {
-          setState(() {
-            output = output + buttonText;
-          });
-        },
-      ),
-    );
-  }
-
-  Widget buildButton1(String iconButton) {
-    return new Expanded(
-      child: new MaterialButton(
-        onPressed: () {
-          setState(() {
-            output = "0";
-          });
-        },
-        padding: new EdgeInsets.all(24.0),
-        child: IconButton(
-          onPressed: () {
-            setState(() {
-              output = "0";
-            });
-          },
-          icon: Icon(
-            Icons.backspace_sharp,
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-  }
+  String text = '';
+  String _scanBarcode = "";
+  TextEditingController _controller;
 
   @override
   Widget build(BuildContext context) {
@@ -121,415 +92,394 @@ class _WalletSendState extends State<WalletSend> {
         ),
       ),
       body: SingleChildScrollView(
+        padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            SizedBox(
+              height: 20,
+            ),
+            Text(
+              (lang.length != null &&
+                      lang.length != 0 &&
+                      userLanguage['iwanttosend'] != null)
+                  ? "${userLanguage['iwanttosend']}"
+                  : "I want to send",
+              style: GoogleFonts.poppins(
+                color: Colors.white,
+                fontSize: 21,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
             Container(
+              height: MediaQuery.of(context).size.height / 8,
+              width: MediaQuery.of(context).size.width,
               //color: Colors.amber,
-              height: MediaQuery.of(context).size.height * 0.45,
-              child: SingleChildScrollView(
-                child: Column(
+              child: InkWell(
+                onTap: () {
+                  output = '';
+                  _showVirutalkeyboardMobile();
+                },
+                child: Row(
+                  // alignment: Alignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Container(
-                      height: MediaQuery.of(context).size.height / 12,
-                      width: MediaQuery.of(context).size.width,
-                      //color: Colors.blueAccent,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 25, top: 20),
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage['iwanttosend'] != null)
-                              ? "${userLanguage['iwanttosend']}"
-                              : "I want to send",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 21,
-                            fontWeight: FontWeight.w500,
-                          ),
+                    Text(
+                      output == '' ? text : output,
+                      style: GoogleFonts.montserrat(
+                        fontSize: 70,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: EdgeInsets.only(top: 30),
+                      child: Text(
+                        " Gwei",
+                        style: GoogleFonts.montserrat(
+                          fontSize: 21,
+                          color: orange,
+                          fontWeight: FontWeight.w400,
                         ),
                       ),
-                    ),
-                    Container(
-                      height: MediaQuery.of(context).size.height / 8,
-                      width: MediaQuery.of(context).size.width,
-                      //color: Colors.amber,
-                      child: Stack(
-                        alignment: Alignment.center,
-                        // crossAxisAlignment: CrossAxisAlignment.start,
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Positioned(
-                            // top: 130,
-                            child: Text(
-                              output,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 70,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                          ),
-                          Positioned(
-                            top: 60,
-                            left: 235,
-                            child: Text(
-                              '.00',
-                              style: GoogleFonts.montserrat(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Positioned(
-                            left: 235,
-                            bottom: 50,
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['sats'] != null)
-                                  ? "${userLanguage['sats']}"
-                                  : "SATs",
-                              style: GoogleFonts.montserrat(
-                                fontSize: 21,
-                                color: orange,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 25),
-                          //   child: RichText(
-                          //     text: TextSpan(
-                          //       children: <TextSpan>[
-                          //         TextSpan(
-                          //           text: (lang.length != null &&
-                          //                   lang.length != 0 &&
-                          //                   userLanguage['0'] != null)
-                          //               ? "${userLanguage['0']}"
-                          //               : output,
-                          //           style: GoogleFonts.montserrat(
-                          //             fontSize: 90,
-                          //             fontWeight: FontWeight.w400,
-                          //             color: Colors.white,
-                          //           ),
-                          //         ),
-                          //         TextSpan(
-                          //           text: (lang.length != null &&
-                          //                   lang.length != 0 &&
-                          //                   userLanguage['.00'] != null)
-                          //               ? "${userLanguage['.00']}"
-                          //               : '.00',
-                          //           style: GoogleFonts.montserrat(
-                          //             fontSize: 25,
-                          //             fontFeatures: [FontFeature.subscripts()],
-                          //             color: Colors.white,
-                          //           ),
-                          //         ),
-                          //       ],
-                          //     ),
-                          //   ),
-                          // ),
-                          // Padding(
-                          //   padding: const EdgeInsets.only(top: 15),
-                          //   child: Text(
-                          //     (lang.length != null &&
-                          //             lang.length != 0 &&
-                          //             userLanguage['sats'] != null)
-                          //         ? "${userLanguage['sats']}"
-                          //         : "SATs",
-                          //     style: GoogleFonts.montserrat(
-                          //       fontSize: 15,
-                          //       color: Colors.orangeAccent,
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 150,
-                      width: MediaQuery.of(context).size.width,
-                      //color: Colors.blueAccent,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['to'] != null)
-                                  ? "${userLanguage['to']}"
-                                  : "to:",
-                              style: GoogleFonts.poppins(
-                                fontSize: 25,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w400,
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 10),
-                            child: Container(
-                                height: 130,
-                                width: 110,
-                                //color: button,
-                                decoration: BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Column(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 25),
-                                      child: ClipRRect(
-                                        borderRadius: BorderRadius.circular(30),
-                                        child: Container(
-                                          height: 50,
-                                          width: 50,
-                                          color: blue1,
-                                          child: IconButton(
-                                              onPressed: () {},
-                                              icon: Icon(
-                                                Icons.qr_code_scanner,
-                                                color: Colors.white,
-                                              )),
-                                        ),
-                                      ),
-                                    ),
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 15),
-                                      child: Text(
-                                        (lang.length != null &&
-                                                lang.length != 0 &&
-                                                userLanguage['scanqrcode'] !=
-                                                    null)
-                                            ? "${userLanguage['scanqrcode']}"
-                                            : "Scan QR code",
-                                        style: GoogleFonts.poppins(
-                                            fontSize: 12, color: Colors.grey),
-                                      ),
-                                    )
-                                  ],
-                                )),
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              // _showModelSheet();
-                              setState(() {
-                                widthbtc = 200;
-                              });
-                            },
-                            onDoubleTap: () {
-                              setState(() {
-                                widthbtc = 110;
-                              });
-                            },
-                            child: Padding(
-                              padding: const EdgeInsets.only(top: 10),
-                              child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 500),
-                                  height: 130,
-                                  width: widthbtc,
-                                  //color: button,
-                                  decoration: BoxDecoration(
-                                    color: button,
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                  child: Column(
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 25),
-                                        child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(30),
-                                          child: Container(
-                                            height: 50,
-                                            width: 50,
-                                            color: Colors.greenAccent,
-                                            child: IconButton(
-                                                onPressed: () {
-                                                  // _showModelSheet();
-                                                  setState(() {
-                                                    widthbtc = 200;
-                                                  });
-                                                },
-                                                icon: Icon(
-                                                  Icons.stacked_line_chart,
-                                                  color: Colors.white,
-                                                )),
-                                          ),
-                                        ),
-                                      ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 15),
-                                        child: Text(
-                                          (lang.length != null &&
-                                                  lang.length != 0 &&
-                                                  userLanguage['btcaddress'] !=
-                                                      null)
-                                              ? "${userLanguage['btcaddress']}"
-                                              : "BTC Address",
-                                          style: GoogleFonts.poppins(
-                                              fontSize: 12, color: Colors.grey),
-                                        ),
-                                      )
-                                    ],
-                                  )),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    Container(
-                      height: 160,
-                      width: MediaQuery.of(context).size.width,
-                      //color: Colors.amber,
-                      child: Column(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 50),
-                                  child: Container(
-                                    height: 30,
-                                    width: 30,
-                                    child: Icon(
-                                      Icons.fmd_bad_rounded,
-                                      color: blue1,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage[
-                                                  'pleasedoublecheckyourrecipientsinfo'] !=
-                                              null)
-                                      ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
-                                      : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500,
-                                    color: Colors.grey,
-                                  ),
-                                )
-                              ],
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20),
-                            child: Container(
-                              height: 50,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              // ignore: deprecated_member_use
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15)),
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => WalletFinal()));
-                                },
-                                color: blue1,
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['sendnow'] != null)
-                                      ? "${userLanguage['sendnow']}"
-                                      : 'SEND NOW',
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
+                      // ),
                     ),
                   ],
                 ),
               ),
             ),
+            Text(
+              "To",
+              style: GoogleFonts.poppins(
+                fontSize: 25,
+                color: Colors.white,
+                fontWeight: FontWeight.w400,
+              ),
+              textAlign: TextAlign.left,
+            ),
+            SizedBox(height: 10),
             Container(
-              height: MediaQuery.of(context).size.height * 0.45,
-              width: MediaQuery.of(context).size.width,
-              decoration: BoxDecoration(
-                  color: button,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(30),
-                    topRight: Radius.circular(30),
-                  )),
-              child: Column(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 5),
-                  child: Container(
-                    height: 40,
-                    width: 200,
-                    // ignore: deprecated_member_use
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(25)),
-                      onPressed: () {},
-                      color: Colors.black.withOpacity(0.5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
-                        children: <Widget>[
-                          Icon(
-                            Icons.copy,
-                            color: blue1,
-                            size: 15,
+              decoration: new BoxDecoration(
+                shape: BoxShape.rectangle,
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.grey[100],
+              ),
+              margin: EdgeInsets.symmetric(horizontal: 1.0),
+              // color: Colors.grey[100],
+              height: 60,
+              child: Row(
+                children: <Widget>[
+                  Container(
+                    width: MediaQuery.of(context).size.width - 90,
+                    padding: EdgeInsets.only(left: 5),
+                    child: TextField(
+                      onChanged: (value) {
+                        _scanBarcode = value;
+                      },
+                      controller: _controller,
+                      decoration: new InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(12.0)),
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
+                        ),
+                        filled: true,
+                        focusedBorder: OutlineInputBorder(
+                          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                        ),
+                        border: InputBorder.none,
+                        hintText: (lang.length != null && lang.length != 0)
+                            ? "  ${userLanguage['enterAddressLable']}"
+                            : '  Enter the Address',
+                      ),
+                      style: TextStyle(fontSize: 13, color: Colors.black),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Padding(
+                      padding: EdgeInsets.only(right: 0),
+                      child: Container(
+                        child: IconButton(
+                          icon: Icon(
+                            FontAwesomeIcons.qrcode,
+                            color: backgroundcolor,
+                            // color: AppColors.loginButton,
                           ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['pastefromclipboard'] != null)
-                                ? "${userLanguage['pastefromclipboard']}"
-                                : 'PASTE FROM CLIPBOARD',
-                            style: TextStyle(
-                              fontSize: 11,
-                              fontWeight: FontWeight.w700,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
+                          onPressed: () {
+                            scanQR();
+                          },
+                        ),
                       ),
                     ),
                   ),
-                ),
-                Row(children: [
-                  buildButton("1"),
-                  buildButton("2"),
-                  buildButton("3"),
-                ]),
-                Row(children: [
-                  buildButton("4"),
-                  buildButton("5"),
-                  buildButton("6"),
-                ]),
-                Row(children: [
-                  buildButton("7"),
-                  buildButton("8"),
-                  buildButton("9"),
-                ]),
-                Row(children: [
-                  buildButton("*"),
-                  buildButton("0"),
-                  buildButton1(""),
-                ]),
-              ]),
+                ], // NEW
+              ), // NEW
+            ),
+            Container(
+              height: 160,
+              width: MediaQuery.of(context).size.width,
+              //color: Colors.amber,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.only(top: 30),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(left: 50),
+                          child: Container(
+                            height: 30,
+                            width: 30,
+                            child: Icon(
+                              Icons.fmd_bad_rounded,
+                              color: blue1,
+                            ),
+                          ),
+                        ),
+                        Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage[
+                                          'pleasedoublecheckyourrecipientsinfo'] !=
+                                      null)
+                              ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
+                              : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
+                          style: GoogleFonts.poppins(
+                            fontSize: 10,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.grey,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  InkWell(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WalletFinal()));
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width / 1.7,
+                      height: MediaQuery.of(context).size.height / 13,
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20), color: blue),
+                      // height: 50,
+                      // width: MediaQuery.of(context).size.width * 0.9,
+                      // ignore: deprecated_member_use
+                      child: Center(
+                        child: Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['sendnow'] != null)
+                              ? "${userLanguage['sendnow']}"
+                              : 'SEND NOW',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w700,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
+  }
+
+  Future<void> scanQR() async {
+    String barcodeScanRes;
+    var response;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.QR);
+      if (barcodeScanRes == '-1') {
+        setState(() {
+          _scanBarcode = '';
+        });
+      } else {
+        response = barcodeScanRes.split(":");
+        if (response.length == 2) {
+          setState(() {
+            _scanBarcode = response[1].toString();
+            _controller = TextEditingController(text: _scanBarcode);
+          });
+        } else {
+          setState(() {
+            _scanBarcode = barcodeScanRes;
+            _controller = TextEditingController(text: barcodeScanRes);
+          });
+        }
+      }
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
+    }
+
+    // If the widget was removed from the tree while the asynchronous platform
+    // message was in flight, we want to discard the reply rather than calling
+    // setState to update our non-existent appearance.
+    if (!mounted) return;
+  }
+
+  _showVirutalkeyboardMobile() {
+    showModalBottomSheet(
+      backgroundColor: backgroundcolor,
+      isScrollControlled: true,
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      builder: (builder) {
+        return new Wrap(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(18),
+              // color: backgroundcolor,
+              child: receiveContent(),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Widget receiveContent() {
+    return Container(
+      color: backgroundcolor,
+      child: VirtualKeyboard(
+          height: 260,
+          textColor: Colors.white,
+          fontSize: 20,
+          type: VirtualKeyboardType.Numeric,
+          onKeyPress: _onKeyPress),
+    );
+  }
+
+  bool shiftEnabled = false;
+  bool isNumericMode = true;
+  _onKeyPress(VirtualKeyboardKey key) {
+    if (key.keyType == VirtualKeyboardKeyType.String) {
+      text = text + (shiftEnabled ? key.capsText : key.text);
+    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+      switch (key.action) {
+        case VirtualKeyboardKeyAction.Backspace:
+          if (text != '' && text.length == 0) return;
+          text = text.substring(0, text.length - 1);
+          break;
+        case VirtualKeyboardKeyAction.Return:
+          text = text + '\n';
+          break;
+        case VirtualKeyboardKeyAction.Space:
+          text = text + key.text;
+          break;
+        case VirtualKeyboardKeyAction.Shift:
+          shiftEnabled = !shiftEnabled;
+          break;
+        default:
+      }
+    }
+    // Update the screen
+    setState(() {});
+  }
+
+  void _onSendTransaction1(
+      // BuildContext context,
+      coin) async {
+    String address = _controller.text;
+    String seed = user[0]["seed"];
+    var privatekey = Web3.privateKeyFromMnemonic(seed);
+    // print(seed);
+    BigInt fees = BigInt.from(double.parse(0.85.toString()));
+
+    if (coin == 'EthereumMain') {
+      double mytotal = double.parse(text) + double.parse(0.06.toString());
+      // if (etherAmountTest >= mytotal) {
+      Decimal tokensAmountDecimal = Decimal.parse(
+          (double.parse(text.toString() * pow(10, 18)).toString()));
+      BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
+      // print(amount1);
+      EtherAmount newvalue =
+          EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
+
+      // print(newvalue);
+      var res =
+          await Web3().sendTransactionMain(address, privatekey, newvalue, fees);
+      // print("res");
+      if (res['status']) {
+        // setState(() {
+        //   _transfer = false;
+        // });
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => PaymentSuccessful(
+        //       response: res,
+        //       coin: coin,
+        //     ),
+        //   ),
+        // );
+      } else {
+        // setState(() {
+        //   _transfer = false;
+        // });
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => PaymentFailed(),
+        //   ),
+        // );
+      }
+      // } else {
+      //   _modalBottomSheetMenu3();
+      // }
+    } else if (coin == 'EthereumTest') {
+      double mytotal =
+          double.parse(text.toString()) + double.parse(0.06.toString());
+      // if (etherAmountTest >= mytotal) {
+      Decimal tokensAmountDecimal = Decimal.parse(
+          (double.parse(text.toString()) * pow(10, 18)).toString());
+      BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
+      EtherAmount newvalue =
+          EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
+      // print("$address,$seed,$newvalue,$fees");
+      var res =
+          await Web3().sendTransactionTest(address, privatekey, newvalue, fees);
+      // print(res['status']);
+      if (res['status']) {
+        // setState(() {
+        //   _transfer = false;
+        // });
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => PaymentSuccessful(
+        //       response: res,
+        //       coin: coin,
+        //     ),
+        //   ),
+        // );
+      } else {
+        // setState(() {
+        //   _transfer = false;
+        // });
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(
+        //     builder: (context) => PaymentFailed(),
+        //   ),
+        // );
+      }
+      // } else {
+      //   _modalBottomSheetMenu3();
+      // }
+    }
   }
 }

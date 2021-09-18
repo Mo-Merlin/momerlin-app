@@ -1,3 +1,4 @@
+import 'package:awesome_loader/awesome_loader.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -37,13 +38,19 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   ];
   bool loading = false;
   var selectedseed;
+  var seedcheck;
+  // selectedseed= widget.seed;
   @override
   void initState() {
+    loading = false;
+    var seed2 = widget.seed1.split(" ");
+    seedcheck = seed2;
+    selectedseed = seed2;
+    // selectedseed = widget.seed;
     print(widget.seed);
-    selectedseed = widget.seed;
     selectedseed.shuffle();
+    print("Selectedseed $selectedseed");
     super.initState();
-    print(widget.seed1);
     loading = false;
     getUserLanguage();
   }
@@ -61,6 +68,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   // ignore: todo
   //TODO: LanguageEnd
   storeUser() async {
+    loading = true;
     String _pk = Web3.privateKeyFromMnemonic(widget.seed1);
     var walletMain = bitcoins.WalletBTC(
         seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.mainnet);
@@ -92,6 +100,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   // print("addrwss $_address");
   @override
   Widget build(BuildContext context) {
+    print(widget.seed);
+
     return Scaffold(
       backgroundColor: backgroundcolor,
       appBar: AppBar(
@@ -160,10 +170,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     ? "${userLanguage['writedownthesewordsinorder']}"
                     : "Arrange the 12 words in the correct order",
                 style: GoogleFonts.poppins(
-                    color: white,
-                    letterSpacing: 1,
-                    fontSize: 30,
-                    fontWeight: FontWeight.w600),
+                    color: white, fontSize: 30, fontWeight: FontWeight.w600),
               ),
               SizedBox(
                 height: 5,
@@ -178,25 +185,33 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       : "Drag each word into the same order it appeared!",
                   textAlign: TextAlign.start,
                   style: GoogleFonts.poppins(
-                      color: white,
-                      letterSpacing: 1,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),
+                      color: white, fontSize: 12, fontWeight: FontWeight.w400),
                 ),
               ),
               SizedBox(
-                height: 10,
+                height: 20,
               ),
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: seed1.length,
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
-                    childAspectRatio: 1.5,
-                    crossAxisSpacing: 30,
-                    mainAxisSpacing: 20),
+                    childAspectRatio: 1.8,
+                    crossAxisSpacing: 20,
+                    mainAxisSpacing: 30),
                 itemBuilder: (BuildContext context, int index) {
                   return InkWell(
+                    onTap: () {
+                      setState(() {
+                        if (seedlength > 0) {
+                          selectedseed.add(seed1[index]);
+                          seed1.removeAt(index);
+                          seed1.add("");
+
+                          seedlength -= 1;
+                        }
+                      });
+                    },
                     child: Container(
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
@@ -207,7 +222,6 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: white,
-                              letterSpacing: 1,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         ),
@@ -245,7 +259,6 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: white,
-                              letterSpacing: 1,
                               fontSize: 15,
                               fontWeight: FontWeight.w500),
                         ),
@@ -259,13 +272,15 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               ),
               InkWell(
                 onTap: () {
+                  setState(() {
+                    loading = true;
+                  });
                   // if (seedlength == 12) {
-                  //   widget.seed == seed1
-                  // ?
-                  storeUser();
-                  // Navigator.push(context,
-                  //     MaterialPageRoute(builder: (_) => WalletSucess()));
-                  // // : _modalBottomSheetMenu3();
+                  if (seed1.toString() == seedcheck.toString()) {
+                    storeUser();
+                  } else {
+                    _modalBottomSheetMenu3();
+                  }
                   // }
                 },
                 child: Container(
@@ -284,7 +299,6 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       textAlign: TextAlign.center,
                       style: GoogleFonts.poppins(
                           color: seedlength == 12 ? white : blue,
-                          letterSpacing: 1,
                           fontSize: 15,
                           fontWeight: FontWeight.w600),
                     ),
@@ -346,10 +360,36 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 ),
                 FlatButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (BuildContext context) => this.widget));
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (BuildContext context) => this.widget));
+                    var seed2 = widget.seed1.split(" ");
+                    seedcheck = seed2;
+                    setState(() {
+                      var seed2 = widget.seed1.split(" ");
+
+                      selectedseed = seed2;
+                      // selectedseed = widget.seed;
+
+                      selectedseed.shuffle();
+                      seed1.clear();
+                      Navigator.pop(context);
+                      loading = false;
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seed1.add("");
+                      seedlength = 0;
+                    });
                   },
                   child: Text(
                     'Ok, Got it',

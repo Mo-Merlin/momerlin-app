@@ -51,6 +51,25 @@ class UserRepository {
     }
   }
 
+  Future<dynamic> getToken() async {
+    try {
+      var url = "http://192.168.43.124:8000/api/";
+
+      var res = await http.post(
+        '${url + "create_link_token"}',
+        headers: <String, String>{
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+      var checkres = jsonDecode(res.body);
+      print("checkres $checkres");
+      return checkres;
+    } catch (e) {
+      print("error");
+      print("Error" + e);
+    }
+  }
+
   Future<dynamic> getTransaction() async {
     try {
       var url = "http://192.168.43.124:8000/api/";

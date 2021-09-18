@@ -12,6 +12,11 @@
          to allow setting breakpoints, to provide hot reload, etc.
     -->
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <uses-feature android:name="android.hardware.camera" />
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature
@@ -29,7 +34,9 @@
         android:appComponentFactory="androidx.core.app.CoreComponentFactory"
         android:debuggable="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="Momerlin" >
+        android:label="Momerlin"
+        android:largeHeap="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar" >
         <activity
             android:name="com.example.Momerlin.MainActivity"
             android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
@@ -72,6 +79,7 @@
             android:name="flutterEmbedding"
             android:value="2" />
 
+        <activity android:name="com.amolg.flutterbarcodescanner.BarcodeCaptureActivity" />
         <activity
             android:name="com.plaid.internal.LinkRedirectActivity"
             android:theme="@android:style/Theme.Material.NoActionBar" >
@@ -95,6 +103,14 @@
             android:launchMode="singleTask"
             android:theme="@style/PlaidTransparentTheme"
             android:windowSoftInputMode="adjustResize" />
+        <activity
+            android:name="com.google.android.gms.common.api.GoogleApiActivity"
+            android:exported="false"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
+
+        <meta-data
+            android:name="com.google.android.gms.version"
+            android:value="@integer/google_play_services_version" />
 
         <provider
             android:name="androidx.work.impl.WorkManagerInitializer"

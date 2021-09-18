@@ -17,22 +17,13 @@ class _WalletSucess extends State<WalletSucess> {
   var userLanguage, lang = [];
   bool loading = false;
   var selectedseed;
-
+  var linktoken;
   @override
   void initState() {
     super.initState();
     loading = false;
-    getUserLanguage();
-    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
-      token: "link-sandbox-c82a7b27-c325-4ba2-93c3-109e5ee301a2",
-    );
 
-    _plaidLinkToken = PlaidLink(
-      configuration: linkTokenConfiguration,
-      onSuccess: _onSuccessCallback,
-      onEvent: _onEventCallback,
-      onExit: _onExitCallback,
-    );
+    getUserLanguage();
   }
 
   int seedlength = 0;
@@ -74,6 +65,24 @@ class _WalletSucess extends State<WalletSucess> {
       print("onExit error: ${error.description()}");
     }
   }
+
+  // Future<void> getToken() async {
+  //   final usertoken1 = await UserRepository().getToken();
+  //   linktoken = usertoken1["link_token"];
+  //   print("token $linktoken");
+  //   LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
+  //     token: usertoken1["link_token"],
+  //   );
+
+  //   _plaidLinkToken = PlaidLink(
+  //     configuration: linkTokenConfiguration,
+  //     onSuccess: _onSuccessCallback,
+  //     onEvent: _onEventCallback,
+  //     onExit: _onExitCallback,
+  //   );
+
+  //   print("UserTokne $usertoken1");
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -147,7 +156,7 @@ class _WalletSucess extends State<WalletSucess> {
                         lang.length != 0 &&
                         userLanguage['writedownthesewordsinorder'] != null)
                     ? "${userLanguage['writedownthesewordsinorder']}"
-                    : "Would you like to earn BTC in exchange for your anonymous payment data? ",
+                    : "Would you like to earn Crypto in exchange for your anonymous payment data? ",
                 style: GoogleFonts.poppins(
                     color: white, fontSize: 25, fontWeight: FontWeight.w600),
               ),
@@ -155,10 +164,13 @@ class _WalletSucess extends State<WalletSucess> {
                 height: 70,
               ),
               InkWell(
-                onTap: () => _plaidLinkToken.open(),
+                onTap: () {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => WalletTwo()));
+                },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 10,
+                  height: MediaQuery.of(context).size.height / 11,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20), color: blue),
                   child: Row(
@@ -175,7 +187,7 @@ class _WalletSucess extends State<WalletSucess> {
                                 lang.length != 0 &&
                                 userLanguage['ihavewrittenthemdown'] != null)
                             ? "${userLanguage['ihavewrittenthemdown']}"
-                            : "Yes, I want free BTC",
+                            : "Yes, I want free Crypto",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             color: white,

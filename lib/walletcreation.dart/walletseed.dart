@@ -99,7 +99,6 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                       "10%",
                       style: GoogleFonts.poppins(
                           color: white,
-                          letterSpacing: 1,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
@@ -134,12 +133,11 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           : "Write down these 12 words in order",
                       style: GoogleFonts.poppins(
                           color: white,
-                          letterSpacing: 1,
                           fontSize: 30,
                           fontWeight: FontWeight.w600),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 5,
                     ),
                     Text(
                       (lang.length != null &&
@@ -148,22 +146,21 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           ? "${userLanguage['recoverykey']}"
                           : "This is your recovery key - you’ll need it if you ever need to recover your account",
                       style: GoogleFonts.poppins(
-                          color: white,
-                          letterSpacing: 1,
+                          color: Colors.grey,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
-                      height: 10,
+                      height: 15,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
                       itemCount: seed1.length,
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
-                          childAspectRatio: 1.5,
-                          crossAxisSpacing: 30,
-                          mainAxisSpacing: 20),
+                          childAspectRatio: 1.8,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 30),
                       itemBuilder: (BuildContext context, int index) {
                         return Container(
                           decoration: BoxDecoration(
@@ -175,7 +172,6 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poppins(
                                   color: white,
-                                  letterSpacing: 1,
                                   fontSize: 15,
                                   fontWeight: FontWeight.w500),
                             ),
@@ -184,7 +180,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                       },
                     ),
                     SizedBox(
-                      height: 40,
+                      height: 70,
                     ),
                     InkWell(
                       onTap: () {
@@ -211,7 +207,6 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                             textAlign: TextAlign.center,
                             style: GoogleFonts.poppins(
                                 color: white,
-                                letterSpacing: 1,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600),
                           ),

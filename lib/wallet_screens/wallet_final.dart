@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
+import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class WalletFinal extends StatefulWidget {
@@ -89,7 +90,6 @@ class _WalletFinalState extends State<WalletFinal> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: Colors.white,
-                              letterSpacing: 1,
                               fontSize: 30,
                               fontWeight: FontWeight.w600),
                         ),
@@ -107,7 +107,6 @@ class _WalletFinalState extends State<WalletFinal> {
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: Colors.grey,
-                              letterSpacing: 1,
                               fontSize: 12,
                               fontWeight: FontWeight.w600),
                         ),
@@ -119,7 +118,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletChallenges()));
+                                    builder: (context) => WalletTwo()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
@@ -139,7 +138,6 @@ class _WalletFinalState extends State<WalletFinal> {
                                       : "SEND MORE",
                                   style: GoogleFonts.poppins(
                                       color: white,
-                                      letterSpacing: 1,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),
@@ -159,7 +157,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletHomePage()));
+                                    builder: (context) => WalletTwo()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
@@ -176,7 +174,6 @@ class _WalletFinalState extends State<WalletFinal> {
                                       : "GO HOME",
                                   style: GoogleFonts.poppins(
                                       color: white,
-                                      letterSpacing: 1,
                                       fontSize: 15,
                                       fontWeight: FontWeight.w600),
                                 ),

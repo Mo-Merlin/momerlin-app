@@ -55,4 +55,51 @@ class Web3 {
       return "Error in PrivateKey";
     }
   }
+
+  Future<dynamic> sendTransactionMain(
+      String address, String privateKey, EtherAmount amount, BigInt fee) async {
+    try {
+      Credentials credentials =
+          await ethClientMain.credentialsFromPrivateKey(privateKey);
+      String txHash = await ethClientMain.sendTransaction(
+          credentials,
+          Transaction(
+            to: EthereumAddress.fromHex(address),
+            value: amount,
+            gasPrice: EtherAmount.fromUnitAndValue(EtherUnit.gwei, fee),
+            maxGas: 21000,
+          ),
+          fetchChainIdFromNetworkId: true);
+
+      var data = {'txHash': txHash, 'status': true};
+      return data;
+    } catch (e) {
+      var data = {'status': false};
+      debugPrint('e $e');
+      return data;
+    }
+  }
+
+  Future<dynamic> sendTransactionTest(
+      String address, String privateKey, EtherAmount amount, BigInt fee) async {
+    try {
+      Credentials credentials =
+          await _client.credentialsFromPrivateKey(privateKey);
+      String txHash = await _client.sendTransaction(
+          credentials,
+          Transaction(
+            to: EthereumAddress.fromHex(address),
+            value: amount,
+            gasPrice: EtherAmount.fromUnitAndValue(EtherUnit.gwei, fee),
+            maxGas: 21000,
+          ),
+          fetchChainIdFromNetworkId: true);
+      var data = {'txHash': txHash, 'status': true};
+      return data;
+    } catch (e) {
+      var data = {'status': false};
+      debugPrint('e $e');
+      return data;
+    }
+  }
 }
