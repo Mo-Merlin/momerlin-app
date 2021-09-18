@@ -63,7 +63,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                   lang.length != 0 &&
                   userLanguage['chellenges'] != null)
               ? "${userLanguage['chellenges']}"
-              : "CREATE A CHALLENGE",
+              : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontSize: 17,

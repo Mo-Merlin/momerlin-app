@@ -64,7 +64,7 @@ class _WalletProfileState extends State<WalletProfile> {
               : "YOUR PROFILE",
           style: GoogleFonts.poppins(
             color: Colors.white,
-            fontSize: 17,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -182,9 +182,9 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ? "${userLanguage['earnofreferredearnings']}"
                                   : "Earn 1% of referred earnings",
                               style: GoogleFonts.poppins(
-                                  color: blue1,
-                                  fontSize: 10,
-                                  fontWeight: FontWeight.w500),
+                                color: blue1,
+                                fontSize: 9,
+                              ),
                             ),
                           ),
                         ),
@@ -197,7 +197,7 @@ class _WalletProfileState extends State<WalletProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20),
               child: Container(
-                height: 90,
+                height: 80,
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.circular(15),
@@ -208,22 +208,26 @@ class _WalletProfileState extends State<WalletProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 0, top: 15),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['minwithdraw'] != null)
-                                ? "${userLanguage['minwithdraw']}"
-                                : "MIN WITHDRAW",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.grey,
+                          padding: const EdgeInsets.only(left: 0, top: 10),
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['minwithdraw'] != null)
+                                  ? "${userLanguage['minwithdraw']}"
+                                  : "MIN WITHDRAW",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.grey,
+                              ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 15),
+                          padding: const EdgeInsets.only(top: 10),
                           child: Container(
                             height: 35,
                             width: 80,
@@ -235,7 +239,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                 "\$5",
                                 style: GoogleFonts.montserrat(
                                   color: Colors.white,
-                                  fontSize: 15,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600,
                                 ),
                               ),
                             ),
@@ -247,18 +252,21 @@ class _WalletProfileState extends State<WalletProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(right: 13, top: 5),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['currentgasfeeestimated'] !=
-                                        null)
-                                ? "${userLanguage['currentgasfeeestimated']}"
-                                : "Current gas fee estimated",
-                            style: GoogleFonts.poppins(
-                              fontSize: 10,
-                              fontWeight: FontWeight.w500,
-                              color: blue1,
+                          padding: const EdgeInsets.only(right: 30, top: 5),
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['currentgasfeeestimated'] !=
+                                          null)
+                                  ? "${userLanguage['currentgasfeeestimated']}"
+                                  : "Current gas fee estimated",
+                              style: GoogleFonts.poppins(
+                                fontSize: 9,
+                                color: blue1,
+                              ),
                             ),
                           ),
                         ),
@@ -268,7 +276,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             "\$2.50",
                             style: GoogleFonts.montserrat(
                               color: blue1,
-                              fontSize: 10,
+                              fontSize: 9,
                             ),
                           ),
                         ),
@@ -281,7 +289,7 @@ class _WalletProfileState extends State<WalletProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
-                height: 90,
+                height: 80,
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.circular(15),
@@ -292,22 +300,26 @@ class _WalletProfileState extends State<WalletProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 0, top: 30),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['selectcurrency'] != null)
-                                ? "${userLanguage['selectcurrency']}"
-                                : "SELECT CURRENCY",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          padding: const EdgeInsets.only(left: 0, top: 25),
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['selectcurrency'] != null)
+                                  ? "${userLanguage['selectcurrency']}"
+                                  : "SELECT CURRENCY",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 30),
+                          padding: const EdgeInsets.only(top: 20),
                           child: Container(
                             height: 35,
                             width: 80,
@@ -337,7 +349,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       child: Text(
                                         value,
                                         style: GoogleFonts.montserrat(
-                                          fontSize: 15,
+                                          fontSize: 12,
                                           color: Colors.white,
                                           fontWeight: FontWeight.w600,
                                         ),
@@ -346,7 +358,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                   }).toList(),
                                   hint: Text("\$USD",
                                       style: GoogleFonts.montserrat(
-                                        fontSize: 15,
+                                        fontSize: 12,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
                                       )),
@@ -369,7 +381,7 @@ class _WalletProfileState extends State<WalletProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
-                height: 90,
+                height: 80,
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.circular(15),
@@ -380,17 +392,21 @@ class _WalletProfileState extends State<WalletProfile> {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(right: 50, top: 20),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['support'] != null)
-                                ? "${userLanguage['support']}"
-                                : "SUPPORT",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          padding: const EdgeInsets.only(right: 0, top: 20),
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['support'] != null)
+                                  ? "${userLanguage['support']}"
+                                  : "SUPPORT",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
@@ -399,8 +415,8 @@ class _WalletProfileState extends State<WalletProfile> {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(15),
                             child: Container(
-                              height: 50,
-                              width: 50,
+                              height: 42,
+                              width: 42,
                               color: backgroundcolor,
                               child: IconButton(
                                   onPressed: () {},
@@ -420,7 +436,7 @@ class _WalletProfileState extends State<WalletProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
-                height: 90,
+                height: 80,
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.circular(15),
@@ -432,54 +448,63 @@ class _WalletProfileState extends State<WalletProfile> {
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(right: 0, top: 20),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['followus'] != null)
-                                ? "${userLanguage['followus']}"
-                                : "FOLLOW US",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['followus'] != null)
+                                  ? "${userLanguage['followus']}"
+                                  : "FOLLOW US",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 50, top: 20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              color: backgroundcolor,
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    FontAwesomeIcons.twitter,
-                                    color: blue1,
-                                    size: 20,
-                                  )),
+                        Row(
+                          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15, left: 20),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                  height: 42,
+                                  width: 42,
+                                  color: backgroundcolor,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        FontAwesomeIcons.twitter,
+                                        color: blue1,
+                                        size: 20,
+                                      )),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 5, top: 20),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(15),
-                            child: Container(
-                              height: 50,
-                              width: 50,
-                              color: backgroundcolor,
-                              child: IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(
-                                    FontAwesomeIcons.facebook,
-                                    color: blue1,
-                                    size: 20,
-                                  )),
+                            Padding(
+                              padding: const EdgeInsets.only(top: 15, left: 20),
+                              child: ClipRRect(
+                                borderRadius: BorderRadius.circular(15),
+                                child: Container(
+                                  height: 42,
+                                  width: 42,
+                                  color: backgroundcolor,
+                                  child: IconButton(
+                                      onPressed: () {},
+                                      icon: Icon(
+                                        FontAwesomeIcons.facebook,
+                                        color: blue1,
+                                        size: 20,
+                                      )),
+                                ),
+                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),
@@ -490,7 +515,7 @@ class _WalletProfileState extends State<WalletProfile> {
             Padding(
               padding: const EdgeInsets.only(left: 20, right: 20, top: 15),
               child: Container(
-                height: 90,
+                height: 80,
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.circular(15),
@@ -501,17 +526,21 @@ class _WalletProfileState extends State<WalletProfile> {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(left: 23, top: 35),
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['aboutus'] != null)
-                                ? "${userLanguage['aboutus']}"
-                                : "ABOUT US",
-                            style: GoogleFonts.poppins(
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                          padding: const EdgeInsets.only(left: 23, top: 30),
+                          child: Container(
+                            width: 150,
+                            //color: Colors.yellow,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['aboutus'] != null)
+                                  ? "${userLanguage['aboutus']}"
+                                  : "ABOUT US",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
                           ),
                         ),

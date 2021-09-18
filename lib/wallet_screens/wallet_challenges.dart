@@ -34,42 +34,42 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   List elements = [
     {
-      "name": "@momozuno has earned",
+      "name": "@momozuno \nhas earned",
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "400",
       "type": "SATs",
     },
     {
-      "name": "@jade.sim has earned",
+      "name": "@jade.sim \nhas earned",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "230",
       "type": "SATs",
     },
     {
-      "name": "@cam.c has earned",
+      "name": "@cam.c \nhas earned",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "40",
       "type": "SATs",
     },
     {
-      "name": "@momozuno has earned",
+      "name": "@momozuno \nhas earned",
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "400",
       "type": "SATs",
     },
     {
-      "name": "@jade.sim has earned",
+      "name": "@jade.sim \nhas earned",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "230",
       "type": "SATs",
     },
     {
-      "name": "@cam.c has earned",
+      "name": "@cam.c \nhas earned",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "40",
@@ -79,7 +79,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   List elementsOne = [
     {
-      "name": "5KM RUN STREAK",
+      "name": "5KM RUN \nSTREAK",
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "+750",
@@ -87,7 +87,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "color": Colors.blue,
     },
     {
-      "name": "3KM RUN STREAK",
+      "name": "3KM RUN \nSTREAK",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "+750",
@@ -95,7 +95,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "color": Colors.greenAccent,
     },
     {
-      "name": "1KM WALK STREAK",
+      "name": "1KM WALK \nSTREAK",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "+300",
@@ -103,7 +103,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "color": Colors.redAccent,
     },
     {
-      "name": "5KM RUN STREAK",
+      "name": "5KM RUN \nSTREAK",
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "+750",
@@ -111,7 +111,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "color": Colors.blue,
     },
     {
-      "name": "3KM RUN STREAK",
+      "name": "3KM RUN \nSTREAK",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "+750",
@@ -119,7 +119,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "color": Colors.greenAccent,
     },
     {
-      "name": "1KM WALK STREAK",
+      "name": "1KM WALK \nSTREAK",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "+300",
@@ -170,7 +170,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
               : "CHALLENGES",
           style: GoogleFonts.poppins(
             color: Colors.white,
-            fontSize: 17,
+            fontSize: 15,
             fontWeight: FontWeight.w600,
           ),
         ),
@@ -179,7 +179,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
             padding: const EdgeInsets.all(5.0),
             child: Container(
               height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width * 0.4,
+              width: MediaQuery.of(context).size.width * 0.35,
               decoration: BoxDecoration(
                   color: button, borderRadius: BorderRadius.circular(40)),
               child: Row(
@@ -203,13 +203,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           ? "${userLanguage['sats']}"
                           : "SATs",
                       style: GoogleFonts.poppins(
-                          fontSize: 17,
+                          fontSize: 12,
                           color: Colors.orangeAccent,
-                          fontWeight: FontWeight.w600),
+                          fontWeight: FontWeight.w500),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 20),
+                    padding: const EdgeInsets.only(left: 12),
                     child: Stack(
                       children: [
                         CircularProgressIndicator(
@@ -221,7 +221,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             child: Stack(
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 5),
+                              padding: const EdgeInsets.only(left: 12, top: 5),
                               child: Text(
                                 (lang.length != null &&
                                         lang.length != 0 &&
@@ -229,17 +229,17 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ? "${userLanguage['level']}"
                                     : "LEVEL",
                                 style: GoogleFonts.poppins(
-                                  fontSize: 7,
+                                  fontSize: 5,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.only(left: 8, top: 12),
+                              padding: const EdgeInsets.only(left: 10, top: 12),
                               child: Text(
                                 "02",
                                 style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: 13,
                                     color: Colors.white,
                                     fontWeight: FontWeight.w600),
                               ),
@@ -291,7 +291,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -311,7 +311,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       )
@@ -365,15 +365,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             child: Center(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                  left: 12,
+                                                  left: 5,
                                                 ),
                                                 child: Text(
                                                     elements[index]['name'],
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.grey,
-                                                      fontSize: 15,
-                                                      fontWeight:
-                                                          FontWeight.w500,
+                                                      fontSize: 11,
                                                     )),
                                               ),
                                             ),
@@ -411,9 +409,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     style: GoogleFonts.poppins(
                                                         color:
                                                             Colors.orangeAccent,
-                                                        fontSize: 10,
+                                                        fontSize: 7,
                                                         fontWeight:
-                                                            FontWeight.w600)),
+                                                            FontWeight.w500)),
                                               ),
                                             ],
                                           ),
@@ -479,7 +477,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -499,7 +497,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       )
@@ -554,12 +552,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             child: Center(
                                               child: Padding(
                                                 padding: const EdgeInsets.only(
-                                                    left: 12, right: 5),
+                                                    left: 12, right: 6),
                                                 child: Text(
                                                     elementsOne[index]['name'],
                                                     style: GoogleFonts.poppins(
                                                       color: Colors.white,
-                                                      fontSize: 15,
+                                                      fontSize: 14,
                                                       fontWeight:
                                                           FontWeight.w600,
                                                     )),
@@ -587,9 +585,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               Text(elementsOne[index]['amt'],
                                                   style: GoogleFonts.poppins(
                                                       color: Colors.white,
-                                                      fontSize: 20,
+                                                      fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.bold)),
+                                                          FontWeight.w600)),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 5),
@@ -597,9 +595,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     elementsOne[index]['type'],
                                                     style: GoogleFonts.poppins(
                                                         color: Colors.white,
-                                                        fontSize: 10,
+                                                        fontSize: 12,
                                                         fontWeight:
-                                                            FontWeight.w600)),
+                                                            FontWeight.w400)),
                                               ),
                                             ],
                                           ),
@@ -657,7 +655,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 16,
                                 color: Colors.white,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
@@ -677,7 +675,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             style: GoogleFonts.poppins(
                                 fontSize: 8,
                                 color: blue1,
-                                fontWeight: FontWeight.bold),
+                                fontWeight: FontWeight.w600),
                           ),
                         ),
                       )
@@ -712,8 +710,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       "1",
                                       style: GoogleFonts.poppins(
                                         color: Colors.white,
-                                        fontSize: 30,
-                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
                                       ),
                                     ),
                                   ),
@@ -747,7 +745,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
                                             fontSize: 16,
-                                            fontWeight: FontWeight.bold,
+                                            fontWeight: FontWeight.w600,
                                           ),
                                         ),
                                         subtitle: Text("rating"),
@@ -772,16 +770,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           height: MediaQuery.of(context)
                                                   .size
                                                   .height *
-                                              0.06,
+                                              0.05,
                                           width: MediaQuery.of(context)
                                                   .size
                                                   .width *
-                                              0.30,
+                                              0.25,
                                           decoration: BoxDecoration(
                                               color: Colors.white
                                                   .withOpacity(0.25),
                                               borderRadius:
-                                                  BorderRadius.circular(20)),
+                                                  BorderRadius.circular(16)),
                                           child: Row(
                                             mainAxisAlignment:
                                                 MainAxisAlignment.center,
@@ -789,9 +787,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               Text(elements[index]['amt'],
                                                   style: GoogleFonts.poppins(
                                                       color: Colors.white,
-                                                      fontSize: 20,
+                                                      fontSize: 16,
                                                       fontWeight:
-                                                          FontWeight.bold)),
+                                                          FontWeight.w600)),
                                               Padding(
                                                 padding: const EdgeInsets.only(
                                                     left: 5),
@@ -800,9 +798,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     style: GoogleFonts.poppins(
                                                         color:
                                                             Colors.orangeAccent,
-                                                        fontSize: 13,
+                                                        fontSize: 12,
                                                         fontWeight:
-                                                            FontWeight.w600)),
+                                                            FontWeight.w400)),
                                               ),
                                             ],
                                           ),
