@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
+import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class ChellengeFinal extends StatefulWidget {
@@ -68,7 +69,7 @@ class _ChellengeFinalState extends State<ChellengeFinal> {
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.55,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: button,
@@ -141,7 +142,8 @@ class _ChellengeFinalState extends State<ChellengeFinal> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletHomePage()));
+                                    builder: (context) =>
+                                        WalletCreatingChallenge()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
