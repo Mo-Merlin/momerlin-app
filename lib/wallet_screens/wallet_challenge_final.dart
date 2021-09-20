@@ -6,14 +6,14 @@ import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
-class ChellengeFinal extends StatefulWidget {
-  const ChellengeFinal({Key key}) : super(key: key);
+class ChallengeFinal extends StatefulWidget {
+  const ChallengeFinal({Key key}) : super(key: key);
 
   @override
-  _ChellengeFinalState createState() => _ChellengeFinalState();
+  _ChallengeFinalState createState() => _ChallengeFinalState();
 }
 
-class _ChellengeFinalState extends State<ChellengeFinal> {
+class _ChallengeFinalState extends State<ChallengeFinal> {
   var userLanguage, lang = [];
   @override
   void initState() {

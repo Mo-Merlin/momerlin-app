@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_chellenge_final.dart';
+import 'package:momerlin/wallet_screens/wallet_challenge_five.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletChallengeFour extends StatefulWidget {
@@ -104,7 +104,7 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => ChellengeFinal()));
+                                builder: (context) => WalletChallengeFive()));
                       },
                       //color: blue.withOpacity(0.3),
                       color: blue1,

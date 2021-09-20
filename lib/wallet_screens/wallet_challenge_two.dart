@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_three.dart';
-import 'package:momerlin/wallet_screens/wallet_chellenge_final.dart';
+import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletChallengeTwo extends StatefulWidget {
