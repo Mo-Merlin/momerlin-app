@@ -1,7 +1,0 @@
-#Tue Sep 21 22:06:02 IST 2021
-base.0=E\:\\New folder\\momerlin-app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
-path.1=classes2.dex
-renamed.1=classes2.dex
-path.0=classes.dex
-renamed.0=classes.dex
-base.1=E\:\\New folder\\momerlin-app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes2.dex
