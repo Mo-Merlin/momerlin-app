@@ -1,0 +1,954 @@
+[
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_message.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_message.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_exit.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_exit.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_search_api_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_routing_number_confirmed.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_routing_number_confirmed.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_small_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ratingbar_small_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_px_feature_04.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_px_feature_04.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_mtrl_checked_circle.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_mtrl_checked_circle.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_mtrl_chip_checked_black.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_mtrl_chip_checked_black.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_terminal.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_terminal.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\design_ic_visibility_off.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\design_ic_visibility_off.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_menu_s1.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_menu_s1.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_items.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_items.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_close_s1.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_close_s1.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_copy.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_copy.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_sidebar_hide.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_sidebar_hide.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\notification_bg_low.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\e57a60dcc20ae93c3b38a3e6ee7bbd35\\core-1.3.2\\res\\drawable\\notification_bg_low.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_balance_beam_01.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_balance_beam_01.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_inbox.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_inbox.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\design_snackbar_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\design_snackbar_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_products.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_products.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\navigation_empty_icon.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\navigation_empty_icon.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_safe.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_safe.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_rotate_keys.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_rotate_keys.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\design_fab_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\design_fab_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_error_attempt_2.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_error_attempt_2.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_keyboard_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_keyboard_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\notification_tile_bg.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\e57a60dcc20ae93c3b38a3e6ee7bbd35\\core-1.3.2\\res\\drawable\\notification_tile_bg.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_pressed_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_pressed_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_indicator_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ratingbar_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\tooltip_frame_light.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\tooltip_frame_light.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_mobile.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_mobile.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_hand.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_hand.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_input_box_border_color.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_input_box_border_color.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_changelog.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_changelog.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\loading_dots.png",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\loading_dots.png"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_platform.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_platform.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_refresh.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_refresh.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_tertiary_button_text_color.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_tertiary_button_text_color.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_arrow_drop_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ratingbar_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ratingbar_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_checkbox_checked_mtrl.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_checkbox_checked_mtrl.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_dark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_list_selector_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_trash.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_trash.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_notebook.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_notebook.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_default_mtrl_shape.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_default_mtrl_shape.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_book.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_book.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_dialog_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_dialog_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_success.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_success.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_default_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_default_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_tag.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_tag.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_radio_off_mtrl.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_radio_off_mtrl.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_borderless_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_borderless_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_mtrl_chip_checked_circle.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_mtrl_chip_checked_circle.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_px_feature_02.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_px_feature_02.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_appearance_hide.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_appearance_hide.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_remove.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_remove.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s2_left.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s2_left.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_globe.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_globe.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_configure.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_configure.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_line_graph.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_line_graph.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_reset.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_reset.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_activity.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_activity.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_book_open.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_book_open.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_alert_error.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_alert_error.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s1_left.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s1_left.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_holo_light.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_list_selector_holo_light.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_webhooks.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_webhooks.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_edit.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_edit.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_sidebar_show.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_sidebar_show.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_shield.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_shield.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_checkbox_checked_to_unchecked_mtrl_animation.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_checkbox_checked_to_unchecked_mtrl_animation.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_primary_disabled_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_primary_disabled_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_verification_in_progress.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_verification_in_progress.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_keyboard_arrow_right_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_keyboard_arrow_right_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_document.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_document.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_add.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_add.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_list_item_ripple_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_list_item_ripple_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_keyboard_arrow_left_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_keyboard_arrow_left_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_ask_question.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_ask_question.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_account_number_confirmed.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_account_number_confirmed.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_missing_data.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_missing_data.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_clear_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_clear_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_light.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_item_background_holo_light.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_logout.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_logout.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_information.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_information.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_loading_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_loading_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_switch.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_switch.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\tooltip_frame_dark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\tooltip_frame_dark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_check_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_check_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_voice_search_api_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_voice_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_wallet.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_wallet.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_radio_material_anim.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_radio_material_anim.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_authentication_issues.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_authentication_issues.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_docs.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_docs.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_item_management.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_item_management.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_alert_bell.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_alert_bell.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_help.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_help.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_check_account_number.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_check_account_number.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_checkmark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_checkmark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_home.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_home.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_product_auth.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_product_auth.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\design_ic_visibility.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\design_ic_visibility.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\avd_hide_password.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\avd_hide_password.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_overview.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_overview.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_institution_error.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_institution_error.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_integrations.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_integrations.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_menu_arrow_up_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_menu_arrow_up_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_text_select_handle_end.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_text_select_handle_end.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_phone.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_phone.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_edit_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_edit_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_error.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_error.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s2_up.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s2_up.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_database.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_database.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_user.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_user.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s1_right.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s1_right.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_tick_mark_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_seekbar_tick_mark_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_error_attempt_1.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_error_attempt_1.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_disabled_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_disabled_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_download.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_download.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_guide.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_guide.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_users.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_users.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_rocket.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_rocket.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_radio_off_to_on_mtrl_animation.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_radio_off_to_on_mtrl_animation.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_menu_s2.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_menu_s2.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_primary_default_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_primary_default_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s2_down.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s2_down.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_menu_arrow_down_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_menu_arrow_down_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_px_feature_03.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_px_feature_03.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_briefcase.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_briefcase.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_focused_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_focused_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_primary_pressed_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_primary_pressed_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_default_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_default_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_balance_beam_02.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_balance_beam_02.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_go_search_api_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_go_search_api_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_disabled_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_disabled_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_thumb_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_seekbar_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_checkmark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_checkmark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_ic_cancel.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_ic_cancel.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s1_down.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s1_down.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_item_background_holo_dark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_item_background_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_status.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_status.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_calendar.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_calendar.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_institution.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_institution.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_key.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_key.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_text_cursor_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_text_cursor_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_radio_on_mtrl.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_radio_on_mtrl.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_appearance_show.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_appearance_show.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\design_password_eye.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\design_password_eye.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_ic_arrow_drop_up.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_ic_arrow_drop_up.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_video.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_video.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_bar_graph.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_bar_graph.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_checkbox_unchecked_mtrl.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_checkbox_unchecked_mtrl.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_rotate.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_rotate.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_list.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_list.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_dark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_list_selector_background_transition_holo_dark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_build.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_build.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_lock.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_lock.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_spinner_textfield_background_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_spinner_textfield_background_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_login.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_login.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s2_right.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s2_right.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_arrow_left.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_arrow_left.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_popupmenu_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_popupmenu_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_top_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_cab_background_top_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_learn.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_learn.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_menu_overflow_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_menu_overflow_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_first_deposit_01.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_first_deposit_01.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_link.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_link.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_dropdown_arrow.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_dropdown_arrow.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_identity.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_identity.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_add_circle.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_add_circle.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_bookmark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_bookmark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_close_s2.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_close_s2.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_gear.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_gear.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_calendar.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_calendar.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_button_text_color.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_button_text_color.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_mail.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_mail.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_radio_on_to_off_mtrl_animation.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_radio_on_to_off_mtrl_animation.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_tab_indicator_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_tab_indicator_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\notification_bg.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\e57a60dcc20ae93c3b38a3e6ee7bbd35\\core-1.3.2\\res\\drawable\\notification_bg.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_textfield_search_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_textfield_search_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_vector_test.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b8495eb7f8b45966e26a11b57aaae2ca\\jetified-appcompat-resources-1.2.0\\res\\drawable\\abc_vector_test.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\btn_checkbox_unchecked_to_checked_mtrl_animation.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\btn_checkbox_unchecked_to_checked_mtrl_animation.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_mtrl_chip_close_circle.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_mtrl_chip_close_circle.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_check_material_anim.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_check_material_anim.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_faulty_data.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_faulty_data.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_cab_background_internal_bg.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_cab_background_internal_bg.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_clear_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_clear_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_lightbulb.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_lightbulb.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\ic_clock_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\ic_clock_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_switch_thumb_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_switch_thumb_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_primary_button_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_primary_button_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_ic_error.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_ic_error.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_folder.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_folder.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_arrow_right.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_arrow_right.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_focused_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_focused_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_search.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_search.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_transfer.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_transfer.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_chevron_s1_up.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_chevron_s1_up.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_inset_line_divider.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_inset_line_divider.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_add_details.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_add_details.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_tabs_default_indicator.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_tabs_default_indicator.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_product_transactions.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_product_transactions.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_btn_radio_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_btn_radio_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_buildings.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_buildings.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_pie_chart.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_pie_chart.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_black_800.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_black_800.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_tweet.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_tweet.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_attachment.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_attachment.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_px_feature_01.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_px_feature_01.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_ic_arrow_drop_down.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_ic_arrow_drop_down.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_text_select_handle_start.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_text_select_handle_start.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_check_routing_number.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_check_routing_number.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\material_ic_calendar_black_24dp.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\material_ic_calendar_black_24dp.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_download_sheet.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_download_sheet.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_scene_error_attempt_3.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_scene_error_attempt_3.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_list_selector_background_transition_holo_light.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_list_selector_background_transition_holo_light.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\mtrl_popupmenu_background_dark.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\mtrl_popupmenu_background_dark.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_deposit.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_deposit.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\avd_show_password.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\avd_show_password.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_account_number_search.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_account_number_search.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_dev_delete_secret.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_dev_delete_secret.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_sandbox.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_sandbox.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_logo_horizontal.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_logo_horizontal.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_routing_number_search.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_routing_number_search.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_primary_focused_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_primary_focused_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\notification_icon_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\e57a60dcc20ae93c3b38a3e6ee7bbd35\\core-1.3.2\\res\\drawable\\notification_icon_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_illustration_spot_first_deposit_02.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_illustration_spot_first_deposit_02.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_vertical_progress_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_vertical_progress_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_libraries.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_libraries.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\pl_icon_categories.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\pl_icon_categories.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_ic_ab_back_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_ic_ab_back_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\test_custom_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\5ecd81f6c79800c0c08bc6ed981572bb\\material-1.3.0\\res\\drawable\\test_custom_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_list_item_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_list_item_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_search_pressed_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_search_pressed_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\abc_seekbar_track_material.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\a1923fe6ecb2f817d462c405c6974658\\appcompat-1.2.0\\res\\drawable\\abc_seekbar_track_material.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_secondary_button_background.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_secondary_button_background.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable\\plaid_text_select_handle_middle.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable\\plaid_text_select_handle_middle.xml"
+    }
+]

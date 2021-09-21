@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:gravity="center"
+  android:layout_height="wrap_content"
+  android:layout_width="match_parent"
+  android:orientation="vertical"
+  android:padding="@dimen/plaid_space_4x">
+
+  <TextView
+    android:id="@+id/no_results_text"
+    style="@style/PlaidText.B1.Regular"
+    android:gravity="center"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/plaid_space_1x"
+    android:layout_width="match_parent"
+    android:text="@string/plaid_dont_see_your_bank" />
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidSecondaryButton
+    android:id="@+id/no_results_button"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    android:paddingLeft="@dimen/plaid_space_3x"
+    android:paddingRight="@dimen/plaid_space_3x"
+    android:text="@string/plaid_exit" />
+</LinearLayout>

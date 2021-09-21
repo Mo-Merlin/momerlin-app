@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Plaid Technologies, Inc. <support@plaid.com>
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_height="wrap_content"
+  android:layout_width="match_parent"
+  android:minHeight="@dimen/plaid_list_item_size"
+  tools:parentTag="androidx.constraintlayout.widget.ConstraintLayout">
+
+  <View
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:minHeight="@dimen/plaid_list_item_size"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintTop_toTopOf="parent" />
+
+  <RadioButton
+    android:id="@+id/plaidRadioButton"
+    android:buttonTint="@color/plaid_compound_button_background"
+    android:layout_height="wrap_content"
+    android:layout_width="wrap_content"
+    app:layout_constraintBottom_toBottomOf="@id/plaidValueText"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toTopOf="@id/plaidValueText" />
+
+  <TextView
+    android:id="@+id/plaidValueText"
+    style="@style/PlaidText.H5.Regular"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/plaid_space_2x"
+    android:layout_marginStart="@dimen/plaid_space_2x"
+    android:layout_width="0dp"
+    android:textColor="@drawable/plaid_tertiary_button_text_color"
+    app:layout_constraintBottom_toTopOf="@id/plaidDescriptorText"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/plaidRadioButton"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintVertical_chainStyle="packed"
+    tools:text="Credit Card Number" />
+
+  <TextView
+    android:id="@+id/plaidDescriptorText"
+    style="@style/PlaidText.B3.Regular"
+    android:gravity="start"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/plaid_space_2x"
+    android:layout_marginStart="@dimen/plaid_space_2x"
+    android:layout_width="0dp"
+    android:textColor="@color/plaid_black_800"
+    android:visibility="gone"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintEnd_toStartOf="@id/plaidMetaText"
+    app:layout_constraintStart_toEndOf="@id/plaidRadioButton"
+    app:layout_constraintTop_toBottomOf="@id/plaidValueText"
+    tools:text="---- ---- ---- 1234"
+    tools:visibility="visible" />
+
+  <TextView
+    android:id="@+id/plaidMetaText"
+    style="@style/PlaidText.B3.Regular"
+    android:gravity="end"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/plaid_space_2x"
+    android:layout_marginStart="@dimen/plaid_space_2x"
+    android:layout_width="0dp"
+    android:textColor="@color/plaid_black_800"
+    android:visibility="gone"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toEndOf="@id/plaidDescriptorText"
+    app:layout_constraintTop_toBottomOf="@id/plaidValueText"
+    tools:text="$12,345"
+    tools:visibility="visible" />
+</merge>

@@ -6,6 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserRepository {
+  var url = "http://52.66.200.27:8000/api/";
   Future<bool> isSignedIn() async {
     // Read the keystore
     // signOut();
@@ -35,7 +36,7 @@ class UserRepository {
       // var url = config.documents[0].data['API_URL_GAM'];
       var body = json.encode(data);
       print("body $body");
-      var url = "http://192.168.43.124:8000/api/";
+      // var url = "http://192.168.43.124:8000/api/";
 
       var res = await http.post('${url + "set_access_token"}',
           headers: <String, String>{
@@ -53,7 +54,7 @@ class UserRepository {
 
   Future<dynamic> getToken() async {
     try {
-      var url = "http://192.168.43.124:8000/api/";
+      // var url = "http://192.168.43.124:8000/api/";
 
       var res = await http.post(
         '${url + "create_link_token"}',
@@ -72,13 +73,13 @@ class UserRepository {
 
   Future<dynamic> getTransaction() async {
     try {
-      var url = "http://192.168.43.124:8000/api/";
-
+      // var url = "http://192.168.43.124:8000/api/";
+//
       var res = await http.get(
         '${url + "transactions"}',
       );
       var checkres = jsonDecode(res.body);
-      ;
+
       return checkres;
     } catch (e) {
       print("error");

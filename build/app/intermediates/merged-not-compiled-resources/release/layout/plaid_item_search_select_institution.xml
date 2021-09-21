@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.plaid.internal.core.plaidstyleutils.PlaidListItemInstitution xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/institution"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:paddingStart="@dimen/plaid_space_3x"
+  android:paddingEnd="@dimen/plaid_space_3x"
+  tools:plaid_image="@sample/linksampledata.json/institutions/logo"
+  tools:plaid_list_item_cta="@drawable/pl_icon_information"
+  tools:plaid_subtitle="@sample/linksampledata.json/institutions/url"
+  tools:plaid_title="@sample/linksampledata.json/institutions/name" />

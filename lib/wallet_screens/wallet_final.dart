@@ -106,9 +106,10 @@ class _WalletFinalState extends State<WalletFinal> {
                               : "(Though it may take our magic 5-10 mins    \nto reach your destination)",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                              color: Colors.grey,
-                              fontSize: 12,
-                              fontWeight: FontWeight.w600),
+                            color: Colors.grey,
+                            letterSpacing: 1,
+                            fontSize: 12,
+                          ),
                         ),
                         SizedBox(
                           height: 50,
@@ -138,7 +139,8 @@ class _WalletFinalState extends State<WalletFinal> {
                                       : "SEND MORE",
                                   style: GoogleFonts.poppins(
                                       color: white,
-                                      fontSize: 15,
+                                      letterSpacing: 1,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 SizedBox(
@@ -174,7 +176,8 @@ class _WalletFinalState extends State<WalletFinal> {
                                       : "GO HOME",
                                   style: GoogleFonts.poppins(
                                       color: white,
-                                      fontSize: 15,
+                                      letterSpacing: 1,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w600),
                                 ),
                                 SizedBox(

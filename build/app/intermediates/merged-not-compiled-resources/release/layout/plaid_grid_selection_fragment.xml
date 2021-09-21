@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:id="@+id/root"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:paddingBottom="@dimen/plaid_space_4x">
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidNavigationBar
+    android:id="@+id/plaid_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/plaid_navigation_height" />
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidInstitutionHeaderItem
+    android:id="@+id/plaid_institution"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/plaid_space_2x"
+    android:layout_marginEnd="@dimen/plaid_space_2x" />
+
+  <androidx.core.widget.NestedScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_marginStart="@dimen/plaid_space_4x"
+    android:layout_marginEnd="@dimen/plaid_space_4x"
+    android:layout_weight="1">
+
+    <LinearLayout
+      android:id="@+id/plaidScrollableLayout"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:animateLayoutChanges="true"
+      android:orientation="vertical">
+      <TextView
+        android:id="@+id/plaidHeader"
+        style="@style/PlaidText.H4.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/plaid_space_1x"
+        android:enabled="true"
+        android:gravity="start"
+        android:paddingBottom="@dimen/plaid_space_1x"
+        android:textColor="@color/plaid_text_black_1000"
+        tools:text="header" />
+      <TextView
+        android:id="@+id/plaidPrompt"
+        style="@style/PlaidText.H4.Regular"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/plaid_space_1x"
+        android:enabled="true"
+        android:gravity="start"
+        android:paddingBottom="@dimen/plaid_space_1x"
+        android:textColor="@color/plaid_text_black_1000"
+        tools:text="prompt" />
+      <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/plaidGrid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
+    </LinearLayout>
+  </androidx.core.widget.NestedScrollView>
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidPrimaryButton
+    android:id="@+id/primaryButton"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/plaid_space_4x"
+    android:layout_marginTop="@dimen/plaid_space_2x"
+    android:layout_marginEnd="@dimen/plaid_space_4x"
+    tools:text="primary button" />
+
+</LinearLayout>

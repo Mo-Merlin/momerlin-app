@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:ns1="http://schemas.android.com/tools">
+    <style name="PlaidInput" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense">
+    <item name="boxStrokeColor">@drawable/plaid_input_box_border_color</item>
+    <item name="boxStrokeWidth">@dimen/plaid_corner_radius</item>
+    <item name="boxCornerRadiusTopStart">@dimen/plaid_corner_radius</item>
+    <item name="boxCornerRadiusTopEnd">@dimen/plaid_corner_radius</item>
+    <item name="boxCornerRadiusBottomStart">@dimen/plaid_corner_radius</item>
+    <item name="boxCornerRadiusBottomEnd">@dimen/plaid_corner_radius</item>
+    <item name="errorTextAppearance">@style/PlaidInput.TextErrorAppearance</item>
+    <item name="colorAccent">@color/plaid_black_100</item>
+    <item name="hintTextColor">@drawable/plaid_input_box_border_color</item>
+    <item name="errorTextColor">@color/plaid_red_600</item>
+  </style>
+    <style name="PlaidInput.Regular" parent="TextAppearance.AppCompat">
+    <item name="font">@font/plaid_cern</item>
+    <item name="android:textSize">@dimen/plaid_input_font_size</item>
+    <item name="lineHeight">@dimen/plaid_input_line_size</item>
+    <item name="android:textColor">@color/plaid_black_100</item>
+  </style>
+    <style name="PlaidInput.TextErrorAppearance" parent="TextAppearance.Design.Error">
+    <item name="android:textColor">@color/plaid_black_200</item>
+  </style>
+    <style name="PlaidTheme" parent="PlaidThemeBase">
+
+  </style>
+    <style name="PlaidThemeBase" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+    <item name="colorPrimary">@color/plaid_black_900</item>
+    <item name="colorSecondary">@color/plaid_white</item>
+    <item name="colorPrimaryDark">@color/plaid_black_1000</item>
+    <item name="colorAccent">@color/plaid_white</item>
+    <item name="android:colorAccent" ns1:targetApi="lollipop">@color/plaid_white</item>
+    <item name="colorControlNormal">@color/plaid_white</item>
+    <item name="colorControlActivated">@color/plaid_white</item>
+    <item name="colorControlHighlight">@color/plaid_white</item>
+    <item name="android:textCursorDrawable">@color/plaid_white</item>
+
+    <item name="plaidTextColorH">@color/plaid_text_white</item>
+    <item name="plaidTextColorBPrimary">@color/plaid_text_black_100</item>
+    <item name="plaidTextColorBSecondary">@color/plaid_text_black_200</item>
+
+    <item name="plaidTertiaryTextColorButtonFocused">@color/plaid_blue_800</item>
+    <item name="plaidTertiaryTextColorButtonPressed">@color/plaid_blue_900</item>
+    <item name="plaidTertiaryTextColorButtonDisabled">@color/plaid_black_400</item>
+    <item name="plaidTertiaryTextColorButtonNormal">@color/plaid_white</item>
+
+    <item name="plaidDisabledListItemBackgroundColor">@color/plaid_black_400</item>
+
+    <item name="plaidBannerIconBlue">@color/plaid_blue_200</item>
+    <item name="plaidBannerBackgroundBlue">@color/plaid_blue_800</item>
+    <item name="plaidBannerIconGreen">@color/plaid_green_200</item>
+    <item name="plaidBannerBackgroundGreen">@color/plaid_green_800</item>
+    <item name="plaidBannerIconYellow">@color/plaid_yellow_200</item>
+    <item name="plaidBannerBackgroundYellow">@color/plaid_yellow_800</item>
+    <item name="plaidBannerIconRed">@color/plaid_red_200</item>
+    <item name="plaidBannerBackgroundRed">@color/plaid_red_800</item>
+    <item name="plaidBannerIconPurple">@color/plaid_purple_200</item>
+    <item name="plaidBannerBackgroundPurple">@color/plaid_purple_800</item>
+  </style>
+    <style name="Theme.AppCompat.DayNight" parent="Theme.AppCompat"/>
+    <style name="Theme.AppCompat.DayNight.DarkActionBar" parent="Theme.AppCompat"/>
+    <style name="Theme.AppCompat.DayNight.Dialog" parent="Theme.AppCompat.Dialog"/>
+    <style name="Theme.AppCompat.DayNight.Dialog.Alert" parent="Theme.AppCompat.Dialog.Alert"/>
+    <style name="Theme.AppCompat.DayNight.Dialog.MinWidth" parent="Theme.AppCompat.Dialog.MinWidth"/>
+    <style name="Theme.AppCompat.DayNight.DialogWhenLarge" parent="Theme.AppCompat.DialogWhenLarge"/>
+    <style name="Theme.AppCompat.DayNight.NoActionBar" parent="Theme.AppCompat.NoActionBar"/>
+    <style name="Theme.MaterialComponents.DayNight" parent="Theme.MaterialComponents"/>
+    <style name="Theme.MaterialComponents.DayNight.BottomSheetDialog" parent="Theme.MaterialComponents.BottomSheetDialog"/>
+    <style name="Theme.MaterialComponents.DayNight.Bridge" parent="Theme.MaterialComponents.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.DarkActionBar" parent="Theme.MaterialComponents"/>
+    <style name="Theme.MaterialComponents.DayNight.DarkActionBar.Bridge" parent="Theme.MaterialComponents.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog" parent="Theme.MaterialComponents.Dialog"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.Alert" parent="Theme.MaterialComponents.Dialog.Alert"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.Alert.Bridge" parent="Theme.MaterialComponents.Dialog.Alert.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.Bridge" parent="Theme.MaterialComponents.Dialog.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.FixedSize" parent="Theme.MaterialComponents.Dialog.FixedSize"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.FixedSize.Bridge" parent="Theme.MaterialComponents.Dialog.FixedSize.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.MinWidth" parent="Theme.MaterialComponents.Dialog.MinWidth"/>
+    <style name="Theme.MaterialComponents.DayNight.Dialog.MinWidth.Bridge" parent="Theme.MaterialComponents.Dialog.MinWidth.Bridge"/>
+    <style name="Theme.MaterialComponents.DayNight.DialogWhenLarge" parent="Theme.MaterialComponents.DialogWhenLarge"/>
+    <style name="Theme.MaterialComponents.DayNight.NoActionBar" parent="Theme.MaterialComponents.NoActionBar"/>
+    <style name="Theme.MaterialComponents.DayNight.NoActionBar.Bridge" parent="Theme.MaterialComponents.NoActionBar.Bridge"/>
+    <style name="ThemeOverlay.AppCompat.DayNight" parent="ThemeOverlay.AppCompat.Dark"/>
+    <style name="ThemeOverlay.MaterialComponents.DayNight.BottomSheetDialog" parent="ThemeOverlay.MaterialComponents.BottomSheetDialog"/>
+    <style name="Widget.MaterialComponents.ActionBar.PrimarySurface" parent="Widget.MaterialComponents.ActionBar.Surface"/>
+    <style name="Widget.MaterialComponents.AppBarLayout.PrimarySurface" parent="Widget.MaterialComponents.AppBarLayout.Surface"/>
+    <style name="Widget.MaterialComponents.BottomAppBar.PrimarySurface" parent="Widget.MaterialComponents.BottomAppBar"/>
+    <style name="Widget.MaterialComponents.BottomNavigationView.PrimarySurface" parent="Widget.MaterialComponents.BottomNavigationView"/>
+    <style name="Widget.MaterialComponents.TabLayout.PrimarySurface" parent="Widget.MaterialComponents.TabLayout"/>
+    <style name="Widget.MaterialComponents.Toolbar.PrimarySurface" parent="Widget.MaterialComponents.Toolbar.Surface"/>
+</resources>

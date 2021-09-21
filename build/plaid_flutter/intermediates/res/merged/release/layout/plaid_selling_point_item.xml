@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.plaid.internal.core.plaidstyleutils.PlaidSellingPoint xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minWidth="@dimen/plaid_space_2x"
+  android:minHeight="@dimen/plaid_space_2x"
+  app:layout_constraintBottom_toBottomOf="parent"
+  app:layout_constraintEnd_toEndOf="parent"
+  app:layout_constraintStart_toStartOf="parent"
+  app:layout_constraintTop_toTopOf="parent"
+  app:plaid_subtitle=""
+  app:plaid_title=""
+  tools:plaid_subtitle="Subtitle description that can be so long lalala"
+  tools:plaid_title="Title" />

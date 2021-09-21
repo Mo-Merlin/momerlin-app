@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright (c) 2020 Plaid Technologies, Inc. <support@plaid.com>
+  -->
+
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  android:minHeight="@dimen/plaid_list_item_size"
+  tools:orientation="horizontal"
+  android:gravity="center_vertical"
+  tools:parentTag="android.widget.LinearLayout">
+
+  <RadioButton
+    android:id="@+id/radiobutton"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/plaid_space_1x"
+    android:buttonTint="@color/plaid_compound_button_background"
+    android:clickable="false" />
+
+  <TextView
+    android:id="@+id/value"
+    style="@style/PlaidText.H5.Regular"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/plaid_space_2x"
+    android:layout_marginEnd="@dimen/plaid_space_2x"
+    android:layout_weight="1"
+    android:textColor="@drawable/plaid_tertiary_button_text_color"
+    android:gravity="center_vertical"
+    tools:text="Credit Card Number" />
+
+  <TextView
+    android:id="@+id/descriptor"
+    style="@style/PlaidText.B2.Regular"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginEnd="@dimen/plaid_space_1x"
+    android:textColor="@color/plaid_black_800"
+    android:gravity="center_vertical"
+    tools:text="---- ---- ---- 1234" />
+
+</merge>

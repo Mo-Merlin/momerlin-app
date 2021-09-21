@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  tools:context="com.plaid.internal.link.LinkActivity">
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidNavigationBar
+    android:id="@+id/plaid_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/plaid_navigation_height" />
+
+  <LinearLayout
+    android:id="@+id/button_content"
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:orientation="vertical"
+    android:paddingStart="@dimen/plaid_space_4x"
+    android:paddingEnd="@dimen/plaid_space_4x">
+
+    <ScrollView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
+      android:fillViewport="true"
+      android:paddingBottom="@dimen/plaid_space_4x">
+
+      <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:gravity="center"
+          android:orientation="horizontal"
+          android:paddingTop="@dimen/plaid_space_4x"
+          android:paddingBottom="@dimen/plaid_space_4x">
+
+          <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="@dimen/plaid_list_item_icon_size"
+            android:layout_height="@dimen/plaid_list_item_icon_size"
+            android:src="@drawable/plaid_logo_round" />
+
+          <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/loading_dots"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/plaid_space_1x"
+            android:adjustViewBounds="true"
+            android:src="@drawable/plaid_loading_dots_top_animation" />
+
+          <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/institution_right"
+            android:layout_width="@dimen/plaid_list_item_icon_size"
+            android:layout_height="@dimen/plaid_list_item_icon_size"
+            tools:padding="@dimen/plaid_space_1x"
+            tools:src="@drawable/pl_icon_institution" />
+
+        </LinearLayout>
+
+        <TextView
+          android:id="@+id/header"
+          style="@style/PlaidText.H2.ExtraBold"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/plaid_space_1x"
+          android:layout_marginBottom="@dimen/plaid_space_1x"
+          android:enabled="true"
+          android:gravity="center"
+          android:textColor="@color/plaid_text_black_1000"
+          android:visibility="gone"
+          tools:text="Authenticate with Chase"
+          tools:visibility="visible" />
+
+        <TextView
+          android:id="@+id/content"
+          style="@style/PlaidText.H5.Regular"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:enabled="true"
+          android:gravity="center"
+          android:textColor="@color/plaid_text_black_800"
+          android:visibility="gone"
+          tools:text="content"
+          tools:visibility="visible" />
+
+        <LinearLayout
+          android:id="@+id/detailList"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:orientation="vertical" />
+
+        <View
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_weight="1" />
+
+        <com.plaid.internal.core.plaidstyleutils.PlaidPrimaryButton
+          android:id="@+id/primaryButton"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="@dimen/plaid_space_2x"
+          android:visibility="gone"
+          tools:text="primary button"
+          tools:visibility="visible" />
+
+      </LinearLayout>
+
+    </ScrollView>
+
+  </LinearLayout>
+
+</LinearLayout>

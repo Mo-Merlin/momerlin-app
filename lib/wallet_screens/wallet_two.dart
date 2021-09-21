@@ -26,7 +26,7 @@ class WalletTwo extends StatefulWidget {
 class _WalletTwoState extends State<WalletTwo> {
   PlaidLink _plaidLinkToken;
   var userLanguage, user, lang = [];
-  bool loading = false;
+  bool loading = true;
   var selectedseed;
   var linktoken;
   @override
@@ -96,14 +96,19 @@ class _WalletTwoState extends State<WalletTwo> {
 
   Future<void> _onSuccessCallback(
       String publicToken, LinkSuccessMetadata metadata) async {
+    setState(() {
+      loading = true;
+    });
     final usertoken =
         await UserRepository().updateToken({"public_token": publicToken});
     print("UserTokne $usertoken");
     final usersave = await UserRepository().storeUser({"token": publicToken});
-
+    setState(() {
+      loading = false;
+    });
     if (usersave == true) {
-      // Navigator.push(
-      //     context, MaterialPageRoute(builder: (_) => WalletSucess()));
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => WalletTwo()));
     } else {
       print("PAVITHRA");
     }
@@ -503,7 +508,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                     top: 60, left: 20, right: 20),
                                 child: Center(
                                   child: Text(
-                                    "Do you want to see your transaction Please click Earn button and login your plaid account",
+                                    "Do you want to Earn Gwei Please click Earn button and login your plaid account",
                                     textAlign: TextAlign.center,
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 17),

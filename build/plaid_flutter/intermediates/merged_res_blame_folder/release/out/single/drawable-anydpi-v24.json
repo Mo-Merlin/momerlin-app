@@ -1,0 +1,42 @@
+[
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_dev_developer_access.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_dev_developer_access.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_dev_usage.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_dev_usage.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_dev_account_admin.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_dev_account_admin.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_link_bank_02.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_link_bank_02.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_deposit_switch.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_deposit_switch.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_link_bank_01.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_link_bank_01.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_identity.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_identity.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_account_admin.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_account_admin.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_dev_product_uses.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_dev_product_uses.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\drawable-anydpi-v24\\pl_illustration_spot_dev_logs.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\drawable-anydpi-v24\\pl_illustration_spot_dev_logs.xml"
+    }
+]

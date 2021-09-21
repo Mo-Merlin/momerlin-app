@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\font\\plaid_cern_extrabold.otf",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\font\\plaid_cern_extrabold.otf"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\font\\plaid_inconsolata.xml",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\font\\plaid_inconsolata.xml"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\font\\plaid_cern.otf",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\font\\plaid_cern.otf"
+    },
+    {
+        "merged": "E:\\New folder\\momerlin-app\\build\\plaid_flutter\\intermediates\\res\\merged\\release\\font\\plaid_cern_semibold.otf",
+        "source": "C:\\Users\\user\\.gradle\\caches\\transforms-2\\files-2.1\\b1506e1878630008af100c9b489a5d16\\jetified-sdk-core-3.4.0\\res\\font\\plaid_cern_semibold.otf"
+    }
+]

@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_height="match_parent"
+  android:layout_width="match_parent"
+  android:orientation="vertical">
+
+  <com.plaid.internal.core.plaidstyleutils.PlaidNavigationBar
+    android:id="@+id/plaid_navigation"
+    android:layout_height="@dimen/plaid_navigation_height"
+    android:layout_width="match_parent" />
+
+  <TextView
+    android:id="@+id/plaid_search_title"
+    style="@style/PlaidText.H3.ExtraBold"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/plaid_space_3x"
+    android:layout_marginEnd="@dimen/plaid_space_3x"
+    android:layout_marginStart="@dimen/plaid_space_4x"
+    android:layout_marginTop="@dimen/plaid_space_1x"
+    android:layout_width="match_parent"
+    tools:title="Select your bank" />
+
+  <SearchView
+    android:id="@+id/plaid_institution_search_view"
+    android:background="@drawable/plaid_search_background"
+    android:iconifiedByDefault="false"
+    android:imeOptions="actionSearch"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/plaid_space_1x"
+    android:layout_marginEnd="@dimen/plaid_space_3x"
+    android:layout_marginStart="@dimen/plaid_space_3x"
+    android:layout_width="match_parent"
+    android:paddingLeft="-8dp"
+    android:paddingRight="-8dp"
+    android:queryBackground="@android:color/transparent"
+    android:queryHint="@string/plaid_search"
+    android:searchIcon="@drawable/plaid_search_black_800" />
+
+  <androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/plaid_institution_recycler"
+    android:cacheColorHint="#00000000"
+    android:fadingEdge="vertical"
+    android:fadingEdgeLength="@dimen/plaid_space_4x"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    android:layout_width="match_parent"
+    android:requiresFadingEdge="vertical"
+    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+    tools:listitem="@layout/plaid_item_search_select_institution" />
+</LinearLayout>

@@ -44,12 +44,12 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   void initState() {
     loading = false;
     var seed2 = widget.seed1.split(" ");
-    seedcheck = seed2;
+    seedcheck = widget.seed1.split(" ");
     selectedseed = seed2;
     // selectedseed = widget.seed;
     print(widget.seed);
     selectedseed.shuffle();
-    print("Selectedseed $selectedseed");
+    print("Selectedseed $seedcheck");
     super.initState();
     loading = false;
     getUserLanguage();
@@ -102,214 +102,240 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   Widget build(BuildContext context) {
     print(widget.seed);
 
-    return Scaffold(
-      backgroundColor: backgroundcolor,
-      appBar: AppBar(
-        backgroundColor: backgroundcolor,
-        leading: Container(
-          padding: EdgeInsets.all(5),
-          child: InkWell(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50), color: button),
-              child: Icon(
-                Icons.arrow_back,
-                color: white,
-                size: 30,
+    return loading == true
+        ? Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            color: white,
+            child: Center(
+              child: AwesomeLoader(
+                loaderType: AwesomeLoader.AwesomeLoader3,
+                color: backgroundcolor,
               ),
             ),
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Spacer(),
-            Image.asset("assets/images/MOMERLIN.png"),
-            Spacer(),
-            LinearPercentIndicator(
-              width: 102.0,
-              lineHeight: 25.0,
-              percent: 0.2,
-              center: Text(
-                "25%",
-                textAlign: TextAlign.end,
-                style: GoogleFonts.poppins(
-                    color: white, fontSize: 12, fontWeight: FontWeight.w400),
-              ),
-              // trailing: Icon(Icons.mood),
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
-              progressColor: blue,
-            ),
-          ],
-        ),
-      ),
-      body: Container(
-        width: MediaQuery.of(context).size.width,
-        height: MediaQuery.of(context).size.height,
-        // decoration: BoxDecoration(
-        //   image: DecorationImage(
-        //       image: AssetImage(
-        //         "asstes/images/seed.png",
-        //       ),
-        //       fit: BoxFit.fill),
-        // ),
-        child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20, right: 20),
-          child: Column(
-            children: [
-              Text(
-                (lang.length != null &&
-                        lang.length != 0 &&
-                        userLanguage['writedownthesewordsinorder'] != null)
-                    ? "${userLanguage['writedownthesewordsinorder']}"
-                    : "Arrange the 12 words in the correct order",
-                style: GoogleFonts.poppins(
-                    color: white, fontSize: 30, fontWeight: FontWeight.w600),
-              ),
-              SizedBox(
-                height: 5,
-              ),
-              Align(
-                alignment: Alignment.topLeft,
-                child: Text(
-                  (lang.length != null &&
-                          lang.length != 0 &&
-                          userLanguage['recoverykey'] != null)
-                      ? "${userLanguage['recoverykey']}"
-                      : "Drag each word into the same order it appeared!",
-                  textAlign: TextAlign.start,
-                  style: GoogleFonts.poppins(
-                      color: white, fontSize: 12, fontWeight: FontWeight.w400),
-                ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GridView.builder(
-                shrinkWrap: true,
-                itemCount: seed1.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3,
-                    childAspectRatio: 1.8,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 30),
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        if (seedlength > 0) {
-                          selectedseed.add(seed1[index]);
-                          seed1.removeAt(index);
-                          seed1.add("");
-
-                          seedlength -= 1;
-                        }
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50),
-                          color: seed1[index] == "" ? gridcolor : blue),
-                      child: Center(
-                        child: Text(
-                          seed1[index],
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              color: white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              GridView.builder(
-                shrinkWrap: true,
-                itemCount: selectedseed.length,
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 4,
-                    childAspectRatio: 2.5,
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 20),
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      setState(() {
-                        seed1[seedlength] = selectedseed[index];
-                        selectedseed.removeAt(index);
-                        seedlength += 1;
-                      });
-                    },
-                    child: Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(50), color: blue),
-                      child: Center(
-                        child: Text(
-                          selectedseed[index],
-                          textAlign: TextAlign.center,
-                          style: GoogleFonts.poppins(
-                              color: white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w500),
-                        ),
-                      ),
-                    ),
-                  );
-                },
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              InkWell(
-                onTap: () {
-                  setState(() {
-                    loading = true;
-                  });
-                  // if (seedlength == 12) {
-                  if (seed1.toString() == seedcheck.toString()) {
-                    storeUser();
-                  } else {
-                    _modalBottomSheetMenu3();
-                  }
-                  // }
-                },
-                child: Container(
-                  width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: seedlength == 12 ? blue : gridcolor),
-                  child: Center(
-                    child: Text(
-                      (lang.length != null &&
-                              lang.length != 0 &&
-                              userLanguage['ihavewrittenthemdown'] != null)
-                          ? "${userLanguage['ihavewrittenthemdown']}"
-                          : "FINISHED",
-                      textAlign: TextAlign.center,
-                      style: GoogleFonts.poppins(
-                          color: seedlength == 12 ? white : blue,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600),
+          )
+        : Scaffold(
+            backgroundColor: backgroundcolor,
+            appBar: AppBar(
+              backgroundColor: backgroundcolor,
+              leading: Container(
+                padding: EdgeInsets.all(5),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    width: 50,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(50), color: button),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: white,
+                      size: 30,
                     ),
                   ),
                 ),
               ),
-            ],
-          ),
-        ),
-      ),
-    );
+              title: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  Spacer(),
+                  Image.asset("assets/images/MOMERLIN.png"),
+                  Spacer(),
+                  LinearPercentIndicator(
+                    width: 102.0,
+                    lineHeight: 25.0,
+                    percent: 0.2,
+                    center: Text(
+                      "25%",
+                      textAlign: TextAlign.end,
+                      style: GoogleFonts.poppins(
+                          color: white,
+                          fontSize: 12,
+                          fontWeight: FontWeight.w400),
+                    ),
+                    // trailing: Icon(Icons.mood),
+                    linearStrokeCap: LinearStrokeCap.roundAll,
+                    backgroundColor: Colors.grey,
+                    progressColor: blue,
+                  ),
+                ],
+              ),
+            ),
+            body: Container(
+              width: MediaQuery.of(context).size.width,
+              height: MediaQuery.of(context).size.height,
+              // decoration: BoxDecoration(
+              //   image: DecorationImage(
+              //       image: AssetImage(
+              //         "asstes/images/seed.png",
+              //       ),
+              //       fit: BoxFit.fill),
+              // ),
+              child: SingleChildScrollView(
+                padding: EdgeInsets.only(left: 20, right: 20),
+                child: Column(
+                  children: [
+                    Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['writedownthesewordsinorder'] !=
+                                  null)
+                          ? "${userLanguage['writedownthesewordsinorder']}"
+                          : "Arrange the 12 words in the correct order",
+                      style: GoogleFonts.poppins(
+                          color: white,
+                          fontSize: 30,
+                          fontWeight: FontWeight.w600),
+                    ),
+                    SizedBox(
+                      height: 5,
+                    ),
+                    Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['recoverykey'] != null)
+                            ? "${userLanguage['recoverykey']}"
+                            : "Drag each word into the same order it appeared!",
+                        textAlign: TextAlign.start,
+                        style: GoogleFonts.poppins(
+                            color: white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: seed1.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 3,
+                          childAspectRatio: 1.8,
+                          crossAxisSpacing: 20,
+                          mainAxisSpacing: 30),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              if (seedlength > 0) {
+                                selectedseed.add(seed1[index]);
+                                seed1.removeAt(index);
+                                seed1.add("");
+
+                                seedlength -= 1;
+                              }
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: seed1[index] == "" ? gridcolor : blue),
+                            child: Center(
+                              child: Text(
+                                seed1[index],
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    color: white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 20,
+                    ),
+                    GridView.builder(
+                      shrinkWrap: true,
+                      itemCount: selectedseed.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 4,
+                          childAspectRatio: 2.5,
+                          crossAxisSpacing: 10,
+                          mainAxisSpacing: 20),
+                      itemBuilder: (BuildContext context, int index) {
+                        return InkWell(
+                          onTap: () {
+                            setState(() {
+                              seed1[seedlength] = selectedseed[index];
+                              selectedseed.removeAt(index);
+                              seedlength += 1;
+                            });
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(50),
+                                color: blue),
+                            child: Center(
+                              child: Text(
+                                selectedseed[index],
+                                textAlign: TextAlign.center,
+                                style: GoogleFonts.poppins(
+                                    color: white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w500),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                    SizedBox(
+                      height: 40,
+                    ),
+                    InkWell(
+                      onTap: () {
+                        setState(() {
+                          loading = true;
+                        });
+                        print("seed1 $seed1");
+                        print("seedcheck $seedcheck");
+                        // if (seedlength == 12) {
+                        if (seed1.toString() == seedcheck.toString()) {
+                          storeUser();
+                          setState(() {
+                            loading = true;
+                          });
+                        } else {
+                          _modalBottomSheetMenu3();
+                        }
+                        // }
+                      },
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(20),
+                            color: seedlength == 12 ? blue : gridcolor),
+                        child: Center(
+                          child: Text(
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['ihavewrittenthemdown'] !=
+                                        null)
+                                ? "${userLanguage['ihavewrittenthemdown']}"
+                                : "FINISHED",
+                            textAlign: TextAlign.center,
+                            style: GoogleFonts.poppins(
+                                color: seedlength == 12 ? white : blue,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
   }
 
   void _modalBottomSheetMenu3() {
@@ -364,8 +390,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     //     context,
                     //     MaterialPageRoute(
                     //         builder: (BuildContext context) => this.widget));
-                    var seed2 = widget.seed1.split(" ");
-                    seedcheck = seed2;
+                    // var seed2 = widget.seed1.split(" ");
+                    seedcheck = widget.seed1.split(" ");
                     setState(() {
                       var seed2 = widget.seed1.split(" ");
 

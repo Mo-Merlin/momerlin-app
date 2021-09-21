@@ -94,7 +94,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                   LinearPercentIndicator(
                     width: 102.0,
                     lineHeight: 25.0,
-                    percent: 0.1,
+                    percent: 0.5,
                     center: Text(
                       "10%",
                       style: GoogleFonts.poppins(

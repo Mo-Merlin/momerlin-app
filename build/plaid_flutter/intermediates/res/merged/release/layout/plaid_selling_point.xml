@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:app="http://schemas.android.com/apk/res-auto"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  tools:orientation="vertical"
+  tools:parentTag="android.widget.LinearLayout">
+
+  <TextView
+    android:id="@+id/plaid_title"
+    style="@style/PlaidText.B1.Semibold"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:drawableStart="@drawable/pl_icon_checkmark"
+    android:drawablePadding="@dimen/plaid_space_1x"
+    app:drawableStartCompat="@drawable/pl_icon_checkmark"
+    tools:text="Sample title" />
+
+  <TextView
+    android:id="@+id/plaid_subtitle"
+    style="@style/PlaidText.B1.Regular"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:maxLines="2"
+    android:paddingStart="@dimen/plaid_space_4x"
+    tools:text="Some very interesting subtitle that spans across several lines into the next one" />
+</merge>

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
+  android:gravity="center_vertical"
+  android:layout_height="@dimen/plaid_navigation_height"
+  android:layout_width="match_parent"
+  android:orientation="horizontal"
+  tools:parentTag="android.widget.LinearLayout">
+
+  <ImageView
+    android:id="@+id/plaid_back_icon"
+    android:contentDescription="@string/plaid_back"
+    android:layout_height="@dimen/plaid_navigation_height"
+    android:layout_width="@dimen/plaid_navigation_height"
+    android:padding="@dimen/plaid_space_1x"
+    android:src="@drawable/pl_icon_arrow_left" />
+
+  <ImageView
+    android:id="@+id/plaid_logo"
+    android:gravity="center"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_width="0dp"
+    android:src="@drawable/plaid_logo_horizontal" />
+
+  <TextView
+    android:id="@+id/plaid_navbar_title"
+    style="@style/PlaidText.H5.SemiBold"
+    android:gravity="center"
+    android:textColor="@color/plaid_black_1000"
+    android:layout_height="match_parent"
+    android:layout_weight="1"
+    android:layout_width="0dp"
+    android:visibility="gone"
+    tools:text="Call to Action" />
+
+  <ImageView
+    android:id="@+id/plaid_close_icon"
+    android:contentDescription="@string/plaid_exit"
+    android:layout_height="@dimen/plaid_navigation_height"
+    android:padding="@dimen/plaid_space_1x"
+    android:layout_width="@dimen/plaid_navigation_height"
+    android:tint="@drawable/plaid_tertiary_button_text_color"
+    android:src="@drawable/pl_icon_close_s1" />
+
+</merge>
