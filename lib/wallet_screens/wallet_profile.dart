@@ -110,9 +110,11 @@ class _WalletProfileState extends State<WalletProfile> {
                                 child: Container(
                                   height: 80,
                                   width: 80,
-                                  child: Image.network(
-                                    'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-                                    fit: BoxFit.cover,
+                                  child: Image.asset(
+                                    "assets/images/profile.png",
+                                    fit: BoxFit.fill,
+                                    width: 80,
+                                    height: 80,
                                   ),
                                 )),
                           ),
@@ -217,7 +219,7 @@ class _WalletProfileState extends State<WalletProfile> {
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Container(
-                      height: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: button,
                         borderRadius: BorderRadius.circular(15),
@@ -229,7 +231,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 0, top: 15),
+                                    const EdgeInsets.only(left: 20, top: 15),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -243,8 +245,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
                               Padding(
-                                padding: const EdgeInsets.only(top: 15),
+                                padding:
+                                    const EdgeInsets.only(top: 15, right: 15),
                                 child: Container(
                                   height: 35,
                                   width: 80,
@@ -265,11 +269,11 @@ class _WalletProfileState extends State<WalletProfile> {
                             ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 13, top: 5),
+                                padding: const EdgeInsets.only(
+                                    right: 15, left: 20, top: 5),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -285,9 +289,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 25, top: 5),
+                                    const EdgeInsets.only(right: 15, top: 5),
                                 child: Text(
                                   "\$2.50",
                                   style: GoogleFonts.montserrat(
@@ -306,7 +311,7 @@ class _WalletProfileState extends State<WalletProfile> {
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 15),
                     child: Container(
-                      height: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: button,
                         borderRadius: BorderRadius.circular(15),
@@ -318,7 +323,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 0, top: 30),
+                                    const EdgeInsets.only(left: 20, top: 30),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -333,8 +338,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
                               Padding(
-                                padding: const EdgeInsets.only(top: 30),
+                                padding:
+                                    const EdgeInsets.only(top: 30, right: 15),
                                 child: Container(
                                   height: 35,
                                   width: 80,
@@ -397,7 +404,7 @@ class _WalletProfileState extends State<WalletProfile> {
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 15),
                     child: Container(
-                      height: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: button,
                         borderRadius: BorderRadius.circular(15),
@@ -405,11 +412,11 @@ class _WalletProfileState extends State<WalletProfile> {
                       child: Column(
                         children: [
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            mainAxisAlignment: MainAxisAlignment.start,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 50, top: 20),
+                                padding: const EdgeInsets.only(
+                                    right: 50, left: 20, top: 20),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -423,9 +430,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
+                              Spacer(),
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 50, top: 20),
+                                padding: const EdgeInsets.only(
+                                    left: 50, right: 15, top: 20),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: Container(
@@ -451,7 +459,7 @@ class _WalletProfileState extends State<WalletProfile> {
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 15),
                     child: Container(
-                      height: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: button,
                         borderRadius: BorderRadius.circular(15),
@@ -462,8 +470,8 @@ class _WalletProfileState extends State<WalletProfile> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 0, top: 20),
+                                padding: const EdgeInsets.only(
+                                    right: 0, left: 20, top: 20),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -477,43 +485,51 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 50, top: 20),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    color: backgroundcolor,
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          FontAwesomeIcons.twitter,
-                                          color: blue1,
-                                          size: 20,
-                                        )),
+                              Spacer(),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(top: 20),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Container(
+                                        height: 50,
+                                        width: 50,
+                                        color: backgroundcolor,
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              FontAwesomeIcons.twitter,
+                                              color: blue1,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    ),
                                   ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(right: 5, top: 20),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Container(
-                                    height: 50,
-                                    width: 50,
-                                    color: backgroundcolor,
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          FontAwesomeIcons.facebook,
-                                          color: blue1,
-                                          size: 20,
-                                        )),
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 15, top: 20),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(15),
+                                      child: Container(
+                                        height: 50,
+                                        width: 50,
+                                        color: backgroundcolor,
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              FontAwesomeIcons.facebook,
+                                              color: blue1,
+                                              size: 20,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ],
                               ),
                             ],
                           ),
@@ -525,7 +541,7 @@ class _WalletProfileState extends State<WalletProfile> {
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 15),
                     child: Container(
-                      height: 90,
+                      height: 80,
                       decoration: BoxDecoration(
                         color: button,
                         borderRadius: BorderRadius.circular(15),
@@ -537,7 +553,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             children: [
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(left: 23, top: 35),
+                                    const EdgeInsets.only(left: 20, top: 35),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&

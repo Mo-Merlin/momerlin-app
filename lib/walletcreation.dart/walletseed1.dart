@@ -117,6 +117,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
         : Scaffold(
             backgroundColor: backgroundcolor,
             appBar: AppBar(
+              elevation: 0,
               backgroundColor: backgroundcolor,
               leading: Container(
                 padding: EdgeInsets.all(5),
@@ -141,19 +142,26 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Spacer(),
-                  Image.asset("assets/images/MOMERLIN.png"),
+                  Image.asset(
+                    "assets/images/MOMERLIN.png",
+                    height: 40,
+                  ),
                   Spacer(),
                   LinearPercentIndicator(
                     width: 102.0,
                     lineHeight: 25.0,
                     percent: 0.2,
-                    center: Text(
-                      "25%",
-                      textAlign: TextAlign.end,
-                      style: GoogleFonts.poppins(
-                          color: white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
+
+                    center: Padding(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Text(
+                        "25%",
+                        textAlign: TextAlign.end,
+                        style: GoogleFonts.poppins(
+                            color: white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                     // trailing: Icon(Icons.mood),
                     linearStrokeCap: LinearStrokeCap.roundAll,
@@ -166,17 +174,13 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
             body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //       image: AssetImage(
-              //         "asstes/images/seed.png",
-              //       ),
-              //       fit: BoxFit.fill),
-              // ),
               child: SingleChildScrollView(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 40,
+                    ),
                     Text(
                       (lang.length != null &&
                               lang.length != 0 &&
@@ -202,13 +206,13 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                             : "Drag each word into the same order it appeared!",
                         textAlign: TextAlign.start,
                         style: GoogleFonts.poppins(
-                            color: white,
+                            color: grey,
                             fontSize: 12,
                             fontWeight: FontWeight.w400),
                       ),
                     ),
                     SizedBox(
-                      height: 20,
+                      height: 45,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
@@ -234,7 +238,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: seed1[index] == "" ? gridcolor : blue),
+                                color: seed1[index] == "" ? gridcolor : blue1),
                             child: Center(
                               child: Text(
                                 seed1[index],
@@ -272,7 +276,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                           child: Container(
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(50),
-                                color: blue),
+                                color: blue1),
                             child: Center(
                               child: Text(
                                 selectedseed[index],
@@ -310,10 +314,10 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(20),
-                            color: seedlength == 12 ? blue : gridcolor),
+                            color: seedlength == 12 ? blue1 : gridcolor),
                         child: Center(
                           child: Text(
                             (lang.length != null &&
@@ -324,13 +328,14 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                                 : "FINISHED",
                             textAlign: TextAlign.center,
                             style: GoogleFonts.poppins(
-                                color: seedlength == 12 ? white : blue,
+                                color: seedlength == 12 ? white : blue1,
                                 fontSize: 15,
                                 fontWeight: FontWeight.w600),
                           ),
                         ),
                       ),
                     ),
+                    SizedBox(height: 20),
                   ],
                 ),
               ),
@@ -380,7 +385,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 SizedBox(
                   height: 25,
                 ),
-                Divider(color: blue),
+                Divider(color: blue1),
                 SizedBox(
                   height: 9,
                 ),
@@ -419,7 +424,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                   },
                   child: Text(
                     'Ok, Got it',
-                    style: TextStyle(color: blue, fontSize: 20),
+                    style: TextStyle(color: blue1, fontSize: 20),
                   ),
                 ),
                 SizedBox(

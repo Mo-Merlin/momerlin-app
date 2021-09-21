@@ -32,13 +32,13 @@ class _WalletTwoState extends State<WalletTwo> {
   @override
   void initState() {
     loading = true;
-    getToken();
-    getTransaction();
-    super.initState();
+
     getUserLanguage();
+    getToken();
+    super.initState();
   }
 
-  var splitvalue = '0.0';
+  var splitvalue = "00";
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
@@ -48,6 +48,8 @@ class _WalletTwoState extends State<WalletTwo> {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
+
+    getTransaction();
   }
 
   // ignore: todo
@@ -58,28 +60,30 @@ class _WalletTwoState extends State<WalletTwo> {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().getTransaction();
+    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     setState(() {
       loading = false;
     });
     transactions1 = [];
+
     for (var i = 0; i < res["transactions"].length; i++) {
       transactions1.add(Transaction.fromJson(res["transactions"][i]));
-      var transamount = res["transactions"][i]["amount"] + balance;
-      print(transamount);
-      balance = (transamount - transamount.floorToDouble()) * 100;
+
+      if (res["transactions"][i]["merchant_name"] != null) {
+        balance += ((res["transactions"][i]["amount"] -
+                res["transactions"][i]["amount"].floorToDouble()) *
+            100);
+      } else {}
     }
-    var balance1 = balance.toString();
-    List result = balance1.split('.');
-    print(result);
-    splitvalue = result[1];
-    // splitvalue = balance.toString();
+    var balance1 = balance.toStringAsFixed(2);
+    var valance2 = balance1.split(".");
+    splitvalue = valance2[1].toString();
   }
 
   Future<void> getToken() async {
     final usertoken1 = await UserRepository().getToken();
     linktoken = usertoken1["link_token"];
-    print("token $linktoken");
+    // print("token $linktoken");
     LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
       token: usertoken1["link_token"],
     );
@@ -91,17 +95,18 @@ class _WalletTwoState extends State<WalletTwo> {
       onExit: _onExitCallback,
     );
 
-    print("UserTokne $usertoken1");
+    // print("UserTokne $usertoken1");
   }
 
   Future<void> _onSuccessCallback(
       String publicToken, LinkSuccessMetadata metadata) async {
+    print("asdfghjklsdfghj ${metadata.description()}");
     setState(() {
       loading = true;
     });
     final usertoken =
         await UserRepository().updateToken({"public_token": publicToken});
-    print("UserTokne $usertoken");
+    // print("UserTokne $usertoken");
     final usersave = await UserRepository().storeUser({"token": publicToken});
     setState(() {
       loading = false;
@@ -110,7 +115,7 @@ class _WalletTwoState extends State<WalletTwo> {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => WalletTwo()));
     } else {
-      print("PAVITHRA");
+      // print("PAVITHRA");
     }
     Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
@@ -163,7 +168,7 @@ class _WalletTwoState extends State<WalletTwo> {
                       child: Container(
                         // duration: Duration(milliseconds: 200),
                         //color: blue1,
-                        height: MediaQuery.of(context).size.height * 0.32,
+                        height: MediaQuery.of(context).size.height * 0.35,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
                           color: blue1,
@@ -182,15 +187,14 @@ class _WalletTwoState extends State<WalletTwo> {
                                             builder: (context) =>
                                                 WalletProfile()));
                                   },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      height: 60,
+                                  child: Container(
+                                    height: 60,
+                                    width: 60,
+                                    child: Image.asset(
+                                      "assets/images/profile.png",
+                                      fit: BoxFit.fill,
                                       width: 60,
-                                      child: Image.network(
-                                        'https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png',
-                                        fit: BoxFit.cover,
-                                      ),
+                                      height: 60,
                                     ),
                                   ),
                                 ),
@@ -206,7 +210,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                     : "Your balance is",
                                 style: GoogleFonts.poppins(
                                   fontSize: 25,
-                                  fontWeight: FontWeight.bold,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                 ),
                               ),
@@ -214,32 +218,33 @@ class _WalletTwoState extends State<WalletTwo> {
                             Positioned(
                               top: 110,
                               child: Text(
-                                balance.toStringAsFixed(2),
+                                balance.toStringAsFixed(0),
                                 style: GoogleFonts.montserrat(
-                                  fontSize: 50,
-                                  fontWeight: FontWeight.bold,
+                                  fontSize: 75,
+                                  fontWeight: FontWeight.w600,
                                   color: Colors.white,
                                 ),
                               ),
                             ),
-                            // Positioned(
-                            //   top: 150,
-                            //   left: 270,
-                            //   child: Text(
-                            //     ".$splitvalue.",
-                            //     style: GoogleFonts.montserrat(
-                            //         fontSize: 25,
-                            //         color: Colors.white,
-                            //         fontWeight: FontWeight.w600),
-                            //   ),
-                            // ),
                             Positioned(
-                              left: 270,
-                              top: 125,
+                              top: 130,
+                              left: 280,
                               child: Text(
                                 "Gwei",
                                 style: GoogleFonts.montserrat(
                                   fontSize: 17,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ),
+                            Positioned(
+                              top: 160,
+                              left: 280,
+                              child: Text(
+                                ".${splitvalue.toString()}",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 17,
+                                  color: white,
                                   fontWeight: FontWeight.w400,
                                 ),
                               ),
@@ -315,7 +320,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                             WalletSend()));
                                               },
                                               icon: Icon(
-                                                Icons.arrow_upward,
+                                                Icons.file_upload_outlined,
                                                 color: Colors.white,
                                               )),
                                         ),
@@ -370,7 +375,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 _showReceiveMobile();
                                               },
                                               icon: Icon(
-                                                Icons.arrow_downward,
+                                                Icons.file_download_outlined,
                                                 color: Colors.white,
                                               )),
                                         ),
@@ -472,10 +477,10 @@ class _WalletTwoState extends State<WalletTwo> {
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: Container(
-                            height: 4,
+                            height: 2,
                             width: 50,
                             decoration: BoxDecoration(
-                                color: Color(0xffE4E4E4),
+                                color: grey,
                                 borderRadius: BorderRadius.circular(10)),
                           ),
                         ),
@@ -531,6 +536,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ? SizedBox()
                                         : Column(
                                             children: [
+                                              SizedBox(
+                                                height: 10,
+                                              ),
                                               Container(
                                                 child: ListTile(
                                                   // contentPadding: EdgeInsets.only(
@@ -705,19 +713,17 @@ class _WalletTwoState extends State<WalletTwo> {
         Container(
           height: 50,
           width: 250,
+          // ignore: deprecated_member_use
           child: RaisedButton(
             shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(12.0),
                 side: BorderSide(color: Colors.white)),
             onPressed: () async {
               FlutterClipboard.copy(
-                // widget.xumCoinMainNetAddress,
                 user[0]["walletaddress"],
               ).then(
                 (result) {
                   Navigator.of(context).pop();
-                  // AppToast()
-                  //     .showSuccess(context: context, msg: "XUM Address Copied");
                 },
               );
             },

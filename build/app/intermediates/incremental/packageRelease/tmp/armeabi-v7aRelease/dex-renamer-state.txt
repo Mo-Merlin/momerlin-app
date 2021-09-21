@@ -1,4 +1,4 @@
-#Tue Sep 21 07:02:48 IST 2021
+#Tue Sep 21 22:06:02 IST 2021
 base.0=E\:\\New folder\\momerlin-app\\build\\app\\intermediates\\dex\\release\\minifyReleaseWithR8\\classes.dex
 path.1=classes2.dex
 renamed.1=classes2.dex

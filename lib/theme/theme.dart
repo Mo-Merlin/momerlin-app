@@ -6,4 +6,5 @@ final blue1 = Color(0xff8684F5);
 final white = Color(0xffffffff);
 final button = Color(0xff282C4A);
 final orange = Color(0xffFF8C00);
+final grey = Color(0xffC1C2C7);
 final gridcolor = Color(0xff1C203A);

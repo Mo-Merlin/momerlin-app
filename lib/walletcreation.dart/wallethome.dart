@@ -73,7 +73,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                             fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
-                        height: 20,
+                        height: 50,
                       ),
                       InkWell(
                         onTap: () {
@@ -105,7 +105,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                                 style: GoogleFonts.poppins(
                                     color: white,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w700),
                               ),
                               SizedBox(
                                 width: 20,
@@ -116,7 +116,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                         ),
                       ),
                       SizedBox(
-                        height: 30,
+                        height: 15,
                       ),
                       InkWell(
                         onTap: () {
@@ -148,7 +148,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                                 style: GoogleFonts.poppins(
                                     color: white,
                                     fontSize: 15,
-                                    fontWeight: FontWeight.w600),
+                                    fontWeight: FontWeight.w700),
                               ),
                               SizedBox(
                                 width: 20,
@@ -171,7 +171,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                               style: GoogleFonts.poppins(
                                   color: button,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                             Spacer(),
                             Text(
@@ -183,7 +183,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                               style: GoogleFonts.poppins(
                                   color: button,
                                   fontSize: 14,
-                                  fontWeight: FontWeight.w400),
+                                  fontWeight: FontWeight.w500),
                             ),
                           ],
                         ),

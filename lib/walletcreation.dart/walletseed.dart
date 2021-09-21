@@ -65,6 +65,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
         ? Scaffold(
             backgroundColor: backgroundcolor,
             appBar: AppBar(
+              elevation: 0,
               backgroundColor: backgroundcolor,
               leading: Container(
                 padding: EdgeInsets.all(5),
@@ -89,18 +90,26 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   Spacer(),
-                  Image.asset("assets/images/MOMERLIN.png"),
+                  Image.asset(
+                    "assets/images/MOMERLIN.png",
+                    height: 40,
+                  ),
                   Spacer(),
                   LinearPercentIndicator(
                     width: 102.0,
                     lineHeight: 25.0,
-                    percent: 0.5,
-                    center: Text(
-                      "10%",
-                      style: GoogleFonts.poppins(
-                          color: white,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w400),
+                    percent: 0.007,
+
+                    center: Padding(
+                      padding: EdgeInsets.only(left: 50),
+                      child: Text(
+                        "10%",
+                        textAlign: TextAlign.end,
+                        style: GoogleFonts.poppins(
+                            color: white,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w400),
+                      ),
                     ),
                     // trailing: Icon(Icons.mood),
                     linearStrokeCap: LinearStrokeCap.roundAll,
@@ -113,17 +122,13 @@ class _WalletSeedPage extends State<WalletSeedPage> {
             body: Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
-              // decoration: BoxDecoration(
-              //   image: DecorationImage(
-              //       image: AssetImage(
-              //         "asstes/images/seed.png",
-              //       ),
-              //       fit: BoxFit.fill),
-              // ),
               child: SingleChildScrollView(
                 padding: EdgeInsets.only(left: 20, right: 20),
                 child: Column(
                   children: [
+                    SizedBox(
+                      height: 40,
+                    ),
                     Text(
                       (lang.length != null &&
                               lang.length != 0 &&
@@ -146,12 +151,12 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           ? "${userLanguage['recoverykey']}"
                           : "This is your recovery key - you’ll need it if you ever need to recover your account",
                       style: GoogleFonts.poppins(
-                          color: Colors.grey,
+                          color: grey,
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
                     SizedBox(
-                      height: 15,
+                      height: 45,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
@@ -165,7 +170,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                         return Container(
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(50),
-                              color: blue),
+                              color: blue1),
                           child: Center(
                             child: Text(
                               seed1[index],
@@ -192,10 +197,10 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                       },
                       child: Container(
                         width: MediaQuery.of(context).size.width,
-                        height: MediaQuery.of(context).size.height * 0.08,
+                        height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            color: blue),
+                            borderRadius: BorderRadius.circular(15),
+                            color: blue1),
                         child: Center(
                           child: Text(
                             (lang.length != null &&

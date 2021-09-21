@@ -71,12 +71,12 @@ class UserRepository {
     }
   }
 
-  Future<dynamic> getTransaction() async {
+  Future<dynamic> getTransaction(walletaddress) async {
     try {
       // var url = "http://192.168.43.124:8000/api/";
 //
       var res = await http.get(
-        '${url + "transactions"}',
+        '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
 

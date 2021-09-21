@@ -114,17 +114,23 @@ class _WalletSucess extends State<WalletSucess> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             Spacer(),
-            Image.asset("assets/images/MOMERLIN.png"),
+            Image.asset(
+              "assets/images/MOMERLIN.png",
+              height: 40,
+            ),
             Spacer(),
             LinearPercentIndicator(
               width: 102.0,
               lineHeight: 25.0,
               percent: 0.3,
-              center: Text(
-                "40%",
-                textAlign: TextAlign.end,
-                style: GoogleFonts.poppins(
-                    color: white, fontSize: 12, fontWeight: FontWeight.w400),
+              center: Padding(
+                padding: const EdgeInsets.only(left: 50),
+                child: Text(
+                  "40%",
+                  textAlign: TextAlign.end,
+                  style: GoogleFonts.poppins(
+                      color: white, fontSize: 12, fontWeight: FontWeight.w400),
+                ),
               ),
               // trailing: Icon(Icons.mood),
               linearStrokeCap: LinearStrokeCap.roundAll,
@@ -172,7 +178,7 @@ class _WalletSucess extends State<WalletSucess> {
                   width: MediaQuery.of(context).size.width / 1.5,
                   height: MediaQuery.of(context).size.height / 11,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: blue),
+                      borderRadius: BorderRadius.circular(20), color: blue1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -192,7 +198,7 @@ class _WalletSucess extends State<WalletSucess> {
                         style: GoogleFonts.poppins(
                             color: white,
                             fontSize: 15,
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w700),
                       ),
                     ],
                   ),
@@ -221,7 +227,7 @@ class _WalletSucess extends State<WalletSucess> {
                     style: GoogleFonts.poppins(
                         color: white,
                         fontSize: 15,
-                        fontWeight: FontWeight.w600),
+                        fontWeight: FontWeight.w700),
                   ),
                 ),
               ),
