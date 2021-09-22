@@ -67,21 +67,34 @@ class _WalletChallengeTwoState extends State<WalletChallengeTwo> {
                         child: RichText(
                             text: TextSpan(children: [
                           TextSpan(
-                              text: 'How many',
+                              text: (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['howmany'] != null)
+                                  ? "${userLanguage['howmany']}"
+                                  : 'How many',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w600,
                               )),
                           TextSpan(
-                              text: ' SATS ',
+                              text: (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['sats'] != null)
+                                  ? "${userLanguage['sats']}"
+                                  : ' SATS ',
                               style: GoogleFonts.poppins(
                                 color: Colors.orange,
                                 fontSize: 25,
                                 fontWeight: FontWeight.w500,
                               )),
                           TextSpan(
-                              text: 'would \n       you like to wager?',
+                              text: (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['wouldyouliketowager'] !=
+                                          null)
+                                  ? "${userLanguage['wouldyouliketowager']}"
+                                  : 'would \n       you like to wager?',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 25,
@@ -123,7 +136,11 @@ class _WalletChallengeTwoState extends State<WalletChallengeTwo> {
                       //color: blue.withOpacity(0.3),
                       color: blue1,
                       child: Text(
-                        "NEXT",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['next'] != null)
+                            ? "${userLanguage['next']}"
+                            : "NEXT",
                         style: GoogleFonts.poppins(
                           //color: blue1,
                           color: Colors.white,
@@ -167,8 +184,8 @@ class _WalletChallengeTwoState extends State<WalletChallengeTwo> {
         title: Text(
           (lang.length != null &&
                   lang.length != 0 &&
-                  userLanguage['chellenges'] != null)
-              ? "${userLanguage['chellenges']}"
+                  userLanguage['createachellenge'] != null)
+              ? "${userLanguage['createachellenge']}"
               : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
@@ -220,8 +237,8 @@ class _WalletChallengeTwoState extends State<WalletChallengeTwo> {
                     child: Text(
                       (lang.length != null &&
                               lang.length != 0 &&
-                              userLanguage['createachallenge'] != null)
-                          ? "${userLanguage['createachallenge']}"
+                              userLanguage['selectsats'] != null)
+                          ? "${userLanguage['selectsats']}"
                           : "SELECT SATS",
                       style: GoogleFonts.poppins(
                         color: Colors.white,

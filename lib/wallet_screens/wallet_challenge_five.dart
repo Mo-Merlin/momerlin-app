@@ -68,7 +68,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                           Padding(
                             padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Text(
-                              "Challenge Summary",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['challengesummary'] != null)
+                                  ? "${userLanguage['challengesummary']}"
+                                  : "Challenge Summary",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.white,
@@ -83,7 +87,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                           Padding(
                             padding: const EdgeInsets.only(top: 15, left: 25),
                             child: Text(
-                              "Activity",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['activity'] != null)
+                                  ? "${userLanguage['activity']}"
+                                  : "Activity",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.grey,
@@ -120,7 +128,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
-                                      "WALKING",
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['walking'] != null)
+                                          ? "${userLanguage['walking']}"
+                                          : "WALKING",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.white,
@@ -157,7 +169,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                           Padding(
                             padding: const EdgeInsets.only(top: 15, left: 25),
                             child: Text(
-                              "SATS Wagered",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['satswagered'] != null)
+                                  ? "${userLanguage['satswagered']}"
+                                  : "SATS Wagered",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.grey,
@@ -193,7 +209,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 5),
                                     child: Text(
-                                      "SATs",
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['sats'] != null)
+                                          ? "${userLanguage['sats']}"
+                                          : "SATs",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.orange,
@@ -230,7 +250,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                           Padding(
                             padding: const EdgeInsets.only(top: 15, left: 25),
                             child: Text(
-                              "Type of Challenge",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['typesofchallenge'] != null)
+                                  ? "${userLanguage['typesofchallenge']}"
+                                  : "Type of Challenge",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.grey,
@@ -267,7 +291,11 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Text(
-                                      "WALKING",
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['walking'] != null)
+                                          ? "${userLanguage['walking']}"
+                                          : "WALKING",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.white,
@@ -375,15 +403,18 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                 borderRadius: BorderRadius.circular(15),
                               ),
                               onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(builder: (context)=>ChallengeFinal()));
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChallengeFinal()));
                               },
                               color: blue1,
                               child: Text(
                                 (lang.length != null &&
                                         lang.length != 0 &&
-                                        userLanguage['createachallenge'] !=
-                                            null)
-                                    ? "${userLanguage['createachallenge']}"
+                                        userLanguage['createchallenge'] != null)
+                                    ? "${userLanguage['createchallenge']}"
                                     : "CREATE CHALLENGE",
                                 style: GoogleFonts.poppins(
                                   color: Colors.white,
@@ -429,8 +460,8 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
         title: Text(
           (lang.length != null &&
                   lang.length != 0 &&
-                  userLanguage['chellenges'] != null)
-              ? "${userLanguage['chellenges']}"
+                  userLanguage['createachellenge'] != null)
+              ? "${userLanguage['createachellenge']}"
               : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
@@ -482,8 +513,8 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                     child: Text(
                       (lang.length != null &&
                               lang.length != 0 &&
-                              userLanguage['createachallenge'] != null)
-                          ? "${userLanguage['createachallenge']}"
+                              userLanguage['showchallengesummary'] != null)
+                          ? "${userLanguage['showchallengesummary']}"
                           : "SHOW CHALLENGE SUMMARY",
                       style: GoogleFonts.poppins(
                         color: Colors.white,

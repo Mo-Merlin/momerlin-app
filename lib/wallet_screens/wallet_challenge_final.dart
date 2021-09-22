@@ -83,9 +83,8 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                         Text(
                           (lang.length != null &&
                                   lang.length != 0 &&
-                                  userLanguage['justlikemagicyourealldone'] !=
-                                      null)
-                              ? "${userLanguage['justlikemagicyourealldone']}"
+                                  userLanguage['letthechallengebegin'] != null)
+                              ? "${userLanguage['letthechallengebegin']}"
                               : "Let the challenge \nbegin!",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
@@ -117,8 +116,8 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                 Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
-                                          userLanguage['sendmore'] != null)
-                                      ? "${userLanguage['sendmore']}"
+                                          userLanguage['gohome'] != null)
+                                      ? "${userLanguage['gohome']}"
                                       : "GO HOME",
                                   style: GoogleFonts.poppins(
                                       color: white,
@@ -155,8 +154,8 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                 Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
-                                          userLanguage['gohome'] != null)
-                                      ? "${userLanguage['gohome']}"
+                                          userLanguage['createanother'] != null)
+                                      ? "${userLanguage['createanother']}"
                                       : "CREATE ANOTHER",
                                   style: GoogleFonts.poppins(
                                       color: white,

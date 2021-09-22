@@ -65,7 +65,11 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                       //color: Colors.red,
                       child: Center(
                         child: Text(
-                          "What type of \n  challenge?",
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['whattypeofchallenge'] != null)
+                              ? "${userLanguage['whattypeofchallenge']}"
+                              : "What type of \n  challenge?",
                           style: GoogleFonts.poppins(
                               decoration: TextDecoration.none,
                               color: Colors.white,
@@ -148,7 +152,11 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                             Padding(
                               padding: const EdgeInsets.only(top: 12),
                               child: Text(
-                                "STREAK",
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['streak'] != null)
+                                    ? "${userLanguage['streak']}"
+                                    : "STREAK",
                                 style: GoogleFonts.poppins(
                                     decoration: TextDecoration.none,
                                     color: Colors.white,
@@ -180,7 +188,13 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                               child: Visibility(
                                   visible: ischeckvisible,
                                   child: Center(
-                                    child: Text("COMMING SOON",
+                                    child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['commingsoon'] !=
+                                                    null)
+                                            ? "${userLanguage['commingsoon']}"
+                                            : "COMMING SOON",
                                         style: GoogleFonts.poppins(
                                             decoration: TextDecoration.none,
                                             color: Colors.white,
@@ -206,7 +220,11 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Text(
-                              "SPEED",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['speed'] != null)
+                                  ? "${userLanguage['speed']}"
+                                  : "SPEED",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.white.withOpacity(0.2),
@@ -238,7 +256,11 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                       //color: blue.withOpacity(0.3),
                       color: blue1,
                       child: Text(
-                        "NEXT",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['next'] != null)
+                            ? "${userLanguage['next']}"
+                            : "NEXT",
                         style: GoogleFonts.poppins(
                           //color: blue1,
                           color: Colors.white,
@@ -282,8 +304,8 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
         title: Text(
           (lang.length != null &&
                   lang.length != 0 &&
-                  userLanguage['chellenges'] != null)
-              ? "${userLanguage['chellenges']}"
+                  userLanguage['createachellenges'] != null)
+              ? "${userLanguage['createachellenges']}"
               : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
@@ -335,8 +357,8 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                     child: Text(
                       (lang.length != null &&
                               lang.length != 0 &&
-                              userLanguage['createachallenge'] != null)
-                          ? "${userLanguage['createachallenge']}"
+                              userLanguage['selectchallengetype'] != null)
+                          ? "${userLanguage['selectchallengetype']}"
                           : "SELECT CHELLENGE TYPE",
                       style: GoogleFonts.poppins(
                         color: Colors.white,

@@ -64,7 +64,11 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                     //color: Colors.red,
                     child: Center(
                       child: Text(
-                        "Select an Activity",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['selectanactivity'] != null)
+                            ? "${userLanguage['selectanactivity']}"
+                            : "Select an Activity",
                         style: GoogleFonts.poppins(
                             decoration: TextDecoration.none,
                             color: Colors.white,
@@ -144,7 +148,11 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Text(
-                              "WALKING",
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['walking'] != null)
+                                  ? "${userLanguage['walking']}"
+                                  : "WALKING",
                               style: GoogleFonts.poppins(
                                   decoration: TextDecoration.none,
                                   color: Colors.white,
@@ -204,7 +212,11 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                         Padding(
                           padding: const EdgeInsets.only(top: 12),
                           child: Text(
-                            "RUNNING",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['running'] != null)
+                                ? "${userLanguage['running']}"
+                                : "RUNNING",
                             style: GoogleFonts.poppins(
                                 decoration: TextDecoration.none,
                                 color: Colors.white,
@@ -235,7 +247,11 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                       //color: blue.withOpacity(0.3),
                       color: blue1,
                       child: Text(
-                        "NEXT",
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['next'] != null)
+                            ? "${userLanguage['next']}"
+                            : "NEXT",
                         style: GoogleFonts.poppins(
                           //color: blue1,
                           color: Colors.white,
@@ -279,8 +295,8 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
         title: Text(
           (lang.length != null &&
                   lang.length != 0 &&
-                  userLanguage['chellenges'] != null)
-              ? "${userLanguage['chellenges']}"
+                  userLanguage['createachellenge'] != null)
+              ? "${userLanguage['createachellenge']}"
               : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
@@ -332,8 +348,8 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                     child: Text(
                       (lang.length != null &&
                               lang.length != 0 &&
-                              userLanguage['createachallenge'] != null)
-                          ? "${userLanguage['createachallenge']}"
+                              userLanguage['selectactivity'] != null)
+                          ? "${userLanguage['selectactivity']}"
                           : "SELECT ACTIVITY",
                       style: GoogleFonts.poppins(
                         color: Colors.white,
