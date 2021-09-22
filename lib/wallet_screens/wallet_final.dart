@@ -66,10 +66,10 @@ class _WalletFinalState extends State<WalletFinal> {
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
+                  padding: const EdgeInsets.only(left: 20, right: 20, top: 130),
                   child: Container(
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.55,
+                    height: MediaQuery.of(context).size.height * 0.52,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: button,
@@ -89,6 +89,7 @@ class _WalletFinalState extends State<WalletFinal> {
                               : "Just like magic,\nyou’re all done!",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
+                              height: 1,
                               color: Colors.white,
                               fontSize: 30,
                               fontWeight: FontWeight.w600),
@@ -123,7 +124,7 @@ class _WalletFinalState extends State<WalletFinal> {
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.08,
+                            height: MediaQuery.of(context).size.height * 0.07,
                             padding: EdgeInsets.only(left: 20),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -194,6 +195,7 @@ class _WalletFinalState extends State<WalletFinal> {
                 ),
                 Positioned(
                   left: 100,
+                  top: 20,
                   child: Image.asset("assets/images/final.png"),
                 )
               ],

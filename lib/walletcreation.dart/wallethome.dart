@@ -38,27 +38,30 @@ class _WalletHomePage extends State<WalletHomePage> {
           color: Color(0xff6C6AEB),
           image: DecorationImage(
               image: AssetImage(
-                "assets/images/Login2.png",
+                "assets/images/Login3.png",
               ),
               fit: BoxFit.fill),
         ),
         child: Container(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 270),
+          padding: EdgeInsets.only(left: 20, right: 20, top: 275),
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
+                // Image.asset(
+                //   "assets/images/toyface.png",
+                // ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.55,
+                  height: MediaQuery.of(context).size.height * 0.566,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
+                      borderRadius: BorderRadius.circular(40),
                       color: backgroundcolor),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       SizedBox(
-                        height: 20,
+                        height: 55,
                       ),
                       Text(
                         (lang.length != null &&
@@ -68,12 +71,13 @@ class _WalletHomePage extends State<WalletHomePage> {
                             : "Hey there,\nyou new here?",
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
+                            height: 1,
                             color: blue,
                             fontSize: 30,
                             fontWeight: FontWeight.w600),
                       ),
                       SizedBox(
-                        height: 50,
+                        height: 40,
                       ),
                       InkWell(
                         onTap: () {
@@ -157,7 +161,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 60),
+                      SizedBox(height: 70),
                       Container(
                         width: MediaQuery.of(context).size.width * 0.7,
                         child: Row(

@@ -113,7 +113,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                     ),
                     // trailing: Icon(Icons.mood),
                     linearStrokeCap: LinearStrokeCap.roundAll,
-                    backgroundColor: Colors.grey,
+                    backgroundColor: gridcolor,
                     progressColor: blue,
                   ),
                 ],
@@ -127,7 +127,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 40,
+                      height: 60,
                     ),
                     Text(
                       (lang.length != null &&
@@ -137,6 +137,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           ? "${userLanguage['writedownthesewordsinorder']}"
                           : "Write down these 12 words in order",
                       style: GoogleFonts.poppins(
+                          height: 1.2,
                           color: white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600),
@@ -151,7 +152,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                           ? "${userLanguage['recoverykey']}"
                           : "This is your recovery key - you’ll need it if you ever need to recover your account",
                       style: GoogleFonts.poppins(
-                          color: grey,
+                          color: Color(0xff3B3D4D),
                           fontSize: 12,
                           fontWeight: FontWeight.w400),
                     ),
@@ -164,7 +165,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 1.8,
-                          crossAxisSpacing: 20,
+                          crossAxisSpacing: 30,
                           mainAxisSpacing: 30),
                       itemBuilder: (BuildContext context, int index) {
                         return Container(

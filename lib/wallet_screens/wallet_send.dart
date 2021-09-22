@@ -92,12 +92,12 @@ class _WalletSendState extends State<WalletSend> {
         ),
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.only(left: 10, right: 10),
+        padding: EdgeInsets.only(left: 20, right: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             SizedBox(
-              height: 20,
+              height: 40,
             ),
             Text(
               (lang.length != null &&
@@ -128,7 +128,7 @@ class _WalletSendState extends State<WalletSend> {
                     Text(
                       output == '' ? text : output,
                       style: GoogleFonts.montserrat(
-                        fontSize: 70,
+                        fontSize: 101,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -149,10 +149,13 @@ class _WalletSendState extends State<WalletSend> {
                 ),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
             Text(
-              "To",
+              "to:",
               style: GoogleFonts.poppins(
-                fontSize: 25,
+                fontSize: 20,
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
               ),
@@ -217,6 +220,9 @@ class _WalletSendState extends State<WalletSend> {
                 ], // NEW
               ), // NEW
             ),
+            SizedBox(
+              height: 30,
+            ),
             Container(
               height: 160,
               width: MediaQuery.of(context).size.width,
@@ -267,8 +273,8 @@ class _WalletSendState extends State<WalletSend> {
                               builder: (context) => WalletFinal()));
                     },
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 1.7,
-                      height: MediaQuery.of(context).size.height / 13,
+                      width: MediaQuery.of(context).size.width * 0.8,
+                      height: MediaQuery.of(context).size.height * 0.07,
                       decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(20), color: blue),
                       // height: 50,

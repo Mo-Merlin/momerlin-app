@@ -165,7 +165,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     ),
                     // trailing: Icon(Icons.mood),
                     linearStrokeCap: LinearStrokeCap.roundAll,
-                    backgroundColor: Colors.grey,
+                    backgroundColor: gridcolor,
                     progressColor: blue,
                   ),
                 ],
@@ -179,7 +179,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 child: Column(
                   children: [
                     SizedBox(
-                      height: 40,
+                      height: 60,
                     ),
                     Text(
                       (lang.length != null &&
@@ -189,6 +189,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                           ? "${userLanguage['writedownthesewordsinorder']}"
                           : "Arrange the 12 words in the correct order",
                       style: GoogleFonts.poppins(
+                          height: 1.2,
                           color: white,
                           fontSize: 30,
                           fontWeight: FontWeight.w600),
@@ -212,7 +213,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       ),
                     ),
                     SizedBox(
-                      height: 45,
+                      height: 50,
                     ),
                     GridView.builder(
                       shrinkWrap: true,
@@ -220,7 +221,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 1.8,
-                          crossAxisSpacing: 20,
+                          crossAxisSpacing: 30,
                           mainAxisSpacing: 30),
                       itemBuilder: (BuildContext context, int index) {
                         return InkWell(

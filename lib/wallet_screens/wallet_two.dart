@@ -149,35 +149,40 @@ class _WalletTwoState extends State<WalletTwo> {
           )
         : Scaffold(
             backgroundColor: backgroundcolor,
-            appBar: AppBar(
-              backgroundColor: blue1,
-              elevation: 0,
-              leading: SizedBox(
-                height: 0,
-              ),
-            ),
             body: Stack(children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
                 width: MediaQuery.of(context).size.width,
+
                 //color: Colors.amber,
                 child: Column(
                   children: [
-                    ClipPath(
-                      clipper: CurvedBottomClipper(),
+                    Container(
+                      // clipper: CurvedBottomClipper(),
                       child: Container(
                         // duration: Duration(milliseconds: 200),
                         //color: blue1,
-                        height: MediaQuery.of(context).size.height * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          color: blue1,
-                        ),
+                            // borderRadius: new BorderRadius.only(
+                            //     bottomRight: Radius.elliptical(500, 150),
+                            //     bottomLeft: Radius.elliptical(300, 250)),
+                            // color: blue1,
+                            ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
                             Positioned(
-                              top: 15,
+                              child: Image.asset(
+                                "assets/images/Wallet.png",
+                                width: MediaQuery.of(context).size.width,
+                                // height: 1000,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Positioned(
+                              top: 45,
                               child: Center(
                                 child: InkWell(
                                   onTap: () {
@@ -201,7 +206,7 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 80,
+                              top: 110,
                               child: Text(
                                 (lang.length != null &&
                                         lang.length != 0 &&
@@ -216,7 +221,7 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 110,
+                              top: 150,
                               child: Text(
                                 balance.toStringAsFixed(0),
                                 style: GoogleFonts.montserrat(
@@ -227,8 +232,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 130,
-                              left: 280,
+                              top: 170,
+                              left: 270,
                               child: Text(
                                 "Gwei",
                                 style: GoogleFonts.montserrat(
@@ -238,8 +243,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 160,
-                              left: 280,
+                              top: 200,
+                              left: 270,
                               child: Text(
                                 ".${splitvalue.toString()}",
                                 style: GoogleFonts.montserrat(
@@ -250,13 +255,13 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 200,
+                              top: 240,
                               child: Container(
                                 // color: button,
-                                height: 40,
+                                height: 36,
                                 width: 100,
                                 decoration: BoxDecoration(
-                                  color: Color(0xff707070).withOpacity(0.4),
+                                  color: Color(0xff6B69C4),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
@@ -280,7 +285,7 @@ class _WalletTwoState extends State<WalletTwo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15),
+                      padding: const EdgeInsets.only(top: 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -294,8 +299,8 @@ class _WalletTwoState extends State<WalletTwo> {
                             },
                             child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 6.3,
-                                width: MediaQuery.of(context).size.width / 4.3,
+                                    MediaQuery.of(context).size.height / 6.5,
+                                width: MediaQuery.of(context).size.width / 4,
                                 //color: button,
                                 decoration: BoxDecoration(
                                   color: button,
@@ -349,8 +354,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               _showReceiveMobile();
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 6.3,
-                              width: MediaQuery.of(context).size.width / 4.3,
+                              height: MediaQuery.of(context).size.height / 6.5,
+                              width: MediaQuery.of(context).size.width / 4,
                               //color: button,
                               decoration: BoxDecoration(
                                 color: button,
@@ -401,8 +406,8 @@ class _WalletTwoState extends State<WalletTwo> {
                             ),
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height / 6.3,
-                            width: MediaQuery.of(context).size.width / 4.3,
+                            height: MediaQuery.of(context).size.height / 6.5,
+                            width: MediaQuery.of(context).size.width / 4,
 
                             //color: button,
                             decoration: BoxDecoration(
@@ -457,8 +462,8 @@ class _WalletTwoState extends State<WalletTwo> {
                 height: 10,
               ),
               DraggableScrollableSheet(
-                initialChildSize: 0.4,
-                minChildSize: 0.4,
+                initialChildSize: 0.41,
+                minChildSize: 0.41,
                 maxChildSize: 0.7,
                 builder: (BuildContext context, myscrollController) {
                   return Container(
@@ -537,7 +542,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         : Column(
                                             children: [
                                               SizedBox(
-                                                height: 10,
+                                                height: 5,
                                               ),
                                               Container(
                                                 child: ListTile(

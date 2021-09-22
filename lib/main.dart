@@ -5,6 +5,7 @@ import 'package:momerlin/bloc/authentication_bloc.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:momerlin/walletcreation.dart/wallethome.dart';
 import 'package:flutter/material.dart';
+import 'package:momerlin/walletcreation.dart/walletsucess.dart';
 import './simpleBlocObserver.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Momerlin',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
         textTheme: GoogleFonts.poppinsTextTheme(),
@@ -41,7 +43,7 @@ class MyApp extends StatelessWidget {
           }
         },
       ),
-      // home: WalletHomePage(),
+      // home: WalletSucess(),
     );
   }
 }
