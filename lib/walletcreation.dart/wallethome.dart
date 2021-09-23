@@ -72,7 +72,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                         textAlign: TextAlign.center,
                         style: GoogleFonts.poppins(
                             height: 1,
-                            color: blue,
+                            color: blue1,
                             fontSize: 30,
                             fontWeight: FontWeight.w600),
                       ),
@@ -87,7 +87,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                                   builder: (_) => WalletSeedPage()));
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.6,
                           height: MediaQuery.of(context).size.height * 0.09,
                           padding: EdgeInsets.only(left: 20),
                           decoration: BoxDecoration(
@@ -130,7 +130,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                                   builder: (context) => WalletTwo()));
                         },
                         child: Container(
-                          width: MediaQuery.of(context).size.width * 0.7,
+                          width: MediaQuery.of(context).size.width * 0.6,
                           height: MediaQuery.of(context).size.height * 0.09,
                           padding: EdgeInsets.only(left: 20),
                           decoration: BoxDecoration(

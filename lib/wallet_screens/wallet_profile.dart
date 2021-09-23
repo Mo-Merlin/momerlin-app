@@ -84,7 +84,7 @@ class _WalletProfileState extends State<WalletProfile> {
                     : "YOUR PROFILE",
                 style: GoogleFonts.poppins(
                   color: Colors.white,
-                  fontSize: 17,
+                  fontSize: 12,
                   fontWeight: FontWeight.w600,
                 ),
               ),
@@ -93,67 +93,60 @@ class _WalletProfileState extends State<WalletProfile> {
             body: SingleChildScrollView(
               child: Column(
                 children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.2,
-                    width: MediaQuery.of(context).size.width,
-                    //color: Colors.amber,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 25, left: 30),
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 25, left: 30),
+                        child: Container(
+                          //color: Colors.redAccent,
                           child: Container(
-                            //color: Colors.redAccent,
-                            child: ClipRRect(
-                                borderRadius: BorderRadius.circular(40),
-                                child: Container(
-                                  height: 70,
-                                  width: 80,
-                                  child: Image.asset(
-                                    "assets/images/profile.png",
-                                    fit: BoxFit.fill,
-                                    width: 80,
-                                    height: 70,
-                                  ),
-                                )),
+                            child: Image.asset(
+                              "assets/images/profile.png",
+                              fit: BoxFit.fill,
+                              width: 76,
+                              height: 76,
+                            ),
                           ),
                         ),
-                        Container(
-                          height: 200,
-                          width: MediaQuery.of(context).size.width * 0.6,
-                          //color: Colors.blue,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 25, left: 4),
-                                child: Container(
-                                  height: 40,
-                                  width: 200,
-                                  //color: Colors.orange,
-                                  child: Text(
-                                    "Momo Omer",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white,
-                                        fontSize: 25,
-                                        fontWeight: FontWeight.w600),
-                                  ),
+                      ),
+                      Container(
+                        // height: 200,
+                        width: MediaQuery.of(context).size.width * 0.6,
+                        //color: Colors.blue,
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 25, left: 4),
+                              child: Container(
+                                height: 40,
+                                width: 200,
+                                //color: Colors.orange,
+                                child: Text(
+                                  "Momo Omer",
+                                  style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600),
                                 ),
                               ),
-                              Stack(
+                            ),
+                            Container(
+                              height: 45,
+                              width: 200,
+                              decoration: new BoxDecoration(
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(10),
+                                color: button,
+                              ),
+                              child: Row(
                                 children: [
-                                  Container(
-                                    height: 45,
-                                    width: 200,
-                                    decoration: new BoxDecoration(
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(10),
-                                      color: button,
-                                    ),
-                                    child: Center(
+                                  Center(
+                                    child: Container(
+                                      width: 160,
                                       child: Text(
                                         user[0]["walletaddress"],
                                         textAlign: TextAlign.center,
@@ -164,59 +157,55 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ),
                                     ),
                                   ),
-                                  Positioned(
-                                    top: 10,
-                                    right: 5,
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(10),
-                                      child: Container(
-                                        height: 35,
-                                        width: 35,
-                                        color: blue1,
-                                        child: IconButton(
-                                          onPressed: () {
-                                            FlutterClipboard.copy(
-                                              // widget.xumCoinMainNetAddress,
-                                              user[0]["walletaddress"],
-                                            ).then(
-                                              (result) {
-                                                Navigator.of(context).pop();
-                                                // AppToast()
-                                                //     .showSuccess(context: context, msg: "XUM Address Copied");
-                                              },
-                                            );
-                                          },
-                                          icon: Icon(
-                                            Icons.copy,
-                                            color: Colors.white,
-                                            size: 15,
-                                          ),
+                                  // Spacer(),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(10),
+                                    child: Container(
+                                      height: 35,
+                                      width: 35,
+                                      color: blue1,
+                                      child: IconButton(
+                                        onPressed: () {
+                                          FlutterClipboard.copy(
+                                            // widget.xumCoinMainNetAddress,
+                                            user[0]["walletaddress"],
+                                          ).then(
+                                            (result) {
+                                              Navigator.of(context).pop();
+                                              // AppToast()
+                                              //     .showSuccess(context: context, msg: "XUM Address Copied");
+                                            },
+                                          );
+                                        },
+                                        icon: Icon(
+                                          Icons.copy,
+                                          color: Colors.white,
+                                          size: 15,
                                         ),
                                       ),
                                     ),
-                                  )
+                                  ),
                                 ],
                               ),
-                              Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage[
-                                                'earnofreferredearnings'] !=
-                                            null)
-                                    ? "${userLanguage['earnofreferredearnings']}"
-                                    : "Earn 1% of referred earnings",
-                                style: GoogleFonts.poppins(
-                                    color: blue1,
-                                    fontSize: 10,
-                                    fontWeight: FontWeight.w500),
-                              ),
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
+                            ),
+                            Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['earnofreferredearnings'] !=
+                                          null)
+                                  ? "${userLanguage['earnofreferredearnings']}"
+                                  : "Earn 1% of referred earnings",
+                              style: GoogleFonts.poppins(
+                                  color: blue1,
+                                  fontSize: 9,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
                   ),
-                  SizedBox(height: 20),
+                  SizedBox(height: 50),
                   Padding(
                     padding: const EdgeInsets.only(left: 20, right: 20),
                     child: Container(
@@ -240,7 +229,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ? "${userLanguage['minwithdraw']}"
                                       : "MIN WITHDRAW",
                                   style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.grey,
                                   ),
@@ -249,7 +238,7 @@ class _WalletProfileState extends State<WalletProfile> {
                               Spacer(),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 5, right: 15),
+                                    const EdgeInsets.only(top: 5, right: 25),
                                 child: Container(
                                   height: 35,
                                   width: 80,
@@ -261,7 +250,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       "\$5",
                                       style: GoogleFonts.montserrat(
                                         color: Colors.white,
-                                        fontSize: 15,
+                                        fontSize: 12,
                                       ),
                                     ),
                                   ),
@@ -284,7 +273,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ? "${userLanguage['currentgasfeeestimated']}"
                                       : "Current gas fee estimated",
                                   style: GoogleFonts.poppins(
-                                    fontSize: 10,
+                                    fontSize: 9,
                                     fontWeight: FontWeight.w500,
                                     color: blue1,
                                   ),
@@ -293,12 +282,12 @@ class _WalletProfileState extends State<WalletProfile> {
                               Spacer(),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 15, top: 5),
+                                    const EdgeInsets.only(right: 30, top: 5),
                                 child: Text(
                                   "\$2.50",
                                   style: GoogleFonts.montserrat(
                                     color: blue1,
-                                    fontSize: 10,
+                                    fontSize: 9,
                                   ),
                                 ),
                               ),
@@ -333,7 +322,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ? "${userLanguage['selectcurrency']}"
                                       : "SELECT CURRENCY",
                                   style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
@@ -342,7 +331,7 @@ class _WalletProfileState extends State<WalletProfile> {
                               Spacer(),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(top: 20, right: 15),
+                                    const EdgeInsets.only(top: 20, right: 25),
                                 child: Container(
                                   height: 35,
                                   width: 80,
@@ -373,7 +362,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                             child: Text(
                                               value,
                                               style: GoogleFonts.montserrat(
-                                                fontSize: 15,
+                                                fontSize: 12,
                                                 color: Colors.white,
                                                 fontWeight: FontWeight.w600,
                                               ),
@@ -382,7 +371,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                         }).toList(),
                                         hint: Text("\$USD",
                                             style: GoogleFonts.montserrat(
-                                              fontSize: 15,
+                                              fontSize: 12,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
                                             )),
@@ -418,7 +407,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    right: 50, left: 20, top: 10),
+                                    right: 50, left: 20, top: 15),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -426,7 +415,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ? "${userLanguage['support']}"
                                       : "SUPPORT",
                                   style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
@@ -435,17 +424,18 @@ class _WalletProfileState extends State<WalletProfile> {
                               Spacer(),
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    left: 50, right: 15, top: 10),
+                                    left: 50, right: 25, top: 15),
                                 child: ClipRRect(
                                   borderRadius: BorderRadius.circular(15),
                                   child: Container(
-                                    height: 50,
-                                    width: 50,
+                                    height: 42,
+                                    width: 42,
                                     color: backgroundcolor,
                                     child: IconButton(
                                         onPressed: () {},
                                         icon: Icon(
                                           Icons.search,
+                                          size: 20,
                                           color: blue1,
                                         )),
                                   ),
@@ -473,7 +463,7 @@ class _WalletProfileState extends State<WalletProfile> {
                             children: [
                               Padding(
                                 padding: const EdgeInsets.only(
-                                    right: 0, left: 20, top: 10),
+                                    right: 0, left: 20, top: 15),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -481,7 +471,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                       ? "${userLanguage['followus']}"
                                       : "FOLLOW US",
                                   style: GoogleFonts.poppins(
-                                    fontSize: 15,
+                                    fontSize: 12,
                                     fontWeight: FontWeight.w600,
                                     color: Colors.white,
                                   ),
@@ -496,8 +486,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 42,
+                                        width: 42,
                                         color: backgroundcolor,
                                         child: IconButton(
                                             onPressed: () {},
@@ -518,18 +508,22 @@ class _WalletProfileState extends State<WalletProfile> {
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(15),
                                       child: Container(
-                                        height: 50,
-                                        width: 50,
+                                        height: 42,
+                                        width: 42,
                                         color: backgroundcolor,
                                         child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              FontAwesomeIcons.facebook,
-                                              color: blue1,
-                                              size: 20,
-                                            )),
+                                          onPressed: () {},
+                                          icon: Icon(
+                                            FontAwesomeIcons.facebook,
+                                            color: blue1,
+                                            size: 20,
+                                          ),
+                                        ),
                                       ),
                                     ),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
                                   ),
                                 ],
                               ),
@@ -564,7 +558,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                         ? "${userLanguage['aboutus']}"
                                         : "ABOUT US",
                                     style: GoogleFonts.poppins(
-                                      fontSize: 15,
+                                      fontSize: 12,
                                       fontWeight: FontWeight.w600,
                                       color: Colors.white,
                                     ),

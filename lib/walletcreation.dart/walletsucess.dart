@@ -232,7 +232,7 @@ class _WalletSucess extends State<WalletSucess> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: white,
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700),
                   ),
                 ),

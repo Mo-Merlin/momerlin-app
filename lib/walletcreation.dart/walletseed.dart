@@ -123,7 +123,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(left: 20, right: 20),
+                padding: EdgeInsets.only(left: 25, right: 25),
                 child: Column(
                   children: [
                     SizedBox(
@@ -136,6 +136,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                                   null)
                           ? "${userLanguage['writedownthesewordsinorder']}"
                           : "Write down these 12 words in order",
+                      // textAlign: TextAlign.left,
                       style: GoogleFonts.poppins(
                           height: 1.2,
                           color: white,
@@ -178,8 +179,8 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                               textAlign: TextAlign.center,
                               style: GoogleFonts.poppins(
                                   color: white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w500),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w600),
                             ),
                           ),
                         );

@@ -112,7 +112,7 @@ class _WalletSendState extends State<WalletSend> {
               ),
             ),
             Container(
-              height: MediaQuery.of(context).size.height / 8,
+              // height: MediaQuery.of(context).size.height / 8,
               width: MediaQuery.of(context).size.width,
               //color: Colors.amber,
               child: InkWell(
@@ -134,7 +134,7 @@ class _WalletSendState extends State<WalletSend> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 30),
+                      padding: EdgeInsets.only(top: 50),
                       child: Text(
                         " Gwei",
                         style: GoogleFonts.montserrat(
@@ -155,7 +155,7 @@ class _WalletSendState extends State<WalletSend> {
             Text(
               "to:",
               style: GoogleFonts.poppins(
-                fontSize: 20,
+                fontSize: 21,
                 color: Colors.white,
                 fontWeight: FontWeight.w400,
               ),
@@ -166,11 +166,11 @@ class _WalletSendState extends State<WalletSend> {
               decoration: new BoxDecoration(
                 shape: BoxShape.rectangle,
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.grey[100],
+                color: gridcolor,
               ),
               margin: EdgeInsets.symmetric(horizontal: 1.0),
               // color: Colors.grey[100],
-              height: 60,
+              height: 80,
               child: Row(
                 children: <Widget>[
                   Container(
@@ -189,25 +189,28 @@ class _WalletSendState extends State<WalletSend> {
                         ),
                         filled: true,
                         focusedBorder: OutlineInputBorder(
+                          borderSide:
+                              BorderSide(color: Colors.transparent, width: 2),
                           borderRadius: BorderRadius.all(Radius.circular(10.0)),
                         ),
                         border: InputBorder.none,
+                        hintStyle: TextStyle(color: Colors.white),
                         hintText: (lang.length != null && lang.length != 0)
                             ? "  ${userLanguage['enterAddressLable']}"
                             : '  Enter the Address',
                       ),
-                      style: TextStyle(fontSize: 13, color: Colors.black),
+                      style: TextStyle(fontSize: 13, color: white),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.topCenter,
+                  Center(
+                    // alignment: Alignment.topCenter,
                     child: Padding(
                       padding: EdgeInsets.only(right: 0),
                       child: Container(
                         child: IconButton(
                           icon: Icon(
                             FontAwesomeIcons.qrcode,
-                            color: backgroundcolor,
+                            color: white,
                             // color: AppColors.loginButton,
                           ),
                           onPressed: () {
@@ -220,11 +223,11 @@ class _WalletSendState extends State<WalletSend> {
                 ], // NEW
               ), // NEW
             ),
-            SizedBox(
-              height: 30,
-            ),
+            // SizedBox(
+            //   height: 10,
+            // ),
             Container(
-              height: 160,
+              // height: 160,
               width: MediaQuery.of(context).size.width,
               //color: Colors.amber,
               child: Column(
@@ -237,13 +240,17 @@ class _WalletSendState extends State<WalletSend> {
                         Padding(
                           padding: const EdgeInsets.only(left: 50),
                           child: Container(
-                            height: 30,
-                            width: 30,
+                            height: 11,
+                            width: 11,
                             child: Icon(
                               Icons.fmd_bad_rounded,
                               color: blue1,
+                              size: 10,
                             ),
                           ),
+                        ),
+                        SizedBox(
+                          width: 10,
                         ),
                         Text(
                           (lang.length != null &&
@@ -254,7 +261,7 @@ class _WalletSendState extends State<WalletSend> {
                               ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
                               : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
                           style: GoogleFonts.poppins(
-                            fontSize: 10,
+                            fontSize: 9,
                             fontWeight: FontWeight.w500,
                             color: Colors.grey,
                           ),
@@ -263,7 +270,7 @@ class _WalletSendState extends State<WalletSend> {
                     ),
                   ),
                   SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   InkWell(
                     onTap: () {
@@ -276,7 +283,8 @@ class _WalletSendState extends State<WalletSend> {
                       width: MediaQuery.of(context).size.width * 0.8,
                       height: MediaQuery.of(context).size.height * 0.07,
                       decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20), color: blue),
+                          borderRadius: BorderRadius.circular(20),
+                          color: blue1),
                       // height: 50,
                       // width: MediaQuery.of(context).size.width * 0.9,
                       // ignore: deprecated_member_use

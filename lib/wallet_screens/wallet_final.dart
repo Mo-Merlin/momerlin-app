@@ -68,6 +68,10 @@ class _WalletFinalState extends State<WalletFinal> {
                 Padding(
                   padding: const EdgeInsets.only(left: 20, right: 20, top: 130),
                   child: Container(
+                    padding: const EdgeInsets.only(
+                      left: 40,
+                      right: 40,
+                    ),
                     width: MediaQuery.of(context).size.width,
                     height: MediaQuery.of(context).size.height * 0.52,
                     decoration: BoxDecoration(
@@ -78,7 +82,7 @@ class _WalletFinalState extends State<WalletFinal> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         SizedBox(
-                          height: 100,
+                          height: 120,
                         ),
                         Text(
                           (lang.length != null &&
@@ -104,7 +108,7 @@ class _WalletFinalState extends State<WalletFinal> {
                                           'thoughitmaytakeourmagicminstoreachyourdestination'] !=
                                       null)
                               ? "${userLanguage['thoughitmaytakeourmagicminstoreachyourdestination']}"
-                              : "(Though it may take our magic 5-10 mins    \nto reach your destination)",
+                              : "(Though it may take our magic 5-10 mins to reach your destination)",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                             color: Colors.grey,
@@ -113,7 +117,7 @@ class _WalletFinalState extends State<WalletFinal> {
                           ),
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 40,
                         ),
                         InkWell(
                           onTap: () {
@@ -123,8 +127,10 @@ class _WalletFinalState extends State<WalletFinal> {
                                     builder: (context) => WalletTwo()));
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.07,
+                            width: 245,
+
+                            // height: MediaQuery.of(context).size.height * 0.07,
+                            height: 50,
                             padding: EdgeInsets.only(left: 20),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -153,7 +159,7 @@ class _WalletFinalState extends State<WalletFinal> {
                           ),
                         ),
                         SizedBox(
-                          height: 10,
+                          height: 5,
                         ),
                         InkWell(
                           onTap: () {
@@ -177,9 +183,8 @@ class _WalletFinalState extends State<WalletFinal> {
                                       : "GO HOME",
                                   style: GoogleFonts.poppins(
                                       color: white,
-                                      letterSpacing: 1,
                                       fontSize: 12,
-                                      fontWeight: FontWeight.w600),
+                                      fontWeight: FontWeight.w700),
                                 ),
                                 SizedBox(
                                   width: 20,

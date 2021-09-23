@@ -175,7 +175,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height,
               child: SingleChildScrollView(
-                padding: EdgeInsets.only(left: 20, right: 20),
+                padding: EdgeInsets.only(left: 25, right: 25),
                 child: Column(
                   children: [
                     SizedBox(

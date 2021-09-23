@@ -258,8 +258,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               top: 240,
                               child: Container(
                                 // color: button,
-                                height: 36,
-                                width: 100,
+                                height: 32,
+                                width: 82,
                                 decoration: BoxDecoration(
                                   color: Color(0xff6B69C4),
                                   borderRadius: BorderRadius.circular(10),
@@ -272,7 +272,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ? "${userLanguage['0.64USD']}"
                                         : "0.64USD",
                                     style: GoogleFonts.montserrat(
-                                      fontSize: 13,
+                                      fontSize: 10,
                                       color: Colors.white,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -313,21 +313,23 @@ class _WalletTwoState extends State<WalletTwo> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 42,
+                                          width: 42,
                                           color: Colors.green[300],
                                           child: IconButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WalletSend()));
-                                              },
-                                              icon: Icon(
-                                                Icons.file_upload_outlined,
-                                                color: Colors.white,
-                                              )),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WalletSend()));
+                                            },
+                                            icon: Icon(
+                                              Icons.file_upload_outlined,
+                                              size: 20,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -340,7 +342,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ? "${userLanguage['send']}"
                                             : "Send",
                                         style: GoogleFonts.poppins(
-                                          fontSize: 15,
+                                          fontSize: 13,
                                           color: Colors.grey,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -372,8 +374,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 42,
+                                          width: 42,
                                           color: blue1,
                                           child: IconButton(
                                               onPressed: () {
@@ -382,6 +384,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                               icon: Icon(
                                                 Icons.file_download_outlined,
                                                 color: Colors.white,
+                                                size: 20,
                                               )),
                                         ),
                                       ),
@@ -395,7 +398,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ? "${userLanguage['receive']}"
                                             : "Receive",
                                         style: GoogleFonts.poppins(
-                                            fontSize: 15,
+                                            fontSize: 13,
                                             color: Colors.grey,
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -421,16 +424,17 @@ class _WalletTwoState extends State<WalletTwo> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Container(
-                                      height: 50,
-                                      width: 50,
+                                      height: 42,
+                                      width: 42,
                                       color: Colors.orange[300],
                                       child: IconButton(
                                           // onPressed: () {},
                                           onPressed: () =>
                                               _plaidLinkToken.open(),
                                           icon: Icon(
-                                            FontAwesomeIcons.dollarSign,
+                                            Icons.attach_money_outlined,
                                             color: Colors.white,
+                                            size: 20,
                                           )),
                                     ),
                                   ),
@@ -444,7 +448,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ? "${userLanguage['earn']}"
                                         : "Earn",
                                     style: GoogleFonts.poppins(
-                                        fontSize: 15,
+                                        fontSize: 13,
                                         color: Colors.grey,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -588,7 +592,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         fontSize: 12,
-                                                        color: Colors.white,
+                                                        color:
+                                                            Color(0xff9395A4),
                                                       ),
                                                     ),
                                                   ),
@@ -608,7 +613,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                         children: [
                                                           Positioned(
                                                             left: 14,
-                                                            top: 10,
+                                                            top: 15,
                                                             child: Text(
                                                               ((transactions1[index]
                                                                               .amount -
@@ -620,7 +625,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                       1),
                                                               style: GoogleFonts
                                                                   .montserrat(
-                                                                fontSize: 15,
+                                                                fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
