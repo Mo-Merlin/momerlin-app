@@ -863,69 +863,72 @@ class _WalletChallengesState extends State<WalletChallenges> {
               ],
             ),
           ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.1,
-            minChildSize: 0.1,
-            maxChildSize: 0.1,
-            builder: (BuildContext context, myscrollController) {
-              return Stack(
-                children: [
-                  Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
-                    decoration: BoxDecoration(
-                      //color: Colors.amber,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    WalletCreatingChallenge()));
-                      },
-                      color: blue1,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) =>
-                                          WalletCreatingChallenge()));
-                            },
-                            icon: Icon(
-                              Icons.add,
-                              color: Colors.white,
-                              size: 30,
-                            ),
-                          ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['createachallenge'] != null)
-                                ? "${userLanguage['createachallenge']}"
-                                : "CREATE A CHALLENGE",
-                            style: GoogleFonts.poppins(
-                              color: Colors.white,
-                              fontSize: 15,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              );
-            },
-          )
         ],
+      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   elevation: 5,
+      //   icon: const Icon(Icons.add),
+      //   label: const Text('Add a task'),
+      //   onPressed: () {},
+      // ),
+      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      floatingActionButton: Container(
+        height: 60,
+        width: 240,
+        decoration: BoxDecoration(
+          color: blue1,
+          borderRadius: BorderRadius.circular(15),
+        ),
+        child: RaisedButton(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => WalletCreatingChallenge()));
+          },
+          color: blue1,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => WalletCreatingChallenge()));
+                },
+                icon: Icon(
+                  Icons.add,
+                  color: Colors.white,
+                  size: 30,
+                ),
+              ),
+              Text(
+                (lang.length != null &&
+                        lang.length != 0 &&
+                        userLanguage['createachallenge'] != null)
+                    ? "${userLanguage['createachallenge']}"
+                    : "CREATE A CHALLENGE",
+                style: GoogleFonts.poppins(
+                  color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
+                ),
+              )
+            ],
+          ),
+        ),
+      ),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      bottomNavigationBar: BottomAppBar(
+        color: backgroundcolor,
+        shape: const CircularNotchedRectangle(),
+        child: Container(
+          height: 30,
+        ),
       ),
     );
   }
