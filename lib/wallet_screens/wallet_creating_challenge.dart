@@ -38,11 +38,11 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
   //TODO: LanguageEnd
 
   void showBottom() {
-    print("bottom");
+    print("select activity button pressed");
     showModalBottomSheet(
         backgroundColor: backgroundcolor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(30),
         ),
         context: context,
         builder: (BuildContext context) {
@@ -51,7 +51,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: backgroundcolor,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(children: [
               Row(
@@ -59,7 +59,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.1,
+                    height: MediaQuery.of(context).size.height * 0.15,
                     width: MediaQuery.of(context).size.width,
                     //color: Colors.red,
                     child: Center(
@@ -94,13 +94,14 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                       });
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.26,
-                      width: MediaQuery.of(context).size.width * 0.4,
+                      height: 188,
+                      width: 134,
                       decoration: BoxDecoration(
                           color: (ischeckvisible = true) ? blue1 : button,
-                          borderRadius: BorderRadius.circular(10)),
+                          borderRadius: BorderRadius.circular(15)),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Padding(
                             padding: const EdgeInsets.only(top: 20),
@@ -113,8 +114,8 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                               child: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
                                 child: Container(
-                                  height: 35,
-                                  width: 35,
+                                  height: 25,
+                                  width: 25,
                                   color: backgroundcolor,
                                   child: Visibility(
                                     visible: ischeckvisible,
@@ -127,7 +128,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                                         icon: Icon(
                                           Icons.check,
                                           color: blue1,
-                                          size: 20,
+                                          size: 10,
                                         )),
                                   ),
                                 ),
@@ -137,8 +138,8 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                           Padding(
                             padding: const EdgeInsets.only(top: 12),
                             child: Container(
-                                height: 80,
-                                width: 50,
+                                height: 60,
+                                width: 48,
                                 //color: Colors.red,
                                 child: Image.asset(
                                   "assets/images/walking.png",
@@ -165,21 +166,22 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                     ),
                   ),
                   Container(
-                    height: MediaQuery.of(context).size.height * 0.26,
-                    width: MediaQuery.of(context).size.width * 0.4,
+                    height: 188,
+                    width: 134,
                     decoration: BoxDecoration(
                         color: (ischeckvisible == false) ? blue1 : button,
-                        borderRadius: BorderRadius.circular(10)),
+                        borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
                         Padding(
                           padding: const EdgeInsets.only(top: 20),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(30),
                             child: Container(
-                              height: 35,
-                              width: 35,
+                              height: 25,
+                              width: 25,
                               color: backgroundcolor,
                               child: Visibility(
                                 visible: false,
@@ -192,7 +194,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                                     icon: Icon(
                                       Icons.check,
                                       color: blue1,
-                                      size: 20,
+                                      size: 10,
                                     )),
                               ),
                             ),
@@ -201,8 +203,8 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                         Padding(
                           padding: const EdgeInsets.only(top: 12),
                           child: Container(
-                              height: 80,
-                              width: 50,
+                              height: 60,
+                              width: 48,
                               //color: Colors.red,
                               child: Image.asset(
                                 "assets/images/running.png",
@@ -229,37 +231,37 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                   )
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                height: 55,
+                width: 321,
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WalletChallengeTwo()));
+                    },
+                    //color: blue.withOpacity(0.3),
+                    color: blue1,
+                    child: Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['next'] != null)
+                          ? "${userLanguage['next']}"
+                          : "NEXT",
+                      style: GoogleFonts.poppins(
+                        //color: blue1,
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WalletChallengeTwo()));
-                      },
-                      //color: blue.withOpacity(0.3),
-                      color: blue1,
-                      child: Text(
-                        (lang.length != null &&
-                                lang.length != 0 &&
-                                userLanguage['next'] != null)
-                            ? "${userLanguage['next']}"
-                            : "NEXT",
-                        style: GoogleFonts.poppins(
-                          //color: blue1,
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
-                ),
+                    )),
               ),
             ]),
           );
@@ -269,9 +271,9 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.white.withOpacity(0.7),
       appBar: AppBar(
-        backgroundColor: backgroundcolor,
+        backgroundColor: Colors.white.withOpacity(0),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -310,18 +312,21 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
             child: LinearPercentIndicator(
               width: 100,
               lineHeight: 25.0,
-              percent: 0.1,
-              center: Text(
-                "10%",
-                style: GoogleFonts.poppins(
-                    color: white,
-                    letterSpacing: 1,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+              percent: 0.25,
+              center: Padding(
+                padding: const EdgeInsets.only(left: 54),
+                child: Text(
+                  "25%",
+                  style: GoogleFonts.poppins(
+                      color: white,
+                      letterSpacing: 1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
               // trailing: Icon(Icons.mood),
               linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
+              backgroundColor: backgroundcolor,
               progressColor: blue,
             ),
           ),

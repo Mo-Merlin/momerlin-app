@@ -41,15 +41,15 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
     showModalBottomSheet(
         backgroundColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(30),
         ),
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
           return DraggableScrollableSheet(
-              initialChildSize: 0.8, //set this as you want
+              initialChildSize: 0.85, //set this as you want
               maxChildSize: 1, //set this as you want
-              minChildSize: 0.8,
+              minChildSize: 0.85,
               //expand: true,
               builder: (context, scrollController) {
                 return Container(
@@ -57,7 +57,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                   // width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                     color: backgroundcolor,
-                    borderRadius: BorderRadius.circular(15),
+                    borderRadius: BorderRadius.circular(30),
                   ),
                   child: Column(
                     children: [
@@ -66,7 +66,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
+                            padding: const EdgeInsets.only(top: 40, left: 25),
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
@@ -85,7 +85,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 30, left: 25),
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
@@ -104,9 +104,9 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Container(
-                              height: MediaQuery.of(context).size.width * 0.17,
+                              height: MediaQuery.of(context).size.width * 0.15,
                               width: MediaQuery.of(context).size.width * 0.9,
                               decoration: BoxDecoration(
                                   color: button,
@@ -116,8 +116,8 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Container(
-                                      height: 45,
-                                      width: 30,
+                                      height: 32,
+                                      width: 25,
                                       //color: blue1,
                                       child: Image.asset(
                                         "assets/images/walking.png",
@@ -167,7 +167,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
@@ -186,9 +186,9 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Container(
-                              height: MediaQuery.of(context).size.width * 0.17,
+                              height: MediaQuery.of(context).size.width * 0.15,
                               width: MediaQuery.of(context).size.width * 0.9,
                               decoration: BoxDecoration(
                                   color: button,
@@ -248,7 +248,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
@@ -267,9 +267,9 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Container(
-                              height: MediaQuery.of(context).size.width * 0.17,
+                              height: MediaQuery.of(context).size.width * 0.15,
                               width: MediaQuery.of(context).size.width * 0.9,
                               decoration: BoxDecoration(
                                   color: button,
@@ -279,8 +279,8 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                                   Padding(
                                     padding: const EdgeInsets.only(left: 10),
                                     child: Container(
-                                      height: 45,
-                                      width: 30,
+                                      height: 32,
+                                      width: 25,
                                       //color: blue1,
                                       child: Image.asset(
                                         "assets/images/streak.png",
@@ -330,7 +330,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Text(
                               "Number of Competitors ",
                               style: GoogleFonts.poppins(
@@ -345,9 +345,9 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                       Row(
                         children: [
                           Padding(
-                            padding: const EdgeInsets.only(top: 15, left: 25),
+                            padding: const EdgeInsets.only(top: 20, left: 25),
                             child: Container(
-                              height: MediaQuery.of(context).size.width * 0.17,
+                              height: MediaQuery.of(context).size.width * 0.15,
                               width: MediaQuery.of(context).size.width * 0.9,
                               decoration: BoxDecoration(
                                   color: button,
@@ -389,40 +389,39 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                           ),
                         ],
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 25),
-                        child: Container(
-                          height: MediaQuery.of(context).size.height * 0.06,
-                          width: MediaQuery.of(context).size.width * 0.8,
-                          decoration: BoxDecoration(
-                            //color: Colors.amber,
-                            borderRadius: BorderRadius.circular(15),
-                          ),
-                          child: RaisedButton(
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15),
-                              ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ChallengeFinal()));
-                              },
-                              color: blue1,
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['createchallenge'] != null)
-                                    ? "${userLanguage['createchallenge']}"
-                                    : "CREATE CHALLENGE",
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              )),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        height: 55,
+                        width: 321,
+                        decoration: BoxDecoration(
+                          //color: Colors.amber,
+                          borderRadius: BorderRadius.circular(15),
                         ),
+                        child: RaisedButton(
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(17),
+                            ),
+                            onPressed: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => ChallengeFinal()));
+                            },
+                            color: blue1,
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['createchallenge'] != null)
+                                  ? "${userLanguage['createchallenge']}"
+                                  : "CREATE CHALLENGE",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            )),
                       ),
                     ],
                   ),
@@ -434,9 +433,9 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.white.withOpacity(0.7),
       appBar: AppBar(
-        backgroundColor: backgroundcolor,
+        backgroundColor: Colors.white.withOpacity(0),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -475,18 +474,21 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
             child: LinearPercentIndicator(
               width: 100,
               lineHeight: 25.0,
-              percent: 0.9,
-              center: Text(
-                "95%",
-                style: GoogleFonts.poppins(
-                    color: white,
-                    letterSpacing: 1,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+              percent: 0.70,
+              center: Padding(
+                padding: const EdgeInsets.only(left: 54),
+                child: Text(
+                  "95%",
+                  style: GoogleFonts.poppins(
+                      color: white,
+                      letterSpacing: 1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
               // trailing: Icon(Icons.mood),
               linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
+              backgroundColor: backgroundcolor,
               progressColor: blue,
             ),
           ),
@@ -494,35 +496,33 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
       ),
       body: Column(
         children: [
+          SizedBox(height: 50),
           Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.06,
-                width: MediaQuery.of(context).size.width * 0.8,
-                decoration: BoxDecoration(
-                  //color: Colors.amber,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    onPressed: showBottom,
-                    color: backgroundcolor,
-                    child: Text(
-                      (lang.length != null &&
-                              lang.length != 0 &&
-                              userLanguage['showchallengesummary'] != null)
-                          ? "${userLanguage['showchallengesummary']}"
-                          : "SHOW CHALLENGE SUMMARY",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )),
+            child: Container(
+              height: MediaQuery.of(context).size.height * 0.06,
+              width: MediaQuery.of(context).size.width * 0.8,
+              decoration: BoxDecoration(
+                //color: Colors.amber,
+                borderRadius: BorderRadius.circular(15),
               ),
+              child: RaisedButton(
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  onPressed: showBottom,
+                  color: backgroundcolor,
+                  child: Text(
+                    (lang.length != null &&
+                            lang.length != 0 &&
+                            userLanguage['showchallengesummary'] != null)
+                        ? "${userLanguage['showchallengesummary']}"
+                        : "SHOW CHALLENGE SUMMARY",
+                    style: GoogleFonts.poppins(
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  )),
             ),
           ),
         ],
