@@ -59,371 +59,380 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                     color: backgroundcolor,
                     borderRadius: BorderRadius.circular(30),
                   ),
-                  child: Column(
-                    children: [
-                      Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 40, left: 25),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['challengesummary'] != null)
-                                  ? "${userLanguage['challengesummary']}"
-                                  : "Challenge Summary",
-                              style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.white,
-                                  fontSize: 25,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 30, left: 25),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['activity'] != null)
-                                  ? "${userLanguage['activity']}"
-                                  : "Activity",
-                              style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.width * 0.15,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(
-                                      height: 32,
-                                      width: 25,
-                                      //color: blue1,
-                                      child: Image.asset(
-                                        "assets/images/walking.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['walking'] != null)
-                                          ? "${userLanguage['walking']}"
-                                          : "WALKING",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 185),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.check,
-                                              color: Colors.white,
-                                              size: 11,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 40, left: 25),
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['challengesummary'] !=
+                                            null)
+                                    ? "${userLanguage['challengesummary']}"
+                                    : "Challenge Summary",
+                                style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.w600),
                               ),
                             ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['satswagered'] != null)
-                                  ? "${userLanguage['satswagered']}"
-                                  : "SATS Wagered",
-                              style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.width * 0.15,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Text(
-                                      "125",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.white,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 5),
-                                    child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['sats'] != null)
-                                          ? "${userLanguage['sats']}"
-                                          : "SATs",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.orange,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 210),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.note_add_outlined,
-                                              color: Colors.white,
-                                              size: 12,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['typesofchallenge'] != null)
-                                  ? "${userLanguage['typesofchallenge']}"
-                                  : "Type of Challenge",
-                              style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.width * 0.15,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Container(
-                                      height: 32,
-                                      width: 25,
-                                      //color: blue1,
-                                      child: Image.asset(
-                                        "assets/images/streak.png",
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 10),
-                                    child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['walking'] != null)
-                                          ? "${userLanguage['walking']}"
-                                          : "WALKING",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.white,
-                                          fontSize: 13,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 185),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.check,
-                                              color: Colors.white,
-                                              size: 11,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Text(
-                              "Number of Competitors ",
-                              style: GoogleFonts.poppins(
-                                  decoration: TextDecoration.none,
-                                  color: Colors.grey,
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.w400),
-                            ),
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 20, left: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.width * 0.15,
-                              width: MediaQuery.of(context).size.width * 0.9,
-                              decoration: BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(15)),
-                              child: Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 20),
-                                    child: Text(
-                                      "85",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.white,
-                                          fontSize: 21,
-                                          fontWeight: FontWeight.w600),
-                                    ),
-                                  ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(left: 250),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.note_add_outlined,
-                                              color: Colors.white,
-                                              size: 12,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 50,
-                      ),
-                      Container(
-                        height: 55,
-                        width: 321,
-                        decoration: BoxDecoration(
-                          //color: Colors.amber,
-                          borderRadius: BorderRadius.circular(15),
+                          ],
                         ),
-                        child: RaisedButton(
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(17),
-                            ),
-                            onPressed: () {
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ChallengeFinal()));
-                            },
-                            color: blue1,
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['createchallenge'] != null)
-                                  ? "${userLanguage['createchallenge']}"
-                                  : "CREATE CHALLENGE",
-                              style: GoogleFonts.poppins(
-                                color: Colors.white,
-                                fontSize: 15,
-                                fontWeight: FontWeight.w600,
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 30, left: 25),
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['activity'] != null)
+                                    ? "${userLanguage['activity']}"
+                                    : "Activity",
+                                style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.grey,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
                               ),
-                            )),
-                      ),
-                    ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                    color: button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(
+                                        height: 32,
+                                        width: 25,
+                                        //color: blue1,
+                                        child: Image.asset(
+                                          "assets/images/walking.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['walking'] != null)
+                                            ? "${userLanguage['walking']}"
+                                            : "WALKING",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 185),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          color: blue1,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.check,
+                                                color: Colors.white,
+                                                size: 11,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['satswagered'] != null)
+                                    ? "${userLanguage['satswagered']}"
+                                    : "SATS Wagered",
+                                style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.grey,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                    color: button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        "125",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 5),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['sats'] != null)
+                                            ? "${userLanguage['sats']}"
+                                            : "SATs",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.orange,
+                                            fontSize: 12,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 210),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          color: blue1,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.note_add_outlined,
+                                                color: Colors.white,
+                                                size: 12,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['typesofchallenge'] !=
+                                            null)
+                                    ? "${userLanguage['typesofchallenge']}"
+                                    : "Type of Challenge",
+                                style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.grey,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                    color: button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(
+                                        height: 32,
+                                        width: 25,
+                                        //color: blue1,
+                                        child: Image.asset(
+                                          "assets/images/streak.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['walking'] != null)
+                                            ? "${userLanguage['walking']}"
+                                            : "WALKING",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 185),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          color: blue1,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.check,
+                                                color: Colors.white,
+                                                size: 11,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Text(
+                                "Number of Competitors ",
+                                style: GoogleFonts.poppins(
+                                    decoration: TextDecoration.none,
+                                    color: Colors.grey,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w400),
+                              ),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 20, left: 25),
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.width * 0.15,
+                                width: MediaQuery.of(context).size.width * 0.9,
+                                decoration: BoxDecoration(
+                                    color: button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        "85",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            fontSize: 21,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 250),
+                                      child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(30),
+                                        child: Container(
+                                          height: 25,
+                                          width: 25,
+                                          color: blue1,
+                                          child: IconButton(
+                                              onPressed: () {},
+                                              icon: Icon(
+                                                Icons.note_add_outlined,
+                                                color: Colors.white,
+                                                size: 12,
+                                              )),
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        SizedBox(
+                          height: 50,
+                        ),
+                        Container(
+                          height: 55,
+                          width: 321,
+                          decoration: BoxDecoration(
+                            //color: Colors.amber,
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(17),
+                              ),
+                              onPressed: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ChallengeFinal()));
+                              },
+                              color: blue1,
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['createchallenge'] != null)
+                                    ? "${userLanguage['createchallenge']}"
+                                    : "CREATE CHALLENGE",
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              )),
+                        ),
+                      ],
+                    ),
                   ),
                 );
               });
