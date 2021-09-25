@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -50,7 +51,7 @@ class _WalletSucess extends State<WalletSucess> {
     } else {
       print("PAVITHRA");
     }
-    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
 
@@ -178,7 +179,7 @@ class _WalletSucess extends State<WalletSucess> {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => WalletTwo()));
+                      context, MaterialPageRoute(builder: (_) => Tabscreen()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
@@ -216,7 +217,7 @@ class _WalletSucess extends State<WalletSucess> {
               InkWell(
                 onTap: () {
                   Navigator.push(
-                      context, MaterialPageRoute(builder: (_) => WalletTwo()));
+                      context, MaterialPageRoute(builder: (_) => Tabscreen()));
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,

@@ -62,6 +62,7 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     setState(() {
       loading = false;
     });

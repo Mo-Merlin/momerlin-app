@@ -1,4 +1,5 @@
 import 'package:awesome_loader/awesome_loader.dart';
+import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -191,6 +192,11 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                     ),
                     InkWell(
                       onTap: () {
+                        FlutterClipboard.copy(
+                          seed,
+                        ).then(
+                          (result) {},
+                        );
                         Navigator.push(
                             context,
                             MaterialPageRoute(
