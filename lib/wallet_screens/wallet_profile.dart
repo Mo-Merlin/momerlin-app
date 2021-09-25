@@ -36,6 +36,7 @@ class _WalletProfileState extends State<WalletProfile> {
     }
   }
 
+  TextEditingController _controller;
   // ignore: todo
   //TODO: LanguageEnd
   String _chosenValue;
@@ -54,6 +55,7 @@ class _WalletProfileState extends State<WalletProfile> {
             ),
           )
         : Scaffold(
+            key: scaffoldKeyWallet,
             appBar: AppBar(
               backgroundColor: backgroundcolor,
               elevation: 0,
@@ -120,17 +122,28 @@ class _WalletProfileState extends State<WalletProfile> {
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
                             Padding(
-                              padding: const EdgeInsets.only(top: 25, left: 4),
+                              padding: const EdgeInsets.only(
+                                top: 25,
+                              ),
                               child: Container(
+                                alignment: Alignment.topLeft,
                                 height: 40,
-                                width: 200,
+                                width: 210,
                                 //color: Colors.orange,
-                                child: Text(
-                                  "Momo Omer",
-                                  style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 25,
-                                      fontWeight: FontWeight.w600),
+                                child: TextField(
+                                  // onChanged: (value) {
+                                  //   _scanBarcode = value;
+                                  // },
+                                  controller: _controller,
+                                  decoration: new InputDecoration(
+                                      filled: true,
+                                      border: InputBorder.none,
+                                      hintStyle: TextStyle(color: Colors.white),
+                                      hintText: '  Nick Name',
+                                      suffixIcon:
+                                          Icon(Icons.edit, color: white)),
+
+                                  style: TextStyle(fontSize: 13, color: white),
                                 ),
                               ),
                             ),
@@ -171,9 +184,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                             user[0]["walletaddress"],
                                           ).then(
                                             (result) {
-                                              Navigator.of(context).pop();
-                                              // AppToast()
-                                              //     .showSuccess(context: context, msg: "XUM Address Copied");
+                                              _showScaffold('Address Copied');
                                             },
                                           );
                                         },
@@ -575,5 +586,23 @@ class _WalletProfileState extends State<WalletProfile> {
               ),
             ),
           );
+  }
+
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
+  void _showScaffold(String message) {
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: GoogleFonts.poppins(
+            color: white,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        backgroundColor: blue1,
+      ),
+    );
   }
 }

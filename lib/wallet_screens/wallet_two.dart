@@ -10,8 +10,9 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
+import 'package:momerlin/wallet_screens/wallet_receive.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -353,7 +354,11 @@ class _WalletTwoState extends State<WalletTwo> {
                           ),
                           InkWell(
                             onTap: () {
-                              _showReceiveMobile();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WalletReceive()));
+                              // _showReceiveMobile();
                             },
                             child: Container(
                               height: MediaQuery.of(context).size.height / 6.5,
@@ -365,7 +370,12 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                               child: InkWell(
                                 onTap: () {
-                                  _showReceiveMobile();
+                                  // _showReceiveMobile();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              WalletReceive()));
                                 },
                                 child: Column(
                                   children: [
@@ -379,7 +389,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                           color: blue1,
                                           child: IconButton(
                                               onPressed: () {
-                                                _showReceiveMobile();
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WalletReceive()));
                                               },
                                               icon: Icon(
                                                 Icons.file_download_outlined,
@@ -465,71 +479,65 @@ class _WalletTwoState extends State<WalletTwo> {
               SizedBox(
                 height: 10,
               ),
-              DraggableScrollableSheet(
-                initialChildSize: 0.41,
-                minChildSize: 0.41,
-                maxChildSize: 0.7,
-                builder: (BuildContext context, myscrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: button,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
-                      ),
-                    ),
-                    //color: button,
-                    child: Stack(
-                      // crossAxisAlignment: CrossAxisAlignment,
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            height: 2,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                color: grey,
-                                borderRadius: BorderRadius.circular(10)),
+              transactions1.length == 0
+                  ? SizedBox(
+                      height: 0,
+                      width: 0,
+                    )
+                  : DraggableScrollableSheet(
+                      initialChildSize: 0.41,
+                      minChildSize: 0.41,
+                      maxChildSize: 0.7,
+                      builder: (BuildContext context, myscrollController) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: button,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //color: button,
+                          child: Stack(
+                            // crossAxisAlignment: CrossAxisAlignment,
+                            alignment: Alignment.topCenter,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['transaction'] != null)
-                                      ? "${userLanguage['transaction']}"
-                                      : "Transaction",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Container(
+                                  height: 2,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                      color: grey,
+                                      borderRadius: BorderRadius.circular(10)),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        transactions1.length == 0
-                            ? Padding(
-                                padding: EdgeInsets.only(
-                                    top: 60, left: 20, right: 20),
-                                child: Center(
-                                  child: Text(
-                                    "Do you want to Earn Gwei Please click Earn button and login your plaid account",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 40),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['transaction'] !=
+                                                    null)
+                                            ? "${userLanguage['transaction']}"
+                                            : "Transaction",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )
-                            : Padding(
+                              ),
+                              Padding(
                                 padding: EdgeInsets.only(top: 50),
                                 // top: 50,
                                 child: ListView.builder(
@@ -656,11 +664,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                   },
                                 ),
                               ),
-                      ],
-                    ),
-                  );
-                },
-              )
+                            ],
+                          ),
+                        );
+                      },
+                    )
             ]),
           );
   }

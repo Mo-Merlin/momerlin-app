@@ -35,12 +35,4 @@ class AuthenticationBloc
       yield Unauthenticated();
     }
   }
-
-  Stream<AuthenticationState> _mapLoggedInToState() async* {
-    yield Authenticated();
-  }
-
-  Stream<AuthenticationState> _mapLoggedOutToState() async* {
-    yield Unauthenticated();
-  }
 }

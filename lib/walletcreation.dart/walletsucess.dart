@@ -182,9 +182,9 @@ class _WalletSucess extends State<WalletSucess> {
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 11,
+                  height: MediaQuery.of(context).size.height * 0.09,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: blue1),
+                      borderRadius: BorderRadius.circular(35), color: blue1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [

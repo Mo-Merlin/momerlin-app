@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_challenges.dart';
+// import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
-import 'package:momerlin/walletcreation.dart/wallethome.dart';
+// import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class WalletFinal extends StatefulWidget {
   const WalletFinal({Key key}) : super(key: key);
@@ -133,7 +133,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             height: 50,
                             padding: EdgeInsets.only(left: 20),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(15),
                                 color: blue1),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,

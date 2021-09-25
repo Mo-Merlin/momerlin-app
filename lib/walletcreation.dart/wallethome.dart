@@ -91,7 +91,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                           height: MediaQuery.of(context).size.height * 0.09,
                           padding: EdgeInsets.only(left: 20),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(19),
                               color: blue),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -134,7 +134,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                           height: MediaQuery.of(context).size.height * 0.09,
                           padding: EdgeInsets.only(left: 20),
                           decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
+                              borderRadius: BorderRadius.circular(19),
                               color: button),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,

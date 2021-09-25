@@ -201,7 +201,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height * 0.07,
                         decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                            borderRadius: BorderRadius.circular(28),
                             color: blue1),
                         child: Center(
                           child: Text(
