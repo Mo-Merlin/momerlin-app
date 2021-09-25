@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
+import 'package:momerlin/walletcreation.dart/importwallet.dart';
 import 'package:momerlin/walletcreation.dart/walletseed.dart';
 
 class WalletHomePage extends StatefulWidget {
@@ -127,7 +128,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => WalletTwo()));
+                                  builder: (context) => ImportWalletPage()));
                         },
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.6,

@@ -86,4 +86,20 @@ class UserRepository {
       print("Error" + e);
     }
   }
+
+  Future<dynamic> getTransaction1(walletaddress) async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/";
+//
+      var res = await http.get(
+        '${url + "momerlin/transactions?address=$walletaddress"}',
+      );
+      var checkres = jsonDecode(res.body);
+
+      return checkres;
+    } catch (e) {
+      print("error");
+      print("Error" + e);
+    }
+  }
 }

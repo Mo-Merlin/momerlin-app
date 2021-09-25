@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
@@ -101,7 +102,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletChallenges()));
+                                    builder: (context) => Tabscreen()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
