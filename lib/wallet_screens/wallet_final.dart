@@ -124,7 +124,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletTwo()));
+                                    builder: (context) => WalletChallenges()));
                           },
                           child: Container(
                             width: 245,

@@ -40,7 +40,7 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
     showModalBottomSheet(
         backgroundColor: backgroundcolor,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(15),
+          borderRadius: BorderRadius.circular(30),
         ),
         context: context,
         builder: (BuildContext context) {
@@ -49,7 +49,7 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
               color: backgroundcolor,
-              borderRadius: BorderRadius.circular(15),
+              borderRadius: BorderRadius.circular(30),
             ),
             child: Column(children: [
               Row(
@@ -59,15 +59,20 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
                   Padding(
                     padding: const EdgeInsets.only(top: 10),
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
+                      height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width,
                       //color: Colors.red,
                       child: Center(
                         child: RichText(
                             text: TextSpan(children: [
                           TextSpan(
-                              text:
-                                  'How many competitors \n         would you like?',
+                              text: (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage[
+                                              'howmanycompetitorswouldyoulike'] !=
+                                          null)
+                                  ? "${userLanguage['howmanycompetitorswouldyoulike']}"
+                                  : 'How many competitors \n         would you like?',
                               style: GoogleFonts.poppins(
                                 color: Colors.white,
                                 fontSize: 25,
@@ -79,45 +84,49 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
                   ),
                 ],
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 50),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.13,
-                  width: MediaQuery.of(context).size.width,
-                  //color: Colors.amber,
-                  child: Image.asset(
-                    "assets/images/bar2.png",
-                    fit: BoxFit.cover,
-                  ),
+              SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: MediaQuery.of(context).size.height * 0.13,
+                width: MediaQuery.of(context).size.width,
+                //color: Colors.amber,
+                child: Image.asset(
+                  "assets/images/bar2.png",
+                  fit: BoxFit.cover,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(top: 25),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: RaisedButton(
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(20),
+              SizedBox(
+                height: 50,
+              ),
+              Container(
+                height: 55,
+                width: 321,
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(17),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WalletChallengeFive()));
+                    },
+                    //color: blue.withOpacity(0.3),
+                    color: blue1,
+                    child: Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['next'] != null)
+                          ? "${userLanguage['next']}"
+                          : "NEXT",
+                      style: GoogleFonts.poppins(
+                        //color: blue1,
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
                       ),
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => WalletChallengeFive()));
-                      },
-                      //color: blue.withOpacity(0.3),
-                      color: blue1,
-                      child: Text(
-                        "NEXT",
-                        style: GoogleFonts.poppins(
-                          //color: blue1,
-                          color: Colors.white,
-                          fontSize: 15,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      )),
-                ),
+                    )),
               ),
             ]),
           );
@@ -127,9 +136,9 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //backgroundColor: Colors.white.withOpacity(0.8),
+      backgroundColor: Colors.white.withOpacity(0.7),
       appBar: AppBar(
-        backgroundColor: backgroundcolor,
+        backgroundColor: Colors.white.withOpacity(0),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -153,8 +162,8 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
         title: Text(
           (lang.length != null &&
                   lang.length != 0 &&
-                  userLanguage['chellenges'] != null)
-              ? "${userLanguage['chellenges']}"
+                  userLanguage['createachellenge'] != null)
+              ? "${userLanguage['createachellenge']}"
               : "CREATE A \nCHALLENGE",
           style: GoogleFonts.poppins(
             color: Colors.white,
@@ -168,18 +177,21 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
             child: LinearPercentIndicator(
               width: 100,
               lineHeight: 25.0,
-              percent: 0.6,
-              center: Text(
-                "60%",
-                style: GoogleFonts.poppins(
-                    color: white,
-                    letterSpacing: 1,
-                    fontSize: 12,
-                    fontWeight: FontWeight.w400),
+              percent: 0.70,
+              center: Padding(
+                padding: const EdgeInsets.only(left: 54),
+                child: Text(
+                  "95%",
+                  style: GoogleFonts.poppins(
+                      color: white,
+                      letterSpacing: 1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
               ),
               // trailing: Icon(Icons.mood),
               linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
+              backgroundColor: backgroundcolor,
               progressColor: blue,
             ),
           ),
@@ -206,8 +218,8 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
                     child: Text(
                       (lang.length != null &&
                               lang.length != 0 &&
-                              userLanguage['createachallenge'] != null)
-                          ? "${userLanguage['createachallenge']}"
+                              userLanguage['selectcompetitors'] != null)
+                          ? "${userLanguage['selectcompotitors']}"
                           : "SELECT COMPETITORS",
                       style: GoogleFonts.poppins(
                         color: Colors.white,
