@@ -134,7 +134,7 @@ class _WalletSucess extends State<WalletSucess> {
               ),
               // trailing: Icon(Icons.mood),
               linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
+              backgroundColor: gridcolor,
               progressColor: blue,
             ),
           ],
@@ -154,6 +154,9 @@ class _WalletSucess extends State<WalletSucess> {
           padding: EdgeInsets.only(left: 20, right: 20),
           child: Column(
             children: [
+              SizedBox(
+                height: 30,
+              ),
               Image.asset(
                 "assets/images/btc.png",
               ),
@@ -164,10 +167,13 @@ class _WalletSucess extends State<WalletSucess> {
                     ? "${userLanguage['writedownthesewordsinorder']}"
                     : "Would you like to earn Crypto in exchange for your anonymous payment data? ",
                 style: GoogleFonts.poppins(
-                    color: white, fontSize: 25, fontWeight: FontWeight.w600),
+                    height: 1.3,
+                    color: white,
+                    fontSize: 25,
+                    fontWeight: FontWeight.w600),
               ),
               SizedBox(
-                height: 70,
+                height: 100,
               ),
               InkWell(
                 onTap: () {
@@ -176,9 +182,9 @@ class _WalletSucess extends State<WalletSucess> {
                 },
                 child: Container(
                   width: MediaQuery.of(context).size.width / 1.5,
-                  height: MediaQuery.of(context).size.height / 11,
+                  height: MediaQuery.of(context).size.height * 0.09,
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20), color: blue1),
+                      borderRadius: BorderRadius.circular(35), color: blue1),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
@@ -226,7 +232,7 @@ class _WalletSucess extends State<WalletSucess> {
                     textAlign: TextAlign.center,
                     style: GoogleFonts.poppins(
                         color: white,
-                        fontSize: 15,
+                        fontSize: 13,
                         fontWeight: FontWeight.w700),
                   ),
                 ),

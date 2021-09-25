@@ -10,8 +10,9 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
+import 'package:momerlin/wallet_screens/wallet_receive.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
@@ -149,35 +150,40 @@ class _WalletTwoState extends State<WalletTwo> {
           )
         : Scaffold(
             backgroundColor: backgroundcolor,
-            appBar: AppBar(
-              backgroundColor: blue1,
-              elevation: 0,
-              leading: SizedBox(
-                height: 0,
-              ),
-            ),
             body: Stack(children: [
               Container(
                 height: MediaQuery.of(context).size.height * 0.6,
                 width: MediaQuery.of(context).size.width,
+
                 //color: Colors.amber,
                 child: Column(
                   children: [
-                    ClipPath(
-                      clipper: CurvedBottomClipper(),
+                    Container(
+                      // clipper: CurvedBottomClipper(),
                       child: Container(
                         // duration: Duration(milliseconds: 200),
                         //color: blue1,
-                        height: MediaQuery.of(context).size.height * 0.35,
+                        height: MediaQuery.of(context).size.height * 0.4,
                         width: MediaQuery.of(context).size.width,
                         decoration: BoxDecoration(
-                          color: blue1,
-                        ),
+                            // borderRadius: new BorderRadius.only(
+                            //     bottomRight: Radius.elliptical(500, 150),
+                            //     bottomLeft: Radius.elliptical(300, 250)),
+                            // color: blue1,
+                            ),
                         child: Stack(
                           alignment: Alignment.center,
                           children: [
                             Positioned(
-                              top: 15,
+                              child: Image.asset(
+                                "assets/images/Wallet.png",
+                                width: MediaQuery.of(context).size.width,
+                                // height: 1000,
+                                fit: BoxFit.fill,
+                              ),
+                            ),
+                            Positioned(
+                              top: 45,
                               child: Center(
                                 child: InkWell(
                                   onTap: () {
@@ -201,7 +207,7 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 80,
+                              top: 110,
                               child: Text(
                                 (lang.length != null &&
                                         lang.length != 0 &&
@@ -216,7 +222,7 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 110,
+                              top: 150,
                               child: Text(
                                 balance.toStringAsFixed(0),
                                 style: GoogleFonts.montserrat(
@@ -227,8 +233,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 130,
-                              left: 280,
+                              top: 170,
+                              left: 270,
                               child: Text(
                                 "Gwei",
                                 style: GoogleFonts.montserrat(
@@ -238,8 +244,8 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 160,
-                              left: 280,
+                              top: 200,
+                              left: 270,
                               child: Text(
                                 ".${splitvalue.toString()}",
                                 style: GoogleFonts.montserrat(
@@ -250,13 +256,13 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                             ),
                             Positioned(
-                              top: 200,
+                              top: 240,
                               child: Container(
                                 // color: button,
-                                height: 40,
-                                width: 100,
+                                height: 32,
+                                width: 82,
                                 decoration: BoxDecoration(
-                                  color: Color(0xff707070).withOpacity(0.4),
+                                  color: Color(0xff6B69C4),
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: Center(
@@ -267,7 +273,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ? "${userLanguage['0.64USD']}"
                                         : "0.64USD",
                                     style: GoogleFonts.montserrat(
-                                      fontSize: 13,
+                                      fontSize: 10,
                                       color: Colors.white,
                                       fontWeight: FontWeight.w400,
                                     ),
@@ -280,7 +286,7 @@ class _WalletTwoState extends State<WalletTwo> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15),
+                      padding: const EdgeInsets.only(top: 0),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -294,8 +300,8 @@ class _WalletTwoState extends State<WalletTwo> {
                             },
                             child: Container(
                                 height:
-                                    MediaQuery.of(context).size.height / 6.3,
-                                width: MediaQuery.of(context).size.width / 4.3,
+                                    MediaQuery.of(context).size.height / 6.5,
+                                width: MediaQuery.of(context).size.width / 4,
                                 //color: button,
                                 decoration: BoxDecoration(
                                   color: button,
@@ -308,21 +314,23 @@ class _WalletTwoState extends State<WalletTwo> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 42,
+                                          width: 42,
                                           color: Colors.green[300],
                                           child: IconButton(
-                                              onPressed: () {
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WalletSend()));
-                                              },
-                                              icon: Icon(
-                                                Icons.file_upload_outlined,
-                                                color: Colors.white,
-                                              )),
+                                            onPressed: () {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) =>
+                                                          WalletSend()));
+                                            },
+                                            icon: Icon(
+                                              Icons.file_upload_outlined,
+                                              size: 20,
+                                              color: Colors.white,
+                                            ),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -335,7 +343,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ? "${userLanguage['send']}"
                                             : "Send",
                                         style: GoogleFonts.poppins(
-                                          fontSize: 15,
+                                          fontSize: 13,
                                           color: Colors.grey,
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -346,11 +354,15 @@ class _WalletTwoState extends State<WalletTwo> {
                           ),
                           InkWell(
                             onTap: () {
-                              _showReceiveMobile();
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => WalletReceive()));
+                              // _showReceiveMobile();
                             },
                             child: Container(
-                              height: MediaQuery.of(context).size.height / 6.3,
-                              width: MediaQuery.of(context).size.width / 4.3,
+                              height: MediaQuery.of(context).size.height / 6.5,
+                              width: MediaQuery.of(context).size.width / 4,
                               //color: button,
                               decoration: BoxDecoration(
                                 color: button,
@@ -358,7 +370,12 @@ class _WalletTwoState extends State<WalletTwo> {
                               ),
                               child: InkWell(
                                 onTap: () {
-                                  _showReceiveMobile();
+                                  // _showReceiveMobile();
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              WalletReceive()));
                                 },
                                 child: Column(
                                   children: [
@@ -367,16 +384,21 @@ class _WalletTwoState extends State<WalletTwo> {
                                       child: ClipRRect(
                                         borderRadius: BorderRadius.circular(30),
                                         child: Container(
-                                          height: 50,
-                                          width: 50,
+                                          height: 42,
+                                          width: 42,
                                           color: blue1,
                                           child: IconButton(
                                               onPressed: () {
-                                                _showReceiveMobile();
+                                                Navigator.push(
+                                                    context,
+                                                    MaterialPageRoute(
+                                                        builder: (context) =>
+                                                            WalletReceive()));
                                               },
                                               icon: Icon(
                                                 Icons.file_download_outlined,
                                                 color: Colors.white,
+                                                size: 20,
                                               )),
                                         ),
                                       ),
@@ -390,7 +412,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ? "${userLanguage['receive']}"
                                             : "Receive",
                                         style: GoogleFonts.poppins(
-                                            fontSize: 15,
+                                            fontSize: 13,
                                             color: Colors.grey,
                                             fontWeight: FontWeight.w400),
                                       ),
@@ -401,8 +423,8 @@ class _WalletTwoState extends State<WalletTwo> {
                             ),
                           ),
                           Container(
-                            height: MediaQuery.of(context).size.height / 6.3,
-                            width: MediaQuery.of(context).size.width / 4.3,
+                            height: MediaQuery.of(context).size.height / 6.5,
+                            width: MediaQuery.of(context).size.width / 4,
 
                             //color: button,
                             decoration: BoxDecoration(
@@ -416,16 +438,17 @@ class _WalletTwoState extends State<WalletTwo> {
                                   child: ClipRRect(
                                     borderRadius: BorderRadius.circular(30),
                                     child: Container(
-                                      height: 50,
-                                      width: 50,
+                                      height: 42,
+                                      width: 42,
                                       color: Colors.orange[300],
                                       child: IconButton(
                                           // onPressed: () {},
                                           onPressed: () =>
                                               _plaidLinkToken.open(),
                                           icon: Icon(
-                                            FontAwesomeIcons.dollarSign,
+                                            Icons.attach_money_outlined,
                                             color: Colors.white,
+                                            size: 20,
                                           )),
                                     ),
                                   ),
@@ -439,7 +462,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ? "${userLanguage['earn']}"
                                         : "Earn",
                                     style: GoogleFonts.poppins(
-                                        fontSize: 15,
+                                        fontSize: 13,
                                         color: Colors.grey,
                                         fontWeight: FontWeight.w400),
                                   ),
@@ -456,71 +479,65 @@ class _WalletTwoState extends State<WalletTwo> {
               SizedBox(
                 height: 10,
               ),
-              DraggableScrollableSheet(
-                initialChildSize: 0.4,
-                minChildSize: 0.4,
-                maxChildSize: 0.7,
-                builder: (BuildContext context, myscrollController) {
-                  return Container(
-                    decoration: BoxDecoration(
-                      color: button,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(40),
-                        topRight: Radius.circular(40),
-                      ),
-                    ),
-                    //color: button,
-                    child: Stack(
-                      // crossAxisAlignment: CrossAxisAlignment,
-                      alignment: Alignment.topCenter,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.only(top: 20),
-                          child: Container(
-                            height: 2,
-                            width: 50,
-                            decoration: BoxDecoration(
-                                color: grey,
-                                borderRadius: BorderRadius.circular(10)),
+              transactions1.length == 0
+                  ? SizedBox(
+                      height: 0,
+                      width: 0,
+                    )
+                  : DraggableScrollableSheet(
+                      initialChildSize: 0.41,
+                      minChildSize: 0.41,
+                      maxChildSize: 0.7,
+                      builder: (BuildContext context, myscrollController) {
+                        return Container(
+                          decoration: BoxDecoration(
+                            color: button,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(40),
+                              topRight: Radius.circular(40),
+                            ),
                           ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(top: 40),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          //color: button,
+                          child: Stack(
+                            // crossAxisAlignment: CrossAxisAlignment,
+                            alignment: Alignment.topCenter,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(left: 20),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['transaction'] != null)
-                                      ? "${userLanguage['transaction']}"
-                                      : "Transaction",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w500,
-                                  ),
+                                padding: const EdgeInsets.only(top: 20),
+                                child: Container(
+                                  height: 2,
+                                  width: 50,
+                                  decoration: BoxDecoration(
+                                      color: grey,
+                                      borderRadius: BorderRadius.circular(10)),
                                 ),
                               ),
-                            ],
-                          ),
-                        ),
-                        transactions1.length == 0
-                            ? Padding(
-                                padding: EdgeInsets.only(
-                                    top: 60, left: 20, right: 20),
-                                child: Center(
-                                  child: Text(
-                                    "Do you want to Earn Gwei Please click Earn button and login your plaid account",
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                        color: Colors.white, fontSize: 17),
-                                  ),
+                              Padding(
+                                padding: const EdgeInsets.only(top: 40),
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 20),
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['transaction'] !=
+                                                    null)
+                                            ? "${userLanguage['transaction']}"
+                                            : "Transaction",
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 20,
+                                          color: Colors.white,
+                                          fontWeight: FontWeight.w500,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                              )
-                            : Padding(
+                              ),
+                              Padding(
                                 padding: EdgeInsets.only(top: 50),
                                 // top: 50,
                                 child: ListView.builder(
@@ -537,7 +554,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         : Column(
                                             children: [
                                               SizedBox(
-                                                height: 10,
+                                                height: 5,
                                               ),
                                               Container(
                                                 child: ListTile(
@@ -583,7 +600,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                       style:
                                                           GoogleFonts.poppins(
                                                         fontSize: 12,
-                                                        color: Colors.white,
+                                                        color:
+                                                            Color(0xff9395A4),
                                                       ),
                                                     ),
                                                   ),
@@ -603,7 +621,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                         children: [
                                                           Positioned(
                                                             left: 14,
-                                                            top: 10,
+                                                            top: 15,
                                                             child: Text(
                                                               ((transactions1[index]
                                                                               .amount -
@@ -615,7 +633,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                       1),
                                                               style: GoogleFonts
                                                                   .montserrat(
-                                                                fontSize: 15,
+                                                                fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w500,
@@ -646,11 +664,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                   },
                                 ),
                               ),
-                      ],
-                    ),
-                  );
-                },
-              )
+                            ],
+                          ),
+                        );
+                      },
+                    )
             ]),
           );
   }
