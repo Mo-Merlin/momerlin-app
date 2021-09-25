@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 
@@ -23,7 +24,7 @@ class _TabscreenState extends State<Tabscreen> {
     super.initState();
     originalList = [
       WalletTwo(),
-      WalletTwo(),
+      WalletChallenges(),
       WalletProfile(),
     ];
     originalDic = {

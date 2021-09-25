@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 // import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
@@ -124,7 +125,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletChallenges()));
+                                    builder: (context) => Tabscreen()));
                           },
                           child: Container(
                             width: 245,
@@ -166,7 +167,7 @@ class _WalletFinalState extends State<WalletFinal> {
                             Navigator.pushReplacement(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => WalletTwo()));
+                                    builder: (context) => Tabscreen()));
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,

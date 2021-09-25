@@ -486,8 +486,8 @@ class _WalletTwoState extends State<WalletTwo> {
                       width: 0,
                     )
                   : DraggableScrollableSheet(
-                      initialChildSize: 0.41,
-                      minChildSize: 0.41,
+                      initialChildSize: 0.31,
+                      minChildSize: 0.31,
                       maxChildSize: 0.7,
                       builder: (BuildContext context, myscrollController) {
                         return Container(
