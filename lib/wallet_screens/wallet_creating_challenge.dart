@@ -367,30 +367,31 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
                 width: 321,
                 // ignore: deprecated_member_use
                 child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => WalletChallengeTwo()));
+                  },
+                  //color: blue.withOpacity(0.3),
+                  color: blue1,
+                  child: Text(
+                    (lang.length != null &&
+                            lang.length != 0 &&
+                            userLanguage['next'] != null)
+                        ? "${userLanguage['next']}"
+                        : "NEXT",
+                    style: GoogleFonts.poppins(
+                      //color: blue1,
+                      color: Colors.white,
+                      fontSize: 15,
+                      fontWeight: FontWeight.w600,
                     ),
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WalletChallengeTwo()));
-                    },
-                    //color: blue.withOpacity(0.3),
-                    color: blue1,
-                    child: Text(
-                      (lang.length != null &&
-                              lang.length != 0 &&
-                              userLanguage['next'] != null)
-                          ? "${userLanguage['next']}"
-                          : "NEXT",
-                      style: GoogleFonts.poppins(
-                        //color: blue1,
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )),
+                  ),
+                ),
               ),
             ]),
           );
