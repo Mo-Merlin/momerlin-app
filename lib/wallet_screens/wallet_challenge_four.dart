@@ -102,6 +102,7 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
               Container(
                 height: 55,
                 width: 321,
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(17),
@@ -209,6 +210,7 @@ class _WalletChallengeFourState extends State<WalletChallengeFour> {
                   //color: Colors.amber,
                   borderRadius: BorderRadius.circular(15),
                 ),
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),

@@ -1,4 +1,5 @@
 import 'package:awesome_loader/awesome_loader.dart';
+import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -6,11 +7,6 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_two.dart';
-import 'package:momerlin/walletcreation.dart/walletsucess.dart';
-
-import 'package:bitcoins/bitcoins.dart' as bitcoins;
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class ImportWalletPage extends StatefulWidget {
   @override

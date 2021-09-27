@@ -406,6 +406,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                             //color: Colors.amber,
                             borderRadius: BorderRadius.circular(15),
                           ),
+                          // ignore: deprecated_member_use
                           child: RaisedButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(17),
@@ -514,6 +515,7 @@ class _WalletChallengeFiveState extends State<WalletChallengeFive> {
                 //color: Colors.amber,
                 borderRadius: BorderRadius.circular(15),
               ),
+              // ignore: deprecated_member_use
               child: RaisedButton(
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15),

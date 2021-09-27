@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_four.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
+// import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletChallengeThree extends StatefulWidget {
@@ -243,6 +243,7 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
               Container(
                 height: 55,
                 width: 321,
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(17),
@@ -350,6 +351,7 @@ class _WalletChallengeThreeState extends State<WalletChallengeThree> {
                   //color: Colors.amber,
                   borderRadius: BorderRadius.circular(15),
                 ),
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
