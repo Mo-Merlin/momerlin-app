@@ -1,18 +1,18 @@
-import 'dart:math';
+// import 'dart:math';
 import 'dart:ui';
 
-import 'package:decimal/decimal.dart';
+// import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
-import 'package:momerlin/data/web3.dart';
+// import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_final.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
-import 'package:web3dart/web3dart.dart';
+// import 'package:web3dart/web3dart.dart';
 
 class WalletSend extends StatefulWidget {
   const WalletSend({Key key}) : super(key: key);
@@ -408,92 +408,92 @@ class _WalletSendState extends State<WalletSend> {
     setState(() {});
   }
 
-  void _onSendTransaction1(
-      // BuildContext context,
-      coin) async {
-    String address = _controller.text;
-    String seed = user[0]["seed"];
-    var privatekey = Web3.privateKeyFromMnemonic(seed);
-    // print(seed);
-    BigInt fees = BigInt.from(double.parse(0.85.toString()));
+  // void _onSendTransaction1(
+  //     // BuildContext context,
+  //     coin) async {
+  //   String address = _controller.text;
+  //   String seed = user[0]["seed"];
+  //   var privatekey = Web3.privateKeyFromMnemonic(seed);
+  //   // print(seed);
+  //   BigInt fees = BigInt.from(double.parse(0.85.toString()));
 
-    if (coin == 'EthereumMain') {
-      double mytotal = double.parse(text) + double.parse(0.06.toString());
-      // if (etherAmountTest >= mytotal) {
-      Decimal tokensAmountDecimal = Decimal.parse(
-          (double.parse(text.toString() * pow(10, 18)).toString()));
-      BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
-      // print(amount1);
-      EtherAmount newvalue =
-          EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
+  //   if (coin == 'EthereumMain') {
+  //     double mytotal = double.parse(text) + double.parse(0.06.toString());
+  //     // if (etherAmountTest >= mytotal) {
+  //     Decimal tokensAmountDecimal = Decimal.parse(
+  //         (double.parse(text.toString() * pow(10, 18)).toString()));
+  //     BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
+  //     // print(amount1);
+  //     EtherAmount newvalue =
+  //         EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
 
-      // print(newvalue);
-      var res =
-          await Web3().sendTransactionMain(address, privatekey, newvalue, fees);
-      // print("res");
-      if (res['status']) {
-        // setState(() {
-        //   _transfer = false;
-        // });
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => PaymentSuccessful(
-        //       response: res,
-        //       coin: coin,
-        //     ),
-        //   ),
-        // );
-      } else {
-        // setState(() {
-        //   _transfer = false;
-        // });
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => PaymentFailed(),
-        //   ),
-        // );
-      }
-      // } else {
-      //   _modalBottomSheetMenu3();
-      // }
-    } else if (coin == 'EthereumTest') {
-      double mytotal =
-          double.parse(text.toString()) + double.parse(0.06.toString());
-      // if (etherAmountTest >= mytotal) {
-      Decimal tokensAmountDecimal = Decimal.parse(
-          (double.parse(text.toString()) * pow(10, 18)).toString());
-      BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
-      EtherAmount newvalue =
-          EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
-      // print("$address,$seed,$newvalue,$fees");
-      var res =
-          await Web3().sendTransactionTest(address, privatekey, newvalue, fees);
-      // print(res['status']);
-      if (res['status']) {
-        // setState(() {
-        //   _transfer = false;
-        // });
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => PaymentSuccessful(
-        //       response: res,
-        //       coin: coin,
-        //     ),
-        //   ),
-        // );
-      } else {
-        // setState(() {
-        //   _transfer = false;
-        // });
-        // Navigator.of(context).push(
-        //   MaterialPageRoute(
-        //     builder: (context) => PaymentFailed(),
-        //   ),
-        // );
-      }
-      // } else {
-      //   _modalBottomSheetMenu3();
-      // }
-    }
-  }
+  //     // print(newvalue);
+  //     var res =
+  //         await Web3().sendTransactionMain(address, privatekey, newvalue, fees);
+  //     // print("res");
+  //     if (res['status']) {
+  //       // setState(() {
+  //       //   _transfer = false;
+  //       // });
+  //       // Navigator.of(context).push(
+  //       //   MaterialPageRoute(
+  //       //     builder: (context) => PaymentSuccessful(
+  //       //       response: res,
+  //       //       coin: coin,
+  //       //     ),
+  //       //   ),
+  //       // );
+  //     } else {
+  //       // setState(() {
+  //       //   _transfer = false;
+  //       // });
+  //       // Navigator.of(context).push(
+  //       //   MaterialPageRoute(
+  //       //     builder: (context) => PaymentFailed(),
+  //       //   ),
+  //       // );
+  //     }
+  //     // } else {
+  //     //   _modalBottomSheetMenu3();
+  //     // }
+  //   } else if (coin == 'EthereumTest') {
+  //     double mytotal =
+  //         double.parse(text.toString()) + double.parse(0.06.toString());
+  //     // if (etherAmountTest >= mytotal) {
+  //     Decimal tokensAmountDecimal = Decimal.parse(
+  //         (double.parse(text.toString()) * pow(10, 18)).toString());
+  //     BigInt amount1 = BigInt.parse((tokensAmountDecimal).toString());
+  //     EtherAmount newvalue =
+  //         EtherAmount.fromUnitAndValue(EtherUnit.wei, amount1);
+  //     // print("$address,$seed,$newvalue,$fees");
+  //     var res =
+  //         await Web3().sendTransactionTest(address, privatekey, newvalue, fees);
+  //     // print(res['status']);
+  //     if (res['status']) {
+  //       // setState(() {
+  //       //   _transfer = false;
+  //       // });
+  //       // Navigator.of(context).push(
+  //       //   MaterialPageRoute(
+  //       //     builder: (context) => PaymentSuccessful(
+  //       //       response: res,
+  //       //       coin: coin,
+  //       //     ),
+  //       //   ),
+  //       // );
+  //     } else {
+  //       // setState(() {
+  //       //   _transfer = false;
+  //       // });
+  //       // Navigator.of(context).push(
+  //       //   MaterialPageRoute(
+  //       //     builder: (context) => PaymentFailed(),
+  //       //   ),
+  //       // );
+  //     }
+  //     // } else {
+  //     //   _modalBottomSheetMenu3();
+  //     // }
+  //   }
+  // }
 }

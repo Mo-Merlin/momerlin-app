@@ -4,7 +4,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_two.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletCreatingChallenge extends StatefulWidget {
@@ -20,9 +19,132 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
   var checkColor = blue1;
   var userLanguage, lang = [];
   @override
-  void initState() {
-    super.initState();
-    getUserLanguage();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.7),
+      appBar: AppBar(
+        backgroundColor: Colors.white.withOpacity(0),
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 50,
+              // width: 50,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['createachellenge'] != null)
+              ? "${userLanguage['createachellenge']}"
+              : "CREATE A \nCHALLENGE",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 17,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.only(right: 10),
+            child: LinearPercentIndicator(
+              width: 100,
+              lineHeight: 25.0,
+              percent: 0.25,
+              center: Padding(
+                padding: const EdgeInsets.only(left: 54),
+                child: Text(
+                  "25%",
+                  style: GoogleFonts.poppins(
+                      color: white,
+                      letterSpacing: 1,
+                      fontSize: 12,
+                      fontWeight: FontWeight.w400),
+                ),
+              ),
+              // trailing: Icon(Icons.mood),
+              linearStrokeCap: LinearStrokeCap.roundAll,
+              backgroundColor: backgroundcolor,
+              progressColor: blue,
+            ),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.only(top: 20),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.06,
+                width: MediaQuery.of(context).size.width * 0.8,
+                decoration: BoxDecoration(
+                  //color: Colors.amber,
+                  borderRadius: BorderRadius.circular(15),
+                ),
+                // ignore: deprecated_member_use
+                child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    onPressed: showBottom,
+                    color: backgroundcolor,
+                    child: Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['selectactivity'] != null)
+                          ? "${userLanguage['selectactivity']}"
+                          : "SELECT ACTIVITY",
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )),
+              ),
+            ),
+          ),
+        ],
+      ),
+      // body: Column(
+      //   children: [
+      //     SizedBox(
+      //       height: MediaQuery.of(context).size.height * 0.33,
+      //     ),
+      //     Container(
+      //         height: MediaQuery.of(context).size.height * 0.55,
+      //         width: MediaQuery.of(context).size.width,
+      //         decoration: BoxDecoration(
+      //           //color: Colors.amber,
+      //           borderRadius: BorderRadius.circular(15),
+      //         ),
+      //         child: MaterialApp(
+      //             debugShowCheckedModeBanner: false,
+      //             theme: ThemeData(
+      //               primaryColor: Color.fromRGBO(86, 86, 86, 1.00),
+      //             ),
+      //             initialRoute: '/W1',
+      //             routes: {
+      //               '/W1': (context) => WidgetOne(),
+      //               '/W2': (context) => WidgetTwo(),
+      //               '/W3': (context) => WidgetThree(),
+      //               '/W4': (context) => WidgetFour(),
+      //             }))
+      //   ],
+      // ),
+    );
   }
 
   // ignore: todo
@@ -36,6 +158,12 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
 
   // ignore: todo
   //TODO: LanguageEnd
+
+  @override
+  void initState() {
+    super.initState();
+    getUserLanguage();
+  }
 
   void showBottom() {
     print("select activity button pressed");
@@ -237,6 +365,7 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
               Container(
                 height: 55,
                 width: 321,
+                // ignore: deprecated_member_use
                 child: RaisedButton(
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(15),
@@ -266,133 +395,5 @@ class _WalletCreatingChallengeState extends State<WalletCreatingChallenge> {
             ]),
           );
         });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white.withOpacity(0.7),
-      appBar: AppBar(
-        backgroundColor: Colors.white.withOpacity(0),
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Container(
-              // height: 50,
-              // width: 50,
-              color: button,
-              child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
-            ),
-          ),
-        ),
-        title: Text(
-          (lang.length != null &&
-                  lang.length != 0 &&
-                  userLanguage['createachellenge'] != null)
-              ? "${userLanguage['createachellenge']}"
-              : "CREATE A \nCHALLENGE",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 17,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.only(right: 10),
-            child: LinearPercentIndicator(
-              width: 100,
-              lineHeight: 25.0,
-              percent: 0.25,
-              center: Padding(
-                padding: const EdgeInsets.only(left: 54),
-                child: Text(
-                  "25%",
-                  style: GoogleFonts.poppins(
-                      color: white,
-                      letterSpacing: 1,
-                      fontSize: 12,
-                      fontWeight: FontWeight.w400),
-                ),
-              ),
-              // trailing: Icon(Icons.mood),
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: backgroundcolor,
-              progressColor: blue,
-            ),
-          ),
-        ],
-      ),
-      body: Column(
-        children: [
-          Center(
-            child: Padding(
-              padding: const EdgeInsets.only(top: 20),
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.06,
-                width: MediaQuery.of(context).size.width * 0.8,
-                decoration: BoxDecoration(
-                  //color: Colors.amber,
-                  borderRadius: BorderRadius.circular(15),
-                ),
-                child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    onPressed: showBottom,
-                    color: backgroundcolor,
-                    child: Text(
-                      (lang.length != null &&
-                              lang.length != 0 &&
-                              userLanguage['selectactivity'] != null)
-                          ? "${userLanguage['selectactivity']}"
-                          : "SELECT ACTIVITY",
-                      style: GoogleFonts.poppins(
-                        color: Colors.white,
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    )),
-              ),
-            ),
-          ),
-        ],
-      ),
-      // body: Column(
-      //   children: [
-      //     SizedBox(
-      //       height: MediaQuery.of(context).size.height * 0.33,
-      //     ),
-      //     Container(
-      //         height: MediaQuery.of(context).size.height * 0.55,
-      //         width: MediaQuery.of(context).size.width,
-      //         decoration: BoxDecoration(
-      //           //color: Colors.amber,
-      //           borderRadius: BorderRadius.circular(15),
-      //         ),
-      //         child: MaterialApp(
-      //             debugShowCheckedModeBanner: false,
-      //             theme: ThemeData(
-      //               primaryColor: Color.fromRGBO(86, 86, 86, 1.00),
-      //             ),
-      //             initialRoute: '/W1',
-      //             routes: {
-      //               '/W1': (context) => WidgetOne(),
-      //               '/W2': (context) => WidgetTwo(),
-      //               '/W3': (context) => WidgetThree(),
-      //               '/W4': (context) => WidgetFour(),
-      //             }))
-      //   ],
-      // ),
-    );
   }
 }

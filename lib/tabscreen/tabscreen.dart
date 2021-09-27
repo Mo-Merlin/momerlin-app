@@ -9,158 +9,198 @@ class Tabscreen extends StatefulWidget {
   _TabscreenState createState() => new _TabscreenState();
 }
 
-class _TabscreenState extends State<Tabscreen> {
-  List<Widget> originalList;
-  Map<int, bool> originalDic;
-  List<Widget> listScreens;
-  List<int> listScreensIndex;
-
-  int tabIndex = 0;
-  Color tabColor = Color(0xFFD3D3D3);
-  Color selectedTabColor = blue;
-
+class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
+  int _selectedIndex = 0;
+  bool showJades = false;
   @override
   void initState() {
     super.initState();
-    originalList = [
-      WalletTwo(),
-      WalletChallenges(),
-      WalletProfile(),
-    ];
-    originalDic = {
-      0: true,
-      1: false,
-      2: false,
-    };
-    listScreens = [
-      WalletTwo(),
-    ];
-    listScreensIndex = [0];
+
+    _animationController = AnimationController(
+      vsync: this,
+      value: 2.0,
+      duration: Duration(milliseconds: 10),
+    );
+    animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
   }
+
+  AnimationController _animationController;
+  Animation animation;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundcolor,
-      body: IndexedStack(
-          index: listScreensIndex.indexOf(tabIndex), children: listScreens),
-      bottomNavigationBar: AnimatedContainer(
-        duration: Duration.zero,
-        curve: Curves.easeOut,
-        height: 80,
-        // width: 270,
-        margin: EdgeInsets.only(left: 50, right: 50, top: 10, bottom: 10),
-        // padding: EdgeInsets.only(left: 5, right: 5),
-        alignment: Alignment.center,
-        decoration: BoxDecoration(
-          color: gridcolor,
-          borderRadius: BorderRadius.circular(41),
-        ),
-        child: _buildTabBar(),
-      ),
-    );
-  }
-
-  void _selectedTab(int index) {
-    if (originalDic[index] == false) {
-      listScreensIndex.add(index);
-      originalDic[index] = true;
-      listScreensIndex.sort();
-      listScreens = listScreensIndex.map((index) {
-        return originalList[index];
-      }).toList();
-    }
-
-    setState(() {
-      tabIndex = index;
-    });
-  }
-
-  Widget _buildTabBar() {
-    var listItems = [
-      BottomAppBarItem(
-        iconData: Icons.attach_money_outlined,
-      ),
-      BottomAppBarItem(
-        iconData: Icons.bar_chart,
-      ),
-      BottomAppBarItem(
-        iconData: Icons.person_outline_outlined,
-      ),
-    ];
-
-    var items = List.generate(listItems.length, (int index) {
-      return _buildTabItem(
-        item: listItems[index],
-        index: index,
-        onPressed: _selectedTab,
-      );
-    });
-
-    return Container(
-      child: Row(
-        mainAxisSize: MainAxisSize.min,
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        children: items,
-      ),
-      // elevation: 3,
-      // shape:CircularNotchedRectangle(),
-      // color: Colors.white,
-    );
-  }
-
-  Widget _buildTabItem({
-    BottomAppBarItem item,
-    int index,
-    ValueChanged<int> onPressed,
-  }) {
-    var color = tabIndex == index ? blue1 : gridcolor;
-    double height = tabIndex == index ? 24 : 24;
-    double width = tabIndex == index ? 24 : 24;
-    var s = tabIndex == 1 ? "red" : "grey";
-    return Expanded(
-      child: Container(
-        // height: 60,
-        // color: gridcolor,
-        margin: EdgeInsets.only(right: 0),
-        child: Material(
-          type: MaterialType.transparency,
-          color: gridcolor,
-          child: InkWell(
-            onTap: () => onPressed(index),
-            child: Column(
-              // mainAxisSize: MainAxisSize.min,
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                index == tabIndex
-                    ? Container(
-                        width: 70,
-                        height: 70,
-                        decoration: BoxDecoration(
-                          color: blue1,
-                          borderRadius: BorderRadius.circular(60),
-                        ),
-                        child: Icon(
-                          item.iconData,
-                          color: white,
-                        ),
-                      )
-                    : Icon(
-                        item.iconData,
-                        color: grey,
-                      ),
-              ],
-            ),
+      body: Stack(
+        children: [
+          IndexedStack(
+            index: _selectedIndex,
+            children: [
+              MyAnimation(animation: animation, child: WalletTwo()),
+              MyAnimation(animation: animation, child: WalletChallenges()),
+              MyAnimation(animation: animation, child: WalletProfile())
+            ],
           ),
-        ),
+          Positioned(
+              bottom: 5,
+              child: AnimatedContainer(
+                alignment: Alignment.center,
+                margin: EdgeInsets.only(
+                  left: 80,
+                  right: 50,
+                ),
+                height: 90,
+                width: 250,
+                duration: Duration(seconds: 0),
+                child: Center(
+                  child: Card(
+                    // elevation: 5,
+                    color: _selectedIndex == 0 ? backgroundcolor : gridcolor,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(41),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          alignment: Alignment.center,
+                          height: 70,
+                          width: 250,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                            children: [
+                              GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _onItemTapped(0);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 70,
+                                    height: 80,
+                                    decoration: _selectedIndex == 0
+                                        ? new BoxDecoration(
+                                            color: blue1,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50)),
+                                          )
+                                        : new BoxDecoration(),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          child: Icon(
+                                              Icons.attach_money_outlined,
+                                              size: 35,
+                                              color: _selectedIndex == 0
+                                                  ? white
+                                                  : grey),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                              GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      _onItemTapped(1);
+                                    });
+                                  },
+                                  child: Container(
+                                    width: 70,
+                                    height: 80,
+                                    decoration: _selectedIndex == 1
+                                        ? new BoxDecoration(
+                                            color: blue1,
+                                            borderRadius: BorderRadius.all(
+                                                Radius.circular(50)),
+                                          )
+                                        : new BoxDecoration(),
+                                    child: Column(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Container(
+                                          margin: EdgeInsets.only(top: 5),
+                                          child: Icon(Icons.bar_chart_rounded,
+                                              size: 35,
+                                              color: _selectedIndex == 1
+                                                  ? white
+                                                  : grey),
+                                        ),
+                                      ],
+                                    ),
+                                  )),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _onItemTapped(2);
+                                  });
+                                },
+                                child: Container(
+                                  width: 70,
+                                  height: 80,
+                                  decoration: _selectedIndex == 2
+                                      ? new BoxDecoration(
+                                          color: blue1,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)),
+                                        )
+                                      : new BoxDecoration(),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        child: Icon(Icons.person_outline,
+                                            size: 35,
+                                            color: _selectedIndex == 2
+                                                ? white
+                                                : grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              )),
+        ],
       ),
     );
+  }
+
+  void _onItemTapped(int index) async {
+    setState(() {
+      _selectedIndex = index;
+      FocusScope.of(context).requestFocus(FocusNode());
+      _animationController.reset();
+      _animationController.forward();
+    });
   }
 }
 
-class BottomAppBarItem {
-  BottomAppBarItem({this.iconData});
-  IconData iconData;
+class MyAnimation extends AnimatedWidget {
+  MyAnimation({key, animation, this.child})
+      : super(
+          key: key,
+          listenable: animation,
+        );
+
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    Animation<double> animation = listenable;
+    return Opacity(
+      opacity: animation.value,
+      child: child,
+    );
+  }
 }

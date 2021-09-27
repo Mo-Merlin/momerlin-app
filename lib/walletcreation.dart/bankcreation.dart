@@ -1,9 +1,7 @@
-import 'package:flappy_search_bar/flappy_search_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_two.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 import 'banklogin.dart';
@@ -15,23 +13,6 @@ class BankCreation extends StatefulWidget {
 
 class _BankCreation extends State<BankCreation> {
   var userLanguage, lang = [];
-  @override
-  void initState() {
-    super.initState();
-    getUserLanguage();
-  }
-
-  // ignore: todo
-  //TODO :languagestart
-  Future<void> getUserLanguage() async {
-    lang = await UserDataSource().getLanguage();
-    if (lang.length != null && lang.length != 0) {
-      userLanguage = lang[0];
-    }
-  }
-
-  // ignore: todo
-  //TODO: LanguageEnd
   var bank = [
     {"image": "bank1", "name": "TD Canada Trust"},
     {"image": "bank2", "name": "Wells Fargo"},
@@ -43,6 +24,9 @@ class _BankCreation extends State<BankCreation> {
     {"image": "bank8", "name": "Capital One Group"},
     {"image": "bank9", "name": "HSBC"},
   ];
+
+  // ignore: todo
+  //TODO :languagestart
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -191,5 +175,20 @@ class _BankCreation extends State<BankCreation> {
         ),
       ),
     );
+  }
+
+  // ignore: todo
+  //TODO: LanguageEnd
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getUserLanguage();
   }
 }

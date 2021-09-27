@@ -879,6 +879,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
           color: blue1,
           borderRadius: BorderRadius.circular(15),
         ),
+        // ignore: deprecated_member_use
         child: RaisedButton(
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15),

@@ -35,7 +35,7 @@ class UserRepository {
       // var config = await Firestore.instance.collection('config').getDocuments();
       // var url = config.documents[0].data['API_URL_GAM'];
       var body = json.encode(data);
-      print("body $body");
+      // print("body $body");
       // var url = "http://192.168.43.124:8000/api/";
 
       var res = await http.post('${url + "set_access_token"}',

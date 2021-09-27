@@ -23,8 +23,6 @@ class _WalletReceiveState extends State<WalletReceive> {
   void initState() {
     super.initState();
     getUserLanguage();
-
-    _controller = TextEditingController(text: _scanBarcode);
   }
 
   // ignore: todo
@@ -44,8 +42,8 @@ class _WalletReceiveState extends State<WalletReceive> {
   //TODO: LanguageEnd
 
   String text = '';
-  String _scanBarcode = "";
-  TextEditingController _controller;
+  // String _scanBarcode = "";
+  // ignore: deprecated_member_use
   bool loading = true;
 
   @override
@@ -262,6 +260,7 @@ class _WalletReceiveState extends State<WalletReceive> {
   }
 
   void _showScaffold(String message) {
+    // ignore: deprecated_member_use
     scaffoldKeyWallet.currentState.showSnackBar(
       SnackBar(
         content: Text(

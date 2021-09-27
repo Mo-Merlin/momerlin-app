@@ -378,6 +378,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 SizedBox(
                   height: 9,
                 ),
+                // ignore: deprecated_member_use
                 FlatButton(
                   onPressed: () {
                     // Navigator.pushReplacement(

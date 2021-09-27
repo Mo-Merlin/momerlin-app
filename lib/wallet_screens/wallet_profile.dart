@@ -591,6 +591,7 @@ class _WalletProfileState extends State<WalletProfile> {
   final GlobalKey<ScaffoldState> scaffoldKeyWallet =
       new GlobalKey<ScaffoldState>();
   void _showScaffold(String message) {
+    // ignore: deprecated_member_use
     scaffoldKeyWallet.currentState.showSnackBar(
       SnackBar(
         content: Text(

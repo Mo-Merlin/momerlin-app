@@ -4,18 +4,74 @@ import 'dart:ui';
 // import 'package:intl/intl.dart';
 import 'package:awesome_loader/awesome_loader.dart';
 import 'package:clipboard/clipboard.dart';
-import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_receive.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+
+class CurvedBottomClipper extends CustomClipper<Path> {
+  @override
+  Path getClip(Size size) {
+    // I've taken approximate height of curved part of view
+    // Change it if you have exact spec for it
+    final roundingHeight = size.height * 2 / 6;
+
+    // this is top part of path, rectangle without any rounding
+    final filledRectangle =
+        Rect.fromLTRB(0, 0, size.width, size.height - roundingHeight);
+
+    // this is rectangle that will be used to draw arc
+    // arc is drawn from center of this rectangle, so it's height has to be twice roundingHeight
+    // also I made it to go 5 units out of screen on left and right, so curve will have some incline there
+    final roundingRectangle = Rect.fromLTRB(
+        -1, size.height - roundingHeight * 2, size.width + 3, size.height);
+
+    final path = Path();
+    path.addRect(filledRectangle);
+
+    // so as I wrote before: arc is drawn from center of roundingRectangle
+    // 2nd and 3rd arguments are angles from center to arc start and end points
+    // 4th argument is set to true to move path to rectangle center, so we don't have to move it manually
+    path.arcTo(roundingRectangle, pi, -pi, true);
+    path.close();
+
+    return path;
+  }
+
+  @override
+  bool shouldReclip(CustomClipper<Path> oldClipper) {
+    // returning fixed 'true' value here for simplicity, it's not the part of actual question, please read docs if you want to dig into it
+    // basically that means that clipping will be redrawn on any changes
+    return true;
+  }
+}
+
+class Transaction {
+  double amount;
+
+  DateTime date;
+  String merchantName;
+  Transaction({
+    this.amount,
+    this.date,
+    this.merchantName,
+  });
+
+  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+        amount: json["amount"].toDouble(),
+        date: DateTime.parse(json["date"]),
+        merchantName:
+            json["merchant_name"] == null ? null : json["merchant_name"],
+      );
+}
 
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
@@ -30,111 +86,15 @@ class _WalletTwoState extends State<WalletTwo> {
   bool loading = true;
   var selectedseed;
   var linktoken;
-  @override
-  void initState() {
-    loading = true;
-
-    getUserLanguage();
-    getToken();
-    super.initState();
-  }
-
   var splitvalue = "00";
+
+  var balance = 0.00;
   // ignore: todo
   //TODO :languagestart
-  Future<void> getUserLanguage() async {
-    lang = await UserDataSource().getLanguage();
-    user = await UserDataSource().getUser();
-    // print(user[0]["walletaddress"]);
-    if (lang.length != null && lang.length != 0) {
-      userLanguage = lang[0];
-    }
-
-    getTransaction();
-  }
+  List<Transaction> transactions1 = [];
 
   // ignore: todo
   //TODO: LanguageEnd
-  var balance = 0.00;
-  List<Transaction> transactions1 = [];
-  Future<void> getTransaction() async {
-    setState(() {
-      loading = false;
-    });
-    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
-    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-    setState(() {
-      loading = false;
-    });
-    transactions1 = [];
-
-    for (var i = 0; i < res["transactions"].length; i++) {
-      transactions1.add(Transaction.fromJson(res["transactions"][i]));
-
-      if (res["transactions"][i]["merchant_name"] != null) {
-        balance += ((res["transactions"][i]["amount"] -
-                res["transactions"][i]["amount"].floorToDouble()) *
-            100);
-      } else {}
-    }
-    var balance1 = balance.toStringAsFixed(2);
-    var valance2 = balance1.split(".");
-    splitvalue = valance2[1].toString();
-  }
-
-  Future<void> getToken() async {
-    final usertoken1 = await UserRepository().getToken();
-    linktoken = usertoken1["link_token"];
-    // print("token $linktoken");
-    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
-      token: usertoken1["link_token"],
-    );
-
-    _plaidLinkToken = PlaidLink(
-      configuration: linkTokenConfiguration,
-      onSuccess: _onSuccessCallback,
-      onEvent: _onEventCallback,
-      onExit: _onExitCallback,
-    );
-
-    // print("UserTokne $usertoken1");
-  }
-
-  Future<void> _onSuccessCallback(
-      String publicToken, LinkSuccessMetadata metadata) async {
-    print("asdfghjklsdfghj ${metadata.description()}");
-    setState(() {
-      loading = true;
-    });
-    final usertoken =
-        await UserRepository().updateToken({"public_token": publicToken});
-    // print("UserTokne $usertoken");
-    final usersave = await UserRepository().storeUser({"token": publicToken});
-    setState(() {
-      loading = false;
-    });
-    if (usersave == true) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => WalletTwo()));
-    } else {
-      // print("PAVITHRA");
-    }
-    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
-    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
-  }
-
-  void _onEventCallback(String event, LinkEventMetadata metadata) {
-    print("onEvent: $event, metadata: ${metadata.description()}");
-  }
-
-  void _onExitCallback(LinkError error, LinkExitMetadata metadata) {
-    print("onExit metadata: ${metadata.description()}");
-
-    if (error != null) {
-      print("onExit error: ${error.description()}");
-    }
-  }
-
   @override
   Widget build(BuildContext context) {
     return loading == true
@@ -486,8 +446,8 @@ class _WalletTwoState extends State<WalletTwo> {
                       width: 0,
                     )
                   : DraggableScrollableSheet(
-                      initialChildSize: 0.31,
-                      minChildSize: 0.31,
+                      initialChildSize: 0.41,
+                      minChildSize: 0.41,
                       maxChildSize: 0.7,
                       builder: (BuildContext context, myscrollController) {
                         return Container(
@@ -674,22 +634,67 @@ class _WalletTwoState extends State<WalletTwo> {
           );
   }
 
-  _showReceiveMobile() {
-    showModalBottomSheet(
-      backgroundColor: Colors.white,
-      isScrollControlled: true,
-      context: context,
-      shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
-      builder: (builder) {
-        return new Wrap(children: <Widget>[
-          Container(
-            padding: EdgeInsets.all(18),
-            child: receiveContent(),
-          ),
-        ]);
-      },
+  Future<void> getToken() async {
+    final usertoken1 = await UserRepository().getToken();
+    linktoken = usertoken1["link_token"];
+    // print("token $linktoken");
+    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
+      token: usertoken1["link_token"],
     );
+
+    _plaidLinkToken = PlaidLink(
+      configuration: linkTokenConfiguration,
+      onSuccess: _onSuccessCallback,
+      onEvent: _onEventCallback,
+      onExit: _onExitCallback,
+    );
+
+    // print("UserTokne $usertoken1");
+  }
+
+  Future<void> getTransaction() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
+    setState(() {
+      loading = false;
+    });
+    transactions1 = [];
+
+    for (var i = 0; i < res["transactions"].length; i++) {
+      transactions1.add(Transaction.fromJson(res["transactions"][i]));
+
+      if (res["transactions"][i]["merchant_name"] != null) {
+        balance += ((res["transactions"][i]["amount"] -
+                res["transactions"][i]["amount"].floorToDouble()) *
+            100);
+      } else {}
+    }
+    var balance1 = balance.toStringAsFixed(2);
+    var valance2 = balance1.split(".");
+    splitvalue = valance2[1].toString();
+  }
+
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    user = await UserDataSource().getUser();
+    // print(user[0]["walletaddress"]);
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+
+    getTransaction();
+  }
+
+  @override
+  void initState() {
+    loading = true;
+
+    getUserLanguage();
+    getToken();
+    super.initState();
   }
 
   Widget receiveContent() {
@@ -754,60 +759,38 @@ class _WalletTwoState extends State<WalletTwo> {
       ],
     );
   }
-}
 
-class CurvedBottomClipper extends CustomClipper<Path> {
-  @override
-  Path getClip(Size size) {
-    // I've taken approximate height of curved part of view
-    // Change it if you have exact spec for it
-    final roundingHeight = size.height * 2 / 6;
-
-    // this is top part of path, rectangle without any rounding
-    final filledRectangle =
-        Rect.fromLTRB(0, 0, size.width, size.height - roundingHeight);
-
-    // this is rectangle that will be used to draw arc
-    // arc is drawn from center of this rectangle, so it's height has to be twice roundingHeight
-    // also I made it to go 5 units out of screen on left and right, so curve will have some incline there
-    final roundingRectangle = Rect.fromLTRB(
-        -1, size.height - roundingHeight * 2, size.width + 3, size.height);
-
-    final path = Path();
-    path.addRect(filledRectangle);
-
-    // so as I wrote before: arc is drawn from center of roundingRectangle
-    // 2nd and 3rd arguments are angles from center to arc start and end points
-    // 4th argument is set to true to move path to rectangle center, so we don't have to move it manually
-    path.arcTo(roundingRectangle, pi, -pi, true);
-    path.close();
-
-    return path;
+  void _onEventCallback(String event, LinkEventMetadata metadata) {
+    print("onEvent: $event, metadata: ${metadata.description()}");
   }
 
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    // returning fixed 'true' value here for simplicity, it's not the part of actual question, please read docs if you want to dig into it
-    // basically that means that clipping will be redrawn on any changes
-    return true;
+  void _onExitCallback(LinkError error, LinkExitMetadata metadata) {
+    print("onExit metadata: ${metadata.description()}");
+
+    if (error != null) {
+      print("onExit error: ${error.description()}");
+    }
   }
-}
 
-class Transaction {
-  Transaction({
-    this.amount,
-    this.date,
-    this.merchantName,
-  });
+  Future<void> _onSuccessCallback(
+      String publicToken, LinkSuccessMetadata metadata) async {
+    setState(() {
+      loading = true;
+    });
 
-  double amount;
-  DateTime date;
-  String merchantName;
-
-  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-        amount: json["amount"].toDouble(),
-        date: DateTime.parse(json["date"]),
-        merchantName:
-            json["merchant_name"] == null ? null : json["merchant_name"],
-      );
+    await UserRepository().updateToken({"public_token": publicToken});
+    // print("UserTokne $usertoken");
+    final usersave = await UserRepository().storeUser({"token": publicToken});
+    setState(() {
+      loading = false;
+    });
+    if (usersave == true) {
+      Navigator.pushReplacement(
+          context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    } else {
+      // print("PAVITHRA");
+    }
+    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
+  }
 }

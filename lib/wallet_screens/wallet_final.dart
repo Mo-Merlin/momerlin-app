@@ -3,8 +3,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-// import 'package:momerlin/wallet_screens/wallet_challenges.dart';
-import 'package:momerlin/wallet_screens/wallet_two.dart';
 // import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class WalletFinal extends StatefulWidget {
