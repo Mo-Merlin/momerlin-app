@@ -911,7 +911,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                     ],
                   ),
                 ),
-                // SizedBox(height: 100),
+                SizedBox(
+                  height: 100,
+                ),
               ],
             ),
           ),
@@ -1178,7 +1180,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     userLanguage['running'] !=
                                                         null)
                                                 ? "${userLanguage['running']}"
-                                                : "Running",
+                                                : "RUNNING",
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.white,
@@ -1204,13 +1206,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  selectsat(context);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             WalletChallengeTwo()));
+                                  if (iswalking == true || isrunning == true) {
+                                    Navigator.pop(context);
+                                    selectsat(context);
+                                  }
+                                  return;
                                 },
                                 //color: blue.withOpacity(0.3),
                                 color: iswalking == true || isrunning == true
@@ -1732,7 +1732,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                 'commingsoon'] !=
                                                             null)
                                                     ? "${userLanguage['commingsoon']}"
-                                                    : "COMMING SOON",
+                                                    : "COMING SOON",
                                                 style: GoogleFonts.poppins(
                                                     decoration:
                                                         TextDecoration.none,
@@ -1790,16 +1790,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     borderRadius: BorderRadius.circular(17),
                                   ),
                                   onPressed: () {
-                                    Navigator.pop(context);
-                                    selectshowcompetitors(context);
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             WalletChallengeFour()));
+                                    if (ischeckvisible == true) {
+                                      Navigator.pop(context);
+                                      selectshowcompetitors(context);
+                                    }
+                                    return;
                                   },
                                   //color: blue.withOpacity(0.3),
-                                  color: blue1,
+                                  color:
+                                      ischeckvisible == true ? blue1 : button,
                                   child: Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&
@@ -1936,7 +1935,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.2,
+                                        0.15,
                                     // width: MediaQuery.of(context).size.width,
                                     //color: Colors.red,
                                     child: Center(
@@ -1966,7 +1965,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 20,
                             ),
                             HorizontalList(),
                             // Container(
@@ -2000,7 +1999,24 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             //       )),
                             // ),
                             SizedBox(
-                              height: 70,
+                              height: 30,
+                            ),
+                            Text(
+                              "WINNER GETS",
+                              style: GoogleFonts.poppins(
+                                  color: Color(0xFF808DA7),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "7500 Gwei",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.orange,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 50,
                             ),
                             Container(
                               height: 55,
@@ -2174,6 +2190,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ],
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -2184,6 +2202,23 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               userLanguage['activity'] != null)
                                           ? "${userLanguage['activity']}"
                                           : "Activity",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 30, right: 50),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['satswagered'] !=
+                                                  null)
+                                          ? "${userLanguage['satswagered']}"
+                                          : "SATS Wagered",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.grey,
@@ -2203,7 +2238,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           MediaQuery.of(context).size.width *
                                               0.15,
                                       width: MediaQuery.of(context).size.width *
-                                          0.9,
+                                          0.41,
                                       decoration: BoxDecoration(
                                           color: button,
                                           borderRadius:
@@ -2241,55 +2276,30 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 185),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                color: blue1,
-                                                child: IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
-                                                      Icons.check,
-                                                      color: Colors.white,
-                                                      size: 11,
-                                                    )),
-                                              ),
-                                            ),
-                                          ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.only(
+                                          //       left: 185),
+                                          //   child: ClipRRect(
+                                          //     borderRadius:
+                                          //         BorderRadius.circular(30),
+                                          //     child: Container(
+                                          //       height: 25,
+                                          //       width: 25,
+                                          //       color: blue1,
+                                          //       child: IconButton(
+                                          //           onPressed: () {},
+                                          //           icon: Icon(
+                                          //             Icons.check,
+                                          //             color: Colors.white,
+                                          //             size: 11,
+                                          //           )),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, left: 25),
-                                    child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['satswagered'] !=
-                                                  null)
-                                          ? "${userLanguage['satswagered']}"
-                                          : "SATS Wagered",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.grey,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 20, left: 25),
@@ -2298,7 +2308,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           MediaQuery.of(context).size.width *
                                               0.15,
                                       width: MediaQuery.of(context).size.width *
-                                          0.9,
+                                          0.41,
                                       decoration: BoxDecoration(
                                           color: button,
                                           borderRadius:
@@ -2310,7 +2320,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 const EdgeInsets.only(left: 20),
                                             child: Text(
                                               "125",
-                                              style: GoogleFonts.poppins(
+                                              style: GoogleFonts.montserrat(
                                                   decoration:
                                                       TextDecoration.none,
                                                   color: Colors.white,
@@ -2324,11 +2334,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             child: Text(
                                               (lang.length != null &&
                                                       lang.length != 0 &&
-                                                      userLanguage['sats'] !=
+                                                      userLanguage['gwei'] !=
                                                           null)
-                                                  ? "${userLanguage['sats']}"
-                                                  : "SATs",
-                                              style: GoogleFonts.poppins(
+                                                  ? "${userLanguage['gwei']}"
+                                                  : "Gwei",
+                                              style: GoogleFonts.montserrat(
                                                   decoration:
                                                       TextDecoration.none,
                                                   color: Colors.orange,
@@ -2337,8 +2347,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 210),
+                                            padding:
+                                                const EdgeInsets.only(left: 25),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -2434,7 +2444,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 185),
+                                                left: 190),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -2533,6 +2543,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               SizedBox(
                                 height: 50,
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "WINNER GETS",
+                                    style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "7500 Gwei",
+                                    style: GoogleFonts.montserrat(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.orange,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
                               Container(
                                 height: 55,
                                 width: 321,
@@ -2566,6 +2603,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     )),
+                              ),
+                              SizedBox(
+                                height: 50,
                               ),
                             ],
                           ),
