@@ -1,5 +1,5 @@
-import 'package:awesome_loader/awesome_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
@@ -44,7 +44,7 @@ class _WalletReceiveState extends State<WalletReceive> {
   String text = '';
   // String _scanBarcode = "";
   // ignore: deprecated_member_use
-  bool loading = true;
+  bool loading = true, buttonpressed = false;
 
   @override
   Widget build(BuildContext context) {
@@ -54,9 +54,9 @@ class _WalletReceiveState extends State<WalletReceive> {
             width: MediaQuery.of(context).size.width,
             color: white,
             child: Center(
-              child: AwesomeLoader(
-                loaderType: AwesomeLoader.AwesomeLoader3,
+              child: SpinKitSpinningLines(
                 color: backgroundcolor,
+                size: 60,
               ),
             ),
           )
@@ -104,7 +104,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                   ),
                   Center(
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 1.3,
+                      width: MediaQuery.of(context).size.width / 1.2,
                       height: MediaQuery.of(context).size.height / 2.2,
                       decoration: BoxDecoration(
                         color: gridcolor,
@@ -127,7 +127,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                           ),
                           Container(
                             padding: EdgeInsets.only(left: 10),
-                            width: MediaQuery.of(context).size.width / 1.9,
+                            width: MediaQuery.of(context).size.width / 1.7,
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
@@ -213,6 +213,9 @@ class _WalletReceiveState extends State<WalletReceive> {
                   ),
                   InkWell(
                     onTap: () {
+                      setState(() {
+                        buttonpressed = true;
+                      });
                       Navigator.pop(context);
                     },
                     child: Container(
@@ -225,31 +228,37 @@ class _WalletReceiveState extends State<WalletReceive> {
                       // width: MediaQuery.of(context).size.width * 0.9,
                       // ignore: deprecated_member_use
                       child: Center(
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.file_upload_outlined,
-                              color: white,
-                              size: 20,
-                            ),
-                            SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['shareaddress'] != null)
-                                  ? "${userLanguage['shareaddress']}"
-                                  : 'SHARE ADDRESS',
-                              style: TextStyle(
-                                fontSize: 12,
-                                fontWeight: FontWeight.w700,
-                                color: Colors.white,
+                        child: buttonpressed == true
+                            ? SpinKitThreeBounce(
+                                color: white,
+                                size: 20,
+                              )
+                            : Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.file_upload_outlined,
+                                    color: white,
+                                    size: 20,
+                                  ),
+                                  SizedBox(
+                                    width: 20,
+                                  ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['shareaddress'] !=
+                                                null)
+                                        ? "${userLanguage['shareaddress']}"
+                                        : 'SHARE ADDRESS',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
                       ),
                     ),
                   ),

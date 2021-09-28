@@ -178,7 +178,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                 ),
                 Positioned(
                   left: 130,
-                  top: 65,
+                  top: 35,
                   child: Image.asset("assets/images/chellenge.png"),
                 )
               ],

@@ -3,7 +3,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
+import 'package:momerlin/wallet_screens/horizontallist.dart';
+import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
+// import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
+import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletChallenges extends StatefulWidget {
   const WalletChallenges({Key key}) : super(key: key);
@@ -153,7 +156,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    // Navigator.pop(context);
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -652,6 +655,55 @@ class _WalletChallengesState extends State<WalletChallenges> {
                 SizedBox(
                   height: 10,
                 ),
+                Container(
+                  height: 60,
+                  width: 240,
+                  decoration: BoxDecoration(
+                    color: blue1,
+                    borderRadius: BorderRadius.circular(15),
+                  ),
+                  // ignore: deprecated_member_use
+                  child: RaisedButton(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    onPressed: () {
+                      showdialog(context);
+                      // Navigator.push(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //         builder: (context) => WalletCreatingChallenge()));
+                    },
+                    color: blue1,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            showdialog(context);
+                          },
+                          icon: Icon(
+                            Icons.add,
+                            color: Colors.white,
+                            size: 30,
+                          ),
+                        ),
+                        Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['createachallenge'] != null)
+                              ? "${userLanguage['createachallenge']}"
+                              : "CREATE A CHALLENGE",
+                          style: GoogleFonts.poppins(
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        )
+                      ],
+                    ),
+                  ),
+                ),
                 /******* 3rd ListView   *******/
                 Container(
                   height: MediaQuery.of(context).size.height * 0.35,
@@ -859,78 +911,1677 @@ class _WalletChallengesState extends State<WalletChallenges> {
                     ],
                   ),
                 ),
-                SizedBox(height: 100),
+                // SizedBox(height: 100),
               ],
             ),
           ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   elevation: 5,
-      //   icon: const Icon(Icons.add),
-      //   label: const Text('Add a task'),
-      //   onPressed: () {},
-      // ),
-      // floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: Container(
-        height: 60,
-        width: 240,
-        decoration: BoxDecoration(
-          color: blue1,
-          borderRadius: BorderRadius.circular(15),
-        ),
-        // ignore: deprecated_member_use
-        child: RaisedButton(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(15),
-          ),
-          onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => WalletCreatingChallenge()));
-          },
-          color: blue1,
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => WalletCreatingChallenge()));
-                },
-                icon: Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 30,
-                ),
+    );
+  }
+
+  bool ischeckvisible = false;
+  bool iswalking = false;
+  bool isrunning = false;
+  void showdialog(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.25,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "25%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            SizedBox(height: 40),
+                            Text(
+                              "Select an Activity",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            SizedBox(height: 70),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height: 188,
+                                  width: 134,
+                                  decoration: BoxDecoration(
+                                      color: iswalking == true ? blue1 : button,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        iswalking = !iswalking;
+                                        isrunning = false;
+                                      });
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 25),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: backgroundcolor,
+                                                child: iswalking == true
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            iswalking = true;
+                                                          });
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.check,
+                                                          color: blue1,
+                                                          size: 10,
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        height: 0,
+                                                      ) // : SizedBox(0),
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Container(
+                                              height: 60,
+                                              width: 48,
+                                              //color: Colors.red,
+                                              child: Image.asset(
+                                                "assets/images/walking.png",
+                                                fit: BoxFit.fill,
+                                              )),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['walking'] !=
+                                                        null)
+                                                ? "${userLanguage['walking']}"
+                                                : "WALKING",
+                                            style: GoogleFonts.poppins(
+                                                decoration: TextDecoration.none,
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                SizedBox(width: 30),
+                                Container(
+                                  height: 188,
+                                  width: 134,
+                                  decoration: BoxDecoration(
+                                      color: isrunning == true ? blue1 : button,
+                                      borderRadius: BorderRadius.circular(15)),
+                                  child: InkWell(
+                                    onTap: () {
+                                      setState(() {
+                                        isrunning = !isrunning;
+                                        iswalking = false;
+                                      });
+                                    },
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 25),
+                                          child: ClipRRect(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                            child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: backgroundcolor,
+                                                child: isrunning == true
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            isrunning = true;
+                                                          });
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.check,
+                                                          color: blue1,
+                                                          size: 10,
+                                                        ),
+                                                      )
+                                                    : SizedBox(
+                                                        height: 0,
+                                                      ) // : SizedBox(0),
+                                                ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Container(
+                                              height: 60,
+                                              width: 48,
+                                              //color: Colors.red,
+                                              child: Image.asset(
+                                                "assets/images/running.png",
+                                                fit: BoxFit.fill,
+                                              )),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 10),
+                                          child: Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['running'] !=
+                                                        null)
+                                                ? "${userLanguage['running']}"
+                                                : "Running",
+                                            style: GoogleFonts.poppins(
+                                                decoration: TextDecoration.none,
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 50,
+                            ),
+                            Container(
+                              height: 55,
+                              width: 321,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  selectsat(context);
+                                  // Navigator.push(
+                                  //     context,
+                                  //     MaterialPageRoute(
+                                  //         builder: (context) =>
+                                  //             WalletChallengeTwo()));
+                                },
+                                //color: blue.withOpacity(0.3),
+                                color: iswalking == true || isrunning == true
+                                    ? blue1
+                                    : button,
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['next'] != null)
+                                      ? "${userLanguage['next']}"
+                                      : "NEXT",
+                                  style: GoogleFonts.poppins(
+                                    //color: blue1,
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
               ),
-              Text(
-                (lang.length != null &&
-                        lang.length != 0 &&
-                        userLanguage['createachallenge'] != null)
-                    ? "${userLanguage['createachallenge']}"
-                    : "CREATE A CHALLENGE",
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              )
-            ],
-          ),
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      bottomNavigationBar: BottomAppBar(
-        color: backgroundcolor,
-        shape: const CircularNotchedRectangle(),
-        child: Container(
-          height: 30,
-        ),
-      ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void selectsat(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.40,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "50%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 20),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  // width: MediaQuery.of(context).size.width,
+                                  //color: Colors.red,
+                                  child: Center(
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['howmany'] !=
+                                                      null)
+                                              ? "${userLanguage['howmany']}"
+                                              : 'How many',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['sats'] != null)
+                                              ? "${userLanguage['sats']}"
+                                              : ' Gwei ',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.orange,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w500,
+                                          )),
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage[
+                                                          'wouldyouliketowager'] !=
+                                                      null)
+                                              ? "${userLanguage['wouldyouliketowager']}"
+                                              : 'would \n       you like to wager?',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            height: 1,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ])),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            // Container(
+                            //   height: MediaQuery.of(context).size.height * 0.13,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   //color: Colors.amber,
+                            //   child: SfLinearGauge(
+                            //       markerPointers: [
+                            //         LinearShapePointer(
+                            //           value: _pointerValue,
+                            //           onValueChanged: (value) => {
+                            //             setState(() => {_pointerValue = value})
+                            //           },
+                            //           shapeType: LinearShapePointerType
+                            //               .invertedTriangle,
+                            //           color: blue1,
+                            //           elevation: 10,
+                            //         )
+                            //       ],
+                            //       tickPosition: LinearElementPosition.outside,
+                            //       labelPosition: LinearLabelPosition.outside,
+                            //       majorTickStyle: LinearTickStyle(
+                            //           length: 70, thickness: 2, color: button),
+                            //       minorTickStyle: LinearTickStyle(
+                            //           length: 40,
+                            //           thickness: 1.75,
+                            //           color: button),
+                            //       axisLabelStyle: GoogleFonts.montserrat(
+                            //         fontSize: 15,
+                            //         color: Colors.grey,
+                            //       )),
+                            // ),
+                            HorizontalList(),
+                            SizedBox(
+                              height: 90,
+                            ),
+                            Container(
+                              height: 55,
+                              width: 321,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    selectchallengetype(context);
+                                  },
+                                  //color: blue.withOpacity(0.3),
+                                  color: blue1,
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['next'] != null)
+                                        ? "${userLanguage['next']}"
+                                        : "NEXT",
+                                    style: GoogleFonts.poppins(
+                                      //color: blue1,
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void selectchallengetype(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.50,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "75%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 20),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.15,
+                                    // width: MediaQuery.of(context).size.width,
+                                    //color: Colors.red,
+                                    child: Center(
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage[
+                                                        'whattypeofchallenge'] !=
+                                                    null)
+                                            ? "${userLanguage['whattypeofchallenge']}"
+                                            : "What type of \n  challenge?",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            height: 1,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    setState(() {
+                                      ischeckvisible = !ischeckvisible;
+                                    });
+                                  },
+                                  child: Container(
+                                    height: 188,
+                                    width: 134,
+                                    decoration: BoxDecoration(
+                                        color: ischeckvisible == true
+                                            ? blue1
+                                            : button,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceEvenly,
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 20),
+                                          child: InkWell(
+                                            onTap: () {
+                                              // setState(() {
+                                              //   ischeckvisible = true;
+                                              // });
+                                            },
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: backgroundcolor,
+                                                child: ischeckvisible == true
+                                                    ? IconButton(
+                                                        onPressed: () {
+                                                          setState(() {
+                                                            ischeckvisible =
+                                                                false;
+                                                          });
+                                                        },
+                                                        icon: Icon(
+                                                          Icons.check,
+                                                          color: blue1,
+                                                          size: 10,
+                                                        ))
+                                                    : SizedBox(
+                                                        height: 0,
+                                                      ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Container(
+                                              height: 60,
+                                              width: 48,
+                                              //color: Colors.red,
+                                              child: Image.asset(
+                                                "assets/images/streak.png",
+                                                fit: BoxFit.fill,
+                                              )),
+                                        ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(top: 12),
+                                          child: Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['streak'] !=
+                                                        null)
+                                                ? "${userLanguage['streak']}"
+                                                : "STREAK",
+                                            style: GoogleFonts.poppins(
+                                                decoration: TextDecoration.none,
+                                                color: Colors.white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.bold),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ),
+                                Container(
+                                  height: 188,
+                                  width: 134,
+                                  decoration: BoxDecoration(
+                                      color: button,
+                                      borderRadius: BorderRadius.circular(10)),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 20),
+                                        child: Container(
+                                          height: 28,
+                                          width: 86,
+                                          decoration: BoxDecoration(
+                                              color: blue1,
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Center(
+                                            child: Text(
+                                                (lang.length != null &&
+                                                        lang.length != 0 &&
+                                                        userLanguage[
+                                                                'commingsoon'] !=
+                                                            null)
+                                                    ? "${userLanguage['commingsoon']}"
+                                                    : "COMMING SOON",
+                                                style: GoogleFonts.poppins(
+                                                    decoration:
+                                                        TextDecoration.none,
+                                                    color: Colors.white,
+                                                    fontSize: 8,
+                                                    fontWeight:
+                                                        FontWeight.w600)),
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Container(
+                                            height: 60,
+                                            width: 40,
+                                            //color: Colors.red,
+                                            child: Opacity(
+                                              opacity: 0.25,
+                                              child: Image.asset(
+                                                "assets/images/speed.png",
+                                                fit: BoxFit.fill,
+                                              ),
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Text(
+                                          (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['speed'] != null)
+                                              ? "${userLanguage['speed']}"
+                                              : "SPEED",
+                                          style: GoogleFonts.poppins(
+                                              decoration: TextDecoration.none,
+                                              color:
+                                                  Colors.white.withOpacity(0.2),
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                )
+                              ],
+                            ),
+                            SizedBox(
+                              height: 60,
+                            ),
+                            Container(
+                              height: 55,
+                              width: 321,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    selectshowcompetitors(context);
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             WalletChallengeFour()));
+                                  },
+                                  //color: blue.withOpacity(0.3),
+                                  color: blue1,
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['next'] != null)
+                                        ? "${userLanguage['next']}"
+                                        : "NEXT",
+                                    style: GoogleFonts.poppins(
+                                      //color: blue1,
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void selectshowcompetitors(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.50,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "75%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 40),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 10),
+                                  child: Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    // width: MediaQuery.of(context).size.width,
+                                    //color: Colors.red,
+                                    child: Center(
+                                      child: RichText(
+                                        text: TextSpan(
+                                          children: [
+                                            TextSpan(
+                                              text: (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage[
+                                                              'howmanycompetitorswouldyoulike'] !=
+                                                          null)
+                                                  ? "${userLanguage['howmanycompetitorswouldyoulike']}"
+                                                  : 'How many competitors \n         would you like?',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w600,
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            HorizontalList(),
+                            // Container(
+                            //   height: MediaQuery.of(context).size.height * 0.13,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   // color: Colors.amber,
+                            //   child: SfLinearGauge(
+                            //       markerPointers: [
+                            //         LinearShapePointer(
+                            //           value: _pointerValue,
+                            //           onValueChanged: (value) => {
+                            //             setState(() => {_pointerValue = value})
+                            //           },
+                            //           shapeType: LinearShapePointerType
+                            //               .invertedTriangle,
+                            //           color: blue1,
+                            //           elevation: 10,
+                            //         )
+                            //       ],
+                            //       tickPosition: LinearElementPosition.outside,
+                            //       labelPosition: LinearLabelPosition.outside,
+                            //       majorTickStyle: LinearTickStyle(
+                            //           length: 70, thickness: 2, color: button),
+                            //       minorTickStyle: LinearTickStyle(
+                            //           length: 40,
+                            //           thickness: 1.75,
+                            //           color: button),
+                            //       axisLabelStyle: GoogleFonts.montserrat(
+                            //         fontSize: 15,
+                            //         color: Colors.grey,
+                            //       )),
+                            // ),
+                            SizedBox(
+                              height: 70,
+                            ),
+                            Container(
+                              height: 55,
+                              width: 321,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                    selectshowsummary(context);
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             WalletChallengeFive()));
+                                  },
+                                  //color: blue.withOpacity(0.3),
+                                  color: blue1,
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['next'] != null)
+                                        ? "${userLanguage['next']}"
+                                        : "NEXT",
+                                    style: GoogleFonts.poppins(
+                                      //color: blue1,
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
+                                  )),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void selectshowsummary(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.80,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "95%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        // height: 703,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: SingleChildScrollView(
+                          child: Column(
+                            children: [
+                              Row(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 40, left: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage[
+                                                      'challengesummary'] !=
+                                                  null)
+                                          ? "${userLanguage['challengesummary']}"
+                                          : "Challenge Summary",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 30, left: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['activity'] != null)
+                                          ? "${userLanguage['activity']}"
+                                          : "Activity",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.15,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      decoration: BoxDecoration(
+                                          color: button,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Container(
+                                              height: 32,
+                                              width: 25,
+                                              //color: blue1,
+                                              child: Image.asset(
+                                                "assets/images/walking.png",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage['walking'] !=
+                                                          null)
+                                                  ? "${userLanguage['walking']}"
+                                                  : "WALKING",
+                                              style: GoogleFonts.poppins(
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.white,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 185),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: blue1,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.check,
+                                                      color: Colors.white,
+                                                      size: 11,
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['satswagered'] !=
+                                                  null)
+                                          ? "${userLanguage['satswagered']}"
+                                          : "SATS Wagered",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.15,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      decoration: BoxDecoration(
+                                          color: button,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Text(
+                                              "125",
+                                              style: GoogleFonts.poppins(
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.white,
+                                                  fontSize: 21,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Text(
+                                              (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage['sats'] !=
+                                                          null)
+                                                  ? "${userLanguage['sats']}"
+                                                  : "SATs",
+                                              style: GoogleFonts.poppins(
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.orange,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 210),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: blue1,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.note_add_outlined,
+                                                      color: Colors.white,
+                                                      size: 12,
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage[
+                                                      'typesofchallenge'] !=
+                                                  null)
+                                          ? "${userLanguage['typesofchallenge']}"
+                                          : "Type of Challenge",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.15,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      decoration: BoxDecoration(
+                                          color: button,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Container(
+                                              height: 32,
+                                              width: 25,
+                                              //color: blue1,
+                                              child: Image.asset(
+                                                "assets/images/streak.png",
+                                                fit: BoxFit.cover,
+                                              ),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 10),
+                                            child: Text(
+                                              (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage['walking'] !=
+                                                          null)
+                                                  ? "${userLanguage['walking']}"
+                                                  : "WALKING",
+                                              style: GoogleFonts.poppins(
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.white,
+                                                  fontSize: 13,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 185),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: blue1,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.check,
+                                                      color: Colors.white,
+                                                      size: 11,
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Text(
+                                      "Number of Competitors ",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Container(
+                                      height:
+                                          MediaQuery.of(context).size.width *
+                                              0.15,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      decoration: BoxDecoration(
+                                          color: button,
+                                          borderRadius:
+                                              BorderRadius.circular(15)),
+                                      child: Row(
+                                        children: [
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 20),
+                                            child: Text(
+                                              "85",
+                                              style: GoogleFonts.poppins(
+                                                  decoration:
+                                                      TextDecoration.none,
+                                                  color: Colors.white,
+                                                  fontSize: 21,
+                                                  fontWeight: FontWeight.w600),
+                                            ),
+                                          ),
+                                          Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 250),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 25,
+                                                width: 25,
+                                                color: blue1,
+                                                child: IconButton(
+                                                    onPressed: () {},
+                                                    icon: Icon(
+                                                      Icons.note_add_outlined,
+                                                      color: Colors.white,
+                                                      size: 12,
+                                                    )),
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
+                              Container(
+                                height: 55,
+                                width: 321,
+                                decoration: BoxDecoration(
+                                  //color: Colors.amber,
+                                  borderRadius: BorderRadius.circular(15),
+                                ),
+                                // ignore: deprecated_member_use
+                                child: RaisedButton(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(17),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  ChallengeFinal()));
+                                    },
+                                    color: blue1,
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['createchallenge'] !=
+                                                  null)
+                                          ? "${userLanguage['createchallenge']}"
+                                          : "CREATE CHALLENGE",
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    )),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
     );
   }
 }
