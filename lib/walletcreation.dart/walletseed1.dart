@@ -1,5 +1,5 @@
-import 'package:awesome_loader/awesome_loader.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
@@ -283,14 +283,9 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                   setState(() {
                     loading = true;
                   });
-                  print("seed1 $seed1");
-                  print("seedcheck $seedcheck");
                   // if (seedlength == 12) {
                   if (seed1.toString() == seedcheck.toString()) {
                     storeUser();
-                    setState(() {
-                      loading = true;
-                    });
                   } else {
                     _modalBottomSheetMenu3();
                   }
@@ -304,9 +299,9 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       color: seedlength == 12 ? blue1 : gridcolor),
                   child: Center(
                     child: loading == true
-                        ? AwesomeLoader(
-                            loaderType: AwesomeLoader.AwesomeLoader4,
+                        ? SpinKitThreeBounce(
                             color: white,
+                            size: 30,
                           )
                         : Text(
                             (lang.length != null &&

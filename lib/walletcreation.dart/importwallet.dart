@@ -1,6 +1,6 @@
-import 'package:awesome_loader/awesome_loader.dart';
 import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
@@ -205,9 +205,9 @@ class _ImportWalletPage extends State<ImportWalletPage> {
                       color: seedlength == 12 ? blue1 : gridcolor),
                   child: Center(
                     child: loading == true
-                        ? AwesomeLoader(
-                            loaderType: AwesomeLoader.AwesomeLoader4,
+                        ? SpinKitThreeBounce(
                             color: white,
+                            size: 30,
                           )
                         : Text(
                             (lang.length != null &&

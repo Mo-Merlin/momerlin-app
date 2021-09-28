@@ -1,6 +1,6 @@
-import 'package:awesome_loader/awesome_loader.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
@@ -48,9 +48,9 @@ class _WalletProfileState extends State<WalletProfile> {
             width: MediaQuery.of(context).size.width,
             color: white,
             child: Center(
-              child: AwesomeLoader(
-                loaderType: AwesomeLoader.AwesomeLoader3,
+              child: SpinKitSpinningLines(
                 color: backgroundcolor,
+                size: 60,
               ),
             ),
           )

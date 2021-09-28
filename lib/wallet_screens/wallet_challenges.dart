@@ -3,14 +3,10 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/horizontallist.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_five.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_four.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_three.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_two.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
-import 'package:syncfusion_flutter_gauges/gauges.dart';
 
 class WalletChallenges extends StatefulWidget {
   const WalletChallenges({Key key}) : super(key: key);
@@ -1348,7 +1344,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         padding: EdgeInsets.all(0),
                         child: Column(
                           children: [
-                            SizedBox(height: 40),
+                            // SizedBox(height: 20),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1394,6 +1390,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               : 'would \n       you like to wager?',
                                           style: GoogleFonts.poppins(
                                             color: Colors.white,
+                                            height: 1,
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600,
                                           )),
@@ -1405,38 +1402,39 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             SizedBox(
                               height: 30,
                             ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.13,
-                              width: MediaQuery.of(context).size.width,
-                              //color: Colors.amber,
-                              child: SfLinearGauge(
-                                  markerPointers: [
-                                    LinearShapePointer(
-                                      value: _pointerValue,
-                                      onValueChanged: (value) => {
-                                        setState(() => {_pointerValue = value})
-                                      },
-                                      shapeType: LinearShapePointerType
-                                          .invertedTriangle,
-                                      color: blue1,
-                                      elevation: 10,
-                                    )
-                                  ],
-                                  tickPosition: LinearElementPosition.outside,
-                                  labelPosition: LinearLabelPosition.outside,
-                                  majorTickStyle: LinearTickStyle(
-                                      length: 70, thickness: 2, color: button),
-                                  minorTickStyle: LinearTickStyle(
-                                      length: 40,
-                                      thickness: 1.75,
-                                      color: button),
-                                  axisLabelStyle: GoogleFonts.montserrat(
-                                    fontSize: 15,
-                                    color: Colors.grey,
-                                  )),
-                            ),
+                            // Container(
+                            //   height: MediaQuery.of(context).size.height * 0.13,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   //color: Colors.amber,
+                            //   child: SfLinearGauge(
+                            //       markerPointers: [
+                            //         LinearShapePointer(
+                            //           value: _pointerValue,
+                            //           onValueChanged: (value) => {
+                            //             setState(() => {_pointerValue = value})
+                            //           },
+                            //           shapeType: LinearShapePointerType
+                            //               .invertedTriangle,
+                            //           color: blue1,
+                            //           elevation: 10,
+                            //         )
+                            //       ],
+                            //       tickPosition: LinearElementPosition.outside,
+                            //       labelPosition: LinearLabelPosition.outside,
+                            //       majorTickStyle: LinearTickStyle(
+                            //           length: 70, thickness: 2, color: button),
+                            //       minorTickStyle: LinearTickStyle(
+                            //           length: 40,
+                            //           thickness: 1.75,
+                            //           color: button),
+                            //       axisLabelStyle: GoogleFonts.montserrat(
+                            //         fontSize: 15,
+                            //         color: Colors.grey,
+                            //       )),
+                            // ),
+                            HorizontalList(),
                             SizedBox(
-                              height: 60,
+                              height: 90,
                             ),
                             Container(
                               height: 55,
@@ -1579,7 +1577,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         padding: EdgeInsets.all(0),
                         child: Column(
                           children: [
-                            SizedBox(height: 40),
+                            // SizedBox(height: 20),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1603,6 +1601,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         style: GoogleFonts.poppins(
                                             decoration: TextDecoration.none,
                                             color: Colors.white,
+                                            height: 1,
                                             fontSize: 25,
                                             fontWeight: FontWeight.w600),
                                       ),
@@ -1632,8 +1631,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.center,
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
+                                      // mainAxisAlignment:
+                                      //     MainAxisAlignment.spaceEvenly,
                                       children: [
                                         Padding(
                                           padding:
@@ -1713,8 +1712,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   child: Column(
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceEvenly,
+                                    // mainAxisAlignment:
+                                    //     MainAxisAlignment.spaceEvenly,
                                     children: [
                                       Padding(
                                         padding: const EdgeInsets.only(top: 20),
@@ -1780,7 +1779,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: 50,
+                              height: 60,
                             ),
                             Container(
                               height: 55,
@@ -1832,7 +1831,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
-  double _pointerValue = 53;
   void selectshowcompetitors(BuildContext context) {
     showDialog(
       context: context,
@@ -1929,7 +1927,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         padding: EdgeInsets.all(0),
                         child: Column(
                           children: [
-                            SizedBox(height: 40),
+                            // SizedBox(height: 40),
                             Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.center,
@@ -1970,38 +1968,39 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             SizedBox(
                               height: 30,
                             ),
-                            Container(
-                              height: MediaQuery.of(context).size.height * 0.13,
-                              width: MediaQuery.of(context).size.width,
-                              // color: Colors.amber,
-                              child: SfLinearGauge(
-                                  markerPointers: [
-                                    LinearShapePointer(
-                                      value: _pointerValue,
-                                      onValueChanged: (value) => {
-                                        setState(() => {_pointerValue = value})
-                                      },
-                                      shapeType: LinearShapePointerType
-                                          .invertedTriangle,
-                                      color: blue1,
-                                      elevation: 10,
-                                    )
-                                  ],
-                                  tickPosition: LinearElementPosition.outside,
-                                  labelPosition: LinearLabelPosition.outside,
-                                  majorTickStyle: LinearTickStyle(
-                                      length: 70, thickness: 2, color: button),
-                                  minorTickStyle: LinearTickStyle(
-                                      length: 40,
-                                      thickness: 1.75,
-                                      color: button),
-                                  axisLabelStyle: GoogleFonts.montserrat(
-                                    fontSize: 15,
-                                    color: Colors.grey,
-                                  )),
-                            ),
+                            HorizontalList(),
+                            // Container(
+                            //   height: MediaQuery.of(context).size.height * 0.13,
+                            //   width: MediaQuery.of(context).size.width,
+                            //   // color: Colors.amber,
+                            //   child: SfLinearGauge(
+                            //       markerPointers: [
+                            //         LinearShapePointer(
+                            //           value: _pointerValue,
+                            //           onValueChanged: (value) => {
+                            //             setState(() => {_pointerValue = value})
+                            //           },
+                            //           shapeType: LinearShapePointerType
+                            //               .invertedTriangle,
+                            //           color: blue1,
+                            //           elevation: 10,
+                            //         )
+                            //       ],
+                            //       tickPosition: LinearElementPosition.outside,
+                            //       labelPosition: LinearLabelPosition.outside,
+                            //       majorTickStyle: LinearTickStyle(
+                            //           length: 70, thickness: 2, color: button),
+                            //       minorTickStyle: LinearTickStyle(
+                            //           length: 40,
+                            //           thickness: 1.75,
+                            //           color: button),
+                            //       axisLabelStyle: GoogleFonts.montserrat(
+                            //         fontSize: 15,
+                            //         color: Colors.grey,
+                            //       )),
+                            // ),
                             SizedBox(
-                              height: 50,
+                              height: 70,
                             ),
                             Container(
                               height: 55,
