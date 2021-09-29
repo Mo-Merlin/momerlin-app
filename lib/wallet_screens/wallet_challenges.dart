@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/horizontallist.dart';
+import 'package:momerlin/wallet_screens/my_activity.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -333,124 +334,137 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           scrollDirection: Axis.horizontal,
                           itemCount: elements.length,
                           itemBuilder: (context, index) {
-                            return Stack(
-                              children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.16,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.35,
-                                  //color: Colors.pink,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        // height:
-                                        //     MediaQuery.of(context).size.height *
-                                        //         0.15,
-                                        // width:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.30,
-                                        height: 112,
-                                        width: 113,
-                                        decoration: BoxDecoration(
-                                            color: button.withOpacity(0.4),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child: Container(
+                            return InkWell(
+                              onTap: () {
+                                print("Gopinath");
+                                if (elements[index]['name'] ==
+                                    '@momozuno \nhas earned') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyActivity()));
+                                }
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.16,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    //color: Colors.pink,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          // height:
+                                          //     MediaQuery.of(context).size.height *
+                                          //         0.15,
+                                          // width:
+                                          //     MediaQuery.of(context).size.width *
+                                          //         0.30,
+                                          height: 112,
+                                          width: 113,
+                                          decoration: BoxDecoration(
+                                              color: button.withOpacity(0.4),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 15),
+                                                child: Container(
+                                                  // height: MediaQuery.of(context)
+                                                  //         .size
+                                                  //         .height *
+                                                  //     0.06,
+                                                  // width: MediaQuery.of(context)
+                                                  //     .size
+                                                  //     .width,
+                                                  height: 29, width: 79,
+                                                  //color: Colors.red,
+                                                  child: Text(
+                                                      elements[index]['name'],
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.grey,
+                                                        fontSize: 11,
+                                                      )),
+                                                ),
+                                              ),
+                                              Container(
                                                 // height: MediaQuery.of(context)
                                                 //         .size
                                                 //         .height *
                                                 //     0.06,
                                                 // width: MediaQuery.of(context)
-                                                //     .size
-                                                //     .width,
-                                                height: 29, width: 79,
-                                                //color: Colors.red,
-                                                child: Text(
-                                                    elements[index]['name'],
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.grey,
-                                                      fontSize: 11,
-                                                    )),
-                                              ),
-                                            ),
-                                            Container(
-                                              // height: MediaQuery.of(context)
-                                              //         .size
-                                              //         .height *
-                                              //     0.06,
-                                              // width: MediaQuery.of(context)
-                                              //         .size
-                                              //         .width *
-                                              //     0.30,
-                                              height: 43, width: 93,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.25),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(elements[index]['amt'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5),
-                                                    child: Text(
-                                                        elements[index]['type'],
+                                                //         .size
+                                                //         .width *
+                                                //     0.30,
+                                                height: 43, width: 93,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.25),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(elements[index]['amt'],
                                                         style:
                                                             GoogleFonts.poppins(
                                                                 color: Colors
-                                                                    .orangeAccent,
-                                                                fontSize: 7,
+                                                                    .white,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w500)),
-                                                  ),
-                                                ],
+                                                                        .bold)),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text(
+                                                          elements[index]
+                                                              ['type'],
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors
+                                                                  .orangeAccent,
+                                                              fontSize: 7,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500)),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Positioned(
-                                  top: 5,
-                                  left: 53,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        color: button,
-                                        child: Image.network(
-                                          elements[index]['url'],
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                )
-                              ],
+                                  Positioned(
+                                    top: 5,
+                                    left: 53,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          color: button,
+                                          child: Image.network(
+                                            elements[index]['url'],
+                                            fit: BoxFit.cover,
+                                          )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             );
                           },
                         ),
