@@ -872,10 +872,18 @@ class _WalletTwoState extends State<WalletTwo> {
   }
 
   void _onEventCallback(String event, LinkEventMetadata metadata) {
+    setState(() {
+      plaidconnect = false;
+      buttonpressed = false;
+    });
     print("onEvent: $event, metadata: ${metadata.description()}");
   }
 
   void _onExitCallback(LinkError error, LinkExitMetadata metadata) {
+    setState(() {
+      plaidconnect = false;
+      buttonpressed = false;
+    });
     print("onExit metadata: ${metadata.description()}");
 
     if (error != null) {
@@ -887,6 +895,9 @@ class _WalletTwoState extends State<WalletTwo> {
       String publicToken, LinkSuccessMetadata metadata) async {
     setState(() {
       loading = true;
+
+      plaidconnect = false;
+      buttonpressed = false;
     });
 
     await UserRepository().updateToken({"public_token": publicToken});

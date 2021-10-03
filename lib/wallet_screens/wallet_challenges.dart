@@ -42,42 +42,42 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "400",
-      "type": "SATs",
+      "type": "Gwei",
     },
     {
       "name": "@jade.sim \nhas earned",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "230",
-      "type": "SATs",
+      "type": "Gwei",
     },
     {
       "name": "@cam.c \nhas earned",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "40",
-      "type": "SATs",
+      "type": "Gwei",
     },
     {
       "name": "@momozuno \nhas earned",
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "400",
-      "type": "SATs",
+      "type": "Gwei",
     },
     {
       "name": "@jade.sim \nhas earned",
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "230",
-      "type": "SATs",
+      "type": "Gwei",
     },
     {
       "name": "@cam.c \nhas earned",
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "40",
-      "type": "SATs",
+      "type": "Gwei",
     },
   ];
 
@@ -87,7 +87,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "+750",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.blue,
     },
     {
@@ -95,7 +95,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "+750",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.greenAccent,
     },
     {
@@ -103,7 +103,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "+300",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.redAccent,
     },
     {
@@ -111,7 +111,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "+750",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.blue,
     },
     {
@@ -119,7 +119,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "+750",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.greenAccent,
     },
     {
@@ -127,7 +127,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "url":
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "+300",
-      "type": "SATs",
+      "type": "Gwei",
       "color": Colors.redAccent,
     },
   ];
@@ -205,7 +205,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               lang.length != 0 &&
                               userLanguage['sats'] != null)
                           ? "${userLanguage['sats']}"
-                          : "SATs",
+                          : "Gwei",
                       style: GoogleFonts.poppins(
                           fontSize: 12,
                           color: Colors.orangeAccent,
@@ -781,6 +781,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         padding: EdgeInsets.only(
                             left: 4, top: 10, bottom: 0, right: 0),
                         child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
                           scrollDirection: Axis.vertical,
                           itemCount: 6,
                           itemBuilder: (context, index) {
@@ -1455,28 +1457,29 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               width: 321,
                               // ignore: deprecated_member_use
                               child: RaisedButton(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(17),
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  selectchallengetype(context);
+                                },
+                                //color: blue.withOpacity(0.3),
+                                color: blue1,
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['next'] != null)
+                                      ? "${userLanguage['next']}"
+                                      : "NEXT",
+                                  style: GoogleFonts.poppins(
+                                    //color: blue1,
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  onPressed: () {
-                                    Navigator.pop(context);
-                                    selectchallengetype(context);
-                                  },
-                                  //color: blue.withOpacity(0.3),
-                                  color: blue1,
-                                  child: Text(
-                                    (lang.length != null &&
-                                            lang.length != 0 &&
-                                            userLanguage['next'] != null)
-                                        ? "${userLanguage['next']}"
-                                        : "NEXT",
-                                    style: GoogleFonts.poppins(
-                                      //color: blue1,
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                    ),
-                                  )),
+                                ),
+                              ),
                             ),
                           ],
                         ),
@@ -2314,6 +2317,31 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       ),
                                     ),
                                   ),
+                                ],
+                              ),
+                              Row(
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 20, left: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['satswagered'] !=
+                                                  null)
+                                          ? "${userLanguage['satswagered']}"
+                                          : "Gwei Wagered",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Row(
+                                children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 20, left: 25),
@@ -2350,9 +2378,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                       lang.length != 0 &&
                                                       userLanguage['gwei'] !=
                                                           null)
-                                                  ? "${userLanguage['gwei']}"
+                                                  ? "${userLanguage['sats']}"
                                                   : "Gwei",
-                                              style: GoogleFonts.montserrat(
+                                              style: GoogleFonts.poppins(
                                                   decoration:
                                                       TextDecoration.none,
                                                   color: Colors.orange,
