@@ -12,7 +12,10 @@ class MyActivity extends StatefulWidget {
 }
 
 class _MyActivityState extends State<MyActivity> {
-  //CalendarController _controller;
+  CalendarFormat format = CalendarFormat.month;
+  DateTime selectedDay = DateTime.now();
+  DateTime focusedDay = DateTime.now();
+
   var userLanguage, lang = [];
   @override
   void initState() {
@@ -167,9 +170,29 @@ class _MyActivityState extends State<MyActivity> {
                     firstDay: DateTime.utc(2010, 10, 16),
                     lastDay: DateTime.utc(2030, 3, 14),
                     focusedDay: DateTime.now(),
+                    calendarFormat: format,
+                    onFormatChanged: (CalendarFormat _format) {
+                      setState(() {
+                        format = _format;
+                      });
+                    },
+                    startingDayOfWeek: StartingDayOfWeek.sunday,
+                    daysOfWeekVisible: false,
+
+                    onDaySelected: (DateTime selectDay, DateTime focusDay) {
+                      setState(() {
+                        selectedDay = selectDay;
+                        focusedDay = focusDay;
+                      });
+                      print(focusDay);
+                    },
+                    selectedDayPredicate: (DateTime date) {
+                      return isSameDay(selectedDay, date);
+                    },
+
+                    // calendar style
                     calendarStyle: CalendarStyle(
-                        //todayColor: Colors.blue,
-                        //selectedColor: Theme.of(context).primaryColor,
+                        isTodayHighlighted: true,
                         todayDecoration: BoxDecoration(
                           color: blue1,
                           shape: BoxShape.circle,
@@ -178,6 +201,43 @@ class _MyActivityState extends State<MyActivity> {
                             fontWeight: FontWeight.w600,
                             fontSize: 15,
                             color: Colors.white)),
+
+                    // Header style
+                    headerStyle: HeaderStyle(
+                      titleCentered: true,
+                      formatButtonDecoration: BoxDecoration(
+                          color: blue1,
+                          borderRadius: BorderRadius.circular(
+                            22,
+                          )),
+                      formatButtonTextStyle: TextStyle(
+                        color: Colors.white,
+                      ),
+                      formatButtonVisible: true,
+                    ),
+                    calendarBuilders: CalendarBuilders(
+                      selectedBuilder: (context, date, events) => Container(
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: blue,
+                            borderRadius: BorderRadius.circular(22)),
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
+                      todayBuilder: (context, date, events) => Container(
+                          margin: const EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: blue1,
+                              borderRadius: BorderRadius.circular(22)),
+                          child: Text(
+                            date.day.toString(),
+                            style: TextStyle(color: Colors.white),
+                          )),
+                    ),
                   ),
                 ),
               ],
