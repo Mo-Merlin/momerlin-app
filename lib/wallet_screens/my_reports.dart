@@ -3,6 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/my_earnings.dart';
+import 'package:momerlin/wallet_screens/spending_report.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 
 class MyReports extends StatefulWidget {
@@ -168,51 +169,57 @@ class _MyReportsState extends State<MyReports> {
             SizedBox(
               height: 30,
             ),
-            Container(
-              height: 177,
-              width: 308,
-              decoration: BoxDecoration(
-                color: button,
-                borderRadius: BorderRadius.circular(30),
-              ),
-              child: Column(
-                children: [
-                  SizedBox(
-                    height: 30,
-                  ),
-                  Container(
-                    height: 50,
-                    width: 50,
-                    //color: blue1,
-                    child: Image.asset(
-                      "assets/images/coin.png",
-                      fit: BoxFit.cover,
+            GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => SpendingReport()));
+              },
+              child: Container(
+                height: 177,
+                width: 308,
+                decoration: BoxDecoration(
+                  color: button,
+                  borderRadius: BorderRadius.circular(30),
+                ),
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 30,
                     ),
-                  ),
-                  Text(
-                    (lang.length != null &&
-                            lang.length != 0 &&
-                            userLanguage['sendingReports'] != null)
-                        ? "${userLanguage['sendingReports']}"
-                        : "Spending Reports",
-                    style: GoogleFonts.poppins(
-                      fontSize: 25,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
+                    Container(
+                      height: 50,
+                      width: 50,
+                      //color: blue1,
+                      child: Image.asset(
+                        "assets/images/coin.png",
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  ),
-                  Text(
-                    (lang.length != null &&
-                            lang.length != 0 &&
-                            userLanguage['howmuchareyouspending'] != null)
-                        ? "${userLanguage['howmuchareyouspending']}"
-                        : "How much are you spending?",
-                    style: GoogleFonts.poppins(
-                      fontSize: 12,
-                      color: text1,
+                    Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['sendingReports'] != null)
+                          ? "${userLanguage['sendingReports']}"
+                          : "Spending Reports",
+                      style: GoogleFonts.poppins(
+                        fontSize: 25,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
-                  ),
-                ],
+                    Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['howmuchareyouspending'] != null)
+                          ? "${userLanguage['howmuchareyouspending']}"
+                          : "How much are you spending?",
+                      style: GoogleFonts.poppins(
+                        fontSize: 12,
+                        color: text1,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
             SizedBox(
