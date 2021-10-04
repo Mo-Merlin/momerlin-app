@@ -2,24 +2,21 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-// import 'package:intl/intl.dart';
 
-class MyEarnings extends StatefulWidget {
-  const MyEarnings({Key key}) : super(key: key);
+class MyEarningsExpenses extends StatefulWidget {
+  const MyEarningsExpenses({Key key}) : super(key: key);
 
   @override
-  _MyEarningsState createState() => _MyEarningsState();
+  _MyEarningsExpensesState createState() => _MyEarningsExpensesState();
 }
 
-class _MyEarningsState extends State<MyEarnings> {
-  List<SalesData> _chartData;
+class _MyEarningsExpensesState extends State<MyEarningsExpenses> {
+  List<GDPData> _chartData;
   TooltipBehavior _tooltipBehavior;
 
   var balance = 0.00;
-
   var userLanguage, lang = [];
   @override
   void initState() {
@@ -189,28 +186,20 @@ class _MyEarningsState extends State<MyEarnings> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyEarningsExpenses()));
-                        },
-                        child: Container(
-                          height: 48,
-                          width: 70,
-                          decoration: BoxDecoration(
-                            color: button,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          child: Center(
-                            child: Text(
-                              "12H",
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
+                      Container(
+                        height: 48,
+                        width: 70,
+                        decoration: BoxDecoration(
+                          color: button,
+                          borderRadius: BorderRadius.circular(25),
+                        ),
+                        child: Center(
+                          child: Text(
+                            "12H",
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
                             ),
                           ),
                         ),
@@ -270,35 +259,36 @@ class _MyEarningsState extends State<MyEarnings> {
                 Container(
                   height: 300,
                   //color: Colors.amberAccent,
-                  child: SfCartesianChart(
-                    //title: ChartTitle(text: 'Yearly sales analysis'),
-                    // legend: Legend(isVisible: true),
-                    tooltipBehavior: _tooltipBehavior,
-                    series: <ChartSeries>[
-                      LineSeries<SalesData, double>(
-                        color: Colors.orange,
-                        //name: 'Sales',
-                        dataSource: _chartData,
-                        xValueMapper: (SalesData sales, _) => sales.year,
-                        yValueMapper: (SalesData sales, _) => sales.sales,
-                        // dataLabelSettings: DataLabelSettings(
-                        //     isVisible: true, color: Colors.orange),
-
-                        enableTooltip: true,
-                      ),
+                  child: SfCircularChart(
+                    palette: <Color>[
+                      blue1,
+                      Colors.pinkAccent,
+                      Colors.greenAccent,
                     ],
-                    primaryXAxis: NumericAxis(
-                      edgeLabelPlacement: EdgeLabelPlacement.shift,
-                    ),
-                    // primaryYAxis: NumericAxis(
-                    //     labelFormat: '{value}M',
-                    //     numberFormat:
-                    //         NumberFormat.simpleCurrency(decimalDigits: 0)),
+                    title: ChartTitle(
+                        text: "Select a portion of the chart to view details",
+                        textStyle: GoogleFonts.poppins(
+                          fontSize: 10,
+                          color: text1,
+                        )),
+                    // legend: Legend(
+                    //     isVisible: true,
+                    //     overflowMode: LegendItemOverflowMode.wrap),
+                    tooltipBehavior: _tooltipBehavior,
+                    series: <CircularSeries>[
+                      DoughnutSeries<GDPData, String>(
+                        dataSource: _chartData,
+                        xValueMapper: (GDPData data, _) => data.continent,
+                        yValueMapper: (GDPData data, _) => data.gdp,
+                        //dataLabelSettings: DataLabelSettings(isVisible: true),
+                        enableTooltip: true,
+                      )
+                    ],
                   ),
                 ),
                 SizedBox(
                   height: 400,
-                ),
+                )
               ],
             ),
           ),
@@ -340,9 +330,9 @@ class _MyEarningsState extends State<MyEarnings> {
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
-                                      userLanguage['activity'] != null)
-                                  ? "${userLanguage['activity']}"
-                                  : "Activity",
+                                      userLanguage['expenses'] != null)
+                                  ? "${userLanguage['expenses']}"
+                                  : "Expenses",
                               style: GoogleFonts.poppins(
                                 fontSize: 20,
                                 color: Colors.white,
@@ -367,17 +357,17 @@ class _MyEarningsState extends State<MyEarnings> {
                             leading: ClipRRect(
                               borderRadius: BorderRadius.circular(30),
                               child: Container(
-                                color: button,
+                                color: blue1,
                                 child: Image.asset(
-                                  "assets/images/profile.png",
-                                  fit: BoxFit.fill,
+                                  "assets/images/berger.png",
+                                  fit: BoxFit.contain,
                                   width: 46,
                                   height: 46,
                                 ),
                               ),
                             ),
                             title: Text(
-                              'Walk Challenge Win',
+                              'Food',
                               style: GoogleFonts.poppins(
                                 fontSize: 12,
                                 color: Colors.white,
@@ -385,7 +375,7 @@ class _MyEarningsState extends State<MyEarnings> {
                               ),
                             ),
                             subtitle: Text(
-                              'Yesterday',
+                              '134 Transactions',
                               style: GoogleFonts.poppins(
                                 fontSize: 9,
                                 color: text1,
@@ -421,99 +411,6 @@ class _MyEarningsState extends State<MyEarnings> {
                               ),
                             ),
                           );
-                          // return transactions1[index].merchantName == null
-                          //     ? SizedBox()
-                          //     : Column(
-                          //         children: [
-                          //           SizedBox(
-                          //             height: 5,
-                          //           ),
-                          //           Container(
-                          //             child: ListTile(
-                          //               // contentPadding: EdgeInsets.only(
-                          //               //     top: 0, bottom: 0),
-                          //               //   leading: ClipRRect(
-                          //               //     borderRadius: BorderRadius.circular(30),
-                          //               //     child: Container(
-                          //               //         height: 60,
-                          //               //         width: 60,
-                          //               //         color: Colors.black54,
-                          //               //         child: Image.network(
-                          //               //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
-                          //               //           fit: BoxFit.cover,
-                          //               //         )),
-                          //               //   ),
-                          //               title: Container(
-                          //                 padding: EdgeInsets.only(left: 20),
-                          //                 child: Text(
-                          //                   transactions1[index].merchantName,
-                          //                   style: GoogleFonts.poppins(
-                          //                       fontSize: 18,
-                          //                       fontWeight: FontWeight.w600,
-                          //                       color: Colors.white),
-                          //                 ),
-                          //               ),
-                          //               subtitle: Container(
-                          //                 padding: EdgeInsets.only(left: 20),
-                          //                 child: Text(
-                          //                   (DateFormat.yMMMd().format(
-                          //                           transactions1[index].date))
-                          //                       .toString(),
-                          //                   style: GoogleFonts.poppins(
-                          //                     fontSize: 12,
-                          //                     color: Color(0xff9395A4),
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //               trailing: Container(
-                          //                 height: 40,
-                          //                 width: 100,
-                          //                 decoration: BoxDecoration(
-                          //                   color: Color(0xff707070)
-                          //                       .withOpacity(0.4),
-                          //                   borderRadius:
-                          //                       BorderRadius.circular(10),
-                          //                 ),
-                          //                 child: Stack(
-                          //                   alignment: Alignment.center,
-                          //                   children: [
-                          //                     Positioned(
-                          //                       left: 14,
-                          //                       top: 15,
-                          //                       child: Text(
-                          //                         ((transactions1[index]
-                          //                                         .amount -
-                          //                                     transactions1[
-                          //                                             index]
-                          //                                         .amount
-                          //                                         .floorToDouble()) *
-                          //                                 100)
-                          //                             .toStringAsFixed(1),
-                          //                         style: GoogleFonts.montserrat(
-                          //                           fontSize: 12,
-                          //                           fontWeight: FontWeight.w500,
-                          //                           color: Colors.white,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                     Positioned(
-                          //                       left: 50,
-                          //                       top: 15,
-                          //                       child: Text(
-                          //                         ' Gwei',
-                          //                         style: GoogleFonts.montserrat(
-                          //                           fontSize: 12,
-                          //                           color: Colors.orangeAccent,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       );
                         },
                       ),
                     ),
@@ -527,20 +424,21 @@ class _MyEarningsState extends State<MyEarnings> {
     );
   }
 
-  List<SalesData> getChartData() {
-    final List<SalesData> chartData = [
-      SalesData(2017, 25),
-      SalesData(2018, 12),
-      SalesData(2019, 24),
-      SalesData(2020, 18),
-      SalesData(2021, 30)
+  List<GDPData> getChartData() {
+    final List<GDPData> chartData = [
+      GDPData('Oceania', 4000),
+      GDPData('Africa', 1400),
+      GDPData('S America', 1420),
+      // GDPData('Europe', 23050),
+      // GDPData('N America', 24880),
+      // GDPData('Asia', 34390),
     ];
     return chartData;
   }
 }
 
-class SalesData {
-  SalesData(this.year, this.sales);
-  final double year;
-  final double sales;
+class GDPData {
+  GDPData(this.continent, this.gdp);
+  final String continent;
+  final int gdp;
 }
