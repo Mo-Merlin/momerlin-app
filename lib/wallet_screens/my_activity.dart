@@ -88,7 +88,8 @@ class _MyActivityState extends State<MyActivity> {
     Colors.greenAccent,
     Colors.orangeAccent,
   ];
-
+  bool _value = false;
+  int val = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -105,13 +106,14 @@ class _MyActivityState extends State<MyActivity> {
               // width: 50,
               color: button,
               child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
@@ -137,10 +139,11 @@ class _MyActivityState extends State<MyActivity> {
             height: 10,
           ),
           Center(
-              child: Image.asset(
-            "assets/images/promo_card_1.png",
-            fit: BoxFit.cover,
-          )),
+            child: Image.asset(
+              "assets/images/promo_card_1.png",
+              fit: BoxFit.cover,
+            ),
+          ),
           SizedBox(
             height: 25,
           ),
@@ -159,11 +162,84 @@ class _MyActivityState extends State<MyActivity> {
           ),
           Container(
             decoration: BoxDecoration(
-              color: button,
+              color: gridcolor,
               borderRadius: BorderRadius.circular(30),
             ),
             child: Column(
               children: [
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: EdgeInsets.only(
+                    left: 10,
+                    top: 10,
+                    right: 110,
+                  ),
+                  child: Container(
+                    height: 33,
+                    decoration: BoxDecoration(
+                      color: button,
+                      borderRadius: BorderRadius.circular(15),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Radio(
+                                value: 1,
+                                groupValue: val,
+                                onChanged: (value) {
+                                  setState(() {
+                                    val = value;
+                                  });
+                                },
+                                activeColor: blue1,
+                              ),
+                              Expanded(
+                                child: Text(
+                                  'Active Days',
+                                  style: GoogleFonts.poppins(
+                                    color: Colors.white,
+                                    fontSize: 12,
+                                    fontWeight: FontWeight.w400,
+                                  ),
+                                ),
+                              )
+                            ],
+                          ),
+                        ),
+                        Expanded(
+                          child: Row(
+                            children: [
+                              Radio(
+                                value: 2,
+                                groupValue: val,
+                                onChanged: (value) {
+                                  setState(() {
+                                    val = value;
+                                  });
+                                },
+                                activeColor: blue1,
+                              ),
+                              Expanded(
+                                  child: Text(
+                                'Present Days',
+                                style: GoogleFonts.poppins(
+                                  color: Colors.white,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ))
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: TableCalendar(
@@ -171,11 +247,13 @@ class _MyActivityState extends State<MyActivity> {
                     lastDay: DateTime.utc(2030, 3, 14),
                     focusedDay: DateTime.now(),
                     calendarFormat: format,
-                    onFormatChanged: (CalendarFormat _format) {
-                      setState(() {
-                        format = _format;
-                      });
-                    },
+                    headerVisible: false,
+                    // onFormatChanged: (CalendarFormat _format) {
+                    //   setState(() {
+                    //     format = _format;
+                    //   });
+                    // },
+
                     startingDayOfWeek: StartingDayOfWeek.sunday,
                     daysOfWeekVisible: false,
 
@@ -186,6 +264,7 @@ class _MyActivityState extends State<MyActivity> {
                       });
                       print(focusDay);
                     },
+
                     selectedDayPredicate: (DateTime date) {
                       return isSameDay(selectedDay, date);
                     },
@@ -203,6 +282,7 @@ class _MyActivityState extends State<MyActivity> {
                             color: Colors.white)),
 
                     // Header style
+
                     headerStyle: HeaderStyle(
                       titleCentered: true,
                       formatButtonDecoration: BoxDecoration(
@@ -228,15 +308,16 @@ class _MyActivityState extends State<MyActivity> {
                         ),
                       ),
                       todayBuilder: (context, date, events) => Container(
-                          margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: blue1,
-                              borderRadius: BorderRadius.circular(22)),
-                          child: Text(
-                            date.day.toString(),
-                            style: TextStyle(color: Colors.white),
-                          )),
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: blue1,
+                            borderRadius: BorderRadius.circular(22)),
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -265,7 +346,7 @@ class _MyActivityState extends State<MyActivity> {
             height: 5,
           ),
           Container(
-            height: MediaQuery.of(context).size.height * 0.35,
+            // height: MediaQuery.of(context).size.height * 0.35,
             width: MediaQuery.of(context).size.width,
             decoration: BoxDecoration(
                 //color: white.withOpacity(0.3),
@@ -276,15 +357,17 @@ class _MyActivityState extends State<MyActivity> {
                   height: 10,
                 ),
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
+                  // height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width,
                   margin: EdgeInsets.only(left: 5, right: 0),
                   //color: Colors.indigo,
                   padding:
                       EdgeInsets.only(left: 4, top: 10, bottom: 0, right: 0),
                   child: ListView.builder(
+                    physics: NeverScrollableScrollPhysics(),
                     scrollDirection: Axis.vertical,
                     itemCount: 6,
+                    shrinkWrap: true,
                     itemBuilder: (context, index) {
                       return Stack(
                         children: [

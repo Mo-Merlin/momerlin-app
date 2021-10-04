@@ -336,22 +336,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           itemCount: elements.length,
                           itemBuilder: (context, index) {
                             return InkWell(
-                              onTap: () {
-                                //print("Gopinath");
-                                if (elements[index]['name'] ==
-                                    '@momozuno \nhas earned') {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MyActivity()));
-                                } else if (elements[index]['name'] ==
-                                    '@jade.sim \nhas earned') {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => MyReports()));
-                                }
-                              },
                               child: Stack(
                                 children: [
                                   Container(
@@ -484,7 +468,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                 ),
                 /******* 2st ListView   *******/
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.28,
+                  // height: MediaQuery.of(context).size.height * 0.28,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       //color: white.withOpacity(0.3),
@@ -495,130 +479,106 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         height: 10,
                       ),
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceAround,
+                        // mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            width: MediaQuery.of(context).size.width * 0.6,
-                            //color: Colors.amber,
-                            child: Center(
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['joinachallenge'] != null)
-                                    ? "${userLanguage['joinachallenge']}"
-                                    : "JOIN A CHALLENGE",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
+                          SizedBox(
+                            width: 20,
+                          ),
+                          Center(
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['joinachallenge'] != null)
+                                  ? "${userLanguage['joinachallenge']}"
+                                  : "My Activity",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          SizedBox(
+                            width: 150,
+                          ),
+                          InkWell(
+                            onTap: () {
+                              //print("Gopinath");
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => MyActivity()));
+                            },
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  color: blue.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['viewmore'] != null)
+                                      ? "${userLanguage['viewmore']}"
+                                      : "VIEW MORE",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8,
+                                      color: blue1,
+                                      fontWeight: FontWeight.w600),
+                                ),
                               ),
                             ),
                           ),
-                          Container(
-                            height: MediaQuery.of(context).size.height * 0.05,
-                            width: MediaQuery.of(context).size.width * 0.25,
-                            decoration: BoxDecoration(
-                                color: blue.withOpacity(0.3),
-                                borderRadius: BorderRadius.circular(10)),
-                            child: Center(
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['viewmore'] != null)
-                                    ? "${userLanguage['viewmore']}"
-                                    : "VIEW MORE",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 8,
-                                    color: blue1,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            ),
-                          )
                         ],
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
+                        // height: MediaQuery.of(context).size.height * 0.26,
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(left: 5, right: 0),
                         //color: Colors.indigo,
                         padding: EdgeInsets.only(
                             left: 4, top: 10, bottom: 0, right: 0),
                         child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: elementsOne.length,
+                          physics: NeverScrollableScrollPhysics(),
+                          scrollDirection: Axis.vertical,
+                          itemCount: 3,
+                          shrinkWrap: true,
                           itemBuilder: (context, index) {
                             return Stack(
                               children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.2,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.4,
-                                  //color: Colors.pink,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        // height:
-                                        //     MediaQuery.of(context).size.height *
-                                        //         0.18,
-                                        // width:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.35,
-                                        height: 126,
-                                        width: 130,
-                                        decoration: BoxDecoration(
-                                            // color: button.withOpacity(0.4),
-                                            color: colors[index],
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child: Container(
-                                                // height: MediaQuery.of(context)
-                                                //         .size
-                                                //         .height *
-                                                //     0.06,
-                                                // width: MediaQuery.of(context)
-                                                //     .size
-                                                //     .width,
-                                                height: 38, width: 86,
-                                                //color: Colors.red,
-                                                child: Center(
-                                                  child: Text(
-                                                      elementsOne[index]
-                                                          ['name'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      )),
-                                                ),
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Row(
+                                      children: [
+                                        SizedBox(
+                                          width: 15,
+                                        ),
+                                        Container(
+                                          height: 59,
+                                          width: 306,
+                                          decoration: BoxDecoration(
+                                              color: colors[index],
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: ListTile(
+                                            title: Text(
+                                              elementsOne[index]['name'],
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
                                               ),
                                             ),
-                                            Container(
-                                              // height: MediaQuery.of(context)
-                                              //         .size
-                                              //         .height *
-                                              //     0.06,
-                                              // width: MediaQuery.of(context)
-                                              //         .size
-                                              //         .width *
-                                              //     0.30,
-                                              height: 38, width: 98,
+                                            trailing: Container(
+                                              height: 33,
+                                              width: 85,
                                               decoration: BoxDecoration(
-                                                  color: Colors.orange,
+                                                  color: Colors.white
+                                                      .withOpacity(0.25),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          20)),
+                                                          16)),
                                               child: Row(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment.center,
@@ -629,7 +589,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           GoogleFonts.poppins(
                                                               color:
                                                                   Colors.white,
-                                                              fontSize: 16,
+                                                              fontSize: 12,
                                                               fontWeight:
                                                                   FontWeight
                                                                       .w600)),
@@ -652,24 +612,160 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 ],
                                               ),
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
-                                  ),
+                                      ],
+                                    ),
+                                    SizedBox(height: 15)
+                                  ],
                                 ),
                                 Positioned(
+                                    right: 30,
                                     top: 10,
-                                    left: 53,
-                                    child: Image.asset(
-                                      "assets/images/challenge.png",
-                                      fit: BoxFit.cover,
-                                    )),
+                                    child: Container(
+                                        height: 40,
+                                        width: 40,
+                                        child: Image.asset(
+                                          "assets/images/challenge.png",
+                                        )))
                               ],
                             );
                           },
                         ),
                       ),
+                      // Container(
+                      //   height: MediaQuery.of(context).size.height * 0.2,
+                      //   width: MediaQuery.of(context).size.width,
+                      //   margin: EdgeInsets.only(left: 5, right: 0),
+                      //   //color: Colors.indigo,
+                      //   padding: EdgeInsets.only(
+                      //       left: 4, top: 10, bottom: 0, right: 0),
+                      //   child: ListView.builder(
+                      //     scrollDirection: Axis.horizontal,
+                      //     itemCount: elementsOne.length,
+                      //     itemBuilder: (context, index) {
+                      //       return Stack(
+                      //         children: [
+                      //           Container(
+                      //             height:
+                      //                 MediaQuery.of(context).size.height * 0.2,
+                      //             width:
+                      //                 MediaQuery.of(context).size.width * 0.4,
+                      //             //color: Colors.pink,
+                      //             child: Column(
+                      //               mainAxisAlignment: MainAxisAlignment.end,
+                      //               children: [
+                      //                 Container(
+                      //                   // height:
+                      //                   //     MediaQuery.of(context).size.height *
+                      //                   //         0.18,
+                      //                   // width:
+                      //                   //     MediaQuery.of(context).size.width *
+                      //                   //         0.35,
+                      //                   height: 126,
+                      //                   width: 130,
+                      //                   decoration: BoxDecoration(
+                      //                       // color: button.withOpacity(0.4),
+                      //                       color: colors[index],
+                      //                       borderRadius:
+                      //                           BorderRadius.circular(15)),
+                      //                   child: Column(
+                      //                     mainAxisAlignment:
+                      //                         MainAxisAlignment.spaceAround,
+                      //                     children: [
+                      //                       Padding(
+                      //                         padding: const EdgeInsets.only(
+                      //                             top: 15),
+                      //                         child: Container(
+                      //                           // height: MediaQuery.of(context)
+                      //                           //         .size
+                      //                           //         .height *
+                      //                           //     0.06,
+                      //                           // width: MediaQuery.of(context)
+                      //                           //     .size
+                      //                           //     .width,
+                      //                           height: 38, width: 86,
+                      //                           //color: Colors.red,
+                      //                           child: Center(
+                      //                             child: Text(
+                      //                                 elementsOne[index]
+                      //                                     ['name'],
+                      //                                 style:
+                      //                                     GoogleFonts.poppins(
+                      //                                   color: Colors.white,
+                      //                                   fontSize: 14,
+                      //                                   fontWeight:
+                      //                                       FontWeight.w600,
+                      //                                 )),
+                      //                           ),
+                      //                         ),
+                      //                       ),
+                      //                       Container(
+                      //                         // height: MediaQuery.of(context)
+                      //                         //         .size
+                      //                         //         .height *
+                      //                         //     0.06,
+                      //                         // width: MediaQuery.of(context)
+                      //                         //         .size
+                      //                         //         .width *
+                      //                         //     0.30,
+                      //                         height: 38, width: 98,
+                      //                         decoration: BoxDecoration(
+                      //                             color: Colors.orange,
+                      //                             borderRadius:
+                      //                                 BorderRadius.circular(
+                      //                                     20)),
+                      //                         child: Row(
+                      //                           mainAxisAlignment:
+                      //                               MainAxisAlignment.center,
+                      //                           children: [
+                      //                             Text(
+                      //                                 elementsOne[index]['amt'],
+                      //                                 style:
+                      //                                     GoogleFonts.poppins(
+                      //                                         color:
+                      //                                             Colors.white,
+                      //                                         fontSize: 16,
+                      //                                         fontWeight:
+                      //                                             FontWeight
+                      //                                                 .w600)),
+                      //                             Padding(
+                      //                               padding:
+                      //                                   const EdgeInsets.only(
+                      //                                       left: 5),
+                      //                               child: Text(
+                      //                                   elementsOne[index]
+                      //                                       ['type'],
+                      //                                   style:
+                      //                                       GoogleFonts.poppins(
+                      //                                           color: Colors
+                      //                                               .white,
+                      //                                           fontSize: 12,
+                      //                                           fontWeight:
+                      //                                               FontWeight
+                      //                                                   .w400)),
+                      //                             ),
+                      //                           ],
+                      //                         ),
+                      //                       ),
+                      //                     ],
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //           Positioned(
+                      //               top: 10,
+                      //               left: 53,
+                      //               child: Image.asset(
+                      //                 "assets/images/challenge.png",
+                      //                 fit: BoxFit.cover,
+                      //               )),
+                      //         ],
+                      //       );
+                      //     },
+                      //   ),
+                      // ),
                     ],
                   ),
                 ),
