@@ -5,6 +5,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/horizontallist.dart';
 import 'package:momerlin/wallet_screens/my_activity.dart';
+import 'package:momerlin/wallet_screens/my_reports.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -336,13 +337,19 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                                print("Gopinath");
+                                //print("Gopinath");
                                 if (elements[index]['name'] ==
                                     '@momozuno \nhas earned') {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) => MyActivity()));
+                                } else if (elements[index]['name'] ==
+                                    '@jade.sim \nhas earned') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyReports()));
                                 }
                               },
                               child: Stack(
