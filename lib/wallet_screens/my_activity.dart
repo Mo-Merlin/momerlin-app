@@ -88,7 +88,7 @@ class _MyActivityState extends State<MyActivity> {
     Colors.greenAccent,
     Colors.orangeAccent,
   ];
-  bool _value = false;
+  //bool _value = false;
   int val = 1;
   @override
   Widget build(BuildContext context) {

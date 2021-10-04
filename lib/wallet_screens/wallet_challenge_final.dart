@@ -111,28 +111,29 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                           height: 25,
                         ),
                         InkWell(
-                          onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => WalletChallenges()));
-                          },
+                          onTap: () {},
                           child: Container(
-                            width: 245,
+                            width: 196,
                             height: 50,
                             padding: EdgeInsets.only(left: 20),
                             decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(20),
+                                borderRadius: BorderRadius.circular(30),
                                 color: blue1),
                             child: Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
+                                IconButton(
+                                  onPressed: () {},
+                                  icon: Icon(Icons.ios_share),
+                                  color: Colors.white,
+                                  iconSize: 15,
+                                ),
                                 Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
-                                          userLanguage['gohome'] != null)
-                                      ? "${userLanguage['gohome']}"
-                                      : "GO HOME",
+                                          userLanguage['shareevent'] != null)
+                                      ? "${userLanguage['shareevent']}"
+                                      : "SHARE EVENT",
                                   style: GoogleFonts.poppins(
                                       color: white,
                                       letterSpacing: 1,
@@ -151,7 +152,12 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                           height: 10,
                         ),
                         InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => WalletChallenges()));
+                          },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
                             height: MediaQuery.of(context).size.height * 0.05,
@@ -162,9 +168,9 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                 Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
-                                          userLanguage['createanother'] != null)
-                                      ? "${userLanguage['createanother']}"
-                                      : "CREATE ANOTHER",
+                                          userLanguage['gohome'] != null)
+                                      ? "${userLanguage['gohome']}"
+                                      : "GO HOME",
                                   style: GoogleFonts.poppins(
                                       color: white,
                                       letterSpacing: 1,
