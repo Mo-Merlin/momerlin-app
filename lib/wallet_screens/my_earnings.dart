@@ -4,9 +4,10 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
-import 'package:bezier_chart/bezier_chart.dart';
+//import 'package:bezier_chart/bezier_chart.dart';
+import 'package:fl_chart/fl_chart.dart';
 
 class MyEarnings extends StatefulWidget {
   const MyEarnings({Key key}) : super(key: key);
@@ -16,8 +17,8 @@ class MyEarnings extends StatefulWidget {
 }
 
 class _MyEarningsState extends State<MyEarnings> {
-  List<SalesData> _chartData;
-  TooltipBehavior _tooltipBehavior;
+  // List<SalesData> _chartData;
+  // TooltipBehavior _tooltipBehavior;
 
   var balance = 0.00;
 
@@ -26,8 +27,8 @@ class _MyEarningsState extends State<MyEarnings> {
   void initState() {
     super.initState();
     getUserLanguage();
-    _chartData = getChartData();
-    _tooltipBehavior = TooltipBehavior(enable: true);
+    // _chartData = getChartData();
+    // _tooltipBehavior = TooltipBehavior(enable: true);
   }
 
   // ignore: todo
@@ -323,38 +324,71 @@ class _MyEarningsState extends State<MyEarnings> {
                 SizedBox(
                   height: 30,
                 ),
-                Container(
-                  //color: Colors.red,
-                  height: MediaQuery.of(context).size.height / 3,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  child: BezierChart(
-                    bezierChartScale: BezierChartScale.CUSTOM,
-                    xAxisCustomValues: const [0, 5, 10, 15, 20, 25, 30, 35],
-                    series: const [
-                      BezierLine(
-                        data: const [
-                          DataPoint<double>(value: 10, xAxis: 0),
-                          DataPoint<double>(value: 130, xAxis: 5),
-                          DataPoint<double>(value: 50, xAxis: 10),
-                          DataPoint<double>(value: 150, xAxis: 15),
-                          DataPoint<double>(value: 75, xAxis: 20),
-                          DataPoint<double>(value: 0, xAxis: 25),
-                          DataPoint<double>(value: 5, xAxis: 30),
-                          DataPoint<double>(value: 45, xAxis: 35),
-                        ],
-                      ),
-                    ],
-                    config: BezierChartConfig(
-                      verticalIndicatorStrokeWidth: 3.0,
-                      bubbleIndicatorColor: Colors.orange,
-                      footerHeight: 40,
-                      verticalIndicatorColor: Colors.white,
-                      showVerticalIndicator: true,
-                      //backgroundColor: Colors.red,
-                      snap: true,
+                Padding(
+                  padding: const EdgeInsets.only(right: 20),
+                  child: Container(
+                    height: 300,
+                    width: 400,
+                    child: LineChart(
+                      LineChartData(
+                          borderData: FlBorderData(show: false),
+                          lineBarsData: [
+                            LineChartBarData(
+                                spots: [
+                                  FlSpot(1, 3),
+                                  FlSpot(2, 10),
+                                  FlSpot(3, 7),
+                                  FlSpot(4, 12),
+                                  FlSpot(5, 13),
+                                  FlSpot(6, 17),
+                                  FlSpot(7, 15),
+                                  FlSpot(8, 20),
+                                  FlSpot(9, 11),
+                                  FlSpot(10, 17),
+                                  FlSpot(11, 12),
+                                  FlSpot(12, 5)
+                                ],
+                                isCurved: true,
+                                colors: [Colors.orange])
+                          ]),
                     ),
                   ),
                 ),
+
+                /*****Beziwer chart */
+                // Container(
+                //   //color: Colors.red,
+                //   height: MediaQuery.of(context).size.height / 3,
+                //   width: MediaQuery.of(context).size.width * 0.9,
+                //   child: BezierChart(
+                //     bezierChartScale: BezierChartScale.CUSTOM,
+                //     xAxisCustomValues: const [0, 5, 10, 15, 20, 25, 30, 35],
+                //     series: const [
+                //       BezierLine(
+                //         data: const [
+                //           DataPoint<double>(value: 10, xAxis: 0),
+                //           DataPoint<double>(value: 130, xAxis: 5),
+                //           DataPoint<double>(value: 50, xAxis: 10),
+                //           DataPoint<double>(value: 150, xAxis: 15),
+                //           DataPoint<double>(value: 75, xAxis: 20),
+                //           DataPoint<double>(value: 0, xAxis: 25),
+                //           DataPoint<double>(value: 5, xAxis: 30),
+                //           DataPoint<double>(value: 45, xAxis: 35),
+                //         ],
+                //       ),
+                //     ],
+                //     config: BezierChartConfig(
+                //       verticalIndicatorStrokeWidth: 3.0,
+                //       bubbleIndicatorColor: Colors.orange,
+                //       footerHeight: 40,
+                //       verticalIndicatorColor: Colors.white,
+                //       showVerticalIndicator: true,
+                //       //backgroundColor: Colors.red,
+                //       snap: true,
+                //     ),
+                //   ),
+                // ),
+                /****** old chart 1****** */
                 // Container(
                 //   height: 300,
                 //   //color: Colors.amberAccent,
