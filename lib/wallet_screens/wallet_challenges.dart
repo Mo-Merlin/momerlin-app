@@ -4,6 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/horizontallist.dart';
+import 'package:momerlin/wallet_screens/my_activity.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
@@ -272,7 +273,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      color: white.withOpacity(0.2),
+                   
+                      color: Color(0xff313248),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                     children: [
@@ -333,124 +335,137 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           scrollDirection: Axis.horizontal,
                           itemCount: elements.length,
                           itemBuilder: (context, index) {
-                            return Stack(
-                              children: [
-                                Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.16,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.35,
-                                  //color: Colors.pink,
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.end,
-                                    children: [
-                                      Container(
-                                        // height:
-                                        //     MediaQuery.of(context).size.height *
-                                        //         0.15,
-                                        // width:
-                                        //     MediaQuery.of(context).size.width *
-                                        //         0.30,
-                                        height: 112,
-                                        width: 113,
-                                        decoration: BoxDecoration(
-                                            color: button.withOpacity(0.4),
-                                            borderRadius:
-                                                BorderRadius.circular(15)),
-                                        child: Column(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceAround,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  top: 15),
-                                              child: Container(
+                            return InkWell(
+                              onTap: () {
+                             
+                                if (elements[index]['name'] ==
+                                    '@momozuno \nhas earned') {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => MyActivity()));
+                                }
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.16,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.35,
+                                    //color: Colors.pink,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          // height:
+                                          //     MediaQuery.of(context).size.height *
+                                          //         0.15,
+                                          // width:
+                                          //     MediaQuery.of(context).size.width *
+                                          //         0.30,
+                                          height: 112,
+                                          width: 113,
+                                          decoration: BoxDecoration(
+                                              color: button.withOpacity(0.4),
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 15),
+                                                child: Container(
+                                                  // height: MediaQuery.of(context)
+                                                  //         .size
+                                                  //         .height *
+                                                  //     0.06,
+                                                  // width: MediaQuery.of(context)
+                                                  //     .size
+                                                  //     .width,
+                                                  height: 29, width: 79,
+                                                  //color: Colors.red,
+                                                  child: Text(
+                                                      elements[index]['name'],
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.grey,
+                                                        fontSize: 11,
+                                                      )),
+                                                ),
+                                              ),
+                                              Container(
                                                 // height: MediaQuery.of(context)
                                                 //         .size
                                                 //         .height *
                                                 //     0.06,
                                                 // width: MediaQuery.of(context)
-                                                //     .size
-                                                //     .width,
-                                                height: 29, width: 79,
-                                                //color: Colors.red,
-                                                child: Text(
-                                                    elements[index]['name'],
-                                                    style: GoogleFonts.poppins(
-                                                      color: Colors.grey,
-                                                      fontSize: 11,
-                                                    )),
-                                              ),
-                                            ),
-                                            Container(
-                                              // height: MediaQuery.of(context)
-                                              //         .size
-                                              //         .height *
-                                              //     0.06,
-                                              // width: MediaQuery.of(context)
-                                              //         .size
-                                              //         .width *
-                                              //     0.30,
-                                              height: 43, width: 93,
-                                              decoration: BoxDecoration(
-                                                  color: Colors.white
-                                                      .withOpacity(0.25),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(elements[index]['amt'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 20,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold)),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5),
-                                                    child: Text(
-                                                        elements[index]['type'],
+                                                //         .size
+                                                //         .width *
+                                                //     0.30,
+                                                height: 43, width: 93,
+                                                decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.25),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(elements[index]['amt'],
                                                         style:
                                                             GoogleFonts.poppins(
                                                                 color: Colors
-                                                                    .orangeAccent,
-                                                                fontSize: 7,
+                                                                    .white,
+                                                                fontSize: 20,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w500)),
-                                                  ),
-                                                ],
+                                                                        .bold)),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text(
+                                                          elements[index]
+                                                              ['type'],
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors
+                                                                  .orangeAccent,
+                                                              fontSize: 7,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w500)),
+                                                    ),
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
+                                            ],
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
-                                ),
-                                Positioned(
-                                  top: 5,
-                                  left: 53,
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                        height: 30,
-                                        width: 30,
-                                        color: button,
-                                        child: Image.network(
-                                          elements[index]['url'],
-                                          fit: BoxFit.cover,
-                                        )),
-                                  ),
-                                )
-                              ],
+                                  Positioned(
+                                    top: 5,
+                                    left: 53,
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Container(
+                                          height: 30,
+                                          width: 30,
+                                          color: button,
+                                          child: Image.network(
+                                            elements[index]['url'],
+                                            fit: BoxFit.cover,
+                                          )),
+                                    ),
+                                  )
+                                ],
+                              ),
                             );
                           },
                         ),
@@ -913,7 +928,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                     ],
                   ),
                 ),
-                // SizedBox(height: 100),
+                SizedBox(
+                  height: 100,
+                ),
               ],
             ),
           ),
@@ -1180,7 +1197,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     userLanguage['running'] !=
                                                         null)
                                                 ? "${userLanguage['running']}"
-                                                : "Running",
+                                                : "RUNNING",
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.white,
@@ -1206,13 +1223,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   borderRadius: BorderRadius.circular(15),
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  selectsat(context);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) =>
-                                  //             WalletChallengeTwo()));
+                                  if (iswalking == true || isrunning == true) {
+                                    Navigator.pop(context);
+                                    selectsat(context);
+                                  }
+                                  return;
                                 },
                                 //color: blue.withOpacity(0.3),
                                 color: iswalking == true || isrunning == true
@@ -1793,16 +1808,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     borderRadius: BorderRadius.circular(17),
                                   ),
                                   onPressed: () {
-                                    Navigator.pop(context);
-                                    selectshowcompetitors(context);
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             WalletChallengeFour()));
+                                    if (ischeckvisible == true) {
+                                      Navigator.pop(context);
+                                      selectshowcompetitors(context);
+                                    }
+                                    return;
                                   },
                                   //color: blue.withOpacity(0.3),
-                                  color: blue1,
+                                  color:
+                                      ischeckvisible == true ? blue1 : button,
                                   child: Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&
@@ -1939,7 +1953,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   padding: const EdgeInsets.only(top: 10),
                                   child: Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.2,
+                                        0.15,
                                     // width: MediaQuery.of(context).size.width,
                                     //color: Colors.red,
                                     child: Center(
@@ -1969,7 +1983,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: 30,
+                              height: 20,
                             ),
                             HorizontalList(),
                             // Container(
@@ -2003,7 +2017,24 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             //       )),
                             // ),
                             SizedBox(
-                              height: 70,
+                              height: 30,
+                            ),
+                            Text(
+                              "WINNER GETS",
+                              style: GoogleFonts.poppins(
+                                  color: Color(0xFF808DA7),
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            Text(
+                              "7500 Gwei",
+                              style: GoogleFonts.montserrat(
+                                  color: Colors.orange,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                            SizedBox(
+                              height: 50,
                             ),
                             Container(
                               height: 55,
@@ -2177,6 +2208,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ],
                               ),
                               Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
@@ -2187,6 +2220,23 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               userLanguage['activity'] != null)
                                           ? "${userLanguage['activity']}"
                                           : "Activity",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.grey,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w400),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        top: 30, right: 50),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['satswagered'] !=
+                                                  null)
+                                          ? "${userLanguage['satswagered']}"
+                                          : "SATS Wagered",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.grey,
@@ -2206,7 +2256,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           MediaQuery.of(context).size.width *
                                               0.15,
                                       width: MediaQuery.of(context).size.width *
-                                          0.9,
+                                          0.41,
                                       decoration: BoxDecoration(
                                           color: button,
                                           borderRadius:
@@ -2244,26 +2294,26 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                           ),
-                                          Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 185),
-                                            child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(30),
-                                              child: Container(
-                                                height: 25,
-                                                width: 25,
-                                                color: blue1,
-                                                child: IconButton(
-                                                    onPressed: () {},
-                                                    icon: Icon(
-                                                      Icons.check,
-                                                      color: Colors.white,
-                                                      size: 11,
-                                                    )),
-                                              ),
-                                            ),
-                                          ),
+                                          // Padding(
+                                          //   padding: const EdgeInsets.only(
+                                          //       left: 185),
+                                          //   child: ClipRRect(
+                                          //     borderRadius:
+                                          //         BorderRadius.circular(30),
+                                          //     child: Container(
+                                          //       height: 25,
+                                          //       width: 25,
+                                          //       color: blue1,
+                                          //       child: IconButton(
+                                          //           onPressed: () {},
+                                          //           icon: Icon(
+                                          //             Icons.check,
+                                          //             color: Colors.white,
+                                          //             size: 11,
+                                          //           )),
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ],
                                       ),
                                     ),
@@ -2301,7 +2351,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           MediaQuery.of(context).size.width *
                                               0.15,
                                       width: MediaQuery.of(context).size.width *
-                                          0.9,
+                                          0.41,
                                       decoration: BoxDecoration(
                                           color: button,
                                           borderRadius:
@@ -2313,7 +2363,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 const EdgeInsets.only(left: 20),
                                             child: Text(
                                               "125",
-                                              style: GoogleFonts.poppins(
+                                              style: GoogleFonts.montserrat(
                                                   decoration:
                                                       TextDecoration.none,
                                                   color: Colors.white,
@@ -2327,7 +2377,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             child: Text(
                                               (lang.length != null &&
                                                       lang.length != 0 &&
-                                                      userLanguage['sats'] !=
+                                                      userLanguage['gwei'] !=
                                                           null)
                                                   ? "${userLanguage['sats']}"
                                                   : "Gwei",
@@ -2340,8 +2390,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             ),
                                           ),
                                           Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 210),
+                                            padding:
+                                                const EdgeInsets.only(left: 25),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -2437,7 +2487,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 185),
+                                                left: 190),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -2536,6 +2586,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               SizedBox(
                                 height: 50,
                               ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    "WINNER GETS",
+                                    style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.white,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w500),
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Text(
+                                    "7500 Gwei",
+                                    style: GoogleFonts.montserrat(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.orange,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 50,
+                              ),
                               Container(
                                 height: 55,
                                 width: 321,
@@ -2569,6 +2646,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         fontWeight: FontWeight.w600,
                                       ),
                                     )),
+                              ),
+                              SizedBox(
+                                height: 50,
                               ),
                             ],
                           ),

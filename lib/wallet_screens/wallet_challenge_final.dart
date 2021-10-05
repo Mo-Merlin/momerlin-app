@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-// import 'package:momerlin/wallet_screens/wallet_challenges.dart';
-import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
-// import 'package:momerlin/walletcreation.dart/wallethome.dart';
+import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 
 class ChallengeFinal extends StatefulWidget {
   const ChallengeFinal({Key key}) : super(key: key);
@@ -67,10 +64,10 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
             Stack(
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 20, right: 20, top: 100),
+                  padding: const EdgeInsets.only(left: 30, right: 30, top: 100),
                   child: Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.5,
+                    width: 325,
+                    height: 367,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: button,
@@ -86,7 +83,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                   lang.length != 0 &&
                                   userLanguage['letthechallengebegin'] != null)
                               ? "${userLanguage['letthechallengebegin']}"
-                              : "Let the challenge \nbegin!",
+                              : "Challenge \nCreated!",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: Colors.white,
@@ -95,18 +92,34 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                               fontWeight: FontWeight.w600),
                         ),
                         SizedBox(
-                          height: 50,
+                          height: 15,
+                        ),
+                        Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['letthechallengebegin'] != null)
+                              ? "${userLanguage['letthechallengebegin']}"
+                              : "May the odds be ever in your favour!",
+                          textAlign: TextAlign.center,
+                          style: GoogleFonts.poppins(
+                            color: text1,
+                            letterSpacing: 1,
+                            fontSize: 12,
+                          ),
+                        ),
+                        SizedBox(
+                          height: 25,
                         ),
                         InkWell(
                           onTap: () {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Tabscreen()));
+                                    builder: (context) => WalletChallenges()));
                           },
                           child: Container(
-                            width: MediaQuery.of(context).size.width * 0.8,
-                            height: MediaQuery.of(context).size.height * 0.08,
+                            width: 245,
+                            height: 50,
                             padding: EdgeInsets.only(left: 20),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(20),
@@ -138,13 +151,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                           height: 10,
                         ),
                         InkWell(
-                          onTap: () {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        WalletCreatingChallenge()));
-                          },
+                          onTap: () {},
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
                             height: MediaQuery.of(context).size.height * 0.05,
@@ -178,8 +185,9 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                 ),
                 Positioned(
                   left: 130,
-                  top: 35,
+                  top: 65,
                   child: Image.asset("assets/images/chellenge.png"),
+                  //child: SvgPicture.asset("assets/images/challenge_final.svg"),
                 )
               ],
             ),
