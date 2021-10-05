@@ -602,69 +602,87 @@ class _WalletTwoState extends State<WalletTwo> {
                       SizedBox(
                         height: 10,
                       ),
-                      transactions1.length == 0
-                          ? SizedBox(
-                              height: 0,
-                              width: 0,
-                            )
-                          : DraggableScrollableSheet(
-                              initialChildSize: 0.41,
-                              minChildSize: 0.41,
-                              maxChildSize: 0.7,
-                              builder:
-                                  (BuildContext context, myscrollController) {
-                                return Container(
-                                  decoration: BoxDecoration(
-                                    color: button,
-                                    borderRadius: BorderRadius.only(
-                                      topLeft: Radius.circular(40),
-                                      topRight: Radius.circular(40),
-                                    ),
+                      DraggableScrollableSheet(
+                        initialChildSize: 0.41,
+                        minChildSize: 0.41,
+                        maxChildSize: 0.7,
+                        builder: (BuildContext context, myscrollController) {
+                          return Container(
+                            decoration: BoxDecoration(
+                              color: button,
+                              borderRadius: BorderRadius.only(
+                                topLeft: Radius.circular(40),
+                                topRight: Radius.circular(40),
+                              ),
+                            ),
+                            //color: button,
+                            child: Stack(
+                              // crossAxisAlignment: CrossAxisAlignment,
+                              alignment: Alignment.topCenter,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 20),
+                                  child: Container(
+                                    height: 2,
+                                    width: 50,
+                                    decoration: BoxDecoration(
+                                        color: grey,
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
                                   ),
-                                  //color: button,
-                                  child: Stack(
-                                    // crossAxisAlignment: CrossAxisAlignment,
-                                    alignment: Alignment.topCenter,
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 40),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsets.only(top: 20),
-                                        child: Container(
-                                          height: 2,
-                                          width: 50,
-                                          decoration: BoxDecoration(
-                                              color: grey,
-                                              borderRadius:
-                                                  BorderRadius.circular(10)),
+                                        padding:
+                                            const EdgeInsets.only(left: 20),
+                                        child: Text(
+                                          (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['transaction'] !=
+                                                      null)
+                                              ? "${userLanguage['transaction']}"
+                                              : "Transaction",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 20,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w500,
+                                          ),
                                         ),
                                       ),
-                                      Padding(
-                                        padding: const EdgeInsets.only(top: 40),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                    ],
+                                  ),
+                                ),
+                                transactions1.length == 0
+                                    ? Container(
+                                        padding: EdgeInsets.only(top: 80),
+                                        child: Column(
                                           children: [
+                                            Image.asset(
+                                              "assets/images/Wallet2.png",
+                                              width: MediaQuery.of(context)
+                                                  .size
+                                                  .width,
+                                            ),
                                             Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 20),
+                                              padding: EdgeInsets.only(
+                                                  left: 50, right: 50),
                                               child: Text(
-                                                (lang.length != null &&
-                                                        lang.length != 0 &&
-                                                        userLanguage[
-                                                                'transaction'] !=
-                                                            null)
-                                                    ? "${userLanguage['transaction']}"
-                                                    : "Transaction",
+                                                "Abracadabra look over here,Spend some Gwei and it will appea",
+                                                textAlign: TextAlign.center,
                                                 style: GoogleFonts.poppins(
-                                                  fontSize: 20,
-                                                  color: Colors.white,
-                                                  fontWeight: FontWeight.w500,
-                                                ),
+                                                    fontSize: 13,
+                                                    fontWeight: FontWeight.w400,
+                                                    color: Colors.white38),
                                               ),
                                             ),
                                           ],
-                                        ),
-                                      ),
-                                      Padding(
+                                        ))
+                                    : Padding(
                                         padding: EdgeInsets.only(top: 50),
                                         // top: 50,
                                         child: ListView.builder(
@@ -798,11 +816,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                           },
                                         ),
                                       ),
-                                    ],
-                                  ),
-                                );
-                              },
-                            )
+                              ],
+                            ),
+                          );
+                        },
+                      )
                     ],
                   ),
           );

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/my_activity.dart';
+import 'package:momerlin/wallet_screens/my_reports.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
@@ -38,6 +41,7 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
             index: _selectedIndex,
             children: [
               MyAnimation(animation: animation, child: WalletTwo()),
+              MyAnimation(animation: animation, child: MyReports()),
               MyAnimation(animation: animation, child: WalletChallenges()),
               MyAnimation(animation: animation, child: WalletProfile())
             ],
@@ -47,11 +51,11 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
               child: AnimatedContainer(
                 alignment: Alignment.center,
                 margin: EdgeInsets.only(
-                  left: 80,
-                  right: 50,
+                  left: 40,
+                  right: 30,
                 ),
                 height: 90,
-                width: 250,
+                // width: 350,
                 duration: Duration(seconds: 0),
                 child: Center(
                   child: Card(
@@ -66,51 +70,82 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
                         Container(
                           alignment: Alignment.center,
                           height: 70,
-                          width: 250,
+                          // width: 280,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      _onItemTapped(0);
-                                    });
-                                  },
-                                  child: Container(
-                                    width: 70,
-                                    height: 80,
-                                    decoration: _selectedIndex == 0
-                                        ? new BoxDecoration(
-                                            color: blue1,
-                                            borderRadius: BorderRadius.all(
-                                                Radius.circular(50)),
-                                          )
-                                        : new BoxDecoration(),
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceEvenly,
-                                      children: [
-                                        Container(
-                                          child: Icon(
-                                              Icons.attach_money_outlined,
-                                              size: 35,
-                                              color: _selectedIndex == 0
-                                                  ? white
-                                                  : grey),
-                                        ),
-                                      ],
-                                    ),
-                                  )),
+                                onTap: () {
+                                  setState(() {
+                                    _onItemTapped(0);
+                                  });
+                                },
+                                child: Container(
+                                  width: 70,
+                                  height: 80,
+                                  decoration: _selectedIndex == 0
+                                      ? new BoxDecoration(
+                                          color: blue1,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)),
+                                        )
+                                      : new BoxDecoration(),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        child: Icon(Icons.attach_money_outlined,
+                                            size: 35,
+                                            color: _selectedIndex == 0
+                                                ? white
+                                                : grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              GestureDetector(
+                                onTap: () {
+                                  setState(() {
+                                    _onItemTapped(1);
+                                  });
+                                },
+                                child: Container(
+                                  width: 70,
+                                  height: 80,
+                                  decoration: _selectedIndex == 1
+                                      ? new BoxDecoration(
+                                          color: blue1,
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(50)),
+                                        )
+                                      : new BoxDecoration(),
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceEvenly,
+                                    children: [
+                                      Container(
+                                        child: Icon(Icons.bar_chart_rounded,
+                                            size: 35,
+                                            color: _selectedIndex == 1
+                                                ? white
+                                                : grey),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
                               GestureDetector(
                                   onTap: () {
                                     setState(() {
-                                      _onItemTapped(1);
+                                      _onItemTapped(2);
                                     });
                                   },
                                   child: Container(
                                     width: 70,
                                     height: 80,
-                                    decoration: _selectedIndex == 1
+                                    decoration: _selectedIndex == 2
                                         ? new BoxDecoration(
                                             color: blue1,
                                             borderRadius: BorderRadius.all(
@@ -123,9 +158,10 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
                                       children: [
                                         Container(
                                           margin: EdgeInsets.only(top: 5),
-                                          child: Icon(Icons.bar_chart_rounded,
+                                          child: Icon(
+                                              Icons.card_membership_sharp,
                                               size: 35,
-                                              color: _selectedIndex == 1
+                                              color: _selectedIndex == 2
                                                   ? white
                                                   : grey),
                                         ),
@@ -135,13 +171,13 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
                               GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    _onItemTapped(2);
+                                    _onItemTapped(3);
                                   });
                                 },
                                 child: Container(
                                   width: 70,
                                   height: 80,
-                                  decoration: _selectedIndex == 2
+                                  decoration: _selectedIndex == 3
                                       ? new BoxDecoration(
                                           color: blue1,
                                           borderRadius: BorderRadius.all(
@@ -155,7 +191,7 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
                                       Container(
                                         child: Icon(Icons.person_outline,
                                             size: 35,
-                                            color: _selectedIndex == 2
+                                            color: _selectedIndex == 3
                                                 ? white
                                                 : grey),
                                       ),

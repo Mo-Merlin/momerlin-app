@@ -5,10 +5,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e61de8e6-6c53-41fb-9406-f03dd1f0527e" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.dart_tool/package_config.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dart_tool/package_config_subset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.dart_tool/version" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/Wallet2.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/berger.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/coin.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/pig_rr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/images/rr.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/wallet_screens/my_earnings.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/wallet_screens/my_earnings_expenses.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/wallet_screens/my_reports.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/lib/wallet_screens/spending_report.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.packages" beforeDir="false" afterPath="$PROJECT_DIR$/.packages" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Debug.xcconfig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Flutter/Release.xcconfig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/output-onlinegiftools.gif" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/seed.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/images/seed1.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Podfile" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Podfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcodeproj/project.pbxproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" beforeDir="false" afterPath="$PROJECT_DIR$/ios/Runner.xcworkspace/contents.xcworkspacedata" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabscreen/tabscreen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabscreen/tabscreen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/wallet_screens/my_activity.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wallet_screens/my_activity.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/wallet_screens/wallet_challenges.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wallet_screens/wallet_challenges.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/wallet_screens/wallet_two.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/wallet_screens/wallet_two.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/walletcreation.dart/wallethome.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/walletcreation.dart/wallethome.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.lock" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
