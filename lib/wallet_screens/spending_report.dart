@@ -41,6 +41,61 @@ class _SpendingReportState extends State<SpendingReport> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
+      appBar: AppBar(
+        backgroundColor: blue1,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 50,
+              // width: 50,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
+            ),
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['spendingReports'] != null)
+              ? "${userLanguage['spendingReports']}"
+              : "SPENDING REPORTS",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WalletProfile()));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.asset(
+                  "assets/images/profile.png",
+                  fit: BoxFit.cover,
+                  width: 46,
+                  height: 46,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Stack(
         children: [
           SingleChildScrollView(
@@ -53,84 +108,84 @@ class _SpendingReportState extends State<SpendingReport> {
                     children: [
                       Positioned(
                         child: Image.asset(
-                          "assets/images/rr.png",
+                          "assets/images/rr1.png",
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.cover,
                         ),
                       ),
+                      // Positioned(
+                      //   top: 45,
+                      //   child: Container(
+                      //     //color: Colors.amber,
+                      //     child: Row(
+                      //       crossAxisAlignment: CrossAxisAlignment.center,
+                      //       mainAxisAlignment: MainAxisAlignment.start,
+                      //       children: [
+                      //         Padding(
+                      //           padding: const EdgeInsets.all(5.0),
+                      //           child: ClipRRect(
+                      //             borderRadius: BorderRadius.circular(30),
+                      //             child: Container(
+                      //               color: button,
+                      //               child: IconButton(
+                      //                   onPressed: () {
+                      //                     Navigator.pop(context);
+                      //                   },
+                      //                   icon: Icon(
+                      //                     Icons.arrow_back,
+                      //                     color: Colors.white,
+                      //                   )),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         SizedBox(
+                      //           width: 15,
+                      //         ),
+                      //         Text(
+                      //           (lang.length != null &&
+                      //                   lang.length != 0 &&
+                      //                   userLanguage['myearnings'] != null)
+                      //               ? "${userLanguage['myearnings']}"
+                      //               : "MY EARNINGS",
+                      //           textAlign: TextAlign.center,
+                      //           style: GoogleFonts.poppins(
+                      //               color: white,
+                      //               fontSize: 15,
+                      //               fontWeight: FontWeight.w700),
+                      //         ),
+                      //         SizedBox(
+                      //           width: MediaQuery.of(context).size.width / 2.7,
+                      //         ),
+                      //         Padding(
+                      //           padding: const EdgeInsets.all(5.0),
+                      //           child: InkWell(
+                      //             onTap: () {
+                      //               Navigator.push(
+                      //                   context,
+                      //                   MaterialPageRoute(
+                      //                       builder: (context) =>
+                      //                           WalletProfile()));
+                      //             },
+                      //             child: ClipRRect(
+                      //               borderRadius: BorderRadius.circular(30),
+                      //               child: Container(
+                      //                 color: button,
+                      //                 child: Image.asset(
+                      //                   "assets/images/profile.png",
+                      //                   fit: BoxFit.fill,
+                      //                   width: 46,
+                      //                   height: 46,
+                      //                 ),
+                      //               ),
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       Positioned(
-                        top: 45,
-                        child: Container(
-                          //color: Colors.amber,
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Container(
-                                    color: button,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          Navigator.pop(context);
-                                        },
-                                        icon: Icon(
-                                          Icons.arrow_back,
-                                          color: Colors.white,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                              SizedBox(
-                                width: 15,
-                              ),
-                              Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['myearnings'] != null)
-                                    ? "${userLanguage['myearnings']}"
-                                    : "MY EARNINGS",
-                                textAlign: TextAlign.center,
-                                style: GoogleFonts.poppins(
-                                    color: white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w700),
-                              ),
-                              SizedBox(
-                                width: MediaQuery.of(context).size.width / 2.7,
-                              ),
-                              Padding(
-                                padding: const EdgeInsets.all(5.0),
-                                child: InkWell(
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WalletProfile()));
-                                  },
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      color: button,
-                                      child: Image.asset(
-                                        "assets/images/profile.png",
-                                        fit: BoxFit.fill,
-                                        width: 46,
-                                        height: 46,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      Positioned(
-                        top: 105,
+                        top: 40,
                         child: Row(
                           children: [
                             Text(
