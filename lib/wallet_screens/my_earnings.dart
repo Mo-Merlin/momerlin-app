@@ -6,6 +6,7 @@ import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
+import 'package:bezier_chart/bezier_chart.dart';
 
 class MyEarnings extends StatefulWidget {
   const MyEarnings({Key key}) : super(key: key);
@@ -323,34 +324,66 @@ class _MyEarningsState extends State<MyEarnings> {
                   height: 30,
                 ),
                 Container(
-                  height: 300,
-                  //color: Colors.amberAccent,
-                  child: SfCartesianChart(
-                    //title: ChartTitle(text: 'Yearly sales analysis'),
-                    // legend: Legend(isVisible: true),
-                    tooltipBehavior: _tooltipBehavior,
-                    series: <ChartSeries>[
-                      LineSeries<SalesData, double>(
-                        color: Colors.orange,
-                        //name: 'Sales',
-                        dataSource: _chartData,
-                        xValueMapper: (SalesData sales, _) => sales.year,
-                        yValueMapper: (SalesData sales, _) => sales.sales,
-                        // dataLabelSettings: DataLabelSettings(
-                        //     isVisible: true, color: Colors.orange),
-
-                        enableTooltip: true,
+                  //color: Colors.red,
+                  height: MediaQuery.of(context).size.height / 3,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  child: BezierChart(
+                    bezierChartScale: BezierChartScale.CUSTOM,
+                    xAxisCustomValues: const [0, 5, 10, 15, 20, 25, 30, 35],
+                    series: const [
+                      BezierLine(
+                        data: const [
+                          DataPoint<double>(value: 10, xAxis: 0),
+                          DataPoint<double>(value: 130, xAxis: 5),
+                          DataPoint<double>(value: 50, xAxis: 10),
+                          DataPoint<double>(value: 150, xAxis: 15),
+                          DataPoint<double>(value: 75, xAxis: 20),
+                          DataPoint<double>(value: 0, xAxis: 25),
+                          DataPoint<double>(value: 5, xAxis: 30),
+                          DataPoint<double>(value: 45, xAxis: 35),
+                        ],
                       ),
                     ],
-                    primaryXAxis: NumericAxis(
-                      edgeLabelPlacement: EdgeLabelPlacement.shift,
+                    config: BezierChartConfig(
+                      verticalIndicatorStrokeWidth: 3.0,
+                      bubbleIndicatorColor: Colors.orange,
+                      footerHeight: 40,
+                      verticalIndicatorColor: Colors.white,
+                      showVerticalIndicator: true,
+                      //backgroundColor: Colors.red,
+                      snap: true,
                     ),
-                    // primaryYAxis: NumericAxis(
-                    //     labelFormat: '{value}M',
-                    //     numberFormat:
-                    //         NumberFormat.simpleCurrency(decimalDigits: 0)),
                   ),
                 ),
+                // Container(
+                //   height: 300,
+                //   //color: Colors.amberAccent,
+                //   child: SfCartesianChart(
+                //     //title: ChartTitle(text: 'Yearly sales analysis'),
+                //     // legend: Legend(isVisible: true),
+                //     tooltipBehavior: _tooltipBehavior,
+                //     series: <ChartSeries>[
+                //       LineSeries<SalesData, double>(
+                //         color: Colors.orange,
+                //         //name: 'Sales',
+                //         dataSource: _chartData,
+                //         xValueMapper: (SalesData sales, _) => sales.year,
+                //         yValueMapper: (SalesData sales, _) => sales.sales,
+                //         // dataLabelSettings: DataLabelSettings(
+                //         //     isVisible: true, color: Colors.orange),
+
+                //         enableTooltip: true,
+                //       ),
+                //     ],
+                //     primaryXAxis: NumericAxis(
+                //       edgeLabelPlacement: EdgeLabelPlacement.shift,
+                //     ),
+                //     // primaryYAxis: NumericAxis(
+                //     //     labelFormat: '{value}M',
+                //     //     numberFormat:
+                //     //         NumberFormat.simpleCurrency(decimalDigits: 0)),
+                //   ),
+                // ),
                 SizedBox(
                   height: 400,
                 ),
