@@ -445,7 +445,7 @@ class _MyEarningsState extends State<MyEarnings> {
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        padding: const EdgeInsets.only(top: 20, left: 10),
                         child: ListTile(
                           title: Text(
                             (lang.length != null &&

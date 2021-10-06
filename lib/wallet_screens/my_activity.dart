@@ -41,6 +41,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "DAY",
       "type": "5/7",
+      "trophys": "trophy3"
     },
     {
       "name": "5KM WALK STREAK",
@@ -48,6 +49,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "DAY",
       "type": "5/7",
+      "trophys": "trophy2"
     },
     {
       "name": "INSERT CHALLENGE THREE",
@@ -55,6 +57,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "DAY",
       "type": "1/7",
+      "trophys": "trophy1"
     },
     {
       "name": "5KM RUN STREAK",
@@ -62,6 +65,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
       "amt": "DAY",
       "type": "6/7",
+      "trophys": "trophy3"
     },
     {
       "name": "3KM RUN STREAK",
@@ -69,6 +73,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
       "amt": "DAY",
       "type": "2/7",
+      "trophys": "trophy2"
     },
     {
       "name": "1KM WALK STREAK",
@@ -76,6 +81,7 @@ class _MyActivityState extends State<MyActivity> {
           "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
       "amt": "DAY",
       "type": "3/7",
+      "trophys": "trophy1"
     },
   ];
   var colors = [
@@ -254,7 +260,7 @@ class _MyActivityState extends State<MyActivity> {
                           GoogleFonts.montserrat(fontSize: 12, color: text1),
                       outsideHolidayStyle:
                           GoogleFonts.montserrat(fontSize: 12, color: text1),
-                    unavailableStyle : const TextStyle(color: Colors.white),
+                      unavailableStyle: const TextStyle(color: Colors.white),
                       todayStyle: GoogleFonts.montserrat(
                         fontSize: 12,
                         color: Colors.white,
@@ -285,13 +291,15 @@ class _MyActivityState extends State<MyActivity> {
                       //     date.day.toString(),
                       //     style: TextStyle(color: Colors.black),
                       //   )),
-                      unavailableDayBuilder: (context,date, events)=>Container(margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                       
-                          child: Text(
-                            date.day.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),),
+                      unavailableDayBuilder: (context, date, events) =>
+                          Container(
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
 //                         unavailableDayBuilder: (context, date, events) => Container(
 //                        margin: const EdgeInsets.all(5.0),
 //                           alignment: Alignment.center,
@@ -313,16 +321,16 @@ class _MyActivityState extends State<MyActivity> {
                             style: TextStyle(color: Colors.white),
                           )),
                       todayDayBuilder: (context, date, events) => Container(
-                          margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: blue1,
-                              borderRadius: BorderRadius.circular(22)),
-                          child: Text(
-                            date.day.toString(),
-                            style: TextStyle(color: Colors.white),
-                          ),),
-                        
+                        margin: const EdgeInsets.all(5.0),
+                        alignment: Alignment.center,
+                        decoration: BoxDecoration(
+                            color: blue1,
+                            borderRadius: BorderRadius.circular(22)),
+                        child: Text(
+                          date.day.toString(),
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ),
                     ),
                   ),
                 ),
@@ -440,14 +448,16 @@ class _MyActivityState extends State<MyActivity> {
                             ],
                           ),
                           Positioned(
-                              right: 30,
-                              top: 10,
-                              child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  child: Image.asset(
-                                    "assets/images/challenge.png",
-                                  )))
+                            right: 30,
+                            top: 10,
+                            child: Container(
+                              height: 40,
+                              width: 40,
+                              child: Image.asset(
+                                "assets/images/${elementsOne[index]['trophys']}.png",
+                              ),
+                            ),
+                          ),
                         ],
                       );
                     },
