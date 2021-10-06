@@ -346,7 +346,7 @@ class _SpendingReportState extends State<SpendingReport> {
                   ),
                 ),
                 SizedBox(
-                  height: 20,
+                  height: 10,
                 ),
                 Container(
                   height: 148,
@@ -430,17 +430,9 @@ class _SpendingReportState extends State<SpendingReport> {
                   ),
                 ),
                 SizedBox(
-                  height: 300,
+                  height: 10,
                 ),
-              ],
-            ),
-          ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.22,
-            minChildSize: 0.22,
-            maxChildSize: 0.4,
-            builder: (BuildContext context, myscrollController) {
-              return Container(
+                 Container(
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.only(
@@ -456,62 +448,17 @@ class _SpendingReportState extends State<SpendingReport> {
                     Padding(
                       padding: const EdgeInsets.only(top: 5),
                       child: ListTile(
-                        leading: ClipRRect(
-                          borderRadius: BorderRadius.circular(30),
-                          child: Container(
-                            color: blue1,
-                            child: Image.asset(
-                              "assets/images/berger.png",
-                              fit: BoxFit.contain,
-                              width: 46,
-                              height: 46,
-                            ),
-                          ),
-                        ),
+                        
                         title: Text(
-                          'Food',
+                          'Expenses',
                           style: GoogleFonts.poppins(
-                            fontSize: 12,
+                            fontSize: 17,
                             color: Colors.white,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w700,
                           ),
                         ),
-                        subtitle: Text(
-                          '134 Transactions',
-                          style: GoogleFonts.poppins(
-                            fontSize: 9,
-                            color: text1,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        trailing: Container(
-                          height: 40,
-                          width: 100,
-                          decoration: BoxDecoration(
-                            color: Color(0xff707070).withOpacity(0.4),
-                            borderRadius: BorderRadius.circular(10),
-                          ),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                '+ 500',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 12,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                              Text(
-                                'Gwei',
-                                style: GoogleFonts.poppins(
-                                  fontSize: 9,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                      
+                        
                       ),
                     ),
                     Padding(
@@ -552,8 +499,8 @@ class _SpendingReportState extends State<SpendingReport> {
                       // top: 50,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        controller: myscrollController,
+                        physics: NeverScrollableScrollPhysics(),
+                        // controller: myscrollController,
                         itemCount: 20,
                         // padding: EdgeInsets.zero,
                         itemBuilder: (BuildContext context, int index) {
@@ -620,10 +567,12 @@ class _SpendingReportState extends State<SpendingReport> {
                     ),
                   ],
                 ),
-              );
-            },
-          )
-        ],
+              ),
+            
+              ],
+            ),
+          ),
+                 ],
       ),
     );
   }

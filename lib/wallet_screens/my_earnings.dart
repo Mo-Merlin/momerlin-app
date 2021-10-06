@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
+// import 'package:momerlin/wallet_screens/my_earnings_expenses.da÷rt';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 //import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
@@ -30,6 +30,8 @@ class _MyEarningsState extends State<MyEarnings> {
     // _chartData = getChartData();
     // _tooltipBehavior = TooltipBehavior(enable: true);
   }
+bool tweleve=true;
+bool week =false;
 
   // ignore: todo
   //TODO :languagestart
@@ -47,7 +49,7 @@ class _MyEarningsState extends State<MyEarnings> {
     return Scaffold(
       backgroundColor: backgroundcolor,
       appBar: AppBar(
-        backgroundColor: blue1,
+       backgroundColor: Color(0xff7D7BF2),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -115,7 +117,8 @@ class _MyEarningsState extends State<MyEarnings> {
                         child: Image.asset(
                           "assets/images/rr1.png",
                           width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.cover,
+                           height: 130,
+                          fit: BoxFit.fill,
                         ),
                       ),
                       // Positioned(
@@ -248,10 +251,10 @@ class _MyEarningsState extends State<MyEarnings> {
                     children: [
                       GestureDetector(
                         onTap: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => MyEarningsExpenses()));
+                          // Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //         builder: (context) => MyEarningsExpenses()));
                         },
                         child: Container(
                           height: 48,
@@ -343,10 +346,7 @@ class _MyEarningsState extends State<MyEarnings> {
                                   FlSpot(6, 17),
                                   FlSpot(7, 15),
                                   FlSpot(8, 20),
-                                  FlSpot(9, 11),
-                                  FlSpot(10, 17),
-                                  FlSpot(11, 12),
-                                  FlSpot(12, 5)
+                                
                                 ],
                                 isCurved: true,
                                 colors: [Colors.orange])
@@ -419,17 +419,9 @@ class _MyEarningsState extends State<MyEarnings> {
                 //   ),
                 // ),
                 SizedBox(
-                  height: 400,
+                  height: 10,
                 ),
-              ],
-            ),
-          ),
-          DraggableScrollableSheet(
-            initialChildSize: 0.22,
-            minChildSize: 0.22,
-            maxChildSize: 0.4,
-            builder: (BuildContext context, myscrollController) {
-              return Container(
+                 Container(
                 decoration: BoxDecoration(
                   color: button,
                   borderRadius: BorderRadius.only(
@@ -453,14 +445,11 @@ class _MyEarningsState extends State<MyEarnings> {
                       ),
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 20),
-                            child: Text(
-                              (lang.length != null &&
+                      padding: const EdgeInsets.only(top: 5),
+                      child: ListTile(
+                        
+                        title: Text(
+                         (lang.length != null &&
                                       lang.length != 0 &&
                                       userLanguage['activity'] != null)
                                   ? "${userLanguage['activity']}"
@@ -470,18 +459,44 @@ class _MyEarningsState extends State<MyEarnings> {
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
                               ),
-                            ),
-                          ),
+                            
+                        ),
+                      
+                        
+                      ),
+                    ),
+                    
+                    Padding(
+                      padding: const EdgeInsets.only(top: 40),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          // Padding(
+                          //   padding: const EdgeInsets.only(left: 20),
+                          //   child: Text(
+                          //     (lang.length != null &&
+                          //             lang.length != 0 &&
+                          //             userLanguage['expenses'] != null)
+                          //         ? "${userLanguage['expenses']}"
+                          //         : "Expenses",
+                          //     style: GoogleFonts.poppins(
+                          //       fontSize: 20,
+                          //       color: Colors.white,
+                          //       fontWeight: FontWeight.w500,
+                          //     ),
+                          //   ),
+                          // ),
                         ],
                       ),
                     ),
+                    
                     Padding(
                       padding: EdgeInsets.only(top: 50),
                       // top: 50,
                       child: ListView.builder(
                         shrinkWrap: true,
-                        physics: AlwaysScrollableScrollPhysics(),
-                        controller: myscrollController,
+                        physics: NeverScrollableScrollPhysics(),
+                        // controller: myscrollController,
                         itemCount: 20,
                         // padding: EdgeInsets.zero,
                         itemBuilder: (BuildContext context, int index) {
@@ -641,9 +656,11 @@ class _MyEarningsState extends State<MyEarnings> {
                     ),
                   ],
                 ),
-              );
-            },
-          )
+              ),
+              ],
+            ),
+          ),
+          
         ],
       ),
     );

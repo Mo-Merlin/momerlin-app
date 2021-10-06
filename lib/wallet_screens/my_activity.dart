@@ -254,6 +254,7 @@ class _MyActivityState extends State<MyActivity> {
                           GoogleFonts.montserrat(fontSize: 12, color: text1),
                       outsideHolidayStyle:
                           GoogleFonts.montserrat(fontSize: 12, color: text1),
+                    unavailableStyle : const TextStyle(color: Colors.white),
                       todayStyle: GoogleFonts.montserrat(
                         fontSize: 12,
                         color: Colors.white,
@@ -272,6 +273,35 @@ class _MyActivityState extends State<MyActivity> {
                     // ),
                     startingDayOfWeek: StartingDayOfWeek.sunday,
                     builders: CalendarBuilders(
+                      // dayBuilder: (context, date, events) => Container(
+                      //   height: 55,
+                      //   width: 55,
+                      //   margin: const EdgeInsets.all(8.0),
+                      //   alignment: Alignment.center,
+                      //   decoration: BoxDecoration(
+                      //       color: blue.withOpacity(0.3),
+                      //       borderRadius: BorderRadius.circular(10.0)),
+                      //   child: Text(
+                      //     date.day.toString(),
+                      //     style: TextStyle(color: Colors.black),
+                      //   )),
+                      unavailableDayBuilder: (context,date, events)=>Container(margin: const EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                       
+                          child: Text(
+                            date.day.toString(),
+                            style: TextStyle(color: Colors.white),
+                          ),),
+//                         unavailableDayBuilder: (context, date, events) => Container(
+//                        margin: const EdgeInsets.all(5.0),
+//                           alignment: Alignment.center,
+//                           decoration: BoxDecoration(
+//                               color: blue,
+//                               borderRadius: BorderRadius.circular(22)),
+//                           child: Text(
+//                             date.day.toString(),
+//                             style: TextStyle(color: Colors.white),
+//                           ),),
                       selectedDayBuilder: (context, date, events) => Container(
                           margin: const EdgeInsets.all(5.0),
                           alignment: Alignment.center,
@@ -291,7 +321,8 @@ class _MyActivityState extends State<MyActivity> {
                           child: Text(
                             date.day.toString(),
                             style: TextStyle(color: Colors.white),
-                          )),
+                          ),),
+                        
                     ),
                   ),
                 ),

@@ -1,4 +1,0 @@
-com/github/jorgefspereira/plaid_flutter/BuildConfig.java
- com.github.jorgefspereira.plaid_flutter.BuildConfig
-com/github/jorgefspereira/plaid_flutter/PlaidFlutterPlugin.java
- com.github.jorgefspereira.plaid_flutter.PlaidFlutterPlugin
