@@ -1,4 +1,4 @@
-import 'dart:math';
+//import 'dart:math';
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -12,7 +12,6 @@ import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_receive.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
-
 
 class Transaction {
   double amount;
@@ -183,7 +182,7 @@ class _WalletTwoState extends State<WalletTwo> {
                 : Stack(
                     children: [
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.6,
+                        height: MediaQuery.of(context).size.height * 0.9,
                         width: MediaQuery.of(context).size.width,
 
                         //color: Colors.amber,
@@ -268,7 +267,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ),
                                           ),
                                           Text(
-                                            "Gwei",
+                                            "  Gwei",
                                             style: GoogleFonts.montserrat(
                                               fontSize: 17,
                                               fontWeight: FontWeight.w400,
@@ -560,6 +559,122 @@ class _WalletTwoState extends State<WalletTwo> {
                                 ],
                               ),
                             ),
+                            SizedBox(
+                              height: 25,
+                            ),
+                            Container(
+                              height: 156,
+                              width: 335,
+                              decoration: BoxDecoration(
+                                color: button,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 25),
+                                        child: Text(
+                                          "Reports",
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 20,
+                                            fontWeight: FontWeight.w600,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 25),
+                                        child: Container(
+                                          height: 35,
+                                          width: 85,
+                                          decoration: BoxDecoration(
+                                            color: blue.withOpacity(0.2),
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              "MORE DETAILS",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 8,
+                                                fontWeight: FontWeight.w600,
+                                                color: blue1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  ),
+                                  SizedBox(height: 25),
+                                  Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(left: 15),
+                                        child: RichText(
+                                          text: TextSpan(
+                                            text: 'You Spent',
+                                            style: GoogleFonts.poppins(
+                                              fontSize: 12,
+                                              color: text1,
+                                            ),
+                                            children: <TextSpan>[
+                                              TextSpan(
+                                                text: ' 1654.12',
+                                                style: GoogleFonts.montserrat(
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                  color: Colors.white,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' Gwei',
+                                                style: GoogleFonts.montserrat(
+                                                  fontSize: 10,
+                                                  color: Colors.orange,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text:
+                                                    ' on food\nthis month, that’s higher\nthan normal.',
+                                                style: GoogleFonts.montserrat(
+                                                  fontSize: 14,
+                                                  color: text1,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(right: 15),
+                                        child: Container(
+                                          height: 54,
+                                          width: 104,
+                                          child: Image.asset(
+                                            "assets/images/reportbar.png",
+                                            fit: BoxFit.contain,
+                                          ),
+                                        ),
+                                      )
+                                    ],
+                                  )
+                                ],
+                              ),
+                            ),
                           ],
                         ),
                       ),
@@ -567,9 +682,9 @@ class _WalletTwoState extends State<WalletTwo> {
                         height: 10,
                       ),
                       DraggableScrollableSheet(
-                        initialChildSize: 0.41,
-                        minChildSize: 0.41,
-                        maxChildSize: 0.7,
+                        initialChildSize: 0.2,
+                        minChildSize: 0.2,
+                        maxChildSize: 0.5,
                         builder: (BuildContext context, myscrollController) {
                           return Container(
                             decoration: BoxDecoration(
@@ -607,10 +722,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                         child: Text(
                                           (lang.length != null &&
                                                   lang.length != 0 &&
-                                                  userLanguage['transaction'] !=
+                                                  userLanguage[
+                                                          'transactions'] !=
                                                       null)
-                                              ? "${userLanguage['transaction']}"
-                                              : "Transaction",
+                                              ? "${userLanguage['transactions']}"
+                                              : "Transactions",
                                           style: GoogleFonts.poppins(
                                             fontSize: 20,
                                             color: Colors.white,

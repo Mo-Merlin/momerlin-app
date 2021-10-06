@@ -108,13 +108,11 @@ class _SpendingReportState extends State<SpendingReport> {
                     alignment: Alignment.center,
                     children: [
                       Positioned(
-                  
                         child: Image.asset(
                           "assets/images/rr1.png",
                           width: MediaQuery.of(context).size.width,
                           fit: BoxFit.fill,
                           height: 130,
-                        
                         ),
                       ),
                       // Positioned(
@@ -189,7 +187,7 @@ class _SpendingReportState extends State<SpendingReport> {
                       //   ),
                       // ),
                       Positioned(
-                        top: 20,
+                        top: 40,
                         child: Row(
                           children: [
                             Text(
@@ -432,147 +430,143 @@ class _SpendingReportState extends State<SpendingReport> {
                 SizedBox(
                   height: 10,
                 ),
-                 Container(
-                decoration: BoxDecoration(
-                  color: button,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
+                Container(
+                  decoration: BoxDecoration(
+                    color: button,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
                   ),
-                ),
-                //color: button,
-                child: Stack(
-                  // crossAxisAlignment: CrossAxisAlignment,
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: ListTile(
-                        
-                        title: Text(
-                          'Expenses',
-                          style: GoogleFonts.poppins(
-                            fontSize: 17,
-                            color: Colors.white,
-                            fontWeight: FontWeight.w700,
+                  //color: button,
+                  child: Stack(
+                    // crossAxisAlignment: CrossAxisAlignment,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 15, left: 15),
+                        child: ListTile(
+                          title: Text(
+                            'Expenses',
+                            style: GoogleFonts.poppins(
+                              fontSize: 17,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w700,
+                            ),
                           ),
                         ),
-                      
-                        
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 70),
-                      child: Container(
-                        height: 2,
-                        width: 150,
-                        decoration: BoxDecoration(
-                            color: grey,
-                            borderRadius: BorderRadius.circular(10)),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 70),
+                      //   child: Container(
+                      //     height: 2,
+                      //     width: 150,
+                      //     decoration: BoxDecoration(
+                      //         color: grey,
+                      //         borderRadius: BorderRadius.circular(10)),
+                      //   ),
+                      // ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 20),
+                            //   child: Text(
+                            //     (lang.length != null &&
+                            //             lang.length != 0 &&
+                            //             userLanguage['expenses'] != null)
+                            //         ? "${userLanguage['expenses']}"
+                            //         : "Expenses",
+                            //     style: GoogleFonts.poppins(
+                            //       fontSize: 20,
+                            //       color: Colors.white,
+                            //       fontWeight: FontWeight.w500,
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
                       ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 20),
-                          //   child: Text(
-                          //     (lang.length != null &&
-                          //             lang.length != 0 &&
-                          //             userLanguage['expenses'] != null)
-                          //         ? "${userLanguage['expenses']}"
-                          //         : "Expenses",
-                          //     style: GoogleFonts.poppins(
-                          //       fontSize: 20,
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.w500,
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      // top: 50,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        // controller: myscrollController,
-                        itemCount: 20,
-                        // padding: EdgeInsets.zero,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                color: blue1,
-                                child: Image.asset(
-                                  "assets/images/berger.png",
-                                  fit: BoxFit.contain,
-                                  width: 46,
-                                  height: 46,
+                      Padding(
+                        padding: EdgeInsets.only(top: 70),
+                        // top: 50,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          // controller: myscrollController,
+                          itemCount: 20,
+                          // padding: EdgeInsets.zero,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Container(
+                                  color: blue1,
+                                  child: Image.asset(
+                                    "assets/images/berger.png",
+                                    fit: BoxFit.contain,
+                                    width: 46,
+                                    height: 46,
+                                  ),
                                 ),
                               ),
-                            ),
-                            title: Text(
-                              'Food',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                              title: Text(
+                                'Food',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            subtitle: Text(
-                              '134 Transactions',
-                              style: GoogleFonts.poppins(
-                                fontSize: 9,
-                                color: text1,
-                                fontWeight: FontWeight.w500,
+                              subtitle: Text(
+                                '134 Transactions',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 9,
+                                  color: text1,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            trailing: Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Color(0xff707070).withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '+ 500',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
+                              trailing: Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff707070).withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '+ 500',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'Gwei',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Colors.orange,
+                                    Text(
+                                      'Gwei',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 9,
+                                        color: Colors.orange,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                        },
+                            );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
-            
               ],
             ),
           ),
-                 ],
+        ],
       ),
     );
   }

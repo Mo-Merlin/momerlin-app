@@ -179,7 +179,7 @@ class _MyReportsState extends State<MyReports> {
                   ),
                 ),
                 Positioned(
-                  top: 105,
+                  top: 120,
                   child: Row(
                     children: [
                       Text(
@@ -200,7 +200,7 @@ class _MyReportsState extends State<MyReports> {
                       Text(
                         balance.toStringAsFixed(2),
                         style: GoogleFonts.montserrat(
-                          fontSize: 60,
+                          fontSize: 30,
                           fontWeight: FontWeight.w600,
                           color: Colors.white,
                         ),
@@ -233,7 +233,7 @@ class _MyReportsState extends State<MyReports> {
                 height: 177,
                 width: 308,
                 decoration: BoxDecoration(
-                  color: button,
+                  color: grey,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Column(
@@ -289,7 +289,7 @@ class _MyReportsState extends State<MyReports> {
                 height: 177,
                 width: 308,
                 decoration: BoxDecoration(
-                  color: button,
+                  color: grey,
                   borderRadius: BorderRadius.circular(30),
                 ),
                 child: Column(

@@ -110,7 +110,7 @@ class _WalletFinalState extends State<WalletFinal> {
                               : "(Though it may take our magic 5-10 mins to reach your destination)",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
-                            color: Colors.grey,
+                            color: text1,
                             letterSpacing: 1,
                             fontSize: 12,
                           ),

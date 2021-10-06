@@ -30,8 +30,9 @@ class _MyEarningsState extends State<MyEarnings> {
     // _chartData = getChartData();
     // _tooltipBehavior = TooltipBehavior(enable: true);
   }
-bool tweleve=true;
-bool week =false;
+
+  bool tweleve = true;
+  bool week = false;
 
   // ignore: todo
   //TODO :languagestart
@@ -49,7 +50,7 @@ bool week =false;
     return Scaffold(
       backgroundColor: backgroundcolor,
       appBar: AppBar(
-       backgroundColor: Color(0xff7D7BF2),
+        backgroundColor: Color(0xff7D7BF2),
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -117,7 +118,7 @@ bool week =false;
                         child: Image.asset(
                           "assets/images/rr1.png",
                           width: MediaQuery.of(context).size.width,
-                           height: 130,
+                          height: 130,
                           fit: BoxFit.fill,
                         ),
                       ),
@@ -214,7 +215,7 @@ bool week =false;
                             Text(
                               balance.toStringAsFixed(2),
                               style: GoogleFonts.montserrat(
-                                fontSize: 60,
+                                fontSize: 30,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
                               ),
@@ -346,7 +347,6 @@ bool week =false;
                                   FlSpot(6, 17),
                                   FlSpot(7, 15),
                                   FlSpot(8, 20),
-                                
                                 ],
                                 isCurved: true,
                                 colors: [Colors.orange])
@@ -421,246 +421,239 @@ bool week =false;
                 SizedBox(
                   height: 10,
                 ),
-                 Container(
-                decoration: BoxDecoration(
-                  color: button,
-                  borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(40),
-                    topRight: Radius.circular(40),
+                Container(
+                  decoration: BoxDecoration(
+                    color: button,
+                    borderRadius: BorderRadius.only(
+                      topLeft: Radius.circular(40),
+                      topRight: Radius.circular(40),
+                    ),
                   ),
-                ),
-                //color: button,
-                child: Stack(
-                  // crossAxisAlignment: CrossAxisAlignment,
-                  alignment: Alignment.topCenter,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(top: 20),
-                      child: Container(
-                        height: 2,
-                        width: 50,
-                        decoration: BoxDecoration(
-                            color: grey,
-                            borderRadius: BorderRadius.circular(10)),
-                      ),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5),
-                      child: ListTile(
-                        
-                        title: Text(
-                         (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['activity'] != null)
-                                  ? "${userLanguage['activity']}"
-                                  : "Activity",
-                              style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            
+                  //color: button,
+                  child: Stack(
+                    // crossAxisAlignment: CrossAxisAlignment,
+                    alignment: Alignment.topCenter,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20),
+                        child: Container(
+                          height: 2,
+                          width: 50,
+                          decoration: BoxDecoration(
+                              color: grey,
+                              borderRadius: BorderRadius.circular(10)),
                         ),
-                      
-                        
                       ),
-                    ),
-                    
-                    Padding(
-                      padding: const EdgeInsets.only(top: 40),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          // Padding(
-                          //   padding: const EdgeInsets.only(left: 20),
-                          //   child: Text(
-                          //     (lang.length != null &&
-                          //             lang.length != 0 &&
-                          //             userLanguage['expenses'] != null)
-                          //         ? "${userLanguage['expenses']}"
-                          //         : "Expenses",
-                          //     style: GoogleFonts.poppins(
-                          //       fontSize: 20,
-                          //       color: Colors.white,
-                          //       fontWeight: FontWeight.w500,
-                          //     ),
-                          //   ),
-                          // ),
-                        ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 20, left: 20),
+                        child: ListTile(
+                          title: Text(
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['activity'] != null)
+                                ? "${userLanguage['activity']}"
+                                : "Activity",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              color: Colors.white,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                    
-                    Padding(
-                      padding: EdgeInsets.only(top: 50),
-                      // top: 50,
-                      child: ListView.builder(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        // controller: myscrollController,
-                        itemCount: 20,
-                        // padding: EdgeInsets.zero,
-                        itemBuilder: (BuildContext context, int index) {
-                          return ListTile(
-                            leading: ClipRRect(
-                              borderRadius: BorderRadius.circular(30),
-                              child: Container(
-                                color: button,
-                                child: Image.asset(
-                                  "assets/images/profile.png",
-                                  fit: BoxFit.fill,
-                                  width: 46,
-                                  height: 46,
+                      Padding(
+                        padding: const EdgeInsets.only(top: 40),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            // Padding(
+                            //   padding: const EdgeInsets.only(left: 20),
+                            //   child: Text(
+                            //     (lang.length != null &&
+                            //             lang.length != 0 &&
+                            //             userLanguage['expenses'] != null)
+                            //         ? "${userLanguage['expenses']}"
+                            //         : "Expenses",
+                            //     style: GoogleFonts.poppins(
+                            //       fontSize: 20,
+                            //       color: Colors.white,
+                            //       fontWeight: FontWeight.w500,
+                            //     ),
+                            //   ),
+                            // ),
+                          ],
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(top: 70),
+                        // top: 50,
+                        child: ListView.builder(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          // controller: myscrollController,
+                          itemCount: 20,
+                          // padding: EdgeInsets.zero,
+                          itemBuilder: (BuildContext context, int index) {
+                            return ListTile(
+                              leading: ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Container(
+                                  color: button,
+                                  child: Image.asset(
+                                    "assets/images/profile.png",
+                                    fit: BoxFit.fill,
+                                    width: 46,
+                                    height: 46,
+                                  ),
                                 ),
                               ),
-                            ),
-                            title: Text(
-                              'Walk Challenge Win',
-                              style: GoogleFonts.poppins(
-                                fontSize: 12,
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
+                              title: Text(
+                                'Walk Challenge Win',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 12,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            subtitle: Text(
-                              'Yesterday',
-                              style: GoogleFonts.poppins(
-                                fontSize: 9,
-                                color: text1,
-                                fontWeight: FontWeight.w500,
+                              subtitle: Text(
+                                'Yesterday',
+                                style: GoogleFonts.poppins(
+                                  fontSize: 9,
+                                  color: text1,
+                                  fontWeight: FontWeight.w500,
+                                ),
                               ),
-                            ),
-                            trailing: Container(
-                              height: 40,
-                              width: 100,
-                              decoration: BoxDecoration(
-                                color: Color(0xff707070).withOpacity(0.4),
-                                borderRadius: BorderRadius.circular(10),
-                              ),
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    '+ 500',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600,
+                              trailing: Container(
+                                height: 40,
+                                width: 100,
+                                decoration: BoxDecoration(
+                                  color: Color(0xff707070).withOpacity(0.4),
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      '+ 500',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
-                                  ),
-                                  Text(
-                                    'Gwei',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 9,
-                                      color: Colors.orange,
+                                    Text(
+                                      'Gwei',
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 9,
+                                        color: Colors.orange,
+                                      ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
-                            ),
-                          );
-                          // return transactions1[index].merchantName == null
-                          //     ? SizedBox()
-                          //     : Column(
-                          //         children: [
-                          //           SizedBox(
-                          //             height: 5,
-                          //           ),
-                          //           Container(
-                          //             child: ListTile(
-                          //               // contentPadding: EdgeInsets.only(
-                          //               //     top: 0, bottom: 0),
-                          //               //   leading: ClipRRect(
-                          //               //     borderRadius: BorderRadius.circular(30),
-                          //               //     child: Container(
-                          //               //         height: 60,
-                          //               //         width: 60,
-                          //               //         color: Colors.black54,
-                          //               //         child: Image.network(
-                          //               //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
-                          //               //           fit: BoxFit.cover,
-                          //               //         )),
-                          //               //   ),
-                          //               title: Container(
-                          //                 padding: EdgeInsets.only(left: 20),
-                          //                 child: Text(
-                          //                   transactions1[index].merchantName,
-                          //                   style: GoogleFonts.poppins(
-                          //                       fontSize: 18,
-                          //                       fontWeight: FontWeight.w600,
-                          //                       color: Colors.white),
-                          //                 ),
-                          //               ),
-                          //               subtitle: Container(
-                          //                 padding: EdgeInsets.only(left: 20),
-                          //                 child: Text(
-                          //                   (DateFormat.yMMMd().format(
-                          //                           transactions1[index].date))
-                          //                       .toString(),
-                          //                   style: GoogleFonts.poppins(
-                          //                     fontSize: 12,
-                          //                     color: Color(0xff9395A4),
-                          //                   ),
-                          //                 ),
-                          //               ),
-                          //               trailing: Container(
-                          //                 height: 40,
-                          //                 width: 100,
-                          //                 decoration: BoxDecoration(
-                          //                   color: Color(0xff707070)
-                          //                       .withOpacity(0.4),
-                          //                   borderRadius:
-                          //                       BorderRadius.circular(10),
-                          //                 ),
-                          //                 child: Stack(
-                          //                   alignment: Alignment.center,
-                          //                   children: [
-                          //                     Positioned(
-                          //                       left: 14,
-                          //                       top: 15,
-                          //                       child: Text(
-                          //                         ((transactions1[index]
-                          //                                         .amount -
-                          //                                     transactions1[
-                          //                                             index]
-                          //                                         .amount
-                          //                                         .floorToDouble()) *
-                          //                                 100)
-                          //                             .toStringAsFixed(1),
-                          //                         style: GoogleFonts.montserrat(
-                          //                           fontSize: 12,
-                          //                           fontWeight: FontWeight.w500,
-                          //                           color: Colors.white,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                     Positioned(
-                          //                       left: 50,
-                          //                       top: 15,
-                          //                       child: Text(
-                          //                         ' Gwei',
-                          //                         style: GoogleFonts.montserrat(
-                          //                           fontSize: 12,
-                          //                           color: Colors.orangeAccent,
-                          //                         ),
-                          //                       ),
-                          //                     ),
-                          //                   ],
-                          //                 ),
-                          //               ),
-                          //             ),
-                          //           ),
-                          //         ],
-                          //       );
-                        },
+                            );
+                            // return transactions1[index].merchantName == null
+                            //     ? SizedBox()
+                            //     : Column(
+                            //         children: [
+                            //           SizedBox(
+                            //             height: 5,
+                            //           ),
+                            //           Container(
+                            //             child: ListTile(
+                            //               // contentPadding: EdgeInsets.only(
+                            //               //     top: 0, bottom: 0),
+                            //               //   leading: ClipRRect(
+                            //               //     borderRadius: BorderRadius.circular(30),
+                            //               //     child: Container(
+                            //               //         height: 60,
+                            //               //         width: 60,
+                            //               //         color: Colors.black54,
+                            //               //         child: Image.network(
+                            //               //           "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
+                            //               //           fit: BoxFit.cover,
+                            //               //         )),
+                            //               //   ),
+                            //               title: Container(
+                            //                 padding: EdgeInsets.only(left: 20),
+                            //                 child: Text(
+                            //                   transactions1[index].merchantName,
+                            //                   style: GoogleFonts.poppins(
+                            //                       fontSize: 18,
+                            //                       fontWeight: FontWeight.w600,
+                            //                       color: Colors.white),
+                            //                 ),
+                            //               ),
+                            //               subtitle: Container(
+                            //                 padding: EdgeInsets.only(left: 20),
+                            //                 child: Text(
+                            //                   (DateFormat.yMMMd().format(
+                            //                           transactions1[index].date))
+                            //                       .toString(),
+                            //                   style: GoogleFonts.poppins(
+                            //                     fontSize: 12,
+                            //                     color: Color(0xff9395A4),
+                            //                   ),
+                            //                 ),
+                            //               ),
+                            //               trailing: Container(
+                            //                 height: 40,
+                            //                 width: 100,
+                            //                 decoration: BoxDecoration(
+                            //                   color: Color(0xff707070)
+                            //                       .withOpacity(0.4),
+                            //                   borderRadius:
+                            //                       BorderRadius.circular(10),
+                            //                 ),
+                            //                 child: Stack(
+                            //                   alignment: Alignment.center,
+                            //                   children: [
+                            //                     Positioned(
+                            //                       left: 14,
+                            //                       top: 15,
+                            //                       child: Text(
+                            //                         ((transactions1[index]
+                            //                                         .amount -
+                            //                                     transactions1[
+                            //                                             index]
+                            //                                         .amount
+                            //                                         .floorToDouble()) *
+                            //                                 100)
+                            //                             .toStringAsFixed(1),
+                            //                         style: GoogleFonts.montserrat(
+                            //                           fontSize: 12,
+                            //                           fontWeight: FontWeight.w500,
+                            //                           color: Colors.white,
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                     Positioned(
+                            //                       left: 50,
+                            //                       top: 15,
+                            //                       child: Text(
+                            //                         ' Gwei',
+                            //                         style: GoogleFonts.montserrat(
+                            //                           fontSize: 12,
+                            //                           color: Colors.orangeAccent,
+                            //                         ),
+                            //                       ),
+                            //                     ),
+                            //                   ],
+                            //                 ),
+                            //               ),
+                            //             ),
+                            //           ),
+                            //         ],
+                            //       );
+                          },
+                        ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
               ],
             ),
           ),
-          
         ],
       ),
     );
