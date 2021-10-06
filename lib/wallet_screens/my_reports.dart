@@ -39,6 +39,61 @@ class _MyReportsState extends State<MyReports> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
+      // appBar: AppBar(
+      //   backgroundColor: blue1,
+      //   elevation: 0,
+      //   leading: Padding(
+      //     padding: const EdgeInsets.all(5.0),
+      //     child: ClipRRect(
+      //       borderRadius: BorderRadius.circular(30),
+      //       child: Container(
+      //         // height: 50,
+      //         // width: 50,
+      //         color: button,
+      //         child: IconButton(
+      //             onPressed: () {
+      //               Navigator.pop(context);
+      //             },
+      //             icon: Icon(
+      //               Icons.arrow_back,
+      //               color: Colors.white,
+      //             )),
+      //       ),
+      //     ),
+      //   ),
+      //   title: Text(
+      //     (lang.length != null &&
+      //             lang.length != 0 &&
+      //             userLanguage['myreports'] != null)
+      //         ? "${userLanguage['myreports']}"
+      //         : "MY REPORTS",
+      //     style: GoogleFonts.poppins(
+      //       color: Colors.white,
+      //       fontSize: 15,
+      //       fontWeight: FontWeight.w600,
+      //     ),
+      //   ),
+      //   actions: [
+      //     Padding(
+      //       padding: const EdgeInsets.all(5),
+      //       child: GestureDetector(
+      //         onTap: () {
+      //           Navigator.push(context,
+      //               MaterialPageRoute(builder: (context) => WalletProfile()));
+      //         },
+      //         child: ClipRRect(
+      //           borderRadius: BorderRadius.circular(30),
+      //           child: Image.asset(
+      //             "assets/images/profile.png",
+      //             fit: BoxFit.cover,
+      //             width: 46,
+      //             height: 46,
+      //           ),
+      //         ),
+      //       ),
+      //     ),
+      //   ],
+      // ),
       body: SingleChildScrollView(
         child: Column(
           children: [

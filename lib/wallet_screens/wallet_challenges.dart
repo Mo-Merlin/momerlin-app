@@ -274,7 +274,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                   
                       color: Color(0xff313248),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
@@ -338,7 +337,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           itemBuilder: (context, index) {
                             return InkWell(
                               onTap: () {
-                             
                                 if (elements[index]['name'] ==
                                     '@momozuno \nhas earned') {
                                   Navigator.push(
@@ -1103,6 +1101,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ? "${userLanguage['createachellenge']}"
                             : "CREATE A \nCHALLENGE",
                         style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
                           height: 1,
                           color: Colors.white,
                           fontSize: 17,
@@ -1333,7 +1332,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               // ignore: deprecated_member_use
                               child: RaisedButton(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(15),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 onPressed: () {
                                   if (iswalking == true || isrunning == true) {
@@ -1426,6 +1425,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ? "${userLanguage['createachellenge']}"
                             : "CREATE A \nCHALLENGE",
                         style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
                           height: 1,
                           color: Colors.white,
                           fontSize: 17,
@@ -1572,7 +1572,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               // ignore: deprecated_member_use
                               child: RaisedButton(
                                 shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(17),
+                                  borderRadius: BorderRadius.circular(30),
                                 ),
                                 onPressed: () {
                                   Navigator.pop(context);
@@ -1660,6 +1660,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ? "${userLanguage['createachellenge']}"
                             : "CREATE A \nCHALLENGE",
                         style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
                           height: 1,
                           color: Colors.white,
                           fontSize: 17,
@@ -1918,7 +1919,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               // ignore: deprecated_member_use
                               child: RaisedButton(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
                                   onPressed: () {
                                     if (ischeckvisible == true) {
@@ -2009,6 +2010,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ? "${userLanguage['createachellenge']}"
                             : "CREATE A \nCHALLENGE",
                         style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
                           height: 1,
                           color: Colors.white,
                           fontSize: 17,
@@ -2155,7 +2157,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               // ignore: deprecated_member_use
                               child: RaisedButton(
                                   shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17),
+                                    borderRadius: BorderRadius.circular(30),
                                   ),
                                   onPressed: () {
                                     Navigator.pop(context);
@@ -2247,6 +2249,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ? "${userLanguage['createachellenge']}"
                             : "CREATE A \nCHALLENGE",
                         style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
                           height: 1,
                           color: Colors.white,
                           fontSize: 17,
@@ -2431,31 +2434,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       ),
                                     ),
                                   ),
-                                ],
-                              ),
-                              Row(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(
-                                        top: 20, left: 25),
-                                    child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['satswagered'] !=
-                                                  null)
-                                          ? "${userLanguage['satswagered']}"
-                                          : "Gwei Wagered",
-                                      style: GoogleFonts.poppins(
-                                          decoration: TextDecoration.none,
-                                          color: Colors.grey,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                              Row(
-                                children: [
                                   Padding(
                                     padding: const EdgeInsets.only(
                                         top: 20, left: 25),
@@ -2528,6 +2506,27 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   ),
                                 ],
                               ),
+                              // Row(
+                              //   children: [
+                              //     Padding(
+                              //       padding: const EdgeInsets.only(
+                              //           top: 20, left: 25),
+                              //       child: Text(
+                              //         (lang.length != null &&
+                              //                 lang.length != 0 &&
+                              //                 userLanguage['satswagered'] !=
+                              //                     null)
+                              //             ? "${userLanguage['satswagered']}"
+                              //             : "Gwei Wagered",
+                              //         style: GoogleFonts.poppins(
+                              //             decoration: TextDecoration.none,
+                              //             color: Colors.grey,
+                              //             fontSize: 15,
+                              //             fontWeight: FontWeight.w400),
+                              //       ),
+                              //     ),
+                              //   ],
+                              // ),
                               Row(
                                 children: [
                                   Padding(
@@ -2736,7 +2735,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 // ignore: deprecated_member_use
                                 child: RaisedButton(
                                     shape: RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(17),
+                                      borderRadius: BorderRadius.circular(30),
                                     ),
                                     onPressed: () {
                                       Navigator.push(

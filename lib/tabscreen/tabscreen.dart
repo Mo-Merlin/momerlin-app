@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/my_activity.dart';
+//import 'package:momerlin/wallet_screens/my_activity.dart';
 import 'package:momerlin/wallet_screens/my_reports.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
@@ -36,6 +37,7 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
       resizeToAvoidBottomInset: false,
       backgroundColor: backgroundcolor,
       body: Stack(
+        alignment: Alignment.center,
         children: [
           IndexedStack(
             index: _selectedIndex,
@@ -50,12 +52,12 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
               bottom: 5,
               child: AnimatedContainer(
                 alignment: Alignment.center,
-                margin: EdgeInsets.only(
-                  left: 40,
-                  right: 30,
-                ),
+                // margin: EdgeInsets.only(
+                //   left: 40,
+                //   right: 30,
+                // ),
                 height: 90,
-                // width: 350,
+                width: 330,
                 duration: Duration(seconds: 0),
                 child: Center(
                   child: Card(
@@ -158,9 +160,8 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
                                       children: [
                                         Container(
                                           margin: EdgeInsets.only(top: 5),
-                                          child: Icon(
-                                              Icons.card_membership_sharp,
-                                              size: 35,
+                                          child: Icon(FontAwesomeIcons.award,
+                                              size: 30,
                                               color: _selectedIndex == 2
                                                   ? white
                                                   : grey),
