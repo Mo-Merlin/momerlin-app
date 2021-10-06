@@ -29,6 +29,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.1"
+  bezier_chart:
+    dependency: "direct main"
+    description:
+      name: bezier_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.17+1"
   bip32:
     dependency: "direct main"
     description:
@@ -169,6 +176,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "6.1.2"
+  fl_chart:
+    dependency: "direct main"
+    description:
+      name: fl_chart
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.35.0"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -288,7 +302,7 @@ packages:
       name: intl
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.17.0"
+    version: "0.16.1"
   isolate:
     dependency: transitive
     description:
@@ -484,7 +498,7 @@ packages:
       name: simple_gesture_detector
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.1.6"
   sky_engine:
     dependency: transitive
     description: flutter
@@ -538,14 +552,14 @@ packages:
       name: syncfusion_flutter_charts
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.3.43"
+    version: "18.4.49"
   syncfusion_flutter_core:
     dependency: transitive
     description:
       name: syncfusion_flutter_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "19.3.43+1"
+    version: "18.4.49"
   synchronized:
     dependency: transitive
     description:
@@ -559,7 +573,7 @@ packages:
       name: table_calendar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.0.2"
+    version: "2.3.3"
   term_glyph:
     dependency: transitive
     description:

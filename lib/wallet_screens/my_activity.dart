@@ -12,16 +12,14 @@ class MyActivity extends StatefulWidget {
 }
 
 class _MyActivityState extends State<MyActivity> {
-  CalendarFormat format = CalendarFormat.month;
-  DateTime selectedDay = DateTime.now();
-  DateTime focusedDay = DateTime.now();
+  CalendarController _controller;
 
   var userLanguage, lang = [];
   @override
   void initState() {
     super.initState();
     getUserLanguage();
-    //_controller = CalendarController();
+    _controller = CalendarController();
   }
 
   // ignore: todo
@@ -243,81 +241,57 @@ class _MyActivityState extends State<MyActivity> {
                 Padding(
                   padding: const EdgeInsets.only(left: 15, right: 15),
                   child: TableCalendar(
-                    firstDay: DateTime.utc(2010, 10, 16),
-                    lastDay: DateTime.utc(2030, 3, 14),
-                    focusedDay: DateTime.now(),
-                    calendarFormat: format,
-                    headerVisible: false,
-                    // onFormatChanged: (CalendarFormat _format) {
-                    //   setState(() {
-                    //     format = _format;
-                    //   });
-                    // },
-
-                    startingDayOfWeek: StartingDayOfWeek.sunday,
-                    daysOfWeekVisible: false,
-
-                    onDaySelected: (DateTime selectDay, DateTime focusDay) {
-                      setState(() {
-                        selectedDay = selectDay;
-                        focusedDay = focusDay;
-                      });
-                      print(focusDay);
-                    },
-
-                    selectedDayPredicate: (DateTime date) {
-                      return isSameDay(selectedDay, date);
-                    },
-
-                    // calendar style
+                    calendarController: _controller,
+                    initialCalendarFormat: CalendarFormat.month,
                     calendarStyle: CalendarStyle(
-                        isTodayHighlighted: true,
-                        todayDecoration: BoxDecoration(
-                          color: blue1,
-                          shape: BoxShape.circle,
-                        ),
-                        todayTextStyle: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.white)),
-
-                    // Header style
-
-                    headerStyle: HeaderStyle(
-                      titleCentered: true,
-                      formatButtonDecoration: BoxDecoration(
-                          color: blue1,
-                          borderRadius: BorderRadius.circular(
-                            22,
-                          )),
-                      formatButtonTextStyle: TextStyle(
+                      todayColor: blue1,
+                      selectedColor: blue,
+                      weekdayStyle:
+                          GoogleFonts.montserrat(fontSize: 12, color: text1),
+                      weekendStyle:
+                          GoogleFonts.montserrat(fontSize: 12, color: text1),
+                      holidayStyle:
+                          GoogleFonts.montserrat(fontSize: 12, color: text1),
+                      outsideHolidayStyle:
+                          GoogleFonts.montserrat(fontSize: 12, color: text1),
+                      todayStyle: GoogleFonts.montserrat(
+                        fontSize: 12,
                         color: Colors.white,
+                        fontWeight: FontWeight.w500,
                       ),
-                      formatButtonVisible: true,
                     ),
-                    calendarBuilders: CalendarBuilders(
-                      selectedBuilder: (context, date, events) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: blue,
-                            borderRadius: BorderRadius.circular(22)),
-                        child: Text(
-                          date.day.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                      todayBuilder: (context, date, events) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: blue1,
-                            borderRadius: BorderRadius.circular(22)),
-                        child: Text(
-                          date.day.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
+                    headerVisible: false,
+                    // headerStyle: HeaderStyle(
+                    //   centerHeaderTitle: true,
+                    //   formatButtonDecoration: BoxDecoration(
+                    //     color: Colors.brown,
+                    //     borderRadius: BorderRadius.circular(22.0),
+                    //   ),
+                    //   formatButtonTextStyle: TextStyle(color: Colors.white),
+                    //   formatButtonShowsNext: false,
+                    // ),
+                    startingDayOfWeek: StartingDayOfWeek.sunday,
+                    builders: CalendarBuilders(
+                      selectedDayBuilder: (context, date, events) => Container(
+                          margin: const EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: blue,
+                              borderRadius: BorderRadius.circular(22)),
+                          child: Text(
+                            date.day.toString(),
+                            style: TextStyle(color: Colors.white),
+                          )),
+                      todayDayBuilder: (context, date, events) => Container(
+                          margin: const EdgeInsets.all(5.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: blue1,
+                              borderRadius: BorderRadius.circular(22)),
+                          child: Text(
+                            date.day.toString(),
+                            style: TextStyle(color: Colors.white),
+                          )),
                     ),
                   ),
                 ),

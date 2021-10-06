@@ -53,7 +53,7 @@ dependencies:
   #plaid
   plaid_flutter:
   #initl
-  intl: ^0.17.0
+  intl:
   #barcodescanner
   flutter_barcode_scanner: ^2.0.0
   #qrflutter
@@ -68,6 +68,8 @@ dependencies:
   flutter_svg:
   table_calendar:
   syncfusion_flutter_charts:
+  bezier_chart:
+  fl_chart: ^0.35.0
 
 dev_dependencies:
   flutter_test:
