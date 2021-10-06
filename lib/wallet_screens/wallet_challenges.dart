@@ -732,7 +732,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 6,
+                                    top: 10,
                                     left: 45,
                                     child: Container(
                                       height: 43,
@@ -1189,7 +1189,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   ),
                 ),
                 SizedBox(
-                  height: 100,
+                  height: 150,
                 ),
               ],
             ),
