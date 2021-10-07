@@ -104,8 +104,10 @@ class _WalletReceiveState extends State<WalletReceive> {
                   ),
                   Center(
                     child: Container(
-                      width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 2.2,
+                      // width: MediaQuery.of(context).size.width / 1.2,
+                      // height: MediaQuery.of(context).size.height / 2.2,
+                      height: 356,
+                      width: 300,
                       decoration: BoxDecoration(
                         color: gridcolor,
                         borderRadius: BorderRadius.circular(36),
@@ -113,12 +115,12 @@ class _WalletReceiveState extends State<WalletReceive> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 10,
+                            height: 40,
                           ),
                           QrImage(
                             eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.circle),
                             data: user[0]["walletaddress"],
-                            size: MediaQuery.of(context).size.width / 1.5,
+                            size: MediaQuery.of(context).size.width / 1.7,
                             gapless: false,
                             dataModuleStyle: const QrDataModuleStyle(
                               dataModuleShape: QrDataModuleShape.circle,
@@ -126,79 +128,88 @@ class _WalletReceiveState extends State<WalletReceive> {
                             foregroundColor: white,
                           ),
                           Container(
-                            padding: EdgeInsets.only(left: 10),
-                            width: MediaQuery.of(context).size.width / 1.7,
+                            width: MediaQuery.of(context).size.width / 1.5,
+                            //color: Colors.amber,
                             child: Align(
                               alignment: Alignment.topLeft,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(
-                                    "Address",
-                                    textAlign: TextAlign.left,
-                                    style: GoogleFonts.poppins(
-                                      color: white,
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.w600,
+                                  SizedBox(height: 3),
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 26),
+                                    child: Text(
+                                      "Address",
+                                      textAlign: TextAlign.left,
+                                      style: GoogleFonts.poppins(
+                                        color: white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                   SizedBox(
                                     height: 10,
                                   ),
-                                  Row(
-                                    children: [
-                                      Container(
-                                        width:
-                                            MediaQuery.of(context).size.width /
-                                                2.4,
-                                        height: 34,
-                                        decoration: BoxDecoration(
-                                          color: backgroundcolor,
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            user[0]["walletaddress"],
-                                            textAlign: TextAlign.center,
-                                            overflow: TextOverflow.ellipsis,
-                                            style: GoogleFonts.poppins(
-                                              color: white,
-                                              fontSize: 12,
-                                              fontWeight: FontWeight.w400,
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 30),
+                                    child: Row(
+                                      children: [
+                                        Container(
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              2.4,
+                                          height: 34,
+                                          decoration: BoxDecoration(
+                                            color: backgroundcolor,
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              user[0]["walletaddress"],
+                                              textAlign: TextAlign.center,
+                                              overflow: TextOverflow.ellipsis,
+                                              style: GoogleFonts.poppins(
+                                                color: white,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      SizedBox(
-                                        width: 5,
-                                      ),
-                                      Container(
-                                        width: 29,
-                                        height: 29,
-                                        decoration: BoxDecoration(
-                                          color: blue1,
-                                          borderRadius:
-                                              BorderRadius.circular(50),
+                                        SizedBox(
+                                          width: 5,
                                         ),
-                                        child: InkWell(
-                                          child: Icon(
-                                            Icons.copy,
-                                            size: 10,
-                                            color: white,
+                                        Container(
+                                          width: 29,
+                                          height: 29,
+                                          decoration: BoxDecoration(
+                                            color: blue1,
+                                            borderRadius:
+                                                BorderRadius.circular(50),
                                           ),
-                                          onTap: () {
-                                            FlutterClipboard.copy(
-                                              user[0]["walletaddress"],
-                                            ).then(
-                                              (result) {
-                                                _showScaffold('Address Copied');
-                                              },
-                                            );
-                                          },
+                                          child: InkWell(
+                                            child: Icon(
+                                              Icons.copy,
+                                              size: 10,
+                                              color: white,
+                                            ),
+                                            onTap: () {
+                                              FlutterClipboard.copy(
+                                                user[0]["walletaddress"],
+                                              ).then(
+                                                (result) {
+                                                  _showScaffold(
+                                                      'Address Copied');
+                                                },
+                                              );
+                                            },
+                                          ),
                                         ),
-                                      ),
-                                    ],
+                                      ],
+                                    ),
                                   ),
                                 ],
                               ),

@@ -2578,7 +2578,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "${data[_focusedIndex]*100}",
+                              "${data[_focusedIndex] * 100}",
                               style: GoogleFonts.montserrat(
                                   color: Colors.orange,
                                   fontSize: 20,
@@ -2596,7 +2596,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   onPressed: () {
-competitorsgets=data[_focusedIndex]*100;
+                                    competitorsgets = data[_focusedIndex] * 100;
                                     Navigator.pop(context);
                                     selectshowsummary(context);
                                     // Navigator.push(
@@ -2784,7 +2784,7 @@ competitorsgets=data[_focusedIndex]*100;
                                     padding: const EdgeInsets.only(
                                         top: 30, right: 50),
                                     child: Text(
-                                     "Gwei Wagered",
+                                      "Gwei Wagered",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.grey,
@@ -2819,8 +2819,9 @@ competitorsgets=data[_focusedIndex]*100;
                                               width: 25,
                                               //color: blue1,
                                               child: Image.asset(
-                                                selecttype=="Walking"?
-                                                "assets/images/walking.png":"assets/images/running.png",
+                                                selecttype == "Walking"
+                                                    ? "assets/images/walking.png"
+                                                    : "assets/images/running.png",
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -2910,7 +2911,7 @@ competitorsgets=data[_focusedIndex]*100;
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 25),
+                                                const EdgeInsets.only(left: 8),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -3083,7 +3084,7 @@ competitorsgets=data[_focusedIndex]*100;
                                             padding:
                                                 const EdgeInsets.only(left: 20),
                                             child: Text(
-                                             wagar.toString(),
+                                              wagar.toString(),
                                               style: GoogleFonts.poppins(
                                                   decoration:
                                                       TextDecoration.none,
