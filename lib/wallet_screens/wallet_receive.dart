@@ -86,7 +86,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                 ),
               ),
               title: Text(
-                "RECEIVE GWEI",
+                "Receive Gwei",
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 17,
@@ -113,7 +113,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                       child: Column(
                         children: [
                           SizedBox(
-                            height: 30,
+                            height: 10,
                           ),
                           QrImage(
                             eyeStyle: QrEyeStyle(eyeShape: QrEyeShape.circle),
