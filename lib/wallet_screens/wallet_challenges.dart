@@ -9,6 +9,7 @@ import 'package:momerlin/wallet_screens/my_activity.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
+import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 class WalletChallenges extends StatefulWidget {
   const WalletChallenges({Key key}) : super(key: key);
@@ -19,6 +20,9 @@ class WalletChallenges extends StatefulWidget {
 
 class _WalletChallengesState extends State<WalletChallenges> {
   var userLanguage, lang = [];
+  List<int> data = [];
+
+  int value = 0;
   @override
   void initState() {
     super.initState();
@@ -844,7 +848,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         ),
                                         Container(
                                           height: 59,
-                                          width: 306,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.8,
                                           decoration: BoxDecoration(
                                               color: colors1[index],
                                               borderRadius:
@@ -908,14 +915,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   ],
                                 ),
                                 Positioned(
-                                    right: 30,
-                                    top: 10,
-                                    child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        child: Image.asset(
-                                          "assets/images/${elementsOne[index]['trophys']}.png",
-                                        )))
+                                  right: 30,
+                                  top: 10,
+                                  child: Container(
+                                    height: 40,
+                                    width: 40,
+                                    child: Image.asset(
+                                      "assets/images/${elementsOne[index]['trophys']}.png",
+                                    ),
+                                  ),
+                                )
                               ],
                             );
                           },
@@ -1202,6 +1211,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
   bool ischeckvisible = false;
   bool iswalking = false;
   bool isrunning = false;
+  var selecttype;
+  var wagar;
+  var challenge;
+  var kmchallenge;
+  var competitorsgets;
+
   void showdialog(BuildContext context) {
     showDialog(
       context: context,
@@ -1319,7 +1334,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       borderRadius: BorderRadius.circular(15)),
                                   child: InkWell(
                                     onTap: () {
+                                      selecttype = "";
                                       setState(() {
+                                        selecttype = "Walking";
                                         iswalking = !iswalking;
                                         isrunning = false;
                                       });
@@ -1399,7 +1416,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       borderRadius: BorderRadius.circular(15)),
                                   child: InkWell(
                                     onTap: () {
+                                      selecttype = "";
                                       setState(() {
+                                        selecttype = "Running";
                                         isrunning = !isrunning;
                                         iswalking = false;
                                       });
@@ -1485,6 +1504,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ),
                                 onPressed: () {
                                   if (iswalking == true || isrunning == true) {
+                                    print("selcettype$selecttype");
                                     Navigator.pop(context);
                                     selectsat(context);
                                   }
@@ -1526,7 +1546,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  int _focusedIndex = 0;
   void selectsat(BuildContext context) {
+    for (int i = 0; i < 40; i++) {
+      value = value + 5;
+      data.add(value);
+    }
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -1534,6 +1559,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
         return StatefulBuilder(
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
+            void _onItemFocus(int index) {
+              print("123456,$index");
+              print(data[index]);
+              setState(() {
+                _focusedIndex = index;
+                print(_focusedIndex);
+              });
+            }
+
             return Container(
               color: backgroundcolor.withOpacity(0.7),
               margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
@@ -1681,37 +1715,21 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             SizedBox(
                               height: 30,
                             ),
-                            // Container(
-                            //   height: MediaQuery.of(context).size.height * 0.13,
-                            //   width: MediaQuery.of(context).size.width,
-                            //   //color: Colors.amber,
-                            //   child: SfLinearGauge(
-                            //       markerPointers: [
-                            //         LinearShapePointer(
-                            //           value: _pointerValue,
-                            //           onValueChanged: (value) => {
-                            //             setState(() => {_pointerValue = value})
-                            //           },
-                            //           shapeType: LinearShapePointerType
-                            //               .invertedTriangle,
-                            //           color: blue1,
-                            //           elevation: 10,
-                            //         )
-                            //       ],
-                            //       tickPosition: LinearElementPosition.outside,
-                            //       labelPosition: LinearLabelPosition.outside,
-                            //       majorTickStyle: LinearTickStyle(
-                            //           length: 70, thickness: 2, color: button),
-                            //       minorTickStyle: LinearTickStyle(
-                            //           length: 40,
-                            //           thickness: 1.75,
-                            //           color: button),
-                            //       axisLabelStyle: GoogleFonts.montserrat(
-                            //         fontSize: 15,
-                            //         color: Colors.grey,
-                            //       )),
-                            // ),
-                            HorizontalList(),
+                            // HorizontalList(),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.13,
+                              child: ScrollSnapList(
+                                duration: 500,
+                                scrollPhysics: BouncingScrollPhysics(),
+                                onItemFocus: _onItemFocus,
+                                itemSize: 50,
+                                itemBuilder: _buildListItem,
+                                itemCount: data.length,
+                                reverse: false,
+                                dynamicItemSize: false,
+                              ),
+                            ),
+
                             SizedBox(
                               height: 90,
                             ),
@@ -1724,8 +1742,250 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 onPressed: () {
+                                  print(data[_focusedIndex]);
+
+                                  wagar = data[_focusedIndex];
+                                  Navigator.pop(context);
+                                  selectKM(context);
+
+                                  // print(_focusedIndex);
+                                },
+                                //color: blue.withOpacity(0.3),
+                                color: blue1,
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['next'] != null)
+                                      ? "${userLanguage['next']}"
+                                      : "NEXT",
+                                  style: GoogleFonts.poppins(
+                                    //color: blue1,
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void selectKM(BuildContext context) {
+    for (int i = 0; i < 40; i++) {
+      value = value + 5;
+      data.add(value);
+    }
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            void _onItemFocus(int index) {
+              print("123456,$index");
+              print(data[index]);
+              setState(() {
+                _focusedIndex = index;
+                print(_focusedIndex);
+              });
+            }
+
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: InkWell(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.40,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "50%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 20),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.2,
+                                  // width: MediaQuery.of(context).size.width,
+                                  //color: Colors.red,
+                                  child: Center(
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['howmany'] !=
+                                                      null)
+                                              ? "${userLanguage['howmany']}"
+                                              : 'How many',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['sats'] != null)
+                                              ? "${userLanguage['sats']}"
+                                              : ' Km ',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.orange,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w500,
+                                          )),
+                                      TextSpan(
+                                          text: (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage[
+                                                          'wouldyouliketowager'] !=
+                                                      null)
+                                              ? "${userLanguage['wouldyouliketowager']}"
+                                              : 'would \n   you like to $selecttype?',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            height: 1,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ])),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height: 30,
+                            ),
+                            // HorizontalList(),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.13,
+                              child: ScrollSnapList(
+                                duration: 500,
+                                scrollPhysics: BouncingScrollPhysics(),
+                                onItemFocus: _onItemFocus,
+                                itemSize: 50,
+                                itemBuilder: _buildListItem,
+                                itemCount: data.length,
+                                reverse: false,
+                                dynamicItemSize: false,
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: 90,
+                            ),
+                            Container(
+                              height: 55,
+                              width: 321,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                onPressed: () {
+                                  print(data[_focusedIndex]);
+
+                                  kmchallenge = data[_focusedIndex];
                                   Navigator.pop(context);
                                   selectchallengetype(context);
+
+                                  // print(_focusedIndex);
                                 },
                                 //color: blue.withOpacity(0.3),
                                 color: blue1,
@@ -2072,6 +2332,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   ),
                                   onPressed: () {
                                     if (ischeckvisible == true) {
+                                      challenge = "Streak";
                                       Navigator.pop(context);
                                       selectshowcompetitors(context);
                                     }
@@ -2112,6 +2373,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 
   void selectshowcompetitors(BuildContext context) {
+    for (int i = 0; i < 40; i++) {
+      value = value + 5;
+      data.add(value);
+    }
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -2119,6 +2384,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
         return StatefulBuilder(
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
+            void _onItemFocus(int index) {
+              print("123456,$index");
+              print(data[index]);
+              setState(() {
+                _focusedIndex = index;
+                print(_focusedIndex);
+              });
+            }
+
             return Container(
               color: backgroundcolor.withOpacity(0.7),
               margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
@@ -2249,7 +2523,20 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             SizedBox(
                               height: 20,
                             ),
-                            HorizontalList(),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.13,
+                              child: ScrollSnapList(
+                                duration: 500,
+                                scrollPhysics: BouncingScrollPhysics(),
+                                onItemFocus: _onItemFocus,
+                                itemSize: 50,
+                                itemBuilder: _buildListItem,
+                                itemCount: data.length,
+                                reverse: false,
+                                dynamicItemSize: false,
+                              ),
+                            ),
+                            // HorizontalList(),
                             // Container(
                             //   height: MediaQuery.of(context).size.height * 0.13,
                             //   width: MediaQuery.of(context).size.width,
@@ -2291,7 +2578,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   fontWeight: FontWeight.w500),
                             ),
                             Text(
-                              "7500 Gwei",
+                              "${data[_focusedIndex]*100}",
                               style: GoogleFonts.montserrat(
                                   color: Colors.orange,
                                   fontSize: 20,
@@ -2309,6 +2596,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     borderRadius: BorderRadius.circular(30),
                                   ),
                                   onPressed: () {
+competitorsgets=data[_focusedIndex]*100;
                                     Navigator.pop(context);
                                     selectshowsummary(context);
                                     // Navigator.push(
@@ -2496,12 +2784,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     padding: const EdgeInsets.only(
                                         top: 30, right: 50),
                                     child: Text(
-                                      (lang.length != null &&
-                                              lang.length != 0 &&
-                                              userLanguage['satswagered'] !=
-                                                  null)
-                                          ? "${userLanguage['satswagered']}"
-                                          : "SATS Wagered",
+                                     "Gwei Wagered",
                                       style: GoogleFonts.poppins(
                                           decoration: TextDecoration.none,
                                           color: Colors.grey,
@@ -2536,7 +2819,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               width: 25,
                                               //color: blue1,
                                               child: Image.asset(
-                                                "assets/images/walking.png",
+                                                selecttype=="Walking"?
+                                                "assets/images/walking.png":"assets/images/running.png",
                                                 fit: BoxFit.cover,
                                               ),
                                             ),
@@ -2545,12 +2829,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             padding:
                                                 const EdgeInsets.only(left: 10),
                                             child: Text(
-                                              (lang.length != null &&
-                                                      lang.length != 0 &&
-                                                      userLanguage['walking'] !=
-                                                          null)
-                                                  ? "${userLanguage['walking']}"
-                                                  : "WALKING",
+                                              selecttype,
                                               style: GoogleFonts.poppins(
                                                   decoration:
                                                       TextDecoration.none,
@@ -2602,7 +2881,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             padding:
                                                 const EdgeInsets.only(left: 20),
                                             child: Text(
-                                              "125",
+                                              competitorsgets.toString(),
                                               style: GoogleFonts.montserrat(
                                                   decoration:
                                                       TextDecoration.none,
@@ -2732,12 +3011,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             padding:
                                                 const EdgeInsets.only(left: 10),
                                             child: Text(
-                                              (lang.length != null &&
-                                                      lang.length != 0 &&
-                                                      userLanguage['walking'] !=
-                                                          null)
-                                                  ? "${userLanguage['walking']}"
-                                                  : "WALKING",
+                                              selecttype,
                                               style: GoogleFonts.poppins(
                                                   decoration:
                                                       TextDecoration.none,
@@ -2809,7 +3083,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             padding:
                                                 const EdgeInsets.only(left: 20),
                                             child: Text(
-                                              "85",
+                                             wagar.toString(),
                                               style: GoogleFonts.poppins(
                                                   decoration:
                                                       TextDecoration.none,
@@ -2862,7 +3136,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     width: 10,
                                   ),
                                   Text(
-                                    "7500 Gwei",
+                                    competitorsgets.toString(),
                                     style: GoogleFonts.montserrat(
                                         decoration: TextDecoration.none,
                                         color: Colors.orange,
@@ -2926,6 +3200,75 @@ class _WalletChallengesState extends State<WalletChallenges> {
           },
         );
       },
+    );
+  }
+
+  Widget _buildListItem(BuildContext context, int index) {
+    var blue = Color(0xFF282C4A);
+    var orange = Color(0xFFFF8C00);
+    var nonlabel = Color(0xFF808DA7);
+    //horizontal
+    return Container(
+      width: 50,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text("${data[index]}",
+                textScaleFactor: 1.0,
+                style: GoogleFonts.poppins(
+                    color: _focusedIndex == index ? orange : nonlabel,
+                    fontWeight: _focusedIndex == index
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: _focusedIndex == index ? 25 : 20)),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 3, top: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  height: 60,
+                  width: 2,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(right: 7),
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
     );
   }
 }

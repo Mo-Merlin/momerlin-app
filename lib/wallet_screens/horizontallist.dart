@@ -25,6 +25,7 @@ class _HorizontalListState extends State<HorizontalList> {
   void _onItemFocus(int index) {
     setState(() {
       _focusedIndex = index;
+      print(_focusedIndex);
     });
   }
 
@@ -40,6 +41,7 @@ class _HorizontalListState extends State<HorizontalList> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
+            alignment: Alignment.centerLeft,
             child: Text("${data[index]}",
                 textScaleFactor: 1.0,
                 style: GoogleFonts.poppins(
@@ -100,6 +102,7 @@ class _HorizontalListState extends State<HorizontalList> {
   Widget build(BuildContext context) {
     return Container(
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
             height: MediaQuery.of(context).size.height * 0.13,

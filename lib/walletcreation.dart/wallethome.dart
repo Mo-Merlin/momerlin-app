@@ -42,7 +42,7 @@ class _WalletHomePage extends State<WalletHomePage> {
               ),
               fit: BoxFit.fill),
         ),
-        child: Container(
+        child: SingleChildScrollView(
           padding: EdgeInsets.only(left: 20, right: 20, top: 290  ),
           child: Container(
             height: MediaQuery.of(context).size.height,
