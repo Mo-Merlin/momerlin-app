@@ -82,12 +82,13 @@ class _SpendingReportState extends State<SpendingReport> {
     },
     {
       "image": "spendingcoin",
-      "title ": "Transfers",
+      "title": "Transfers",
       "subtitle": "12 Transactions",
       "value": "-125.21",
       "type": "Gwei",
       "percentage": "20%",
     },
+    
   ];
   var spendingColors = [
     spendingBlue,

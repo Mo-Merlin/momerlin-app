@@ -372,7 +372,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   height: MediaQuery.of(context).size.height * 0.26,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
-                      color: Color(0xff313248),
+                      //color: Color(0xff313248),
+                      color: Colors.white.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(10)),
                   child: Column(
                     children: [
@@ -856,58 +857,164 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               color: colors1[index],
                                               borderRadius:
                                                   BorderRadius.circular(15)),
-                                          child: ListTile(
-                                            title: Text(
-                                              elementsOne[index]['name'],
-                                              style: GoogleFonts.poppins(
-                                                color: Colors.black,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                            trailing: Container(
-                                              height: 33,
-                                              width: 85,
-                                              decoration: BoxDecoration(
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Container(
+                                                height: 59,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.5,
+                                                decoration: BoxDecoration(
                                                   color: Colors.white
-                                                      .withOpacity(0.25),
+                                                      .withOpacity(0.2),
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          16)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment.center,
-                                                children: [
-                                                  Text(
-                                                      elementsOne[index]['day'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600)),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 5),
-                                                    child: Text(
-                                                        elementsOne[index]
-                                                            ['count'],
-                                                        style:
-                                                            GoogleFonts.poppins(
+                                                      BorderRadius.only(
+                                                          bottomLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          bottomRight:
+                                                              Radius.circular(
+                                                                  25),
+                                                          topLeft:
+                                                              Radius.circular(
+                                                                  15),
+                                                          topRight:
+                                                              Radius.circular(
+                                                                  25)),
+                                                ),
+                                                child: Center(
+                                                  child: Text(
+                                                    elementsOne[index]['name'],
+                                                    style: GoogleFonts.poppins(
+                                                      color: Colors.black,
+                                                      fontSize: 14,
+                                                      fontWeight:
+                                                          FontWeight.w600,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 20),
+                                                child: Container(
+                                                  height: 33,
+                                                  width: 85,
+                                                  decoration: BoxDecoration(
+                                                      color: Colors.white
+                                                          .withOpacity(0.25),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              16)),
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                          elementsOne[index][
+                                                              'day'],
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 5),
+                                                        child: Text(
+                                                            elementsOne[index]
+                                                                ['count'],
+                                                            style: GoogleFonts.poppins(
                                                                 color: Colors
                                                                     .white,
                                                                 fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
                                                                         .w400)),
+                                                      ),
+                                                    ],
                                                   ),
-                                                ],
+                                                ),
                                               ),
-                                            ),
+                                            ],
                                           ),
+                                          // child: ListTile(
+                                          //   title: Padding(
+                                          //     padding:
+                                          //         const EdgeInsets.fromLTRB(
+                                          //             0, 0, 20, 2),
+                                          //     child: Container(
+                                          //       height: 60,
+                                          //       decoration: BoxDecoration(
+                                          //           color: Colors.black
+                                          //               .withOpacity(0.1),
+                                          //           borderRadius:
+                                          //               BorderRadius.circular(
+                                          //                   15)),
+                                          //       child: Center(
+                                          //         child: Text(
+                                          //           elementsOne[index]['name'],
+                                          //           style: GoogleFonts.poppins(
+                                          //             color: Colors.black,
+                                          //             fontSize: 14,
+                                          //             fontWeight:
+                                          //                 FontWeight.w600,
+                                          //           ),
+                                          //         ),
+                                          //       ),
+                                          //     ),
+                                          //   ),
+                                          //   trailing: Container(
+                                          //     height: 33,
+                                          //     width: 85,
+                                          //     decoration: BoxDecoration(
+                                          //         color: Colors.white
+                                          //             .withOpacity(0.25),
+                                          //         borderRadius:
+                                          //             BorderRadius.circular(
+                                          //                 16)),
+                                          //     child: Row(
+                                          //       mainAxisAlignment:
+                                          //           MainAxisAlignment.center,
+                                          //       children: [
+                                          //         Text(
+                                          //             elementsOne[index]['day'],
+                                          //             style:
+                                          //                 GoogleFonts.poppins(
+                                          //                     color:
+                                          //                         Colors.white,
+                                          //                     fontSize: 12,
+                                          //                     fontWeight:
+                                          //                         FontWeight
+                                          //                             .w600)),
+                                          //         Padding(
+                                          //           padding:
+                                          //               const EdgeInsets.only(
+                                          //                   left: 5),
+                                          //           child: Text(
+                                          //               elementsOne[index]
+                                          //                   ['count'],
+                                          //               style:
+                                          //                   GoogleFonts.poppins(
+                                          //                       color: Colors
+                                          //                           .white,
+                                          //                       fontSize: 12,
+                                          //                       fontWeight:
+                                          //                           FontWeight
+                                          //                               .w400)),
+                                          //         ),
+                                          //       ],
+                                          //     ),
+                                          //   ),
+                                          // ),
                                         ),
                                       ],
                                     ),

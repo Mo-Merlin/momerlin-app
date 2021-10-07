@@ -399,48 +399,122 @@ class _MyActivityState extends State<MyActivity> {
                                         color: colors[index],
                                         borderRadius:
                                             BorderRadius.circular(15)),
-                                    child: ListTile(
-                                      title: Text(
-                                        elementsOne[index]['name'],
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      trailing: Container(
-                                        height: 33,
-                                        width: 85,
-                                        decoration: BoxDecoration(
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          height: 59,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.5,
+                                          decoration: BoxDecoration(
                                             color:
-                                                Colors.white.withOpacity(0.25),
-                                            borderRadius:
-                                                BorderRadius.circular(16)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            Text(elementsOne[index]['amt'],
-                                                style: GoogleFonts.poppins(
-                                                    color: Colors.white,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w600)),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 5),
-                                              child: Text(
-                                                  elementsOne[index]['type'],
-                                                  style: GoogleFonts.poppins(
-                                                      color: Colors.white,
-                                                      fontSize: 12,
-                                                      fontWeight:
-                                                          FontWeight.w400)),
+                                                Colors.white.withOpacity(0.2),
+                                            borderRadius: BorderRadius.only(
+                                                bottomLeft: Radius.circular(13),
+                                                bottomRight:
+                                                    Radius.circular(25),
+                                                topLeft: Radius.circular(13),
+                                                topRight: Radius.circular(25)),
+                                          ),
+                                          child: Center(
+                                            child: Text(
+                                              elementsOne[index]['name'],
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.black,
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                              ),
                                             ),
-                                          ],
+                                          ),
                                         ),
-                                      ),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(right: 20),
+                                          child: Container(
+                                            height: 33,
+                                            width: 85,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withOpacity(0.25),
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Text(elementsOne[index]['amt'],
+                                                    style: GoogleFonts.poppins(
+                                                        color: Colors.white,
+                                                        fontSize: 12,
+                                                        fontWeight:
+                                                            FontWeight.w600)),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 5),
+                                                  child: Text(
+                                                      elementsOne[index]
+                                                          ['type'],
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                      ],
                                     ),
+                                    // child: ListTile(
+                                    //   title: Text(
+                                    //     elementsOne[index]['name'],
+                                    //     style: GoogleFonts.poppins(
+                                    //       color: Colors.white,
+                                    //       fontSize: 14,
+                                    //       fontWeight: FontWeight.w600,
+                                    //     ),
+                                    //   ),
+                                    //   trailing: Container(
+                                    //     height: 33,
+                                    //     width: 85,
+                                    //     decoration: BoxDecoration(
+                                    //         color:
+                                    //             Colors.white.withOpacity(0.25),
+                                    //         borderRadius:
+                                    //             BorderRadius.circular(16)),
+                                    //     child: Row(
+                                    //       mainAxisAlignment:
+                                    //           MainAxisAlignment.center,
+                                    //       children: [
+                                    //         Text(elementsOne[index]['amt'],
+                                    //             style: GoogleFonts.poppins(
+                                    //                 color: Colors.white,
+                                    //                 fontSize: 12,
+                                    //                 fontWeight:
+                                    //                     FontWeight.w600)),
+                                    //         Padding(
+                                    //           padding: const EdgeInsets.only(
+                                    //               left: 5),
+                                    //           child: Text(
+                                    //               elementsOne[index]['type'],
+                                    //               style: GoogleFonts.poppins(
+                                    //                   color: Colors.white,
+                                    //                   fontSize: 12,
+                                    //                   fontWeight:
+                                    //                       FontWeight.w400)),
+                                    //         ),
+                                    //       ],
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ),
                                 ],
                               ),

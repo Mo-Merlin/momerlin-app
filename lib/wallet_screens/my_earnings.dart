@@ -94,10 +94,10 @@ class _MyEarningsState extends State<MyEarnings> {
     },
     {
       "image": "earntrophygold",
-      "title ": "Run Challenge Win",
+      "title": "Run Challenge Win",
       "subtitle": "Yesterday",
       "symbol": "+",
-      "value": "27.00",
+      "value": "1000.00",
       "type": "Gwei",
       "percentage": "20%",
     },
@@ -198,7 +198,7 @@ class _MyEarningsState extends State<MyEarnings> {
                         ),
                       ),
                       // Positioned(
-                      //   top: 45,
+                      //   top: 45,a
                       //   child: Container(
                       //     //color: Colors.amber,
                       //     child: Row(
