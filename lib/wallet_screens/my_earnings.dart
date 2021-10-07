@@ -4,10 +4,10 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 // import 'package:momerlin/wallet_screens/my_earnings_expenses.da÷rt';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
-//import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
 //import 'package:bezier_chart/bezier_chart.dart';
-import 'package:fl_chart/fl_chart.dart';
+// import 'package:fl_chart/fl_chart.dart';
 
 class MyEarnings extends StatefulWidget {
   const MyEarnings({Key key}) : super(key: key);
@@ -19,7 +19,11 @@ class MyEarnings extends StatefulWidget {
 class _MyEarningsState extends State<MyEarnings> {
   // List<SalesData> _chartData;
   // TooltipBehavior _tooltipBehavior;
-
+  bool isWeek = true;
+  bool isMonth = false;
+  bool isYear = false;
+  bool isAll = false;
+  var selectType;
   var balance = 0.00;
 
   var userLanguage, lang = [];
@@ -45,6 +49,18 @@ class _MyEarningsState extends State<MyEarnings> {
 
   // ignore: todo
   //TODO: LanguageEnd
+  List<ChartSampleData> chartData = <ChartSampleData>[
+    ChartSampleData(x: DateTime(2015, 1, 1, 0), yValue: 1.13),
+    ChartSampleData(x: DateTime(2015, 1, 2, 2), yValue: 1.12),
+    ChartSampleData(x: DateTime(2015, 1, 3, 3), yValue: 1.08),
+    ChartSampleData(x: DateTime(2015, 1, 4, 4), yValue: 1.12),
+    ChartSampleData(x: DateTime(2015, 1, 5, 5), yValue: 1.1),
+    ChartSampleData(x: DateTime(2015, 1, 6, 6), yValue: 1.12),
+    ChartSampleData(x: DateTime(2015, 1, 7, 7), yValue: 1.1),
+    ChartSampleData(x: DateTime(2015, 1, 8, 8), yValue: 1.12),
+    ChartSampleData(x: DateTime(2015, 1, 9, 9), yValue: 1.16),
+    ChartSampleData(x: DateTime(2015, 1, 12, 12), yValue: 1.1),
+  ];
 
   List earningElements = [
     {
@@ -325,74 +341,134 @@ class _MyEarningsState extends State<MyEarnings> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      GestureDetector(
+                      InkWell(
                         onTap: () {
-                          // Navigator.push(
-                          //     context,
-                          //     MaterialPageRoute(
-                          //         builder: (context) => MyEarningsExpenses()));
+                          selectType = "";
+                          setState(() {
+                            selectType = "Week";
+                            isWeek = true;
+                            isMonth = false;
+                            isYear = false;
+                            isAll = false;
+                          });
                         },
                         child: Container(
                           height: 48,
                           width: 70,
-                          decoration: BoxDecoration(
-                            color: button,
-                            borderRadius: BorderRadius.circular(25),
-                          ),
+                          decoration: isWeek == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
                           child: Center(
                             child: Text(
-                              "12H",
+                              "1W",
                               style: GoogleFonts.poppins(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w600,
-                                color: Colors.white,
+                                color: isWeek == true ? white : text1,
                               ),
                             ),
                           ),
                         ),
                       ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
-                          child: Text(
-                            "1W",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "Month";
+                            isMonth = true;
+                            isWeek = false;
+                            isYear = false;
+                            isAll = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isMonth == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "1M",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isMonth == true ? white : text1,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
-                          child: Text(
-                            "1Y",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "Year";
+                            isYear = true;
+                            isWeek = false;
+                            isMonth = false;
+                            isAll = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isYear == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "1Y",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isYear == true ? white : text1,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
-                          child: Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['all'] != null)
-                                ? "${userLanguage['all']}"
-                                : "ALL",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "All";
+                            isAll = true;
+                            isMonth = false;
+                            isWeek = false;
+                            isYear = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isAll == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['all'] != null)
+                                  ? "${userLanguage['all']}"
+                                  : "ALL",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isAll == true ? white : text1,
+                              ),
                             ),
                           ),
                         ),
@@ -403,32 +479,35 @@ class _MyEarningsState extends State<MyEarnings> {
                 SizedBox(
                   height: 30,
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20),
-                  child: Container(
-                    height: 300,
-                    width: 400,
-                    child: LineChart(
-                      LineChartData(
-                          borderData: FlBorderData(show: false),
-                          lineBarsData: [
-                            LineChartBarData(
-                                spots: [
-                                  FlSpot(1, 3),
-                                  FlSpot(2, 10),
-                                  FlSpot(3, 7),
-                                  FlSpot(4, 12),
-                                  FlSpot(5, 13),
-                                  FlSpot(6, 17),
-                                  FlSpot(7, 15),
-                                  FlSpot(8, 20),
-                                ],
-                                isCurved: true,
-                                colors: [Colors.orange])
-                          ]),
-                    ),
-                  ),
-                ),
+
+                /**Fl chart */
+
+                // Padding(
+                //   padding: const EdgeInsets.only(right: 20),
+                //   child: Container(
+                //     height: 300,
+                //     width: 400,
+                //     child: LineChart(
+                //       LineChartData(
+                //           borderData: FlBorderData(show: false),
+                //           lineBarsData: [
+                //             LineChartBarData(
+                //                 spots: [
+                //                   FlSpot(1, 3),
+                //                   FlSpot(2, 10),
+                //                   FlSpot(3, 7),
+                //                   FlSpot(4, 12),
+                //                   FlSpot(5, 13),
+                //                   FlSpot(6, 17),
+                //                   FlSpot(7, 15),
+                //                   FlSpot(8, 20),
+                //                 ],
+                //                 isCurved: true,
+                //                 colors: [Colors.orange])
+                //           ]),
+                //     ),
+                //   ),
+                // ),
 
                 /*****Beziwer chart */
                 // Container(
@@ -463,7 +542,7 @@ class _MyEarningsState extends State<MyEarnings> {
                 //     ),
                 //   ),
                 // ),
-                /****** old chart 1****** */
+                /****** syncfusion chart 1****** */
                 // Container(
                 //   height: 300,
                 //   //color: Colors.amberAccent,
@@ -493,6 +572,39 @@ class _MyEarningsState extends State<MyEarnings> {
                 //     //         NumberFormat.simpleCurrency(decimalDigits: 0)),
                 //   ),
                 // ),
+                Container(
+                  height: 300,
+                  width: 350,
+                  child: SfCartesianChart(
+                    zoomPanBehavior: ZoomPanBehavior(
+                      enablePinching: true,
+                      zoomMode: ZoomMode.x,
+                      enablePanning: true,
+                    ),
+                    enableAxisAnimation: true,
+                    tooltipBehavior:
+                        TooltipBehavior(enable: true, color: Colors.orange),
+                    isTransposed: false,
+                    backgroundColor: backgroundcolor,
+
+                    //Specifying date time interval type as hours
+                    primaryXAxis: DateTimeAxis(
+                        interval: 6,
+                        majorGridLines: MajorGridLines(width: 0),
+                        edgeLabelPlacement: EdgeLabelPlacement.shift,
+                        intervalType: DateTimeIntervalType.hours),
+                    series: <ChartSeries<ChartSampleData, DateTime>>[
+                      SplineSeries<ChartSampleData, DateTime>(
+                        color: Colors.orange,
+                        dataSource: chartData,
+                        xValueMapper: (ChartSampleData sales, _) => sales.x,
+                        yValueMapper: (ChartSampleData sales, _) =>
+                            sales.yValue,
+                        name: 'Sales',
+                      )
+                    ],
+                  ),
+                ),
                 SizedBox(
                   height: 10,
                 ),
@@ -761,4 +873,11 @@ class SalesData {
   SalesData(this.year, this.sales);
   final double year;
   final double sales;
+}
+
+class ChartSampleData {
+  ChartSampleData({this.x, this.yValue});
+
+  final DateTime x;
+  final double yValue;
 }

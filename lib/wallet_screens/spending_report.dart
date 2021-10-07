@@ -4,7 +4,10 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+//import 'package:pie_chart/pie_chart.dart';
+//import 'package:fl_chart/fl_chart.dart';
 
 class SpendingReport extends StatefulWidget {
   const SpendingReport({Key key}) : super(key: key);
@@ -14,8 +17,21 @@ class SpendingReport extends StatefulWidget {
 }
 
 class _SpendingReportState extends State<SpendingReport> {
+  bool isWeek = true;
+  bool isMonth = false;
+  bool isYear = false;
+  bool isAll = false;
+  var selectType;
+
+  bool isVisibleInfo = true;
+  bool chartClick = true;
   List<GDPData> _chartData;
   TooltipBehavior _tooltipBehavior;
+  Map<String, double> dataMap = {
+    "Flutter": 5,
+    "React": 1,
+    "Xamarin": 1,
+  };
 
   var balance = 0.00;
   var userLanguage, lang = [];
@@ -88,7 +104,6 @@ class _SpendingReportState extends State<SpendingReport> {
       "type": "Gwei",
       "percentage": "20%",
     },
-    
   ];
   var spendingColors = [
     spendingBlue,
@@ -176,77 +191,6 @@ class _SpendingReportState extends State<SpendingReport> {
                           height: 130,
                         ),
                       ),
-                      // Positioned(
-                      //   top: 45,
-                      //   child: Container(
-                      //     //color: Colors.amber,
-                      //     child: Row(
-                      //       crossAxisAlignment: CrossAxisAlignment.center,
-                      //       mainAxisAlignment: MainAxisAlignment.start,
-                      //       children: [
-                      //         Padding(
-                      //           padding: const EdgeInsets.all(5.0),
-                      //           child: ClipRRect(
-                      //             borderRadius: BorderRadius.circular(30),
-                      //             child: Container(
-                      //               color: button,
-                      //               child: IconButton(
-                      //                   onPressed: () {
-                      //                     Navigator.pop(context);
-                      //                   },
-                      //                   icon: Icon(
-                      //                     Icons.arrow_back,
-                      //                     color: Colors.white,
-                      //                   )),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         Text(
-                      //           (lang.length != null &&
-                      //                   lang.length != 0 &&
-                      //                   userLanguage['myearnings'] != null)
-                      //               ? "${userLanguage['myearnings']}"
-                      //               : "MY EARNINGS",
-                      //           textAlign: TextAlign.center,
-                      //           style: GoogleFonts.poppins(
-                      //               color: white,
-                      //               fontSize: 15,
-                      //               fontWeight: FontWeight.w700),
-                      //         ),
-                      //         SizedBox(
-                      //           width: MediaQuery.of(context).size.width / 2.7,
-                      //         ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.all(5.0),
-                      //           child: InkWell(
-                      //             onTap: () {
-                      //               Navigator.push(
-                      //                   context,
-                      //                   MaterialPageRoute(
-                      //                       builder: (context) =>
-                      //                           WalletProfile()));
-                      //             },
-                      //             child: ClipRRect(
-                      //               borderRadius: BorderRadius.circular(30),
-                      //               child: Container(
-                      //                 color: button,
-                      //                 child: Image.asset(
-                      //                   "assets/images/profile.png",
-                      //                   fit: BoxFit.fill,
-                      //                   width: 46,
-                      //                   height: 46,
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Positioned(
                         top: 40,
                         child: Row(
@@ -304,188 +248,331 @@ class _SpendingReportState extends State<SpendingReport> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      Container(
-                        height: 48,
-                        width: 70,
-                        decoration: BoxDecoration(
-                          color: button,
-                          borderRadius: BorderRadius.circular(25),
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "Week";
+                            isWeek = true;
+                            isMonth = false;
+                            isYear = false;
+                            isAll = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isWeek == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "1W",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isWeek == true ? white : text1,
+                              ),
+                            ),
+                          ),
                         ),
-                        child: Center(
+                      ),
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "Month";
+                            isMonth = true;
+                            isWeek = false;
+                            isYear = false;
+                            isAll = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isMonth == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "1M",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isMonth == true ? white : text1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "Year";
+                            isYear = true;
+                            isWeek = false;
+                            isMonth = false;
+                            isAll = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isYear == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "1Y",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isYear == true ? white : text1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
+                          setState(() {
+                            selectType = "All";
+                            isAll = true;
+                            isMonth = false;
+                            isWeek = false;
+                            isYear = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isAll == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['all'] != null)
+                                  ? "${userLanguage['all']}"
+                                  : "ALL",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isAll == true ? white : text1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+
+                /******Pie chats package */
+
+                // Container(
+                //   height: 300,
+                //   child: PieChart(
+                //     dataMap: dataMap,
+                //     animationDuration: Duration(milliseconds: 1500),
+                //     chartLegendSpacing: 32,
+                //     chartRadius: MediaQuery.of(context).size.width / 2,
+                //     colorList: spendingColors,
+                //     initialAngleInDegree: 0,
+                //     chartType: ChartType.ring,
+                //     ringStrokeWidth: 45,
+                //     centerText: "HYBRID",
+                //     legendOptions: LegendOptions(
+                //       showLegends: false,
+                //     ),
+                //     chartValuesOptions: ChartValuesOptions(
+                //       showChartValueBackground: true,
+                //       showChartValues: true,
+                //       showChartValuesInPercentage: true,
+                //       showChartValuesOutside: false,
+                //       decimalPlaces: 1,
+                //     ),
+                //   ),
+                // ),
+
+                /******Syncfusion package */
+
+                Container(
+                  height: 300,
+                  //color: Colors.amberAccent,
+                  child: GestureDetector(
+                    onTap: () {
+                      isVisibleInfo = !isVisibleInfo;
+                    },
+                    child: SfCircularChart(
+                      palette: <Color>[
+                        spendingBlue,
+                        spendingPink,
+                        spendingGreen,
+                      ],
+                      annotations: <CircularChartAnnotation>[
+                        CircularChartAnnotation(
+                          widget: Container(
+                            /**  TEXT DESIGN 1 **/
+                            child: Text(
+                                'Select a portion\nof the chart to\nview details',
+                                style: GoogleFonts.poppins(
+                                    fontSize: 10, color: text1)),
+
+                            /**  TEXT DESIGN 2 **/
+
+                            // child: RichText(
+                            //   text: TextSpan(
+                            //     text: '            FOOD',
+                            //     style: GoogleFonts.poppins(
+                            //       fontSize: 10,
+                            //       color: white,
+                            //       fontWeight: FontWeight.w600,
+                            //     ),
+                            //     children: <TextSpan>[
+                            //       TextSpan(
+                            //         text: '\n 53%',
+                            //         style: GoogleFonts.montserrat(
+                            //           fontSize: 31,
+                            //           fontWeight: FontWeight.w600,
+                            //           color: white,
+                            //         ),
+                            //       ),
+                            //     ],
+                            //   ),
+                            // ),
+                          ),
+                        )
+                      ],
+                      // title: ChartTitle(
+                      //     text: "Select a portion of the chart to view details",
+                      //     textStyle: GoogleFonts.poppins(
+                      //       fontSize: 10,
+                      //       color: text1,
+                      //     )),
+                      // legend: Legend(
+                      //     isVisible: true,
+                      //     overflowMode: LegendItemOverflowMode.wrap),
+                      tooltipBehavior: _tooltipBehavior,
+                      series: <CircularSeries>[
+                        DoughnutSeries<GDPData, String>(
+                          dataSource: _chartData,
+                          xValueMapper: (GDPData data, _) => data.continent,
+                          yValueMapper: (GDPData data, _) => data.gdp,
+                          //dataLabelSettings: DataLabelSettings(isVisible: true),
+                          enableTooltip: true,
+                          selectionBehavior:
+                              SelectionBehavior(enable: chartClick),
+                          explode: false,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 2,
+                ),
+                Visibility(
+                  visible: isVisibleInfo,
+                  child: Container(
+                    height: 148,
+                    width: 335,
+                    decoration: BoxDecoration(
+                      color: button,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 20, left: 20),
                           child: Text(
-                            "1W",
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['info'] != null)
+                                ? "${userLanguage['info']}"
+                                : "Info",
                             style: GoogleFonts.poppins(
-                              fontSize: 14,
+                              fontSize: 20,
                               fontWeight: FontWeight.w600,
                               color: Colors.white,
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
-                          child: Text(
-                            "1M",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
+                        Padding(
+                          padding: const EdgeInsets.only(top: 5, left: 20),
+                          child: RichText(
+                            text: TextSpan(
+                              text: 'You Spent',
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: text1,
+                              ),
+                              children: <TextSpan>[
+                                TextSpan(
+                                  text: ' 1654.12',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text: ' Gwei',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 10,
+                                    color: Colors.orange,
+                                  ),
+                                ),
+                                TextSpan(
+                                  text:
+                                      ' on food this month, that’s higher than normal.',
+                                  style: GoogleFonts.montserrat(
+                                    fontSize: 14,
+                                    color: text1,
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
-                          child: Text(
-                            "1Y",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
-                            ),
-                          ),
-                        ),
-                      ),
-                      Container(
-                        height: 48,
-                        width: 70,
-                        child: Center(
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 20),
                           child: Text(
                             (lang.length != null &&
                                     lang.length != 0 &&
-                                    userLanguage['all'] != null)
-                                ? "${userLanguage['all']}"
-                                : "ALL",
-                            style: GoogleFonts.poppins(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                              color: text1,
-                            ),
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  height: 300,
-                  //color: Colors.amberAccent,
-                  child: SfCircularChart(
-                    palette: <Color>[
-                      spendingBlue,
-                      spendingPink,
-                      spendingGreen,
-                    ],
-                    // title: ChartTitle(
-                    //     text: "Select a portion of the chart to view details",
-                    //     textStyle: GoogleFonts.poppins(
-                    //       fontSize: 10,
-                    //       color: text1,
-                    //     )),
-                    // legend: Legend(
-                    //     isVisible: true,
-                    //     overflowMode: LegendItemOverflowMode.wrap),
-                    tooltipBehavior: _tooltipBehavior,
-                    series: <CircularSeries>[
-                      DoughnutSeries<GDPData, String>(
-                        dataSource: _chartData,
-                        xValueMapper: (GDPData data, _) => data.continent,
-                        yValueMapper: (GDPData data, _) => data.gdp,
-                        //dataLabelSettings: DataLabelSettings(isVisible: true),
-                        enableTooltip: true,
-                      )
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 2,
-                ),
-                Container(
-                  height: 148,
-                  width: 335,
-                  decoration: BoxDecoration(
-                    color: button,
-                    borderRadius: BorderRadius.circular(20),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 20, left: 20),
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage['info'] != null)
-                              ? "${userLanguage['info']}"
-                              : "Info",
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 5, left: 20),
-                        child: RichText(
-                          text: TextSpan(
-                            text: 'You Spent',
+                                    userLanguage[
+                                            'whatcanwedotolowerthatnumber'] !=
+                                        null)
+                                ? "${userLanguage['whatcanwedotolowerthatnumber']}"
+                                : "What can we do to lower that number?",
                             style: GoogleFonts.poppins(
                               fontSize: 12,
                               color: text1,
                             ),
-                            children: <TextSpan>[
-                              TextSpan(
-                                text: ' 1654.12',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.white,
-                                ),
-                              ),
-                              TextSpan(
-                                text: ' Gwei',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 10,
-                                  color: Colors.orange,
-                                ),
-                              ),
-                              TextSpan(
-                                text:
-                                    ' on food this month, that’s higher than normal.',
-                                style: GoogleFonts.montserrat(
-                                  fontSize: 14,
-                                  color: text1,
-                                ),
-                              ),
-                            ],
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10, left: 20),
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage[
-                                          'whatcanwedotolowerthatnumber'] !=
-                                      null)
-                              ? "${userLanguage['whatcanwedotolowerthatnumber']}"
-                              : "What can we do to lower that number?",
-                          style: GoogleFonts.poppins(
-                            fontSize: 12,
-                            color: text1,
-                          ),
-                        ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
                 SizedBox(
@@ -661,9 +748,9 @@ class _SpendingReportState extends State<SpendingReport> {
 
   List<GDPData> getChartData() {
     final List<GDPData> chartData = [
-      GDPData('Oceania', 4000),
-      GDPData('Africa', 1400),
-      GDPData('S America', 1420),
+      GDPData('Food', 4000),
+      GDPData('Coffee', 1400),
+      GDPData('Transfers', 1420),
       // GDPData('Europe', 23050),
       // GDPData('N America', 24880),
       // GDPData('Asia', 34390),
