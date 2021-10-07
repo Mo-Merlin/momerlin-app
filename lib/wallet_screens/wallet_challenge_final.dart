@@ -83,7 +83,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                   lang.length != 0 &&
                                   userLanguage['letthechallengebegin'] != null)
                               ? "${userLanguage['letthechallengebegin']}"
-                              : "Challenge \nCreated!",
+                              : "Challenge\nCreated!",
                           textAlign: TextAlign.center,
                           style: GoogleFonts.poppins(
                               color: Colors.white,

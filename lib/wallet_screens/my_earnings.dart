@@ -45,6 +45,81 @@ class _MyEarningsState extends State<MyEarnings> {
 
   // ignore: todo
   //TODO: LanguageEnd
+
+  List earningElements = [
+    {
+      "image": "earntrophybrown",
+      "title": "Walk Challenge Win",
+      "subtitle": "Yesterday",
+      "symbol": "+",
+      "value": "500.00",
+      "type": "Gwei",
+      "percentage": "53%",
+    },
+    {
+      "image": "earndown",
+      "title": "2 days ago",
+      "subtitle": "24 Transactions",
+      "symbol": "-",
+      "value": "220.00",
+      "type": "Gwei",
+      "percentage": "27%",
+    },
+    {
+      "image": "earntrophygold",
+      "title": "Run Challenge Win",
+      "subtitle": "Yesterday",
+      "symbol": "+",
+      "value": "1000.00",
+      "type": "Gwei",
+      "percentage": "20%",
+    },
+    {
+      "image": "earndown",
+      "title": "Walk Challenge Win",
+      "subtitle": "3 days ago",
+      "symbol": "-",
+      "value": "27.00",
+      "type": "Gwei",
+      "percentage": "53%",
+    },
+    {
+      "image": "earnup",
+      "title": "August 30th",
+      "subtitle": "24 Transactions",
+      "symbol": "-",
+      "value": "300.00",
+      "type": "Gwei",
+      "percentage": "27%",
+    },
+    {
+      "image": "earntrophygold",
+      "title ": "Run Challenge Win",
+      "subtitle": "Yesterday",
+      "symbol": "+",
+      "value": "27.00",
+      "type": "Gwei",
+      "percentage": "20%",
+    },
+  ];
+  var earningColors = [
+    earningOrange,
+    earningBlue,
+    spendingPink,
+    earningBlue,
+    earningBlue,
+    spendingPink,
+  ];
+
+  var earningSymbolColor = [
+    spendingGreen,
+    spendingPink,
+    spendingGreen,
+    spendingPink,
+    spendingPink,
+    spendingGreen,
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -437,10 +512,10 @@ class _MyEarningsState extends State<MyEarnings> {
                       Padding(
                         padding: const EdgeInsets.only(top: 20),
                         child: Container(
-                          height: 2,
+                          height: 4,
                           width: 50,
                           decoration: BoxDecoration(
-                              color: grey,
+                              color: text1,
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
@@ -491,24 +566,24 @@ class _MyEarningsState extends State<MyEarnings> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           // controller: myscrollController,
-                          itemCount: 20,
+                          itemCount: 6,
                           // padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
                             return ListTile(
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
                                 child: Container(
-                                  color: button,
+                                  color: earningColors[index],
                                   child: Image.asset(
-                                    "assets/images/profile.png",
-                                    fit: BoxFit.fill,
-                                    width: 46,
-                                    height: 46,
+                                    "assets/images/${earningElements[index]['image']}.png",
+                                    fit: BoxFit.none,
+                                    width: 50,
+                                    height: 50,
                                   ),
                                 ),
                               ),
                               title: Text(
-                                'Walk Challenge Win',
+                                earningElements[index]['title'],
                                 style: GoogleFonts.poppins(
                                   fontSize: 12,
                                   color: Colors.white,
@@ -516,7 +591,7 @@ class _MyEarningsState extends State<MyEarnings> {
                                 ),
                               ),
                               subtitle: Text(
-                                'Yesterday',
+                                earningElements[index]['subtitle'],
                                 style: GoogleFonts.poppins(
                                   fontSize: 9,
                                   color: text1,
@@ -534,15 +609,26 @@ class _MyEarningsState extends State<MyEarnings> {
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      '+ 500',
+                                      earningElements[index]['symbol'],
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: earningSymbolColor[index],
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                    Text(
+                                      earningElements[index]['value'],
                                       style: GoogleFonts.poppins(
                                         fontSize: 12,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
+                                    SizedBox(
+                                      width: 2,
+                                    ),
                                     Text(
-                                      'Gwei',
+                                      earningElements[index]['type'],
                                       style: GoogleFonts.poppins(
                                         fontSize: 9,
                                         color: Colors.orange,

@@ -199,17 +199,21 @@ class _WalletProfileState extends State<WalletProfile> {
                                 ],
                               ),
                             ),
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['earnofreferredearnings'] !=
-                                          null)
-                                  ? "${userLanguage['earnofreferredearnings']}"
-                                  : "Earn 1% of referred earnings",
-                              style: GoogleFonts.poppins(
-                                  color: blue1,
-                                  fontSize: 9,
-                                  fontWeight: FontWeight.w500),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 10, top: 5),
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage[
+                                                'earnofreferredearnings'] !=
+                                            null)
+                                    ? "${userLanguage['earnofreferredearnings']}"
+                                    : "Earn 1% of referred earnings",
+                                style: GoogleFonts.poppins(
+                                    color: blue1,
+                                    fontSize: 9,
+                                    fontWeight: FontWeight.w500),
+                              ),
                             ),
                           ],
                         ),
@@ -270,11 +274,11 @@ class _WalletProfileState extends State<WalletProfile> {
                             ],
                           ),
                           Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 15, left: 20, top: 5),
+                                padding:
+                                    const EdgeInsets.only(left: 20, top: 5),
                                 child: Text(
                                   (lang.length != null &&
                                           lang.length != 0 &&
@@ -290,10 +294,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                 ),
                               ),
-                              Spacer(),
+                              // Spacer(),
                               Padding(
                                 padding:
-                                    const EdgeInsets.only(right: 30, top: 5),
+                                    const EdgeInsets.only(right: 50, top: 5),
                                 child: Text(
                                   "\$2.50",
                                   style: GoogleFonts.montserrat(
@@ -504,8 +508,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                             onPressed: () {},
                                             icon: Icon(
                                               FontAwesomeIcons.twitter,
-                                              color: blue1,
-                                              size: 20,
+                                              color: Colors.blue,
+                                              size: 15,
                                             )),
                                       ),
                                     ),
@@ -526,8 +530,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                           onPressed: () {},
                                           icon: Icon(
                                             FontAwesomeIcons.facebook,
-                                            color: blue1,
-                                            size: 20,
+                                            color: Color(0xff4267B2),
+                                            size: 15,
                                           ),
                                         ),
                                       ),

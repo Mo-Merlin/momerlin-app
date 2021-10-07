@@ -4,6 +4,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:percent_indicator/percent_indicator.dart';
 
 class SpendingReport extends StatefulWidget {
   const SpendingReport({Key key}) : super(key: key);
@@ -37,6 +38,65 @@ class _SpendingReportState extends State<SpendingReport> {
 
   // ignore: todo
   //TODO: LanguageEnd
+
+  List spendingElements = [
+    {
+      "image": "berger",
+      "title": "Food",
+      "subtitle": "134 Transactions",
+      "value": "-1654.12",
+      "type": "Gwei",
+      "percentage": "53%",
+    },
+    {
+      "image": "coffee",
+      "title": "Coffee",
+      "subtitle": "24 Transactions",
+      "value": "-254.12",
+      "type": "Gwei",
+      "percentage": "27%",
+    },
+    {
+      "image": "spendingcoin",
+      "title": "Transfers",
+      "subtitle": "12 Transactions",
+      "value": "-125.21",
+      "type": "Gwei",
+      "percentage": "20%",
+    },
+    {
+      "image": "berger",
+      "title": "Food",
+      "subtitle": "134 Transactions",
+      "value": "-1654.12",
+      "type": "Gwei",
+      "percentage": "53%",
+    },
+    {
+      "image": "coffee",
+      "title": "Coffee",
+      "subtitle": "24 Transactions",
+      "value": "-254.12",
+      "type": "Gwei",
+      "percentage": "27%",
+    },
+    {
+      "image": "spendingcoin",
+      "title ": "Transfers",
+      "subtitle": "12 Transactions",
+      "value": "-125.21",
+      "type": "Gwei",
+      "percentage": "20%",
+    },
+  ];
+  var spendingColors = [
+    spendingBlue,
+    spendingPink,
+    spendingGreen,
+    spendingBlue,
+    spendingPink,
+    spendingGreen,
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -311,16 +371,16 @@ class _SpendingReportState extends State<SpendingReport> {
                   ),
                 ),
                 SizedBox(
-                  height: 30,
+                  height: 2,
                 ),
                 Container(
                   height: 300,
                   //color: Colors.amberAccent,
                   child: SfCircularChart(
                     palette: <Color>[
-                      blue1,
-                      Colors.pinkAccent,
-                      Colors.greenAccent,
+                      spendingBlue,
+                      spendingPink,
+                      spendingGreen,
                     ],
                     // title: ChartTitle(
                     //     text: "Select a portion of the chart to view details",
@@ -344,7 +404,7 @@ class _SpendingReportState extends State<SpendingReport> {
                   ),
                 ),
                 SizedBox(
-                  height: 10,
+                  height: 2,
                 ),
                 Container(
                   height: 148,
@@ -496,65 +556,92 @@ class _SpendingReportState extends State<SpendingReport> {
                           shrinkWrap: true,
                           physics: NeverScrollableScrollPhysics(),
                           // controller: myscrollController,
-                          itemCount: 20,
+                          itemCount: spendingElements.length,
                           // padding: EdgeInsets.zero,
                           itemBuilder: (BuildContext context, int index) {
                             return ListTile(
                               leading: ClipRRect(
                                 borderRadius: BorderRadius.circular(30),
                                 child: Container(
-                                  color: blue1,
+                                  color: spendingColors[index],
                                   child: Image.asset(
-                                    "assets/images/berger.png",
-                                    fit: BoxFit.contain,
-                                    width: 46,
-                                    height: 46,
+                                    "assets/images/${spendingElements[index]['image']}.png",
+                                    fit: BoxFit.none,
+                                    width: 50,
+                                    height: 50,
                                   ),
                                 ),
                               ),
                               title: Text(
-                                'Food',
+                                // "Food",
+                                spendingElements[index]["title"],
                                 style: GoogleFonts.poppins(
-                                  fontSize: 12,
+                                  fontSize: 18,
                                   color: Colors.white,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
                               subtitle: Text(
-                                '134 Transactions',
+                                spendingElements[index]['subtitle'],
                                 style: GoogleFonts.poppins(
-                                  fontSize: 9,
+                                  fontSize: 12,
                                   color: text1,
-                                  fontWeight: FontWeight.w500,
+                                  // fontWeight: FontWeight.w500,
                                 ),
                               ),
-                              trailing: Container(
-                                height: 40,
-                                width: 100,
-                                decoration: BoxDecoration(
-                                  color: Color(0xff707070).withOpacity(0.4),
-                                  borderRadius: BorderRadius.circular(10),
-                                ),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    Text(
-                                      '+ 500',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
+                              trailing: Wrap(
+                                children: [
+                                  CircularPercentIndicator(
+                                    radius: 40,
+                                    lineWidth: 2,
+                                    animation: true,
+                                    percent: 0.7,
+                                    center: Text(
+                                      spendingElements[index]['percentage'],
+                                      style: GoogleFonts.montserrat(
+                                        fontSize: 10,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                    Text(
-                                      'Gwei',
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 9,
-                                        color: Colors.orange,
-                                      ),
+                                    progressColor: spendingColors[index],
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  Container(
+                                    height: 40,
+                                    width: 100,
+                                    decoration: BoxDecoration(
+                                      color: Color(0xff707070).withOpacity(0.4),
+                                      borderRadius: BorderRadius.circular(10),
                                     ),
-                                  ],
-                                ),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                          spendingElements[index]['value'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 12,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          width: 2,
+                                        ),
+                                        Text(
+                                          spendingElements[index]['type'],
+                                          style: GoogleFonts.poppins(
+                                            fontSize: 9,
+                                            color: Colors.orange,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             );
                           },

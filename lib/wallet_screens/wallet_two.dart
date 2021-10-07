@@ -244,7 +244,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                         child: Text(
                                           (lang.length != null &&
                                                   lang.length != 0 &&
-                                                  userLanguage['yourBalanceIs'] !=
+                                                  userLanguage[
+                                                          'yourBalanceIs'] !=
                                                       null)
                                               ? "${userLanguage['yourBalanceIs']}"
                                               : "Your balance is",
@@ -348,12 +349,14 @@ class _WalletTwoState extends State<WalletTwo> {
                                                     WalletSend()));
                                       },
                                       child: Container(
-                                          height:
-                                              MediaQuery.of(context).size.height /
-                                                  6.5,
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  4,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6.5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           //color: button,
                                           decoration: BoxDecoration(
                                             color: button,
@@ -377,8 +380,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                                         Navigator.push(
                                                             context,
                                                             MaterialPageRoute(
-                                                                builder: (context) =>
-                                                                    WalletSend()));
+                                                                builder:
+                                                                    (context) =>
+                                                                        WalletSend()));
                                                       },
                                                       icon: Icon(
                                                         Icons
@@ -396,7 +400,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 child: Text(
                                                   (lang.length != null &&
                                                           lang.length != 0 &&
-                                                          userLanguage['send'] !=
+                                                          userLanguage[
+                                                                  'send'] !=
                                                               null)
                                                       ? "${userLanguage['send']}"
                                                       : "Send",
@@ -424,11 +429,13 @@ class _WalletTwoState extends State<WalletTwo> {
                                             MediaQuery.of(context).size.height /
                                                 6.5,
                                         width:
-                                            MediaQuery.of(context).size.width / 4,
+                                            MediaQuery.of(context).size.width /
+                                                4,
                                         //color: button,
                                         decoration: BoxDecoration(
                                           color: button,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: InkWell(
                                           onTap: () {
@@ -493,8 +500,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                       ),
                                     ),
                                     Container(
-                                      height: MediaQuery.of(context).size.height /
-                                          6.5,
+                                      height:
+                                          MediaQuery.of(context).size.height /
+                                              6.5,
                                       width:
                                           MediaQuery.of(context).size.width / 4,
 
@@ -512,8 +520,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                         child: Column(
                                           children: [
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 25),
+                                              padding: const EdgeInsets.only(
+                                                  top: 25),
                                               child: ClipRRect(
                                                 borderRadius:
                                                     BorderRadius.circular(30),
@@ -538,8 +546,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                               ),
                                             ),
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(top: 15),
+                                              padding: const EdgeInsets.only(
+                                                  top: 15),
                                               child: Text(
                                                 (lang.length != null &&
                                                         lang.length != 0 &&
@@ -550,7 +558,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 style: GoogleFonts.poppins(
                                                     fontSize: 13,
                                                     color: Colors.grey,
-                                                    fontWeight: FontWeight.w400),
+                                                    fontWeight:
+                                                        FontWeight.w400),
                                               ),
                                             ),
                                           ],
@@ -704,10 +713,10 @@ class _WalletTwoState extends State<WalletTwo> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 20),
                                   child: Container(
-                                    height: 2,
+                                    height: 4,
                                     width: 50,
                                     decoration: BoxDecoration(
-                                        color: grey,
+                                        color: text1,
                                         borderRadius:
                                             BorderRadius.circular(10)),
                                   ),

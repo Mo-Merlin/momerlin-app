@@ -3,7 +3,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/horizontallist.dart';
+//import 'package:momerlin/wallet_screens/horizontallist.dart';
 import 'package:momerlin/wallet_screens/my_activity.dart';
 // import 'package:momerlin/wallet_screens/my_reports.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
@@ -2877,10 +2877,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 20),
+                                                const EdgeInsets.only(left: 15),
                                             child: Text(
                                               competitorsgets.toString(),
                                               style: GoogleFonts.montserrat(
@@ -2891,27 +2893,22 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                   fontWeight: FontWeight.w600),
                                             ),
                                           ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Text(
-                                              (lang.length != null &&
-                                                      lang.length != 0 &&
-                                                      userLanguage['gwei'] !=
-                                                          null)
-                                                  ? "${userLanguage['sats']}"
-                                                  : "Gwei",
-                                              style: GoogleFonts.poppins(
-                                                  decoration:
-                                                      TextDecoration.none,
-                                                  color: Colors.orange,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400),
-                                            ),
+                                          Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['gwei'] !=
+                                                        null)
+                                                ? "${userLanguage['sats']}"
+                                                : "Gwei",
+                                            style: GoogleFonts.poppins(
+                                                decoration: TextDecoration.none,
+                                                color: Colors.orange,
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w400),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 8),
+                                            padding: const EdgeInsets.only(
+                                                right: 10),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -2994,36 +2991,51 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 10),
+                                                const EdgeInsets.only(left: 15),
                                             child: Container(
-                                              height: 32,
-                                              width: 25,
                                               //color: blue1,
-                                              child: Image.asset(
-                                                "assets/images/streak.png",
-                                                fit: BoxFit.cover,
+                                              child: Row(
+                                                children: [
+                                                  Container(
+                                                    height: 32,
+                                                    width: 25,
+                                                    //color: blue1,
+                                                    child: Image.asset(
+                                                      "assets/images/streak.png",
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            left: 10),
+                                                    child: Text(
+                                                      selecttype,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 13,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 10),
-                                            child: Text(
-                                              selecttype,
-                                              style: GoogleFonts.poppins(
-                                                  decoration:
-                                                      TextDecoration.none,
-                                                  color: Colors.white,
-                                                  fontSize: 13,
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                          ),
-                                          Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 190),
+                                                right: 25),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -3079,10 +3091,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           borderRadius:
                                               BorderRadius.circular(15)),
                                       child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(left: 20),
+                                                const EdgeInsets.only(left: 15),
                                             child: Text(
                                               wagar.toString(),
                                               style: GoogleFonts.poppins(
@@ -3095,7 +3109,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           ),
                                           Padding(
                                             padding: const EdgeInsets.only(
-                                                left: 250),
+                                                right: 25),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -3138,6 +3152,17 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   ),
                                   Text(
                                     competitorsgets.toString(),
+                                    style: GoogleFonts.montserrat(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.orange,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                  SizedBox(
+                                    width: 3,
+                                  ),
+                                  Text(
+                                    "GWEI",
                                     style: GoogleFonts.montserrat(
                                         decoration: TextDecoration.none,
                                         color: Colors.orange,
