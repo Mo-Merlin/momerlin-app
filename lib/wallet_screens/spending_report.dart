@@ -192,24 +192,24 @@ class _SpendingReportState extends State<SpendingReport> {
                         ),
                       ),
                       Positioned(
-                        top: 40,
+                        top: 20,
+                        child: Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['yourBalanceIs'] != null)
+                              ? "${userLanguage['yourBalanceIs']}"
+                              : "Your balance is",
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 60,
                         child: Row(
                           children: [
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['yourBalanceIs'] != null)
-                                  ? "${userLanguage['yourBalanceIs']}"
-                                  : "Your balance is",
-                              style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
                             Text(
                               balance.toStringAsFixed(2),
                               style: GoogleFonts.montserrat(

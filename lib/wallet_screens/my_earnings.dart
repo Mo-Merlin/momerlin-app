@@ -213,96 +213,25 @@ class _MyEarningsState extends State<MyEarnings> {
                           fit: BoxFit.fill,
                         ),
                       ),
-                      // Positioned(
-                      //   top: 45,a
-                      //   child: Container(
-                      //     //color: Colors.amber,
-                      //     child: Row(
-                      //       crossAxisAlignment: CrossAxisAlignment.center,
-                      //       mainAxisAlignment: MainAxisAlignment.start,
-                      //       children: [
-                      //         Padding(
-                      //           padding: const EdgeInsets.all(5.0),
-                      //           child: ClipRRect(
-                      //             borderRadius: BorderRadius.circular(30),
-                      //             child: Container(
-                      //               color: button,
-                      //               child: IconButton(
-                      //                   onPressed: () {
-                      //                     Navigator.pop(context);
-                      //                   },
-                      //                   icon: Icon(
-                      //                     Icons.arrow_back,
-                      //                     color: Colors.white,
-                      //                   )),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //         SizedBox(
-                      //           width: 15,
-                      //         ),
-                      //         Text(
-                      //           (lang.length != null &&
-                      //                   lang.length != 0 &&
-                      //                   userLanguage['myearnings'] != null)
-                      //               ? "${userLanguage['myearnings']}"
-                      //               : "MY EARNINGS",
-                      //           textAlign: TextAlign.center,
-                      //           style: GoogleFonts.poppins(
-                      //               color: white,
-                      //               fontSize: 15,
-                      //               fontWeight: FontWeight.w700),
-                      //         ),
-                      //         SizedBox(
-                      //           width: MediaQuery.of(context).size.width / 2.7,
-                      //         ),
-                      //         Padding(
-                      //           padding: const EdgeInsets.all(5.0),
-                      //           child: InkWell(
-                      //             onTap: () {
-                      //               Navigator.push(
-                      //                   context,
-                      //                   MaterialPageRoute(
-                      //                       builder: (context) =>
-                      //                           WalletProfile()));
-                      //             },
-                      //             child: ClipRRect(
-                      //               borderRadius: BorderRadius.circular(30),
-                      //               child: Container(
-                      //                 color: button,
-                      //                 child: Image.asset(
-                      //                   "assets/images/profile.png",
-                      //                   fit: BoxFit.fill,
-                      //                   width: 46,
-                      //                   height: 46,
-                      //                 ),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         ),
-                      //       ],
-                      //     ),
-                      //   ),
-                      // ),
                       Positioned(
-                        top: 40,
+                        top: 20,
+                        child: Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['yourBalanceIs'] != null)
+                              ? "${userLanguage['yourBalanceIs']}"
+                              : "Your balance is",
+                          style: GoogleFonts.poppins(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      Positioned(
+                        top: 60,
                         child: Row(
                           children: [
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['yourBalanceIs'] != null)
-                                  ? "${userLanguage['yourBalanceIs']}"
-                                  : "Your balance is",
-                              style: GoogleFonts.poppins(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w600,
-                                color: Colors.white,
-                              ),
-                            ),
-                            SizedBox(
-                              width: 5,
-                            ),
                             Text(
                               balance.toStringAsFixed(2),
                               style: GoogleFonts.montserrat(
