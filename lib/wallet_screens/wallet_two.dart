@@ -749,9 +749,128 @@ class _WalletTwoState extends State<WalletTwo> {
                                   ),
                                 ),
                                 transactions1.length == 0
+                                    // ? Padding(
+                                    //     padding: EdgeInsets.only(top: 50),
+                                    //     // top: 50,
+                                    //     child: ListView.builder(
+                                    //       shrinkWrap: true,
+                                    //       physics:
+                                    //           AlwaysScrollableScrollPhysics(),
+                                    //       controller: myscrollController,
+                                    //       itemCount: 12,
+                                    //       // padding: EdgeInsets.zero,
+                                    //       itemBuilder: (BuildContext context,
+                                    //           int index) {
+                                    //         return Column(
+                                    //           children: [
+                                    //             SizedBox(
+                                    //               height: 5,
+                                    //             ),
+                                    //             Container(
+                                    //               child: ListTile(
+                                    //                 contentPadding:
+                                    //                     EdgeInsets.only(
+                                    //                         top: 0, bottom: 0),
+                                    //                 leading: ClipRRect(
+                                    //                   borderRadius:
+                                    //                       BorderRadius.circular(
+                                    //                           30),
+                                    //                   child: Container(
+                                    //                       height: 60,
+                                    //                       width: 60,
+                                    //                       color: Colors.black54,
+                                    //                       child: Image.network(
+                                    //                         "https://c.static-nike.com/a/images/w_1920,c_limit/mdbgldn6yg1gg88jomci/image.jpg",
+                                    //                         fit: BoxFit.cover,
+                                    //                       )),
+                                    //                 ),
+                                    //                 title: Container(
+                                    //                   padding: EdgeInsets.only(
+                                    //                       left: 20),
+                                    //                   child: Text(
+                                    //                     "TRANS DETAILS",
+                                    //                     style:
+                                    //                         GoogleFonts.poppins(
+                                    //                             fontSize: 18,
+                                    //                             fontWeight:
+                                    //                                 FontWeight
+                                    //                                     .w600,
+                                    //                             color: Colors
+                                    //                                 .white),
+                                    //                   ),
+                                    //                 ),
+                                    //                 subtitle: Container(
+                                    //                   padding: EdgeInsets.only(
+                                    //                       left: 20),
+                                    //                   child: Text(
+                                    //                     "Date and time",
+                                    //                     style:
+                                    //                         GoogleFonts.poppins(
+                                    //                       fontSize: 12,
+                                    //                       color:
+                                    //                           Color(0xff9395A4),
+                                    //                     ),
+                                    //                   ),
+                                    //                 ),
+                                    //                 trailing: Container(
+                                    //                   height: 40,
+                                    //                   width: 100,
+                                    //                   decoration: BoxDecoration(
+                                    //                     color: Color(0xff707070)
+                                    //                         .withOpacity(0.4),
+                                    //                     borderRadius:
+                                    //                         BorderRadius
+                                    //                             .circular(10),
+                                    //                   ),
+                                    //                   child: Stack(
+                                    //                     alignment:
+                                    //                         Alignment.center,
+                                    //                     children: [
+                                    //                       Positioned(
+                                    //                         left: 14,
+                                    //                         top: 15,
+                                    //                         child: Text(
+                                    //                           "-12.00",
+                                    //                           style: GoogleFonts
+                                    //                               .montserrat(
+                                    //                             fontSize: 12,
+                                    //                             fontWeight:
+                                    //                                 FontWeight
+                                    //                                     .w500,
+                                    //                             color: Colors
+                                    //                                 .white,
+                                    //                           ),
+                                    //                         ),
+                                    //                       ),
+                                    //                       Positioned(
+                                    //                         left: 50,
+                                    //                         top: 15,
+                                    //                         child: Text(
+                                    //                           ' Gwei',
+                                    //                           style: GoogleFonts
+                                    //                               .montserrat(
+                                    //                             fontSize: 12,
+                                    //                             color: Colors
+                                    //                                 .orangeAccent,
+                                    //                           ),
+                                    //                         ),
+                                    //                       ),
+                                    //                     ],
+                                    //                   ),
+                                    //                 ),
+                                    //               ),
+                                    //             ),
+                                    //           ],
+                                    //         );
+                                    //       },
+                                    //     ),
+                                    //   )
                                     ? Container(
                                         padding: EdgeInsets.only(top: 80),
-                                        child: Column(
+                                        child: ListView(
+                                          physics:
+                                              AlwaysScrollableScrollPhysics(),
+                                          controller: myscrollController,
                                           children: [
                                             Image.asset(
                                               "assets/images/Wallet2.png",

@@ -19,8 +19,14 @@ class MyEarnings extends StatefulWidget {
 class _MyEarningsState extends State<MyEarnings> {
   // List<SalesData> _chartData;
   // TooltipBehavior _tooltipBehavior;
-  bool isWeek = true;
-  bool isMonth = false;
+  bool isHourChart = true;
+  bool isWeekChart = false;
+  bool isYearChart = false;
+
+  //var selectChartType;
+
+  bool isHour = true;
+  bool isWeek = false;
   bool isYear = false;
   bool isAll = false;
   var selectType;
@@ -49,17 +55,26 @@ class _MyEarningsState extends State<MyEarnings> {
 
   // ignore: todo
   //TODO: LanguageEnd
-  List<ChartSampleData> chartData = <ChartSampleData>[
-    ChartSampleData(x: DateTime(2015, 1, 1, 0), yValue: 1.13),
-    ChartSampleData(x: DateTime(2015, 1, 2, 2), yValue: 1.12),
-    ChartSampleData(x: DateTime(2015, 1, 3, 3), yValue: 1.08),
-    ChartSampleData(x: DateTime(2015, 1, 4, 4), yValue: 1.12),
-    ChartSampleData(x: DateTime(2015, 1, 5, 5), yValue: 1.1),
-    ChartSampleData(x: DateTime(2015, 1, 6, 6), yValue: 1.12),
-    ChartSampleData(x: DateTime(2015, 1, 7, 7), yValue: 1.1),
-    ChartSampleData(x: DateTime(2015, 1, 8, 8), yValue: 1.12),
-    ChartSampleData(x: DateTime(2015, 1, 9, 9), yValue: 1.16),
-    ChartSampleData(x: DateTime(2015, 1, 12, 12), yValue: 1.1),
+  List<HourChartData> hourChartData = <HourChartData>[
+    HourChartData(x: DateTime(2015, 1, 1, 5), yValue: 1.13),
+    HourChartData(x: DateTime(2015, 1, 2, 2), yValue: 1.12),
+    HourChartData(x: DateTime(2015, 1, 3, 3), yValue: 1.08),
+    HourChartData(x: DateTime(2015, 1, 4, 4), yValue: 1.12),
+    HourChartData(x: DateTime(2015, 1, 5, 5), yValue: 1.1),
+    HourChartData(x: DateTime(2015, 1, 6, 6), yValue: 1.12),
+    HourChartData(x: DateTime(2015, 1, 7, 7), yValue: 1.1),
+    HourChartData(x: DateTime(2015, 1, 8, 8), yValue: 1.12),
+    HourChartData(x: DateTime(2015, 1, 9, 9), yValue: 1.16),
+    HourChartData(x: DateTime(2015, 1, 12, 12), yValue: 1.1),
+  ];
+  List<YearChartData> yearChartData = <YearChartData>[
+    YearChartData(x: "2021", y: 0),
+    YearChartData(x: "2020", y: 10),
+    YearChartData(x: "2019", y: 3),
+    YearChartData(x: "2018", y: 6),
+    YearChartData(x: "2017", y: 2),
+    YearChartData(x: "2016", y: 12),
+    YearChartData(x: "2015", y: 7),
   ];
 
   List earningElements = [
@@ -273,12 +288,52 @@ class _MyEarningsState extends State<MyEarnings> {
                       InkWell(
                         onTap: () {
                           selectType = "";
+
+                          setState(() {
+                            selectType = "Hour";
+                            isHour = true;
+                            isWeek = false;
+                            isYear = false;
+                            isAll = false;
+
+                            isHourChart = true;
+                            isWeekChart = false;
+                            isYearChart = false;
+                          });
+                        },
+                        child: Container(
+                          height: 48,
+                          width: 70,
+                          decoration: isHour == true
+                              ? BoxDecoration(
+                                  color: button,
+                                  borderRadius: BorderRadius.circular(25),
+                                )
+                              : BoxDecoration(),
+                          child: Center(
+                            child: Text(
+                              "12H",
+                              style: GoogleFonts.poppins(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                                color: isHour == true ? white : text1,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          selectType = "";
                           setState(() {
                             selectType = "Week";
                             isWeek = true;
-                            isMonth = false;
+                            isHour = false;
                             isYear = false;
                             isAll = false;
+                            isHourChart = false;
+                            isWeekChart = true;
+                            isYearChart = false;
                           });
                         },
                         child: Container(
@@ -306,43 +361,14 @@ class _MyEarningsState extends State<MyEarnings> {
                         onTap: () {
                           selectType = "";
                           setState(() {
-                            selectType = "Month";
-                            isMonth = true;
-                            isWeek = false;
-                            isYear = false;
-                            isAll = false;
-                          });
-                        },
-                        child: Container(
-                          height: 48,
-                          width: 70,
-                          decoration: isMonth == true
-                              ? BoxDecoration(
-                                  color: button,
-                                  borderRadius: BorderRadius.circular(25),
-                                )
-                              : BoxDecoration(),
-                          child: Center(
-                            child: Text(
-                              "1M",
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: isMonth == true ? white : text1,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                      InkWell(
-                        onTap: () {
-                          selectType = "";
-                          setState(() {
                             selectType = "Year";
                             isYear = true;
                             isWeek = false;
-                            isMonth = false;
+                            isHour = false;
                             isAll = false;
+                            isHourChart = false;
+                            isWeekChart = false;
+                            isYearChart = true;
                           });
                         },
                         child: Container(
@@ -372,9 +398,12 @@ class _MyEarningsState extends State<MyEarnings> {
                           setState(() {
                             selectType = "All";
                             isAll = true;
-                            isMonth = false;
+                            isHour = false;
                             isWeek = false;
                             isYear = false;
+                            isHourChart = true;
+                            isWeekChart = true;
+                            isYearChart = true;
                           });
                         },
                         child: Container(
@@ -501,39 +530,127 @@ class _MyEarningsState extends State<MyEarnings> {
                 //     //         NumberFormat.simpleCurrency(decimalDigits: 0)),
                 //   ),
                 // ),
-                Container(
-                  height: 300,
-                  width: 350,
-                  child: SfCartesianChart(
-                    zoomPanBehavior: ZoomPanBehavior(
-                      enablePinching: true,
-                      zoomMode: ZoomMode.x,
-                      enablePanning: true,
-                    ),
-                    enableAxisAnimation: true,
-                    tooltipBehavior:
-                        TooltipBehavior(enable: true, color: Colors.orange),
-                    isTransposed: false,
-                    backgroundColor: backgroundcolor,
+                Visibility(
+                  visible: isHourChart,
+                  child: Container(
+                    height: 300,
+                    width: 350,
+                    child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                        enablePinching: true,
+                        zoomMode: ZoomMode.x,
+                        enablePanning: true,
+                      ),
+                      enableAxisAnimation: true,
+                      tooltipBehavior:
+                          TooltipBehavior(enable: true, color: Colors.orange),
+                      isTransposed: false,
+                      backgroundColor: backgroundcolor,
 
-                    //Specifying date time interval type as hours
-                    primaryXAxis: DateTimeAxis(
-                        interval: 6,
-                        majorGridLines: MajorGridLines(width: 0),
-                        edgeLabelPlacement: EdgeLabelPlacement.shift,
-                        intervalType: DateTimeIntervalType.hours),
-                    series: <ChartSeries<ChartSampleData, DateTime>>[
-                      SplineSeries<ChartSampleData, DateTime>(
-                        color: Colors.orange,
-                        dataSource: chartData,
-                        xValueMapper: (ChartSampleData sales, _) => sales.x,
-                        yValueMapper: (ChartSampleData sales, _) =>
-                            sales.yValue,
-                        name: 'Sales',
-                      )
-                    ],
+                      //Specifying date time interval type as hours
+                      primaryXAxis: DateTimeAxis(
+                          interval: 6,
+                          majorGridLines: MajorGridLines(width: 0),
+                          edgeLabelPlacement: EdgeLabelPlacement.shift,
+                          intervalType: DateTimeIntervalType.hours),
+                      series: <ChartSeries<HourChartData, DateTime>>[
+                        SplineSeries<HourChartData, DateTime>(
+                          color: Colors.orange,
+                          dataSource: hourChartData,
+                          xValueMapper: (HourChartData sales, _) => sales.x,
+                          yValueMapper: (HourChartData sales, _) =>
+                              sales.yValue,
+                          // name: 'Sales',
+                        )
+                      ],
+                    ),
                   ),
                 ),
+                SizedBox(
+                  height: 10,
+                ),
+                Visibility(
+                  visible: isWeekChart,
+                  child: Container(
+                    height: 300,
+                    width: 350,
+                    // color: Colors.amber,
+                    // child: Text("WEEK CHART"),
+                    child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                        enablePinching: true,
+                        zoomMode: ZoomMode.x,
+                        enablePanning: true,
+                      ),
+                      enableAxisAnimation: true,
+                      tooltipBehavior:
+                          TooltipBehavior(enable: true, color: Colors.orange),
+                      isTransposed: false,
+                      backgroundColor: backgroundcolor,
+
+                      //Specifying date time interval type as hours
+                      primaryXAxis: DateTimeAxis(
+                          interval: 6,
+                          majorGridLines: MajorGridLines(width: 0),
+                          edgeLabelPlacement: EdgeLabelPlacement.shift,
+                          intervalType: DateTimeIntervalType.hours),
+                      series: <ChartSeries<HourChartData, DateTime>>[
+                        SplineSeries<HourChartData, DateTime>(
+                          color: Colors.orange,
+                          dataSource: hourChartData,
+                          xValueMapper: (HourChartData sales, _) => sales.x,
+                          yValueMapper: (HourChartData sales, _) =>
+                              sales.yValue,
+                          name: 'Sales',
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                Visibility(
+                  visible: isYearChart,
+                  child: Container(
+                    height: 300,
+                    width: 350,
+                    //color: Colors.blueAccent,
+                    //child: Text("YEAR CHART"),
+                    child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                        enablePinching: true,
+                        zoomMode: ZoomMode.x,
+                        enablePanning: true,
+                      ),
+                      enableAxisAnimation: true,
+
+                      tooltipBehavior:
+                          TooltipBehavior(enable: true, color: Colors.orange),
+                      isTransposed: false,
+                      backgroundColor: backgroundcolor,
+
+                      primaryXAxis: CategoryAxis(
+                        interval: 1,
+                        majorGridLines: MajorGridLines(width: 0),
+                        edgeLabelPlacement: EdgeLabelPlacement.shift,
+                        //intervalType: DateTimeIntervalType.years,
+                      ),
+                      series: <SplineSeries<YearChartData, String>>[
+                        SplineSeries<YearChartData, String>(
+                            color: Colors.orange,
+                            dataSource: yearChartData,
+                            xValueMapper: (YearChartData sales, _) => sales.x,
+                            yValueMapper: (YearChartData sales, _) => sales.y,
+                            dataLabelSettings: DataLabelSettings(
+                                isVisible: false) // Enables the data label.
+                            )
+                      ],
+                      //Specifying date time interval type as hours
+                    ),
+                  ),
+                ),
+
                 SizedBox(
                   height: 10,
                 ),
@@ -804,9 +921,16 @@ class SalesData {
   final double sales;
 }
 
-class ChartSampleData {
-  ChartSampleData({this.x, this.yValue});
+class HourChartData {
+  HourChartData({this.x, this.yValue});
 
   final DateTime x;
   final double yValue;
+}
+
+class YearChartData {
+  YearChartData({this.x, this.y});
+
+  final String x;
+  final double y;
 }
