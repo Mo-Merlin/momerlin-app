@@ -261,7 +261,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         context,
                         MaterialPageRoute(
                             builder: (_) => Tabscreen(
-                                // indexvalue: 3,
+                                index: 1,
                                 )));
                   },
                   icon: Icon(

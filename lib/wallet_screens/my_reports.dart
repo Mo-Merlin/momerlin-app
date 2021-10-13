@@ -130,7 +130,7 @@ class _MyReportsState extends State<MyReports> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (_) => Tabscreen(
-                                                
+                                                index: 0,
                                                 )));
                                   },
                                   icon: Icon(

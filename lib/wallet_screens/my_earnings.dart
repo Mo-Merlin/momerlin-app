@@ -22,6 +22,7 @@ class _MyEarningsState extends State<MyEarnings> {
   bool isHourChart = true;
   bool isWeekChart = false;
   bool isYearChart = false;
+  bool isAllChart = false;
 
   //var selectChartType;
 
@@ -67,14 +68,37 @@ class _MyEarningsState extends State<MyEarnings> {
     HourChartData(x: DateTime(2015, 1, 9, 9), yValue: 1.16),
     HourChartData(x: DateTime(2015, 1, 12, 12), yValue: 1.1),
   ];
+  List<WeekChartData> weekChartData = <WeekChartData>[
+    WeekChartData(x: "Sun", y: 0),
+    WeekChartData(x: "Mon", y: 10),
+    WeekChartData(x: "Tue", y: 3),
+    WeekChartData(x: "Wed", y: 6),
+    WeekChartData(x: "Thu", y: 2),
+    WeekChartData(x: "Fri", y: 12),
+    WeekChartData(x: "Sat", y: 7),
+  ];
   List<YearChartData> yearChartData = <YearChartData>[
-    YearChartData(x: "2021", y: 0),
-    YearChartData(x: "2020", y: 10),
-    YearChartData(x: "2019", y: 3),
-    YearChartData(x: "2018", y: 6),
-    YearChartData(x: "2017", y: 2),
-    YearChartData(x: "2016", y: 12),
-    YearChartData(x: "2015", y: 7),
+    YearChartData(x: "Jan", y: 0),
+    YearChartData(x: "Feb", y: 10),
+    YearChartData(x: "Mar", y: 3),
+    YearChartData(x: "Apr", y: 6),
+    YearChartData(x: "May", y: 2),
+    YearChartData(x: "Jun", y: 12),
+    YearChartData(x: "Jul", y: 11),
+    YearChartData(x: "Aug", y: 3),
+    YearChartData(x: "Sep", y: 7),
+    YearChartData(x: "Oct", y: 10),
+    YearChartData(x: "Nov", y: 14),
+    YearChartData(x: "Dec", y: 11),
+  ];
+  List<AllChartData> allChartData = <AllChartData>[
+    AllChartData(x: "2021", y: 0),
+    AllChartData(x: "2020", y: 10),
+    AllChartData(x: "2019", y: 3),
+    AllChartData(x: "2018", y: 6),
+    AllChartData(x: "2017", y: 2),
+    AllChartData(x: "2016", y: 12),
+    AllChartData(x: "2015", y: 7),
   ];
 
   List earningElements = [
@@ -299,6 +323,7 @@ class _MyEarningsState extends State<MyEarnings> {
                             isHourChart = true;
                             isWeekChart = false;
                             isYearChart = false;
+                            isAllChart = false;
                           });
                         },
                         child: Container(
@@ -334,6 +359,7 @@ class _MyEarningsState extends State<MyEarnings> {
                             isHourChart = false;
                             isWeekChart = true;
                             isYearChart = false;
+                            isAllChart = false;
                           });
                         },
                         child: Container(
@@ -369,6 +395,7 @@ class _MyEarningsState extends State<MyEarnings> {
                             isHourChart = false;
                             isWeekChart = false;
                             isYearChart = true;
+                            isAllChart = false;
                           });
                         },
                         child: Container(
@@ -401,9 +428,10 @@ class _MyEarningsState extends State<MyEarnings> {
                             isHour = false;
                             isWeek = false;
                             isYear = false;
-                            isHourChart = true;
-                            isWeekChart = true;
-                            isYearChart = true;
+                            isHourChart = false;
+                            isWeekChart = false;
+                            isYearChart = false;
+                            isAllChart = true;
                           });
                         },
                         child: Container(
@@ -530,6 +558,8 @@ class _MyEarningsState extends State<MyEarnings> {
                 //     //         NumberFormat.simpleCurrency(decimalDigits: 0)),
                 //   ),
                 // ),
+
+                /**HOUR CHART */
                 Visibility(
                   visible: isHourChart,
                   child: Container(
@@ -569,6 +599,7 @@ class _MyEarningsState extends State<MyEarnings> {
                 SizedBox(
                   height: 10,
                 ),
+                /**WEEK CHART */
                 Visibility(
                   visible: isWeekChart,
                   child: Container(
@@ -589,18 +620,17 @@ class _MyEarningsState extends State<MyEarnings> {
                       backgroundColor: backgroundcolor,
 
                       //Specifying date time interval type as hours
-                      primaryXAxis: DateTimeAxis(
-                          interval: 6,
-                          majorGridLines: MajorGridLines(width: 0),
-                          edgeLabelPlacement: EdgeLabelPlacement.shift,
-                          intervalType: DateTimeIntervalType.hours),
-                      series: <ChartSeries<HourChartData, DateTime>>[
-                        SplineSeries<HourChartData, DateTime>(
+                      primaryXAxis: CategoryAxis(
+                        interval: 1,
+                        majorGridLines: MajorGridLines(width: 0),
+                        edgeLabelPlacement: EdgeLabelPlacement.shift,
+                      ),
+                      series: <ChartSeries<WeekChartData, String>>[
+                        SplineSeries<WeekChartData, String>(
                           color: Colors.orange,
-                          dataSource: hourChartData,
-                          xValueMapper: (HourChartData sales, _) => sales.x,
-                          yValueMapper: (HourChartData sales, _) =>
-                              sales.yValue,
+                          dataSource: weekChartData,
+                          xValueMapper: (WeekChartData sales, _) => sales.x,
+                          yValueMapper: (WeekChartData sales, _) => sales.y,
                           name: 'Sales',
                         )
                       ],
@@ -610,8 +640,55 @@ class _MyEarningsState extends State<MyEarnings> {
                 SizedBox(
                   height: 10,
                 ),
+                /**YEAR CHART */
                 Visibility(
                   visible: isYearChart,
+                  child: Container(
+                    height: 300,
+                    width: 350,
+                    //color: Colors.blueAccent,
+                    //child: Text("YEAR CHART"),
+                    child: SfCartesianChart(
+                      zoomPanBehavior: ZoomPanBehavior(
+                        enablePinching: true,
+                        zoomMode: ZoomMode.x,
+                        enablePanning: true,
+                      ),
+                      enableAxisAnimation: true,
+
+                      tooltipBehavior:
+                          TooltipBehavior(enable: true, color: Colors.orange),
+                      isTransposed: false,
+                      backgroundColor: backgroundcolor,
+
+                      primaryXAxis: CategoryAxis(
+                        labelRotation: -50,
+                        interval: 1,
+                        majorGridLines: MajorGridLines(width: 0),
+                        edgeLabelPlacement: EdgeLabelPlacement.shift,
+                        //intervalType: DateTimeIntervalType.years,
+                      ),
+                      series: <SplineSeries<YearChartData, String>>[
+                        SplineSeries<YearChartData, String>(
+                            color: Colors.orange,
+                            dataSource: yearChartData,
+                            xValueMapper: (YearChartData sales, _) => sales.x,
+                            yValueMapper: (YearChartData sales, _) => sales.y,
+                            dataLabelSettings: DataLabelSettings(
+                                isVisible: false) // Enables the data label.
+                            )
+                      ],
+                      //Specifying date time interval type as hours
+                    ),
+                  ),
+                ),
+
+                SizedBox(
+                  height: 10,
+                ),
+                /**ALL CHART */ /**YEAR CHART */
+                Visibility(
+                  visible: isAllChart,
                   child: Container(
                     height: 300,
                     width: 350,
@@ -636,12 +713,12 @@ class _MyEarningsState extends State<MyEarnings> {
                         edgeLabelPlacement: EdgeLabelPlacement.shift,
                         //intervalType: DateTimeIntervalType.years,
                       ),
-                      series: <SplineSeries<YearChartData, String>>[
-                        SplineSeries<YearChartData, String>(
+                      series: <SplineSeries<AllChartData, String>>[
+                        SplineSeries<AllChartData, String>(
                             color: Colors.orange,
-                            dataSource: yearChartData,
-                            xValueMapper: (YearChartData sales, _) => sales.x,
-                            yValueMapper: (YearChartData sales, _) => sales.y,
+                            dataSource: allChartData,
+                            xValueMapper: (AllChartData sales, _) => sales.x,
+                            yValueMapper: (AllChartData sales, _) => sales.y,
                             dataLabelSettings: DataLabelSettings(
                                 isVisible: false) // Enables the data label.
                             )
@@ -650,7 +727,6 @@ class _MyEarningsState extends State<MyEarnings> {
                     ),
                   ),
                 ),
-
                 SizedBox(
                   height: 10,
                 ),
@@ -928,8 +1004,22 @@ class HourChartData {
   final double yValue;
 }
 
+class WeekChartData {
+  WeekChartData({this.x, this.y});
+
+  final String x;
+  final double y;
+}
+
 class YearChartData {
   YearChartData({this.x, this.y});
+
+  final String x;
+  final double y;
+}
+
+class AllChartData {
+  AllChartData({this.x, this.y});
 
   final String x;
   final double y;

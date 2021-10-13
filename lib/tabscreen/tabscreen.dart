@@ -9,6 +9,9 @@ import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:momerlin/wallet_screens/wallet_two.dart';
 
 class Tabscreen extends StatefulWidget {
+  final index;
+
+  const Tabscreen({Key key, this.index}) : super(key: key);
   @override
   _TabscreenState createState() => new _TabscreenState();
 }
@@ -26,6 +29,12 @@ class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
       duration: Duration(milliseconds: 10),
     );
     animation = Tween(begin: 0.0, end: 1.0).animate(_animationController);
+
+    if (widget.index!= null) {
+      setState(() {
+        _selectedIndex= widget.index;
+      });
+    }
   }
 
   AnimationController _animationController;

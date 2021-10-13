@@ -70,8 +70,12 @@ class _WalletProfileState extends State<WalletProfile> {
                     color: button,
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (_) => Tabscreen()));
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Tabscreen(
+                                        index: 2,
+                                      )));
                         },
                         icon: Icon(
                           Icons.arrow_back,
