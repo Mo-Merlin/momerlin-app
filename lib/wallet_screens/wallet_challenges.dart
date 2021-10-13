@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 //import 'package:momerlin/wallet_screens/horizontallist.dart';
 import 'package:momerlin/wallet_screens/my_activity.dart';
@@ -256,7 +257,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    // Navigator.pop(context);
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => Tabscreen(
+                                // indexvalue: 3,
+                                )));
                   },
                   icon: Icon(
                     Icons.arrow_back,
