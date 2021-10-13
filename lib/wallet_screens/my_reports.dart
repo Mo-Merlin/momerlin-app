@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/my_earnings.dart';
 import 'package:momerlin/wallet_screens/spending_report.dart';
@@ -124,7 +125,13 @@ class _MyReportsState extends State<MyReports> {
                               color: button,
                               child: IconButton(
                                   onPressed: () {
-                                    Navigator.pop(context);
+                                    // Navigator.pop(context);
+                                    Navigator.pushReplacement(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (_) => Tabscreen(
+                                                
+                                                )));
                                   },
                                   icon: Icon(
                                     Icons.arrow_back,
