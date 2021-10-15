@@ -6,6 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
@@ -31,6 +32,8 @@ class Transaction {
             json["merchant_name"] == null ? null : json["merchant_name"],
       );
 }
+
+
 
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
@@ -149,8 +152,12 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
     if (usersave == true) {
-      Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => WalletTwo()));
+        Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Tabscreen(
+                                        index: 0,
+                                      ),),);
     } else {
       // print("PAVITHRA");
     }
