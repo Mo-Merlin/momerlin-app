@@ -68,9 +68,29 @@ class _ImportWalletPage extends State<ImportWalletPage> {
 
   // String _address = await Web3.getAddressFromPrivateKey(_pk);
   // print("addrwss $_address");
+
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
+  void _showScaffold(String message) {
+    // ignore: deprecated_member_use
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: GoogleFonts.poppins(
+            color: white,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        backgroundColor: blue1,
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+       key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         elevation: 0,
@@ -191,9 +211,12 @@ class _ImportWalletPage extends State<ImportWalletPage> {
                 onTap: () {
                   print(seed);
                   setState(() {
-                    loading = true;
+                    seedlength == 12 ?
+                    loading = true:loading = false;
                   });
-                  storeUser();
+                   seedlength == 12 ?
+                     storeUser(): _showScaffold('Please enter valid seed phrase');
+                 
 
                   // }
                 },

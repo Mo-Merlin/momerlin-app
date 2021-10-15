@@ -74,8 +74,8 @@ class _WalletProfileState extends State<WalletProfile> {
                               context,
                               MaterialPageRoute(
                                   builder: (_) => Tabscreen(
-                                        index: 2,
-                                      )));
+                                        index: 0,
+                                      ),),);
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -591,7 +591,8 @@ class _WalletProfileState extends State<WalletProfile> {
                         ],
                       ),
                     ),
-                  )
+                  ),
+                  SizedBox(height: 100,),
                 ],
               ),
             ),

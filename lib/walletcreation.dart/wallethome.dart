@@ -43,7 +43,7 @@ class _WalletHomePage extends State<WalletHomePage> {
               fit: BoxFit.fill),
         ),
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20, right: 20, top: 290  ),
+          padding: EdgeInsets.only(left: 20, right: 20, top: MediaQuery.of(context).size.height * 0.36),
           child: Container(
             height: MediaQuery.of(context).size.height,
             child: Column(
@@ -53,7 +53,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                 // ),
                 Container(
                   width: MediaQuery.of(context).size.width,
-                  height: MediaQuery.of(context).size.height * 0.566,
+                  height: MediaQuery.of(context).size.height * 0.6,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(40),
                       color: backgroundcolor),
