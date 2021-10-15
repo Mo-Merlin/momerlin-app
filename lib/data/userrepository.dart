@@ -102,4 +102,22 @@ class UserRepository {
       print("Error" + e);
     }
   }
+
+  Future<dynamic> getChallenges() async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/challenges";
+
+      var res = await http.get(
+        '${url + "challenges"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      print("NO OF CHALLENGES : "+ checkres.length.toString());
+      
+      return checkres;
+    } catch (e) {
+      print("error");
+      print("Error" + e);
+    }
+  }
 }

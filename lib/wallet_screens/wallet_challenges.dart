@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 //import 'package:momerlin/wallet_screens/horizontallist.dart';
@@ -12,6 +13,33 @@ import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
+class Challenges {
+  String mode;
+  String type;
+  String totalCompetitors;
+  var streakDays;
+  var totalKm;
+  var wage;
+
+  Challenges({
+    this.mode,
+    this.type,
+    this.totalCompetitors,
+    this.streakDays,
+    this.totalKm,
+    this.wage,
+  });
+
+  factory Challenges.fromJson(Map<String, dynamic> json) => Challenges(
+        mode: json["mode"] == null ? null : json["mode"],
+        type: json["type"],
+        totalCompetitors: json["totalCompetitors"],
+        streakDays: json["streakDays"],
+        totalKm: json["totalKm"],
+        wage: json["wage"],
+      );
+}
+
 class WalletChallenges extends StatefulWidget {
   const WalletChallenges({Key key}) : super(key: key);
 
@@ -20,14 +48,18 @@ class WalletChallenges extends StatefulWidget {
 }
 
 class _WalletChallengesState extends State<WalletChallenges> {
+  List<Challenges> challengesOne = [];
   var userLanguage, lang = [];
+  bool loading = true;
   List<int> data = [];
 
   int value = 0;
+
   @override
   void initState() {
     super.initState();
     getUserLanguage();
+    getChallenges();
   }
 
   // ignore: todo
@@ -41,6 +73,21 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   // ignore: todo
   //TODO: LanguageEnd
+
+  Future<void> getChallenges() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getChallenges();
+    setState(() {
+      loading = false;
+    });
+    challengesOne = [];
+    for (var i = 0; i < res["challenges"].length; i++) {
+      challengesOne.add(Challenges.fromJson(res["challenges"][i]));
+    }
+    print("Challenges : " + res.toString());
+  }
 
   List elements = [
     {
@@ -261,7 +308,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         context,
                         MaterialPageRoute(
                             builder: (_) => Tabscreen(
-                                index: 1,
+                                  index: 1,
                                 )));
                   },
                   icon: Icon(
@@ -373,9 +420,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   height: 40,
                 ),
 
-                /******* 1st ListView   *******/
+                /******* RECENT WINNERS ListView   *******/
                 Container(
-                  height: MediaQuery.of(context).size.height * 0.26,
+                  height: MediaQuery.of(context).size.height * 0.27,
                   width: MediaQuery.of(context).size.width,
                   decoration: BoxDecoration(
                       //color: Color(0xff313248),
@@ -429,7 +476,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         ],
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.18,
+                        height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(left: 5, right: 0),
                         //color: Colors.indigo,
@@ -453,7 +500,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 children: [
                                   Container(
                                     height: MediaQuery.of(context).size.height *
-                                        0.16,
+                                        0.17,
                                     width: MediaQuery.of(context).size.width *
                                         0.35,
                                     //color: Colors.pink,
@@ -461,14 +508,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Container(
-                                          // height:
-                                          //     MediaQuery.of(context).size.height *
-                                          //         0.15,
-                                          // width:
-                                          //     MediaQuery.of(context).size.width *
-                                          //         0.30,
-                                          height: 112,
-                                          width: 113,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.15,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.30,
+                                          //height: 112,
+                                          //width: 113,
                                           decoration: BoxDecoration(
                                               color: button.withOpacity(0.4),
                                               borderRadius:
@@ -481,34 +530,36 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 padding: const EdgeInsets.only(
                                                     top: 15),
                                                 child: Container(
-                                                  // height: MediaQuery.of(context)
-                                                  //         .size
-                                                  //         .height *
-                                                  //     0.06,
-                                                  // width: MediaQuery.of(context)
-                                                  //     .size
-                                                  //     .width,
-                                                  height: 29, width: 79,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.04,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  //height: 29, width: 79,
                                                   //color: Colors.red,
-                                                  child: Text(
-                                                      elements[index]['name'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.grey,
-                                                        fontSize: 11,
-                                                      )),
+                                                  child: Center(
+                                                    child: Text(
+                                                        elements[index]['name'],
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.grey,
+                                                          fontSize: 11,
+                                                        )),
+                                                  ),
                                                 ),
                                               ),
                                               Container(
-                                                // height: MediaQuery.of(context)
-                                                //         .size
-                                                //         .height *
-                                                //     0.06,
-                                                // width: MediaQuery.of(context)
-                                                //         .size
-                                                //         .width *
-                                                //     0.30,
-                                                height: 43, width: 93,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.06,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.25,
+                                                // height: 43, width: 93,
                                                 decoration: BoxDecoration(
                                                     color: Colors.white
                                                         .withOpacity(0.25),
@@ -553,8 +604,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 5,
-                                    left: 53,
+                                    top: MediaQuery.of(context).size.height *
+                                        0.001,
+                                    left: MediaQuery.of(context).size.width *
+                                        0.13,
                                     child: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
@@ -579,7 +632,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                 SizedBox(
                   height: 10,
                 ),
-                /******* 2nd ListView   *******/
+                /******* JOIN CHALLENGE ListView   *******/
                 Container(
                   height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.width,
@@ -634,7 +687,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         ],
                       ),
                       Container(
-                        height: MediaQuery.of(context).size.height * 0.2,
+                        height: MediaQuery.of(context).size.height * 0.23,
                         width: MediaQuery.of(context).size.width,
                         margin: EdgeInsets.only(left: 5, right: 0),
                         //color: Colors.indigo,
@@ -666,8 +719,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       mainAxisAlignment: MainAxisAlignment.end,
                                       children: [
                                         Container(
-                                          height: 126,
-                                          width: 130,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.17,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.35,
+                                          // height: 126,
+                                          // width: 130,
                                           decoration: BoxDecoration(
                                               color: colors[index],
                                               borderRadius:
@@ -680,23 +741,40 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 padding: const EdgeInsets.only(
                                                     top: 15),
                                                 child: Container(
-                                                  height: 40, width: 79,
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.06,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  // height: 40, width: 79,
                                                   //color: Colors.red,
-                                                  child: Text(
-                                                      elementsTwo[index]
-                                                          ['name'],
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.white,
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                      )),
+                                                  child: Center(
+                                                    child: Text(
+                                                        elementsTwo[index]
+                                                            ['name'],
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        )),
+                                                  ),
                                                 ),
                                               ),
                                               Container(
-                                                height: 43,
-                                                width: 93,
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.06,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.28,
+                                                // height: 43,
+                                                // width: 93,
                                                 decoration: BoxDecoration(
                                                     color: Color(0xffFF8C00),
                                                     borderRadius:
@@ -743,8 +821,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ),
                                   Positioned(
-                                    top: 10,
-                                    left: 45,
+                                    top: MediaQuery.of(context).size.height *
+                                        0.001,
+                                    left: MediaQuery.of(context).size.width *
+                                        0.13,
                                     child: Container(
                                       height: 43,
                                       width: 43,
@@ -766,7 +846,271 @@ class _WalletChallengesState extends State<WalletChallenges> {
                 SizedBox(
                   height: 10,
                 ),
-                /******* 3rd ListView   *******/
+                /******* MY CHALLENGES  ListView   *******/
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      //color: Color(0xff313248),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25),
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['mychallenges'] != null)
+                                  ? "${userLanguage['mychallenges']}"
+                                  : "MY CHALLENGES",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  color: blue.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['viewmore'] != null)
+                                      ? "${userLanguage['viewmore']}"
+                                      : "VIEW MORE",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8,
+                                      color: blue1,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      challengesOne.length == 0
+                          ? Container(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              width: MediaQuery.of(context).size.width,
+                              child: Center(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Text(
+                                      "please check your internet connection and refresh the page.",
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600,
+                                      )),
+                                ),
+                              ),
+                            )
+                          : Container(
+                              height: MediaQuery.of(context).size.height * 0.23,
+                              width: MediaQuery.of(context).size.width,
+                              margin: EdgeInsets.only(left: 5, right: 0),
+                              //color: Colors.indigo,
+                              padding: EdgeInsets.only(
+                                  left: 4, top: 10, bottom: 0, right: 0),
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: challengesOne.length,
+                                itemBuilder: (context, index) {
+                                  print(challengesOne.length);
+                                  return InkWell(
+                                    // onTap: () {
+                                    //   if (elements[index]['name'] ==
+                                    //       '@momozuno \nhas earned') {
+                                    //     Navigator.push(
+                                    //         context,
+                                    //         MaterialPageRoute(
+                                    //             builder: (context) => MyActivity()));
+                                    //   }
+                                    //},
+                                    child: Stack(
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.2,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.38,
+                                          //color: Colors.pink,
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.17,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.35,
+                                                // height: 126,
+                                                // width: 130,
+                                                decoration: BoxDecoration(
+                                                    color: colors[index],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Column(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceAround,
+                                                  children: [
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              top: 15),
+                                                      child: Container(
+                                                        height: MediaQuery.of(
+                                                                    context)
+                                                                .size
+                                                                .height *
+                                                            0.06,
+                                                        width: MediaQuery.of(
+                                                                context)
+                                                            .size
+                                                            .width,
+                                                        //height: 40, width: 79,
+                                                        //color: Colors.red,
+                                                        child: Center(
+                                                          child: Text(
+                                                              challengesOne[
+                                                                          index]
+                                                                      .totalKm +
+                                                                  " KM " +
+                                                                  challengesOne[
+                                                                          index]
+                                                                      .mode +
+                                                                  " " +
+                                                                  challengesOne[
+                                                                          index]
+                                                                      .type,
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              )),
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    Container(
+                                                      height:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .height *
+                                                              0.06,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.28,
+                                                      // height: 43,
+                                                      // width: 93,
+                                                      decoration: BoxDecoration(
+                                                          color:
+                                                              Color(0xffFF8C00),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      15)),
+                                                      child: Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                        children: [
+                                                          Text(
+                                                              challengesOne[
+                                                                      index]
+                                                                  .wage,
+                                                              style: GoogleFonts.poppins(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600)),
+                                                          Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                        .only(
+                                                                    left: 5),
+                                                            child: Text(
+                                                                elementsTwo[
+                                                                        index]
+                                                                    ['type'],
+                                                                style: GoogleFonts.poppins(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500)),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Positioned(
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.01,
+                                          left: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.13,
+                                          child: Container(
+                                            height: 43,
+                                            width: 43,
+                                            //color: button,
+                                            child: Image.asset(
+                                              "assets/images/${elementsTwo[index]['trophys']}.png",
+                                            ),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                              ),
+                            ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                /******* MY ACTIVITY ListView   *******/
                 Container(
                   // height: MediaQuery.of(context).size.height * 0.28,
                   width: MediaQuery.of(context).size.width,
@@ -3411,3 +3755,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 }
+
+// Future<void> getChallenges() async {
+//   var res = await UserRepository().getChallenges();
+//   challenges1 = [];
+//   print("RESPONSES : "+res.toString());
+// }
