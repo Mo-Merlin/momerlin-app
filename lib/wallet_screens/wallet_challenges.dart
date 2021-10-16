@@ -488,7 +488,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           scrollDirection: Axis.horizontal,
                           itemCount: elements.length,
                           itemBuilder: (context, index) {
-                            return InkWell(
+                            return GestureDetector(
                               // onTap: () {
                               //   if (elements[index]['name'] ==
                               //       '@momozuno \nhas earned') {
@@ -699,7 +699,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           scrollDirection: Axis.horizontal,
                           itemCount: elements.length,
                           itemBuilder: (context, index) {
-                            return InkWell(
+                            return GestureDetector(
                               // onTap: () {
                               //   if (elements[index]['name'] ==
                               //       '@momozuno \nhas earned') {
@@ -931,7 +931,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 itemCount: challengesOne.length,
                                 itemBuilder: (context, index) {
                                   print(challengesOne.length);
-                                  return InkWell(
+                                  return GestureDetector(
                                     // onTap: () {
                                     //   if (elements[index]['name'] ==
                                     //       '@momozuno \nhas earned') {
@@ -1141,7 +1141,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   fontWeight: FontWeight.w600),
                             ),
                           ),
-                          InkWell(
+                          GestureDetector(
                             onTap: () {
                               //print("Gopinath");
                               Navigator.push(
@@ -1701,7 +1701,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
@@ -1791,7 +1791,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   decoration: BoxDecoration(
                                       color: iswalking == true ? blue1 : button,
                                       borderRadius: BorderRadius.circular(15)),
-                                  child: InkWell(
+                                  child: GestureDetector(
                                     onTap: () {
                                       selecttype = "";
                                       setState(() {
@@ -1873,7 +1873,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   decoration: BoxDecoration(
                                       color: isrunning == true ? blue1 : button,
                                       borderRadius: BorderRadius.circular(15)),
-                                  child: InkWell(
+                                  child: GestureDetector(
                                     onTap: () {
                                       selecttype = "";
                                       setState(() {
@@ -2044,7 +2044,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
@@ -2281,7 +2281,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
@@ -2505,7 +2505,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
@@ -2613,7 +2613,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceAround,
                               children: [
-                                InkWell(
+                                GestureDetector(
                                   onTap: () {
                                     setState(() {
                                       ischeckvisible = !ischeckvisible;
@@ -2637,7 +2637,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         Padding(
                                           padding:
                                               const EdgeInsets.only(top: 20),
-                                          child: InkWell(
+                                          child: GestureDetector(
                                             onTap: () {
                                               // setState(() {
                                               //   ischeckvisible = true;
@@ -2869,7 +2869,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },
@@ -3122,7 +3122,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           borderRadius: BorderRadius.circular(150),
                           // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
-                        child: InkWell(
+                        child: GestureDetector(
                           onTap: () {
                             Navigator.pop(context);
                           },

@@ -6,6 +6,7 @@ class UserEntity extends Entity<int> {
   final String btcmainaddress;
   final String seed;
   final String language;
+  final uid;
 
   UserEntity({
     int id,
@@ -14,6 +15,7 @@ class UserEntity extends Entity<int> {
     this.btcmainaddress,
     this.seed,
     this.language,
+    this.uid,
   }) : super(id);
 
   @override
@@ -25,6 +27,7 @@ class UserEntity extends Entity<int> {
       'btcmainaddress': btcmainaddress,
       'seed': seed,
       'language': language,
+      'uid':uid
     };
   }
 
@@ -36,5 +39,6 @@ class UserEntity extends Entity<int> {
         btcmainaddress,
         seed,
         language,
+        uid
       ];
 }

@@ -97,7 +97,7 @@ class _ImportWalletPage extends State<ImportWalletPage> {
         backgroundColor: backgroundcolor,
         leading: Container(
           padding: EdgeInsets.all(5),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
@@ -207,7 +207,7 @@ class _ImportWalletPage extends State<ImportWalletPage> {
               SizedBox(
                 height: 40,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   print(seed);
                   setState(() {

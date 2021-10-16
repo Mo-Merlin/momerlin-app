@@ -44,7 +44,7 @@ class _WalletHomePage extends State<WalletHomePage> {
               fit: BoxFit.fill),
         ),
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20, right: 20, top: MediaQuery.of(context).size.width * 0.62),
+          padding: EdgeInsets.only(left: 20, right: 20, top: MediaQuery.of(context).size.height * 0.33),
           child: Container(
             // height: MediaQuery.of(context).size.height,
             child: Column(
@@ -80,7 +80,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                       SizedBox(
                         height: 40,
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           Navigator.push(
                               context,
@@ -123,7 +123,7 @@ class _WalletHomePage extends State<WalletHomePage> {
                       SizedBox(
                         height: 15,
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           Navigator.push(
                               context,

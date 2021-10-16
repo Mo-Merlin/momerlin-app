@@ -111,7 +111,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                         SizedBox(
                           height: 25,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {},
                           child: Container(
                             width: 196,
@@ -152,7 +152,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                         SizedBox(
                           height: 10,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             Navigator.pushReplacement(
                                 context,

@@ -190,7 +190,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                                             borderRadius:
                                                 BorderRadius.circular(50),
                                           ),
-                                          child: InkWell(
+                                          child: GestureDetector(
                                             child: Icon(
                                               Icons.copy,
                                               size: 10,
@@ -222,7 +222,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                   SizedBox(
                     height: 30,
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       setState(() {
                         buttonpressed = true;

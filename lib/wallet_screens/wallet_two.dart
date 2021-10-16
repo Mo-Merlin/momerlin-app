@@ -70,12 +70,12 @@ class _WalletTwoState extends State<WalletTwo> {
 
     // print("UserTokne $usertoken1");
   }
-
-  Future<void> getTransaction() async {
+Future<void> getTransactionuseraddress() async {
+  print("pavithraManoharan");
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     setState(() {
       loading = false;
@@ -96,6 +96,32 @@ class _WalletTwoState extends State<WalletTwo> {
     splitvalue = valance2[1].toString();
   }
 
+  Future<void> getTransaction() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    getTransactionuseraddress();
+    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
+    // setState(() {
+    //   loading = false;
+    // });
+    // transactions1 = [];
+
+    // for (var i = 0; i < res["transactions"].length; i++) {
+    //   transactions1.add(Transaction.fromJson(res["transactions"][i]));
+
+    //   if (res["transactions"][i]["merchant_name"] != null) {
+    //     balance += ((res["transactions"][i]["amount"] -
+    //             res["transactions"][i]["amount"].floorToDouble()) *
+    //         100);
+    //   } else {}
+    // }
+    // var balance1 = balance.toStringAsFixed(2);
+    // var valance2 = balance1.split(".");
+    // splitvalue = valance2[1].toString();
+  }
+
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
@@ -103,8 +129,8 @@ class _WalletTwoState extends State<WalletTwo> {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
-
-    getTransaction();
+getTransaction();
+    getTransactionuseraddress();
   }
 
   @override
@@ -146,6 +172,7 @@ class _WalletTwoState extends State<WalletTwo> {
     });
 
     await UserRepository().updateToken({"public_token": publicToken});
+    getTransaction();
     // print("UserTokne $usertoken");
     final usersave = await UserRepository().storeUser({"token": publicToken});
     setState(() {
@@ -160,8 +187,12 @@ class _WalletTwoState extends State<WalletTwo> {
                                       ),),);
     } else {
       // print("PAVITHRA");
-    }
-    Navigator.push(context, MaterialPageRoute(builder: (_) => WalletTwo()));
+    } Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (_) => Tabscreen(
+                                        index: 0,
+                                      ),),);
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
 
@@ -241,7 +272,7 @@ class _WalletTwoState extends State<WalletTwo> {
                         SizedBox(
                           height: 20,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             setState(() {
                               buttonpressed = true;
@@ -296,10 +327,11 @@ class _WalletTwoState extends State<WalletTwo> {
                 : Stack(
                     children: [
                       ListView(
+                        padding:EdgeInsets.zero,
                         shrinkWrap: true,
                         children: [
                           Container(
-                            height: MediaQuery.of(context).size.height * 0.9,
+                            //height: MediaQuery.of(context).size.height * 0.9,
                             width: MediaQuery.of(context).size.width,
 
                             //color: Colors.amber,
@@ -331,7 +363,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                         top: MediaQuery.of(context).size.height *
                                             0.1,
                                         child: Center(
-                                          child: InkWell(
+                                          child: GestureDetector(
                                             onTap: () {
                                               Navigator.push(
                                                   context,
@@ -506,7 +538,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                               ],
                                             )),
                                       ),
-                                      InkWell(
+                                      GestureDetector(
                                         onTap: () {
                                           Navigator.push(
                                               context,
@@ -528,7 +560,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             borderRadius:
                                                 BorderRadius.circular(10),
                                           ),
-                                          child: InkWell(
+                                          child: GestureDetector(
                                             onTap: () {
                                               // _showReceiveMobile();
                                               Navigator.push(
@@ -602,7 +634,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                           color: button,
                                           borderRadius: BorderRadius.circular(10),
                                         ),
-                                        child: InkWell(
+                                        child: GestureDetector(
                                           onTap: () {
                                             setState(() {
                                               plaidconnect = true;
@@ -781,7 +813,7 @@ class _WalletTwoState extends State<WalletTwo> {
                               ],
                             ),
                           ),
-                            // SizedBox(height:20),
+                            SizedBox(height:20),
                             
                             Container(
                               height: MediaQuery.of(context).size.height*0.5,

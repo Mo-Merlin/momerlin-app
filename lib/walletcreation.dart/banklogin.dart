@@ -42,7 +42,7 @@ class _BankLogin extends State<BankLogin> {
         backgroundColor: backgroundcolor,
         leading: Container(
           padding: EdgeInsets.all(5),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
@@ -178,7 +178,7 @@ class _BankLogin extends State<BankLogin> {
               SizedBox(
                 height: 50,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => WalletTwo()));

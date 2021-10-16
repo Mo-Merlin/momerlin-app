@@ -309,7 +309,7 @@ class _MyEarningsState extends State<MyEarnings> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
 
@@ -347,7 +347,7 @@ class _MyEarningsState extends State<MyEarnings> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {
@@ -383,7 +383,7 @@ class _MyEarningsState extends State<MyEarnings> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {
@@ -419,7 +419,7 @@ class _MyEarningsState extends State<MyEarnings> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {

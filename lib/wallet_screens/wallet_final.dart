@@ -118,7 +118,7 @@ class _WalletFinalState extends State<WalletFinal> {
                         SizedBox(
                           height: 40,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             Navigator.push(
                                 context,
@@ -160,7 +160,7 @@ class _WalletFinalState extends State<WalletFinal> {
                         SizedBox(
                           height: 5,
                         ),
-                        InkWell(
+                        GestureDetector(
                           onTap: () {
                             Navigator.pushReplacement(
                                 context,

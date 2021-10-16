@@ -248,7 +248,7 @@ class _SpendingReportState extends State<SpendingReport> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {
@@ -280,7 +280,7 @@ class _SpendingReportState extends State<SpendingReport> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {
@@ -312,7 +312,7 @@ class _SpendingReportState extends State<SpendingReport> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {
@@ -344,7 +344,7 @@ class _SpendingReportState extends State<SpendingReport> {
                           ),
                         ),
                       ),
-                      InkWell(
+                      GestureDetector(
                         onTap: () {
                           selectType = "";
                           setState(() {

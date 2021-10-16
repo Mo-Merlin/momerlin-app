@@ -110,6 +110,7 @@ class UserDataSource extends DataSource {
       btctestaddress: udata['btcTestnetAddress'],
       btcmainaddress: udata['btcMainnetAddress'],
       seed: udata['seed'],
+      uid:udata["id"],
       language: udata['selectedLanguage'],
     ));
     final List<Map<String, dynamic>> maps = await db.query(tableName);

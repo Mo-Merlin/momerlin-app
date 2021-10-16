@@ -65,6 +65,34 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     }
   }
 
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
+  void _showScaffold(String message) {
+    // ignore: deprecated_member_use
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              message,
+              style: GoogleFonts.poppins(
+                color: white,
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            )
+          ],
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
+
   // ignore: todo
   //TODO: LanguageEnd
   storeUser() async {
@@ -78,38 +106,55 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     print(walletTest.getAddress(0));
     String _address = await Web3().getAddressFromPrivateKey(_pk);
     print(_address);
-
-    final usersave = await UserRepository().storeUser({
-      "address": _address,
-      "btcTestnetAddress": walletTest.getAddress(0),
-      "btcMainnetAddress": walletMain.getAddress(0),
-      "seed": widget.seed1,
-      "language": "English"
+    var user = await UserRepository().adduser({
+      "ethAddress": _address,
+      "btcAddress": walletMain.getAddress(0),
+      "fullName": "NickName",
     });
-    if (usersave == true) {
-      Navigator.push(
-          context, MaterialPageRoute(builder: (_) => WalletSucess()));
+    if (user == false) {
+      _showScaffold('Please Connect Your Network');
+      print("pavithraMuggi");
     } else {
-      print("PAVITHRA");
+      print(user["success"]);
+      if (user["success"] == false) {
+        _showScaffold('Something Went Wrong!');
+      } else {
+        print(user["user"]["_id"]);
+        final usersave = await UserRepository().storeUser({
+          "uid": user["user"]["_id"],
+          "address": _address,
+          "btcTestnetAddress": walletTest.getAddress(0),
+          "btcMainnetAddress": walletMain.getAddress(0),
+          "seed": widget.seed1,
+          "language": "English"
+        });
+        if (usersave == true) {
+          Navigator.push(
+              context, MaterialPageRoute(builder: (_) => WalletSucess()));
+        } else {
+          print("PAVITHRA");
+        }
+      }
+      //
     }
-    print("usersave$usersave");
-  }
-  // String _pk = Web3.privateKeyFromMnemonic(seed);
+    print("uesrr12323 $user");
 
-  // String _address = await Web3.getAddressFromPrivateKey(_pk);
-  // print("addrwss $_address");
+    // print("usersave$usersave");
+  }
+
   @override
   Widget build(BuildContext context) {
     print(widget.seed);
 
     return Scaffold(
+      key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: backgroundcolor,
         leading: Container(
           padding: EdgeInsets.all(5),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
@@ -192,7 +237,10 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       : "Drag each word into the same order it appeared!",
                   textAlign: TextAlign.start,
                   style: GoogleFonts.poppins(
-                      color: grey, fontSize: 12, fontWeight: FontWeight.w400),
+                    color: grey,
+                    fontSize: 12,
+                    fontWeight: FontWeight.w400,
+                  ),
                 ),
               ),
               SizedBox(
@@ -207,7 +255,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     crossAxisSpacing: 30,
                     mainAxisSpacing: 30),
                 itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
+                  return GestureDetector(
                     onTap: () {
                       setState(() {
                         if (seedlength > 0) {
@@ -249,7 +297,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     crossAxisSpacing: 10,
                     mainAxisSpacing: 20),
                 itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
+                  return GestureDetector(
                     onTap: () {
                       setState(() {
                         seed1[seedlength] = selectedseed[index];
@@ -278,7 +326,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               SizedBox(
                 height: 40,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   setState(() {
                     loading = true;
@@ -294,9 +342,12 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 child: Container(
                   width: MediaQuery.of(context).size.width,
                   height: MediaQuery.of(context).size.height * 0.07,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      color: seedlength == 12 ? blue1 : gridcolor),
+                  decoration: seedlength == 12
+                      ? BoxDecoration(
+                          borderRadius: BorderRadius.circular(28), color: blue1)
+                      : BoxDecoration(
+                          borderRadius: BorderRadius.circular(15),
+                          color: gridcolor),
                   child: Center(
                     child: loading == true
                         ? SpinKitThreeBounce(

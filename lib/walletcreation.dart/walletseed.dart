@@ -70,7 +70,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
               backgroundColor: backgroundcolor,
               leading: Container(
                 padding: EdgeInsets.all(5),
-                child: InkWell(
+                child: GestureDetector(
                   onTap: () {
                     Navigator.pop(context);
                   },
@@ -190,7 +190,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                     SizedBox(
                       height: 70,
                     ),
-                    InkWell(
+                    GestureDetector(
                       onTap: () {
                         FlutterClipboard.copy(
                           seed,

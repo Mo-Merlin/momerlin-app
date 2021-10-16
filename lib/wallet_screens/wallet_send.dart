@@ -115,7 +115,7 @@ class _WalletSendState extends State<WalletSend> {
               // height: MediaQuery.of(context).size.height / 8,
               width: MediaQuery.of(context).size.width,
               //color: Colors.amber,
-              child: InkWell(
+              child: GestureDetector(
                 onTap: () {
                   output = '';
                   _showVirutalkeyboardMobile();
@@ -272,7 +272,7 @@ class _WalletSendState extends State<WalletSend> {
                   SizedBox(
                     height: 20,
                   ),
-                  InkWell(
+                  GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,

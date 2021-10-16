@@ -36,7 +36,7 @@ class _BankCreation extends State<BankCreation> {
         backgroundColor: backgroundcolor,
         leading: Container(
           padding: EdgeInsets.all(5),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
@@ -137,7 +137,7 @@ class _BankCreation extends State<BankCreation> {
                     crossAxisSpacing: 20,
                     mainAxisSpacing: 20),
                 itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
+                  return GestureDetector(
                     onTap: () {
                       Navigator.push(
                           context,

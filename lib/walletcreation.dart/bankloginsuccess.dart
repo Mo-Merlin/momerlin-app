@@ -129,7 +129,7 @@ class _BankLoginSuccess extends State<BankLoginSuccess> {
               SizedBox(
                 height: 50,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => WalletTwo()));

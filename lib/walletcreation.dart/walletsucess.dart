@@ -47,7 +47,7 @@ class _WalletSucess extends State<WalletSucess> {
         backgroundColor: backgroundcolor,
         leading: Container(
           padding: EdgeInsets.all(5),
-          child: InkWell(
+          child: GestureDetector(
             onTap: () {
               Navigator.pop(context);
             },
@@ -129,7 +129,7 @@ class _WalletSucess extends State<WalletSucess> {
               SizedBox(
                 height: 100,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => Tabscreen()));
@@ -167,7 +167,7 @@ class _WalletSucess extends State<WalletSucess> {
               SizedBox(
                 height: 30,
               ),
-              InkWell(
+              GestureDetector(
                 onTap: () {
                   Navigator.push(
                       context, MaterialPageRoute(builder: (_) => Tabscreen()));

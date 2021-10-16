@@ -32,12 +32,7 @@ class UserRepository {
   Future<dynamic> updateToken(data) async {
     print(data);
     try {
-      // var config = await Firestore.instance.collection('config').getDocuments();
-      // var url = config.documents[0].data['API_URL_GAM'];
       var body = json.encode(data);
-      // print("body $body");
-      // var url = "http://192.168.43.124:8000/api/";
-
       var res = await http.post('${url + "set_access_token"}',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
@@ -54,8 +49,6 @@ class UserRepository {
 
   Future<dynamic> getToken() async {
     try {
-      // var url = "http://192.168.43.124:8000/api/";
-
       var res = await http.post(
         '${url + "create_link_token"}',
         headers: <String, String>{
@@ -71,15 +64,32 @@ class UserRepository {
     }
   }
 
+  //usersave
+  Future<dynamic> adduser(data) async {
+    print(data);
+    try {
+      var body = json.encode(data);
+
+      var res = await http.post('${url + "user"}',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: body);
+      var checkres = jsonDecode(res.body);
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      return false;
+    }
+  }
+
   Future<dynamic> getTransaction(walletaddress) async {
     try {
-      // var url = "http://192.168.43.124:8000/api/";
-//
       var res = await http.get(
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-
+      print(checkres);
       return checkres;
     } catch (e) {
       print("error");
@@ -88,18 +98,21 @@ class UserRepository {
   }
 
   Future<dynamic> getTransaction1(walletaddress) async {
+    print("walletaddress $walletaddress");
     try {
       // var url = "http://192.168.43.124:8000/api/";
 //
       var res = await http.get(
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
+      print(res.body);
       var checkres = jsonDecode(res.body);
-
+      print("123343434 $checkres");
       return checkres;
     } catch (e) {
       print("error");
       print("Error" + e);
+      return e;
     }
   }
 
@@ -113,11 +126,29 @@ class UserRepository {
       print(res.body);
 
       var checkres = jsonDecode(res.body);
-      
+
       return checkres;
     } catch (e) {
       print("error");
       print("Error" + e);
+    }
+  }
+ //create challange
+  Future<dynamic> createchallenge(data) async {
+    print(data);
+    try {
+      var body = json.encode(data);
+
+      var res = await http.post('${url + "challenge/create"}',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: body);
+      var checkres = jsonDecode(res.body);
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      return false;
     }
   }
 }
