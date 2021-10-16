@@ -32,6 +32,7 @@ class _WalletHomePage extends State<WalletHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(0xff6C6AEB),
       body: Container(
         width: MediaQuery.of(context).size.width,
         decoration: BoxDecoration(
@@ -43,9 +44,9 @@ class _WalletHomePage extends State<WalletHomePage> {
               fit: BoxFit.fill),
         ),
         child: SingleChildScrollView(
-          padding: EdgeInsets.only(left: 20, right: 20, top: MediaQuery.of(context).size.height * 0.36),
+          padding: EdgeInsets.only(left: 20, right: 20, top: MediaQuery.of(context).size.width * 0.62),
           child: Container(
-            height: MediaQuery.of(context).size.height,
+            // height: MediaQuery.of(context).size.height,
             child: Column(
               children: [
                 // Image.asset(
