@@ -33,8 +33,6 @@ class Transaction {
       );
 }
 
-
-
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
 
@@ -152,12 +150,14 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
     if (usersave == true) {
-        Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => Tabscreen(
-                                        index: 0,
-                                      ),),);
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+          builder: (_) => Tabscreen(
+            index: 0,
+          ),
+        ),
+      );
     } else {
       // print("PAVITHRA");
     }
@@ -328,8 +328,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: MediaQuery.of(context).size.height *
-                                            0.1,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.1,
                                         child: Center(
                                           child: InkWell(
                                             onTap: () {
@@ -353,12 +354,14 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: MediaQuery.of(context).size.height *
-                                            0.18,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.18,
                                         child: Text(
                                           (lang.length != null &&
                                                   lang.length != 0 &&
-                                                  userLanguage['yourBalanceIs'] !=
+                                                  userLanguage[
+                                                          'yourBalanceIs'] !=
                                                       null)
                                               ? "${userLanguage['yourBalanceIs']}"
                                               : "Your balance is",
@@ -370,8 +373,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: MediaQuery.of(context).size.height *
-                                            0.23,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.23,
                                         child: Row(
                                           children: [
                                             Text(
@@ -393,8 +397,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                       ),
                                       Positioned(
-                                        top: MediaQuery.of(context).size.height *
-                                            0.3,
+                                        top:
+                                            MediaQuery.of(context).size.height *
+                                                0.3,
                                         child: Container(
                                           // color: button,
                                           height: 32,
@@ -427,7 +432,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                 Padding(
                                   padding: const EdgeInsets.only(top: 0),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceEvenly,
                                     children: [
@@ -457,11 +463,13 @@ class _WalletTwoState extends State<WalletTwo> {
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 25),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     child: Container(
                                                       height: 42,
                                                       width: 42,
@@ -486,8 +494,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 15),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 15),
                                                   child: Text(
                                                     (lang.length != null &&
                                                             lang.length != 0 &&
@@ -499,7 +508,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                     style: GoogleFonts.poppins(
                                                       fontSize: 13,
                                                       color: Colors.grey,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                     ),
                                                   ),
                                                 )
@@ -516,12 +526,14 @@ class _WalletTwoState extends State<WalletTwo> {
                                           // _showReceiveMobile();
                                         },
                                         child: Container(
-                                          height:
-                                              MediaQuery.of(context).size.height /
-                                                  6.5,
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  4,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6.5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
                                           //color: button,
                                           decoration: BoxDecoration(
                                             color: button,
@@ -540,11 +552,13 @@ class _WalletTwoState extends State<WalletTwo> {
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 25),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     child: Container(
                                                       height: 42,
                                                       width: 42,
@@ -568,8 +582,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 15),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 15),
                                                   child: Text(
                                                     (lang.length != null &&
                                                             lang.length != 0 &&
@@ -595,12 +610,14 @@ class _WalletTwoState extends State<WalletTwo> {
                                             MediaQuery.of(context).size.height /
                                                 6.5,
                                         width:
-                                            MediaQuery.of(context).size.width / 4,
+                                            MediaQuery.of(context).size.width /
+                                                4,
 
                                         //color: button,
                                         decoration: BoxDecoration(
                                           color: button,
-                                          borderRadius: BorderRadius.circular(10),
+                                          borderRadius:
+                                              BorderRadius.circular(10),
                                         ),
                                         child: InkWell(
                                           onTap: () {
@@ -642,7 +659,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 child: Text(
                                                   (lang.length != null &&
                                                           lang.length != 0 &&
-                                                          userLanguage['earn'] !=
+                                                          userLanguage[
+                                                                  'earn'] !=
                                                               null)
                                                       ? "${userLanguage['earn']}"
                                                       : "Earn",
@@ -692,8 +710,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 25),
+                                            padding: const EdgeInsets.only(
+                                                right: 25),
                                             child: Container(
                                               height: 35,
                                               width: 85,
@@ -734,15 +752,18 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 children: <TextSpan>[
                                                   TextSpan(
                                                     text: ' 1654.12',
-                                                    style: GoogleFonts.montserrat(
+                                                    style:
+                                                        GoogleFonts.montserrat(
                                                       fontSize: 14,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       color: Colors.white,
                                                     ),
                                                   ),
                                                   TextSpan(
                                                     text: ' Gwei',
-                                                    style: GoogleFonts.montserrat(
+                                                    style:
+                                                        GoogleFonts.montserrat(
                                                       fontSize: 10,
                                                       color: Colors.orange,
                                                     ),
@@ -750,7 +771,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                   TextSpan(
                                                     text:
                                                         ' on food\nthis month, that’s higher\nthan normal.',
-                                                    style: GoogleFonts.montserrat(
+                                                    style:
+                                                        GoogleFonts.montserrat(
                                                       fontSize: 14,
                                                       color: text1,
                                                     ),
@@ -760,8 +782,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ),
                                           ),
                                           Padding(
-                                            padding:
-                                                const EdgeInsets.only(right: 15),
+                                            padding: const EdgeInsets.only(
+                                                right: 15),
                                             child: Container(
                                               height: 54,
                                               width: 104,
@@ -773,18 +795,16 @@ class _WalletTwoState extends State<WalletTwo> {
                                           )
                                         ],
                                       ),
-                                     
                                     ],
                                   ),
                                 ),
-                               
                               ],
                             ),
                           ),
-                            // SizedBox(height:20),
-                            
-                            Container(
-                              height: MediaQuery.of(context).size.height*0.5,
+                          // SizedBox(height:20),
+
+                          Container(
+                            height: MediaQuery.of(context).size.height * 0.5,
                             decoration: BoxDecoration(
                               color: button,
                               borderRadius: BorderRadius.only(
@@ -836,8 +856,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                   ),
                                 ),
                                 transactions1.length == 0
-                                    ? 
-                                    Container(
+                                    ? Container(
                                         padding: EdgeInsets.only(top: 80),
                                         child: ListView(
                                           // physics:
@@ -863,7 +882,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                               ),
                                             ),
                                           ],
-                                        ),)
+                                        ),
+                                      )
                                     : Padding(
                                         padding: EdgeInsets.only(top: 50),
                                         // top: 50,
