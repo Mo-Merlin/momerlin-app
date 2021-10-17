@@ -15,7 +15,7 @@ import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 
 class Transaction {
-  double amount;
+  var amount;
 
   DateTime date;
   String merchantName;
@@ -26,8 +26,8 @@ class Transaction {
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-        amount: json["amount"].toDouble(),
-        date: DateTime.parse(json["date"]),
+        amount: json["amount"],
+        date: DateTime.parse(json["time"]),
         merchantName:
             json["merchant_name"] == null ? null : json["merchant_name"],
       );
@@ -68,8 +68,9 @@ class _WalletTwoState extends State<WalletTwo> {
 
     // print("UserTokne $usertoken1");
   }
-Future<void> getTransactionuseraddress() async {
-  print("pavithraManoharan");
+
+  Future<void> getTransactionuseraddress() async {
+    print("pavithraManoharan");
     setState(() {
       loading = false;
     });
@@ -84,8 +85,8 @@ Future<void> getTransactionuseraddress() async {
       transactions1.add(Transaction.fromJson(res["transactions"][i]));
 
       if (res["transactions"][i]["merchant_name"] != null) {
-        balance += ((res["transactions"][i]["amount"] -
-                res["transactions"][i]["amount"].floorToDouble()) *
+        balance += ((num.parse(res["transactions"][i]["amount"]) -
+                num.parse(res["transactions"][i]["amount"])) *
             100);
       } else {}
     }
@@ -127,7 +128,7 @@ Future<void> getTransactionuseraddress() async {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
-getTransaction();
+    getTransaction();
     getTransactionuseraddress();
   }
 
@@ -187,12 +188,15 @@ getTransaction();
       );
     } else {
       // print("PAVITHRA");
-    } Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => Tabscreen(
-                                        index: 0,
-                                      ),),);
+    }
+    Navigator.pushReplacement(
+      context,
+      MaterialPageRoute(
+        builder: (_) => Tabscreen(
+          index: 0,
+        ),
+      ),
+    );
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
 
@@ -327,7 +331,7 @@ getTransaction();
                 : Stack(
                     children: [
                       ListView(
-                        padding:EdgeInsets.zero,
+                        padding: EdgeInsets.zero,
                         shrinkWrap: true,
                         children: [
                           Container(
@@ -833,7 +837,7 @@ getTransaction();
                               ],
                             ),
                           ),
-                          // SizedBox(height:20),
+                          SizedBox(height:20),
 
                           Container(
                             height: MediaQuery.of(context).size.height * 0.5,
@@ -1010,7 +1014,7 @@ getTransaction();
                                                                   left: 14,
                                                                   top: 15,
                                                                   child: Text(
-                                                                    ((transactions1[index].amount - transactions1[index].amount.floorToDouble()) *
+                                                                    ((num.parse(transactions1[index].amount) - num.parse(transactions1[index].amount)) *
                                                                             100)
                                                                         .toStringAsFixed(
                                                                             1),
