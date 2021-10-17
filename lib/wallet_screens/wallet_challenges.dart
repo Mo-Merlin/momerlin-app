@@ -50,7 +50,7 @@ class WalletChallenges extends StatefulWidget {
 
 class _WalletChallengesState extends State<WalletChallenges> {
   List<Challenges> challengesOne = [];
-  var userLanguage, lang = [];
+  var userLanguage, user, lang = [];
   bool loading = true;
   List<int> data = [];
 
@@ -67,6 +67,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   //TODO :languagestart
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
+    user = await UserDataSource().getUser();
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -76,12 +77,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
   //TODO: LanguageEnd
 
   Future<void> getChallenges() async {
-    print("123456789");
     setState(() {
       loading = false;
     });
     var res = await UserRepository().getChallenges();
-    print("12345678 $res");
+
     setState(() {
       loading = false;
     });
@@ -89,7 +89,67 @@ class _WalletChallengesState extends State<WalletChallenges> {
     for (var i = 0; i < res["challenges"]["docs"].length; i++) {
       challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
     }
-    print("Challenges : " + res.toString());
+  }
+
+  Future<void> createChallenges() async {
+    setState(() {
+      loading = false;
+    });
+    var createchallange = await UserRepository().createchallenge({
+      "mode": selecttype,
+      "type": challenge,
+      "totalCompetitors": wagar,
+      "streakDays": 10,
+      "totalKm": kmchallenge,
+      "createdBy": user[0]["uid"],
+      "startAt": "",
+      "endAt": "",
+      "wage": competitorsgets,
+    });
+    if (createchallange == false) {
+       _showScaffold('No Internet Connection');
+    } else {
+      
+      if (createchallange["success"] == true) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => ChallengeFinal(),
+          ),
+        );
+      }
+      else{
+  _showScaffold('Please Try Again!');
+      }
+    }
+    print("user $createchallange");
+  }
+final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
+  void _showScaffold(String message) {
+    // ignore: deprecated_member_use
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              message,
+              style: GoogleFonts.poppins(
+                color: white,
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            )
+          ],
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
   }
 
   List elements = [
@@ -293,6 +353,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: backgroundcolor,
@@ -3671,11 +3732,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       borderRadius: BorderRadius.circular(30),
                                     ),
                                     onPressed: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ChallengeFinal()));
+                                      Navigator.pop(context);
+                                      createChallenges();
+                                      // Navigator.push(
+                                      //     context,
+                                      //     MaterialPageRoute(
+                                      //         builder: (context) =>
+                                      //             ChallengeFinal()));
                                     },
                                     color: blue1,
                                     child: Text(

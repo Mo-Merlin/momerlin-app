@@ -22,6 +22,7 @@ class UserDataSource extends DataSource {
         btctestaddress: maps[i]['btctestaddress'],
         btcmainaddress: maps[i]['btcmainaddress'],
         seed: maps[i]['seed'],
+        uid: maps[i]["uid"],
         language: maps[i]['language'],
       );
     });
@@ -110,8 +111,8 @@ class UserDataSource extends DataSource {
       btctestaddress: udata['btcTestnetAddress'],
       btcmainaddress: udata['btcMainnetAddress'],
       seed: udata['seed'],
-      uid:udata["id"],
-      language: udata['selectedLanguage'],
+      uid: udata["uid"],
+      language: udata['language'],
     ));
     final List<Map<String, dynamic>> maps = await db.query(tableName);
     return maps != null;

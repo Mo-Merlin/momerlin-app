@@ -112,8 +112,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
       "fullName": "NickName",
     });
     if (user == false) {
-      _showScaffold('Please Connect Your Network');
-      print("pavithraMuggi");
+      _showScaffold('No Internet Connection');
+    
     } else {
       print(user["success"]);
       if (user["success"] == false) {

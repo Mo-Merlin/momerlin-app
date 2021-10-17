@@ -6,7 +6,7 @@ class UserEntity extends Entity<int> {
   final String btcmainaddress;
   final String seed;
   final String language;
-  final uid;
+  final String uid;
 
   UserEntity({
     int id,

@@ -30,7 +30,7 @@ class UserRepository {
   }
 
   Future<dynamic> updateToken(data) async {
-    print(data);
+   
     try {
       var body = json.encode(data);
       var res = await http.post('${url + "set_access_token"}',
@@ -39,7 +39,7 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-      print("checkres $checkres");
+   
       return checkres;
     } catch (e) {
       print("error");
@@ -56,7 +56,7 @@ class UserRepository {
         },
       );
       var checkres = jsonDecode(res.body);
-      print("checkres $checkres");
+    
       return checkres;
     } catch (e) {
       print("error");
@@ -66,7 +66,7 @@ class UserRepository {
 
   //usersave
   Future<dynamic> adduser(data) async {
-    print(data);
+ 
     try {
       var body = json.encode(data);
 
@@ -89,7 +89,7 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-      print(checkres);
+    
       return checkres;
     } catch (e) {
       print("error");
@@ -105,9 +105,8 @@ class UserRepository {
       var res = await http.get(
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
-      print(res.body);
-      var checkres = jsonDecode(res.body);
-      print("123343434 $checkres");
+     var checkres = jsonDecode(res.body);
+    
       return checkres;
     } catch (e) {
       print("error");
@@ -123,7 +122,7 @@ class UserRepository {
       var res = await http.get(
         '${url + "challenges"}',
       );
-      print(res.body);
+     
 
       var checkres = jsonDecode(res.body);
 
@@ -145,9 +144,11 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
+      print("12345678 $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
+      print("ASDFZFRDEF $e");
       return false;
     }
   }
