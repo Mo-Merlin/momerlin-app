@@ -107,9 +107,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "wage": competitorsgets,
     });
     if (createchallange == false) {
-       _showScaffold('No Internet Connection');
+      _showScaffold('No Internet Connection');
     } else {
-      
       if (createchallange["success"] == true) {
         Navigator.push(
           context,
@@ -117,14 +116,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
             builder: (context) => ChallengeFinal(),
           ),
         );
-      }
-      else{
-  _showScaffold('Please Try Again!');
+      } else {
+        _showScaffold('Please Try Again!');
       }
     }
     print("user $createchallange");
   }
-final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
       new GlobalKey<ScaffoldState>();
   void _showScaffold(String message) {
     // ignore: deprecated_member_use
@@ -2262,7 +2261,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.13,
+                              height: MediaQuery.of(context).size.height * 0.16,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -2499,7 +2498,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.13,
+                              height: MediaQuery.of(context).size.height * 0.16,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -3069,7 +3068,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                               height: 20,
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.13,
+                              height: MediaQuery.of(context).size.height * 0.16,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
