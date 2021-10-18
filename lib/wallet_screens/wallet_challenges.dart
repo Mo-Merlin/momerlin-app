@@ -107,9 +107,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "wage": competitorsgets,
     });
     if (createchallange == false) {
-       _showScaffold('No Internet Connection');
+      _showScaffold('No Internet Connection');
     } else {
-      
       if (createchallange["success"] == true) {
         Navigator.push(
           context,
@@ -117,14 +116,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
             builder: (context) => ChallengeFinal(),
           ),
         );
-      }
-      else{
-  _showScaffold('Please Try Again!');
+      } else {
+        _showScaffold('Please Try Again!');
       }
     }
     print("user $createchallange");
   }
-final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
       new GlobalKey<ScaffoldState>();
   void _showScaffold(String message) {
     // ignore: deprecated_member_use
@@ -696,7 +695,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                 SizedBox(
                   height: 10,
                 ),
-                /******* JOIN CHALLENGE ListView   *******/
+                /******* JOIN CHALLENGES  ListView   *******/
                 Container(
                   height: MediaQuery.of(context).size.height * 0.3,
                   width: MediaQuery.of(context).size.width,
@@ -716,220 +715,9 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                             child: Text(
                               (lang.length != null &&
                                       lang.length != 0 &&
-                                      userLanguage['joinachallenge'] != null)
-                                  ? "${userLanguage['joinachallenge']}"
-                                  : "JOIN A CHALLENGE",
-                              style: GoogleFonts.poppins(
-                                  fontSize: 16,
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.w600),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(right: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              decoration: BoxDecoration(
-                                  color: blue.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['viewmore'] != null)
-                                      ? "${userLanguage['viewmore']}"
-                                      : "VIEW MORE",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 8,
-                                      color: blue1,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ),
-                          )
-                        ],
-                      ),
-                      Container(
-                        height: MediaQuery.of(context).size.height * 0.23,
-                        width: MediaQuery.of(context).size.width,
-                        margin: EdgeInsets.only(left: 5, right: 0),
-                        //color: Colors.indigo,
-                        padding: EdgeInsets.only(
-                            left: 4, top: 10, bottom: 0, right: 0),
-                        child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: elementsOne.length,
-                          itemBuilder: (context, index) {
-                            return InkWell(
-                              onTap: () {
-                                if (elementsOne[index]['name'] ==
-                                    '5KM RUN STREAK') {
-                                  joinChallenge(context);
-                                }
-                              },
-                              child: Stack(
-                                children: [
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.2,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.38,
-                                    //color: Colors.pink,
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.end,
-                                      children: [
-                                        Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height *
-                                              0.17,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width *
-                                              0.35,
-                                          // height: 126,
-                                          // width: 130,
-                                          decoration: BoxDecoration(
-                                              color: colors[index],
-                                              borderRadius:
-                                                  BorderRadius.circular(15)),
-                                          child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.spaceAround,
-                                            children: [
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 15),
-                                                child: Container(
-                                                  height: MediaQuery.of(context)
-                                                          .size
-                                                          .height *
-                                                      0.06,
-                                                  width: MediaQuery.of(context)
-                                                      .size
-                                                      .width,
-                                                  // height: 40, width: 79,
-                                                  //color: Colors.red,
-                                                  child: Center(
-                                                    child: Text(
-                                                        elementsTwo[index]
-                                                            ['name'],
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          color: Colors.white,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        )),
-                                                  ),
-                                                ),
-                                              ),
-                                              Container(
-                                                height: MediaQuery.of(context)
-                                                        .size
-                                                        .height *
-                                                    0.06,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.28,
-                                                // height: 43,
-                                                // width: 93,
-                                                decoration: BoxDecoration(
-                                                    color: Color(0xffFF8C00),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(
-                                                        elementsTwo[index]
-                                                            ['amt'],
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 16,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5),
-                                                      child: Text(
-                                                          elementsTwo[index]
-                                                              ['type'],
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500)),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                  Positioned(
-                                    top: MediaQuery.of(context).size.height *
-                                        0.001,
-                                    left: MediaQuery.of(context).size.width *
-                                        0.13,
-                                    child: Container(
-                                      height: 43,
-                                      width: 43,
-                                      //color: button,
-                                      child: Image.asset(
-                                        "assets/images/${elementsTwo[index]['trophys']}.png",
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            );
-                          },
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                SizedBox(
-                  height: 10,
-                ),
-                /******* MY CHALLENGES  ListView   *******/
-                Container(
-                  height: MediaQuery.of(context).size.height * 0.3,
-                  width: MediaQuery.of(context).size.width,
-                  decoration: BoxDecoration(
-                      //color: Color(0xff313248),
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Column(
-                    children: [
-                      SizedBox(
-                        height: 10,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 25),
-                            child: Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage['mychallenges'] != null)
-                                  ? "${userLanguage['mychallenges']}"
-                                  : "MY CHALLENGES",
+                                      userLanguage['joinchallenges'] != null)
+                                  ? "${userLanguage['joinchallenges']}"
+                                  : "JOIN CHALLENGE",
                               style: GoogleFonts.poppins(
                                   fontSize: 16,
                                   color: Colors.white,
@@ -1192,6 +980,217 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                                     },
                                   ),
                                 ),
+                    ],
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                /******* MY CHALLENGES ListView   *******/
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.3,
+                  width: MediaQuery.of(context).size.width,
+                  decoration: BoxDecoration(
+                      //color: Color(0xff313248),
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(left: 25),
+                            child: Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['mychallenges'] != null)
+                                  ? "${userLanguage['mychallenges']}"
+                                  : "MY CHALLENGES",
+                              style: GoogleFonts.poppins(
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 25),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                              width: MediaQuery.of(context).size.width * 0.25,
+                              decoration: BoxDecoration(
+                                  color: blue.withOpacity(0.3),
+                                  borderRadius: BorderRadius.circular(10)),
+                              child: Center(
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['viewmore'] != null)
+                                      ? "${userLanguage['viewmore']}"
+                                      : "VIEW MORE",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 8,
+                                      color: blue1,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              ),
+                            ),
+                          )
+                        ],
+                      ),
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.23,
+                        width: MediaQuery.of(context).size.width,
+                        margin: EdgeInsets.only(left: 5, right: 0),
+                        //color: Colors.indigo,
+                        padding: EdgeInsets.only(
+                            left: 4, top: 10, bottom: 0, right: 0),
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: elementsOne.length,
+                          itemBuilder: (context, index) {
+                            return InkWell(
+                              onTap: () {
+                                if (elementsOne[index]['name'] ==
+                                    '5KM RUN STREAK') {
+                                  joinChallenge(context);
+                                }
+                              },
+                              child: Stack(
+                                children: [
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.2,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.38,
+                                    //color: Colors.pink,
+                                    child: Column(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Container(
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.17,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width *
+                                              0.35,
+                                          // height: 126,
+                                          // width: 130,
+                                          decoration: BoxDecoration(
+                                              color: colors[index],
+                                              borderRadius:
+                                                  BorderRadius.circular(15)),
+                                          child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceAround,
+                                            children: [
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    top: 15),
+                                                child: Container(
+                                                  height: MediaQuery.of(context)
+                                                          .size
+                                                          .height *
+                                                      0.06,
+                                                  width: MediaQuery.of(context)
+                                                      .size
+                                                      .width,
+                                                  // height: 40, width: 79,
+                                                  //color: Colors.red,
+                                                  child: Center(
+                                                    child: Text(
+                                                        elementsTwo[index]
+                                                            ['name'],
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 14,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        )),
+                                                  ),
+                                                ),
+                                              ),
+                                              Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height *
+                                                    0.06,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.28,
+                                                // height: 43,
+                                                // width: 93,
+                                                decoration: BoxDecoration(
+                                                    color: Color(0xffFF8C00),
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                        elementsTwo[index]
+                                                            ['amt'],
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600)),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text(
+                                                          elementsTwo[index]
+                                                              ['type'],
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 12,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  Positioned(
+                                    top: MediaQuery.of(context).size.height *
+                                        0.001,
+                                    left: MediaQuery.of(context).size.width *
+                                        0.13,
+                                    child: Container(
+                                      height: 43,
+                                      width: 43,
+                                      //color: button,
+                                      child: Image.asset(
+                                        "assets/images/${elementsTwo[index]['trophys']}.png",
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                     ],
                   ),
                 ),
