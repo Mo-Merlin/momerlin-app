@@ -8,6 +8,8 @@ import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 //import 'package:momerlin/wallet_screens/horizontallist.dart';
 import 'package:momerlin/wallet_screens/my_activity.dart';
+import 'package:momerlin/wallet_screens/viewmore_join_challenge.dart';
+import 'package:momerlin/wallet_screens/viewmore_my_challenges.dart';
 // import 'package:momerlin/wallet_screens/my_reports.dart';
 import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 // import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
@@ -81,6 +83,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().getChallenges();
+    if (res == false) {
+      _showScaffold('No Internet Connection');
+    } else {
+      if (res["success"] == true) {
+      } else {
+        _showScaffold('Please Try Again!');
+      }
+    }
 
     setState(() {
       loading = false;
@@ -726,23 +736,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              decoration: BoxDecoration(
-                                  color: blue.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['viewmore'] != null)
-                                      ? "${userLanguage['viewmore']}"
-                                      : "VIEW MORE",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 8,
-                                      color: blue1,
-                                      fontWeight: FontWeight.w600),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewmoreJoinChallenge()));
+                              },
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                decoration: BoxDecoration(
+                                    color: blue.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['viewmore'] != null)
+                                        ? "${userLanguage['viewmore']}"
+                                        : "VIEW MORE",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 8,
+                                        color: blue1,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                               ),
                             ),
@@ -1017,29 +1037,41 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           ),
                           Padding(
                             padding: const EdgeInsets.only(right: 25),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.05,
-                              width: MediaQuery.of(context).size.width * 0.25,
-                              decoration: BoxDecoration(
-                                  color: blue.withOpacity(0.3),
-                                  borderRadius: BorderRadius.circular(10)),
-                              child: Center(
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['viewmore'] != null)
-                                      ? "${userLanguage['viewmore']}"
-                                      : "VIEW MORE",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 8,
-                                      color: blue1,
-                                      fontWeight: FontWeight.w600),
+                            child: GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            ViewmoreMyChallenge()));
+                              },
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.05,
+                                width: MediaQuery.of(context).size.width * 0.25,
+                                decoration: BoxDecoration(
+                                    color: blue.withOpacity(0.3),
+                                    borderRadius: BorderRadius.circular(10)),
+                                child: Center(
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['viewmore'] != null)
+                                        ? "${userLanguage['viewmore']}"
+                                        : "VIEW MORE",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 8,
+                                        color: blue1,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                               ),
                             ),
                           )
                         ],
                       ),
+
+                      /**  add err condition for my challenge**/
                       Container(
                         height: MediaQuery.of(context).size.height * 0.23,
                         width: MediaQuery.of(context).size.width,
