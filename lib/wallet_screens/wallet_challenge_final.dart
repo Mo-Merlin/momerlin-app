@@ -112,7 +112,12 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                           height: 25,
                         ),
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {  Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => Tabscreen(
+                                          index: 2,
+                                        ),),);},
                           child: Container(
                             width: 196,
                             height: 50,
@@ -159,7 +164,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                                 MaterialPageRoute(
                                     builder: (context) => Tabscreen(
                                           index: 2,
-                                        )));
+                                        ),),);
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,

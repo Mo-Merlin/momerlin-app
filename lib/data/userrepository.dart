@@ -30,7 +30,6 @@ class UserRepository {
   }
 
   Future<dynamic> updateToken(data) async {
-   
     try {
       var body = json.encode(data);
       var res = await http.post('${url + "set_access_token"}',
@@ -39,7 +38,7 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-   
+
       return checkres;
     } catch (e) {
       print("error");
@@ -56,7 +55,7 @@ class UserRepository {
         },
       );
       var checkres = jsonDecode(res.body);
-    
+
       return checkres;
     } catch (e) {
       print("error");
@@ -66,7 +65,6 @@ class UserRepository {
 
   //usersave
   Future<dynamic> adduser(data) async {
- 
     try {
       var body = json.encode(data);
 
@@ -89,7 +87,7 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-    
+
       return checkres;
     } catch (e) {
       print("error");
@@ -105,8 +103,8 @@ class UserRepository {
       var res = await http.get(
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
-     var checkres = jsonDecode(res.body);
-    
+      var checkres = jsonDecode(res.body);
+
       return checkres;
     } catch (e) {
       print("error");
@@ -122,7 +120,6 @@ class UserRepository {
       var res = await http.get(
         '${url + "challenges"}',
       );
-     
 
       var checkres = jsonDecode(res.body);
 
@@ -132,7 +129,26 @@ class UserRepository {
       print("Error" + e);
     }
   }
- //create challange
+
+  //getmychallange
+  Future<dynamic> getmyChallenges(id) async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/challenges";
+
+      var res = await http.get(
+        '${url + "user/challenges?id=$id"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
+      return false;
+    }
+  }
+
+  //create challange
   Future<dynamic> createchallenge(data) async {
     print(data);
     try {
@@ -144,11 +160,10 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-      print("12345678 $checkres");
+
       checkres["status"] = true;
       return checkres;
     } catch (e) {
-      print("ASDFZFRDEF $e");
       return false;
     }
   }

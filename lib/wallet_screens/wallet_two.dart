@@ -70,11 +70,12 @@ class _WalletTwoState extends State<WalletTwo> {
   }
 
   Future<void> getTransactionuseraddress() async {
-    print("pavithraManoharan");
+   
     setState(() {
       loading = false;
     });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
+  
     // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     setState(() {
       loading = false;
@@ -85,8 +86,8 @@ class _WalletTwoState extends State<WalletTwo> {
       transactions1.add(Transaction.fromJson(res["transactions"][i]));
 
       if (res["transactions"][i]["merchant_name"] != null) {
-        balance += ((num.parse(res["transactions"][i]["amount"]) -
-                num.parse(res["transactions"][i]["amount"])) *
+        balance += ((double.parse(res["transactions"][i]["amount"]) -
+                double.parse(res["transactions"][i]["amount"]).floorToDouble()) *
             100);
       } else {}
     }
@@ -124,11 +125,11 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
-    // print(user[0]["walletaddress"]);
+  
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
-    getTransaction();
+    // getTransaction();
     getTransactionuseraddress();
   }
 
@@ -172,7 +173,7 @@ class _WalletTwoState extends State<WalletTwo> {
 
     await UserRepository().updateToken({"public_token": publicToken});
     getTransaction();
-    // print("UserTokne $usertoken");
+   
     final usersave = await UserRepository().storeUser({"token": publicToken});
     setState(() {
       loading = false;
@@ -1014,7 +1015,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                   left: 14,
                                                                   top: 15,
                                                                   child: Text(
-                                                                    ((num.parse(transactions1[index].amount) - num.parse(transactions1[index].amount)) *
+                                                                    ((double.parse(transactions1[index].amount) - double.parse(transactions1[index].amount).floorToDouble()) *
                                                                             100)
                                                                         .toStringAsFixed(
                                                                             1),
