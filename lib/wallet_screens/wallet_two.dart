@@ -53,18 +53,33 @@ class _WalletTwoState extends State<WalletTwo> {
   bool plaidconnect = false, buttonpressed = false;
   Future<void> getToken() async {
     final usertoken1 = await UserRepository().getToken();
-    linktoken = usertoken1["link_token"];
+    if (usertoken1 == false) {
+      Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+    } else {
+      if (usertoken1["success"] == true) {
+       linktoken = usertoken1["link_token"];
     // print("token $linktoken");
     LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
       token: usertoken1["link_token"],
     );
-
     _plaidLinkToken = PlaidLink(
       configuration: linkTokenConfiguration,
       onSuccess: _onSuccessCallback,
       onEvent: _onEventCallback,
       onExit: _onExitCallback,
     );
+      } else {
+       Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
+      }
+    }
+    
+   
+
+    
 
     // print("UserTokne $usertoken1");
   }
@@ -76,11 +91,13 @@ class _WalletTwoState extends State<WalletTwo> {
     });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
   
-    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-    setState(() {
-      loading = false;
-    });
-    transactions1 = [];
+    if (res == false) {
+      // Scaffold
+      //     .of(context)
+      //     .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+    } else {
+      if (res["success"] == true) {
+       transactions1 = [];
 
     for (var i = 0; i < res["transactions"].length; i++) {
       transactions1.add(Transaction.fromJson(res["transactions"][i]));
@@ -94,7 +111,19 @@ class _WalletTwoState extends State<WalletTwo> {
     var balance1 = balance.toStringAsFixed(2);
     var valance2 = balance1.split(".");
     splitvalue = valance2[1].toString();
-  }
+  
+    // print("token $linktoken");
+   
+      } else {
+        Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
+        
+      }
+    setState(() {
+      loading = false;
+    });}
+   }
 
   Future<void> getTransaction() async {
     setState(() {
@@ -200,7 +229,39 @@ class _WalletTwoState extends State<WalletTwo> {
     );
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
+    final GlobalKey<ScaffoldState> _scaffoldstate= new GlobalKey<ScaffoldState>();
+ void _showScaffold(String message){
+   _scaffoldstate.currentState.showSnackBar(new SnackBar(content: new Text('Hello world')));
+ }
+final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
+  void _showScaffold1(String message) {
+    // ignore: deprecated_member_use
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              message,
+              style: GoogleFonts.poppins(
+                color: white,
+                fontSize: 17,
+                fontWeight: FontWeight.w400,
+              ),
+            ),
+            Icon(
+              Icons.info_outline,
+              color: Colors.white,
+            )
+          ],
+        ),
+        backgroundColor: Colors.red,
+      ),
+    );
+  }
 
+  
   @override
   Widget build(BuildContext context) {
     return loading == true
@@ -216,6 +277,7 @@ class _WalletTwoState extends State<WalletTwo> {
             ),
           )
         : Scaffold(
+           key:_scaffoldstate,
             backgroundColor: backgroundcolor,
             body: plaidconnect == true
                 ? Container(
@@ -330,6 +392,7 @@ class _WalletTwoState extends State<WalletTwo> {
                     ),
                   )
                 : Stack(
+                   key: scaffoldKeyWallet,
                     children: [
                       ListView(
                         padding: EdgeInsets.zero,

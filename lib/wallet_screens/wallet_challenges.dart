@@ -117,20 +117,23 @@ class _WalletChallengesState extends State<WalletChallenges> {
     });
     var res = await UserRepository().getChallenges();
     if (res == false) {
-      _showScaffold('No Internet Connection');
+        // Scaffold
+        //   .of(context)
+        //   .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (res["success"] == true) {
+        setState(() {
+          loading = false;
+        });
+        challengesOne = [];
+        for (var i = 0; i < res["challenges"]["docs"].length; i++) {
+          challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
+        }
       } else {
-        _showScaffold('Please Try Again!');
+        Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       }
-    }
-
-    setState(() {
-      loading = false;
-    });
-    challengesOne = [];
-    for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-      challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
     }
   }
 
@@ -144,7 +147,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     if (res == false) {
-      _showScaffold('No Internet Connection');
+        // Scaffold
+        //   .of(context)
+        //   .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (res["success"] == true) {
         mychallenge = [];
@@ -152,7 +157,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
           mychallenge.add(MyChallenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
-        _showScaffold('Please Try Again');
+         Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       }
     }
   }
@@ -180,7 +187,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "wage": competitorsgets,
     });
     if (createchallange == false) {
-      _showScaffold('No Internet Connection');
+        Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (createchallange["success"] == true) {
         Navigator.push(
@@ -190,7 +199,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
           ),
         );
       } else {
-        _showScaffold('Please Try Again!');
+           Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
+      
       }
     }
     print("user $createchallange");

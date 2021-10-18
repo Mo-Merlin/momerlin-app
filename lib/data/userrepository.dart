@@ -39,10 +39,12 @@ class UserRepository {
           body: body);
       var checkres = jsonDecode(res.body);
 
+checkres["status"] = true;
       return checkres;
     } catch (e) {
       print("error");
-      print("Error" + e);
+     
+      return false;
     }
   }
 
@@ -55,11 +57,11 @@ class UserRepository {
         },
       );
       var checkres = jsonDecode(res.body);
-
+checkres["status"] = true;
       return checkres;
     } catch (e) {
       print("error");
-      print("Error" + e);
+      return false;
     }
   }
 
@@ -87,11 +89,11 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-
+      checkres["status"] = true;
       return checkres;
     } catch (e) {
       print("error");
-      print("Error" + e);
+      return false;
     }
   }
 
@@ -104,12 +106,12 @@ class UserRepository {
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-
+checkres["status"] = true;
       return checkres;
     } catch (e) {
       print("error");
-      print("Error" + e);
-      return e;
+     
+     return false;
     }
   }
 
@@ -122,11 +124,11 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-
+checkres["status"] = true;
       return checkres;
     } catch (e) {
       print("error");
-      print("Error" + e);
+     return false;
     }
   }
 
