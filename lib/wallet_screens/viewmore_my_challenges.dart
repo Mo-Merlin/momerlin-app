@@ -64,15 +64,15 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
   //TODO: LanguageEnd
 
   Future<void> getChallenges() async {
-    setState(() {
-      loading = true;
-    });
+   
     var res = await UserRepository().getChallenges();
     if (res == false) {
       setState(() {
         loading=false;
       });
-      _showScaffold('No Internet Connection');
+      Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (res["success"] == true) {
         setState(() {
@@ -83,7 +83,9 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
           challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
-        _showScaffold('Please Try Again!');
+         Scaffold
+          .of(context)
+          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       }
     }
     
