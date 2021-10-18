@@ -4085,8 +4085,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             child: Image.asset("assets/images/jc1.png"),
                           ),
                           Positioned(
-                            top: 0,
-                            left: MediaQuery.of(context).size.width * 0.01,
+                            top: MediaQuery.of(context).size.height * 0.06,
+                            left: MediaQuery.of(context).size.width * 0.05,
                             child: Image.asset("assets/images/jc2.png"),
                           ),
                         ],
