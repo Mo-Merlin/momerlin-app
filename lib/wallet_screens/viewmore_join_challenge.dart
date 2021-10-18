@@ -64,15 +64,16 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
   //TODO: LanguageEnd
 
   Future<void> getChallenges() async {
-    setState(() {
-      loading = true;
-    });
     var res = await UserRepository().getChallenges();
     if (res == false) {
       setState(() {
         loading = false;
       });
-      _showScaffold('No Internet Connection');
+      // ignore: deprecated_member_use
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('No Internet Connection'),
+        backgroundColor: Colors.red,
+      ));
     } else {
       if (res["success"] == true) {
         setState(() {
@@ -83,38 +84,42 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
           challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
-        _showScaffold('Please Try Again!');
+        // ignore: deprecated_member_use
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
       }
     }
   }
 
-  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-      new GlobalKey<ScaffoldState>();
-  void _showScaffold(String message) {
-    // ignore: deprecated_member_use
-    scaffoldKeyWallet.currentState.showSnackBar(
-      SnackBar(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              message,
-              style: GoogleFonts.poppins(
-                color: white,
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            )
-          ],
-        ),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
+  // final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+  //     new GlobalKey<ScaffoldState>();
+  // void _showScaffold(String message) {
+  //   // ignore: deprecated_member_use
+  //   scaffoldKeyWallet.currentState.showSnackBar(
+  //     SnackBar(
+  //       content: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Text(
+  //             message,
+  //             style: GoogleFonts.poppins(
+  //               color: white,
+  //               fontSize: 17,
+  //               fontWeight: FontWeight.w400,
+  //             ),
+  //           ),
+  //           Icon(
+  //             Icons.info_outline,
+  //             color: Colors.white,
+  //           )
+  //         ],
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     ),
+  //   );
+  // }
 
   List elementsOne = [
     {
@@ -165,6 +170,30 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
       "type": "3",
       "trophys": "trophy1"
     },
+    {
+      "name": "5KM RUN STREAK",
+      "url":
+          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
+      "amt": "DAY",
+      "type": "5",
+      "trophys": "trophy3"
+    },
+    {
+      "name": "5KM WALK STREAK",
+      "url":
+          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
+      "amt": "DAY",
+      "type": "5",
+      "trophys": "trophy2"
+    },
+    {
+      "name": "INSERT CHALLENGE THREE",
+      "url":
+          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
+      "amt": "DAY",
+      "type": "1",
+      "trophys": "trophy1"
+    },
   ];
   var colors = [
     blue1,
@@ -173,13 +202,16 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
     blue1,
     Colors.greenAccent,
     Colors.orangeAccent,
+    blue1,
+    Colors.pinkAccent[100],
+    Colors.orange[300],
   ];
   //bool _value = false;
   int val = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKeyWallet,
+      //key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: backgroundcolor,
@@ -418,10 +450,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                                                         .only(
                                                                     left: 5),
                                                             child: Text(
-                                                                elementsOne[index]
-                                                                        [
-                                                                        "type"] +
-                                                                    " / ",
+                                                                "5" + " / ",
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,

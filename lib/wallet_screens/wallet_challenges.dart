@@ -1,4 +1,4 @@
-import 'dart:math';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
@@ -132,6 +132,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       } else {
         Scaffold
           .of(context)
+          // ignore: deprecated_member_use
           .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       }
     }
@@ -159,6 +160,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       } else {
          Scaffold
           .of(context)
+          // ignore: deprecated_member_use
           .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       }
     }
@@ -189,6 +191,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     if (createchallange == false) {
         Scaffold
           .of(context)
+          // ignore: deprecated_member_use
           .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (createchallange["success"] == true) {
@@ -201,6 +204,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       } else {
            Scaffold
           .of(context)
+          // ignore: deprecated_member_use
           .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
       
       }
@@ -208,33 +212,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
     print("user $createchallange");
   }
 
-  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-      new GlobalKey<ScaffoldState>();
-  void _showScaffold(String message) {
-    // ignore: deprecated_member_use
-    scaffoldKeyWallet.currentState.showSnackBar(
-      SnackBar(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              message,
-              style: GoogleFonts.poppins(
-                color: white,
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            )
-          ],
-        ),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
+  // final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+  //     new GlobalKey<ScaffoldState>();
+  // void _showScaffold(String message) {
+  //   // ignore: deprecated_member_use
+  //   scaffoldKeyWallet.currentState.showSnackBar(
+  //     SnackBar(
+  //       content: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Text(
+  //             message,
+  //             style: GoogleFonts.poppins(
+  //               color: white,
+  //               fontSize: 17,
+  //               fontWeight: FontWeight.w400,
+  //             ),
+  //           ),
+  //           Icon(
+  //             Icons.info_outline,
+  //             color: Colors.white,
+  //           )
+  //         ],
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     ),
+  //   );
+  // }
 
   List elements = [
     {
@@ -437,7 +441,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKeyWallet,
+      //key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: backgroundcolor,

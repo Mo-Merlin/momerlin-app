@@ -54,82 +54,87 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> getToken() async {
     final usertoken1 = await UserRepository().getToken();
     if (usertoken1 == false) {
-      Scaffold
-          .of(context)
-          .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+      Scaffold.of(context)
+          // ignore: deprecated_member_use
+          .showSnackBar(SnackBar(
+        content: Text('No Internet Connection'),
+        backgroundColor: Colors.red,
+      ));
     } else {
       if (usertoken1["success"] == true) {
-       linktoken = usertoken1["link_token"];
-    // print("token $linktoken");
-    LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
-      token: usertoken1["link_token"],
-    );
-    _plaidLinkToken = PlaidLink(
-      configuration: linkTokenConfiguration,
-      onSuccess: _onSuccessCallback,
-      onEvent: _onEventCallback,
-      onExit: _onExitCallback,
-    );
+        linktoken = usertoken1["link_token"];
+        // print("token $linktoken");
+        LinkTokenConfiguration linkTokenConfiguration = LinkTokenConfiguration(
+          token: usertoken1["link_token"],
+        );
+        _plaidLinkToken = PlaidLink(
+          configuration: linkTokenConfiguration,
+          onSuccess: _onSuccessCallback,
+          onEvent: _onEventCallback,
+          onExit: _onExitCallback,
+        );
       } else {
-       Scaffold
-          .of(context)
-          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
+        Scaffold.of(context)
+            // ignore: deprecated_member_use
+            .showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
       }
     }
-    
-   
-
-    
 
     // print("UserTokne $usertoken1");
   }
 
   Future<void> getTransactionuseraddress() async {
-   
     setState(() {
       loading = false;
     });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-  
+
     if (res == false) {
       // Scaffold
       //     .of(context)
       //     .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
       if (res["success"] == true) {
-       transactions1 = [];
+        transactions1 = [];
 
-    for (var i = 0; i < res["transactions"].length; i++) {
-      transactions1.add(Transaction.fromJson(res["transactions"][i]));
+        for (var i = 0; i < res["transactions"].length; i++) {
+          transactions1.add(Transaction.fromJson(res["transactions"][i]));
 
-      if (res["transactions"][i]["merchant_name"] != null) {
-        balance += ((double.parse(res["transactions"][i]["amount"]) -
-                double.parse(res["transactions"][i]["amount"]).floorToDouble()) *
-            100);
-      } else {}
-    }
-    var balance1 = balance.toStringAsFixed(2);
-    var valance2 = balance1.split(".");
-    splitvalue = valance2[1].toString();
-  
-    // print("token $linktoken");
-   
+          if (res["transactions"][i]["merchant_name"] != null) {
+            balance += ((double.parse(res["transactions"][i]["amount"]) -
+                    double.parse(res["transactions"][i]["amount"])
+                        .floorToDouble()) *
+                100);
+          } else {}
+        }
+        var balance1 = balance.toStringAsFixed(2);
+        var valance2 = balance1.split(".");
+        splitvalue = valance2[1].toString();
+
+        // print("token $linktoken");
+
       } else {
-        Scaffold
-          .of(context)
-          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
-        
+        Scaffold.of(context)
+            // ignore: deprecated_member_use
+            .showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
       }
-    setState(() {
-      loading = false;
-    });}
-   }
+      setState(() {
+        loading = false;
+      });
+    }
+  }
 
   Future<void> getTransaction() async {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    //var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     getTransactionuseraddress();
     // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     // setState(() {
@@ -154,7 +159,7 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
-  
+
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -202,7 +207,7 @@ class _WalletTwoState extends State<WalletTwo> {
 
     await UserRepository().updateToken({"public_token": publicToken});
     getTransaction();
-   
+
     final usersave = await UserRepository().storeUser({"token": publicToken});
     setState(() {
       loading = false;
@@ -229,39 +234,41 @@ class _WalletTwoState extends State<WalletTwo> {
     );
     print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
-    final GlobalKey<ScaffoldState> _scaffoldstate= new GlobalKey<ScaffoldState>();
- void _showScaffold(String message){
-   _scaffoldstate.currentState.showSnackBar(new SnackBar(content: new Text('Hello world')));
- }
-final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-      new GlobalKey<ScaffoldState>();
-  void _showScaffold1(String message) {
-    // ignore: deprecated_member_use
-    scaffoldKeyWallet.currentState.showSnackBar(
-      SnackBar(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              message,
-              style: GoogleFonts.poppins(
-                color: white,
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            )
-          ],
-        ),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
 
-  
+  final GlobalKey<ScaffoldState> _scaffoldstate =
+      new GlobalKey<ScaffoldState>();
+//  void _showScaffold(String message){
+//    // ignore: deprecated_member_use
+//    _scaffoldstate.currentState.showSnackBar(new SnackBar(content: new Text('Hello world')));
+//  }
+// final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+//       new GlobalKey<ScaffoldState>();
+//   void _showScaffold1(String message) {
+//     // ignore: deprecated_member_use
+//     scaffoldKeyWallet.currentState.showSnackBar(
+//       SnackBar(
+//         content: Row(
+//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+//           children: [
+//             Text(
+//               message,
+//               style: GoogleFonts.poppins(
+//                 color: white,
+//                 fontSize: 17,
+//                 fontWeight: FontWeight.w400,
+//               ),
+//             ),
+//             Icon(
+//               Icons.info_outline,
+//               color: Colors.white,
+//             )
+//           ],
+//         ),
+//         backgroundColor: Colors.red,
+//       ),
+//     );
+//   }
+
   @override
   Widget build(BuildContext context) {
     return loading == true
@@ -277,7 +284,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
             ),
           )
         : Scaffold(
-           key:_scaffoldstate,
+            key: _scaffoldstate,
             backgroundColor: backgroundcolor,
             body: plaidconnect == true
                 ? Container(
@@ -392,7 +399,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                     ),
                   )
                 : Stack(
-                   key: scaffoldKeyWallet,
+                    //key: scaffoldKeyWallet,
                     children: [
                       ListView(
                         padding: EdgeInsets.zero,
@@ -901,8 +908,7 @@ final GlobalKey<ScaffoldState> scaffoldKeyWallet =
                               ],
                             ),
                           ),
-                          SizedBox(height:20),
-
+                          SizedBox(height: 20),
                           Container(
                             height: MediaQuery.of(context).size.height * 0.5,
                             decoration: BoxDecoration(

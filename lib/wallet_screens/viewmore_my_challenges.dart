@@ -5,7 +5,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 
-class Challenges {
+class MyChallenges {
   String mode;
   String type;
   String totalCompetitors;
@@ -13,7 +13,7 @@ class Challenges {
   var totalKm;
   var wage;
 
-  Challenges({
+  MyChallenges({
     this.mode,
     this.type,
     this.totalCompetitors,
@@ -22,7 +22,7 @@ class Challenges {
     this.wage,
   });
 
-  factory Challenges.fromJson(Map<String, dynamic> json) => Challenges(
+  factory MyChallenges.fromJson(Map<String, dynamic> json) => MyChallenges(
         mode: json["mode"] == null ? null : json["mode"],
         type: json["type"],
         totalCompetitors: json["totalCompetitors"],
@@ -40,14 +40,14 @@ class ViewmoreMyChallenge extends StatefulWidget {
 }
 
 class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
-  List<Challenges> challengesOne = [];
+  List<MyChallenges> mychallenge = [];
   bool loading = true;
-  var userLanguage, lang = [];
+  var userLanguage, lang, user = [];
 
   @override
   void initState() {
     super.initState();
-    getChallenges();
+    getmyChallenges();
     getUserLanguage();
   }
 
@@ -63,61 +63,65 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
   // ignore: todo
   //TODO: LanguageEnd
 
-  Future<void> getChallenges() async {
-   
-    var res = await UserRepository().getChallenges();
+  Future<void> getmyChallenges() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getmyChallenges(user[0]["uid"]);
+
+    setState(() {
+      loading = false;
+    });
     if (res == false) {
-      setState(() {
-        loading=false;
-      });
-      Scaffold
-          .of(context)
-          .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+      Scaffold.of(context)
+          // ignore: deprecated_member_use
+          .showSnackBar(SnackBar(
+        content: Text('No Internet Connection'),
+        backgroundColor: Colors.red,
+      ));
     } else {
       if (res["success"] == true) {
-        setState(() {
-          loading = false;
-        });
-        challengesOne = [];
+        mychallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-          challengesOne.add(Challenges.fromJson(res["challenges"]["docs"][i]));
+          mychallenge.add(MyChallenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
-         Scaffold
-          .of(context)
-          .showSnackBar(SnackBar(content: Text('Please Try Again!'),backgroundColor: Colors.red,));
+        // ignore: deprecated_member_use
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
       }
     }
-    
   }
 
-  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-      new GlobalKey<ScaffoldState>();
-  void _showScaffold(String message) {
-    // ignore: deprecated_member_use
-    scaffoldKeyWallet.currentState.showSnackBar(
-      SnackBar(
-        content: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              message,
-              style: GoogleFonts.poppins(
-                color: white,
-                fontSize: 17,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            Icon(
-              Icons.info_outline,
-              color: Colors.white,
-            )
-          ],
-        ),
-        backgroundColor: Colors.red,
-      ),
-    );
-  }
+  // final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+  //     new GlobalKey<ScaffoldState>();
+  // void _showScaffold(String message) {
+  //   // ignore: deprecated_member_use
+  //   scaffoldKeyWallet.currentState.showSnackBar(
+  //     SnackBar(
+  //       content: Row(
+  //         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+  //         children: [
+  //           Text(
+  //             message,
+  //             style: GoogleFonts.poppins(
+  //               color: white,
+  //               fontSize: 17,
+  //               fontWeight: FontWeight.w400,
+  //             ),
+  //           ),
+  //           Icon(
+  //             Icons.info_outline,
+  //             color: Colors.white,
+  //           )
+  //         ],
+  //       ),
+  //       backgroundColor: Colors.red,
+  //     ),
+  //   );
+  // }
 
   List elementsOne = [
     {
@@ -182,7 +186,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: scaffoldKeyWallet,
+      //key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: backgroundcolor,
@@ -281,7 +285,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                     ),
                   ),
                 )
-              : challengesOne.length == 0
+              : mychallenge.length == 0
                   ? Container(
                       height: MediaQuery.of(context).size.height * 0.2,
                       width: MediaQuery.of(context).size.width,
@@ -318,7 +322,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                             child: ListView.builder(
                               physics: NeverScrollableScrollPhysics(),
                               scrollDirection: Axis.vertical,
-                              itemCount: challengesOne.length,
+                              itemCount: mychallenge.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return Stack(
@@ -371,10 +375,10 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                     ),
                                                     child: Center(
                                                       child: Text(
-                                                        challengesOne[index]
+                                                        mychallenge[index]
                                                                 .totalKm +
                                                             " KM " +
-                                                            challengesOne[index]
+                                                            mychallenge[index]
                                                                 .mode
                                                                 .toUpperCase(),
                                                         style:
@@ -435,8 +439,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                                             .w400)),
                                                           ),
                                                           Text(
-                                                              challengesOne[
-                                                                      index]
+                                                              mychallenge[index]
                                                                   .streakDays,
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
