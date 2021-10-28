@@ -153,19 +153,11 @@ class _MyActivityState extends State<MyActivity> {
       "trophys": "trophy1"
     },
   ];
-  var colors = [
+  List<Color> myActivityColorList = [
     blue1,
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-  ];
-
-  List<Color> colorList = [
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
+    spendingPink,
+    containerOrange,
+    containerGreen,
   ];
 
   var trophy = [
@@ -508,10 +500,12 @@ class _MyActivityState extends State<MyActivity> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.8,
+                                                  0.85,
                                               decoration: BoxDecoration(
-                                                  color: colorList[
-                                                      index % colorList.length],
+                                                  color: myActivityColorList[
+                                                      index %
+                                                          myActivityColorList
+                                                              .length],
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           20)),
@@ -533,13 +527,13 @@ class _MyActivityState extends State<MyActivity> {
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               bottomLeft: Radius
-                                                                  .circular(13),
+                                                                  .circular(18),
                                                               bottomRight:
                                                                   Radius
                                                                       .circular(
                                                                           25),
                                                               topLeft: Radius
-                                                                  .circular(13),
+                                                                  .circular(18),
                                                               topRight: Radius
                                                                   .circular(
                                                                       25)),
@@ -713,7 +707,8 @@ class _MyActivityState extends State<MyActivity> {
                                       ],
                                     ),
                                     Positioned(
-                                      right: 30,
+                                      right: MediaQuery.of(context).size.width *
+                                          0.03,
                                       top: 10,
                                       child: Container(
                                         height: 40,

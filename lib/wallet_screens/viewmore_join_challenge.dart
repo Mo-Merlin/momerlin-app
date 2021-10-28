@@ -225,22 +225,11 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
       "trophys": "trophy1"
     },
   ];
-  var colors = [
+  List<Color> joinChallengeColorList = [
     blue1,
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-    blue1,
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-  ];
-
-  List<Color> colorList = [
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
+    spendingPink,
+    containerOrange,
+    containerGreen,
   ];
 
   var trophy = [
@@ -422,10 +411,12 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                                 width: MediaQuery.of(context)
                                                         .size
                                                         .width *
-                                                    0.8,
+                                                    0.85,
                                                 decoration: BoxDecoration(
-                                                    color: colorList[index %
-                                                        colorList.length],
+                                                    color: joinChallengeColorList[
+                                                        index %
+                                                            joinChallengeColorList
+                                                                .length],
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             20)),
@@ -448,14 +439,14 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                                             BorderRadius.only(
                                                                 bottomLeft: Radius
                                                                     .circular(
-                                                                        13),
+                                                                        18),
                                                                 bottomRight:
                                                                     Radius
                                                                         .circular(
                                                                             25),
                                                                 topLeft: Radius
                                                                     .circular(
-                                                                        13),
+                                                                        18),
                                                                 topRight: Radius
                                                                     .circular(
                                                                         25)),
@@ -631,7 +622,9 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                         ],
                                       ),
                                       Positioned(
-                                        right: 30,
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
                                         top: 10,
                                         child: Container(
                                           height: 40,
