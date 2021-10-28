@@ -13,7 +13,7 @@
 
 // GoogleSignIn _googleSignIn = GoogleSignIn(
 //   // Optional clientId
-//   // clientId: '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
+//   clientId: '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
 //   scopes: <String>[
 //     'email',
 //     'https://www.googleapis.com/auth/contacts.readonly',

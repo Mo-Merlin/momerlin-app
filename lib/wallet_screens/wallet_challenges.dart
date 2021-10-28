@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health/health.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -20,6 +21,8 @@ import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
+import 'challangedetails.dart';
+import 'googlesign.dart';
 import 'healthkit.dart';
 
 class Challenges {
@@ -137,6 +140,37 @@ enum AppState {
   NO_DATA,
   AUTH_NOT_GRANTED
 }
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+    'https://www.googleapis.com/auth/fitness.activity.read',
+    'https://www.googleapis.com/auth/fitness.activity.write',
+    'https://www.googleapis.com/auth/fitness.blood_glucose.read',
+    'https://www.googleapis.com/auth/fitness.blood_glucose.write',
+    'https://www.googleapis.com/auth/fitness.blood_pressure.read',
+    'https://www.googleapis.com/auth/fitness.blood_pressure.write',
+    'https://www.googleapis.com/auth/fitness.body.read',
+    'https://www.googleapis.com/auth/fitness.body.write',
+    'https://www.googleapis.com/auth/fitness.body_temperature.read',
+    'https://www.googleapis.com/auth/fitness.body_temperature.write',
+    'https://www.googleapis.com/auth/fitness.heart_rate.read',
+    'https://www.googleapis.com/auth/fitness.heart_rate.write',
+    'https://www.googleapis.com/auth/fitness.location.read',
+    'https://www.googleapis.com/auth/fitness.location.write',
+    'https://www.googleapis.com/auth/fitness.nutrition.read',
+    'https://www.googleapis.com/auth/fitness.nutrition.write',
+    'https://www.googleapis.com/auth/fitness.oxygen_saturation.read',
+    'https://www.googleapis.com/auth/fitness.oxygen_saturation.write',
+    'https://www.googleapis.com/auth/fitness.reproductive_health.read',
+    'https://www.googleapis.com/auth/fitness.reproductive_health.write',
+    'https://www.googleapis.com/auth/fitness.sleep.read',
+    'https://www.googleapis.com/auth/fitness.sleep.write',
+  ],
+);
 
 class _WalletChallengesState extends State<WalletChallenges> {
   List<HealthDataPoint> _healthDataList = [];
@@ -218,6 +252,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getUserLanguage();
     getChallenges();
     getapp();
+    gettoken();
     return null;
   }
 
@@ -230,7 +265,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getUserLanguage();
     getChallenges();
     getapp();
-    //fetchData();
+    // fetchData();
+
+    // gettoken();
   }
 
   // ignore: todo
@@ -275,6 +312,17 @@ class _WalletChallengesState extends State<WalletChallenges> {
           backgroundColor: Colors.red,
         ));
       }
+    }
+  }
+
+  Future<void> gettoken() async {
+    try {
+      final result = await _googleSignIn.signIn();
+      final ggAuth = await result.authentication;
+      print("pavimano ${ggAuth.idToken}");
+      print("pavimano ${ggAuth.accessToken}");
+    } catch (error) {
+      print(error);
     }
   }
 
@@ -692,7 +740,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         context,
                         MaterialPageRoute(
                             builder: (_) => Tabscreen(
-                                  index: 1,
+                                  index: 0,
                                 )));
                   },
                   icon: Icon(
@@ -1951,16 +1999,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         print(joingetchallenge.length);
                                         return GestureDetector(
                                           onTap: () {
-                                            print(joingetchallenge[index]);
-                                            getwinnerChallenges(
-                                                joingetchallenge[index].id);
-                                            challangedetails(context,
-                                                joingetchallenge[index]);
-                                            // Navigator.push(
-                                            //     context,
-                                            //     MaterialPageRoute(
-                                            //         builder: (context) =>
-                                            //             HealthKit()));
+                                            // print(joingetchallenge[index]);
+                                            // getwinnerChallenges(
+                                            //     joingetchallenge[index].id);
+                                            // challangedetails(context,
+                                            //     joingetchallenge[index]);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Challengesdetail(challange:joingetchallenge[index])));
                                           },
                                           child: Stack(
                                             children: [
@@ -5076,8 +5124,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   //challangedetails screen start//
   void challangedetails(BuildContext context, detail) {
-    // var newDateTimeObj2 = new DateFormat("dd/MM/yyyy HH:mm:ss").parse(detail.startDate);
-    // print("dfghjkl $newDateTimeObj2");
     DateTime parseDate =
         new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'").parse(detail.startDate);
     var inputDate = DateTime.parse(parseDate.toString());
@@ -5109,10 +5155,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         Card(
                           color: gridcolor,
                           elevation: 20,
-                          // shadowColor: button.withOpacity(0.5),
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(150),
-                            // side: new BorderSide(color: Colors.black, width: 1.0),
                           ),
                           child: GestureDetector(
                             onTap: () {
@@ -5151,8 +5195,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         color: Color(0xff1C203A),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(32),
-                          // side: new BorderSide(color: Colors.black, width: 1.0),
-                        ),
+                         ),
                         child: SingleChildScrollView(
                           child: Container(
                             child: Column(
@@ -5712,7 +5755,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       width: 10,
                                     ),
                                     Text(
-                                      (num.parse(detail.wage*10)).toString(),
+                                      (num.parse(detail.wage * 10)).toString(),
                                       style: GoogleFonts.montserrat(
                                           decoration: TextDecoration.none,
                                           color: Colors.orange,
@@ -6014,13 +6057,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         //fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    Text(
-                                      "${chall.wage} Gwei",
-                                      style: GoogleFonts.montserrat(
-                                        decoration: TextDecoration.none,
-                                        color: Colors.orange,
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.w600,
+                                    FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Text(
+                                        "${chall.wage} Gwei",
+                                        style: GoogleFonts.montserrat(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.orange,
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
                                     ),
                                     SizedBox(
