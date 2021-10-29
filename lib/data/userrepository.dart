@@ -85,6 +85,29 @@ class UserRepository {
     }
   }
 
+//updateuser
+  Future<dynamic> updateuser(id, fullname) async {
+    print(
+      "12345678 $id , $fullname",
+    );
+    try {
+      var data = ({"fullName": fullname});
+      var body = json.encode(data);
+      var res = await http.put('${url + "user/update?id=$id"}',
+          headers: <String, String>{
+            'Content-Type': 'application/json; charset=UTF-8',
+          },
+          body: body);
+      var checkres = jsonDecode(res.body);
+
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print(e);
+      return false;
+    }
+  }
+
   Future<dynamic> getTransaction(walletaddress) async {
     try {
       var res = await http.get(
@@ -152,12 +175,14 @@ class UserRepository {
       return false;
     }
   }
+
   Future<dynamic> getwinnerChallenges(challangeid) async {
+    print("challangeid $challangeid");
     try {
       // var url = "http://192.168.43.124:8000/api/challenges";
 
       var res = await http.get(
-        '${url + "challenge/winners?id=$challangeid"}',
+        '${url + "/challenge/$challangeid"}',
       );
 
       var checkres = jsonDecode(res.body);
@@ -218,16 +243,14 @@ class UserRepository {
     print("12345678 $id");
     try {
       var res = await http.get(
-        Uri.parse(
-          '${url + "/challenge/joined?id=$id"}',
-        ),
+        '${url + "/challenge/joined/$id?page=1&limit=10"}',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
       );
       var checkres = jsonDecode(res.body);
       print("checkres ${checkres.length}");
-    
+
       return checkres;
     } catch (e) {
       print(e);

@@ -174,21 +174,11 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
       "trophys": "trophy1"
     },
   ];
-  var colors = [
+  List<Color> myChallengeColorList = [
     blue1,
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-    blue1,
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-  ];
-  List<Color> colorList = [
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
+    spendingPink,
+    containerOrange,
+    containerGreen,
   ];
 
   var trophy = [
@@ -346,10 +336,12 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                               width: MediaQuery.of(context)
                                                       .size
                                                       .width *
-                                                  0.8,
+                                                  0.85,
                                               decoration: BoxDecoration(
-                                                  color: colorList[
-                                                      index % colorList.length],
+                                                  color: myChallengeColorList[
+                                                      index %
+                                                          myChallengeColorList
+                                                              .length],
                                                   borderRadius:
                                                       BorderRadius.circular(
                                                           15)),
@@ -371,13 +363,13 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                       borderRadius:
                                                           BorderRadius.only(
                                                               bottomLeft: Radius
-                                                                  .circular(13),
+                                                                  .circular(18),
                                                               bottomRight:
                                                                   Radius
                                                                       .circular(
                                                                           25),
                                                               topLeft: Radius
-                                                                  .circular(13),
+                                                                  .circular(18),
                                                               topRight: Radius
                                                                   .circular(
                                                                       25)),
@@ -506,7 +498,8 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                       ],
                                     ),
                                     Positioned(
-                                      right: 30,
+                                      right: MediaQuery.of(context).size.width *
+                                          0.03,
                                       top: 10,
                                       child: Container(
                                           height: 40,

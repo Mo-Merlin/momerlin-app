@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -35,6 +36,14 @@ class _WalletProfileState extends State<WalletProfile> {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
+  }
+
+  void updateuser(id,fullname) async {
+    var res = await UserRepository().updateuser(
+      user[0]["uid"],
+       fullname
+    );
+    print("pavimanohran $res");
   }
 
   TextEditingController _controller;
@@ -71,11 +80,13 @@ class _WalletProfileState extends State<WalletProfile> {
                     child: IconButton(
                         onPressed: () {
                           Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (_) => Tabscreen(
-                                        index: 0,
-                                      ),),);
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Tabscreen(
+                                index: 0,
+                              ),
+                            ),
+                          );
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -137,9 +148,10 @@ class _WalletProfileState extends State<WalletProfile> {
                                 width: 210,
                                 //color: Colors.orange,
                                 child: TextField(
-                                  // onChanged: (value) {
-                                  //   _scanBarcode = value;
-                                  // },
+                                  onSubmitted: (value) {
+                                    print(value);
+                                    updateuser(user[0]["uid"],value);
+                                  },
                                   controller: _controller,
                                   decoration: new InputDecoration(
                                       filled: true,
@@ -148,7 +160,6 @@ class _WalletProfileState extends State<WalletProfile> {
                                       hintText: '  Nick Name',
                                       suffixIcon:
                                           Icon(Icons.edit, color: white)),
-
                                   style: TextStyle(fontSize: 13, color: white),
                                 ),
                               ),
@@ -592,7 +603,9 @@ class _WalletProfileState extends State<WalletProfile> {
                       ),
                     ),
                   ),
-                  SizedBox(height: 100,),
+                  SizedBox(
+                    height: 100,
+                  ),
                 ],
               ),
             ),
