@@ -152,6 +152,7 @@ class UserRepository {
       return false;
     }
   }
+
   Future<dynamic> getwinnerChallenges(challangeid) async {
     try {
       // var url = "http://192.168.43.124:8000/api/challenges";
@@ -227,10 +228,29 @@ class UserRepository {
       );
       var checkres = jsonDecode(res.body);
       print("checkres ${checkres.length}");
-    
+
       return checkres;
     } catch (e) {
       print(e);
+      return false;
+    }
+  }
+
+  Future<dynamic> getAllLeaderboard() async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/leaderboard";
+
+      var res = await http.get(
+        '${url + "leaderboard"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      print("ALL LEADERBOARD COUNT :  ${checkres.length}");
+      print("ALL LEADERBOARD :  $checkres");
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
       return false;
     }
   }
