@@ -128,6 +128,201 @@ class JoingetChallenges {
           endDate: json["endAt"]);
 }
 
+// To parse this JSON data, do
+
+//     final leaderboardAll = leaderboardAllFromJson(jsonString);
+
+class LeaderboardAll {
+  LeaderboardAll({
+    this.id,
+    this.competitor,
+    this.challenge,
+    this.startAt,
+    this.endAt,
+    this.totalkm,
+    this.streakNo,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  String id;
+  LeaderboardAllCompetitor competitor;
+  Challenge challenge;
+  String startAt;
+  String endAt;
+  String totalkm;
+  int streakNo;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  factory LeaderboardAll.fromJson(Map<String, dynamic> json) => LeaderboardAll(
+        id: json["_id"],
+        competitor: LeaderboardAllCompetitor.fromJson(json["competitor"]),
+        challenge: Challenge.fromJson(json["challenge"]),
+        startAt: json["startAt"],
+        endAt: json["endAt"],
+        totalkm: json["totalkm"],
+        streakNo: json["streakNo"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "competitor": competitor.toJson(),
+        "challenge": challenge.toJson(),
+        "startAt": startAt,
+        "endAt": endAt,
+        "totalkm": totalkm,
+        "streakNo": streakNo,
+        "status": status,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class Challenge {
+  Challenge({
+    this.id,
+    this.mode,
+    this.type,
+    this.totalCompetitors,
+    this.streakDays,
+    this.totalKm,
+    this.createdBy,
+    this.competitors,
+    this.startAt,
+    this.endAt,
+    this.wage,
+    this.prize,
+    this.commissionEnabled,
+    this.percentage,
+    this.winners,
+    this.active,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  String id;
+  String mode;
+  String type;
+  String totalCompetitors;
+  String streakDays;
+  String totalKm;
+  String createdBy;
+  List<CompetitorElement> competitors;
+  DateTime startAt;
+  DateTime endAt;
+  String wage;
+  int prize;
+  bool commissionEnabled;
+  String percentage;
+  List<dynamic> winners;
+  bool active;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  factory Challenge.fromJson(Map<String, dynamic> json) => Challenge(
+        id: json["_id"],
+        mode: json["mode"],
+        type: json["type"],
+        totalCompetitors: json["totalCompetitors"],
+        streakDays: json["streakDays"],
+        totalKm: json["totalKm"],
+        createdBy: json["createdBy"],
+        competitors: List<CompetitorElement>.from(
+            json["competitors"].map((x) => CompetitorElement.fromJson(x))),
+        startAt: DateTime.parse(json["startAt"]),
+        endAt: DateTime.parse(json["endAt"]),
+        wage: json["wage"],
+        prize: json["prize"],
+        commissionEnabled: json["commissionEnabled"],
+        percentage: json["percentage"],
+        winners: List<dynamic>.from(json["winners"].map((x) => x)),
+        active: json["active"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "mode": mode,
+        "type": type,
+        "totalCompetitors": totalCompetitors,
+        "streakDays": streakDays,
+        "totalKm": totalKm,
+        "createdBy": createdBy,
+        "competitors": List<dynamic>.from(competitors.map((x) => x.toJson())),
+        "startAt": startAt.toIso8601String(),
+        "endAt": endAt.toIso8601String(),
+        "wage": wage,
+        "prize": prize,
+        "commissionEnabled": commissionEnabled,
+        "percentage": percentage,
+        "winners": List<dynamic>.from(winners.map((x) => x)),
+        "active": active,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class CompetitorElement {
+  CompetitorElement({
+    this.userId,
+    this.joinedAt,
+    this.id,
+  });
+
+  String userId;
+  DateTime joinedAt;
+  String id;
+
+  factory CompetitorElement.fromJson(Map<String, dynamic> json) =>
+      CompetitorElement(
+        userId: json["userId"],
+        joinedAt: DateTime.parse(json["joinedAt"]),
+        id: json["_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "userId": userId,
+        "joinedAt": joinedAt.toIso8601String(),
+        "_id": id,
+      };
+}
+
+class LeaderboardAllCompetitor {
+  LeaderboardAllCompetitor({
+    this.id,
+    this.fullName,
+  });
+
+  String id;
+  String fullName;
+
+  factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
+      LeaderboardAllCompetitor(
+        id: json["_id"],
+        fullName: json["fullName"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "fullName": fullName,
+      };
+}
+
 class WalletChallenges extends StatefulWidget {
   const WalletChallenges({Key key}) : super(key: key);
 
@@ -240,6 +435,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   List<Challenges> challengesOne = [];
   List<MyChallenges> mychallenge = [];
   List<JoingetChallenges> joingetchallenge = [];
+  List<LeaderboardAll> leaderboardAll = [];
+
   var userLanguage, user, lang = [];
   bool loading = true;
   // bool leaderViewMore = false;
@@ -267,6 +464,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getUserLanguage();
     getChallenges();
     getapp();
+    getAllLeaderboard();
     // fetchData();
 
     // gettoken();
@@ -486,6 +684,35 @@ class _WalletChallengesState extends State<WalletChallenges> {
       }
     }
     print("user $joinchallange");
+  }
+
+  Future<void> getAllLeaderboard() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getAllLeaderboard();
+    if (res == false) {
+      // Scaffold
+      //   .of(context)
+      //   .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+    } else {
+      if (res["success"] == true) {
+        setState(() {
+          loading = false;
+        });
+        leaderboardAll = [];
+        for (var i = 0; i < res["leaders"].length; i++) {
+          leaderboardAll.add(LeaderboardAll.fromJson(res["leaders"][i]));
+        }
+      } else {
+        Scaffold.of(context)
+            // ignore: deprecated_member_use
+            .showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
+      }
+    }
   }
 
   List elements = [
@@ -2455,7 +2682,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             shrinkWrap: true,
                             physics: NeverScrollableScrollPhysics(),
                             scrollDirection: Axis.vertical,
-                            itemCount: 3,
+                            itemCount: leaderboardAll.length <= 3
+                                ? leaderboardAll.length
+                                : 3,
                             itemBuilder: (context, index) {
                               return InkWell(
                                 onTap: () {
@@ -2529,7 +2758,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     )),
                                               ),
                                               title: Text(
-                                                elements[index]["leadername"]
+                                                leaderboardAll[index]
+                                                    .competitor
+                                                    .fullName
                                                     .toString()
                                                     .toUpperCase(),
                                                 style: GoogleFonts.poppins(
@@ -2575,33 +2806,41 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             16)),
-                                                child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
-                                                  children: [
-                                                    Text(elements[index]['amt'],
-                                                        style:
-                                                            GoogleFonts.poppins(
+                                                child: FittedBox(
+                                                  fit: BoxFit.scaleDown,
+                                                  child: Row(
+                                                    mainAxisAlignment:
+                                                        MainAxisAlignment
+                                                            .center,
+                                                    children: [
+                                                      Text(
+                                                          leaderboardAll[index]
+                                                              .challenge
+                                                              .prize
+                                                              .toString(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 16,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w600)),
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .only(left: 5),
+                                                        child: Text("Gwei",
+                                                            style: GoogleFonts.poppins(
                                                                 color: Colors
-                                                                    .white,
-                                                                fontSize: 16,
+                                                                    .orangeAccent,
+                                                                fontSize: 12,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w600)),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5),
-                                                      child: Text("Gwei",
-                                                          style: GoogleFonts.poppins(
-                                                              color: Colors
-                                                                  .orangeAccent,
-                                                              fontSize: 12,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400)),
-                                                    ),
-                                                  ],
+                                                                        .w400)),
+                                                      ),
+                                                    ],
+                                                  ),
                                                 ),
                                               ),
                                             ),
@@ -5754,44 +5993,40 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   height:
                                       MediaQuery.of(context).size.height * 0.02,
                                 ),
-                                Text(
-                                  "WINNER GETS",
-                                  style: GoogleFonts.poppins(
-                                      decoration: TextDecoration.none,
-                                      color: Colors.white,
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.w500),
-                                ),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                ),
-                                FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      Text(
-                                        detail.wage.toString(),
-                                        style: GoogleFonts.montserrat(
-                                            decoration: TextDecoration.none,
-                                            color: Colors.orange,
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                      SizedBox(
-                                        width: 3,
-                                      ),
-                                      Text(
-                                        "Gwei",
-                                        style: GoogleFonts.montserrat(
-                                            decoration: TextDecoration.none,
-                                            color: Colors.orange,
-                                            fontSize: 17,
-                                            fontWeight: FontWeight.w600),
-                                      ),
-                                    ],
-                                  ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "WINNER GETS",
+                                      style: GoogleFonts.poppins(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                    SizedBox(
+                                      width: 10,
+                                    ),
+                                    Text(
+                                      detail.wage .toString(),
+                                      style: GoogleFonts.montserrat(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.orange,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                    SizedBox(
+                                      width: 3,
+                                    ),
+                                    Text(
+                                      "GWEI",
+                                      style: GoogleFonts.montserrat(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.orange,
+                                          fontSize: 17,
+                                          fontWeight: FontWeight.w600),
+                                    ),
+                                  ],
                                 ),
                                 SizedBox(
                                   height:
