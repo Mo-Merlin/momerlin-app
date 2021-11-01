@@ -7,6 +7,7 @@ class UserEntity extends Entity<int> {
   final String seed;
   final String language;
   final String uid;
+  final int googlefitenable;
 
   UserEntity({
     int id,
@@ -16,6 +17,7 @@ class UserEntity extends Entity<int> {
     this.seed,
     this.language,
     this.uid,
+    this.googlefitenable,
   }) : super(id);
 
   @override
@@ -27,7 +29,8 @@ class UserEntity extends Entity<int> {
       'btcmainaddress': btcmainaddress,
       'seed': seed,
       'language': language,
-      'uid':uid
+      'uid':uid,
+      'googlefitenable':googlefitenable
     };
   }
 
@@ -39,6 +42,8 @@ class UserEntity extends Entity<int> {
         btcmainaddress,
         seed,
         language,
-        uid
+        uid,
+        googlefitenable
+
       ];
 }

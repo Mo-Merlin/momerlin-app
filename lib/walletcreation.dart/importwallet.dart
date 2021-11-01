@@ -49,20 +49,70 @@ class _ImportWalletPage extends State<ImportWalletPage> {
     print(walletTest.getAddress(0));
     String _address = await Web3().getAddressFromPrivateKey(_pk);
     print(_address);
-
-    final usersave = await UserRepository().storeUser({
-      "address": _address,
-      "btcTestnetAddress": walletTest.getAddress(0),
-      "btcMainnetAddress": walletMain.getAddress(0),
-      "seed": seed,
-      "language": "English"
-    });
-    if (usersave == true) {
-      Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
-    } else {
+    var res = await UserRepository().getUser(_address);
+    print(res);
+    if (res['user'] != null) {
+      //  print(user["user"]["_id"]);
+      final usersave = await UserRepository().storeUser({
+        "uid": res["user"]["_id"],
+        "address": _address,
+        "btcTestnetAddress": walletTest.getAddress(0),
+        "btcMainnetAddress": walletMain.getAddress(0),
+        "seed": seed,
+        "language": "English",
+        "googlefitenable": 0,
+      });
+      if (usersave == true) {
+        Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
+      } else {}
       print("PAVITHRA");
+    } else {
+      var user = await UserRepository().adduser({
+        "ethAddress": _address,
+        "btcAddress": walletMain.getAddress(0),
+        "fullName": "NickName",
+      });
+      if (user == false) {
+        _showScaffold('No Internet Connection');
+      } else {
+        print(user["success"]);
+        if (user["success"] == false) {
+          _showScaffold('Something Went Wrong!');
+        } else {
+          print(user["user"]["_id"]);
+          final usersave = await UserRepository().storeUser({
+            "uid": user["user"]["_id"],
+            "address": _address,
+            "btcTestnetAddress": walletTest.getAddress(0),
+            "btcMainnetAddress": walletMain.getAddress(0),
+            "seed": seed,
+            "language": "English",
+            "googlefitenable": 0,
+          });
+          if (usersave == true) {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => Tabscreen()));
+          } else {}
+        }
+        //
+      }
     }
-    print("usersave$usersave");
+    // final usersave = await UserRepository().storeUser({
+    //   "uid": user["user"]["_id"],
+    //       "address": _address,
+    //       "btcTestnetAddress": walletTest.getAddress(0),
+    //       "btcMainnetAddress": walletMain.getAddress(0),
+    //       "seed": seed,
+    //       "language": "English",
+    //       "googlefitenable":0,
+
+    // });
+    // if (usersave == true) {
+    //   Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
+    // } else {
+    //   print("PAVITHRA");
+    // }
+    // print("usersave$usersave");
   }
   // String _pk = Web3.privateKeyFromMnemonic(seed);
 
@@ -87,10 +137,11 @@ class _ImportWalletPage extends State<ImportWalletPage> {
       ),
     );
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-       key: scaffoldKeyWallet,
+      key: scaffoldKeyWallet,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         elevation: 0,
@@ -183,6 +234,7 @@ class _ImportWalletPage extends State<ImportWalletPage> {
                   maxLines: 4,
                   onChanged: (value) {
                     seed = value;
+                    seedlength = seed.length;
                   },
                   controller: _controller,
                   decoration: new InputDecoration(
@@ -210,13 +262,13 @@ class _ImportWalletPage extends State<ImportWalletPage> {
               GestureDetector(
                 onTap: () {
                   print(seed);
-                  setState(() {
-                    seedlength == 12 ?
-                    loading = true:loading = false;
-                  });
-                   seedlength == 12 ?
-                     storeUser(): _showScaffold('Please enter valid seed phrase');
-                 
+                  // setState(() {
+                  //   seed.length == 12 ? loading = true : loading = false;
+                  // });
+                  // seed.length == 12
+                  // ?
+                  storeUser();
+                  // : _showScaffold('Please enter valid seed phrase');
 
                   // }
                 },

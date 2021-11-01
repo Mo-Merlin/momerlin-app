@@ -109,11 +109,10 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     var user = await UserRepository().adduser({
       "ethAddress": _address,
       "btcAddress": walletMain.getAddress(0),
-      "fullName": "NickName",
+      "fullName": "",
     });
     if (user == false) {
       _showScaffold('No Internet Connection');
-    
     } else {
       print(user["success"]);
       if (user["success"] == false) {
@@ -126,20 +125,16 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
           "btcTestnetAddress": walletTest.getAddress(0),
           "btcMainnetAddress": walletMain.getAddress(0),
           "seed": widget.seed1,
-          "language": "English"
+          "language": "English",
+          "googlefitenable":0,
         });
         if (usersave == true) {
           Navigator.push(
               context, MaterialPageRoute(builder: (_) => WalletSucess()));
-        } else {
-          print("PAVITHRA");
-        }
+        } else {}
       }
       //
     }
-    print("uesrr12323 $user");
-
-    // print("usersave$usersave");
   }
 
   @override

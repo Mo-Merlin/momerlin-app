@@ -7,93 +7,49 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
-class Challengesdetail extends StatefulWidget {
+class LeaderboardChallengesdetail extends StatefulWidget {
   final challange;
-  const Challengesdetail({Key key, this.challange}) : super(key: key);
+  const LeaderboardChallengesdetail({Key key, this.challange})
+      : super(key: key);
 
   @override
-  _ChallengesdetailState createState() => _ChallengesdetailState();
+  _LeaderboardChallengesdetailState createState() =>
+      _LeaderboardChallengesdetailState();
 }
 
 class MyChallengesDetail {
   var totalkm;
   var streakNo;
-  GetChallenge challenge;
+
   MyChallengesDetail({
     this.totalkm,
     this.streakNo,
-    this.challenge,
   });
 
   factory MyChallengesDetail.fromJson(Map<String, dynamic> json) =>
       MyChallengesDetail(
-        totalkm: json["totalkm"] == null ? null : json["totalkm"],
-        streakNo: json["streakNo"],
-        challenge: GetChallenge.fromJson(json["competitor"]),
-        
-        
-      );
-}
-
-class GetChallenge {
-  GetChallenge({
-    this.id,
-    this.fullName,
-  });
-
-  String id;
-  String fullName;
-
-  factory GetChallenge.fromJson(Map<String, dynamic> json) => GetChallenge(
-        id: json["_id"],
-        fullName: json["fullName"],
-      );
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+          totalkm: json["totalkm"] == null ? null : json["totalkm"],
+          streakNo: json["streakNo"]);
 }
 
 class WinnerDetails {
   var totalkm;
   var streakNo;
-  Getwinnerchallenge winnerchallenge;
+
   WinnerDetails({
     this.totalkm,
     this.streakNo,
-    this.winnerchallenge,
   });
 
   factory WinnerDetails.fromJson(Map<String, dynamic> json) => WinnerDetails(
-        totalkm: json["totalkm"] == null ? null : json["totalkm"],
-        streakNo: json["streakNo"],
-        winnerchallenge: Getwinnerchallenge.fromJson(json["competitor"]),
-      );
+      totalkm: json["totalkm"] == null ? null : json["totalkm"],
+      streakNo: json["streakNo"]);
 }
 
-class Getwinnerchallenge {
-  Getwinnerchallenge({
-    this.id,
-    this.fullName,
-  });
-
-  String id;
-  String fullName;
-
-  factory Getwinnerchallenge.fromJson(Map<String, dynamic> json) =>
-      Getwinnerchallenge(
-        id: json["_id"],
-        fullName: json["fullName"],
-      );
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
-}
-
-class _ChallengesdetailState extends State<Challengesdetail> {
+class _LeaderboardChallengesdetailState
+    extends State<LeaderboardChallengesdetail> {
   var userLanguage, user, lang = [];
-  bool loading = false;
+  bool loading = true;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<Null> refreshList() async {
     refreshKey.currentState?.show(atTop: false);
@@ -112,8 +68,9 @@ class _ChallengesdetailState extends State<Challengesdetail> {
   @override
   void initState() {
     print(widget.challange.challenge.id);
+    print(widget.challange.challenge.startAt.runtimeType);
     super.initState();
-    getwinnerChallenges(widget.challange.challenge.id);
+    // getwinnerChallenges(widget.challange.challenge.id);
     getUserLanguage();
   }
 
@@ -182,6 +139,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
 
   @override
   Widget build(BuildContext context) {
+    
     return loading == false
         ? Container(
             height: MediaQuery.of(context).size.height,
@@ -273,7 +231,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.41,
@@ -289,7 +247,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                     width: 25,
                                     //color: blue1,
                                     child: Image.asset(
-                                      challangedetail['mode'] == "Walking"
+                                      widget.challange.challenge.mode == "Walking"
                                           ? "assets/images/walking.png"
                                           : "assets/images/running.png",
                                       fit: BoxFit.cover,
@@ -299,7 +257,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Text(
-                                    challangedetail['mode'] == "Walking"
+                                    widget.challange.challenge.mode == "Walking"
                                         ? "Walk"
                                         : "Run",
                                     style: GoogleFonts.poppins(
@@ -314,7 +272,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.41,
@@ -327,7 +285,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: Text(
-                                    challangedetail["wage"],
+                                    widget.challange.challenge.wage.toString(),
                                     style: GoogleFonts.montserrat(
                                         decoration: TextDecoration.none,
                                         color: Colors.white,
@@ -402,7 +360,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.41,
@@ -414,7 +372,9 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 10),
                                   child: Text(
-                                    startDate.toString(),
+                                    DateFormat.yMMMd().format(widget.challange.challenge.startAt),
+                                  //  DateFormat("dd-MM-yyyy hh:mm:ss").format(now))
+                                    // startDate.toString(),
                                     style: GoogleFonts.poppins(
                                         decoration: TextDecoration.none,
                                         color: Colors.white,
@@ -427,7 +387,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.41,
@@ -440,7 +400,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: Text(
-                                    endDate.toString(),
+                                    DateFormat.yMMMd().format(widget.challange.challenge.startAt),
                                     style: GoogleFonts.poppins(
                                         decoration: TextDecoration.none,
                                         color: Colors.white,
@@ -476,7 +436,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.9,
@@ -505,7 +465,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                           padding:
                                               const EdgeInsets.only(left: 10),
                                           child: Text(
-                                            challangedetail["type"]+"  " +challangedetail["totalKm"]+"KM",
+                                            widget.challange.challenge.type,
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.white,
@@ -560,7 +520,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                     Row(
                       children: [
                         Padding(
-                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          padding: const EdgeInsets.only(top: 20, left: 25),
                           child: Container(
                             height: MediaQuery.of(context).size.width * 0.15,
                             width: MediaQuery.of(context).size.width * 0.9,
@@ -573,7 +533,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Padding(
                                   padding: const EdgeInsets.only(left: 15),
                                   child: Text(
-                                    challangedetail["totalCompetitors"],
+                                    widget.challange.challenge.totalCompetitors,
                                     style: GoogleFonts.poppins(
                                         decoration: TextDecoration.none,
                                         color: Colors.white,
@@ -624,7 +584,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                           width: 10,
                         ),
                         Text(
-                          challangedetail["prize"].toString(),
+                          widget.challange.challenge.prize.toString(),
                           style: GoogleFonts.montserrat(
                               decoration: TextDecoration.none,
                               color: Colors.orange,
@@ -722,16 +682,15 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                     topRight:
                                                         Radius.circular(25)),
                                               ),
-                                              child: Padding(
-                                                padding: EdgeInsets.only(left: 10,right:10),
+                                              child: Center(
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
                                                   children: [
                                                     Text(
-                                                      mychallengesdetail[index]
-                                                          .challenge
-                                                          .fullName,
+                                                      challangedetail[
+                                                              "totalKm"] +
+                                                          "KM ",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,
@@ -740,15 +699,38 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                             FontWeight.w600,
                                                       ),
                                                     ),
-                                                    Spacer(),
                                                     Text(
-                                                      double.parse(
+                                                      challangedetail['mode'] ==
+                                                              "Walking"
+                                                          ? "Walk"
+                                                          : "Run",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      challangedetail['type'],
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.black,
+                                                        fontSize: 14,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      " (" +
+                                                          double.parse(
                                                                   mychallengesdetail[
                                                                           index]
                                                                       .totalkm)
                                                               .toStringAsFixed(
                                                                   2) +
-                                                          "KM",
+                                                          "KM)",
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.black,

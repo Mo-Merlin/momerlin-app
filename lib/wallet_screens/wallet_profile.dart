@@ -30,6 +30,7 @@ class _WalletProfileState extends State<WalletProfile> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
+    getuser();
     setState(() {
       loading = false;
     });
@@ -38,15 +39,22 @@ class _WalletProfileState extends State<WalletProfile> {
     }
   }
 
-  void updateuser(id,fullname) async {
-    var res = await UserRepository().updateuser(
-      user[0]["uid"],
-       fullname
-    );
+  void updateuser(id, fullname) async {
+    var res = await UserRepository().updateuser(user[0]["uid"], fullname);
     print("pavimanohran $res");
   }
 
-  TextEditingController _controller;
+  TextEditingController _controller=TextEditingController();
+  Future<void> getuser() async {
+    var res = await UserRepository().getUser(user[0]["walletaddress"]);
+    setState(() {
+      var name = res["user"]["fullName"];
+      _controller.text = name;
+    });
+
+    print(res);
+  }
+
   // ignore: todo
   //TODO: LanguageEnd
   String _chosenValue;
@@ -150,7 +158,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                 child: TextField(
                                   onSubmitted: (value) {
                                     print(value);
-                                    updateuser(user[0]["uid"],value);
+                                    updateuser(user[0]["uid"], value);
                                   },
                                   controller: _controller,
                                   decoration: new InputDecoration(

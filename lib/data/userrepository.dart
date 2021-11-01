@@ -18,13 +18,19 @@ class UserRepository {
     }
   }
 
-  Future<bool> storeUser(dynamic udata) async {
+  Future<dynamic> storeUser(dynamic udata) async {
     var save = UserDataSource().save(udata);
     print("save $save");
     return save;
   }
 
-  Future<bool> storeToken(String token) async {
+  Future<dynamic> updateUser(dynamic udata) async {
+    var save = UserDataSource().updatefit(udata);
+    print("save $save");
+    return save;
+  }
+
+  Future<dynamic> storeToken(String token) async {
     var save = UserDataSource().savetoken(token);
     return save;
   }
@@ -93,7 +99,7 @@ class UserRepository {
     try {
       var data = ({"fullName": fullname});
       var body = json.encode(data);
-      var res = await http.put('${url + "user/update?id=$id"}',
+      var res = await http.put('${url + "user/$id"}',
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -107,7 +113,25 @@ class UserRepository {
       return false;
     }
   }
+//getuser
+Future<dynamic> getUser(id) async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/leaderboard";
 
+      var res = await http.get(
+        '${url + "user/get?id=$id"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      print("ALL LEADERBOARD COUNT :  ${checkres.length}");
+      print("ALL LEADERBOARD :  $checkres");
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
+      return false;
+    }
+  }
   Future<dynamic> getTransaction(walletaddress) async {
     try {
       var res = await http.get(
@@ -239,17 +263,21 @@ class UserRepository {
   }
 
 // getjoining a challenge
-  Future<dynamic> joingetchallenge(id) async {
+  Future<dynamic> joingetchallenge(id, token) async {
     print("12345678 $id");
+
     try {
-      var res = await http.get(
-        '${url + "/challenge/joined/$id?page=1&limit=10"}',
+      var data = ({"token": token});
+      var body = json.encode(data);
+      var res = await http.put(
+        '${url + "challenge/joined/$id?page=1&limit=10"}',
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
+        body: body,
       );
       var checkres = jsonDecode(res.body);
-      print("checkres ${checkres.length}");
+      print("checkres ${checkres}");
 
       return checkres;
     } catch (e) {
@@ -276,4 +304,5 @@ class UserRepository {
       return false;
     }
   }
+
 }

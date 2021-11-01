@@ -47,14 +47,15 @@ class _WalletTwoState extends State<WalletTwo> {
   var selectedseed;
   var linktoken;
   var splitvalue = "00";
-var refreshKey = GlobalKey<RefreshIndicatorState>();
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<Null> refreshList() async {
     refreshKey.currentState?.show(atTop: false);
     await Future.delayed(Duration(seconds: 2));
     getUserLanguage();
-    
+
     return null;
   }
+
   var balance = 0.00;
   List<Transaction> transactions1 = [];
   bool plaidconnect = false, buttonpressed = false;
@@ -94,7 +95,6 @@ var refreshKey = GlobalKey<RefreshIndicatorState>();
   }
 
   Future<void> getTransactionuseraddress() async {
-
     setState(() {
       loading = false;
     });
@@ -167,7 +167,7 @@ var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
-print("1232132uid ${user[0]["uid"]}");
+    print("1232132uid ${user[0]}");
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -292,9 +292,9 @@ print("1232132uid ${user[0]["uid"]}");
             ),
           )
         : RefreshIndicator(
-        key: refreshKey,
-        onRefresh: refreshList,
-          child: Scaffold(
+            key: refreshKey,
+            onRefresh: refreshList,
+            child: Scaffold(
               key: _scaffoldstate,
               backgroundColor: backgroundcolor,
               body: plaidconnect == true
@@ -327,8 +327,8 @@ print("1232132uid ${user[0]["uid"]}");
                               borderRadius: BorderRadius.circular(50),
                               child: ColorFiltered(
                                 child: Image.asset("assets/images/plaid.gif"),
-                                colorFilter:
-                                    ColorFilter.mode(gridcolor, BlendMode.color),
+                                colorFilter: ColorFilter.mode(
+                                    gridcolor, BlendMode.color),
                               ),
                             ),
                           ),
@@ -374,8 +374,9 @@ print("1232132uid ${user[0]["uid"]}");
                                   borderRadius: buttonpressed == false
                                       ? BorderRadius.circular(15)
                                       : BorderRadius.circular(35),
-                                  color:
-                                      buttonpressed == false ? gridcolor : blue1),
+                                  color: buttonpressed == false
+                                      ? gridcolor
+                                      : blue1),
                               child: Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
@@ -424,8 +425,8 @@ print("1232132uid ${user[0]["uid"]}");
                               child: Column(
                                 children: [
                                   Container(
-                                    height:
-                                        MediaQuery.of(context).size.height * 0.4,
+                                    height: MediaQuery.of(context).size.height *
+                                        0.4,
                                     width: MediaQuery.of(context).size.width,
                                     decoration: BoxDecoration(
                                         // borderRadius: new BorderRadius.only(
@@ -439,16 +440,18 @@ print("1232132uid ${user[0]["uid"]}");
                                         Positioned(
                                           child: Image.asset(
                                             "assets/images/Wallet.png",
-                                            width:
-                                                MediaQuery.of(context).size.width,
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
                                             // height: 1000,
                                             fit: BoxFit.fill,
                                           ),
                                         ),
                                         Positioned(
-                                          top:
-                                              MediaQuery.of(context).size.height *
-                                                  0.1,
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.1,
                                           child: Center(
                                             child: GestureDetector(
                                               onTap: () {
@@ -472,9 +475,10 @@ print("1232132uid ${user[0]["uid"]}");
                                           ),
                                         ),
                                         Positioned(
-                                          top:
-                                              MediaQuery.of(context).size.height *
-                                                  0.18,
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.18,
                                           child: Text(
                                             (lang.length != null &&
                                                     lang.length != 0 &&
@@ -491,9 +495,10 @@ print("1232132uid ${user[0]["uid"]}");
                                           ),
                                         ),
                                         Positioned(
-                                          top:
-                                              MediaQuery.of(context).size.height *
-                                                  0.23,
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.23,
                                           child: Row(
                                             children: [
                                               Text(
@@ -515,9 +520,10 @@ print("1232132uid ${user[0]["uid"]}");
                                           ),
                                         ),
                                         Positioned(
-                                          top:
-                                              MediaQuery.of(context).size.height *
-                                                  0.3,
+                                          top: MediaQuery.of(context)
+                                                  .size
+                                                  .height *
+                                              0.3,
                                           child: Container(
                                             // color: button,
                                             height: 32,
@@ -531,7 +537,8 @@ print("1232132uid ${user[0]["uid"]}");
                                               child: Text(
                                                 (lang.length != null &&
                                                         lang.length != 0 &&
-                                                        userLanguage['0.64USD'] !=
+                                                        userLanguage[
+                                                                '0.64USD'] !=
                                                             null)
                                                     ? "${userLanguage['0.64USD']}"
                                                     : "0.64 USD",
@@ -591,7 +598,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                       child: Container(
                                                         height: 42,
                                                         width: 42,
-                                                        color: Colors.green[300],
+                                                        color:
+                                                            Colors.green[300],
                                                         child: IconButton(
                                                           onPressed: () {
                                                             Navigator.push(
@@ -617,13 +625,15 @@ print("1232132uid ${user[0]["uid"]}");
                                                             top: 15),
                                                     child: Text(
                                                       (lang.length != null &&
-                                                              lang.length != 0 &&
+                                                              lang.length !=
+                                                                  0 &&
                                                               userLanguage[
                                                                       'send'] !=
                                                                   null)
                                                           ? "${userLanguage['send']}"
                                                           : "Send",
-                                                      style: GoogleFonts.poppins(
+                                                      style:
+                                                          GoogleFonts.poppins(
                                                         fontSize: 13,
                                                         color: Colors.grey,
                                                         fontWeight:
@@ -693,7 +703,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                             icon: Icon(
                                                               Icons
                                                                   .file_download_outlined,
-                                                              color: Colors.white,
+                                                              color:
+                                                                  Colors.white,
                                                               size: 20,
                                                             )),
                                                       ),
@@ -705,17 +716,21 @@ print("1232132uid ${user[0]["uid"]}");
                                                             top: 15),
                                                     child: Text(
                                                       (lang.length != null &&
-                                                              lang.length != 0 &&
+                                                              lang.length !=
+                                                                  0 &&
                                                               userLanguage[
                                                                       'receive'] !=
                                                                   null)
                                                           ? "${userLanguage['receive']}"
                                                           : "Receive",
-                                                      style: GoogleFonts.poppins(
-                                                          fontSize: 13,
-                                                          color: Colors.grey,
-                                                          fontWeight:
-                                                              FontWeight.w400),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              fontSize: 13,
+                                                              color:
+                                                                  Colors.grey,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
                                                     ),
                                                   )
                                                 ],
@@ -724,12 +739,14 @@ print("1232132uid ${user[0]["uid"]}");
                                           ),
                                         ),
                                         Container(
-                                          height:
-                                              MediaQuery.of(context).size.height /
-                                                  6.5,
-                                          width:
-                                              MediaQuery.of(context).size.width /
-                                                  4,
+                                          height: MediaQuery.of(context)
+                                                  .size
+                                                  .height /
+                                              6.5,
+                                          width: MediaQuery.of(context)
+                                                  .size
+                                                  .width /
+                                              4,
 
                                           //color: button,
                                           decoration: BoxDecoration(
@@ -746,11 +763,13 @@ print("1232132uid ${user[0]["uid"]}");
                                             child: Column(
                                               children: [
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 25),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25),
                                                   child: ClipRRect(
                                                     borderRadius:
-                                                        BorderRadius.circular(30),
+                                                        BorderRadius.circular(
+                                                            30),
                                                     child: Container(
                                                       height: 42,
                                                       width: 42,
@@ -759,7 +778,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                           // onPressed: () {},
                                                           onPressed: () {
                                                             setState(() {
-                                                              plaidconnect = true;
+                                                              plaidconnect =
+                                                                  true;
                                                             });
                                                           },
                                                           icon: Icon(
@@ -772,8 +792,9 @@ print("1232132uid ${user[0]["uid"]}");
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsets.only(
-                                                      top: 15),
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 15),
                                                   child: Text(
                                                     (lang.length != null &&
                                                             lang.length != 0 &&
@@ -816,8 +837,8 @@ print("1232132uid ${user[0]["uid"]}");
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 25),
+                                              padding: const EdgeInsets.only(
+                                                  left: 25),
                                               child: Text(
                                                 "Reports",
                                                 style: GoogleFonts.poppins(
@@ -843,7 +864,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                     "MORE DETAILS",
                                                     style: GoogleFonts.poppins(
                                                       fontSize: 8,
-                                                      fontWeight: FontWeight.w600,
+                                                      fontWeight:
+                                                          FontWeight.w600,
                                                       color: blue1,
                                                     ),
                                                   ),
@@ -858,8 +880,8 @@ print("1232132uid ${user[0]["uid"]}");
                                               MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
-                                              padding:
-                                                  const EdgeInsets.only(left: 15),
+                                              padding: const EdgeInsets.only(
+                                                  left: 15),
                                               child: RichText(
                                                 text: TextSpan(
                                                   text: 'You Spent',
@@ -870,8 +892,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                   children: <TextSpan>[
                                                     TextSpan(
                                                       text: ' 1654.12',
-                                                      style:
-                                                          GoogleFonts.montserrat(
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         fontSize: 14,
                                                         fontWeight:
                                                             FontWeight.w600,
@@ -880,8 +902,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                     ),
                                                     TextSpan(
                                                       text: ' Gwei',
-                                                      style:
-                                                          GoogleFonts.montserrat(
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         fontSize: 10,
                                                         color: Colors.orange,
                                                       ),
@@ -889,8 +911,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                     TextSpan(
                                                       text:
                                                           ' on food\nthis month, that’s higher\nthan normal.',
-                                                      style:
-                                                          GoogleFonts.montserrat(
+                                                      style: GoogleFonts
+                                                          .montserrat(
                                                         fontSize: 14,
                                                         color: text1,
                                                       ),
@@ -994,7 +1016,8 @@ print("1232132uid ${user[0]["uid"]}");
                                                   textAlign: TextAlign.center,
                                                   style: GoogleFonts.poppins(
                                                       fontSize: 13,
-                                                      fontWeight: FontWeight.w400,
+                                                      fontWeight:
+                                                          FontWeight.w400,
                                                       color: Colors.white38),
                                                 ),
                                               ),
@@ -1038,15 +1061,16 @@ print("1232132uid ${user[0]["uid"]}");
                                                             //         )),
                                                             //   ),
                                                             title: Container(
-                                                              padding:
-                                                                  EdgeInsets.only(
+                                                              padding: EdgeInsets
+                                                                  .only(
                                                                       left: 20),
                                                               child: Text(
                                                                 transactions1[
                                                                         index]
                                                                     .merchantName,
                                                                 style: GoogleFonts.poppins(
-                                                                    fontSize: 18,
+                                                                    fontSize:
+                                                                        18,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
@@ -1055,17 +1079,17 @@ print("1232132uid ${user[0]["uid"]}");
                                                               ),
                                                             ),
                                                             subtitle: Container(
-                                                              padding:
-                                                                  EdgeInsets.only(
+                                                              padding: EdgeInsets
+                                                                  .only(
                                                                       left: 20),
                                                               child: Text(
-                                                                (DateFormat.yMMMd().format(
-                                                                        transactions1[
-                                                                                index]
-                                                                            .date))
+                                                                (DateFormat.yMMMd()
+                                                                        .format(
+                                                                            transactions1[index].date))
                                                                     .toString(),
-                                                                style: GoogleFonts
-                                                                    .poppins(
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
                                                                   fontSize: 12,
                                                                   color: Color(
                                                                       0xff9395A4),
@@ -1104,8 +1128,7 @@ print("1232132uid ${user[0]["uid"]}");
                                                                         fontSize:
                                                                             12,
                                                                         fontWeight:
-                                                                            FontWeight
-                                                                                .w500,
+                                                                            FontWeight.w500,
                                                                         color: Colors
                                                                             .white,
                                                                       ),
@@ -1485,6 +1508,6 @@ print("1232132uid ${user[0]["uid"]}");
                       ],
                     ),
             ),
-        );
+          );
   }
 }

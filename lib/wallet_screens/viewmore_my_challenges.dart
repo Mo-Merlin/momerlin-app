@@ -6,6 +6,8 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
+import 'mychallengedetails.dart';
+
 class MyChallenges {
   String mode;
   String type;
@@ -13,24 +15,28 @@ class MyChallenges {
   var streakDays;
   var totalKm;
   var wage;
+  var prize;
+  var id;
 
-  MyChallenges({
-    this.mode,
-    this.type,
-    this.totalCompetitors,
-    this.streakDays,
-    this.totalKm,
-    this.wage,
-  });
+  MyChallenges(
+      {this.mode,
+      this.type,
+      this.totalCompetitors,
+      this.streakDays,
+      this.totalKm,
+      this.wage,
+      this.prize,
+      this.id});
 
   factory MyChallenges.fromJson(Map<String, dynamic> json) => MyChallenges(
-        mode: json["mode"] == null ? null : json["mode"],
-        type: json["type"],
-        totalCompetitors: json["totalCompetitors"],
-        streakDays: json["streakDays"],
-        totalKm: json["totalKm"],
-        wage: json["wage"],
-      );
+      mode: json["mode"] == null ? null : json["mode"],
+      type: json["type"],
+      totalCompetitors: json["totalCompetitors"],
+      streakDays: json["streakDays"],
+      totalKm: json["totalKm"],
+      wage: json["wage"],
+      prize: json["prize"],
+      id: json["_id"]);
 }
 
 class ViewmoreMyChallenge extends StatefulWidget {
@@ -320,135 +326,153 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                               itemCount: mychallenge.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return Stack(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Container(
-                                              height: 59,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.85,
-                                              decoration: BoxDecoration(
-                                                  color: myChallengeColorList[
-                                                      index %
-                                                          myChallengeColorList
-                                                              .length],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    height: 59,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.5,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white
-                                                          .withOpacity(0.2),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              bottomLeft: Radius
-                                                                  .circular(18),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          25),
-                                                              topLeft: Radius
-                                                                  .circular(18),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      25)),
-                                                    ),
-                                                    child: Center(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            mychallenge[index]
-                                                                    .totalKm +
-                                                                "KM ",
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
+                                return GestureDetector(
+                                  onTap: () {
+                                    // challangedetails(
+                                    //     context, mychallenge[index]);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                MyChallengesdetails(
+                                                    challange:
+                                                        mychallenge[index])));
+                                    // if (elementsOne[index]['name'] ==
+                                    //     '5KM RUN STREAK') {
+                                    // joinChallenge(context);
+                                    //}
+                                  },
+                                  child: Stack(
+                                    children: [
+                                      Row(
+                                        children: [
+                                          SizedBox(
+                                            width: 15,
+                                          ),
+                                          Container(
+                                            height: 59,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.85,
+                                            decoration: BoxDecoration(
+                                                color: myChallengeColorList[
+                                                    index %
+                                                        myChallengeColorList
+                                                            .length],
+                                                borderRadius:
+                                                    BorderRadius.circular(15)),
+                                            child: Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                Container(
+                                                  height: 59,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.5,
+                                                  decoration: BoxDecoration(
+                                                    color: Colors.white
+                                                        .withOpacity(0.2),
+                                                    borderRadius:
+                                                        BorderRadius.only(
+                                                            bottomLeft:
+                                                                Radius.circular(
+                                                                    18),
+                                                            bottomRight:
+                                                                Radius.circular(
+                                                                    25),
+                                                            topLeft:
+                                                                Radius.circular(
+                                                                    18),
+                                                            topRight:
+                                                                Radius.circular(
+                                                                    25)),
+                                                  ),
+                                                  child: Center(
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text(
+                                                          mychallenge[index]
+                                                                  .totalKm +
+                                                              "KM ",
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w600,
                                                           ),
-                                                          Text(
-                                                            mychallenge[index]
-                                                                        .mode ==
-                                                                    "Walking"
-                                                                ? "WALK "
-                                                                : "RUN ",
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
+                                                        ),
+                                                        Text(
+                                                          mychallenge[index]
+                                                                      .mode ==
+                                                                  "Walking"
+                                                              ? "WALK "
+                                                              : "RUN ",
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w600,
                                                           ),
-                                                          Text(
-                                                            mychallenge[index]
-                                                                .type
-                                                                .toUpperCase(),
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
-                                                            ),
+                                                        ),
+                                                        Text(
+                                                          mychallenge[index]
+                                                              .type
+                                                              .toUpperCase(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            color: Colors.black,
+                                                            fontSize: 14,
+                                                            fontWeight:
+                                                                FontWeight.w600,
                                                           ),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                      ],
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 20),
-                                                    child: Container(
-                                                      height: 33,
-                                                      width: 85,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white
-                                                              .withOpacity(
-                                                                  0.25),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      16)),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text("DAY",
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          right: 20),
+                                                  child: Container(
+                                                    height: 33,
+                                                    width: 85,
+                                                    decoration: BoxDecoration(
+                                                        color: Colors.white
+                                                            .withOpacity(0.25),
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(16)),
+                                                    child: Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Text("DAY",
+                                                            style: GoogleFonts.poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600)),
+                                                        Padding(
+                                                          padding:
+                                                              const EdgeInsets
+                                                                      .only(
+                                                                  left: 5),
+                                                          child: Text(
+                                                              day[index %
+                                                                  day.length],
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .white,
@@ -456,57 +480,42 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w600)),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 5),
-                                                            child: Text(
-                                                                day[index %
-                                                                    day.length],
-                                                                style: GoogleFonts.poppins(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600)),
-                                                          ),
-                                                          Text(
-                                                              " / " +
-                                                                  mychallenge[
-                                                                          index]
-                                                                      .streakDays,
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                        ],
-                                                      ),
+                                                        ),
+                                                        Text(
+                                                            " / " +
+                                                                mychallenge[
+                                                                        index]
+                                                                    .streakDays,
+                                                            style: GoogleFonts.poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 12,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w400)),
+                                                      ],
                                                     ),
                                                   ),
-                                                ],
-                                              ),
+                                                ),
+                                              ],
                                             ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 15)
-                                      ],
-                                    ),
-                                    Positioned(
-                                      right: MediaQuery.of(context).size.width *
-                                          0.03,
-                                      top: 10,
-                                      child: Container(
-                                          height: 40,
-                                          width: 40,
-                                          child: trophy[index % trophy.length]),
-                                    ),
-                                  ],
+                                          ),
+                                        ],
+                                      ),
+                                      SizedBox(height: 15),
+                                      Positioned(
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
+                                        top: 10,
+                                        child: Container(
+                                            height: 40,
+                                            width: 40,
+                                            child:
+                                                trophy[index % trophy.length]),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             ),

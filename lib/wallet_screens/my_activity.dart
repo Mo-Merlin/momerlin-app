@@ -1,40 +1,116 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:table_calendar/table_calendar.dart';
 
+import 'challangedetails.dart';
+
 class JoingetChallenges {
-  var mode;
-  var type;
-  var totalCompetitors;
-  var streakDays;
-  var totalKm;
-  var wage;
+  var totalkm;
   var id;
+  GetChallenge challenge;
+  var streakNo;
 
   JoingetChallenges({
+    this.totalkm,
+    this.id,
+    this.challenge,
+    this.streakNo,
+  });
+
+  factory JoingetChallenges.fromJson(Map<String, dynamic> json) =>
+      JoingetChallenges(
+          totalkm: json["totalkm"],
+          id: json["_id"],
+          challenge: GetChallenge.fromJson(json["challenge"]),
+          streakNo: json["streakNo"]);
+}
+
+class GetChallenge {
+  GetChallenge({
+    this.id,
     this.mode,
     this.type,
     this.totalCompetitors,
     this.streakDays,
     this.totalKm,
+    this.createdBy,
+    this.startAt,
+    this.endAt,
     this.wage,
-    this.id,
+    this.prize,
+    this.commissionEnabled,
+    this.percentage,
+    this.winners,
+    this.active,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
   });
 
-  factory JoingetChallenges.fromJson(Map<String, dynamic> json) =>
-      JoingetChallenges(
-        mode: json["mode"] == null ? null : json["mode"],
+  String id;
+  String mode;
+  String type;
+  String totalCompetitors;
+  String streakDays;
+  String totalKm;
+  String createdBy;
+
+  DateTime startAt;
+  DateTime endAt;
+  String wage;
+  int prize;
+  bool commissionEnabled;
+  String percentage;
+  List<dynamic> winners;
+  bool active;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  factory GetChallenge.fromJson(Map<String, dynamic> json) => GetChallenge(
+        id: json["_id"],
+        mode: json["mode"],
         type: json["type"],
         totalCompetitors: json["totalCompetitors"],
         streakDays: json["streakDays"],
         totalKm: json["totalKm"],
+        createdBy: json["createdBy"],
+        startAt: DateTime.parse(json["startAt"]),
+        endAt: DateTime.parse(json["endAt"]),
         wage: json["wage"],
-        id: json["_id"],
+        prize: json["prize"],
+        commissionEnabled: json["commissionEnabled"],
+        percentage: json["percentage"],
+        winners: List<dynamic>.from(json["winners"].map((x) => x)),
+        active: json["active"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
       );
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "mode": mode,
+        "type": type,
+        "totalCompetitors": totalCompetitors,
+        "streakDays": streakDays,
+        "totalKm": totalKm,
+        "startAt": startAt.toIso8601String(),
+        "endAt": endAt.toIso8601String(),
+        "wage": wage,
+        "prize": prize,
+        "commissionEnabled": commissionEnabled,
+        "percentage": percentage,
+        "winners": List<dynamic>.from(winners.map((x) => x)),
+        "active": active,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
 }
 
 class MyActivity extends StatefulWidget {
@@ -43,6 +119,38 @@ class MyActivity extends StatefulWidget {
   @override
   _MyActivityState createState() => _MyActivityState();
 }
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/contacts.readonly',
+    'https://www.googleapis.com/auth/fitness.activity.read',
+    'https://www.googleapis.com/auth/fitness.activity.write',
+    'https://www.googleapis.com/auth/fitness.blood_glucose.read',
+    'https://www.googleapis.com/auth/fitness.blood_glucose.write',
+    'https://www.googleapis.com/auth/fitness.blood_pressure.read',
+    'https://www.googleapis.com/auth/fitness.blood_pressure.write',
+    'https://www.googleapis.com/auth/fitness.body.read',
+    'https://www.googleapis.com/auth/fitness.body.write',
+    'https://www.googleapis.com/auth/fitness.body_temperature.read',
+    'https://www.googleapis.com/auth/fitness.body_temperature.write',
+    'https://www.googleapis.com/auth/fitness.heart_rate.read',
+    'https://www.googleapis.com/auth/fitness.heart_rate.write',
+    'https://www.googleapis.com/auth/fitness.location.read',
+    'https://www.googleapis.com/auth/fitness.location.write',
+    'https://www.googleapis.com/auth/fitness.nutrition.read',
+    'https://www.googleapis.com/auth/fitness.nutrition.write',
+    'https://www.googleapis.com/auth/fitness.oxygen_saturation.read',
+    'https://www.googleapis.com/auth/fitness.oxygen_saturation.write',
+    'https://www.googleapis.com/auth/fitness.reproductive_health.read',
+    'https://www.googleapis.com/auth/fitness.reproductive_health.write',
+    'https://www.googleapis.com/auth/fitness.sleep.read',
+    'https://www.googleapis.com/auth/fitness.sleep.write',
+  ],
+);
 
 class _MyActivityState extends State<MyActivity> {
   CalendarController _controller;
@@ -66,7 +174,26 @@ class _MyActivityState extends State<MyActivity> {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
-    getjoinChallenges();
+    if (user[0]["googlefitenable"] == 1) {
+      // fetchData();
+
+      gettoken();
+    }
+  }
+
+  var token;
+  Future<void> gettoken() async {
+    try {
+      final result = await _googleSignIn.signIn();
+      final ggAuth = await result.authentication;
+      token = ggAuth.accessToken;
+      // getmyChallenges();
+      getjoinChallenges();
+      print("pavimano ${ggAuth.idToken}");
+      print("pavimano ${ggAuth.accessToken}");
+    } catch (error) {
+      print(error);
+    }
   }
 
   // ignore: todo
@@ -76,7 +203,7 @@ class _MyActivityState extends State<MyActivity> {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().joingetchallenge(user[0]["uid"]);
+    var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
 
     setState(() {
       loading = false;
@@ -89,6 +216,7 @@ class _MyActivityState extends State<MyActivity> {
       if (res["success"] == true) {
         joingetchallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
+          print("PAVIMano ${res["challenges"]["docs"][i]}");
           joingetchallenge
               .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
@@ -484,239 +612,287 @@ class _MyActivityState extends State<MyActivity> {
                               itemCount: joingetchallenge.length,
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
-                                return Stack(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Container(
-                                              height: 59,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.85,
-                                              decoration: BoxDecoration(
-                                                  color: myActivityColorList[
-                                                      index %
-                                                          myActivityColorList
-                                                              .length],
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    height: 59,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.5,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white
-                                                          .withOpacity(0.2),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              bottomLeft: Radius
-                                                                  .circular(18),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          25),
-                                                              topLeft: Radius
-                                                                  .circular(18),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      25)),
-                                                    ),
-                                                    child: Center(
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            joingetchallenge[
-                                                                        index]
-                                                                    .totalKm +
-                                                                "KM ",
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                return GestureDetector(
+                                   onTap: () {
+                                            // print(joingetchallenge[index]);
+                                            // getwinnerChallenges(
+                                            //     joingetchallenge[index].id);
+                                            // challangedetails(context,3
+                                            //     joingetchallenge[index]);
+                                            Navigator.push(
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        Challengesdetail(
+                                                            challange:
+                                                                joingetchallenge[
+                                                                    index])));
+                                          },
+                                  child: Stack(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              SizedBox(
+                                                width: 15,
+                                              ),
+                                              Container(
+                                                height: 59,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.85,
+                                                decoration: BoxDecoration(
+                                                    color: myActivityColorList[
+                                                        index %
+                                                            myActivityColorList
+                                                                .length],
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            20)),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      height: 59,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.52,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white
+                                                            .withOpacity(0.2),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(18),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            25),
+                                                                topLeft: Radius
+                                                                    .circular(18),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        25)),
+                                                      ),
+                                                      child: Center(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              joingetchallenge[
+                                                                          index]
+                                                                      .challenge
+                                                                      .totalKm +
+                                                                  "KM ",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color:
+                                                                    Colors.black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            joingetchallenge[
-                                                                            index]
-                                                                        .mode ==
-                                                                    "Walking"
-                                                                ? "WALK "
-                                                                : "RUN ",
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                            Text(
+                                                              joingetchallenge[
+                                                                              index]
+                                                                          .challenge
+                                                                          .totalKm ==
+                                                                      "Walking"
+                                                                  ? "WALK "
+                                                                  : "RUN ",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color:
+                                                                    Colors.black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Text(
-                                                            joingetchallenge[
-                                                                    index]
-                                                                .type
-                                                                .toUpperCase(),
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                            Text(
+                                                              joingetchallenge[
+                                                                      index]
+                                                                  .challenge
+                                                                  .type
+                                                                  .toUpperCase(),
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color:
+                                                                    Colors.black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                            Container(
+                                                              child: FittedBox(
+                                                                fit: BoxFit
+                                                                    .scaleDown,
+                                                                child: Text(
+                                                                  " (" +
+                                                                      double.parse(joingetchallenge[index]
+                                                                              .totalkm)
+                                                                          .toStringAsFixed(
+                                                                              2) +
+                                                                      "KM)",
+                                                                  style:
+                                                                      GoogleFonts
+                                                                          .poppins(
+                                                                    color: Colors
+                                                                        .black,
+                                                                    fontSize: 14,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w600,
+                                                                  ),
+                                                                ),
+                                                              ),
+                                                            ),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 20),
-                                                    child: Container(
-                                                      height: 33,
-                                                      width: 85,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white
-                                                              .withOpacity(
-                                                                  0.25),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      16)),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text("DAY",
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600)),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 5),
-                                                            child: Text(
-                                                                day[index %
-                                                                    day.length],
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20),
+                                                      child: Container(
+                                                        height: 33,
+                                                        width: 85,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                    0.25),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        16)),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text("DAY",
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,
-                                                                    fontSize:
-                                                                        12,
+                                                                    fontSize: 12,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600)),
-                                                          ),
-                                                          Text(
-                                                              " / " +
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 5),
+                                                              child: Text(
                                                                   joingetchallenge[
                                                                           index]
-                                                                      .streakDays,
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                        ],
+                                                                      .streakNo
+                                                                      .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600)),
+                                                            ),
+                                                            Text(
+                                                                " / " +
+                                                                    joingetchallenge[
+                                                                            index]
+                                                                        .challenge
+                                                                        .streakDays
+                                                                        .toString(),
+                                                                style: GoogleFonts.poppins(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize: 12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400)),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
+                                                // child: ListTile(
+                                                //   title: Text(
+                                                //     elementsOne[index]['name'],
+                                                //     style: GoogleFonts.poppins(
+                                                //       color: Colors.white,
+                                                //       fontSize: 14,
+                                                //       fontWeight: FontWeight.w600,
+                                                //     ),
+                                                //   ),
+                                                //   trailing: Container(
+                                                //     height: 33,
+                                                //     width: 85,
+                                                //     decoration: BoxDecoration(
+                                                //         color:
+                                                //             Colors.white.withOpacity(0.25),
+                                                //         borderRadius:
+                                                //             BorderRadius.circular(16)),
+                                                //     child: Row(
+                                                //       mainAxisAlignment:
+                                                //           MainAxisAlignment.center,
+                                                //       children: [
+                                                //         Text(elementsOne[index]['amt'],
+                                                //             style: GoogleFonts.poppins(
+                                                //                 color: Colors.white,
+                                                //                 fontSize: 12,
+                                                //                 fontWeight:
+                                                //                     FontWeight.w600)),
+                                                //         Padding(
+                                                //           padding: const EdgeInsets.only(
+                                                //               left: 5),
+                                                //           child: Text(
+                                                //               elementsOne[index]['type'],
+                                                //               style: GoogleFonts.poppins(
+                                                //                   color: Colors.white,
+                                                //                   fontSize: 12,
+                                                //                   fontWeight:
+                                                //                       FontWeight.w400)),
+                                                //         ),
+                                                //       ],
+                                                //     ),
+                                                //   ),
+                                                // ),
                                               ),
-                                              // child: ListTile(
-                                              //   title: Text(
-                                              //     elementsOne[index]['name'],
-                                              //     style: GoogleFonts.poppins(
-                                              //       color: Colors.white,
-                                              //       fontSize: 14,
-                                              //       fontWeight: FontWeight.w600,
-                                              //     ),
-                                              //   ),
-                                              //   trailing: Container(
-                                              //     height: 33,
-                                              //     width: 85,
-                                              //     decoration: BoxDecoration(
-                                              //         color:
-                                              //             Colors.white.withOpacity(0.25),
-                                              //         borderRadius:
-                                              //             BorderRadius.circular(16)),
-                                              //     child: Row(
-                                              //       mainAxisAlignment:
-                                              //           MainAxisAlignment.center,
-                                              //       children: [
-                                              //         Text(elementsOne[index]['amt'],
-                                              //             style: GoogleFonts.poppins(
-                                              //                 color: Colors.white,
-                                              //                 fontSize: 12,
-                                              //                 fontWeight:
-                                              //                     FontWeight.w600)),
-                                              //         Padding(
-                                              //           padding: const EdgeInsets.only(
-                                              //               left: 5),
-                                              //           child: Text(
-                                              //               elementsOne[index]['type'],
-                                              //               style: GoogleFonts.poppins(
-                                              //                   color: Colors.white,
-                                              //                   fontSize: 12,
-                                              //                   fontWeight:
-                                              //                       FontWeight.w400)),
-                                              //         ),
-                                              //       ],
-                                              //     ),
-                                              //   ),
-                                              // ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 15)
-                                      ],
-                                    ),
-                                    Positioned(
-                                      right: MediaQuery.of(context).size.width *
-                                          0.03,
-                                      top: 10,
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        child: trophy[index % trophy.length],
+                                            ],
+                                          ),
+                                          SizedBox(height: 15)
+                                        ],
                                       ),
-                                    ),
-                                  ],
+                                      Positioned(
+                                        right: MediaQuery.of(context).size.width *
+                                            0.03,
+                                        top: 10,
+                                        child: Container(
+                                          height: 40,
+                                          width: 40,
+                                          child: trophy[index % trophy.length],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 );
                               },
                             ),

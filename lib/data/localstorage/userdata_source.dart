@@ -24,6 +24,7 @@ class UserDataSource extends DataSource {
         seed: maps[i]['seed'],
         uid: maps[i]["uid"],
         language: maps[i]['language'],
+        googlefitenable:  maps[i]['googlefitenable']
       );
     });
   }
@@ -103,17 +104,17 @@ class UserDataSource extends DataSource {
     return maps;
   }
 
-  Future<bool> save(
+  Future<dynamic> save(
     dynamic udata,
   ) async {
     await insert(UserEntity(
-      walletaddress: udata['address'],
-      btctestaddress: udata['btcTestnetAddress'],
-      btcmainaddress: udata['btcMainnetAddress'],
-      seed: udata['seed'],
-      uid: udata["uid"],
-      language: udata['language'],
-    ));
+        walletaddress: udata['address'],
+        btctestaddress: udata['btcTestnetAddress'],
+        btcmainaddress: udata['btcMainnetAddress'],
+        seed: udata['seed'],
+        uid: udata["uid"],
+        language: udata['language'],
+        googlefitenable: udata['googlefitenable']));
     final List<Map<String, dynamic>> maps = await db.query(tableName);
     return maps != null;
   }
@@ -137,7 +138,16 @@ class UserDataSource extends DataSource {
     // return await UserRepository().updateLanguage(maps[0]['language']);
   }
 
-  
+  Future<dynamic> updatefit(googlefitenable) async {
+    var row = {'googlefitenable': googlefitenable};
+    await checkDatabaseConnection();
+    await db.update(
+      tableName,
+      row,
+      where: 'id = 1',
+    );
+  }
+
   Future<bool> logout() async {
     await deleteAll();
     final maps = await db.query(tableName);
