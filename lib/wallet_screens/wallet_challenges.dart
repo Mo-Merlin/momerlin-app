@@ -546,6 +546,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 
 class _WalletChallengesState extends State<WalletChallenges> {
   List<HealthDataPoint> _healthDataList = [];
+  // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
   DateTime now = DateTime.now();
 
