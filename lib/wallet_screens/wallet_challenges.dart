@@ -2872,13 +2872,18 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         //**** leaderboard view less container *****/
                         leaderboardAll.length == 0
                             ? Container(
-                                child: Text(
-                                  "No Available Data",
-                                  style: GoogleFonts.montserrat(
-                                      decoration: TextDecoration.none,
-                                      color: white,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.w600),
+                                height:
+                                    MediaQuery.of(context).size.height * 0.2,
+                                width: MediaQuery.of(context).size.width,
+                                child: Center(
+                                  child: Text(
+                                    "NO AVAILABLE DATA",
+                                    style: GoogleFonts.montserrat(
+                                        decoration: TextDecoration.none,
+                                        color: white,
+                                        fontSize: 14,
+                                        fontWeight: FontWeight.w600),
+                                  ),
                                 ),
                               )
                             : Container(
