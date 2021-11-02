@@ -535,13 +535,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                             ),
                                             child: Center(
                                               child: Text(
-                                                (lang.length != null &&
-                                                        lang.length != 0 &&
-                                                        userLanguage[
-                                                                '0.64USD'] !=
-                                                            null)
-                                                    ? "${userLanguage['0.64USD']}"
-                                                    : "0.64 USD",
+                                                "0.00 USD",
                                                 style: GoogleFonts.montserrat(
                                                   fontSize: 10,
                                                   color: Colors.white,
