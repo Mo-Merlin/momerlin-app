@@ -19,29 +19,9 @@ class WalletSeedCheckPage extends StatefulWidget {
   _WalletSeedCheckPage createState() => _WalletSeedCheckPage();
 }
 
-class CheckNickname {
-  CheckNickname({
-    this.message,
-    this.available,
-    this.success,
-  });
-
-  var message;
-  bool available;
-  bool success;
-
-  factory CheckNickname.fromJson(Map<String, dynamic> json) => CheckNickname(
-        message: json["message"],
-        available: json["available"],
-        success: json["success"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "message": message,
-        "available": available,
-        "success": success,
-      };
-}
+// To parse this JSON data, do
+//
+//     final getAllUsers = getAllUsersFromJson(jsonString);
 
 class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   var userLanguage, lang = [];
@@ -60,6 +40,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     "",
     "",
   ];
+
   bool loading = false;
   var selectedseed;
   var seedcheck;
@@ -77,6 +58,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     super.initState();
     loading = false;
     getUserLanguage();
+    //getAllUSERS();
   }
 
   int seedlength = 0;
@@ -86,6 +68,24 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     lang = await UserDataSource().getLanguage();
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
+    }
+  }
+
+  Future<void> checkUserNickname() async {
+    var res = await UserRepository().checkNickname(_nicknameController.text);
+    if (res == false) {
+      setState(() {
+        storeUser();
+        nickNameChecking = false;
+        nickNameErrorMessage = "Nickname available";
+        print(nickNameErrorMessage);
+      });
+    } else {
+      setState(() {
+        nickNameChecking = true;
+        nickNameErrorMessage = "Nickname not available";
+        print(nickNameErrorMessage);
+      });
     }
   }
 
@@ -133,7 +133,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
     var user = await UserRepository().adduser({
       "ethAddress": _address,
       "btcAddress": walletMain.getAddress(0),
-      "fullName": "",
+      "fullName": _nicknameController.text.toUpperCase(),
     });
     if (user == false) {
       _showScaffold('No Internet Connection');
@@ -495,7 +495,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   }
 
   //** NICKNAME BOTTOM SHEET */
-
+  bool nickNameChecking = false;
+  String nickNameErrorMessage = "";
   final formKey = GlobalKey<FormState>();
   final TextEditingController _nicknameController = TextEditingController();
   void _enterNickname(BuildContext context) async {
@@ -542,11 +543,23 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                 Form(
                   key: formKey,
                   child: TextFormField(
+                    onChanged: (value) {
+                      // setState(() {
+                      //   nickNameChecking = false;
+                      //   nickNameErrorMessage = "12345";
+                      // });
+                    },
                     style: TextStyle(color: Colors.white),
-                    validator: (value) {
-                      if (value.isEmpty) {
+                    validator: (_nicknameController) {
+                      if (_nicknameController.isEmpty)
                         return 'Please enter nickname';
+
+                      if (nickNameChecking == false) {
+                        return "Nickname available";
+                      } else if (nickNameChecking == true) {
+                        return "Nickname not available";
                       }
+
                       return null;
                     },
                     autofocus: true,
@@ -587,6 +600,17 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                     autocorrect: false,
                   ),
                 ),
+                // nickNameChecking == true
+                //     ? Container(
+                //         child: Text(
+                //         nickNameErrorMessage,
+                //         style: GoogleFonts.poppins(
+                //           //color: blue1,
+                //           color: Colors.red,
+                //           fontSize: 12,
+                //         ),
+                //       ))
+                //     : SizedBox(),
                 SizedBox(
                   height: MediaQuery.of(context).size.height * 0.04,
                 ),
@@ -605,16 +629,10 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           onPressed: () {
+                            checkUserNickname();
                             if (formKey.currentState.validate()) {
                               formKey.currentState.save();
-
-                              // if (_nicknameController.text ==  ) {
-
-                              // } else {
-                              // //storeUser();
-                              // }
                             }
-                            //Navigator.of(context).pop();
                           },
                           color: blue1.withOpacity(0.2),
                           child: Text(

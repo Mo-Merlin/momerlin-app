@@ -1436,7 +1436,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 left: 4, top: 10, bottom: 0, right: 0),
                             child: ListView.builder(
                               scrollDirection: Axis.horizontal,
-                              itemCount: elements.length,
+                              itemCount: leaderboardAll.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
                                   // onTap: () {
@@ -1501,13 +1501,17 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                       //color: Colors.red,
                                                       child: Center(
                                                         child: Text(
-                                                            elements[index]
-                                                                ['name'],
+                                                            leaderboardAll[
+                                                                    index]
+                                                                .competitor
+                                                                .fullName
+                                                                .toString()
+                                                                .toUpperCase(),
                                                             style: GoogleFonts
                                                                 .poppins(
                                                               color:
                                                                   Colors.grey,
-                                                              fontSize: 11,
+                                                              fontSize: 12,
                                                             )),
                                                       ),
                                                     ),
@@ -1535,16 +1539,22 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        Text(
-                                                            elements[index][
-                                                                'amt'],
-                                                            style: GoogleFonts.poppins(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 20,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .bold)),
+                                                        FittedBox(
+                                                          fit: BoxFit.scaleDown,
+                                                          child: Text(
+                                                              leaderboardAll[
+                                                                      index]
+                                                                  .challenge
+                                                                  .prize
+                                                                  .toString(),
+                                                              style: GoogleFonts.poppins(
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontSize: 20,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold)),
+                                                        ),
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
@@ -1556,7 +1566,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .orangeAccent,
-                                                                  fontSize: 12,
+                                                                  fontSize: 14,
                                                                   fontWeight:
                                                                       FontWeight
                                                                           .w500)),
@@ -2987,18 +2997,21 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                             fit: BoxFit.cover,
                                                           )),
                                                     ),
-                                                    title: Text(
-                                                      leaderboardAll[index]
-                                                          .competitor
-                                                          .fullName
-                                                          .toString()
-                                                          .toUpperCase(),
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                        color: Colors.white,
-                                                        fontSize: 16,
-                                                        fontWeight:
-                                                            FontWeight.w600,
+                                                    title: FittedBox(
+                                                      fit: BoxFit.scaleDown,
+                                                      child: Text(
+                                                        leaderboardAll[index]
+                                                            .competitor
+                                                            .fullName
+                                                            .toString()
+                                                            .toUpperCase(),
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          color: Colors.white,
+                                                          fontSize: 16,
+                                                          fontWeight:
+                                                              FontWeight.w600,
+                                                        ),
                                                       ),
                                                     ),
 
