@@ -19,6 +19,30 @@ class WalletSeedCheckPage extends StatefulWidget {
   _WalletSeedCheckPage createState() => _WalletSeedCheckPage();
 }
 
+class CheckNickname {
+  CheckNickname({
+    this.message,
+    this.available,
+    this.success,
+  });
+
+  var message;
+  bool available;
+  bool success;
+
+  factory CheckNickname.fromJson(Map<String, dynamic> json) => CheckNickname(
+        message: json["message"],
+        available: json["available"],
+        success: json["success"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "message": message,
+        "available": available,
+        "success": success,
+      };
+}
+
 class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   var userLanguage, lang = [];
 
@@ -126,7 +150,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
           "btcMainnetAddress": walletMain.getAddress(0),
           "seed": widget.seed1,
           "language": "English",
-          "googlefitenable":0,
+          "googlefitenable": 0,
         });
         if (usersave == true) {
           Navigator.push(
@@ -328,7 +352,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                   });
                   // if (seedlength == 12) {
                   if (seed1.toString() == seedcheck.toString()) {
-                    storeUser();
+                    //storeUser();
+                    _enterNickname(context);
                   } else {
                     _modalBottomSheetMenu3();
                   }
@@ -465,6 +490,155 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
             ),
           ),
         );
+      },
+    );
+  }
+
+  //** NICKNAME BOTTOM SHEET */
+
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController _nicknameController = TextEditingController();
+  void _enterNickname(BuildContext context) async {
+    showModalBottomSheet(
+      backgroundColor: backgroundcolor,
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return Container(
+            decoration: BoxDecoration(
+                color: button.withOpacity(0.5),
+                borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(25),
+                  topRight: Radius.circular(25),
+                )),
+            padding: EdgeInsets.only(
+              bottom: MediaQuery.of(context).viewInsets.bottom,
+            ),
+            // You can wrap this Column with Padding of 8.0 for better design
+            child: Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                Text(
+                  (lang.length != null &&
+                          lang.length != 0 &&
+                          userLanguage['createyournicknamehere'] != null)
+                      ? "${userLanguage['createyournicknamehere']}"
+                      : "CREATE YOUR NICKNAME HERE",
+                  textAlign: TextAlign.center,
+                  style: GoogleFonts.poppins(
+                    color: white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.03,
+                ),
+                Form(
+                  key: formKey,
+                  child: TextFormField(
+                    style: TextStyle(color: Colors.white),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'Please enter nickname';
+                      }
+                      return null;
+                    },
+                    autofocus: true,
+                    controller: _nicknameController,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderSide: BorderSide(
+                          color: Color(0xffedeff5),
+                        ),
+                      ),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderSide: BorderSide(
+                          color: Color(0xffedeff5),
+                        ),
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.all(Radius.circular(15)),
+                        borderSide: BorderSide(color: white),
+                      ),
+                      isDense: true,
+                      labelText: 'Nickname',
+                      labelStyle: TextStyle(
+                        fontFamily: 'Dosis-Book',
+                        color: white,
+                        fontSize: 18,
+                      ),
+                      prefixIcon: Icon(
+                        Icons.star,
+                        color: Colors.red,
+                        size: 10,
+                      ),
+                    ),
+                    minLines: 1,
+                    maxLines: 1,
+                    //autovalidate: true,
+                    autocorrect: false,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                Center(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      Container(
+                        height: MediaQuery.of(context).size.height * 0.06,
+                        width: MediaQuery.of(context).size.width * 0.9,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15)),
+                        // ignore: deprecated_member_use
+                        child: RaisedButton(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          onPressed: () {
+                            if (formKey.currentState.validate()) {
+                              formKey.currentState.save();
+
+                              // if (_nicknameController.text ==  ) {
+
+                              // } else {
+                              // //storeUser();
+                              // }
+                            }
+                            //Navigator.of(context).pop();
+                          },
+                          color: blue1.withOpacity(0.2),
+                          child: Text(
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['proceed'] != null)
+                                ? "${userLanguage['proceed']}"
+                                : "PROCEED",
+                            style: GoogleFonts.poppins(
+                              //color: blue1,
+                              color: blue2,
+                              fontSize: 15,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                )
+              ]),
+            ),
+          );
+        });
       },
     );
   }

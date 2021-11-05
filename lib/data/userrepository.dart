@@ -87,6 +87,7 @@ class UserRepository {
       checkres["status"] = true;
       return checkres;
     } catch (e) {
+      print(e);
       return false;
     }
   }
@@ -113,8 +114,9 @@ class UserRepository {
       return false;
     }
   }
+
 //getuser
-Future<dynamic> getUser(id) async {
+  Future<dynamic> getUser(id) async {
     try {
       // var url = "http://192.168.43.124:8000/api/leaderboard";
 
@@ -132,6 +134,7 @@ Future<dynamic> getUser(id) async {
       return false;
     }
   }
+
   Future<dynamic> getTransaction(walletaddress) async {
     try {
       var res = await http.get(
@@ -277,6 +280,7 @@ Future<dynamic> getUser(id) async {
         body: body,
       );
       var checkres = jsonDecode(res.body);
+      // ignore: unnecessary_brace_in_string_interps
       print("checkres ${checkres}");
 
       return checkres;
@@ -297,6 +301,26 @@ Future<dynamic> getUser(id) async {
       var checkres = jsonDecode(res.body);
       print("ALL LEADERBOARD COUNT :  ${checkres.length}");
       print("ALL LEADERBOARD :  $checkres");
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
+      return false;
+    }
+  }
+
+
+Future<dynamic> getNickname() async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/user/checkName/:name";
+
+      var res = await http.get(
+        '${url + "user/checkName/:name"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      print("Name count :  ${checkres.length}");
+      print("Nick Names :  $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
