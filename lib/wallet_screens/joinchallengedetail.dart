@@ -1399,7 +1399,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                     FittedBox(
                                       fit: BoxFit.scaleDown,
                                       child: Text(
-                                        "${chall.wage} Gwei",
+                                        "${chall.prize} Gwei",
                                         style: GoogleFonts.montserrat(
                                           decoration: TextDecoration.none,
                                           color: Colors.orange,
