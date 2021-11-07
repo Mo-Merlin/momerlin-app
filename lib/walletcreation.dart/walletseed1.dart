@@ -558,9 +558,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       if (_nicknameController.isEmpty)
                         return 'Please enter nickname';
 
-                      if ( nicknameAvailable=="default") {
-                        return "";
-                      } else if ( nicknameAvailable=="available") {
+                      if ( nicknameAvailable=="available") {
                         return "Nickname not available";
                       }
 
