@@ -2,9 +2,201 @@ import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/data/userrepository.dart';
 
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+
+class LeaderboardAll {
+  LeaderboardAll({
+    this.id,
+    this.competitor,
+    this.challenge,
+    this.startAt,
+    this.endAt,
+    this.totalkm,
+    this.streakNo,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  String id;
+  LeaderboardAllCompetitor competitor;
+  Challenge challenge;
+  String startAt;
+  String endAt;
+  String totalkm;
+  int streakNo;
+  String status;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  factory LeaderboardAll.fromJson(Map<String, dynamic> json) => LeaderboardAll(
+        id: json["_id"],
+        competitor: LeaderboardAllCompetitor.fromJson(json["competitor"]),
+        challenge: Challenge.fromJson(json["challenge"]),
+        startAt: json["startAt"],
+        endAt: json["endAt"],
+        totalkm: json["totalkm"],
+        streakNo: json["streakNo"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "competitor": competitor.toJson(),
+        "challenge": challenge.toJson(),
+        "startAt": startAt,
+        "endAt": endAt,
+        "totalkm": totalkm,
+        "streakNo": streakNo,
+        "status": status,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class Challenge {
+  Challenge({
+    this.id,
+    this.mode,
+    this.type,
+    this.totalCompetitors,
+    this.streakDays,
+    this.totalKm,
+    this.createdBy,
+    this.competitors,
+    this.startAt,
+    this.endAt,
+    this.wage,
+    this.prize,
+    this.commissionEnabled,
+    this.percentage,
+    this.winners,
+    this.active,
+    this.createdAt,
+    this.updatedAt,
+    this.v,
+  });
+
+  String id;
+  String mode;
+  String type;
+  String totalCompetitors;
+  String streakDays;
+  String totalKm;
+  String createdBy;
+  List<CompetitorElement> competitors;
+  var startAt;
+  var endAt;
+  String wage;
+  int prize;
+  bool commissionEnabled;
+  String percentage;
+  List<dynamic> winners;
+  bool active;
+  DateTime createdAt;
+  DateTime updatedAt;
+  int v;
+
+  factory Challenge.fromJson(Map<String, dynamic> json) => Challenge(
+        id: json["_id"],
+        mode: json["mode"],
+        type: json["type"],
+        totalCompetitors: json["totalCompetitors"],
+        streakDays: json["streakDays"],
+        totalKm: json["totalKm"],
+        createdBy: json["createdBy"],
+        competitors: List<CompetitorElement>.from(
+            json["competitors"].map((x) => CompetitorElement.fromJson(x))),
+        startAt: DateTime.parse(json["startAt"]),
+        endAt: DateTime.parse(json["endAt"]),
+        wage: json["wage"],
+        prize: json["prize"],
+        commissionEnabled: json["commissionEnabled"],
+        percentage: json["percentage"],
+        winners: List<dynamic>.from(json["winners"].map((x) => x)),
+        active: json["active"],
+        createdAt: DateTime.parse(json["createdAt"]),
+        updatedAt: DateTime.parse(json["updatedAt"]),
+        v: json["__v"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "mode": mode,
+        "type": type,
+        "totalCompetitors": totalCompetitors,
+        "streakDays": streakDays,
+        "totalKm": totalKm,
+        "createdBy": createdBy,
+        "competitors": List<dynamic>.from(competitors.map((x) => x.toJson())),
+        "startAt": startAt.toIso8601String(),
+        "endAt": endAt.toIso8601String(),
+        "wage": wage,
+        "prize": prize,
+        "commissionEnabled": commissionEnabled,
+        "percentage": percentage,
+        "winners": List<dynamic>.from(winners.map((x) => x)),
+        "active": active,
+        "createdAt": createdAt.toIso8601String(),
+        "updatedAt": updatedAt.toIso8601String(),
+        "__v": v,
+      };
+}
+
+class CompetitorElement {
+  CompetitorElement({
+    this.userId,
+    this.joinedAt,
+    this.id,
+  });
+
+  String userId;
+  DateTime joinedAt;
+  String id;
+
+  factory CompetitorElement.fromJson(Map<String, dynamic> json) =>
+      CompetitorElement(
+        userId: json["userId"],
+        joinedAt: DateTime.parse(json["joinedAt"]),
+        id: json["_id"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "userId": userId,
+        "joinedAt": joinedAt.toIso8601String(),
+        "_id": id,
+      };
+}
+
+class LeaderboardAllCompetitor {
+  LeaderboardAllCompetitor({
+    this.id,
+    this.fullName,
+  });
+
+  String id;
+  String fullName;
+
+  factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
+      LeaderboardAllCompetitor(
+        id: json["_id"],
+        fullName: json["fullName"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "_id": id,
+        "fullName": fullName,
+      };
+}
 
 class ViewmoreRecentWinners extends StatefulWidget {
   const ViewmoreRecentWinners({Key key}) : super(key: key);
@@ -15,13 +207,14 @@ class ViewmoreRecentWinners extends StatefulWidget {
 
 class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
   bool loading = true;
+  List<LeaderboardAll> leaderboardAll = [];
   var userLanguage, user, lang = [];
 
   @override
   void initState() {
     super.initState();
-
     getUserLanguage();
+    getAllLeaderboard();
   }
 
   // ignore: todo
@@ -32,6 +225,36 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
     user = await UserDataSource().getUser();
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
+    }
+  }
+
+  Future<void> getAllLeaderboard() async {
+    setState(() {
+      loading = false;
+    });
+    var res = await UserRepository().getAllLeaderboard();
+    print("PAVIANI $res");
+    if (res == false) {
+      // Scaffold
+      //   .of(context)
+      //   .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
+    } else {
+      if (res["success"] == true) {
+        setState(() {
+          loading = false;
+        });
+        leaderboardAll = [];
+        for (var i = 0; i < res["leaders"].length; i++) {
+          leaderboardAll.add(LeaderboardAll.fromJson(res["leaders"][i]));
+        }
+      } else {
+        Scaffold.of(context)
+            // ignore: deprecated_member_use
+            .showSnackBar(SnackBar(
+          content: Text('Please Try Again!'),
+          backgroundColor: Colors.red,
+        ));
+      }
     }
   }
 
@@ -224,7 +447,7 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
-              itemCount: elements.length,
+              itemCount: leaderboardAll.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {},
@@ -275,12 +498,14 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                         fit: BoxFit.cover,
                                       )),
                                 ),
-                                title: Row(
-                                  children: [
-                                    FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Text(
-                                        elements[index]["leadername"]
+                                title: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        leaderboardAll[index]
+                                            .competitor
+                                            .fullName
                                             .toString()
                                             .toUpperCase(),
                                         style: GoogleFonts.poppins(
@@ -289,16 +514,16 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       ),
-                                    ),
-                                    Text(
-                                      " has earned",
-                                      style: GoogleFonts.poppins(
-                                        color: Colors.white60,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600,
+                                      Text(
+                                        " has earned",
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white60,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
                                       ),
-                                    ),
-                                  ],
+                                    ],
+                                  ),
                                 ),
 
                                 //subtitle: Text("rating"),
@@ -319,7 +544,11 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(elements[index]['amt'],
+                                      Text(
+                                          leaderboardAll[index]
+                                              .challenge
+                                              .prize
+                                              .toString(),
                                           style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontSize: 16,

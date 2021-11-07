@@ -6,7 +6,7 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class UserRepository {
-  var url = "http://api.momerlin.com/api/";
+  var url = "https://api.momerlin.com/api/";
   Future<bool> isSignedIn() async {
     // Read the keystore
     // signOut();
@@ -84,6 +84,7 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
+      print(checkres);
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -309,13 +310,30 @@ class UserRepository {
     }
   }
 
+  Future<dynamic> getAllUsers() async {
+    try {
+      // var url = "http://192.168.43.124:8000/users";
 
-Future<dynamic> getNickname() async {
+      var res = await http.get(
+        '${url + "users"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      print("USERS : ${checkres.length}");
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
+      return false;
+    }
+  }
+
+  Future<dynamic> checkNickname(String nickName) async {
     try {
       // var url = "http://192.168.43.124:8000/api/user/checkName/:name";
 
       var res = await http.get(
-        '${url + "user/checkName/:name"}',
+        '${url + "user/checkName/$nickName"}',
       );
 
       var checkres = jsonDecode(res.body);
@@ -328,5 +346,4 @@ Future<dynamic> getNickname() async {
       return false;
     }
   }
-
 }

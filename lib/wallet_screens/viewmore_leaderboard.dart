@@ -578,16 +578,19 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
                                         fit: BoxFit.cover,
                                       )),
                                 ),
-                                title: Text(
-                                  leaderboardAll[index]
-                                      .competitor
-                                      .fullName
-                                      .toString()
-                                      .toUpperCase(),
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w600,
+                                title: FittedBox(
+                                  fit: BoxFit.scaleDown,
+                                  child: Text(
+                                    leaderboardAll[index]
+                                        .competitor
+                                        .fullName
+                                        .toString()
+                                        .toUpperCase(),
+                                    style: GoogleFonts.poppins(
+                                      color: Colors.white,
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w600,
+                                    ),
                                   ),
                                 ),
                                 subtitle: RatingBar.builder(
