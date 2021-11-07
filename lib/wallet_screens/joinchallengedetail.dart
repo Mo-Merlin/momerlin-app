@@ -151,6 +151,8 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   Map<String, dynamic> challangedetail;
   var startDate;
   var endDate;
+
+  var difference;
   Future<void> getwinnerChallenges(challangeid) async {
     var res = await UserRepository().getwinnerChallenges(challangeid);
     // print("USER ID :" + user[0]["uid"]);
@@ -169,8 +171,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           .parse(challangedetail['endAt']);
       var endinputDate = DateTime.parse(parseendDate.toString());
       endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
-      print("PAVITHRAMANOHARAN");
-      print(res["challenge"]["competitors"]);
+      final endat = DateTime.parse(challangedetail['endAt']);
+      final date2 = DateTime.now();
+      difference = date2.difference(endat).inDays;
       for (var i = 0; i < res["challenge"]["competitors"].length; i++) {
         if (user[0]["uid"] == res["challenge"]["competitors"][i]["userId"]) {
           joinchallenge = true;
@@ -638,6 +641,78 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                           Icons.note_add_outlined,
                                           color: Colors.white,
                                           size: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          child: Text(
+                            "Status",
+                            style: GoogleFonts.poppins(
+                                decoration: TextDecoration.none,
+                                color: Colors.grey,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          child: Container(
+                            height: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                                color: button,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    difference == 0
+                                        ? "Challenge ended yesterday"
+                                        : difference >= 0
+                                            ? "Challenge ended on ${endDate.toString()}"
+                                            : "Challenge ongoing now",
+                                    style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 25),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 25,
+                                      width: 25,
+                                      color: difference >= 0
+                                          ? Colors.redAccent
+                                          : Colors.green,
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          difference >= 0
+                                              ? Icons.check
+                                              : Icons.add_task_outlined,
+                                          color: Colors.white,
+                                          size: 10,
                                         ),
                                       ),
                                     ),
@@ -1153,7 +1228,8 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                       joinChallenge(context, widget.challange);
                     },
                     child: Container(
-                      margin: EdgeInsets.only(bottom: 15, right: 25, left: 25, top: 25),
+                      margin: EdgeInsets.only(
+                          bottom: 15, right: 25, left: 25, top: 25),
                       width: MediaQuery.of(context).size.width * 0.2,
                       height: MediaQuery.of(context).size.height * 0.07,
                       decoration: BoxDecoration(

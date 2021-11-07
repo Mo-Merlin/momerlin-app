@@ -30,8 +30,6 @@ class MyChallengesDetail {
         totalkm: json["totalkm"] == null ? null : json["totalkm"],
         streakNo: json["streakNo"],
         challenge: GetChallenge.fromJson(json["competitor"]),
-        
-        
       );
 }
 
@@ -117,6 +115,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
     getUserLanguage();
   }
 
+  var difference;
   Map<String, dynamic> challangedetail;
   var startDate;
   var endDate;
@@ -138,14 +137,14 @@ class _ChallengesdetailState extends State<Challengesdetail> {
           .parse(challangedetail['endAt']);
       var endinputDate = DateTime.parse(parseendDate.toString());
       endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
+      final endat = DateTime.parse(challangedetail['endAt']);
+      final date2 = DateTime.now();
+      difference = date2.difference(endat).inDays;
+
       for (var i = 0; i < res["leaders"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
       }
       for (var i = 0; i < res["winners"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         winnerdetail.add(WinnerDetails.fromJson(res["winners"][i]));
       }
     } else {
@@ -505,7 +504,10 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                           padding:
                                               const EdgeInsets.only(left: 10),
                                           child: Text(
-                                            challangedetail["type"]+"  " +challangedetail["totalKm"]+"KM",
+                                            challangedetail["type"] +
+                                                "  " +
+                                                challangedetail["totalKm"] +
+                                                "KM",
                                             style: GoogleFonts.poppins(
                                                 decoration: TextDecoration.none,
                                                 color: Colors.white,
@@ -595,6 +597,78 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                           Icons.note_add_outlined,
                                           color: Colors.white,
                                           size: 12,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          child: Text(
+                            "Status",
+                            style: GoogleFonts.poppins(
+                                decoration: TextDecoration.none,
+                                color: Colors.grey,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Row(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 10, left: 25),
+                          child: Container(
+                            height: MediaQuery.of(context).size.width * 0.15,
+                            width: MediaQuery.of(context).size.width * 0.9,
+                            decoration: BoxDecoration(
+                                color: button,
+                                borderRadius: BorderRadius.circular(15)),
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Padding(
+                                  padding: const EdgeInsets.only(left: 15),
+                                  child: Text(
+                                    difference == 0
+                                        ? "Challenge ended yesterday"
+                                        : difference >= 0
+                                            ? "Challenge ended on ${endDate.toString()}"
+                                            : "Challenge ongoing now",
+                                    style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                ),
+                                Padding(
+                                  padding: const EdgeInsets.only(right: 25),
+                                  child: ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                      height: 25,
+                                      width: 25,
+                                      color: difference >= 0
+                                          ? Colors.redAccent
+                                          : Colors.green,
+                                      child: IconButton(
+                                        onPressed: () {},
+                                        icon: Icon(
+                                          difference >= 0
+                                              ? Icons.check
+                                              : Icons.add_task_outlined,
+                                          color: Colors.white,
+                                          size: 10,
                                         ),
                                       ),
                                     ),
@@ -723,7 +797,8 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                         Radius.circular(25)),
                                               ),
                                               child: Padding(
-                                                padding: EdgeInsets.only(left: 10,right:10),
+                                                padding: EdgeInsets.only(
+                                                    left: 10, right: 10),
                                                 child: Row(
                                                   mainAxisAlignment:
                                                       MainAxisAlignment.center,
