@@ -55,16 +55,19 @@ class GetChallenge {
 class WinnerDetails {
   var totalkm;
   var streakNo;
+  var prize;
   Getwinnerchallenge winnerchallenge;
   WinnerDetails({
     this.totalkm,
     this.streakNo,
+    this.prize,
     this.winnerchallenge,
   });
 
   factory WinnerDetails.fromJson(Map<String, dynamic> json) => WinnerDetails(
         totalkm: json["totalkm"] == null ? null : json["totalkm"],
         streakNo: json["streakNo"],
+        prize: json["prize"],
         winnerchallenge: Getwinnerchallenge.fromJson(json["competitor"]),
       );
 }
@@ -835,7 +838,8 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                 child: Row(
                                                   children: [
                                                     Text(
-                                                      challangedetail["prize"]
+                                                   winnerdetail[index]
+                                                    .prize
                                                           .toString(),
                                                       style:
                                                           GoogleFonts.poppins(
