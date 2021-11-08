@@ -492,213 +492,245 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
           SizedBox(
             height: 20,
           ),
-          // loading == true
-          //     ? Container(
-          //         height: MediaQuery.of(context).size.height * 0.23,
-          //         width: MediaQuery.of(context).size.width,
-          //         color: backgroundcolor,
-          //         child: Center(
-          //           child: SpinKitSpinningLines(
-          //             color: white,
-          //             size: 60,
-          //           ),
-          //         ),
-          //       )
-          //     : mychallenge.length == 0
-          //         ? Container(
-          //             height: MediaQuery.of(context).size.height * 0.2,
-          //             width: MediaQuery.of(context).size.width,
-          //             child: Center(
-          //               child: Padding(
-          //                 padding: const EdgeInsets.all(8.0),
-          //                 child: Text("NO CHALLENGES",
-          //                     style: GoogleFonts.poppins(
-          //                       color: Colors.white,
-          //                       fontSize: 14,
-          //                       fontWeight: FontWeight.w600,
-          //                     )),
-          //               ),
-          //             ),
-          //           )
-          //         :
-          Container(
-            // height: MediaQuery.of(context).size.height * 0.28,
-            width: MediaQuery.of(context).size.width,
-            margin: EdgeInsets.only(left: 5, right: 0),
-            //color: Colors.indigo,
-            padding: EdgeInsets.only(left: 4, top: 10, bottom: 0, right: 0),
-            child: ListView.builder(
-              shrinkWrap: true,
-              physics: NeverScrollableScrollPhysics(),
-              scrollDirection: Axis.vertical,
-              itemCount: leaderboardAll.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Challengesdetail(
-                                challange:
-                                    leaderboardAll[index].challenge.id)));
-                    // leaderboardProfile(context);
-                  },
-                  child: Column(
-                    children: [
-                      Row(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Container(
-                              height:
-                                  MediaQuery.of(context).size.height * 0.075,
-                              width: MediaQuery.of(context).size.width * 0.1,
-                              //height: 63, width: 42,
-                              decoration: BoxDecoration(
-                                  color: leaderboardNumberColorList[index %
-                                      leaderboardNumberColorList.length],
-                                  borderRadius: BorderRadius.circular(16)),
-                              child: Center(
-                                child: Text(
-                                  elements[index]["count"],
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.only(left: 10),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
-                              width: MediaQuery.of(context).size.width * 0.8,
-                              //height: 63, width: 300,
-                              decoration: BoxDecoration(
-                                  color: white.withOpacity(0.1),
-                                  borderRadius: BorderRadius.circular(20)),
-                              child: Row(
-                                children: [
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      height: 35,
-                                      width: 35,
-                                      color: button,
-                                      child: Image.network(
-                                        url[index % url.length],
-                                        fit: BoxFit.cover,
-                                      ),
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
-                                  Column(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                        mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                        Container(
-                                            alignment: Alignment.centerLeft,
-                                            width: MediaQuery.of(context)
-                                                    .size
-                                                    .width *
-                                                0.4,
-                                            child:
-                                      FittedBox(
-                                        fit: BoxFit.scaleDown,
-                                        child: Text(
-                                          leaderboardAll[index]
-                                              .competitor
-                                              .fullName
-                                              .toString()
-                                              .toUpperCase(),
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w600,
-                                          ),
-                                        ),),
-                                      ),
-                                      RatingBar.builder(
-                                        initialRating: 3,
-                                        minRating: 1,
-                                        direction: Axis.horizontal,
-                                        allowHalfRating: true,
-                                        itemCount: 3,
-                                        itemSize: 10,
-                                        itemPadding: EdgeInsets.symmetric(
-                                            horizontal: 0.2),
-                                        itemBuilder: (context, _) => Icon(
-                                          Icons.star,
-                                          color: Colors.amber,
-                                        ),
-                                        onRatingUpdate: (rating) {
-                                          print(rating);
-                                        },
-                                      ),
-                                    ],
-                                  ),
-                                  Container(
-                                    height: MediaQuery.of(context).size.height *
-                                        0.05,
-                                    width: MediaQuery.of(context).size.width *
-                                        0.23,
-                                    //height: 38, width: 98,
-                                    decoration: BoxDecoration(
-                                        color: Colors.white.withOpacity(0.1),
-                                        borderRadius:
-                                            BorderRadius.circular(16)),
-                                    child: FittedBox(
-                                      fit: BoxFit.scaleDown,
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.center,
-                                        children: [
-                                          Text(
-                                              leaderboardAll[index]
-                                                  .challenge
-                                                  .prize
-                                                  .toString(),
-                                              style: GoogleFonts.poppins(
-                                                  color: Colors.white,
-                                                  fontSize: 16,
-                                                  fontWeight: FontWeight.w600)),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsets.only(left: 5),
-                                            child: Text("Gwei",
-                                                style: GoogleFonts.poppins(
-                                                    color: Colors.orangeAccent,
-                                                    fontSize: 12,
-                                                    fontWeight:
-                                                        FontWeight.w400)),
-                                          ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        height: 15,
-                      ),
-                    ],
+          loading == true
+              ? Container(
+                  height: MediaQuery.of(context).size.height * 0.23,
+                  width: MediaQuery.of(context).size.width,
+                  color: backgroundcolor,
+                  child: Center(
+                    child: SpinKitSpinningLines(
+                      color: white,
+                      size: 60,
+                    ),
                   ),
-                );
-              },
-            ),
-          )
+                )
+              : leaderboardAll.length == 0
+                  ? Container(
+                      height: MediaQuery.of(context).size.height * 0.2,
+                      width: MediaQuery.of(context).size.width,
+                      child: Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text("NO CHALLENGES",
+                              style: GoogleFonts.poppins(
+                                color: Colors.white,
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              )),
+                        ),
+                      ),
+                    )
+                  : Container(
+                      // height: MediaQuery.of(context).size.height * 0.28,
+                      width: MediaQuery.of(context).size.width,
+                      margin: EdgeInsets.only(left: 5, right: 0),
+                      //color: Colors.indigo,
+                      padding: EdgeInsets.only(
+                          left: 4, top: 10, bottom: 0, right: 0),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        scrollDirection: Axis.vertical,
+                        itemCount: leaderboardAll.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Challengesdetail(
+                                          challange: leaderboardAll[index]
+                                              .challenge
+                                              .id)));
+                              // leaderboardProfile(context);
+                            },
+                            child: Column(
+                              children: [
+                                Row(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.075,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.1,
+                                        //height: 63, width: 42,
+                                        decoration: BoxDecoration(
+                                            color: leaderboardNumberColorList[
+                                                index %
+                                                    leaderboardNumberColorList
+                                                        .length],
+                                            borderRadius:
+                                                BorderRadius.circular(16)),
+                                        child: Center(
+                                          child: Text(
+                                            elements[index]["count"],
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              fontSize: 20,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(left: 10),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.08,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.8,
+                                        //height: 63, width: 300,
+                                        decoration: BoxDecoration(
+                                            color: white.withOpacity(0.1),
+                                            borderRadius:
+                                                BorderRadius.circular(20)),
+                                        child: Row(
+                                          children: [
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(30),
+                                              child: Container(
+                                                height: 35,
+                                                width: 35,
+                                                color: button,
+                                                child: Image.network(
+                                                  url[index % url.length],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
+                                            ),
+                                            Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                Container(
+                                                  alignment:
+                                                      Alignment.centerLeft,
+                                                  width: MediaQuery.of(context)
+                                                          .size
+                                                          .width *
+                                                      0.4,
+                                                  child: FittedBox(
+                                                    fit: BoxFit.scaleDown,
+                                                    child: Text(
+                                                      leaderboardAll[index]
+                                                          .competitor
+                                                          .fullName
+                                                          .toString()
+                                                          .toUpperCase(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        color: Colors.white,
+                                                        fontSize: 15,
+                                                        fontWeight:
+                                                            FontWeight.w600,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
+                                                RatingBar.builder(
+                                                  initialRating: 3,
+                                                  minRating: 1,
+                                                  direction: Axis.horizontal,
+                                                  allowHalfRating: true,
+                                                  itemCount: 3,
+                                                  itemSize: 10,
+                                                  itemPadding:
+                                                      EdgeInsets.symmetric(
+                                                          horizontal: 0.2),
+                                                  itemBuilder: (context, _) =>
+                                                      Icon(
+                                                    Icons.star,
+                                                    color: Colors.amber,
+                                                  ),
+                                                  onRatingUpdate: (rating) {
+                                                    print(rating);
+                                                  },
+                                                ),
+                                              ],
+                                            ),
+                                            Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height *
+                                                  0.05,
+                                              width: MediaQuery.of(context)
+                                                      .size
+                                                      .width *
+                                                  0.23,
+                                              //height: 38, width: 98,
+                                              decoration: BoxDecoration(
+                                                  color: Colors.white
+                                                      .withOpacity(0.1),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          16)),
+                                              child: FittedBox(
+                                                fit: BoxFit.scaleDown,
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.center,
+                                                  children: [
+                                                    Text(
+                                                        leaderboardAll[index]
+                                                            .challenge
+                                                            .prize
+                                                            .toString(),
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600)),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              left: 5),
+                                                      child: Text("Gwei",
+                                                          style: GoogleFonts.poppins(
+                                                              color: Colors
+                                                                  .orangeAccent,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400)),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 15,
+                                ),
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    )
         ],
       )),
     );

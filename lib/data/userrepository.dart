@@ -346,4 +346,23 @@ class UserRepository {
       return false;
     }
   }
+
+  Future<dynamic> recentWinners() async {
+    try {
+      // var url = "http://192.168.43.124:8000/api/leaderboard";
+
+      var res = await http.get(
+        '${url + "challenges/winners"}',
+      );
+
+      var checkres = jsonDecode(res.body);
+      // print("ALL LEADERBOARD COUNT :  ${checkres.length}");
+      // print("ALL LEADERBOARD :  $checkres");
+      checkres["status"] = true;
+      return checkres;
+    } catch (e) {
+      print("error");
+      return false;
+    }
+  }
 }

@@ -1,14 +1,43 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 
-class LeaderboardAll {
-  LeaderboardAll({
+// To parse this JSON data, do
+//
+//     final recentWinners = recentWinnersFromJson(jsonString);
+
+// import 'dart:convert';
+
+// RecentWinners recentWinnersFromJson(String str) => RecentWinners.fromJson(json.decode(str));
+
+// String recentWinnersToJson(RecentWinners data) => json.encode(data.toJson());
+
+class RecentWinners {
+  RecentWinners({
+    this.leaders,
+  });
+
+  List<Leader> leaders;
+
+  factory RecentWinners.fromJson(Map<String, dynamic> json) => RecentWinners(
+        leaders:
+            List<Leader>.from(json["leaders"].map((x) => Leader.fromJson(x))),
+      );
+
+  Map<String, dynamic> toJson() => {
+        "leaders": List<dynamic>.from(leaders.map((x) => x.toJson())),
+      };
+}
+
+class Leader {
+  Leader({
     this.id,
     this.competitor,
     this.challenge,
@@ -20,51 +49,55 @@ class LeaderboardAll {
     this.createdAt,
     this.updatedAt,
     this.v,
+    this.prize,
   });
 
   String id;
-  LeaderboardAllCompetitor competitor;
+  LeaderCompetitor competitor;
   Challenge challenge;
-  String startAt;
-  String endAt;
+  DateTime startAt;
+  DateTime endAt;
   String totalkm;
   int streakNo;
   String status;
   DateTime createdAt;
   DateTime updatedAt;
   int v;
+  int prize;
 
-  factory LeaderboardAll.fromJson(Map<String, dynamic> json) => LeaderboardAll(
+  factory Leader.fromJson(Map<String, dynamic> json) => Leader(
         id: json["_id"],
-        competitor: LeaderboardAllCompetitor.fromJson(json["competitor"]),
+        competitor: LeaderCompetitor.fromJson(json["competitor"]),
         challenge: Challenge.fromJson(json["challenge"]),
-        startAt: json["startAt"],
-        endAt: json["endAt"],
+        startAt: DateTime.parse(json["startAt"]),
+        endAt: DateTime.parse(json["endAt"]),
         totalkm: json["totalkm"],
         streakNo: json["streakNo"],
         status: json["status"],
         createdAt: DateTime.parse(json["createdAt"]),
         updatedAt: DateTime.parse(json["updatedAt"]),
         v: json["__v"],
+        prize: json["prize"],
       );
 
   Map<String, dynamic> toJson() => {
         "_id": id,
         "competitor": competitor.toJson(),
         "challenge": challenge.toJson(),
-        "startAt": startAt,
-        "endAt": endAt,
+        "startAt": startAt.toIso8601String(),
+        "endAt": endAt.toIso8601String(),
         "totalkm": totalkm,
         "streakNo": streakNo,
         "status": status,
         "createdAt": createdAt.toIso8601String(),
         "updatedAt": updatedAt.toIso8601String(),
         "__v": v,
+        "prize": prize,
       };
 }
 
-class Challenge {
-  Challenge({
+class ChallengeRecent {
+  ChallengeRecent({
     this.id,
     this.mode,
     this.type,
@@ -94,8 +127,8 @@ class Challenge {
   String totalKm;
   String createdBy;
   List<CompetitorElement> competitors;
-  var startAt;
-  var endAt;
+  DateTime startAt;
+  DateTime endAt;
   String wage;
   int prize;
   bool commissionEnabled;
@@ -106,7 +139,8 @@ class Challenge {
   DateTime updatedAt;
   int v;
 
-  factory Challenge.fromJson(Map<String, dynamic> json) => Challenge(
+  factory ChallengeRecent.fromJson(Map<String, dynamic> json) =>
+      ChallengeRecent(
         id: json["_id"],
         mode: json["mode"],
         type: json["type"],
@@ -152,8 +186,8 @@ class Challenge {
       };
 }
 
-class CompetitorElement {
-  CompetitorElement({
+class CompetitorElementRecent {
+  CompetitorElementRecent({
     this.userId,
     this.joinedAt,
     this.id,
@@ -163,8 +197,8 @@ class CompetitorElement {
   DateTime joinedAt;
   String id;
 
-  factory CompetitorElement.fromJson(Map<String, dynamic> json) =>
-      CompetitorElement(
+  factory CompetitorElementRecent.fromJson(Map<String, dynamic> json) =>
+      CompetitorElementRecent(
         userId: json["userId"],
         joinedAt: DateTime.parse(json["joinedAt"]),
         id: json["_id"],
@@ -177,8 +211,8 @@ class CompetitorElement {
       };
 }
 
-class LeaderboardAllCompetitor {
-  LeaderboardAllCompetitor({
+class LeaderCompetitor {
+  LeaderCompetitor({
     this.id,
     this.fullName,
   });
@@ -186,8 +220,8 @@ class LeaderboardAllCompetitor {
   String id;
   String fullName;
 
-  factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
-      LeaderboardAllCompetitor(
+  factory LeaderCompetitor.fromJson(Map<String, dynamic> json) =>
+      LeaderCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
       );
@@ -199,7 +233,9 @@ class LeaderboardAllCompetitor {
 }
 
 class ViewmoreRecentWinners extends StatefulWidget {
-  const ViewmoreRecentWinners({Key key}) : super(key: key);
+  final challange;
+
+  const ViewmoreRecentWinners({Key key, this.challange}) : super(key: key);
 
   @override
   _ViewmoreRecentWinnersState createState() => _ViewmoreRecentWinnersState();
@@ -207,14 +243,15 @@ class ViewmoreRecentWinners extends StatefulWidget {
 
 class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
   bool loading = true;
-  List<LeaderboardAll> leaderboardAll = [];
+  List<Leader> recentWinners = [];
   var userLanguage, user, lang = [];
 
   @override
   void initState() {
     super.initState();
     getUserLanguage();
-    getAllLeaderboard();
+    recentWinners1();
+    //getwinnerChallenges(widget.challange);
   }
 
   // ignore: todo
@@ -228,12 +265,12 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
     }
   }
 
-  Future<void> getAllLeaderboard() async {
+  Future<void> recentWinners1() async {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().getAllLeaderboard();
-    print("PAVIANI $res");
+    var res = await UserRepository().recentWinners();
+    print("RECENT WINNERS $res");
     if (res == false) {
       // Scaffold
       //   .of(context)
@@ -243,9 +280,10 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
         setState(() {
           loading = false;
         });
-        leaderboardAll = [];
+
+        recentWinners = [];
         for (var i = 0; i < res["leaders"].length; i++) {
-          leaderboardAll.add(LeaderboardAll.fromJson(res["leaders"][i]));
+          recentWinners.add(Leader.fromJson(res["leaders"][i]));
         }
       } else {
         Scaffold.of(context)
@@ -257,6 +295,46 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
       }
     }
   }
+
+  // var difference;
+  // Map<String, dynamic> challangedetail;
+  // var startDate;
+  // var endDate;
+  // Future<void> getwinnerChallenges(challangeid) async {
+  //   var res = await UserRepository().getwinnerChallenges(challangeid);
+  //   // print("USER ID :" + user[0]["uid"]);
+  //   // print(res["leaders"]);
+  //   if (res["success"] == true) {
+  //     setState(() {
+  //       loading = true;
+  //     });
+
+  //     challangedetail = res['challenge'];
+  //     DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+  //         .parse(challangedetail['startAt']);
+  //     var inputDate = DateTime.parse(parseDate.toString());
+  //     startDate = (DateFormat.yMMMd().format(inputDate)).toString();
+  //     DateTime parseendDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+  //         .parse(challangedetail['endAt']);
+  //     var endinputDate = DateTime.parse(parseendDate.toString());
+  //     endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
+  //     final endat = DateTime.parse(challangedetail['endAt']);
+  //     final date2 = DateTime.now();
+  //     difference = date2.difference(endat).inDays;
+
+  //     // for (var i = 0; i < res["leaders"].length; i++) {
+  //     //   mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
+  //     // }
+  //     // for (var i = 0; i < res["winners"].length; i++) {
+  //     //   winnerdetail.add(WinnerDetails.fromJson(res["winners"][i]));
+  //     // }
+  //   } else {
+  //     setState(() {
+  //       loading = true;
+  //     });
+  //   }
+  //   // print("PAVIMANO12 $res");
+  // }
 
   // ignore: todo
   //TODO: LanguageEnd
@@ -447,7 +525,7 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
               shrinkWrap: true,
               physics: NeverScrollableScrollPhysics(),
               scrollDirection: Axis.vertical,
-              itemCount: leaderboardAll.length,
+              itemCount: recentWinners.length,
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {},
@@ -480,90 +558,115 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                           Padding(
                             padding: const EdgeInsets.only(left: 10),
                             child: Container(
-                              height: MediaQuery.of(context).size.height * 0.08,
+                              height: MediaQuery.of(context).size.height * 0.07,
                               width: MediaQuery.of(context).size.width * 0.9,
                               //height: 63, width: 300,
                               decoration: BoxDecoration(
                                   color: white.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(20)),
-                              child: ListTile(
-                                leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Container(
-                                      height: 35,
-                                      width: 35,
-                                      color: button,
-                                      child: Image.network(
-                                        elements[index]['url'],
-                                        fit: BoxFit.cover,
-                                      )),
-                                ),
-                                title: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Row(
-                                    children: [
-                                      Text(
-                                        leaderboardAll[index]
-                                            .competitor
-                                            .fullName
-                                            .toString()
-                                            .toUpperCase(),
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white60,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                      Text(
-                                        " has earned",
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white60,
-                                          fontSize: 12,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      ),
-                                    ],
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 15,
                                   ),
-                                ),
-
-                                //subtitle: Text("rating"),
-                                subtitle: Text("yesterday",
-                                    style: GoogleFonts.poppins(
-                                        color: Colors.white54,
-                                        fontSize: 12,
-                                        fontWeight: FontWeight.w600)),
-                                trailing: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.25,
-                                  //height: 38, width: 98,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: Row(
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
+                                        height: 35,
+                                        width: 35,
+                                        color: button,
+                                        child: Image.network(
+                                          elements[index]['url'],
+                                          fit: BoxFit.cover,
+                                        )),
+                                  ),
+                                  SizedBox(
+                                    width: 15,
+                                  ),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     mainAxisAlignment: MainAxisAlignment.center,
                                     children: [
-                                      Text(
-                                          leaderboardAll[index]
-                                              .challenge
-                                              .prize
-                                              .toString(),
-                                          style: GoogleFonts.poppins(
-                                              color: Colors.white,
-                                              fontSize: 16,
-                                              fontWeight: FontWeight.w600)),
-                                      Padding(
-                                        padding: const EdgeInsets.only(left: 5),
-                                        child: Text("Gwei",
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.4,
+                                        child: FittedBox(
+                                          fit: BoxFit.scaleDown,
+                                          child: Text(
+                                            recentWinners[index]
+                                                .competitor
+                                                .fullName
+                                                .toString()
+                                                .toUpperCase(),
                                             style: GoogleFonts.poppins(
-                                                color: Colors.orangeAccent,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400)),
+                                              color: Colors.white60,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ),
                                       ),
+
+                                      // Text(
+                                      //   difference == 0
+                                      //       ? "Yesterday"
+                                      //       : difference >= 0
+                                      //           ? "${endDate.toString()}"
+                                      //           : "Challenge ongoing now",
+                                      //   style: GoogleFonts.poppins(
+                                      //       decoration: TextDecoration.none,
+                                      //       color: Colors.white,
+                                      //       fontSize: 15,
+                                      //       fontWeight: FontWeight.w600),
+                                      // ),
+                                      // Text("yesterday",
+                                      //     style: GoogleFonts.poppins(
+                                      //         color: Colors.white54,
+                                      //         fontSize: 12,
+                                      //         fontWeight: FontWeight.w600)),
                                     ],
                                   ),
-                                ),
+                                  SizedBox(
+                                    width: 30,
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.23,
+                                    //height: 38, width: 98,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.1),
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    child: Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.center,
+                                      children: [
+                                        Text(
+                                            recentWinners[index]
+                                                .prize
+                                                .toString(),
+                                            style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 16,
+                                                fontWeight: FontWeight.w600)),
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 5),
+                                          child: Text("Gwei",
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.orangeAccent,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ),
