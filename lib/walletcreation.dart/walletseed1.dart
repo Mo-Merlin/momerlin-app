@@ -559,7 +559,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                         return 'Please enter nickname';
 
                       if ( nicknameAvailable=="available") {
-                        return "Nickname not available";
+                        return "Nickname is unavailable";
                       }
 
                       return null;
@@ -586,7 +586,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       isDense: true,
                       labelText: 'Nickname',
                       labelStyle: TextStyle(
-                        fontFamily: 'Dosis-Book',
+                        // fontFamily: 'Dosis-Book',
                         color: white,
                         fontSize: 18,
                       ),

@@ -109,9 +109,9 @@ class _ChallengesdetailState extends State<Challengesdetail> {
   var exprydate;
   @override
   void initState() {
-    print(widget.challange.challenge.id);
+    print(widget.challange);
     super.initState();
-    getwinnerChallenges(widget.challange.challenge.id);
+    getwinnerChallenges(widget.challange);
     getUserLanguage();
   }
 
@@ -172,6 +172,11 @@ class _ChallengesdetailState extends State<Challengesdetail> {
     Image.asset("assets/images/trophy3.png"),
     Image.asset("assets/images/trophy2.png"),
     Image.asset("assets/images/trophy1.png"),
+  ];
+  var url = [
+    "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
+    "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
+    "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
   ];
   List<Color> myActivityColorList = [
     containerGreen,
@@ -735,7 +740,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 Align(
                                   alignment: Alignment.topLeft,
                                   child: Text(
-                                    "WINNER DETAILS",
+                                    "WINNERS",
                                     textAlign: TextAlign.left,
                                     style: GoogleFonts.montserrat(
                                         decoration: TextDecoration.none,
@@ -754,192 +759,118 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                       itemCount: winnerdetail.length,
                       shrinkWrap: true,
                       itemBuilder: (context, index) {
-                        return GestureDetector(
-                          onTap: () {},
-                          child: Stack(
-                            children: [
-                              Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Row(
-                                    children: [
-                                      SizedBox(
-                                        width: 15,
-                                      ),
-                                      Container(
-                                        height: 59,
-                                        width:
-                                            MediaQuery.of(context).size.width *
-                                                0.83,
-                                        decoration: BoxDecoration(
-                                            color: myActivityColorList[index %
-                                                myActivityColorList.length],
+                        return Container(
+                          padding: EdgeInsets.only(left: 25, right: 10),
+                          child: GestureDetector(
+                            onTap: () {},
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Row(
+                                  children: [
+                                    Container(
+                                      height: 59,
+                                      width: MediaQuery.of(context).size.width *
+                                          0.9,
+                                      decoration: BoxDecoration(
+                                          color: white.withOpacity(0.1),
+                                          borderRadius:
+                                              BorderRadius.circular(20)),
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          ClipRRect(
                                             borderRadius:
-                                                BorderRadius.circular(20)),
-                                        child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Container(
-                                              height: 59,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.6,
-                                              decoration: BoxDecoration(
-                                                color: Colors.white
-                                                    .withOpacity(0.2),
-                                                borderRadius: BorderRadius.only(
-                                                    bottomLeft:
-                                                        Radius.circular(15),
-                                                    bottomRight:
-                                                        Radius.circular(25),
-                                                    topLeft:
-                                                        Radius.circular(15),
-                                                    topRight:
-                                                        Radius.circular(25)),
-                                              ),
-                                              child: Center(
-                                                child: Padding(
-                                                  padding: EdgeInsets.only(
-                                                      left: 10, right: 10),
-                                                  child: Row(
-                                                    mainAxisAlignment:
-                                                        MainAxisAlignment
-                                                            .center,
-                                                    children: [
-                                                      Text(
-                                                        winnerdetail[index]
-                                                            .winnerchallenge
-                                                            .fullName,
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                      Spacer(),
-                                                      // Text(
-                                                      //   challangedetail['mode'] ==
-                                                      //           "Walking"
-                                                      //       ? "Walk"
-                                                      //       : "Run",
-                                                      //   style:
-                                                      //       GoogleFonts.poppins(
-                                                      //     color: Colors.black,
-                                                      //     fontSize: 14,
-                                                      //     fontWeight:
-                                                      //         FontWeight.w600,
-                                                      //   ),
-                                                      // ),
-                                                      // Text(
-                                                      //   challangedetail['type'],
-                                                      //   style:
-                                                      //       GoogleFonts.poppins(
-                                                      //     color: Colors.black,
-                                                      //     fontSize: 14,
-                                                      //     fontWeight:
-                                                      //         FontWeight.w600,
-                                                      //   ),
-                                                      // ),
-                                                      Text(
-                                                        double.parse(winnerdetail[
-                                                                        index]
-                                                                    .totalkm)
-                                                                .toStringAsFixed(
-                                                                    2) +
-                                                            "KM",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                          color: Colors.black,
-                                                          fontSize: 14,
-                                                          fontWeight:
-                                                              FontWeight.w600,
-                                                        ),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                ),
+                                                BorderRadius.circular(30),
+                                            child: Container(
+                                              height: 35,
+                                              width: 35,
+                                              color: button,
+                                              child: Image.network(
+                                                url[index % url.length],
+                                                fit: BoxFit.cover,
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 0),
-                                              child: Container(
-                                                height: 33,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                    color: Colors.white
-                                                        .withOpacity(0.25),
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            16)),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Container(
+                                            alignment: Alignment.centerLeft,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.5,
+                                            child: FittedBox(
+                                              fit: BoxFit.scaleDown,
+                                              child: Text(
+                                                winnerdetail[index]
+                                                    .winnerchallenge
+                                                    .fullName,
+                                                style: GoogleFonts.poppins(
+                                                  color: white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                                textAlign: TextAlign.left,
+                                              ),
+                                            ),
+                                          ),
+                                          Spacer(),
+                                          Container(
+                                            height: 33,
+                                            width: 85,
+                                            decoration: BoxDecoration(
+                                                color: Colors.white
+                                                    .withOpacity(0.25),
+                                                borderRadius:
+                                                    BorderRadius.circular(16)),
+                                            child: Center(
+                                              child: FittedBox(
+                                                fit: BoxFit.scaleDown,
                                                 child: Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.center,
                                                   children: [
-                                                    Text("DAY",
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 5),
-                                                      child: Text(
-                                                          winnerdetail[index]
-                                                              .streakNo
-                                                              .toString(),
-                                                          style: GoogleFonts
-                                                              .poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600)),
+                                                    Text(
+                                                      challangedetail["prize"]
+                                                          .toString(),
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600),
                                                     ),
                                                     Text(
-                                                        " / " +
-                                                            challangedetail[
-                                                                'streakDays'],
-                                                        style:
-                                                            GoogleFonts.poppins(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w400)),
+                                                      " Gwei",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              color: Colors
+                                                                  .orangeAccent,
+                                                              fontSize: 12,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w400),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                             ),
-                                          ],
-                                        ),
+                                          ),
+                                          SizedBox(width: 15)
+                                        ],
                                       ),
-                                    ],
-                                  ),
-                                  SizedBox(height: 15)
-                                ],
-                              ),
-                              Positioned(
-                                right: 20,
-                                top: 10,
-                                child: Container(
-                                  height: 40,
-                                  width: 40,
-                                  child: trophy[index % trophy.length],
+                                    ),
+                                  ],
                                 ),
-                              ),
-                            ],
+                                SizedBox(height: 15)
+                              ],
+                            ),
                           ),
                         );
                       },
@@ -986,145 +917,131 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                             itemCount: mychallengesdetail.length,
                             shrinkWrap: true,
                             itemBuilder: (context, index) {
-                              return GestureDetector(
-                                onTap: () {},
-                                child: Stack(
-                                  children: [
-                                    Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            SizedBox(
-                                              width: 15,
-                                            ),
-                                            Container(
-                                              height: 59,
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width *
-                                                  0.83,
-                                              decoration: BoxDecoration(
+                              return Container(
+                                padding: EdgeInsets.only(left: 25, right: 10),
+                                child: GestureDetector(
+                                  onTap: () {},
+                                  child: Stack(
+                                    children: [
+                                      Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              Container(
+                                                height: 59,
+                                                width: MediaQuery.of(context)
+                                                        .size
+                                                        .width *
+                                                    0.87,
+                                                decoration: BoxDecoration(
                                                   color: myActivityColorList[
                                                       index %
                                                           myActivityColorList
                                                               .length],
                                                   borderRadius:
-                                                      BorderRadius.circular(
-                                                          20)),
-                                              child: Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  Container(
-                                                    height: 59,
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                                .size
-                                                                .width *
-                                                            0.6,
-                                                    decoration: BoxDecoration(
-                                                      color: Colors.white
-                                                          .withOpacity(0.2),
-                                                      borderRadius:
-                                                          BorderRadius.only(
-                                                              bottomLeft: Radius
-                                                                  .circular(15),
-                                                              bottomRight:
-                                                                  Radius
-                                                                      .circular(
-                                                                          25),
-                                                              topLeft: Radius
-                                                                  .circular(15),
-                                                              topRight: Radius
-                                                                  .circular(
-                                                                      25)),
-                                                    ),
-                                                    child: Padding(
-                                                      padding: EdgeInsets.only(
-                                                          left: 10, right: 10),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text(
-                                                            mychallengesdetail[
-                                                                    index]
-                                                                .challenge
-                                                                .fullName,
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                      BorderRadius.circular(20),
+                                                ),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Container(
+                                                      height: 59,
+                                                      width:
+                                                          MediaQuery.of(context)
+                                                                  .size
+                                                                  .width *
+                                                              0.6,
+                                                      decoration: BoxDecoration(
+                                                        color: Colors.white
+                                                            .withOpacity(0.2),
+                                                        borderRadius:
+                                                            BorderRadius.only(
+                                                                bottomLeft: Radius
+                                                                    .circular(
+                                                                        15),
+                                                                bottomRight:
+                                                                    Radius
+                                                                        .circular(
+                                                                            25),
+                                                                topLeft: Radius
+                                                                    .circular(
+                                                                        15),
+                                                                topRight: Radius
+                                                                    .circular(
+                                                                        25)),
+                                                      ),
+                                                      child: Padding(
+                                                        padding:
+                                                            EdgeInsets.only(
+                                                                left: 10,
+                                                                right: 10),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
+                                                              mychallengesdetail[
+                                                                      index]
+                                                                  .challenge
+                                                                  .fullName,
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                          Spacer(),
-                                                          Text(
-                                                            double.parse(mychallengesdetail[
-                                                                            index]
-                                                                        .totalkm)
-                                                                    .toStringAsFixed(
-                                                                        2) +
-                                                                "KM",
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.black,
-                                                              fontSize: 14,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600,
+                                                            Spacer(),
+                                                            Text(
+                                                              double.parse(mychallengesdetail[
+                                                                              index]
+                                                                          .totalkm)
+                                                                      .toStringAsFixed(
+                                                                          2) +
+                                                                  "KM",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color: Colors
+                                                                    .black,
+                                                                fontSize: 14,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w600,
+                                                              ),
                                                             ),
-                                                          ),
-                                                        ],
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            right: 0),
-                                                    child: Container(
-                                                      height: 33,
-                                                      width: 85,
-                                                      decoration: BoxDecoration(
-                                                          color: Colors.white
-                                                              .withOpacity(
-                                                                  0.25),
-                                                          borderRadius:
-                                                              BorderRadius
-                                                                  .circular(
-                                                                      16)),
-                                                      child: Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          Text("DAY",
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w600)),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                        .only(
-                                                                    left: 5),
-                                                            child: Text(
-                                                                mychallengesdetail[
-                                                                        index]
-                                                                    .streakNo
-                                                                    .toString(),
+                                                    Padding(
+                                                      padding:
+                                                          const EdgeInsets.only(
+                                                              right: 20),
+                                                      child: Container(
+                                                        height: 33,
+                                                        width: 85,
+                                                        decoration: BoxDecoration(
+                                                            color: Colors.white
+                                                                .withOpacity(
+                                                                    0.25),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        16)),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text("DAY",
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,
@@ -1133,40 +1050,60 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600)),
-                                                          ),
-                                                          Text(
-                                                              " / " +
-                                                                  challangedetail[
-                                                                      'streakDays'],
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 12,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w400)),
-                                                        ],
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                          .only(
+                                                                      left: 5),
+                                                              child: Text(
+                                                                  mychallengesdetail[
+                                                                          index]
+                                                                      .streakNo
+                                                                      .toString(),
+                                                                  style: GoogleFonts.poppins(
+                                                                      color: Colors
+                                                                          .white,
+                                                                      fontSize:
+                                                                          12,
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .w600)),
+                                                            ),
+                                                            Text(
+                                                                " / " +
+                                                                    challangedetail[
+                                                                        'streakDays'],
+                                                                style: GoogleFonts.poppins(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        12,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w400)),
+                                                          ],
+                                                        ),
                                                       ),
                                                     ),
-                                                  ),
-                                                ],
+                                                  ],
+                                                ),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        SizedBox(height: 15)
-                                      ],
-                                    ),
-                                    Positioned(
-                                      right: 20,
-                                      top: 10,
-                                      child: Container(
-                                        height: 40,
-                                        width: 40,
-                                        child: trophy[index % trophy.length],
+                                            ],
+                                          ),
+                                          SizedBox(height: 15)
+                                        ],
                                       ),
-                                    ),
-                                  ],
+                                      Positioned(
+                                        right: 0,
+                                        top: 10,
+                                        child: Container(
+                                          height: 40,
+                                          width: 40,
+                                          child: trophy[index % trophy.length],
+                                        ),
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },

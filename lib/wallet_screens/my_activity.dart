@@ -126,29 +126,10 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
       '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
   scopes: <String>[
     'email',
-    'https://www.googleapis.com/auth/contacts.readonly',
     'https://www.googleapis.com/auth/fitness.activity.read',
     'https://www.googleapis.com/auth/fitness.activity.write',
-    'https://www.googleapis.com/auth/fitness.blood_glucose.read',
-    'https://www.googleapis.com/auth/fitness.blood_glucose.write',
-    'https://www.googleapis.com/auth/fitness.blood_pressure.read',
-    'https://www.googleapis.com/auth/fitness.blood_pressure.write',
-    'https://www.googleapis.com/auth/fitness.body.read',
-    'https://www.googleapis.com/auth/fitness.body.write',
-    'https://www.googleapis.com/auth/fitness.body_temperature.read',
-    'https://www.googleapis.com/auth/fitness.body_temperature.write',
-    'https://www.googleapis.com/auth/fitness.heart_rate.read',
-    'https://www.googleapis.com/auth/fitness.heart_rate.write',
     'https://www.googleapis.com/auth/fitness.location.read',
     'https://www.googleapis.com/auth/fitness.location.write',
-    'https://www.googleapis.com/auth/fitness.nutrition.read',
-    'https://www.googleapis.com/auth/fitness.nutrition.write',
-    'https://www.googleapis.com/auth/fitness.oxygen_saturation.read',
-    'https://www.googleapis.com/auth/fitness.oxygen_saturation.write',
-    'https://www.googleapis.com/auth/fitness.reproductive_health.read',
-    'https://www.googleapis.com/auth/fitness.reproductive_health.write',
-    'https://www.googleapis.com/auth/fitness.sleep.read',
-    'https://www.googleapis.com/auth/fitness.sleep.write',
   ],
 );
 
@@ -366,144 +347,154 @@ class _MyActivityState extends State<MyActivity> {
           SizedBox(
             height: 20,
           ),
-          Container(
-            decoration: BoxDecoration(
-              color: gridcolor,
-              borderRadius: BorderRadius.circular(30),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 10,
-                ),
-                Padding(
-                  padding: EdgeInsets.only(
-                    left: 10,
-                    top: 10,
-                    right: 110,
-                  ),
-                  child: Container(
-                    height: 33,
-                    decoration: BoxDecoration(
-                      color: button,
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Radio(
-                                value: 1,
-                                groupValue: val,
-                                onChanged: (value) {
-                                  setState(() {
-                                    val = value;
-                                  });
-                                },
-                                activeColor: blue1,
-                              ),
-                              Expanded(
-                                child: Text(
-                                  'Active Days',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w400,
-                                  ),
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                        Expanded(
-                          child: Row(
-                            children: [
-                              Radio(
-                                value: 2,
-                                groupValue: val,
-                                onChanged: (value) {
-                                  setState(() {
-                                    val = value;
-                                  });
-                                },
-                                activeColor: blue1,
-                              ),
-                              Expanded(
-                                  child: Text(
-                                'Present Days',
-                                style: GoogleFonts.poppins(
-                                  color: Colors.white,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ))
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15, right: 15),
-                  child: TableCalendar(
-                    calendarController: _controller,
-                    initialCalendarFormat: CalendarFormat.month,
-                    calendarStyle: CalendarStyle(
-                      todayColor: blue1,
-                      selectedColor: blue,
-                      weekdayStyle:
-                          GoogleFonts.montserrat(fontSize: 12, color: text1),
-                      weekendStyle:
-                          GoogleFonts.montserrat(fontSize: 12, color: text1),
-                      holidayStyle:
-                          GoogleFonts.montserrat(fontSize: 12, color: text1),
-                      outsideHolidayStyle:
-                          GoogleFonts.montserrat(fontSize: 12, color: text1),
-                      unavailableStyle: const TextStyle(color: Colors.white),
-                      todayStyle: GoogleFonts.montserrat(
-                        fontSize: 12,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                    headerVisible: false,
-                    // headerStyle: HeaderStyle(
-                    //   centerHeaderTitle: true,
-                    //   formatButtonDecoration: BoxDecoration(
-                    //     color: Colors.brown,
-                    //     borderRadius: BorderRadius.circular(22.0),
-                    //   ),
-                    //   formatButtonTextStyle: TextStyle(color: Colors.white),
-                    //   formatButtonShowsNext: false,
-                    // ),
-                    startingDayOfWeek: StartingDayOfWeek.sunday,
-                    builders: CalendarBuilders(
-                      // dayBuilder: (context, date, events) => Container(
-                      //   height: 55,
-                      //   width: 55,
-                      //   margin: const EdgeInsets.all(8.0),
-                      //   alignment: Alignment.center,
-                      //   decoration: BoxDecoration(
-                      //       color: blue.withOpacity(0.3),
-                      //       borderRadius: BorderRadius.circular(10.0)),
-                      //   child: Text(
-                      //     date.day.toString(),
-                      //     style: TextStyle(color: Colors.black),
-                      //   )),
-                      unavailableDayBuilder: (context, date, events) =>
-                          Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        child: Text(
-                          date.day.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-//                         unavailableDayBuilder: (context, date, events) => Container(
-//                        margin: const EdgeInsets.all(5.0),
+//           Container(
+//             decoration: BoxDecoration(
+//               color: gridcolor,
+//               borderRadius: BorderRadius.circular(30),
+//             ),
+//             child: Column(
+//               children: [
+//                 SizedBox(
+//                   height: 10,
+//                 ),
+//                 Padding(
+//                   padding: EdgeInsets.only(
+//                     left: 10,
+//                     top: 10,
+//                     right: 110,
+//                   ),
+//                   child: Container(
+//                     height: 33,
+//                     decoration: BoxDecoration(
+//                       color: button,
+//                       borderRadius: BorderRadius.circular(15),
+//                     ),
+//                     child: Row(
+//                       mainAxisAlignment: MainAxisAlignment.start,
+//                       children: [
+//                         Expanded(
+//                           child: Row(
+//                             children: [
+//                               Radio(
+//                                 value: 1,
+//                                 groupValue: val,
+//                                 onChanged: (value) {
+//                                   setState(() {
+//                                     val = value;
+//                                   });
+//                                 },
+//                                 activeColor: blue1,
+//                               ),
+//                               Expanded(
+//                                 child: Text(
+//                                   'Active Days',
+//                                   style: GoogleFonts.poppins(
+//                                     color: Colors.white,
+//                                     fontSize: 12,
+//                                     fontWeight: FontWeight.w400,
+//                                   ),
+//                                 ),
+//                               )
+//                             ],
+//                           ),
+//                         ),
+//                         Expanded(
+//                           child: Row(
+//                             children: [
+//                               Radio(
+//                                 value: 2,
+//                                 groupValue: val,
+//                                 onChanged: (value) {
+//                                   setState(() {
+//                                     val = value;
+//                                   });
+//                                 },
+//                                 activeColor: blue1,
+//                               ),
+//                               Expanded(
+//                                   child: Text(
+//                                 'Present Days',
+//                                 style: GoogleFonts.poppins(
+//                                   color: Colors.white,
+//                                   fontSize: 12,
+//                                   fontWeight: FontWeight.w400,
+//                                 ),
+//                               ))
+//                             ],
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 ),
+//                 Padding(
+//                   padding: const EdgeInsets.only(left: 15, right: 15),
+//                   child: TableCalendar(
+//                     calendarController: _controller,
+//                     initialCalendarFormat: CalendarFormat.month,
+//                     calendarStyle: CalendarStyle(
+//                       todayColor: blue1,
+//                       selectedColor: blue,
+//                       weekdayStyle:
+//                           GoogleFonts.montserrat(fontSize: 12, color: text1),
+//                       weekendStyle:
+//                           GoogleFonts.montserrat(fontSize: 12, color: text1),
+//                       holidayStyle:
+//                           GoogleFonts.montserrat(fontSize: 12, color: text1),
+//                       outsideHolidayStyle:
+//                           GoogleFonts.montserrat(fontSize: 12, color: text1),
+//                       unavailableStyle: const TextStyle(color: Colors.white),
+//                       todayStyle: GoogleFonts.montserrat(
+//                         fontSize: 12,
+//                         color: Colors.white,
+//                         fontWeight: FontWeight.w500,
+//                       ),
+//                     ),
+//                     headerVisible: false,
+//                     // headerStyle: HeaderStyle(
+//                     //   centerHeaderTitle: true,
+//                     //   formatButtonDecoration: BoxDecoration(
+//                     //     color: Colors.brown,
+//                     //     borderRadius: BorderRadius.circular(22.0),
+//                     //   ),
+//                     //   formatButtonTextStyle: TextStyle(color: Colors.white),
+//                     //   formatButtonShowsNext: false,
+//                     // ),
+//                     startingDayOfWeek: StartingDayOfWeek.sunday,
+//                     builders: CalendarBuilders(
+//                       // dayBuilder: (context, date, events) => Container(
+//                       //   height: 55,
+//                       //   width: 55,
+//                       //   margin: const EdgeInsets.all(8.0),
+//                       //   alignment: Alignment.center,
+//                       //   decoration: BoxDecoration(
+//                       //       color: blue.withOpacity(0.3),
+//                       //       borderRadius: BorderRadius.circular(10.0)),
+//                       //   child: Text(
+//                       //     date.day.toString(),
+//                       //     style: TextStyle(color: Colors.black),
+//                       //   )),
+//                       unavailableDayBuilder: (context, date, events) =>
+//                           Container(
+//                         margin: const EdgeInsets.all(5.0),
+//                         alignment: Alignment.center,
+//                         child: Text(
+//                           date.day.toString(),
+//                           style: TextStyle(color: Colors.white),
+//                         ),
+//                       ),
+// //                         unavailableDayBuilder: (context, date, events) => Container(
+// //                        margin: const EdgeInsets.all(5.0),
+// //                           alignment: Alignment.center,
+// //                           decoration: BoxDecoration(
+// //                               color: blue,
+// //                               borderRadius: BorderRadius.circular(22)),
+// //                           child: Text(
+// //                             date.day.toString(),
+// //                             style: TextStyle(color: Colors.white),
+// //                           ),),
+//                       selectedDayBuilder: (context, date, events) => Container(
+//                           margin: const EdgeInsets.all(5.0),
 //                           alignment: Alignment.center,
 //                           decoration: BoxDecoration(
 //                               color: blue,
@@ -511,52 +502,42 @@ class _MyActivityState extends State<MyActivity> {
 //                           child: Text(
 //                             date.day.toString(),
 //                             style: TextStyle(color: Colors.white),
-//                           ),),
-                      selectedDayBuilder: (context, date, events) => Container(
-                          margin: const EdgeInsets.all(5.0),
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: blue,
-                              borderRadius: BorderRadius.circular(22)),
-                          child: Text(
-                            date.day.toString(),
-                            style: TextStyle(color: Colors.white),
-                          )),
-                      todayDayBuilder: (context, date, events) => Container(
-                        margin: const EdgeInsets.all(5.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            color: blue1,
-                            borderRadius: BorderRadius.circular(22)),
-                        child: Text(
-                          date.day.toString(),
-                          style: TextStyle(color: Colors.white),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(
-            height: 20,
-          ),
-          Padding(
-            padding: const EdgeInsets.only(left: 30),
-            child: Text(
-              (lang.length != null &&
-                      lang.length != 0 &&
-                      userLanguage['currentchallenges'] != null)
-                  ? "${userLanguage['currentchallenges']}"
-                  : "CURRENT CHALLENGES",
-              style: GoogleFonts.poppins(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
+//                           )),
+//                       todayDayBuilder: (context, date, events) => Container(
+//                         margin: const EdgeInsets.all(5.0),
+//                         alignment: Alignment.center,
+//                         decoration: BoxDecoration(
+//                             color: blue1,
+//                             borderRadius: BorderRadius.circular(22)),
+//                         child: Text(
+//                           date.day.toString(),
+//                           style: TextStyle(color: Colors.white),
+//                         ),
+//                       ),
+//                     ),
+//                   ),
+//                 ),
+//               ],
+//             ),
+//           ),
+          // SizedBox(
+          //   height: 20,
+          // ),
+          // Padding(
+          //   padding: const EdgeInsets.only(left: 30),
+          //   child: Text(
+          //     (lang.length != null &&
+          //             lang.length != 0 &&
+          //             userLanguage['currentchallenges'] != null)
+          //         ? "${userLanguage['currentchallenges']}"
+          //         : "CURRENT CHALLENGES",
+          //     style: GoogleFonts.poppins(
+          //       color: Colors.white,
+          //       fontSize: 16,
+          //       fontWeight: FontWeight.w600,
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: 5,
           ),
@@ -613,21 +594,23 @@ class _MyActivityState extends State<MyActivity> {
                               shrinkWrap: true,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                   onTap: () {
-                                            // print(joingetchallenge[index]);
-                                            // getwinnerChallenges(
-                                            //     joingetchallenge[index].id);
-                                            // challangedetails(context,3
-                                            //     joingetchallenge[index]);
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Challengesdetail(
+                                  onTap: () {
+                                    // print(joingetchallenge[index]);
+                                    // getwinnerChallenges(
+                                    //     joingetchallenge[index].id);
+                                    // challangedetails(context,3
+                                    //     joingetchallenge[index]);
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                Challengesdetail(
                                                             challange:
                                                                 joingetchallenge[
-                                                                    index])));
-                                          },
+                                                                        index]
+                                                                    .challenge
+                                                                    .id)));
+                                  },
                                   child: Stack(
                                     children: [
                                       Column(
@@ -671,13 +654,15 @@ class _MyActivityState extends State<MyActivity> {
                                                         borderRadius:
                                                             BorderRadius.only(
                                                                 bottomLeft: Radius
-                                                                    .circular(18),
+                                                                    .circular(
+                                                                        18),
                                                                 bottomRight:
                                                                     Radius
                                                                         .circular(
                                                                             25),
                                                                 topLeft: Radius
-                                                                    .circular(18),
+                                                                    .circular(
+                                                                        18),
                                                                 topRight: Radius
                                                                     .circular(
                                                                         25)),
@@ -696,8 +681,8 @@ class _MyActivityState extends State<MyActivity> {
                                                                   "KM ",
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
@@ -714,8 +699,8 @@ class _MyActivityState extends State<MyActivity> {
                                                                   : "RUN ",
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
@@ -730,8 +715,8 @@ class _MyActivityState extends State<MyActivity> {
                                                                   .toUpperCase(),
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                color:
-                                                                    Colors.black,
+                                                                color: Colors
+                                                                    .black,
                                                                 fontSize: 14,
                                                                 fontWeight:
                                                                     FontWeight
@@ -749,12 +734,12 @@ class _MyActivityState extends State<MyActivity> {
                                                                           .toStringAsFixed(
                                                                               2) +
                                                                       "KM)",
-                                                                  style:
-                                                                      GoogleFonts
-                                                                          .poppins(
+                                                                  style: GoogleFonts
+                                                                      .poppins(
                                                                     color: Colors
                                                                         .black,
-                                                                    fontSize: 14,
+                                                                    fontSize:
+                                                                        14,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600,
@@ -790,7 +775,8 @@ class _MyActivityState extends State<MyActivity> {
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,
-                                                                    fontSize: 12,
+                                                                    fontSize:
+                                                                        12,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w600)),
@@ -823,7 +809,8 @@ class _MyActivityState extends State<MyActivity> {
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,
-                                                                    fontSize: 12,
+                                                                    fontSize:
+                                                                        12,
                                                                     fontWeight:
                                                                         FontWeight
                                                                             .w400)),
@@ -882,8 +869,9 @@ class _MyActivityState extends State<MyActivity> {
                                         ],
                                       ),
                                       Positioned(
-                                        right: MediaQuery.of(context).size.width *
-                                            0.03,
+                                        right:
+                                            MediaQuery.of(context).size.width *
+                                                0.03,
                                         top: 10,
                                         child: Container(
                                           height: 40,

@@ -6,7 +6,8 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
-import 'mychallengedetails.dart';
+import 'challangedetails.dart';
+// import 'mychallengedetails.dart';
 
 class MyChallenges {
   String mode;
@@ -334,9 +335,9 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                         context,
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                MyChallengesdetails(
+                                                Challengesdetail(
                                                     challange:
-                                                        mychallenge[index])));
+                                                        mychallenge[index].id)));
                                     // if (elementsOne[index]['name'] ==
                                     //     '5KM RUN STREAK') {
                                     // joinChallenge(context);
@@ -457,22 +458,15 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        Text("DAY",
-                                                            style: GoogleFonts.poppins(
-                                                                color: Colors
-                                                                    .white,
-                                                                fontSize: 12,
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600)),
+                                                       
                                                         Padding(
                                                           padding:
                                                               const EdgeInsets
                                                                       .only(
                                                                   left: 5),
                                                           child: Text(
-                                                              day[index %
-                                                                  day.length],
+                                                            mychallenge[index]
+                                                              .prize.toString()   ,
                                                               style: GoogleFonts.poppins(
                                                                   color: Colors
                                                                       .white,
@@ -482,10 +476,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
                                                                           .w600)),
                                                         ),
                                                         Text(
-                                                            " / " +
-                                                                mychallenge[
-                                                                        index]
-                                                                    .streakDays,
+                                                            " Gwei" ,
                                                             style: GoogleFonts.poppins(
                                                                 color: Colors
                                                                     .white,

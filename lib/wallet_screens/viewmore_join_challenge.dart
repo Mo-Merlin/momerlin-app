@@ -14,6 +14,7 @@ class Challenges {
   var totalKm;
   var wage;
   var id;
+  var prize;
 
   Challenges({
     this.mode,
@@ -23,6 +24,7 @@ class Challenges {
     this.totalKm,
     this.wage,
     this.id,
+    this.prize,
   });
 
   factory Challenges.fromJson(Map<String, dynamic> json) => Challenges(
@@ -32,7 +34,8 @@ class Challenges {
       streakDays: json["streakDays"],
       totalKm: json["totalKm"],
       wage: json["wage"],
-      id: json["_id"]);
+      id: json["_id"],
+       prize: json["prize"],);
 }
 
 class ViewmoreJoinChallenge extends StatefulWidget {
@@ -527,24 +530,16 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                                               MainAxisAlignment
                                                                   .center,
                                                           children: [
-                                                            Text("DAY",
-                                                                style: GoogleFonts.poppins(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        12,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600)),
+                                                           
                                                             Padding(
                                                               padding:
                                                                   const EdgeInsets
                                                                           .only(
                                                                       left: 5),
                                                               child: Text(
-                                                                  day[index %
-                                                                      day
-                                                                          .length],
+                                                                challengesOne[
+                                                                      index]
+                                                                  .prize.toString(),
                                                                   style: GoogleFonts.poppins(
                                                                       color: Colors
                                                                           .white,
@@ -555,10 +550,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                                                               .w600)),
                                                             ),
                                                             Text(
-                                                                " / " +
-                                                                    challengesOne[
-                                                                            index]
-                                                                        .streakDays,
+                                                               " Gwei",
                                                                 style: GoogleFonts.poppins(
                                                                     color: Colors
                                                                         .white,

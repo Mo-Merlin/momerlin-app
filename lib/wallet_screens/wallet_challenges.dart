@@ -25,8 +25,8 @@ import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import 'challangedetails.dart';
 import 'joinchallengedetail.dart';
-import 'leaderboard.dart';
-import 'mychallengedetails.dart';
+// import 'leaderboard.dart';
+// import 'mychallengedetails.dart';
 // import 'googlesign.dart';
 // import 'healthkit.dart';
 
@@ -521,26 +521,8 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
     'email',
     'https://www.googleapis.com/auth/fitness.activity.read',
     'https://www.googleapis.com/auth/fitness.activity.write',
-    'https://www.googleapis.com/auth/fitness.blood_glucose.read',
-    'https://www.googleapis.com/auth/fitness.blood_glucose.write',
-    'https://www.googleapis.com/auth/fitness.blood_pressure.read',
-    'https://www.googleapis.com/auth/fitness.blood_pressure.write',
-    'https://www.googleapis.com/auth/fitness.body.read',
-    'https://www.googleapis.com/auth/fitness.body.write',
-    'https://www.googleapis.com/auth/fitness.body_temperature.read',
-    'https://www.googleapis.com/auth/fitness.body_temperature.write',
-    'https://www.googleapis.com/auth/fitness.heart_rate.read',
-    'https://www.googleapis.com/auth/fitness.heart_rate.write',
     'https://www.googleapis.com/auth/fitness.location.read',
     'https://www.googleapis.com/auth/fitness.location.write',
-    'https://www.googleapis.com/auth/fitness.nutrition.read',
-    'https://www.googleapis.com/auth/fitness.nutrition.write',
-    'https://www.googleapis.com/auth/fitness.oxygen_saturation.read',
-    'https://www.googleapis.com/auth/fitness.oxygen_saturation.write',
-    'https://www.googleapis.com/auth/fitness.reproductive_health.read',
-    'https://www.googleapis.com/auth/fitness.reproductive_health.write',
-    'https://www.googleapis.com/auth/fitness.sleep.read',
-    'https://www.googleapis.com/auth/fitness.sleep.write',
   ],
 );
 
@@ -2105,10 +2087,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 context,
                                                 MaterialPageRoute(
                                                     builder: (context) =>
-                                                        MyChallengesdetails(
+                                                        Challengesdetail(
                                                             challange:
                                                                 mychallenge[
-                                                                    index])));
+                                                                        index]
+                                                                    .id)));
                                             // if (elementsOne[index]['name'] ==
                                             //     '5KM RUN STREAK') {
                                             // joinChallenge(context);
@@ -2449,7 +2432,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                         Challengesdetail(
                                                             challange:
                                                                 joingetchallenge[
-                                                                    index])));
+                                                                        index]
+                                                                    .challenge
+                                                                    .id)));
                                           },
                                           child: Stack(
                                             children: [
@@ -2918,10 +2903,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
-                                                    LeaderboardChallengesdetail(
+                                                    Challengesdetail(
                                                         challange:
                                                             leaderboardAll[
-                                                                index])));
+                                                                index].challenge.id)));
                                         // leaderboardProfile(context);
                                       },
                                       child: Column(

@@ -9,6 +9,8 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
+import 'challangedetails.dart';
+
 class Challenges {
   var mode;
   var type;
@@ -383,6 +385,11 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
       "type": "Gwei",
     },
   ];
+  var url = [
+    "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
+    "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
+    "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
+  ];
   List<Color> joinChallengeColorList = [
     blue1,
     spendingPink,
@@ -528,7 +535,13 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
               itemBuilder: (context, index) {
                 return InkWell(
                   onTap: () {
-                    leaderboardProfile(context);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Challengesdetail(
+                                challange:
+                                    leaderboardAll[index].challenge.id)));
+                    // leaderboardProfile(context);
                   },
                   child: Column(
                     children: [
@@ -566,87 +579,112 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
                               decoration: BoxDecoration(
                                   color: white.withOpacity(0.1),
                                   borderRadius: BorderRadius.circular(20)),
-                              child: ListTile(
-                                leading: ClipRRect(
-                                  borderRadius: BorderRadius.circular(30),
-                                  child: Container(
+                              child: Row(
+                                children: [
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(30),
+                                    child: Container(
                                       height: 35,
                                       width: 35,
                                       color: button,
                                       child: Image.network(
-                                        elements[index]['url'],
+                                        url[index % url.length],
                                         fit: BoxFit.cover,
-                                      )),
-                                ),
-                                title: FittedBox(
-                                  fit: BoxFit.scaleDown,
-                                  child: Text(
-                                    leaderboardAll[index]
-                                        .competitor
-                                        .fullName
-                                        .toString()
-                                        .toUpperCase(),
-                                    style: GoogleFonts.poppins(
-                                      color: Colors.white,
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                subtitle: RatingBar.builder(
-                                  initialRating: 3,
-                                  minRating: 1,
-                                  direction: Axis.horizontal,
-                                  allowHalfRating: true,
-                                  itemCount: 3,
-                                  itemSize: 10,
-                                  itemPadding:
-                                      EdgeInsets.symmetric(horizontal: 0.2),
-                                  itemBuilder: (context, _) => Icon(
-                                    Icons.star,
-                                    color: Colors.amber,
+                                  SizedBox(
+                                    width: 10,
                                   ),
-                                  onRatingUpdate: (rating) {
-                                    print(rating);
-                                  },
-                                ),
-                                trailing: Container(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.05,
-                                  width:
-                                      MediaQuery.of(context).size.width * 0.25,
-                                  //height: 38, width: 98,
-                                  decoration: BoxDecoration(
-                                      color: Colors.white.withOpacity(0.1),
-                                      borderRadius: BorderRadius.circular(16)),
-                                  child: FittedBox(
-                                    fit: BoxFit.scaleDown,
-                                    child: Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Text(
-                                            leaderboardAll[index]
-                                                .challenge
-                                                .prize
-                                                .toString(),
-                                            style: GoogleFonts.poppins(
-                                                color: Colors.white,
-                                                fontSize: 16,
-                                                fontWeight: FontWeight.w600)),
-                                        Padding(
-                                          padding:
-                                              const EdgeInsets.only(left: 5),
-                                          child: Text("Gwei",
-                                              style: GoogleFonts.poppins(
-                                                  color: Colors.orangeAccent,
-                                                  fontSize: 12,
-                                                  fontWeight: FontWeight.w400)),
+                                  Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                        mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                        Container(
+                                            alignment: Alignment.centerLeft,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width *
+                                                0.4,
+                                            child:
+                                      FittedBox(
+                                        fit: BoxFit.scaleDown,
+                                        child: Text(
+                                          leaderboardAll[index]
+                                              .competitor
+                                              .fullName
+                                              .toString()
+                                              .toUpperCase(),
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),),
+                                      ),
+                                      RatingBar.builder(
+                                        initialRating: 3,
+                                        minRating: 1,
+                                        direction: Axis.horizontal,
+                                        allowHalfRating: true,
+                                        itemCount: 3,
+                                        itemSize: 10,
+                                        itemPadding: EdgeInsets.symmetric(
+                                            horizontal: 0.2),
+                                        itemBuilder: (context, _) => Icon(
+                                          Icons.star,
+                                          color: Colors.amber,
                                         ),
-                                      ],
+                                        onRatingUpdate: (rating) {
+                                          print(rating);
+                                        },
+                                      ),
+                                    ],
+                                  ),
+                                  Container(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.05,
+                                    width: MediaQuery.of(context).size.width *
+                                        0.23,
+                                    //height: 38, width: 98,
+                                    decoration: BoxDecoration(
+                                        color: Colors.white.withOpacity(0.1),
+                                        borderRadius:
+                                            BorderRadius.circular(16)),
+                                    child: FittedBox(
+                                      fit: BoxFit.scaleDown,
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                              leaderboardAll[index]
+                                                  .challenge
+                                                  .prize
+                                                  .toString(),
+                                              style: GoogleFonts.poppins(
+                                                  color: Colors.white,
+                                                  fontSize: 16,
+                                                  fontWeight: FontWeight.w600)),
+                                          Padding(
+                                            padding:
+                                                const EdgeInsets.only(left: 5),
+                                            child: Text("Gwei",
+                                                style: GoogleFonts.poppins(
+                                                    color: Colors.orangeAccent,
+                                                    fontSize: 12,
+                                                    fontWeight:
+                                                        FontWeight.w400)),
+                                          ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
+                                ],
                               ),
                             ),
                           ),
