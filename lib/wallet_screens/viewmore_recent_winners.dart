@@ -233,9 +233,7 @@ class LeaderCompetitor {
 }
 
 class ViewmoreRecentWinners extends StatefulWidget {
-  final challange;
-
-  const ViewmoreRecentWinners({Key key, this.challange}) : super(key: key);
+  const ViewmoreRecentWinners({Key key}) : super(key: key);
 
   @override
   _ViewmoreRecentWinnersState createState() => _ViewmoreRecentWinnersState();
@@ -251,7 +249,6 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
     super.initState();
     getUserLanguage();
     recentWinners1();
-    //getwinnerChallenges(widget.challange);
   }
 
   // ignore: todo
@@ -265,6 +262,10 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
     }
   }
 
+  var difference;
+  Map<Leader, dynamic> challangedetail;
+  var startDate;
+  var endDate;
   Future<void> recentWinners1() async {
     setState(() {
       loading = false;
@@ -281,6 +282,18 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
           loading = false;
         });
 
+        DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .parse(res["leaders"]["challenge"]["startAt"]);
+        var inputDate = DateTime.parse(parseDate.toString());
+        startDate = (DateFormat.yMMMd().format(inputDate)).toString();
+        DateTime parseendDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+            .parse(res["leaders"]["challenge"]["endAt"]);
+        var endinputDate = DateTime.parse(parseendDate.toString());
+        endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
+        final endat = DateTime.parse(res["leaders"]["challenge"]["endAt"]);
+        final date2 = DateTime.now();
+        difference = date2.difference(endat).inDays;
+
         recentWinners = [];
         for (var i = 0; i < res["leaders"].length; i++) {
           recentWinners.add(Leader.fromJson(res["leaders"][i]));
@@ -295,46 +308,6 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
       }
     }
   }
-
-  // var difference;
-  // Map<String, dynamic> challangedetail;
-  // var startDate;
-  // var endDate;
-  // Future<void> getwinnerChallenges(challangeid) async {
-  //   var res = await UserRepository().getwinnerChallenges(challangeid);
-  //   // print("USER ID :" + user[0]["uid"]);
-  //   // print(res["leaders"]);
-  //   if (res["success"] == true) {
-  //     setState(() {
-  //       loading = true;
-  //     });
-
-  //     challangedetail = res['challenge'];
-  //     DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-  //         .parse(challangedetail['startAt']);
-  //     var inputDate = DateTime.parse(parseDate.toString());
-  //     startDate = (DateFormat.yMMMd().format(inputDate)).toString();
-  //     DateTime parseendDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-  //         .parse(challangedetail['endAt']);
-  //     var endinputDate = DateTime.parse(parseendDate.toString());
-  //     endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
-  //     final endat = DateTime.parse(challangedetail['endAt']);
-  //     final date2 = DateTime.now();
-  //     difference = date2.difference(endat).inDays;
-
-  //     // for (var i = 0; i < res["leaders"].length; i++) {
-  //     //   mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
-  //     // }
-  //     // for (var i = 0; i < res["winners"].length; i++) {
-  //     //   winnerdetail.add(WinnerDetails.fromJson(res["winners"][i]));
-  //     // }
-  //   } else {
-  //     setState(() {
-  //       loading = true;
-  //     });
-  //   }
-  //   // print("PAVIMANO12 $res");
-  // }
 
   // ignore: todo
   //TODO: LanguageEnd
@@ -610,18 +583,19 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                         ),
                                       ),
 
-                                      // Text(
-                                      //   difference == 0
-                                      //       ? "Yesterday"
-                                      //       : difference >= 0
-                                      //           ? "${endDate.toString()}"
-                                      //           : "Challenge ongoing now",
-                                      //   style: GoogleFonts.poppins(
-                                      //       decoration: TextDecoration.none,
-                                      //       color: Colors.white,
-                                      //       fontSize: 15,
-                                      //       fontWeight: FontWeight.w600),
-                                      // ),
+                                      Text(
+                                        difference == 0
+                                            ? "Yesterday"
+                                            : difference >= 0
+                                                ? "${endDate.toString()}"
+                                                : "Challenge ongoing now",
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.white,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+
                                       // Text("yesterday",
                                       //     style: GoogleFonts.poppins(
                                       //         color: Colors.white54,
