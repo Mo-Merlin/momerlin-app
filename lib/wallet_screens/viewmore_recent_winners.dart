@@ -282,20 +282,19 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
           loading = false;
         });
 
-        DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .parse(res["leaders"]["challenge"]["startAt"]);
-        var inputDate = DateTime.parse(parseDate.toString());
-        startDate = (DateFormat.yMMMd().format(inputDate)).toString();
-        DateTime parseendDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-            .parse(res["leaders"]["challenge"]["endAt"]);
-        var endinputDate = DateTime.parse(parseendDate.toString());
-        endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
-        final endat = DateTime.parse(res["leaders"]["challenge"]["endAt"]);
-        final date2 = DateTime.now();
-        difference = date2.difference(endat).inDays;
-
-        recentWinners = [];
         for (var i = 0; i < res["leaders"].length; i++) {
+          DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+              .parse(res["leaders"][i]["challenge"]["startAt"]);
+          var inputDate = DateTime.parse(parseDate.toString());
+          startDate = (DateFormat.yMMMd().format(inputDate)).toString();
+          DateTime parseendDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
+              .parse(res["leaders"][i]["challenge"]["endAt"]);
+          var endinputDate = DateTime.parse(parseendDate.toString());
+          endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
+          final endat = DateTime.parse(res["leaders"][i]["challenge"]["endAt"]);
+          final date2 = DateTime.now();
+          difference = date2.difference(endat).inDays;
+
           recentWinners.add(Leader.fromJson(res["leaders"][i]));
         }
       } else {
@@ -593,7 +592,7 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                             decoration: TextDecoration.none,
                                             color: Colors.white,
                                             fontSize: 15,
-                                            fontWeight: FontWeight.w600),
+                                            fontWeight: FontWeight.w300),
                                       ),
 
                                       // Text("yesterday",
