@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -766,7 +768,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
     // define the types to get
     List<HealthDataType> types = [
-      HealthDataType.DISTANCE_DELTA,
+      HealthDataType.STEPS,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
     ];
     List<HealthDataPoint> healthData =
         await health.getHealthDataFromTypes(startDate, endDate, types);
@@ -777,9 +780,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
     // you MUST request access to the data types before reading them
     bool accessWasGranted = await health.requestAuthorization(types);
-    if (accessWasGranted) {
-      await UserRepository().updateUser(1);
-    }
+    // if (accessWasGranted) {
+    //   await UserRepository().updateUser(1);
+    // }
     if (accessWasGranted) {
       try {
         // fetch new data
@@ -866,6 +869,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
       gettoken();
     }
+    getmyChallenges();
+    getjoinChallenges();
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -1140,199 +1145,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
     }
   }
 
-  List elements = [
-    {
-      "count": "1",
-      "leadername": "zuno",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "2",
-      "leadername": "timodit",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "3",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-    {
-      "count": "4",
-      "leadername": "sadiam",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "5",
-      "leadername": "sadiam",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "6",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-  ];
-
-  List elementsOne = [
-    {
-      "name": "5KM RUN STREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "5/7",
-      "trophys": "trophy3",
-      "color": Colors.blue,
-    },
-    {
-      "name": "3KM RUN STREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "3/7",
-      "trophys": "trophy2",
-      "color": Colors.greenAccent,
-    },
-    {
-      "name": "1KM WALK STREAK",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "+300",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "1/7",
-      "trophys": "trophy1",
-      "color": Colors.redAccent,
-    },
-    {
-      "name": "5KM RUN STREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "5/7",
-      "trophys": "trophy3",
-      "color": Colors.blue,
-    },
-    {
-      "name": "3KM RUN STREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "3/7",
-      "trophys": "trophy2",
-      "color": Colors.greenAccent,
-    },
-    {
-      "name": "1KM WALK STREAK",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "+300",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "1/7",
-      "trophys": "trophy1",
-      "color": Colors.redAccent,
-    },
-  ];
-  List elementsTwo = [
-    {
-      "name": "5KM RUN \nSTREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "5/7",
-      "trophys": "trophy3",
-      "color": Colors.blue,
-    },
-    {
-      "name": "3KM RUN \nSTREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "3/7",
-      "trophys": "trophy2",
-      "color": Colors.greenAccent,
-    },
-    {
-      "name": "1KM WALK \nSTREAK",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "+300",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "1/7",
-      "trophys": "trophy1",
-      "color": Colors.redAccent,
-    },
-    {
-      "name": "5KM RUN \nSTREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "5/7",
-      "trophys": "trophy3",
-      "color": Colors.blue,
-    },
-    {
-      "name": "3KM RUN \nSTREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "+750",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "3/7",
-      "trophys": "trophy2",
-      "color": Colors.greenAccent,
-    },
-    {
-      "name": "1KM WALK \nSTREAK",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "+300",
-      "type": "Gwei",
-      "day": "DAY",
-      "count": "1/7",
-      "trophys": "trophy1",
-      "color": Colors.redAccent,
-    },
-  ];
   var colors = [
     blue1,
     Colors.greenAccent,
@@ -1371,6 +1183,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
     Colors.green[300],
     Colors.pinkAccent[100],
     Colors.orange[300],
+  ];
+  var url = [
+    "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
+    "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
+    "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
   ];
   @override
   Widget build(BuildContext context) {
@@ -1700,6 +1517,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Container(
+                                              padding: EdgeInsets.only(
+                                                  left: 10, right: 10),
                                               height: MediaQuery.of(context)
                                                       .size
                                                       .height *
@@ -1775,36 +1594,30 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           MainAxisAlignment
                                                               .center,
                                                       children: [
-                                                        FittedBox(
-                                                          fit: BoxFit.scaleDown,
-                                                          child: Text(
-                                                              recentWinners[
-                                                                      index]
-                                                                  .prize
-                                                                  .toString(),
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .white,
-                                                                  fontSize: 20,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .bold)),
-                                                        ),
-                                                        Padding(
-                                                          padding:
-                                                              const EdgeInsets
-                                                                      .only(
-                                                                  left: 5),
-                                                          child: Text(
-                                                              elements[index]
-                                                                  ['type'],
-                                                              style: GoogleFonts.poppins(
-                                                                  color: Colors
-                                                                      .orangeAccent,
-                                                                  fontSize: 14,
-                                                                  fontWeight:
-                                                                      FontWeight
-                                                                          .w500)),
+                                                        Container(
+                                                          width: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .width *
+                                                              0.22,
+                                                          child: FittedBox(
+                                                            fit: BoxFit
+                                                                .scaleDown,
+                                                            child: Text(
+                                                                recentWinners[
+                                                                            index]
+                                                                        .prize
+                                                                        .toString() +
+                                                                    " Gwei",
+                                                                style: GoogleFonts.poppins(
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontSize:
+                                                                        16,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .bold)),
+                                                          ),
                                                         ),
                                                       ],
                                                     ),
@@ -1826,13 +1639,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           borderRadius:
                                               BorderRadius.circular(30),
                                           child: Container(
-                                              height: 30,
-                                              width: 30,
-                                              color: button,
-                                              child: Image.network(
-                                                elements[index]['url'],
-                                                fit: BoxFit.cover,
-                                              )),
+                                            height: 30,
+                                            width: 30,
+                                            color: button,
+                                            child: Image.network(
+                                              url[index % url.length],
+                                              fit: BoxFit.cover,
+                                            ),
+                                          ),
                                         ),
                                       )
                                     ],
@@ -1965,36 +1779,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         0.23,
                                     width: MediaQuery.of(context).size.width,
                                     margin: EdgeInsets.only(left: 5, right: 0),
-                                    //color: Colors.indigo,
-                                    // decoration: BoxDecoration(
-                                    //   gradient: RadialGradient(
-                                    //     colors: [
-                                    //       //gPink.withOpacity(0.3),
-                                    //       gBlue.withOpacity(0.4),
-                                    //       white.withOpacity(0.0),
-                                    //     ],
-                                    //     // Add one stop for each color
-                                    //     // Values should increase from 0.0 to 1.0
-                                    //     stops: [0.6, 1],
-                                    //     center: Alignment(-.2, -.2),
-                                    //     focal: Alignment(0.1, -0.1),
-                                    //     //focalRadius: 0.3,
-                                    //   ),
-                                    // ),
                                     padding: EdgeInsets.only(
                                         left: 4, top: 10, bottom: 0, right: 0),
                                     child: ListView.builder(
                                       scrollDirection: Axis.horizontal,
                                       itemCount: challengesOne.length,
                                       itemBuilder: (context, index) {
-                                        print(
-                                            "challenge length : ${challengesOne.length}");
                                         return InkWell(
                                           onTap: () {
-                                            // googlefitint != true
-                                            //     ? startBetting(context,
-                                            //         challengesOne[index])
-                                            // :
                                             user[0]["googlefitenable"] == 1
                                                 ? Navigator.push(
                                                     context,
@@ -2005,13 +1797,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                     challengesOne[
                                                                         index])))
                                                 : startBetting(context);
-                                            //   if (elements[index]['name'] ==
-                                            //       '@momozuno \nhas earned') {
-                                            //     Navigator.push(
-                                            //         context,
-                                            //         MaterialPageRoute(
-                                            //             builder: (context) => MyActivity()));
-                                            //   }
                                           },
                                           child: Stack(
                                             children: [
@@ -3191,7 +2976,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                               16)),
                                                   child: Center(
                                                     child: Text(
-                                                      elements[index]["count"],
+                                                      "${index + 1}".toString(),
                                                       style:
                                                           GoogleFonts.poppins(
                                                         color: Colors.white,
@@ -3236,8 +3021,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           width: 35,
                                                           color: button,
                                                           child: Image.network(
-                                                            elements[index]
-                                                                ['url'],
+                                                            url[index %
+                                                                url.length],
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
@@ -4192,45 +3977,45 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   //color: Colors.red,
                                   child: Center(
                                     child: RichText(
-                                        text: TextSpan(children: [
-                                      TextSpan(
-                                          text: (lang.length != null &&
-                                                  lang.length != 0 &&
-                                                  userLanguage['howmany'] !=
-                                                      null)
-                                              ? "${userLanguage['howmany']}"
-                                              : 'How many',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                      TextSpan(
-                                          text: (lang.length != null &&
-                                                  lang.length != 0 &&
-                                                  userLanguage['sats'] != null)
-                                              ? "${userLanguage['sats']}"
-                                              : ' Gwei ',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.orange,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w500,
-                                          )),
-                                      TextSpan(
-                                          text: (lang.length != null &&
-                                                  lang.length != 0 &&
-                                                  userLanguage[
-                                                          'wouldyouliketowager'] !=
-                                                      null)
-                                              ? "${userLanguage['wouldyouliketowager']}"
-                                              : 'would \n       you like to wager?',
-                                          style: GoogleFonts.poppins(
-                                            color: Colors.white,
-                                            height: 1,
-                                            fontSize: 25,
-                                            fontWeight: FontWeight.w600,
-                                          )),
-                                    ])),
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text: (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage['howmany'] !=
+                                                          null)
+                                                  ? "${userLanguage['howmany']}"
+                                                  : 'How many',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w600,
+                                              )),
+                                          TextSpan(
+                                              text: ' Gwei ',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.orange,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w500,
+                                              )),
+                                          TextSpan(
+                                            text: (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage[
+                                                            'wouldyouliketowager'] !=
+                                                        null)
+                                                ? "${userLanguage['wouldyouliketowager']}"
+                                                : 'would \n       you like to wager?',
+                                            style: GoogleFonts.poppins(
+                                              color: Colors.white,
+                                              height: 1,
+                                              fontSize: 25,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
                                   ),
                                 ),
                               ],
@@ -4240,7 +4025,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.15,
+                              height: MediaQuery.of(context).size.height * 0.21,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -4253,7 +4038,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.12,
                             ),
                             Container(
                               height: 55,
@@ -4320,11 +4105,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
             void _onItemFocus(int index) {
-              print("123456,$index");
-              print(km[index]);
               setState(() {
                 _kmfocusedIndex = index;
-                print(_kmfocusedIndex);
               });
             }
 
@@ -4463,7 +4245,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.16,
+                              height: MediaQuery.of(context).size.height * 0.21,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -4477,7 +4259,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ),
 
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.12,
                             ),
                             Container(
                               height: 55,
@@ -4894,11 +4676,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
             void _onItemFocus(int index) {
-              print("123456,$index");
-              print(wage[index]);
               setState(() {
                 _wageIndex = index;
-                print(_wageIndex);
               });
             }
 
@@ -4983,7 +4762,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       color: Color(0xff1C203A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32),
-                        // side: new BorderSide(color: Colors.black, width: 1.0),
                       ),
                       child: Container(
                         height: 467,
@@ -5033,7 +4811,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               height: MediaQuery.of(context).size.height * 0.02,
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.16,
+                              height: MediaQuery.of(context).size.height * 0.21,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -5045,39 +4823,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 dynamicItemSize: false,
                               ),
                             ),
-                            // HorizontalList(),
-                            // Container(
-                            //   height: MediaQuery.of(context).size.height * 0.13,
-                            //   width: MediaQuery.of(context).size.width,
-                            //   // color: Colors.amber,
-                            //   child: SfLinearGauge(
-                            //       markerPointers: [
-                            //         LinearShapePointer(
-                            //           value: _pointerValue,
-                            //           onValueChanged: (value) => {
-                            //             setState(() => {_pointerValue = value})
-                            //           },
-                            //           shapeType: LinearShapePointerType
-                            //               .invertedTriangle,
-                            //           color: blue1,
-                            //           elevation: 10,
-                            //         )
-                            //       ],
-                            //       tickPosition: LinearElementPosition.outside,
-                            //       labelPosition: LinearLabelPosition.outside,
-                            //       majorTickStyle: LinearTickStyle(
-                            //           length: 70, thickness: 2, color: button),
-                            //       minorTickStyle: LinearTickStyle(
-                            //           length: 40,
-                            //           thickness: 1.75,
-                            //           color: button),
-                            //       axisLabelStyle: GoogleFonts.montserrat(
-                            //         fontSize: 15,
-                            //         color: Colors.grey,
-                            //       )),
-                            // ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.03,
+                              height: MediaQuery.of(context).size.height * 0.04,
                             ),
                             Text(
                               "WINNER GETS",
@@ -5109,13 +4856,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
                                     Navigator.pop(context);
                                     selectshowsummary(context);
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             WalletChallengeFive()));
                                   },
-                                  //color: blue.withOpacity(0.3),
                                   color: blue1,
                                   child: Text(
                                     (lang.length != null &&
@@ -5581,28 +5322,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ],
                                 ),
-
-                                // Row(
-                                //   children: [
-                                //     Padding(
-                                //       padding: const EdgeInsets.only(
-                                //           top: 20, left: 25),
-                                //       child: Text(
-                                //         (lang.length != null &&
-                                //                 lang.length != 0 &&
-                                //                 userLanguage['satswagered'] !=
-                                //                     null)
-                                //             ? "${userLanguage['satswagered']}"
-                                //             : "Gwei Wagered",
-                                //         style: GoogleFonts.poppins(
-                                //             decoration: TextDecoration.none,
-                                //             color: Colors.grey,
-                                //             fontSize: 15,
-                                //             fontWeight: FontWeight.w400),
-                                //       ),
-                                //     ),
-                                //   ],
-                                // ),
                                 Row(
                                   children: [
                                     Padding(
@@ -5625,7 +5344,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ],
                                 ),
-
                                 Row(
                                   children: [
                                     Padding(
@@ -5711,7 +5429,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ),
                                   ],
                                 ),
-
                                 Row(
                                   children: [
                                     Padding(
@@ -5829,12 +5546,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ),
                                 SizedBox(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.03,
+                                      MediaQuery.of(context).size.height * 0.02,
                                 ),
                                 Container(
                                   height: 55,
                                   width:
-                                      MediaQuery.of(context).size.height * 0.6,
+                                      MediaQuery.of(context).size.width * 0.8,
                                   decoration: BoxDecoration(
                                     //color: Colors.amber,
                                     borderRadius: BorderRadius.circular(15),
@@ -5847,11 +5564,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       onPressed: () {
                                         Navigator.pop(context);
                                         createChallenges();
-                                        // Navigator.push(
-                                        //     context,
-                                        //     MaterialPageRoute(
-                                        //         builder: (context) =>
-                                        //             ChallengeFinal()));
                                       },
                                       color: blue1,
                                       child: Text(
@@ -5869,15 +5581,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         ),
                                       )),
                                 ),
-                                // SizedBox(
-                                //   height:
-                                //       MediaQuery.of(context).size.height * 0.03,
-                                // ),
                               ],
                             ),
                           ),
                         ),
                       ),
+                    ),
+
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.02,
                     ),
                   ],
                 ),
@@ -7500,7 +7212,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
           builder: (BuildContext context, StateSetter setState) {
             return Container(
               color: backgroundcolor.withOpacity(0.7),
-              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 mainAxisAlignment: MainAxisAlignment.start,
@@ -7510,10 +7221,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       Card(
                         color: gridcolor,
                         elevation: 20,
-                        // shadowColor: button.withOpacity(0.5),
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(150),
-                          // side: new BorderSide(color: Colors.black, width: 1.0),
                         ),
                         child: GestureDetector(
                           onTap: () {
@@ -7549,206 +7258,258 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       ),
                     ],
                   ),
-                  Spacer(),
-                  Center(
-                    child: Container(
-                        height: 200,
-                        width: 200,
-                        child: Image.asset("assets/images/toyface.png",
-                            fit: BoxFit.cover)),
-                  ),
-                  Align(
-                    alignment: Alignment.bottomCenter,
-                    child: Card(
-                      shadowColor: button.withOpacity(0.5),
-                      color: Color(0xff1C203A),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(32),
-                        // side: new BorderSide(color: Colors.black, width: 1.0),
-                      ),
-                      child: Container(
-                        height: 467,
-                        width: MediaQuery.of(context).size.width,
-                        padding: EdgeInsets.all(0),
-                        child: Column(
-                          children: [
-                            SizedBox(height: 20),
-                            Container(
-                                height: 4,
-                                width: 50,
-                                decoration: BoxDecoration(
-                                    color: text1,
-                                    borderRadius: BorderRadius.circular(15))),
-                            SizedBox(
-                              height: 20,
+                  // Spacer(),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Container(
+                              height: 200,
+                              width: 200,
+                              child: Image.asset("assets/images/toyface.png",
+                                  fit: BoxFit.cover)),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Card(
+                            shadowColor: button.withOpacity(0.5),
+                            color: Color(0xff1C203A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                              // side: new BorderSide(color: Colors.black, width: 1.0),
                             ),
-                            RichText(
-                                text: TextSpan(children: [
-                              TextSpan(
-                                  text: (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['startbetting'] != null)
-                                      ? "${userLanguage['startbetting']}"
-                                      : 'Start betting',
-                                  style: GoogleFonts.poppins(
-                                    color: Colors.white,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                              TextSpan(
-                                  text: (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['gwei'] != null)
-                                      ? "${userLanguage['gwei']}"
-                                      : ' Gwei ',
-                                  style: GoogleFonts.montserrat(
-                                    color: Colors.orange,
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.w600,
-                                  )),
-                            ])),
-                            // SizedBox(
-                            //   height: 20,
-                            // ),
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage[
-                                              'bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin'] !=
-                                          null)
-                                  ? "${userLanguage['bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin']}"
-                                  : "Betting is as easy as abracadabra, just\n  connect your fitness tracker to begin",
-                              style: GoogleFonts.poppins(
-                                decoration: TextDecoration.none,
-                                color: text1,
-                                fontSize: 12,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 50,
-                            ),
-                            Container(
-                              height: 55,
-                              width: MediaQuery.of(context).size.width * 0.6,
-                              // ignore: deprecated_member_use
-                              child: RaisedButton(
-                                shape: RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(30),
-                                ),
-                                color: button,
-                                onPressed: () {
-                                  Navigator.pop(context);
-
-                                  gettoken();
-                                  fetchData();
-                                  // joinChallenge(context, chall);
-                                  // Navigator.push(
-                                  //     context,
-                                  //     MaterialPageRoute(
-                                  //         builder: (context) => HealthKit()));
-                                },
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        height: 50,
-                                        width: 50,
-                                        decoration: BoxDecoration(
-                                            color: white,
-                                            borderRadius:
-                                                BorderRadius.circular(30)),
-                                        child: Image.asset(
-                                          "assets/images/gfit.png",
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.55,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.all(0),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 20),
+                                  Container(
+                                      height: 4,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                          color: text1,
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                        text: (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['startbetting'] !=
+                                                    null)
+                                            ? "${userLanguage['startbetting']}"
+                                            : 'Start betting',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
                                         )),
-                                    SizedBox(width: 20),
-                                    Text(
+                                    TextSpan(
+                                        text: (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['gwei'] != null)
+                                            ? "${userLanguage['gwei']}"
+                                            : ' Gwei ',
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.orange,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ])),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage[
+                                                    'bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin'] !=
+                                                null)
+                                        ? "${userLanguage['bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin']}"
+                                        : "Betting is as easy as abracadabra, just\n  connect your fitness tracker to begin",
+                                    style: GoogleFonts.poppins(
+                                      decoration: TextDecoration.none,
+                                      color: text1,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        if (Platform.isAndroid) {
+                                          Navigator.pop(context);
+
+                                          gettoken();
+                                          fetchData();
+                                          // Android-specific code
+                                        } else if (Platform.isIOS) {
+                                          // iOS-specific code
+                                        }
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                                color: white,
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            child: Image.asset(
+                                              "assets/images/gfit.png",
+                                            ),
+                                          ),
+                                          SizedBox(width: 20),
+                                          Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['googlefit'] !=
+                                                        null)
+                                                ? "${userLanguage['googlefit']}"
+                                                : "GOOGLE FIT",
+                                            style: GoogleFonts.poppins(
+                                              //color: blue1,
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        // fetchData();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              height: 50,
+                                              width: 50,
+                                              decoration: BoxDecoration(
+                                                  color: healthkitPink
+                                                      .withOpacity(0.4),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              child: Image.asset(
+                                                "assets/images/ahkit.png",
+                                              )),
+                                          SizedBox(width: 20),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                (lang.length != null &&
+                                                        lang.length != 0 &&
+                                                        userLanguage[
+                                                                'applehealthkit'] !=
+                                                            null)
+                                                    ? "${userLanguage['applehealthkit']}"
+                                                    : "APPLE HEALTH KIT",
+                                                style: GoogleFonts.poppins(
+                                                  //color: blue1,
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 23,
+                                                width: 86,
+                                                decoration: BoxDecoration(
+                                                    color: blue1,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Center(
+                                                  child: Text(
+                                                      (lang.length != null &&
+                                                              lang.length !=
+                                                                  0 &&
+                                                              userLanguage[
+                                                                      'commingsoon'] !=
+                                                                  null)
+                                                          ? "${userLanguage['commingsoon']}"
+                                                          : "COMING SOON",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 8,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      bettingGuide(context);
+                                    },
+                                    child: Text(
                                       (lang.length != null &&
                                               lang.length != 0 &&
-                                              userLanguage['googlefit'] != null)
-                                          ? "${userLanguage['googlefit']}"
-                                          : "GOOGLE FIT",
+                                              userLanguage['howdoesthiswork'] !=
+                                                  null)
+                                          ? "${userLanguage['howdoesthiswork']}"
+                                          : "How does this work?",
                                       style: GoogleFonts.poppins(
-                                        //color: blue1,
-                                        color: Colors.white,
-                                        fontSize: 14,
+                                        color: blue2,
+                                        fontSize: 12,
                                         fontWeight: FontWeight.w600,
                                       ),
                                     ),
-                                  ],
-                                ),
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              height: 20,
-                            ),
-                            // Container(
-                            //   height: 55,
-                            //   width: MediaQuery.of(context).size.width * 0.6,
-                            //   // ignore: deprecated_member_use
-                            //   child: RaisedButton(
-                            //     shape: RoundedRectangleBorder(
-                            //       borderRadius: BorderRadius.circular(30),
-                            //     ),
-                            //     color: button,
-                            //     onPressed: () {},
-                            //     child: Row(
-                            //       children: [
-                            //         Container(
-                            //             height: 50,
-                            //             width: 50,
-                            //             decoration: BoxDecoration(
-                            //                 color:
-                            //                     healthkitPink.withOpacity(0.4),
-                            //                 borderRadius:
-                            //                     BorderRadius.circular(30)),
-                            //             child: Image.asset(
-                            //               "assets/images/ahkit.png",
-                            //             )),
-                            //         SizedBox(width: 20),
-                            //         Text(
-                            //           (lang.length != null &&
-                            //                   lang.length != 0 &&
-                            //                   userLanguage['applehealthkit'] !=
-                            //                       null)
-                            //               ? "${userLanguage['applehealthkit']}"
-                            //               : "APPLE HEALTH KIT",
-                            //           style: GoogleFonts.poppins(
-                            //             //color: blue1,
-                            //             color: Colors.white,
-                            //             fontSize: 14,
-                            //             fontWeight: FontWeight.w600,
-                            //           ),
-                            //         ),
-                            //       ],
-                            //     ),
-                            //   ),
-                            // ),
-                            SizedBox(height: 25),
-                            InkWell(
-                              onTap: () {
-                                Navigator.pop(context);
-                                bettingGuide(context);
-                              },
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['howdoesthiswork'] != null)
-                                    ? "${userLanguage['howdoesthiswork']}"
-                                    : "How does this work?",
-                                style: GoogleFonts.poppins(
-                                  color: blue2,
-                                  fontSize: 12,
-                                  fontWeight: FontWeight.w600,
-                                ),
-                              ),
-                            ),
-                          ],
+                          ),
                         ),
-                      ),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                      ],
                     ),
                   ),
-                  // SizedBox(
-                  //   height: 30,
-                  // ),
                 ],
               ),
             );
@@ -7826,7 +7587,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       color: Color(0xff1C203A),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(32),
-                        // side: new BorderSide(color: Colors.black, width: 1.0),
                       ),
                       child: Container(
                         height: MediaQuery.of(context).size.height * 0.7,
@@ -7978,11 +7738,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ),
                                 child: Column(
                                   children: [
-                                    SizedBox(
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.02,
-                                    ),
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.height *
+                                    //           0.02,
+                                    // ),
                                     Container(
                                       height: 50,
                                       width: 50,

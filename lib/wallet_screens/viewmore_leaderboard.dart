@@ -272,9 +272,7 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
   //TODO: LanguageEnd
 
   Future<void> getChallenges() async {
-    setState(() {
-      loading = false;
-    });
+    
     var res = await UserRepository().getChallenges();
     if (res == false) {
       // Scaffold
@@ -301,9 +299,7 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
   }
 
   Future<void> getAllLeaderboard() async {
-    setState(() {
-      loading = false;
-    });
+   
     var res = await UserRepository().getAllLeaderboard();
     if (res == false) {
       // Scaffold

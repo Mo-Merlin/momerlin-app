@@ -807,13 +807,11 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.5,
+                                                0.4,
                                             child: FittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: Text(
-                                                winnerdetail[index]
-                                                    .winnerchallenge
-                                                    .fullName,
+                                                winnerdetail[index].winnerchallenge.fullName,
                                                 style: GoogleFonts.poppins(
                                                   color: white,
                                                   fontSize: 14,
@@ -935,10 +933,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                             children: [
                                               Container(
                                                 height: 59,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.87,
+                                               
                                                 decoration: BoxDecoration(
                                                   color: myActivityColorList[
                                                       index %

@@ -68,14 +68,17 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
       body: SingleChildScrollView(
         // padding: EdgeInsets.only(left: 20, right: 20, top: 270),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Stack(
+              alignment: Alignment.center,
               children: [
                 Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30, top: 100),
+                  padding: const EdgeInsets.only(left: 50, right: 30, top: 100),
                   child: Container(
+                    alignment: Alignment.center,
                     width: MediaQuery.of(context).size.height * 0.4,
-                    height: MediaQuery.of(context).size.height * 0.45,
+                    height: MediaQuery.of(context).size.height * 0.5,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: button,

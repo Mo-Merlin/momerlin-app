@@ -75,9 +75,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
   //TODO: LanguageEnd
 
   Future<void> getmyChallenges() async {
-    setState(() {
-      loading = false;
-    });
+   
     var res = await UserRepository().getmyChallenges(user[0]["uid"]);
 
     setState(() {

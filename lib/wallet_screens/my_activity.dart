@@ -142,7 +142,6 @@ class _MyActivityState extends State<MyActivity> {
   @override
   void initState() {
     super.initState();
-    getjoinChallenges();
     getUserLanguage();
     _controller = CalendarController();
   }
@@ -155,11 +154,14 @@ class _MyActivityState extends State<MyActivity> {
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
+
     if (user[0]["googlefitenable"] == 1) {
       // fetchData();
 
       gettoken();
     }
+
+    getjoinChallenges();
   }
 
   var token;
@@ -170,8 +172,7 @@ class _MyActivityState extends State<MyActivity> {
       token = ggAuth.accessToken;
       // getmyChallenges();
       getjoinChallenges();
-      print("pavimano ${ggAuth.idToken}");
-      print("pavimano ${ggAuth.accessToken}");
+     
     } catch (error) {
       print(error);
     }
@@ -181,9 +182,7 @@ class _MyActivityState extends State<MyActivity> {
   //TODO: LanguageEnd
 
   Future<void> getjoinChallenges() async {
-    setState(() {
-      loading = false;
-    });
+    
     var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
 
     setState(() {
@@ -197,7 +196,7 @@ class _MyActivityState extends State<MyActivity> {
       if (res["success"] == true) {
         joingetchallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-          print("PAVIMano ${res["challenges"]["docs"][i]}");
+         
           joingetchallenge
               .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
@@ -212,56 +211,7 @@ class _MyActivityState extends State<MyActivity> {
     }
   }
 
-  List elementsOne = [
-    {
-      "name": "5KM RUN STREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "DAY",
-      "type": "5/7",
-      "trophys": "trophy3"
-    },
-    {
-      "name": "5KM WALK STREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "DAY",
-      "type": "5/7",
-      "trophys": "trophy2"
-    },
-    {
-      "name": "INSERT CHALLENGE THREE",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "DAY",
-      "type": "1/7",
-      "trophys": "trophy1"
-    },
-    {
-      "name": "5KM RUN STREAK",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "DAY",
-      "type": "6/7",
-      "trophys": "trophy3"
-    },
-    {
-      "name": "3KM RUN STREAK",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "DAY",
-      "type": "2/7",
-      "trophys": "trophy2"
-    },
-    {
-      "name": "1KM WALK STREAK",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "DAY",
-      "type": "3/7",
-      "trophys": "trophy1"
-    },
-  ];
+  
   List<Color> myActivityColorList = [
     blue1,
     spendingPink,
