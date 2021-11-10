@@ -112,7 +112,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
   var exprydate;
   @override
   void initState() {
-    print(widget.challange);
+    // print(widget.challange);
     super.initState();
     getwinnerChallenges(widget.challange);
     getUserLanguage();
@@ -727,14 +727,12 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
-                    ),
+                    
                     winnerdetail.length == 0
                         ? SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03,
+                            height:0,
                           )
                         : Padding(
                             padding: EdgeInsets.only(left: 35),
@@ -878,7 +876,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                       },
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 35),

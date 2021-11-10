@@ -67,7 +67,7 @@ class _HealthKit extends State<HealthKit> {
     int steps = 0;
 
     if (accessWasGranted) {
-      print("PATTU $accessWasGranted");
+      // print("PATTU $accessWasGranted");
       try {
         // fetch new data
         List<HealthDataPoint> healthData =
@@ -128,8 +128,8 @@ class _HealthKit extends State<HealthKit> {
         itemCount: _healthDataList.length,
         itemBuilder: (_, index) {
           HealthDataPoint p = _healthDataList[index];
-          print(
-            "1234567 $p");
+          // print(
+          //   "1234567 $p");
           return ListTile(
             title: Text("${p.typeString}: ${p.value}"),
             trailing: Text('${p.unitString}'),
@@ -153,20 +153,18 @@ class _HealthKit extends State<HealthKit> {
   }
 
   Widget _content() {
-    print("1234567890- $AppState");
+    // print("1234567890- $AppState");
     if (_state == AppState.DATA_READY){
-    print("pavmu $_state");
+   
       return _contentDataReady();}
     else if (_state == AppState.NO_DATA)
     {
-      print("pav $_state");
+   
       return _contentNoData();
     }else if (_state == AppState.FETCHING_DATA){
-      print("pavi $_state");
-      return _contentFetchingData();
+  return _contentFetchingData();
     }else if (_state == AppState.AUTH_NOT_GRANTED){
-      print("wertyui $_state");
-      return _authorizationNotGranted();
+     return _authorizationNotGranted();
     }
     return _contentNotFetched();
   }

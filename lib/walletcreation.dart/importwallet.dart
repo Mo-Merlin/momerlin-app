@@ -65,7 +65,6 @@ class _ImportWalletPage extends State<ImportWalletPage> {
       if (usersave == true) {
         Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
       } else {}
-      print("PAVITHRA");
     } else {
       var user = await UserRepository().adduser({
         "ethAddress": _address,

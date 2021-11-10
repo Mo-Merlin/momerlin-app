@@ -20,13 +20,13 @@ class UserRepository {
 
   Future<dynamic> storeUser(dynamic udata) async {
     var save = UserDataSource().save(udata);
-    print("save $save");
+    // print("save $save");
     return save;
   }
 
   Future<dynamic> updateUser(dynamic udata) async {
     var save = UserDataSource().updatefit(udata);
-    print("save $save");
+    // print("save $save");
     return save;
   }
 
@@ -63,7 +63,7 @@ class UserRepository {
         },
       );
       var checkres = jsonDecode(res.body);
-      print(checkres);
+      // print(checkres);
       checkres["status"] = true;
       checkres["success"] = true;
       return checkres;
@@ -84,7 +84,7 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-      print(checkres);
+      // print(checkres);
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -95,9 +95,9 @@ class UserRepository {
 
 //updateuser
   Future<dynamic> updateuser(id, fullname) async {
-    print(
-      "12345678 $id , $fullname",
-    );
+    // print(
+      // "12345678 $id , $fullname",
+    // );
     try {
       var data = ({"fullName": fullname});
       var body = json.encode(data);
@@ -126,8 +126,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("ALL LEADERBOARD COUNT :  ${checkres.length}");
-      print("ALL LEADERBOARD :  $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -151,8 +149,7 @@ class UserRepository {
   }
 
   Future<dynamic> getTransaction1(walletaddress) async {
-    print("walletaddress $walletaddress");
-    try {
+   try {
       // var url = "http://192.168.43.124:8000/api/";
 //
       var res = await http.get(
@@ -177,7 +174,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("2345678 $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -205,7 +201,6 @@ class UserRepository {
   }
 
   Future<dynamic> getwinnerChallenges(challangeid) async {
-    print("challangeid $challangeid");
     try {
       // var url = "http://192.168.43.124:8000/api/challenges";
 
@@ -214,7 +209,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("PAVIMANO $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -225,7 +219,7 @@ class UserRepository {
 
   //create challange
   Future<dynamic> createchallenge(data) async {
-    print(data);
+    // print(data);
     try {
       var body = json.encode(data);
 
@@ -245,10 +239,7 @@ class UserRepository {
 
   // joining a challenge
   Future<dynamic> joiningchallenge(id, challengeId) async {
-    print("USER ID " +
-        id.toString() +
-        "  CHALLENGE ID " +
-        challengeId.toString());
+   
     try {
       var res = await http.put(
         '${url + "challenge/join?id=$id&challenge=$challengeId"}',
@@ -268,8 +259,7 @@ class UserRepository {
 
 // getjoining a challenge
   Future<dynamic> joingetchallenge(id, token) async {
-    print("12345678 $id");
-
+  
     try {
       var data = ({"token": token});
       var body = json.encode(data);
@@ -281,9 +271,7 @@ class UserRepository {
         body: body,
       );
       var checkres = jsonDecode(res.body);
-      // ignore: unnecessary_brace_in_string_interps
-      print("checkres ${checkres}");
-
+      
       return checkres;
     } catch (e) {
       print(e);
@@ -300,8 +288,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("ALL LEADERBOARD COUNT :  ${checkres.length}");
-      print("ALL LEADERBOARD :  $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -319,7 +305,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("USERS : ${checkres.length}");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -337,8 +322,6 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      print("Name count :  ${checkres.length}");
-      print("Nick Names :  $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {

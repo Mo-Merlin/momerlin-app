@@ -73,8 +73,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
 
   Future<void> checkUserNickname() async {
     var res = await UserRepository().checkNickname(_nicknameController.text);
-    print("pavithraManohran");
-    print(res["available"]);
+   
     if (res["available"] == false) {
       setState(() {
         nicknameAvailable="notavailable";

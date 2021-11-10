@@ -272,7 +272,6 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
   //TODO: LanguageEnd
 
   Future<void> getChallenges() async {
-    
     var res = await UserRepository().getChallenges();
     if (res == false) {
       // Scaffold
@@ -299,7 +298,6 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
   }
 
   Future<void> getAllLeaderboard() async {
-   
     var res = await UserRepository().getAllLeaderboard();
     if (res == false) {
       // Scaffold
@@ -325,62 +323,6 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
     }
   }
 
-  List elements = [
-    {
-      "count": "1",
-      "leadername": "zuno",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "2",
-      "leadername": "timodit",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "3",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-    {
-      "count": "4",
-      "leadername": "sadiam",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "5",
-      "leadername": "sadiam",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "6",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-  ];
   var url = [
     "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
     "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
@@ -563,7 +505,7 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
                                                 BorderRadius.circular(16)),
                                         child: Center(
                                           child: Text(
-                                            elements[index]["count"],
+                                            "${index + 1}",
                                             style: GoogleFonts.poppins(
                                               color: Colors.white,
                                               fontSize: 20,
@@ -655,7 +597,7 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
                                                     color: Colors.amber,
                                                   ),
                                                   onRatingUpdate: (rating) {
-                                                    print(rating);
+                                                  
                                                   },
                                                 ),
                                               ],

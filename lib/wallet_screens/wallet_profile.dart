@@ -41,7 +41,7 @@ class _WalletProfileState extends State<WalletProfile> {
 
   void updateuser(id, fullname) async {
     var res = await UserRepository().updateuser(user[0]["uid"], fullname);
-    print("pavimanohran $res");
+   
   }
 
   TextEditingController _controller=TextEditingController();
@@ -52,7 +52,6 @@ class _WalletProfileState extends State<WalletProfile> {
       _controller.text = name;
     });
 
-    print(res);
   }
 
   // ignore: todo
@@ -157,7 +156,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                 //color: Colors.orange,
                                 child: TextField(
                                   onSubmitted: (value) {
-                                    print(value);
+                                  
                                     updateuser(user[0]["uid"], value);
                                   },
                                   controller: _controller,

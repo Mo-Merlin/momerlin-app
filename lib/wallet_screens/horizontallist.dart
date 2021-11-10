@@ -25,7 +25,6 @@ class _HorizontalListState extends State<HorizontalList> {
   void _onItemFocus(int index) {
     setState(() {
       _focusedIndex = index;
-      print(_focusedIndex);
     });
   }
 

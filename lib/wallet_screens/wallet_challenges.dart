@@ -773,7 +773,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     ];
     List<HealthDataPoint> healthData =
         await health.getHealthDataFromTypes(startDate, endDate, types);
-    print("123223434 ${healthData.length}");
+
     healthData.length != 0
         ? setState(() => googlefitint = true)
         : setState(() => _state = AppState.FETCHING_DATA);
@@ -884,7 +884,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().getChallenges();
-    print("PAVITHRAMANOHARAN $res");
     if (res == false) {
       // Scaffold
       //   .of(context)
@@ -915,7 +914,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       await UserRepository().updateUser(1);
       final result = await _googleSignIn.signIn();
       final ggAuth = await result.authentication;
-      print("PAVITHRAManoharan ${ggAuth.accessToken}");
       token = ggAuth.accessToken;
       getmyChallenges();
       getjoinChallenges();
@@ -927,7 +925,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
   Future<void> getapp() async {
     bool isInstalled =
         await DeviceApps.isAppInstalled('com.google.android.apps.fitness');
-    print("1232434345pavi $isInstalled");
   }
 
   Future<void> getmyChallenges() async {
@@ -935,7 +932,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().getmyChallenges(user[0]["uid"]);
-    print("USER ID :" + user[0]["uid"]);
 
     setState(() {
       loading = false;
@@ -948,8 +944,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       if (res["success"] == true) {
         mychallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-          print("pavimno");
-          print(res["challenges"]["docs"][i]);
           mychallenge.add(MyChallenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
@@ -968,9 +962,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().getwinnerChallenges(challangeid);
-    print("USER ID :" + user[0]["uid"]);
-
-    print("PAVIMANO $res");
   }
 
   Future<void> getjoinChallenges() async {
@@ -990,7 +981,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
       if (res["success"] == true) {
         joingetchallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-          print("PAVIMano ${res["challenges"]["docs"][i]}");
           joingetchallenge
               .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
@@ -1027,6 +1017,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "endAt": expiryDate,
       "wage": competitorsgets,
     });
+    print("createchallange ${createchallange["challenge"]["_id"]}");
     if (createchallange == false) {
       Scaffold.of(context)
           // ignore: deprecated_member_use
@@ -1035,11 +1026,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
         backgroundColor: Colors.red,
       ));
     } else {
-      if (createchallange["success"] == true) {
+      if (createchallange["status"] == true) {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChallengeFinal(),
+            builder: (context) => ChallengeFinal(id:createchallange["challenge"]["_id"]),
           ),
         );
       } else {
@@ -1051,7 +1042,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
         ));
       }
     }
-    print("user $createchallange");
   }
 
   // ignore: non_constant_identifier_names
@@ -1060,7 +1050,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       uid,
       challangeid,
     );
-    print("Joinchallange $joinchallange");
+
     if (joinchallange == false) {
       Scaffold.of(context)
           // ignore: deprecated_member_use
@@ -1082,7 +1072,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
         );
       }
     }
-    print("user $joinchallange");
   }
 
   Future<void> getAllLeaderboard() async {
@@ -1090,7 +1079,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().getAllLeaderboard();
-    print("PAVIANI $res");
+
     if (res == false) {
       // Scaffold
       //   .of(context)
@@ -1120,7 +1109,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
       loading = false;
     });
     var res = await UserRepository().recentWinners();
-    print("RECENT WINNERS $res");
+    // print("RECENT WINNERS $res");
     if (res == false) {
       // Scaffold
       //   .of(context)
@@ -1460,9 +1449,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 // gBlue.withOpacity(0.5),
                                 white.withOpacity(0.0)
                               ],
-                              // Add one stop for each color
-                              // Values should increase from 0.0 to 1.0
-                              //stops: [0.3, 0.7, 0.8],
                               center: Alignment(-1.0, 0.0),
                               focal: Alignment(-1.0, -0.1),
                             ),
@@ -1471,21 +1457,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             height: MediaQuery.of(context).size.height * 0.2,
                             width: MediaQuery.of(context).size.width,
                             margin: EdgeInsets.only(left: 0, right: 0),
-                            //color: Colors.indigo,
-                            // decoration: BoxDecoration(
-                            //   gradient: RadialGradient(
-                            //     colors: [
-                            //       //gPink.withOpacity(0.3),
-                            //       gBlue.withOpacity(0.2),
-                            //       white.withOpacity(0.0)
-                            //     ],
-                            //     // Add one stop for each color
-                            //     // Values should increase from 0.0 to 1.0
-                            //     stops: [0.4, 0.8],
-                            //     center: Alignment(-0.4, 0.0),
-                            //     focal: Alignment(-0.5, -0.2),
-                            //   ),
-                            // ),
                             padding: EdgeInsets.only(
                                 left: 4, top: 10, bottom: 0, right: 0),
                             child: ListView.builder(
@@ -1493,15 +1464,17 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               itemCount: recentWinners.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  // onTap: () {
-                                  //   if (elements[index]['name'] ==
-                                  //       '@momozuno \nhas earned') {
-                                  //     Navigator.push(
-                                  //         context,
-                                  //         MaterialPageRoute(
-                                  //             builder: (context) => MyActivity()));
-                                  //   }
-                                  // },
+                                  onTap: () {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => Challengesdetail(
+                                            challange: recentWinners[index]
+                                                .challenge
+                                                .id),
+                                      ),
+                                    );
+                                  },
                                   child: Stack(
                                     children: [
                                       Container(
@@ -2455,14 +2428,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           : 3,
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
-                                        print(joingetchallenge.length);
                                         return GestureDetector(
                                           onTap: () {
-                                            // print(joingetchallenge[index]);
-                                            // getwinnerChallenges(
-                                            //     joingetchallenge[index].id);
-                                            // challangedetails(context,3
-                                            //     joingetchallenge[index]);
                                             Navigator.push(
                                                 context,
                                                 MaterialPageRoute(
@@ -3090,9 +3057,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                   Colors.amber,
                                                             ),
                                                             onRatingUpdate:
-                                                                (rating) {
-                                                              print(rating);
-                                                            },
+                                                                (rating) {},
                                                           ),
                                                         ],
                                                       ),
@@ -3811,7 +3776,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 ),
                                 onPressed: () {
                                   if (iswalking == true || isrunning == true) {
-                                    print("selcettype$selecttype");
                                     Navigator.pop(context);
                                     selectsat(context);
                                   }
@@ -3868,11 +3832,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
             void _onItemFocus(int index) {
-              print("123456,$index");
-              print(data[index]);
               setState(() {
                 _focusedIndex = index;
-                print(_focusedIndex);
               });
             }
 
@@ -4049,8 +4010,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 onPressed: () {
-                                  print(data[_focusedIndex]);
-
                                   wagar = data[_focusedIndex];
                                   Navigator.pop(context);
                                   selectKM(context);
@@ -4270,8 +4229,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   borderRadius: BorderRadius.circular(30),
                                 ),
                                 onPressed: () {
-                                  print(km[_kmfocusedIndex]);
-
                                   kmchallenge = km[_kmfocusedIndex];
                                   Navigator.pop(context);
                                   selectchallengetype(context);
@@ -5260,26 +5217,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                         FontWeight.w600),
                                               ),
                                             ),
-                                            // Padding(
-                                            //   padding: const EdgeInsets.only(
-                                            //       left: 185),
-                                            //   child: ClipRRect(
-                                            //     borderRadius:
-                                            //         BorderRadius.circular(30),
-                                            //     child: Container(
-                                            //       height: 25,
-                                            //       width: 25,
-                                            //       color: blue1,
-                                            //       child: IconButton(
-                                            //           onPressed: () {},
-                                            //           icon: Icon(
-                                            //             Icons.check,
-                                            //             color: Colors.white,
-                                            //             size: 11,
-                                            //           )),
-                                            //     ),
-                                            //   ),
-                                            // ),
                                           ],
                                         ),
                                       ),
@@ -5342,6 +5279,19 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             fontWeight: FontWeight.w400),
                                       ),
                                     ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 10, right: 90),
+                                      child: Text(
+                                        "Total KM",
+                                        textAlign: TextAlign.start,
+                                        style: GoogleFonts.poppins(
+                                            decoration: TextDecoration.none,
+                                            color: Colors.grey,
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.w400),
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 Row(
@@ -5355,7 +5305,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                 0.15,
                                         width:
                                             MediaQuery.of(context).size.width *
-                                                0.9,
+                                                0.41,
                                         decoration: BoxDecoration(
                                             color: button,
                                             borderRadius:
@@ -5385,7 +5335,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           const EdgeInsets.only(
                                                               left: 10),
                                                       child: Text(
-                                                        selecttype,
+                                                        challenge,
                                                         style:
                                                             GoogleFonts.poppins(
                                                                 decoration:
@@ -5399,28 +5349,67 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                         .w600),
                                                       ),
                                                     ),
+                                                    Padding(
+                                                     padding:
+                                                          const EdgeInsets.only(
+                                                              left: 10),
+                                                      child: ClipRRect(
+                                                        borderRadius:
+                                                            BorderRadius
+                                                                .circular(30),
+                                                        child: Container(
+                                                          height: 25,
+                                                          width: 25,
+                                                          color: blue1,
+                                                          child: IconButton(
+                                                              onPressed: () {},
+                                                              icon: Icon(
+                                                                Icons.check,
+                                                                color: Colors
+                                                                    .white,
+                                                                size: 11,
+                                                              )),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ],
                                                 ),
                                               ),
                                             ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                    Padding(
+                                      padding: const EdgeInsets.only(
+                                          top: 20, left: 25),
+                                      child: Container(
+                                        height:
+                                            MediaQuery.of(context).size.width *
+                                                0.15,
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.41,
+                                        decoration: BoxDecoration(
+                                            color: button,
+                                            borderRadius:
+                                                BorderRadius.circular(15)),
+                                        child: Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
+                                          children: [
                                             Padding(
                                               padding: const EdgeInsets.only(
-                                                  right: 25),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  color: blue1,
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.check,
-                                                        color: Colors.white,
-                                                        size: 11,
-                                                      )),
-                                                ),
+                                                  left: 15),
+                                              child: Text(
+                                                kmchallenge.toString() + " KM",
+                                                style: GoogleFonts.poppins(
+                                                    decoration:
+                                                        TextDecoration.none,
+                                                    color: Colors.white,
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
                                             ),
                                           ],
@@ -5588,9 +5577,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       ),
                     ),
 
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.02,
-                    ),
+                    // SizedBox(
+                    //   height: MediaQuery.of(context).size.height * 0.02,
+                    // ),
                   ],
                 ),
               ),
@@ -7065,8 +7054,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                             itemBuilder:
                                                                 (context,
                                                                     index) {
-                                                              print(
-                                                                  "ChallengeOne Length :  ${challengesOne.length}");
                                                               return Material(
                                                                 child: Stack(
                                                                   children: [

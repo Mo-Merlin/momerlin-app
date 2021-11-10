@@ -10,6 +10,8 @@ import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_challenges.dart';
 
+import 'challangedetails.dart';
+
 // To parse this JSON data, do
 //
 //     final recentWinners = recentWinnersFromJson(jsonString);
@@ -268,11 +270,8 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
   var startDate;
   var endDate;
   Future<void> recentWinners1() async {
-    setState(() {
-      loading = false;
-    });
     var res = await UserRepository().recentWinners();
-    print("RECENT WINNERS $res");
+
     if (res == false) {
       // Scaffold
       //   .of(context)
@@ -311,63 +310,6 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
 
   // ignore: todo
   //TODO: LanguageEnd
-  List elements = [
-    {
-      "count": "1",
-      "leadername": "zuno",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "2",
-      "leadername": "timodit",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "3",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-    {
-      "count": "4",
-      "leadername": "sadiam",
-      "name": "@momozuno \nhas earned",
-      "url":
-          "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
-      "amt": "400",
-      "type": "Gwei",
-    },
-    {
-      "count": "5",
-      "leadername": "sadiam",
-      "name": "@jade.sim \nhas earned",
-      "url":
-          "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
-      "amt": "230",
-      "type": "Gwei",
-    },
-    {
-      "count": "6",
-      "leadername": "sadiam",
-      "name": "@cam.c \nhas earned",
-      "url":
-          "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
-      "amt": "40",
-      "type": "Gwei",
-    },
-  ];
-
   List<Color> recentWinnersColorList = [
     blue1,
     spendingPink,
@@ -380,7 +322,11 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
     Image.asset("assets/images/trophy2.png"),
     Image.asset("assets/images/trophy1.png"),
   ];
-
+  var url = [
+    "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
+    "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
+    "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
+  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -461,31 +407,16 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
           ),
           loading == true
               ? Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
+                  height: MediaQuery.of(context).size.height * 0.23,
                   width: MediaQuery.of(context).size.width,
+                  color: backgroundcolor,
                   child: Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Text("LOADING...",
-                          style: GoogleFonts.poppins(
-                            color: Colors.white,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          )),
+                    child: SpinKitSpinningLines(
+                      color: white,
+                      size: 60,
                     ),
                   ),
                 )
-              //  Container(
-              //     height: MediaQuery.of(context).size.height * 0.23,
-              //     width: MediaQuery.of(context).size.width,
-              //     color: backgroundcolor,
-              //     child: Center(
-              //       child: SpinKitSpinningLines(
-              //         color: white,
-              //         size: 60,
-              //       ),
-              //     ),
-              //   )
               : recentWinners.length == 0
                   ? Container(
                       height: MediaQuery.of(context).size.height * 0.2,
@@ -515,40 +446,26 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                         scrollDirection: Axis.vertical,
                         itemCount: recentWinners.length,
                         itemBuilder: (context, index) {
-                          return InkWell(
-                            onTap: () {},
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => Challengesdetail(
+                                          challange: recentWinners[index]
+                                              .challenge
+                                              .id)));
+                            },
                             child: Column(
                               children: [
                                 Row(
                                   children: [
-                                    // Padding(
-                                    //   padding: const EdgeInsets.only(left: 10),
-                                    //   child: Container(
-                                    //     height: MediaQuery.of(context).size.height * 0.07,
-                                    //     width: MediaQuery.of(context).size.width * 0.1,
-                                    //     //height: 63, width: 42,
-                                    //     decoration: BoxDecoration(
-                                    //         color: recentWinnersColorList[
-                                    //             index % recentWinnersColorList.length],
-                                    //         borderRadius: BorderRadius.circular(16)),
-                                    //     child: Center(
-                                    //       child: Text(
-                                    //         elements[index]["count"],
-                                    //         style: GoogleFonts.poppins(
-                                    //           color: Colors.white,
-                                    //           fontSize: 25,
-                                    //           fontWeight: FontWeight.w600,
-                                    //         ),
-                                    //       ),
-                                    //     ),
-                                    //   ),
-                                    // ),
                                     Padding(
                                       padding: const EdgeInsets.only(left: 10),
                                       child: Container(
                                         height:
                                             MediaQuery.of(context).size.height *
-                                                0.07,
+                                                0.09,
                                         width:
                                             MediaQuery.of(context).size.width *
                                                 0.9,
@@ -566,13 +483,14 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                               borderRadius:
                                                   BorderRadius.circular(30),
                                               child: Container(
-                                                  height: 35,
-                                                  width: 35,
-                                                  color: button,
-                                                  child: Image.network(
-                                                    elements[index]['url'],
-                                                    fit: BoxFit.cover,
-                                                  )),
+                                                height: 35,
+                                                width: 35,
+                                                color: button,
+                                                child: Image.network(
+                                                  url[index % url.length],
+                                                  fit: BoxFit.cover,
+                                                ),
+                                              ),
                                             ),
                                             SizedBox(
                                               width: 15,

@@ -113,7 +113,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
 
   @override
   void initState() {
-    print(widget.challange.id);
     super.initState();
     getwinnerChallenges(widget.challange.id);
     getUserLanguage();
@@ -125,7 +124,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       uid,
       challangeid,
     );
-    print("Joinchallange $joinchallange");
     if (joinchallange == false) {
       Scaffold.of(context)
           // ignore: deprecated_member_use
@@ -147,7 +145,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         );
       }
     }
-    print("user $joinchallange");
   }
 
   var joinchallenge = false;
