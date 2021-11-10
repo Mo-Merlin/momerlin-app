@@ -838,8 +838,8 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                 child: Row(
                                                   children: [
                                                     Text(
-                                                   winnerdetail[index]
-                                                    .prize
+                                                      winnerdetail[index]
+                                                          .prize
                                                           .toString(),
                                                       style:
                                                           GoogleFonts.poppins(
@@ -966,14 +966,14 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                             BorderRadius.only(
                                                                 bottomLeft: Radius
                                                                     .circular(
-                                                                        15),
+                                                                        20),
                                                                 bottomRight:
                                                                     Radius
                                                                         .circular(
                                                                             25),
                                                                 topLeft: Radius
                                                                     .circular(
-                                                                        15),
+                                                                        20),
                                                                 topRight: Radius
                                                                     .circular(
                                                                         25)),
