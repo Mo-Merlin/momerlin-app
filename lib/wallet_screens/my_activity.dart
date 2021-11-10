@@ -134,6 +134,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 );
 
 class _MyActivityState extends State<MyActivity> {
+  // ignore: unused_field
   CalendarController _controller;
 
   List<JoingetChallenges> joingetchallenge = [];
