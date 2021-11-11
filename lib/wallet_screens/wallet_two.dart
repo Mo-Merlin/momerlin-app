@@ -51,6 +51,7 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<Null> refreshList() async {
     refreshKey.currentState?.show(atTop: false);
     await Future.delayed(Duration(seconds: 2));
+    balance = 0;
     getUserLanguage();
 
     return null;
@@ -95,6 +96,7 @@ class _WalletTwoState extends State<WalletTwo> {
   }
 
   Future<void> getTransactionuseraddress() async {
+    balance=0;
     setState(() {
       loading = false;
     });
@@ -142,8 +144,18 @@ class _WalletTwoState extends State<WalletTwo> {
     setState(() {
       loading = false;
     });
-    //var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
-    // getTransactionuseraddress();
+
+    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+
+    // Navigator.pushReplacement(
+    //   context,
+    //   MaterialPageRoute(
+    //     builder: (_) => Tabscreen(
+    //       index: 0,
+    //     ),
+    //   ),
+    // );
+    getTransactionuseraddress();
     // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
     // setState(() {
     //   loading = false;
@@ -165,6 +177,7 @@ class _WalletTwoState extends State<WalletTwo> {
   }
 
   Future<void> getUserLanguage() async {
+  
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
     print("1232132uid ${user[0]}");
@@ -212,7 +225,7 @@ class _WalletTwoState extends State<WalletTwo> {
       plaidconnect = false;
       buttonpressed = false;
     });
-
+    print("PAVIMANO $publicToken");
     await UserRepository().updateToken({"public_token": publicToken});
     getTransaction();
 
@@ -221,14 +234,6 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
     if (usersave == true) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(
-          builder: (_) => Tabscreen(
-            index: 0,
-          ),
-        ),
-      );
     } else {
       // print("PAVITHRA");
     }

@@ -1,11 +1,16 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'package:health/health.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'wallet_challenges.dart';
 
 class JoinChallengesdetail extends StatefulWidget {
   final challange;
@@ -92,8 +97,32 @@ class Getwinnerchallenge {
       };
 }
 
+enum AppState {
+  DATA_NOT_FETCHED,
+  FETCHING_DATA,
+  DATA_READY,
+  NO_DATA,
+  AUTH_NOT_GRANTED
+}
+
+GoogleSignIn _googleSignIn = GoogleSignIn(
+  // Optional clientId
+  clientId:
+      '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
+  scopes: <String>[
+    'email',
+    'https://www.googleapis.com/auth/fitness.activity.read',
+    'https://www.googleapis.com/auth/fitness.activity.write',
+    'https://www.googleapis.com/auth/fitness.location.read',
+    'https://www.googleapis.com/auth/fitness.location.write',
+  ],
+);
+
 class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   var userLanguage, user, lang = [];
+  List<HealthDataPoint> _healthDataList = [];
+  AppState _state = AppState.DATA_NOT_FETCHED;
+
   bool loading = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<Null> refreshList() async {
@@ -155,8 +184,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   var difference;
   Future<void> getwinnerChallenges(challangeid) async {
     var res = await UserRepository().getwinnerChallenges(challangeid);
-    // print("USER ID :" + user[0]["uid"]);
-    // print(res["leaders"]);
+
     if (res["success"] == true) {
       setState(() {
         loading = true;
@@ -204,7 +232,11 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
+    if (user[0]["googlefitenable"] == 1) {
+      fetchData();
 
+      gettoken();
+    }
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -217,6 +249,80 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
     Image.asset("assets/images/trophy2.png"),
     Image.asset("assets/images/trophy1.png"),
   ];
+  var token;
+  Future<void> gettoken() async {
+    try {
+      await UserRepository().updateUser(1);
+      final result = await _googleSignIn.signIn();
+      final ggAuth = await result.authentication;
+      token = ggAuth.accessToken;
+      // getmyChallenges();
+      // getjoinChallenges();
+    } catch (error) {
+      print(error);
+    }
+  }
+
+  DateTime now = DateTime.now();
+  var steps = 0.0;
+  Future fetchData() async {
+    // get everything from midnight until now
+
+    DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+
+    HealthFactory health = HealthFactory();
+
+    // define the types to get
+    List<HealthDataType> types = [
+      HealthDataType.STEPS,
+      HealthDataType.WEIGHT,
+      HealthDataType.HEIGHT,
+      HealthDataType.BLOOD_GLUCOSE,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+    ];
+
+    setState(() => _state = AppState.FETCHING_DATA);
+
+    // you MUST request access to the data types before reading them
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    int steps = 0;
+
+    if (accessWasGranted) {
+      try {
+        // fetch new data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(startDate, endDate, types);
+
+        // save all the new data points
+        _healthDataList.addAll(healthData);
+      } catch (e) {
+        print("Caught exception in getHealthDataFromTypes: $e");
+      }
+
+      // filter out duplicates
+      _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+
+      // print the results
+      _healthDataList.forEach((x) {
+        print("Data point: $x");
+        steps += x.value.round();
+      });
+
+      print("Steps: $steps");
+
+      // update the UI to display the results
+      setState(() {
+        _state =
+            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+      });
+    } else {
+      print("Authorization not granted");
+      setState(() => _state = AppState.DATA_NOT_FETCHED);
+    }
+  }
+
   var url = [
     "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
     "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
@@ -768,11 +874,11 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                       ],
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     winnerdetail.length == 0
                         ? SizedBox(
-                            height: MediaQuery.of(context).size.height * 0.03,
+                            height: 0,
                           )
                         : Padding(
                             padding: EdgeInsets.only(left: 35),
@@ -845,7 +951,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                             width: MediaQuery.of(context)
                                                     .size
                                                     .width *
-                                                0.5,
+                                                0.4,
                                             child: FittedBox(
                                               fit: BoxFit.scaleDown,
                                               child: Text(
@@ -918,7 +1024,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                       },
                     ),
                     SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.03,
+                      height: MediaQuery.of(context).size.height * 0.01,
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 35),
@@ -948,7 +1054,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                 style: GoogleFonts.montserrat(
                                     decoration: TextDecoration.none,
                                     color: white,
-                                    fontSize: 17,
+                                    fontSize: 15,
                                     fontWeight: FontWeight.w600),
                               ),
                             ),
@@ -973,10 +1079,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                             children: [
                                               Container(
                                                 height: 59,
-                                                width: MediaQuery.of(context)
-                                                        .size
-                                                        .width *
-                                                    0.87,
                                                 decoration: BoxDecoration(
                                                   color: myActivityColorList[
                                                       index %
@@ -1154,10 +1256,12 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                 ),
               ),
             ),
-            bottomNavigationBar: joinchallenge == false
+            bottomNavigationBar: joinchallenge == false && difference < 0
                 ? GestureDetector(
                     onTap: () {
-                      joinChallenge(context, widget.challange);
+                      user[0]["googlefitenable"] == 1
+                          ? joinChallenge(context, widget.challange)
+                          : startBetting(context);
                     },
                     child: Container(
                       margin: EdgeInsets.only(
@@ -1183,6 +1287,827 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                     height: 0,
                   ),
           );
+  }
+
+  void startBetting(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "BET Gwei",
+                          style: GoogleFonts.poppins(
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  // Spacer(),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Container(
+                              height: 200,
+                              width: 200,
+                              child: Image.asset("assets/images/toyface.png",
+                                  fit: BoxFit.cover)),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Card(
+                            shadowColor: button.withOpacity(0.5),
+                            color: Color(0xff1C203A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                              // side: new BorderSide(color: Colors.black, width: 1.0),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.55,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.all(0),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 20),
+                                  Container(
+                                      height: 4,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                          color: text1,
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  RichText(
+                                      text: TextSpan(children: [
+                                    TextSpan(
+                                        text: (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['startbetting'] !=
+                                                    null)
+                                            ? "${userLanguage['startbetting']}"
+                                            : 'Start betting',
+                                        style: GoogleFonts.poppins(
+                                          color: Colors.white,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                    TextSpan(
+                                        text: (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['gwei'] != null)
+                                            ? "${userLanguage['gwei']}"
+                                            : ' Gwei ',
+                                        style: GoogleFonts.montserrat(
+                                          color: Colors.orange,
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w600,
+                                        )),
+                                  ])),
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage[
+                                                    'bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin'] !=
+                                                null)
+                                        ? "${userLanguage['bettingisaseasyasabracadabrajustconnectyourfitnesstrackertobegin']}"
+                                        : "Betting is as easy as abracadabra, just\n  connect your fitness tracker to begin",
+                                    style: GoogleFonts.poppins(
+                                      decoration: TextDecoration.none,
+                                      color: text1,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        if (Platform.isAndroid) {
+                                          Navigator.pop(context);
+
+                                          gettoken();
+                                          fetchData();
+                                          // Android-specific code
+                                        } else if (Platform.isIOS) {
+                                          // iOS-specific code
+                                        }
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                            height: 50,
+                                            width: 50,
+                                            decoration: BoxDecoration(
+                                                color: white,
+                                                borderRadius:
+                                                    BorderRadius.circular(30)),
+                                            child: Image.asset(
+                                              "assets/images/gfit.png",
+                                            ),
+                                          ),
+                                          SizedBox(width: 20),
+                                          Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['googlefit'] !=
+                                                        null)
+                                                ? "${userLanguage['googlefit']}"
+                                                : "GOOGLE FIT",
+                                            style: GoogleFonts.poppins(
+                                              //color: blue1,
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        fetchData();
+                                        Navigator.pop(context);
+                                        // fetchData();
+                                      },
+                                      child: Row(
+                                        children: [
+                                          Container(
+                                              height: 50,
+                                              width: 50,
+                                              decoration: BoxDecoration(
+                                                  color: healthkitPink
+                                                      .withOpacity(0.4),
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          30)),
+                                              child: Image.asset(
+                                                "assets/images/ahkit.png",
+                                              )),
+                                          SizedBox(width: 20),
+                                          Column(
+                                            children: [
+                                              Text(
+                                                (lang.length != null &&
+                                                        lang.length != 0 &&
+                                                        userLanguage[
+                                                                'applehealthkit'] !=
+                                                            null)
+                                                    ? "${userLanguage['applehealthkit']}"
+                                                    : "APPLE HEALTH KIT",
+                                                style: GoogleFonts.poppins(
+                                                  //color: blue1,
+                                                  color: Colors.white,
+                                                  fontSize: 14,
+                                                  fontWeight: FontWeight.w600,
+                                                ),
+                                              ),
+                                              Container(
+                                                height: 23,
+                                                width: 86,
+                                                decoration: BoxDecoration(
+                                                    color: blue1,
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            15)),
+                                                child: Center(
+                                                  child: Text(
+                                                      (lang.length != null &&
+                                                              lang.length !=
+                                                                  0 &&
+                                                              userLanguage[
+                                                                      'commingsoon'] !=
+                                                                  null)
+                                                          ? "${userLanguage['commingsoon']}"
+                                                          : "COMING SOON",
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                              decoration:
+                                                                  TextDecoration
+                                                                      .none,
+                                                              color:
+                                                                  Colors.white,
+                                                              fontSize: 8,
+                                                              fontWeight:
+                                                                  FontWeight
+                                                                      .w600)),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(height: 15),
+                                  InkWell(
+                                    onTap: () {
+                                      Navigator.pop(context);
+                                      bettingGuide(context);
+                                    },
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['howdoesthiswork'] !=
+                                                  null)
+                                          ? "${userLanguage['howdoesthiswork']}"
+                                          : "How does this work?",
+                                      style: GoogleFonts.poppins(
+                                        color: blue2,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void bettingGuide(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          (lang.length != null &&
+                                  lang.length != 0 &&
+                                  userLanguage['betsats'] != null)
+                              ? "${userLanguage['betsats']}"
+                              : "BET SATS",
+                          style: GoogleFonts.poppins(
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                      ),
+                      child: Container(
+                        height: MediaQuery.of(context).size.height * 0.7,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.02),
+                            Container(
+                                height: 4,
+                                width: 50,
+                                decoration: BoxDecoration(
+                                    color: spr,
+                                    borderRadius: BorderRadius.circular(15))),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.19,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: grey,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                  ),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    //color: blue1,
+                                    child: Image.asset(
+                                      "assets/images/betTrophy.png",
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['step'] != null)
+                                        ? "${userLanguage['step']}"
+                                        : "Step 1",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                      color: white,
+                                    ),
+                                  ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage[
+                                                    'joinormakeachallengewithgwei'] !=
+                                                null)
+                                        ? "${userLanguage['joinormakeachallengewithgwei']}"
+                                        : "Join or make a challenge with GWEI",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.19,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              decoration: BoxDecoration(
+                                color: grey,
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              child: Column(
+                                children: [
+                                  SizedBox(
+                                    height: MediaQuery.of(context).size.height *
+                                        0.02,
+                                  ),
+                                  Container(
+                                    height: 50,
+                                    width: 50,
+                                    //color: blue1,
+                                    child: Stack(
+                                      children: [
+                                        Image.asset(
+                                          "assets/images/betRunboy.png",
+                                          fit: BoxFit.cover,
+                                        ),
+                                        Positioned(
+                                          left: 10,
+                                          child: Image.asset(
+                                            "assets/images/betRungirl.png",
+                                            fit: BoxFit.cover,
+                                          ),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['step'] != null)
+                                        ? "${userLanguage['step']}"
+                                        : "Step 2",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.w600,
+                                      color: white,
+                                    ),
+                                  ),
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage[
+                                                    'completeawalkorrunchallenge'] !=
+                                                null)
+                                        ? "${userLanguage['completeawalkorrunchallenge']}"
+                                        : "Complete a walk or run challenge",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 12,
+                                      color: white,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.02,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pop(context);
+                                notEnoughBalance(context);
+                              },
+                              child: Container(
+                                height:
+                                    MediaQuery.of(context).size.height * 0.19,
+                                width: MediaQuery.of(context).size.width * 0.8,
+                                decoration: BoxDecoration(
+                                  color: grey,
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                child: Column(
+                                  children: [
+                                    // SizedBox(
+                                    //   height:
+                                    //       MediaQuery.of(context).size.height *
+                                    //           0.02,
+                                    // ),
+                                    Container(
+                                      height: 50,
+                                      width: 50,
+                                      //color: blue1,
+                                      child: Image.asset(
+                                        "assets/images/spendingcoin.png",
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                    Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['step'] != null)
+                                          ? "${userLanguage['step']}"
+                                          : "Step 3",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 25,
+                                        fontWeight: FontWeight.w600,
+                                        color: white,
+                                      ),
+                                    ),
+                                    Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['winandgetpaid'] !=
+                                                  null)
+                                          ? "${userLanguage['winandgetpaid']}"
+                                          : "Win and get paid!",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: white,
+                                      ),
+                                    ),
+                                    Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage[
+                                                      'orloseandtryagain)'] !=
+                                                  null)
+                                          ? "${userLanguage['orloseandtryagain']}"
+                                          : "(Or lose and try again!)",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: white,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void notEnoughBalance(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return SingleChildScrollView(
+              child: Container(
+                color: backgroundcolor.withOpacity(0.4),
+                margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Row(
+                      children: [
+                        Card(
+                          color: gridcolor,
+                          elevation: 20,
+                          // shadowColor: button.withOpacity(0.5),
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(150),
+                            // side: new BorderSide(color: Colors.black, width: 1.0),
+                          ),
+                          child: InkWell(
+                            onTap: () {
+                              Navigator.pushReplacement(
+                                context,
+                                MaterialPageRoute(
+                                  builder: (_) => Tabscreen(
+                                    index: 2,
+                                  ),
+                                ),
+                              );
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                  shape: BoxShape.circle, color: gridcolor),
+                              child: Center(
+                                child: Icon(Icons.arrow_back,
+                                    size: 20, color: Colors.white),
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                    Container(
+                      height: MediaQuery.of(context).size.height * 0.8,
+                      width: MediaQuery.of(context).size.width * 0.85,
+                      //color: Colors.red,
+                      child: Stack(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 140),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.5,
+                              width: MediaQuery.of(context).size.width * 0.85,
+                              decoration: BoxDecoration(
+                                color: backgroundcolor,
+                                borderRadius: BorderRadius.circular(25),
+                              ),
+                              child: SingleChildScrollView(
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    SizedBox(
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.14),
+                                    RichText(
+                                      text: TextSpan(
+                                        children: [
+                                          TextSpan(
+                                              text: (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage[
+                                                              'sorryyoudonthaveenough'] !=
+                                                          null)
+                                                  ? "${userLanguage['sorryyoudonthaveenough']}"
+                                                  : '   Sorry, you don’t \nhave enough',
+                                              style: GoogleFonts.poppins(
+                                                color: Colors.white,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w600,
+                                              )),
+                                          TextSpan(
+                                              text: (lang.length != null &&
+                                                      lang.length != 0 &&
+                                                      userLanguage['sats'] !=
+                                                          null)
+                                                  ? "${userLanguage['sats']}"
+                                                  : ' Gwei ',
+                                              style: GoogleFonts.montserrat(
+                                                color: Colors.orange,
+                                                fontSize: 25,
+                                                fontWeight: FontWeight.w700,
+                                              )),
+                                        ],
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                    Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage[
+                                                      'eitherkeepmakingpurchasesordepositfundsintoyourwallet'] !=
+                                                  null)
+                                          ? "${userLanguage['eitherkeepmakingpurchasesordepositfundsintoyourwallet']}"
+                                          : "Either keep making purchases or   \ndeposit funds into your wallet!",
+                                      style: GoogleFonts.poppins(
+                                        color: text1,
+                                        fontSize: 14,
+                                      ),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.02,
+                                    ),
+                                    Container(
+                                      height: 55,
+                                      width: 144,
+                                      decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(15),
+                                      ),
+                                      // ignore: deprecated_member_use
+                                      child: RaisedButton(
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(30),
+                                          ),
+                                          onPressed: () {},
+                                          color: blue2,
+                                          child: Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage['deposit'] !=
+                                                        null)
+                                                ? "${userLanguage['deposit']}"
+                                                : "Deposit",
+                                            style: GoogleFonts.poppins(
+                                              color: white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w600,
+                                            ),
+                                          )),
+                                    ),
+                                    SizedBox(
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.025,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (_) => Tabscreen(
+                                              index: 2,
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Text(
+                                        (lang.length != null &&
+                                                lang.length != 0 &&
+                                                userLanguage['goback'] != null)
+                                            ? "${userLanguage['cancel']}"
+                                            : "Go BACK",
+                                        style: GoogleFonts.montserrat(
+                                          decoration: TextDecoration.none,
+                                          color: blue2,
+                                          fontSize: 12,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ),
+                                    SizedBox(height: 50),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ),
+                          Positioned(
+                            top: 0,
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            child: Image.asset("assets/images/notEnough1.png"),
+                          ),
+                          Positioned(
+                            top: MediaQuery.of(context).size.height * 0,
+                            left: MediaQuery.of(context).size.width * 0.04,
+                            child: Image.asset("assets/images/notEnough.png"),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 
   void joinChallenge(BuildContext context, chall) {

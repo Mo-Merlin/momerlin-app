@@ -720,16 +720,15 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                     // joinChallenge(
                                     //     context, challengesOne[index]);
 
-                                    user[0]["googlefitenable"] == 1
-                                        ? Navigator.push(
+                                  Navigator.push(
                                             context,
                                             MaterialPageRoute(
                                                 builder: (context) =>
                                                     JoinChallengesdetail(
                                                         challange:
                                                             challengesOne[
-                                                                index])))
-                                        : startBetting(context);
+                                                                index])));
+                                        // : startBetting(context);
                                   },
                                   child: Stack(
                                     children: [

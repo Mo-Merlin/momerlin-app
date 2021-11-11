@@ -771,13 +771,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       HealthDataType.STEPS,
       HealthDataType.DISTANCE_WALKING_RUNNING,
     ];
-    List<HealthDataPoint> healthData =
-        await health.getHealthDataFromTypes(startDate, endDate, types);
 
-    healthData.length != 0
-        ? setState(() => googlefitint = true)
-        : setState(() => _state = AppState.FETCHING_DATA);
-
+   
     // you MUST request access to the data types before reading them
     bool accessWasGranted = await health.requestAuthorization(types);
     // if (accessWasGranted) {
@@ -1760,16 +1755,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       itemBuilder: (context, index) {
                                         return InkWell(
                                           onTap: () {
-                                            user[0]["googlefitenable"] == 1
-                                                ? Navigator.push(
+                                            Navigator.push(
                                                     context,
                                                     MaterialPageRoute(
                                                         builder: (context) =>
                                                             JoinChallengesdetail(
                                                                 challange:
                                                                     challengesOne[
-                                                                        index])))
-                                                : startBetting(context);
+                                                                        index])));
+                                               
                                           },
                                           child: Stack(
                                             children: [

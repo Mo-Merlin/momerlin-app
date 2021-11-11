@@ -1,15 +1,11 @@
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:health/health.dart';
-import 'package:momerlin/theme/theme.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-class HealthKit extends StatefulWidget {
+class MyHealthKitApp extends StatefulWidget {
   @override
-  _HealthKit createState() => _HealthKit();
+  _MyHealthApp createState() => _MyHealthApp();
 }
 
 enum AppState {
@@ -20,43 +16,30 @@ enum AppState {
   AUTH_NOT_GRANTED
 }
 
-class _HealthKit extends State<HealthKit> {
+class _MyHealthApp extends State<MyHealthKitApp> {
   List<HealthDataPoint> _healthDataList = [];
   AppState _state = AppState.DATA_NOT_FETCHED;
 
   @override
   void initState() {
-     fetchData();
     super.initState();
-    permission();
-  }
-
-  Future<void> permission() async {
-    if (Platform.isAndroid) {
-      final permissionStatus = Permission.activityRecognition.request();
-      if (await permissionStatus.isDenied ||
-          await permissionStatus.isPermanentlyDenied) {
-      
-        // showToast(
-        //     'activityRecognition permission required to fetch your steps count');
-        return;
-      }
-    }
   }
 
   /// Fetch data from the health plugin and print it
   Future fetchData() async {
     // get everything from midnight until now
-    DateTime startDate = DateTime(2021, 10, 25, 0, 0, 0);
+    DateTime startDate = DateTime(2020, 11, 07, 0, 0, 0);
     DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
 
     HealthFactory health = HealthFactory();
 
     // define the types to get
     List<HealthDataType> types = [
-      HealthDataType.WAIST_CIRCUMFERENCE,
-     
-     
+      HealthDataType.STEPS,
+      HealthDataType.WEIGHT,
+      HealthDataType.HEIGHT,
+      HealthDataType.BLOOD_GLUCOSE,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
     ];
 
     setState(() => _state = AppState.FETCHING_DATA);
@@ -67,7 +50,6 @@ class _HealthKit extends State<HealthKit> {
     int steps = 0;
 
     if (accessWasGranted) {
-      // print("PATTU $accessWasGranted");
       try {
         // fetch new data
         List<HealthDataPoint> healthData =
@@ -105,35 +87,25 @@ class _HealthKit extends State<HealthKit> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: <Widget>[
-        SizedBox(
-          height: 30,
-        ),
         Container(
-          padding: EdgeInsets.all(20),
-          child: CircularProgressIndicator(
-            strokeWidth: 10,
-          ),
-        ),
-        Text(
-          'Fetching data...',
-          style: TextStyle(color: Colors.black),
-        )
+            padding: EdgeInsets.all(20),
+            child: CircularProgressIndicator(
+              strokeWidth: 10,
+            )),
+        Text('Fetching data...')
       ],
     );
   }
 
   Widget _contentDataReady() {
     return ListView.builder(
-      shrinkWrap: true,
         itemCount: _healthDataList.length,
         itemBuilder: (_, index) {
           HealthDataPoint p = _healthDataList[index];
-          // print(
-          //   "1234567 $p");
           return ListTile(
             title: Text("${p.typeString}: ${p.value}"),
             trailing: Text('${p.unitString}'),
-           
+            subtitle: Text('${p.dateFrom} - ${p.dateTo}'),
           );
         });
   }
@@ -143,7 +115,7 @@ class _HealthKit extends State<HealthKit> {
   }
 
   Widget _contentNotFetched() {
-    return Text('pavi');
+    return Text('Press the download button to fetch data');
   }
 
   Widget _authorizationNotGranted() {
@@ -153,19 +125,15 @@ class _HealthKit extends State<HealthKit> {
   }
 
   Widget _content() {
-    // print("1234567890- $AppState");
-    if (_state == AppState.DATA_READY){
-   
-      return _contentDataReady();}
+    if (_state == AppState.DATA_READY)
+      return _contentDataReady();
     else if (_state == AppState.NO_DATA)
-    {
-   
       return _contentNoData();
-    }else if (_state == AppState.FETCHING_DATA){
-  return _contentFetchingData();
-    }else if (_state == AppState.AUTH_NOT_GRANTED){
-     return _authorizationNotGranted();
-    }
+    else if (_state == AppState.FETCHING_DATA)
+      return _contentFetchingData();
+    else if (_state == AppState.AUTH_NOT_GRANTED)
+      return _authorizationNotGranted();
+
     return _contentNotFetched();
   }
 
@@ -174,49 +142,18 @@ class _HealthKit extends State<HealthKit> {
     return MaterialApp(
       home: Scaffold(
           appBar: AppBar(
-            leading: IconButton(
-              icon: Icon(Icons.arrow_back_ios_new),
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-            backgroundColor: blue,
-            title: const Text('Google Fit'),
-            actions: <Widget>[],
+            title: const Text('Plugin example app'),
+            actions: <Widget>[
+              IconButton(
+                icon: Icon(Icons.file_download),
+                onPressed: () {
+                  fetchData();
+                },
+              )
+            ],
           ),
-          body: SingleChildScrollView(
-            child: Center(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                 
-                  GestureDetector(
-                    onTap: () {
-                      fetchData();
-                    },
-                    child: Container(
-                      height: MediaQuery.of(context).size.height * 0.05,
-                      width: MediaQuery.of(context).size.width * 0.25,
-                      decoration: BoxDecoration(
-                          color: blue.withOpacity(0.3),
-                          borderRadius: BorderRadius.circular(10)),
-                      child: Center(
-                        child: Text(
-                          "Connect Health Kit",
-                          style: GoogleFonts.poppins(
-                              fontSize: 8,
-                              color: blue1,
-                              fontWeight: FontWeight.w600),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Center(
-                    child: _content(),
-                  ),
-                ],
-              ),
-            ),
+          body: Center(
+            child: _content(),
           )),
     );
   }

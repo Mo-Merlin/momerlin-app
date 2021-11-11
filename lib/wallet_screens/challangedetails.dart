@@ -906,8 +906,8 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                 style: GoogleFonts.montserrat(
                                     decoration: TextDecoration.none,
                                     color: white,
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w600),
+                                     fontSize: 15,
+                                        fontWeight: FontWeight.w600),
                               ),
                             ),
                           )

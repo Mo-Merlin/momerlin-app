@@ -44,7 +44,6 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -140,9 +139,12 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
+      print("PAVITHRA $checkres");
       checkres["status"] = true;
+      print("PAVIMANO $checkres");
       return checkres;
     } catch (e) {
+      print(e);
       print("error");
       return false;
     }
@@ -156,9 +158,11 @@ class UserRepository {
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
+      print("PAVITHRAMANOHARAN $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
+      print("PAVITHRA $e");
       print("error");
 
       return false;
