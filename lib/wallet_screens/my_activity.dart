@@ -173,7 +173,7 @@ class _MyActivityState extends State<MyActivity> {
       token = ggAuth.accessToken;
       // getmyChallenges();
       getjoinChallenges();
-     
+
     } catch (error) {
       print(error);
     }
@@ -183,8 +183,8 @@ class _MyActivityState extends State<MyActivity> {
   //TODO: LanguageEnd
 
   Future<void> getjoinChallenges() async {
-    
-    var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
+
+    var res = await UserRepository().joingetchallenge(user[0]["uid"], token,0.158);
 
     setState(() {
       loading = false;
@@ -197,7 +197,7 @@ class _MyActivityState extends State<MyActivity> {
       if (res["success"] == true) {
         joingetchallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-         
+
           joingetchallenge
               .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
@@ -212,7 +212,6 @@ class _MyActivityState extends State<MyActivity> {
     }
   }
 
-  
   List<Color> myActivityColorList = [
     blue1,
     spendingPink,
@@ -556,11 +555,10 @@ class _MyActivityState extends State<MyActivity> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 Challengesdetail(
-                                                            challange:
-                                                                joingetchallenge[
-                                                                        index]
-                                                                    .challenge
-                                                                    .id)));
+                                                    challange:
+                                                        joingetchallenge[index]
+                                                            .challenge
+                                                            .id)));
                                   },
                                   child: Stack(
                                     children: [

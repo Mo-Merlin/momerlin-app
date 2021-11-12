@@ -235,7 +235,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
     ];
     List<HealthDataPoint> healthData =
         await health.getHealthDataFromTypes(startDate, endDate, types);
-   
+
     healthData.length != 0
         ? setState(() => googlefitint = true)
         : setState(() => _state = AppState.FETCHING_DATA);
@@ -318,8 +318,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
       final result = await _googleSignIn.signIn();
       final ggAuth = await result.authentication;
       token = ggAuth.accessToken;
-      getmyChallenges();
-      getjoinChallenges();
+      
     } catch (error) {
       print(error);
     }
@@ -328,7 +327,6 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
   Future<void> getapp() async {
     bool isInstalled =
         await DeviceApps.isAppInstalled('com.google.android.apps.fitness');
-    
   }
 
   Future<void> getmyChallenges() async {
@@ -336,7 +334,6 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
       loading = false;
     });
     var res = await UserRepository().getmyChallenges(user[0]["uid"]);
-   
 
     setState(() {
       loading = false;
@@ -349,39 +346,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
       if (res["success"] == true) {
         mychallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-       
           mychallenge.add(MyChallenges.fromJson(res["challenges"]["docs"][i]));
-        }
-      } else {
-        Scaffold.of(context)
-            // ignore: deprecated_member_use
-            .showSnackBar(SnackBar(
-          content: Text('Please Try Again!'),
-          backgroundColor: Colors.red,
-        ));
-      }
-    }
-  }
-
-  Future<void> getjoinChallenges() async {
-    setState(() {
-      loading = false;
-    });
-    var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
-
-    setState(() {
-      loading = false;
-    });
-    if (res == false) {
-      // Scaffold
-      //   .of(context)
-      //   .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
-    } else {
-      if (res["success"] == true) {
-        joingetchallenge = [];
-        for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-          joingetchallenge
-              .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
       } else {
         Scaffold.of(context)
@@ -720,15 +685,16 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
                                     // joinChallenge(
                                     //     context, challengesOne[index]);
 
-                                  Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    JoinChallengesdetail(
-                                                        challange:
-                                                            challengesOne[
-                                                                index])));
-                                        // : startBetting(context);
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) =>
+                                            JoinChallengesdetail(
+                                          challange: challengesOne[index],
+                                        ),
+                                      ),
+                                    );
+                                    // : startBetting(context);
                                   },
                                   child: Stack(
                                     children: [

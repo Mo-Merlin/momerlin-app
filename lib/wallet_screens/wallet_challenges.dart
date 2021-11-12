@@ -769,10 +769,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
     // define the types to get
     List<HealthDataType> types = [
       HealthDataType.STEPS,
-      HealthDataType.DISTANCE_WALKING_RUNNING,
+      HealthDataType.DISTANCE_DELTA,
     ];
 
-   
     // you MUST request access to the data types before reading them
     bool accessWasGranted = await health.requestAuthorization(types);
     // if (accessWasGranted) {
@@ -801,6 +800,61 @@ class _WalletChallengesState extends State<WalletChallenges> {
       });
 
       print("Steps: $steps");
+
+      // update the UI to display the results
+      setState(() {
+        _state =
+            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+      });
+    } else {
+      print("Authorization not granted");
+      setState(() => _state = AppState.DATA_NOT_FETCHED);
+    }
+  }
+
+  num steps1 = 0;
+  num distance = 0;
+  Future fetchData1() async {
+    // get everything from midnight until now
+
+    DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+
+    HealthFactory health = HealthFactory();
+
+    // define the types to get
+    List<HealthDataType> types = [
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+    ];
+
+    setState(() => _state = AppState.FETCHING_DATA);
+
+    // you MUST request access to the data types before reading them
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    num steps1 = 0;
+
+    if (accessWasGranted) {
+      try {
+        // fetch new data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(startDate, endDate, types);
+
+        // save all the new data points
+        _healthDataList.addAll(healthData);
+      } catch (e) {
+        print("Caught exception in getHealthDataFromTypes: $e");
+      }
+
+      // filter out duplicates
+      _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+
+      // print the results
+      _healthDataList.forEach((x) {
+        steps1 += x.value.round();
+      });
+      distance = steps1 / 1000;
+      print("Steps: $steps1 $distance");
 
       // update the UI to display the results
       setState(() {
@@ -852,6 +906,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getapp();
     getAllLeaderboard();
     recentWinners1();
+    if (Platform.isIOS) {
+      fetchData1();
+    }
   }
 
   // ignore: todo
@@ -963,7 +1020,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
+    var res = await UserRepository().joingetchallenge(user[0]["uid"], token,distance);
 
     setState(() {
       loading = false;
@@ -1025,7 +1082,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => ChallengeFinal(id:createchallange["challenge"]["_id"]),
+            builder: (context) =>
+                ChallengeFinal(id: createchallange["challenge"]["_id"]),
           ),
         );
       } else {
@@ -1756,14 +1814,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         return InkWell(
                                           onTap: () {
                                             Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            JoinChallengesdetail(
-                                                                challange:
-                                                                    challengesOne[
-                                                                        index])));
-                                               
+                                                context,
+                                                MaterialPageRoute(
+                                                    builder: (context) =>
+                                                        JoinChallengesdetail(
+                                                            challange:
+                                                                challengesOne[
+                                                                    index])));
                                           },
                                           child: Stack(
                                             children: [
@@ -5344,7 +5401,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                       ),
                                                     ),
                                                     Padding(
-                                                     padding:
+                                                      padding:
                                                           const EdgeInsets.only(
                                                               left: 10),
                                                       child: ClipRRect(

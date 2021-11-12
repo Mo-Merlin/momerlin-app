@@ -1,4 +1,6 @@
 // import 'localstorage/auth_header.dart';
+import 'dart:io';
+
 import 'localstorage/userdata_source.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -95,7 +97,7 @@ class UserRepository {
 //updateuser
   Future<dynamic> updateuser(id, fullname) async {
     // print(
-      // "12345678 $id , $fullname",
+    // "12345678 $id , $fullname",
     // );
     try {
       var data = ({"fullName": fullname});
@@ -151,14 +153,13 @@ class UserRepository {
   }
 
   Future<dynamic> getTransaction1(walletaddress) async {
-   try {
+    try {
       // var url = "http://192.168.43.124:8000/api/";
 //
       var res = await http.get(
         '${url + "momerlin/transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-      print("PAVITHRAMANOHARAN $checkres");
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -243,7 +244,6 @@ class UserRepository {
 
   // joining a challenge
   Future<dynamic> joiningchallenge(id, challengeId) async {
-   
     try {
       var res = await http.put(
         '${url + "challenge/join?id=$id&challenge=$challengeId"}',
@@ -262,10 +262,17 @@ class UserRepository {
   }
 
 // getjoining a challenge
-  Future<dynamic> joingetchallenge(id, token) async {
-  
+  Future<dynamic> joingetchallenge(id, token, distance) async {
+    var data;
     try {
-      var data = ({"token": token});
+      if (Platform.isIOS) {
+        data = ({"distance": distance});
+      } else {
+        data = ({
+          "token": token,
+        });
+      }
+
       var body = json.encode(data);
       var res = await http.put(
         '${url + "challenge/joined/$id?page=1&limit=10"}',
@@ -275,7 +282,7 @@ class UserRepository {
         body: body,
       );
       var checkres = jsonDecode(res.body);
-      
+
       return checkres;
     } catch (e) {
       print(e);

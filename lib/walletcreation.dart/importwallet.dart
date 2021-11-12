@@ -61,6 +61,7 @@ class _ImportWalletPage extends State<ImportWalletPage> {
         "seed": seed,
         "language": "English",
         "googlefitenable": 0,
+        "healthfitenable":0
       });
       if (usersave == true) {
         Navigator.push(context, MaterialPageRoute(builder: (_) => Tabscreen()));
@@ -87,6 +88,7 @@ class _ImportWalletPage extends State<ImportWalletPage> {
             "seed": seed,
             "language": "English",
             "googlefitenable": 0,
+            "healthfitenable":0,
           });
           if (usersave == true) {
             Navigator.push(

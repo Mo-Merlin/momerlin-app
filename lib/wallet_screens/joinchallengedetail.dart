@@ -275,10 +275,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
 
     // define the types to get
     List<HealthDataType> types = [
-      HealthDataType.STEPS,
-      HealthDataType.WEIGHT,
-      HealthDataType.HEIGHT,
-      HealthDataType.BLOOD_GLUCOSE,
+    
       HealthDataType.DISTANCE_WALKING_RUNNING,
     ];
 
@@ -1261,7 +1258,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                     onTap: () {
                       user[0]["googlefitenable"] == 1
                           ? joinChallenge(context, widget.challange)
-                          : startBetting(context);
+                          : startBetting(context,widget.challange);
                     },
                     child: Container(
                       margin: EdgeInsets.only(
@@ -1289,7 +1286,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           );
   }
 
-  void startBetting(BuildContext context) {
+  void startBetting(BuildContext context,challenge) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -1491,8 +1488,10 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                       color: button,
                                       onPressed: () {
-                                        fetchData();
-                                        Navigator.pop(context);
+                                        // fetchData()
+                                          Navigator.pop(context);
+                                        joinChallenge(context,challenge);
+                                      
                                         // fetchData();
                                       },
                                       child: Row(
@@ -2111,6 +2110,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   }
 
   void joinChallenge(BuildContext context, chall) {
+    print(chall);
     showDialog(
       context: context,
       barrierDismissible: true,
