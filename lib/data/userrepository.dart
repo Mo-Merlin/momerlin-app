@@ -31,7 +31,11 @@ class UserRepository {
     // print("save $save");
     return save;
   }
-
+ Future<dynamic> updatehealthfit(dynamic udata) async {
+    var save = UserDataSource().updatehealthfit(udata);
+    // print("save $save");
+    return save;
+  }
   Future<dynamic> storeToken(String token) async {
     var save = UserDataSource().savetoken(token);
     return save;

@@ -10,7 +10,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'wallet_challenges.dart';
+// import 'wallet_challenges.dart';
 
 class JoinChallengesdetail extends StatefulWidget {
   final challange;
@@ -121,6 +121,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   var userLanguage, user, lang = [];
   List<HealthDataPoint> _healthDataList = [];
+  // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
 
   bool loading = false;
@@ -210,13 +211,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         }
       }
       for (var i = 0; i < res["leaders"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
       }
       for (var i = 0; i < res["winners"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         winnerdetail.add(WinnerDetails.fromJson(res["winners"][i]));
       }
     } else {
@@ -224,7 +221,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         loading = true;
       });
     }
-    // print("PAVIMANO12 $res");
   }
 
   // ignore: todo
@@ -269,23 +265,20 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
     // get everything from midnight until now
 
     DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
-    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+    DateTime endDate = DateTime.now();
 
     HealthFactory health = HealthFactory();
 
     // define the types to get
     List<HealthDataType> types = [
-    
-      HealthDataType.DISTANCE_WALKING_RUNNING,
+      HealthDataType.DISTANCE_DELTA,
     ];
-
-    setState(() => _state = AppState.FETCHING_DATA);
 
     // you MUST request access to the data types before reading them
     bool accessWasGranted = await health.requestAuthorization(types);
-
-    int steps = 0;
-
+    // if (accessWasGranted) {
+    //   await UserRepository().updateUser(1);
+    // }
     if (accessWasGranted) {
       try {
         // fetch new data
@@ -302,12 +295,71 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
 
       // print the results
+
       _healthDataList.forEach((x) {
-        print("Data point: $x");
-        steps += x.value.round();
+        // print("Data point: $x");
+        steps += x.value / 1000;
       });
 
       print("Steps: $steps");
+
+      // update the UI to display the results
+      setState(() {
+        _state =
+            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+      });
+    } else {
+      print("Authorization not granted");
+      setState(() => _state = AppState.DATA_NOT_FETCHED);
+    }
+  }
+
+  num steps1 = 0;
+  num distance = 0;
+  Future fetchData1() async {
+    // get everything from midnight until now
+
+    DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endDate = DateTime.now();
+
+    HealthFactory health = HealthFactory();
+
+    // define the types to get
+    List<HealthDataType> types = [
+      HealthDataType.STEPS,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+    ];
+
+    setState(() => _state = AppState.FETCHING_DATA);
+
+    // you MUST request access to the data types before reading them
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    num steps1 = 0;
+
+    if (accessWasGranted) {
+      try {
+        await UserRepository().updatehealthfit(1);
+        // fetch new data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(startDate, endDate, types);
+
+        // save all the new data points
+        _healthDataList.addAll(healthData);
+      } catch (e) {
+        print("Caught exception in getHealthDataFromTypes: $e");
+      }
+
+      // filter out duplicates
+      _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+
+      // print the results
+      _healthDataList.forEach((x) {
+        print("Data point: $x");
+        steps1 += x.value.round();
+      });
+      distance = steps1 / 1000;
+      print("Steps: $steps1 $distance");
 
       // update the UI to display the results
       setState(() {
@@ -1256,9 +1308,10 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
             bottomNavigationBar: joinchallenge == false && difference < 0
                 ? GestureDetector(
                     onTap: () {
-                      user[0]["googlefitenable"] == 1
+                      user[0]["googlefitenable"] == 1 ||
+                              user[0]["healthfitenable"] == 1
                           ? joinChallenge(context, widget.challange)
-                          : startBetting(context,widget.challange);
+                          : startBetting(context, widget.challange);
                     },
                     child: Container(
                       margin: EdgeInsets.only(
@@ -1286,7 +1339,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           );
   }
 
-  void startBetting(BuildContext context,challenge) {
+  void startBetting(BuildContext context, challenge) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -1434,9 +1487,13 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       onPressed: () {
                                         if (Platform.isAndroid) {
                                           Navigator.pop(context);
+                                          if (user[0]["googlefitenable"] == 1) {
+                                            joinChallenge(context, challenge);
+                                          } else {
+                                            gettoken();
+                                            fetchData();
+                                          }
 
-                                          gettoken();
-                                          fetchData();
                                           // Android-specific code
                                         } else if (Platform.isIOS) {
                                           // iOS-specific code
@@ -1488,10 +1545,20 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                       color: button,
                                       onPressed: () {
-                                        // fetchData()
+                                        if (Platform.isIOS) {
                                           Navigator.pop(context);
-                                        joinChallenge(context,challenge);
-                                      
+                                          if (user[0]["healthfitenable"] == 1) {
+                                            joinChallenge(context, challenge);
+                                          } else {
+                                            fetchData1();
+                                          }
+                                          // Android-specific code
+                                        } else if (Platform.isAndroid) {
+                                          // iOS-specific code
+                                        }
+
+                                        //
+
                                         // fetchData();
                                       },
                                       child: Row(
@@ -2110,7 +2177,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   }
 
   void joinChallenge(BuildContext context, chall) {
-    print(chall);
     showDialog(
       context: context,
       barrierDismissible: true,

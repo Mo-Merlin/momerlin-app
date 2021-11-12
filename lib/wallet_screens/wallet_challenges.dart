@@ -762,13 +762,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
     // get everything from midnight until now
 
     DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
-    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+    DateTime endDate = DateTime.now();
 
     HealthFactory health = HealthFactory();
 
     // define the types to get
     List<HealthDataType> types = [
-      HealthDataType.STEPS,
       HealthDataType.DISTANCE_DELTA,
     ];
 
@@ -818,7 +817,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     // get everything from midnight until now
 
     DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
-    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+    DateTime endDate = DateTime.now();
 
     HealthFactory health = HealthFactory();
 
@@ -854,6 +853,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
         steps1 += x.value.round();
       });
       distance = steps1 / 1000;
+      getjoinChallenges();
+      getmyChallenges();
       print("Steps: $steps1 $distance");
 
       // update the UI to display the results
@@ -906,9 +907,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getapp();
     getAllLeaderboard();
     recentWinners1();
-    if (Platform.isIOS) {
-      fetchData1();
-    }
   }
 
   // ignore: todo
@@ -920,6 +918,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       fetchData();
 
       gettoken();
+    } else if (user[0]["healthfitenable"] == 1) {
+      fetchData1();
     }
     getmyChallenges();
     getjoinChallenges();
@@ -975,6 +975,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 
   Future<void> getapp() async {
+    // ignore: unused_local_variable
     bool isInstalled =
         await DeviceApps.isAppInstalled('com.google.android.apps.fitness');
   }
@@ -1009,18 +1010,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
     }
   }
 
-  Future<void> getwinnerChallenges(challangeid) async {
-    setState(() {
-      loading = false;
-    });
-    var res = await UserRepository().getwinnerChallenges(challangeid);
-  }
-
   Future<void> getjoinChallenges() async {
     setState(() {
       loading = false;
     });
-    var res = await UserRepository().joingetchallenge(user[0]["uid"], token,distance);
+    var res = await UserRepository()
+        .joingetchallenge(user[0]["uid"], token, distance);
 
     setState(() {
       loading = false;
@@ -1187,14 +1182,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
     }
   }
 
-  var colors = [
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-    blue1,
-    Colors.greenAccent,
-    Colors.orangeAccent,
-  ];
   List<Color> joinChallengeColorList = [
     blue1,
     spendingPink,
@@ -1217,15 +1204,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     Image.asset("assets/images/trophy2.png"),
     Image.asset("assets/images/trophy1.png"),
   ];
-  List<String> day = ["5", "6", "4", "2", "1", "3", "7"];
-  var colors1 = [
-    Colors.green[300],
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-    Colors.green[300],
-    Colors.pinkAccent[100],
-    Colors.orange[300],
-  ];
+
   var url = [
     "https://www.pngitem.com/pimgs/m/78-786293_1240-x-1240-0-avatar-profile-icon-png.png",
     "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
@@ -1244,22 +1223,23 @@ class _WalletChallengesState extends State<WalletChallenges> {
           child: ClipRRect(
             borderRadius: BorderRadius.circular(30),
             child: Container(
-              // height: 50,
-              // width: 50,
               color: button,
               child: IconButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                                  index: 0,
-                                )));
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Tabscreen(
+                        index: 0,
+                      ),
+                    ),
+                  );
+                },
+                icon: Icon(
+                  Icons.arrow_back,
+                  color: Colors.white,
+                ),
+              ),
             ),
           ),
         ),
@@ -1290,9 +1270,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                     child: Text(
                       "300",
                       style: GoogleFonts.poppins(
-                          fontSize: 17,
-                          color: Colors.white,
-                          fontWeight: FontWeight.w600),
+                        fontSize: 17,
+                        color: Colors.white,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
                   ),
                   Padding(
@@ -1304,9 +1285,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           ? "${userLanguage['sats']}"
                           : "Gwei",
                       style: GoogleFonts.poppins(
-                          fontSize: 12,
-                          color: Colors.orangeAccent,
-                          fontWeight: FontWeight.w500),
+                        fontSize: 12,
+                        color: Colors.orangeAccent,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   Padding(
@@ -1319,34 +1301,37 @@ class _WalletChallengesState extends State<WalletChallenges> {
                           valueColor: new AlwaysStoppedAnimation<Color>(blue1),
                         ),
                         Positioned(
-                            child: Stack(
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 12, top: 5),
-                              child: Text(
-                                (lang.length != null &&
-                                        lang.length != 0 &&
-                                        userLanguage['level'] != null)
-                                    ? "${userLanguage['level']}"
-                                    : "LEVEL",
-                                style: GoogleFonts.poppins(
-                                  fontSize: 5,
-                                  color: Colors.white,
+                          child: Stack(
+                            children: [
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 12, top: 5),
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['level'] != null)
+                                      ? "${userLanguage['level']}"
+                                      : "LEVEL",
+                                  style: GoogleFonts.poppins(
+                                    fontSize: 5,
+                                    color: Colors.white,
+                                  ),
                                 ),
                               ),
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.only(left: 10, top: 12),
-                              child: Text(
-                                "02",
-                                style: GoogleFonts.poppins(
-                                    fontSize: 13,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
-                              ),
-                            )
-                          ],
-                        ))
+                              Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 10, top: 12),
+                                child: Text(
+                                  "02",
+                                  style: GoogleFonts.poppins(
+                                      fontSize: 13,
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.w600),
+                                ),
+                              )
+                            ],
+                          ),
+                        )
                       ],
                     ),
                   )
@@ -1371,23 +1356,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   //******* RECENT WINNERS ListView   *******/
 
                   Container(
-                    height:
-                        // recentWinnerViewMore == true
-                        //     ? MediaQuery.of(context).size.height * 0.5
-                        //     :
-                        MediaQuery.of(context).size.height * 0.27,
+                    height: MediaQuery.of(context).size.height * 0.27,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                        //color: Color(0xff707070),
                         color: Colors.white.withOpacity(0.1),
-                        // gradient: RadialGradient(
-                        //   colors: [gPink, gBlue, white.withOpacity(0.1)],
-                        //   // Add one stop for each color
-                        //   // Values should increase from 0.0 to 1.0
-                        //   //stops: [0.1, 0.5, 0.6]
-                        //   center: Alignment(-1.2, 0.0),
-                        //   //focal: Alignment(0.1, -0.1),
-                        // ),
                         borderRadius: BorderRadius.circular(10)),
                     child: Column(
                       children: [
@@ -1406,21 +1378,21 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                     ? "${userLanguage['recentwinners']}"
                                     : "RECENT WINNERS",
                                 style: GoogleFonts.poppins(
-                                    fontSize: 16,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.w600),
+                                  fontSize: 16,
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.w600,
+                                ),
                               ),
                             ),
                             InkWell(
                               onTap: () {
                                 Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            ViewmoreRecentWinners()));
-                                // setState(() {
-                                //   recentWinnerViewMore = true;
-                                // });
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) =>
+                                        ViewmoreRecentWinners(),
+                                  ),
+                                );
                               },
                               child:
                                   // recentWinnerViewMore == true
@@ -1484,9 +1456,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           ? "${userLanguage['viewmore']}"
                                           : "VIEW MORE",
                                       style: GoogleFonts.poppins(
-                                          fontSize: 8,
-                                          color: blue1,
-                                          fontWeight: FontWeight.w600),
+                                        fontSize: 8,
+                                        color: blue1,
+                                        fontWeight: FontWeight.w600,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -1499,7 +1472,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             gradient: RadialGradient(
                               colors: [
                                 gPink.withOpacity(0.3),
-                                // gBlue.withOpacity(0.5),
                                 white.withOpacity(0.0)
                               ],
                               center: Alignment(-1.0, 0.0),
@@ -1522,9 +1494,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Challengesdetail(
-                                            challange: recentWinners[index]
-                                                .challenge
-                                                .id),
+                                          challange:
+                                              recentWinners[index].challenge.id,
+                                        ),
                                       ),
                                     );
                                   },
@@ -1553,13 +1525,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                       .size
                                                       .width *
                                                   0.30,
-                                              //height: 112,
-                                              //width: 113,
                                               decoration: BoxDecoration(
-                                                  color: white.withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          15)),
+                                                color: white.withOpacity(0.2),
+                                                borderRadius:
+                                                    BorderRadius.circular(15),
+                                              ),
                                               child: Column(
                                                 mainAxisAlignment:
                                                     MainAxisAlignment
@@ -1579,21 +1549,19 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           MediaQuery.of(context)
                                                               .size
                                                               .width,
-                                                      //height: 29, width: 79,
-                                                      //color: Colors.red,
                                                       child: Center(
                                                         child: Text(
-                                                            recentWinners[index]
-                                                                .competitor
-                                                                .fullName
-                                                                .toString()
-                                                                .toUpperCase(),
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontSize: 12,
-                                                            )),
+                                                          recentWinners[index]
+                                                              .competitor
+                                                              .fullName
+                                                              .toString()
+                                                              .toUpperCase(),
+                                                          style: GoogleFonts
+                                                              .poppins(
+                                                            color: Colors.grey,
+                                                            fontSize: 12,
+                                                          ),
+                                                        ),
                                                       ),
                                                     ),
                                                   ),
@@ -1608,7 +1576,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                 .size
                                                                 .width *
                                                             0.25,
-                                                    // height: 43, width: 93,
                                                     decoration: BoxDecoration(
                                                         color: Colors.white
                                                             .withOpacity(0.25),
@@ -1630,19 +1597,21 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                             fit: BoxFit
                                                                 .scaleDown,
                                                             child: Text(
-                                                                recentWinners[
-                                                                            index]
-                                                                        .prize
-                                                                        .toString() +
-                                                                    " Gwei",
-                                                                style: GoogleFonts.poppins(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .bold)),
+                                                              recentWinners[
+                                                                          index]
+                                                                      .prize
+                                                                      .toString() +
+                                                                  " Gwei",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                color: Colors
+                                                                    .white,
+                                                                fontSize: 16,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold,
+                                                              ),
+                                                            ),
                                                           ),
                                                         ),
                                                       ],
@@ -1674,7 +1643,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             ),
                                           ),
                                         ),
-                                      )
+                                      ),
                                     ],
                                   ),
                                 );
@@ -1693,14 +1662,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                   Container(
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width,
-                    // decoration: BoxDecoration(
-                    //     //color: Color(0xff313248),
-                    //     borderRadius: BorderRadius.circular(10)),
-
                     decoration: BoxDecoration(
                       gradient: RadialGradient(
                         colors: [
-                          //gPink.withOpacity(0.3),
                           gBlue.withOpacity(0.1),
                           white.withOpacity(0.0),
                         ],
@@ -1814,13 +1778,15 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                         return InkWell(
                                           onTap: () {
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        JoinChallengesdetail(
-                                                            challange:
-                                                                challengesOne[
-                                                                    index])));
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    JoinChallengesdetail(
+                                                  challange:
+                                                      challengesOne[index],
+                                                ),
+                                              ),
+                                            );
                                           },
                                           child: Stack(
                                             children: [
@@ -2023,15 +1989,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
                     height: MediaQuery.of(context).size.height * 0.3,
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
-                        //color: Color(0xff313248),
                         gradient: RadialGradient(
                           colors: [
                             gPink.withOpacity(0.1),
                             //gBlue.withOpacity(0.2),
                             white.withOpacity(0.0),
                           ],
-                          // Add one stop for each color
-                          // Values should increase from 0.0 to 1.0
+
                           stops: [0.6, 1],
                           center: Alignment(0.4, 0),
                           focal: Alignment(0.6, -0.1),
@@ -2143,21 +2107,16 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
                                           onTap: () {
-                                            // challangedetails(
-                                            //     context, mychallenge[index]);
                                             Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Challengesdetail(
-                                                            challange:
-                                                                mychallenge[
-                                                                        index]
-                                                                    .id)));
-                                            // if (elementsOne[index]['name'] ==
-                                            //     '5KM RUN STREAK') {
-                                            // joinChallenge(context);
-                                            //}
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Challengesdetail(
+                                                  challange:
+                                                      mychallenge[index].id,
+                                                ),
+                                              ),
+                                            );
                                           },
                                           child: Stack(
                                             children: [
@@ -2694,75 +2653,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                             ),
                                                           ],
                                                         ),
-                                                        // child: ListTile(
-                                                        //   title: Padding(
-                                                        //     padding:
-                                                        //         const EdgeInsets.fromLTRB(
-                                                        //             0, 0, 20, 2),
-                                                        //     child: Container(
-                                                        //       height: 60,
-                                                        //       decoration: BoxDecoration(
-                                                        //           color: Colors.black
-                                                        //               .withOpacity(0.1),
-                                                        //           borderRadius:
-                                                        //               BorderRadius.circular(
-                                                        //                   15)),
-                                                        //       child: Center(
-                                                        //         child: Text(
-                                                        //           elementsOne[index]['name'],
-                                                        //           style: GoogleFonts.poppins(
-                                                        //             color: Colors.black,
-                                                        //             fontSize: 14,
-                                                        //             fontWeight:
-                                                        //                 FontWeight.w600,
-                                                        //           ),
-                                                        //         ),
-                                                        //       ),
-                                                        //     ),
-                                                        //   ),
-                                                        //   trailing: Container(
-                                                        //     height: 33,
-                                                        //     width: 85,
-                                                        //     decoration: BoxDecoration(
-                                                        //         color: Colors.white
-                                                        //             .withOpacity(0.25),
-                                                        //         borderRadius:
-                                                        //             BorderRadius.circular(
-                                                        //                 16)),
-                                                        //     child: Row(
-                                                        //       mainAxisAlignment:
-                                                        //           MainAxisAlignment.center,
-                                                        //       children: [
-                                                        //         Text(
-                                                        //             elementsOne[index]['day'],
-                                                        //             style:
-                                                        //                 GoogleFonts.poppins(
-                                                        //                     color:
-                                                        //                         Colors.white,
-                                                        //                     fontSize: 12,
-                                                        //                     fontWeight:
-                                                        //                         FontWeight
-                                                        //                             .w600)),
-                                                        //         Padding(
-                                                        //           padding:
-                                                        //               const EdgeInsets.only(
-                                                        //                   left: 5),
-                                                        //           child: Text(
-                                                        //               elementsOne[index]
-                                                        //                   ['count'],
-                                                        //               style:
-                                                        //                   GoogleFonts.poppins(
-                                                        //                       color: Colors
-                                                        //                           .white,
-                                                        //                       fontSize: 12,
-                                                        //                       fontWeight:
-                                                        //                           FontWeight
-                                                        //                               .w400)),
-                                                        //         ),
-                                                        //       ],
-                                                        //     ),
-                                                        //   ),
-                                                        // ),
                                                       ),
                                                     ],
                                                   ),
@@ -2849,51 +2739,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 //   //print(leaderViewMore);
                                 // });
                               },
-                              child:
-                                  // leaderViewMore == true
-                                  //     ? InkWell(
-                                  //         onTap: () {
-                                  //           setState(() {
-                                  //             leaderViewMore = false;
-                                  //             //print(leaderViewMore);
-                                  //           });
-                                  //         },
-                                  //         child: Padding(
-                                  //           padding:
-                                  //               const EdgeInsets.only(right: 25),
-                                  //           child: Container(
-                                  //             height: MediaQuery.of(context)
-                                  //                     .size
-                                  //                     .height *
-                                  //                 0.05,
-                                  //             width: MediaQuery.of(context)
-                                  //                     .size
-                                  //                     .width *
-                                  //                 0.25,
-                                  //             decoration: BoxDecoration(
-                                  //                 color: blue2,
-                                  //                 borderRadius:
-                                  //                     BorderRadius.circular(10)),
-                                  //             child: Center(
-                                  //               child: Text(
-                                  //                 (lang.length != null &&
-                                  //                         lang.length != 0 &&
-                                  //                         userLanguage[
-                                  //                                 'viewless'] !=
-                                  //                             null)
-                                  //                     ? "${userLanguage['viewless']}"
-                                  //                     : "VIEW LESS",
-                                  //                 style: GoogleFonts.poppins(
-                                  //                     fontSize: 8,
-                                  //                     color: white,
-                                  //                     fontWeight: FontWeight.w600),
-                                  //               ),
-                                  //             ),
-                                  //           ),
-                                  //         ),
-                                  //       )
-                                  //     :
-                                  Padding(
+                              child: Padding(
                                 padding: const EdgeInsets.only(right: 25),
                                 child: Container(
                                   height:
@@ -3484,10 +3330,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       ),
                       onPressed: () {
                         showdialog(context);
-                        // Navigator.push(
-                        //     context,
-                        //     MaterialPageRoute(
-                        //         builder: (context) => WalletCreatingChallenge()));
+                       
                       },
                       color: blue1,
                       child: Row(
@@ -3540,6 +3383,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   var kmchallenge;
   var competitorsgets;
   var winnergets;
+  // Selecttype start//
   void showdialog(BuildContext context) {
     showDialog(
       context: context,
@@ -3868,8 +3712,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  // Selecttype end//
   int _focusedIndex = 0;
   int _wageIndex = 0;
+
+  // selectsat start//
   void selectsat(BuildContext context) {
     for (int i = 0; i < 40; i++) {
       value = value + 5;
@@ -4101,7 +3948,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  // selectsat end//
+
   int _kmfocusedIndex = 0;
+
+  // selectKM start//
   void selectKM(BuildContext context) {
     for (int i = 0; i < 40; i++) {
       kmvalue = kmvalue + 1;
@@ -4320,6 +4171,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  // selectKM end//
+
+  // selectchallengetype start//
   void selectchallengetype(BuildContext context) {
     showDialog(
       context: context,
@@ -4671,6 +4525,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  // selectchallengetype end//
+
+
+  // selectshowcompetitors start//
   void selectshowcompetitors(BuildContext context) {
     for (int i = 0; i < 40; i++) {
       wagevalue = wagevalue + 5;
@@ -4897,6 +4755,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
     );
   }
 
+  // selectshowcompetitors end//
+
+
+  // selectshowsummary start//
   void selectshowsummary(BuildContext context) {
     var todayDate = new DateTime.now();
     var todayDate1 = new DateTime.now();
@@ -5640,6 +5502,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       },
     );
   }
+
+  // selectshowsummary end//
 
   //** challangedetails screen start //
 

@@ -145,6 +145,7 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
 
+    // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
 
     // Navigator.pushReplacement(

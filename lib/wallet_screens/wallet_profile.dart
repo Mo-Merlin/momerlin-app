@@ -40,6 +40,7 @@ class _WalletProfileState extends State<WalletProfile> {
   }
 
   void updateuser(id, fullname) async {
+    // ignore: unused_local_variable
     var res = await UserRepository().updateuser(user[0]["uid"], fullname);
    
   }
