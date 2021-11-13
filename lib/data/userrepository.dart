@@ -31,11 +31,13 @@ class UserRepository {
     // print("save $save");
     return save;
   }
- Future<dynamic> updatehealthfit(dynamic udata) async {
+
+  Future<dynamic> updatehealthfit(dynamic udata) async {
     var save = UserDataSource().updatehealthfit(udata);
     // print("save $save");
     return save;
   }
+
   Future<dynamic> storeToken(String token) async {
     var save = UserDataSource().savetoken(token);
     return save;
@@ -145,9 +147,9 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-      print("PAVITHRA $checkres");
+      // print("PAVITHRA $checkres");
       checkres["status"] = true;
-      print("PAVIMANO $checkres");
+      // print("PAVIMANO $checkres");
       return checkres;
     } catch (e) {
       print(e);
@@ -167,7 +169,7 @@ class UserRepository {
       checkres["status"] = true;
       return checkres;
     } catch (e) {
-      print("PAVITHRA $e");
+      // print("PAVITHRA $e");
       print("error");
 
       return false;
@@ -238,7 +240,7 @@ class UserRepository {
           },
           body: body);
       var checkres = jsonDecode(res.body);
-
+      print(checkres);
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -256,7 +258,7 @@ class UserRepository {
         },
       );
       var checkres = jsonDecode(res.body);
-
+      print(checkres);
       checkres["status"] = true;
       return checkres;
     } catch (e) {

@@ -909,20 +909,27 @@ class _WalletChallengesState extends State<WalletChallenges> {
     recentWinners1();
   }
 
+  var gweibalance = "0";
+
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
+    var res = await UserRepository().getUser(user[0]["walletaddress"]);
+    print("PAVIMANO ${res["user"]["gwei"]}");
+    gweibalance = res["user"]["gwei"];
     if (user[0]["googlefitenable"] == 1) {
       fetchData();
 
       gettoken();
     } else if (user[0]["healthfitenable"] == 1) {
       fetchData1();
+    } else {
+      getmyChallenges();
+      getjoinChallenges();
     }
-    getmyChallenges();
-    getjoinChallenges();
+
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -1016,7 +1023,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     });
     var res = await UserRepository()
         .joingetchallenge(user[0]["uid"], token, distance);
-
+    print("PAVIMANo $res");
     setState(() {
       loading = false;
     });
@@ -1263,82 +1270,86 @@ class _WalletChallengesState extends State<WalletChallenges> {
               width: MediaQuery.of(context).size.width * 0.35,
               decoration: BoxDecoration(
                   color: button, borderRadius: BorderRadius.circular(40)),
-              child: Row(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(left: 15),
-                    child: Text(
-                      "300",
-                      style: GoogleFonts.poppins(
-                        fontSize: 17,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 5),
-                    child: Text(
-                      (lang.length != null &&
-                              lang.length != 0 &&
-                              userLanguage['sats'] != null)
-                          ? "${userLanguage['sats']}"
-                          : "Gwei",
-                      style: GoogleFonts.poppins(
-                        fontSize: 12,
-                        color: Colors.orangeAccent,
-                        fontWeight: FontWeight.w500,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 12),
-                    child: Stack(
-                      children: [
-                        CircularProgressIndicator(
-                          strokeWidth: 3,
-                          backgroundColor: blue,
-                          valueColor: new AlwaysStoppedAnimation<Color>(blue1),
+              child: FittedBox(
+                fit: BoxFit.scaleDown,
+                child: Row(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 15),
+                      child: Text(
+                        gweibalance.toString(),
+                        style: GoogleFonts.poppins(
+                          fontSize: 17,
+                          color: Colors.white,
+                          fontWeight: FontWeight.w600,
                         ),
-                        Positioned(
-                          child: Stack(
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 12, top: 5),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['level'] != null)
-                                      ? "${userLanguage['level']}"
-                                      : "LEVEL",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 5,
-                                    color: Colors.white,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 5),
+                      child: Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['sats'] != null)
+                            ? "${userLanguage['sats']}"
+                            : "Gwei",
+                        style: GoogleFonts.poppins(
+                          fontSize: 12,
+                          color: Colors.orangeAccent,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 12),
+                      child: Stack(
+                        children: [
+                          CircularProgressIndicator(
+                            strokeWidth: 3,
+                            backgroundColor: blue,
+                            valueColor:
+                                new AlwaysStoppedAnimation<Color>(blue1),
+                          ),
+                          Positioned(
+                            child: Stack(
+                              children: [
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 12, top: 5),
+                                  child: Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['level'] != null)
+                                        ? "${userLanguage['level']}"
+                                        : "LEVEL",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 5,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 10, top: 12),
-                                child: Text(
-                                  "02",
-                                  style: GoogleFonts.poppins(
-                                      fontSize: 13,
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    ),
-                  )
-                ],
+                                Padding(
+                                  padding:
+                                      const EdgeInsets.only(left: 10, top: 12),
+                                  child: Text(
+                                    "02",
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 13,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w600),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          )
+          ),
         ],
       ),
       body: RefreshIndicator(
@@ -3330,7 +3341,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                       ),
                       onPressed: () {
                         showdialog(context);
-                       
                       },
                       color: blue1,
                       child: Row(
@@ -4527,7 +4537,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   // selectchallengetype end//
 
-
   // selectshowcompetitors start//
   void selectshowcompetitors(BuildContext context) {
     for (int i = 0; i < 40; i++) {
@@ -4756,7 +4765,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 
   // selectshowcompetitors end//
-
 
   // selectshowsummary start//
   void selectshowsummary(BuildContext context) {

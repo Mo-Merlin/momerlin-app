@@ -157,6 +157,7 @@ class UserDataSource extends DataSource {
       row,
       where: 'id = 1',
     );
+    return true;
   }
 
   Future<bool> logout() async {
