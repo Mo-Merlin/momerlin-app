@@ -147,9 +147,9 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-      // print("PAVITHRA $checkres");
+      
       checkres["status"] = true;
-      // print("PAVIMANO $checkres");
+      
       return checkres;
     } catch (e) {
       print(e);

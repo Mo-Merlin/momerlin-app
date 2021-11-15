@@ -149,6 +149,7 @@ class UserDataSource extends DataSource {
       where: 'id = 1',
     );
   }
+  
   Future<dynamic> updatehealthfit(healthfitenable) async {
     var row = {'healthfitenable': healthfitenable};
     await checkDatabaseConnection();

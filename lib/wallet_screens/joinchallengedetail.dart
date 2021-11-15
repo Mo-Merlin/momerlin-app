@@ -123,7 +123,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   List<HealthDataPoint> _healthDataList = [];
   // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
-  final _scaffoldKey = GlobalKey<ScaffoldState>();
+  // final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool loading = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<Null> refreshList() async {
