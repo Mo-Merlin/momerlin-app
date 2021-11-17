@@ -8,20 +8,21 @@ class UserEntity extends Entity<int> {
   final String language;
   final String uid;
   final int googlefitenable;
-
+  final int plaidlogin;
   final int healthfitenable;
 
-  UserEntity({
-    int id,
-    this.walletaddress,
-    this.btctestaddress,
-    this.btcmainaddress,
-    this.seed,
-    this.language,
-    this.uid,
-    this.googlefitenable,
-    this.healthfitenable
-  }) : super(id);
+  UserEntity(
+      {int id,
+      this.walletaddress,
+      this.btctestaddress,
+      this.btcmainaddress,
+      this.seed,
+      this.language,
+      this.uid,
+      this.googlefitenable,
+      this.plaidlogin,
+      this.healthfitenable})
+      : super(id);
 
   @override
   Map<String, dynamic> toMap() {
@@ -32,9 +33,10 @@ class UserEntity extends Entity<int> {
       'btcmainaddress': btcmainaddress,
       'seed': seed,
       'language': language,
-      'uid':uid,
-      'googlefitenable':googlefitenable,
-      'healthfitenable':healthfitenable
+      'uid': uid,
+      'googlefitenable': googlefitenable,
+      'plaidlogin': plaidlogin,
+      'healthfitenable': healthfitenable
     };
   }
 
@@ -48,7 +50,7 @@ class UserEntity extends Entity<int> {
         language,
         uid,
         googlefitenable,
+        plaidlogin,
         healthfitenable
-
       ];
 }

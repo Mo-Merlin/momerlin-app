@@ -24,8 +24,9 @@ class UserDataSource extends DataSource {
         seed: maps[i]['seed'],
         uid: maps[i]["uid"],
         language: maps[i]['language'],
-        googlefitenable:  maps[i]['googlefitenable'],
-        healthfitenable:maps[i]['healthfitenable'],
+        googlefitenable: maps[i]['googlefitenable'],
+        plaidlogin: maps[i]['plaidlogin'],
+        healthfitenable: maps[i]['healthfitenable'],
       );
     });
   }
@@ -116,7 +117,8 @@ class UserDataSource extends DataSource {
         uid: udata["uid"],
         language: udata['language'],
         googlefitenable: udata['googlefitenable'],
-        healthfitenable:udata['healthfitenable']));
+        plaidlogin: udata['plaidlogin'],
+        healthfitenable: udata['healthfitenable']));
     final List<Map<String, dynamic>> maps = await db.query(tableName);
     return maps != null;
   }
@@ -149,9 +151,19 @@ class UserDataSource extends DataSource {
       where: 'id = 1',
     );
   }
-  
+
   Future<dynamic> updatehealthfit(healthfitenable) async {
     var row = {'healthfitenable': healthfitenable};
+    await checkDatabaseConnection();
+    await db.update(
+      tableName,
+      row,
+      where: 'id = 1',
+    );
+    return true;
+  }
+  Future<dynamic> updateplaidlogin(plaidlogin) async {
+    var row = {'plaidlogin': plaidlogin};
     await checkDatabaseConnection();
     await db.update(
       tableName,

@@ -41,20 +41,34 @@ class _WalletProfileState extends State<WalletProfile> {
 
   void updateuser(id, fullname) async {
     // ignore: unused_local_variable
-    var res = await UserRepository().updateuser(user[0]["uid"], fullname);
-   
+    var res =
+        await UserRepository().updateuser(user[0]["uid"], _controller.text);
+    print(res);
+    if (res["success"] == true) {
+      // ignore: deprecated_member_use
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Name has been updated successfully.'),
+        backgroundColor: Colors.green,
+      ));
+    } else {
+      // ignore: deprecated_member_use
+      Scaffold.of(context).showSnackBar(SnackBar(
+        content: Text('Name cannot be updated.'),
+        backgroundColor: Colors.red,
+      ));
+    }
   }
 
-  TextEditingController _controller=TextEditingController();
+  TextEditingController _controller = TextEditingController();
   Future<void> getuser() async {
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
     setState(() {
       var name = res["user"]["fullName"];
       _controller.text = name;
     });
-
   }
 
+  bool iconchanged = false;
   // ignore: todo
   //TODO: LanguageEnd
   String _chosenValue;
@@ -155,20 +169,48 @@ class _WalletProfileState extends State<WalletProfile> {
                                 height: 40,
                                 width: 210,
                                 //color: Colors.orange,
-                                child: TextField(
-                                  onSubmitted: (value) {
-                                  
-                                    updateuser(user[0]["uid"], value);
-                                  },
-                                  controller: _controller,
-                                  decoration: new InputDecoration(
-                                      filled: true,
-                                      border: InputBorder.none,
-                                      hintStyle: TextStyle(color: Colors.white),
-                                      hintText: '  Nick Name',
-                                      suffixIcon:
-                                          Icon(Icons.edit, color: white)),
-                                  style: TextStyle(fontSize: 13, color: white),
+                                child: Row(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.topLeft,
+                                      height: 40,
+                                      width: 150,
+                                      child: TextField(
+                                        onChanged: (value) {
+                                          setState(() {
+                                            iconchanged = true;
+                                          });
+                                        },
+                                        controller: _controller,
+                                        decoration: new InputDecoration(
+                                          filled: true,
+                                          border: InputBorder.none,
+                                          hintStyle:
+                                              TextStyle(color: Colors.white),
+                                          hintText: '  Nick Name',
+                                        ),
+                                        style: TextStyle(
+                                            fontSize: 13, color: white),
+                                      ),
+                                    ),
+                                    IconButton(
+                                      onPressed: () {
+                                        iconchanged == true
+                                            ? updateuser(
+                                                user[0]["uid"], _controller)
+                                            : print("");
+                                      },
+                                      icon: iconchanged == true
+                                          ? Icon(
+                                              Icons.check_circle,
+                                              color: Colors.green,
+                                            )
+                                          : Icon(
+                                              Icons.edit,
+                                              color: white,
+                                            ),
+                                    )
+                                  ],
                                 ),
                               ),
                             ),

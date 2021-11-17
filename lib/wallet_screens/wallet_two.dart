@@ -20,18 +20,20 @@ class Transaction {
   var sats;
   DateTime date;
   String merchantName;
+  // ignore: non_constant_identifier_names
   var iso_currency_code;
   Transaction({
     this.amount,
     this.date,
     this.merchantName,
     this.sats,
+    // ignore: non_constant_identifier_names
     this.iso_currency_code,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
         amount: json["amount"],
-        date: DateTime.parse(json["time"]),
+        date: DateTime.fromMillisecondsSinceEpoch(num.parse(json["createdAt"])),
         sats: json["sats"],
         iso_currency_code: json['iso_currency_code'],
         merchantName:
@@ -109,10 +111,16 @@ class _WalletTwoState extends State<WalletTwo> {
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
 
     if (res == false) {
+      setState(() {
+        loading = false;
+      });
       // Scaffold
       //     .of(context)
       //     .showSnackBar(SnackBar(content: Text('No Internet Connection'),backgroundColor: Colors.red,));
     } else {
+      setState(() {
+        loading = false;
+      });
       if (res["success"] == true) {
         transactions1 = [];
 
@@ -140,31 +148,30 @@ class _WalletTwoState extends State<WalletTwo> {
           backgroundColor: Colors.red,
         ));
       }
-      setState(() {
-        loading = false;
-      });
+      // setState(() {
+      loading = false;
+      // });
     }
   }
 
   Future<void> getTransaction() async {
-    setState(() {
-      loading = false;
-    });
-
     // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Your Plaid Integration is done'),
+          content: Text('Bank account connection successful'),
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => Tabscreen()),
-          (Route<dynamic> route) => false);
+
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (context) => Tabscreen()),
+      //     (Route<dynamic> route) => false);
 
       getUserLanguage();
+    } else {
+      plaidconnection(context);
     }
   }
 
@@ -173,7 +180,7 @@ class _WalletTwoState extends State<WalletTwo> {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-
+    print(user[0]);
     gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
@@ -214,18 +221,31 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> _onSuccessCallback(
       String publicToken, LinkSuccessMetadata metadata) async {
     setState(() {
-
       plaidconnect = false;
       buttonpressed = false;
     });
     await UserRepository().updateToken({"public_token": publicToken});
-    getTransaction();
+    var res1 = await UserRepository().updateplaidlogin(1);
+    print(res1);
+    // ignore: unused_local_variable
+    var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    if (res["success"] == true) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Bank account connection successful'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => Tabscreen()),
+          (Route<dynamic> route) => false);
+
+      getUserLanguage();
+    }
 
     final usersave =
         await UserRepository().storeUser({"publictoken": publicToken});
-    setState(() {
-      loading = false;
-    });
+
     if (usersave == true) {
     } else {
       // print("PAVITHRA");
@@ -340,13 +360,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                 children: [
                                   buttonpressed == false
                                       ? Text(
-                                          (lang.length != null &&
-                                                  lang.length != 0 &&
-                                                  userLanguage[
-                                                          'ihavewrittenthemdown'] !=
-                                                      null)
-                                              ? "${userLanguage['ihavewrittenthemdown']}"
-                                              : "Get Started!",
+                                          "Get Started!",
                                           textAlign: TextAlign.center,
                                           style: GoogleFonts.poppins(
                                               color: white,
@@ -658,9 +672,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                         GestureDetector(
                                           onTap: () {
-                                            setState(() {
-                                              plaidconnect = true;
-                                            });
+                                            if (user[0]["plaidlogin"] == 0) {
+                                              plaidconnection(context);
+                                            } else {
+                                              getTransaction();
+                                            }
                                           },
                                           child: Container(
                                             height: MediaQuery.of(context)
@@ -1023,10 +1039,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                
                                                                 Icon(
-                                                                  Icons.more_vert_outlined
-                                                                      ,
+                                                                  Icons
+                                                                      .more_vert_outlined,
                                                                   color: white,
                                                                 ),
                                                                 Text(
@@ -1460,5 +1475,164 @@ class _WalletTwoState extends State<WalletTwo> {
                     ),
             ),
           );
+  }
+
+  void plaidconnection(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Plaid Connection",
+                          style: GoogleFonts.poppins(
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            child: Image.asset(
+                              "assets/images/toyface.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Card(
+                            shadowColor: button.withOpacity(0.5),
+                            color: Color(0xff1C203A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                              // side: new BorderSide(color: Colors.black, width: 1.0),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.35,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.all(0),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 20),
+                                  Container(
+                                      height: 4,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                          color: text1,
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  Text(
+                                    "We are going to launch plaid",
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 19,
+                                      fontWeight: FontWeight.w400,
+                                      color: white,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        _plaidLinkToken.open();
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Get Started!",
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.poppins(
+                                                color: white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
   }
 }

@@ -2592,7 +2592,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                               'viewchallenges'] !=
                                                           null)
                                                   ? "${userLanguage['viewchallenges']}"
-                                                  : "View Challenges",
+                                                  : "View Challenge",
                                               style: GoogleFonts.poppins(
                                                 color: white,
                                                 fontSize: 12,

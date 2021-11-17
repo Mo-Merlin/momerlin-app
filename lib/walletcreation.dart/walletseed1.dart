@@ -153,6 +153,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
           "seed": widget.seed1,
           "language": "English",
           "googlefitenable": 0,
+          "plaidlogin":0,
           "healthfitenable":0
         });
         if (usersave == true) {

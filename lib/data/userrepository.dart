@@ -38,6 +38,12 @@ class UserRepository {
     return save;
   }
 
+  Future<dynamic> updateplaidlogin(dynamic udata) async {
+    var save = UserDataSource().updateplaidlogin(udata);
+    // print("save $save");
+    return save;
+  }
+
   Future<dynamic> storeToken(String token) async {
     var save = UserDataSource().savetoken(token);
     return save;
@@ -147,9 +153,9 @@ class UserRepository {
         '${url + "transactions?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-      
+
       checkres["status"] = true;
-      
+
       return checkres;
     } catch (e) {
       print(e);
