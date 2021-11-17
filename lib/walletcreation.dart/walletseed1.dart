@@ -73,17 +73,17 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
 
   Future<void> checkUserNickname() async {
     var res = await UserRepository().checkNickname(_nicknameController.text);
-   
+
     if (res["available"] == false) {
       setState(() {
-        nicknameAvailable="notavailable";
+        nicknameAvailable = "notavailable";
         nickNameChecking = false;
         Navigator.pop(context);
         storeUser();
       });
     } else {
       setState(() {
-         nicknameAvailable="available";
+        nicknameAvailable = "available";
         nickNameChecking = true;
         nickNameErrorMessage = "Nickname not available";
         print(nickNameErrorMessage);
@@ -498,7 +498,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
 
   //** NICKNAME BOTTOM SHEET */
   bool nickNameChecking = false;
-  var nicknameAvailable="default";
+  var nicknameAvailable = "default";
   String nickNameErrorMessage = "";
   final formKey = GlobalKey<FormState>();
   final TextEditingController _nicknameController = TextEditingController();
@@ -557,7 +557,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
                       if (_nicknameController.isEmpty)
                         return 'Please enter nickname';
 
-                      if ( nicknameAvailable=="available") {
+                      if (nicknameAvailable == "available") {
                         return "Nickname is unavailable";
                       }
 
