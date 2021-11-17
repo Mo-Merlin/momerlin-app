@@ -10,7 +10,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'wallet_challenges.dart';
+// import 'wallet_challenges.dart';
 
 class JoinChallengesdetail extends StatefulWidget {
   final challange;
@@ -121,8 +121,9 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
 class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   var userLanguage, user, lang = [];
   List<HealthDataPoint> _healthDataList = [];
+  // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
-
+  // final _scaffoldKey = GlobalKey<ScaffoldState>();
   bool loading = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   Future<Null> refreshList() async {
@@ -153,10 +154,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       uid,
       challangeid,
     );
+
     if (joinchallange == false) {
-      Scaffold.of(context)
-          // ignore: deprecated_member_use
-          .showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         content: Text('No Internet Connection'),
         backgroundColor: Colors.red,
       ));
@@ -164,14 +164,19 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       if (joinchallange["success"] == true) {
         challengeAccepted(context);
       } else {
-        Scaffold.of(context)
-            // ignore: deprecated_member_use
-            .showSnackBar(
-          SnackBar(
-            content: Text(joinchallange["error"]),
-            backgroundColor: Colors.red,
-          ),
-        );
+        getUserLanguage();
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text(joinchallange["error"]),
+          backgroundColor: Colors.red,
+        ));
+        // Scaffold.of(context)
+        //     // ignore: deprecated_member_use
+        //     .showSnackBar(
+        //   SnackBar(
+        //     content: Text(joinchallange["error"]),
+        //     backgroundColor: Colors.red,
+        //   ),
+        // );
       }
     }
   }
@@ -210,13 +215,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         }
       }
       for (var i = 0; i < res["leaders"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
       }
       for (var i = 0; i < res["winners"].length; i++) {
-        // print("pavimno");
-        // print(res["leaders"][i]);
         winnerdetail.add(WinnerDetails.fromJson(res["winners"][i]));
       }
     } else {
@@ -224,7 +225,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         loading = true;
       });
     }
-    // print("PAVIMANO12 $res");
   }
 
   // ignore: todo
@@ -269,26 +269,20 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
     // get everything from midnight until now
 
     DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
-    DateTime endDate = DateTime(2025, 11, 07, 23, 59, 59);
+    DateTime endDate = DateTime.now();
 
     HealthFactory health = HealthFactory();
 
     // define the types to get
     List<HealthDataType> types = [
-      HealthDataType.STEPS,
-      HealthDataType.WEIGHT,
-      HealthDataType.HEIGHT,
-      HealthDataType.BLOOD_GLUCOSE,
-      HealthDataType.DISTANCE_WALKING_RUNNING,
+      HealthDataType.DISTANCE_DELTA,
     ];
-
-    setState(() => _state = AppState.FETCHING_DATA);
 
     // you MUST request access to the data types before reading them
     bool accessWasGranted = await health.requestAuthorization(types);
-
-    int steps = 0;
-
+    // if (accessWasGranted) {
+    //   await UserRepository().updateUser(1);
+    // }
     if (accessWasGranted) {
       try {
         // fetch new data
@@ -305,12 +299,75 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
 
       // print the results
+
       _healthDataList.forEach((x) {
-        print("Data point: $x");
-        steps += x.value.round();
+        // print("Data point: $x");
+        steps += x.value / 1000;
       });
 
       print("Steps: $steps");
+
+      // update the UI to display the results
+      setState(() {
+        _state =
+            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+      });
+    } else {
+      print("Authorization not granted");
+      setState(() => _state = AppState.DATA_NOT_FETCHED);
+    }
+  }
+
+  num steps1 = 0;
+  num distance = 0;
+  Future fetchData1() async {
+    // get everything from midnight until now
+
+    DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endDate = DateTime.now();
+
+    HealthFactory health = HealthFactory();
+
+    // define the types to get
+    List<HealthDataType> types = [
+      HealthDataType.STEPS,
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+    ];
+
+    setState(() => _state = AppState.FETCHING_DATA);
+
+    // you MUST request access to the data types before reading them
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    num steps1 = 0;
+
+    if (accessWasGranted) {
+      try {
+        var res = await UserRepository().updatehealthfit(1);
+
+        if (res == true) {
+          joinChallenge(context, widget.challange);
+        }
+        // fetch new data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(startDate, endDate, types);
+
+        // save all the new data points
+        _healthDataList.addAll(healthData);
+      } catch (e) {
+        print("Caught exception in getHealthDataFromTypes: $e");
+      }
+
+      // filter out duplicates
+      _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+
+      // print the results
+      _healthDataList.forEach((x) {
+        // print("Data point: $x");
+        steps1 += x.value.round();
+      });
+      distance = steps1 / 1000;
+      print("Steps: $steps1 $distance");
 
       // update the UI to display the results
       setState(() {
@@ -475,51 +532,55 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                             decoration: BoxDecoration(
                                 color: button,
                                 borderRadius: BorderRadius.circular(15)),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Padding(
-                                  padding: const EdgeInsets.only(left: 15),
-                                  child: Text(
-                                    challangedetail["wage"],
-                                    style: GoogleFonts.montserrat(
-                                        decoration: TextDecoration.none,
-                                        color: Colors.white,
-                                        fontSize: 21,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                ),
-                                Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['gwei'] != null)
-                                      ? "${userLanguage['sats']}"
-                                      : "Gwei",
-                                  style: GoogleFonts.poppins(
-                                      decoration: TextDecoration.none,
-                                      color: Colors.orange,
-                                      fontSize: 12,
-                                      fontWeight: FontWeight.w400),
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.only(right: 10),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(30),
-                                    child: Container(
-                                      height: 25,
-                                      width: 25,
-                                      color: blue1,
-                                      child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.note_add_outlined,
-                                            color: Colors.white,
-                                            size: 12,
-                                          )),
+                            child: FittedBox(
+                              fit: BoxFit.scaleDown,
+                              child: Row(
+                                mainAxisAlignment:
+                                    MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(left: 15),
+                                    child: Text(
+                                      challangedetail["wage"],
+                                      style: GoogleFonts.montserrat(
+                                          decoration: TextDecoration.none,
+                                          color: Colors.white,
+                                          fontSize: 21,
+                                          fontWeight: FontWeight.w600),
                                     ),
                                   ),
-                                ),
-                              ],
+                                  Text(
+                                    (lang.length != null &&
+                                            lang.length != 0 &&
+                                            userLanguage['gwei'] != null)
+                                        ? "${userLanguage['sats']}"
+                                        : "Gwei",
+                                    style: GoogleFonts.poppins(
+                                        decoration: TextDecoration.none,
+                                        color: Colors.orange,
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w400),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: ClipRRect(
+                                      borderRadius: BorderRadius.circular(30),
+                                      child: Container(
+                                        height: 25,
+                                        width: 25,
+                                        color: blue1,
+                                        child: IconButton(
+                                            onPressed: () {},
+                                            icon: Icon(
+                                              Icons.note_add_outlined,
+                                              color: Colors.white,
+                                              size: 12,
+                                            )),
+                                      ),
+                                    ),
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
                         ),
@@ -1259,9 +1320,11 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
             bottomNavigationBar: joinchallenge == false && difference < 0
                 ? GestureDetector(
                     onTap: () {
-                      user[0]["googlefitenable"] == 1
+                      getUserLanguage();
+                      user[0]["googlefitenable"] == 1 ||
+                              user[0]["healthfitenable"] == 1
                           ? joinChallenge(context, widget.challange)
-                          : startBetting(context);
+                          : startBetting(context, widget.challange);
                     },
                     child: Container(
                       margin: EdgeInsets.only(
@@ -1289,7 +1352,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           );
   }
 
-  void startBetting(BuildContext context) {
+  void startBetting(BuildContext context, challenge) {
     showDialog(
       context: context,
       barrierDismissible: true,
@@ -1437,9 +1500,13 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       onPressed: () {
                                         if (Platform.isAndroid) {
                                           Navigator.pop(context);
+                                          if (user[0]["googlefitenable"] == 1) {
+                                            joinChallenge(context, challenge);
+                                          } else {
+                                            gettoken();
+                                            fetchData();
+                                          }
 
-                                          gettoken();
-                                          fetchData();
                                           // Android-specific code
                                         } else if (Platform.isIOS) {
                                           // iOS-specific code
@@ -1491,8 +1558,20 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                       color: button,
                                       onPressed: () {
-                                        fetchData();
-                                        Navigator.pop(context);
+                                        if (Platform.isIOS) {
+                                          Navigator.pop(context);
+                                          if (user[0]["healthfitenable"] == 1) {
+                                            joinChallenge(context, challenge);
+                                          } else {
+                                            fetchData1();
+                                          }
+                                          // Android-specific code
+                                        } else if (Platform.isAndroid) {
+                                          // iOS-specific code
+                                        }
+
+                                        //
+
                                         // fetchData();
                                       },
                                       child: Row(
@@ -1510,55 +1589,20 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 "assets/images/ahkit.png",
                                               )),
                                           SizedBox(width: 20),
-                                          Column(
-                                            children: [
-                                              Text(
-                                                (lang.length != null &&
-                                                        lang.length != 0 &&
-                                                        userLanguage[
-                                                                'applehealthkit'] !=
-                                                            null)
-                                                    ? "${userLanguage['applehealthkit']}"
-                                                    : "APPLE HEALTH KIT",
-                                                style: GoogleFonts.poppins(
-                                                  //color: blue1,
-                                                  color: Colors.white,
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w600,
-                                                ),
-                                              ),
-                                              Container(
-                                                height: 23,
-                                                width: 86,
-                                                decoration: BoxDecoration(
-                                                    color: blue1,
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            15)),
-                                                child: Center(
-                                                  child: Text(
-                                                      (lang.length != null &&
-                                                              lang.length !=
-                                                                  0 &&
-                                                              userLanguage[
-                                                                      'commingsoon'] !=
-                                                                  null)
-                                                          ? "${userLanguage['commingsoon']}"
-                                                          : "COMING SOON",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              decoration:
-                                                                  TextDecoration
-                                                                      .none,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontSize: 8,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w600)),
-                                                ),
-                                              ),
-                                            ],
+                                          Text(
+                                            (lang.length != null &&
+                                                    lang.length != 0 &&
+                                                    userLanguage[
+                                                            'applehealthkit'] !=
+                                                        null)
+                                                ? "${userLanguage['applehealthkit']}"
+                                                : "APPLE HEALTH KIT",
+                                            style: GoogleFonts.poppins(
+                                              //color: blue1,
+                                              color: Colors.white,
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                            ),
                                           ),
                                         ],
                                       ),

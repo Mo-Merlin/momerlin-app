@@ -2,6 +2,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
@@ -16,18 +17,23 @@ import 'package:plaid_flutter/plaid_flutter.dart';
 
 class Transaction {
   var amount;
-
+  var sats;
   DateTime date;
   String merchantName;
+  var iso_currency_code;
   Transaction({
     this.amount,
     this.date,
     this.merchantName,
+    this.sats,
+    this.iso_currency_code,
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
         amount: json["amount"],
         date: DateTime.parse(json["time"]),
+        sats: json["sats"],
+        iso_currency_code: json['iso_currency_code'],
         merchantName:
             json["merchant_name"] == null ? null : json["merchant_name"],
       );
@@ -96,10 +102,10 @@ class _WalletTwoState extends State<WalletTwo> {
   }
 
   Future<void> getTransactionuseraddress() async {
-    balance=0;
-    setState(() {
-      loading = false;
-    });
+    balance = 0;
+    // setState(() {
+    loading = false;
+    // });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
 
     if (res == false) {
@@ -113,16 +119,16 @@ class _WalletTwoState extends State<WalletTwo> {
         for (var i = 0; i < res["transactions"].length; i++) {
           transactions1.add(Transaction.fromJson(res["transactions"][i]));
 
-          if (res["transactions"][i]["merchant_name"] != null) {
-            balance += ((double.parse(res["transactions"][i]["amount"]) -
-                    double.parse(res["transactions"][i]["amount"])
-                        .floorToDouble()) *
-                100);
-          } else {}
+          // if (res["transactions"][i]["merchant_name"] != null) {
+          //   balance += ((double.parse(res["transactions"][i]["amount"]) -
+          //           double.parse(res["transactions"][i]["amount"])
+          //               .floorToDouble()) *
+          //       100);
+          // } else {}
         }
-        var balance1 = balance.toStringAsFixed(2);
-        var valance2 = balance1.split(".");
-        splitvalue = valance2[1].toString();
+        // var balance1 = balance.toStringAsFixed(2);
+        // var valance2 = balance1.split(".");
+        // splitvalue = valance2[1].toString();
 
         // print("token $linktoken");
 
@@ -145,42 +151,30 @@ class _WalletTwoState extends State<WalletTwo> {
       loading = false;
     });
 
+    // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    if (res["success"] == true) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Your Plaid Integration is done'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (context) => Tabscreen()),
+          (Route<dynamic> route) => false);
 
-    // Navigator.pushReplacement(
-    //   context,
-    //   MaterialPageRoute(
-    //     builder: (_) => Tabscreen(
-    //       index: 0,
-    //     ),
-    //   ),
-    // );
-    getTransactionuseraddress();
-    // var res1 = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-    // setState(() {
-    //   loading = false;
-    // });
-    // transactions1 = [];
-
-    // for (var i = 0; i < res["transactions"].length; i++) {
-    //   transactions1.add(Transaction.fromJson(res["transactions"][i]));
-
-    //   if (res["transactions"][i]["merchant_name"] != null) {
-    //     balance += ((res["transactions"][i]["amount"] -
-    //             res["transactions"][i]["amount"].floorToDouble()) *
-    //         100);
-    //   } else {}
-    // }
-    // var balance1 = balance.toStringAsFixed(2);
-    // var valance2 = balance1.split(".");
-    // splitvalue = valance2[1].toString();
+      getUserLanguage();
+    }
   }
 
+  var gweibalance = "0";
   Future<void> getUserLanguage() async {
-  
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
-    print("1232132uid ${user[0]}");
+    var res = await UserRepository().getUser(user[0]["walletaddress"]);
+
+    gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -220,16 +214,15 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> _onSuccessCallback(
       String publicToken, LinkSuccessMetadata metadata) async {
     setState(() {
-      loading = true;
 
       plaidconnect = false;
       buttonpressed = false;
     });
-    print("PAVIMANO $publicToken");
     await UserRepository().updateToken({"public_token": publicToken});
     getTransaction();
 
-    final usersave = await UserRepository().storeUser({"token": publicToken});
+    final usersave =
+        await UserRepository().storeUser({"publictoken": publicToken});
     setState(() {
       loading = false;
     });
@@ -237,50 +230,10 @@ class _WalletTwoState extends State<WalletTwo> {
     } else {
       // print("PAVITHRA");
     }
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(
-        builder: (_) => Tabscreen(
-          index: 0,
-        ),
-      ),
-    );
-    print("onSuccess: $publicToken, metadata: ${metadata.description()}");
   }
 
   final GlobalKey<ScaffoldState> _scaffoldstate =
       new GlobalKey<ScaffoldState>();
-//  void _showScaffold(String message){
-//    // ignore: deprecated_member_use
-//    _scaffoldstate.currentState.showSnackBar(new SnackBar(content: new Text('Hello world')));
-//  }
-// final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-//       new GlobalKey<ScaffoldState>();
-//   void _showScaffold1(String message) {
-//     // ignore: deprecated_member_use
-//     scaffoldKeyWallet.currentState.showSnackBar(
-//       SnackBar(
-//         content: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             Text(
-//               message,
-//               style: GoogleFonts.poppins(
-//                 color: white,
-//                 fontSize: 17,
-//                 fontWeight: FontWeight.w400,
-//               ),
-//             ),
-//             Icon(
-//               Icons.info_outline,
-//               color: Colors.white,
-//             )
-//           ],
-//         ),
-//         backgroundColor: Colors.red,
-//       ),
-//     );
-//   }
 
   @override
   Widget build(BuildContext context) {
@@ -507,7 +460,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                           child: Row(
                                             children: [
                                               Text(
-                                                balance.toStringAsFixed(2),
+                                                gweibalance,
                                                 style: GoogleFonts.montserrat(
                                                   fontSize: 30,
                                                   fontWeight: FontWeight.w600,
@@ -599,21 +552,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                                         width: 42,
                                                         color:
                                                             Colors.green[300],
-                                                        child: IconButton(
-                                                          onPressed: () {
-                                                            Navigator.push(
-                                                                context,
-                                                                MaterialPageRoute(
-                                                                    builder:
-                                                                        (context) =>
-                                                                            WalletSend()));
-                                                          },
-                                                          icon: Icon(
-                                                            Icons
-                                                                .file_upload_outlined,
-                                                            size: 20,
-                                                            color: Colors.white,
-                                                          ),
+                                                        child: Icon(
+                                                          Icons
+                                                              .file_upload_outlined,
+                                                          size: 20,
+                                                          color: Colors.white,
                                                         ),
                                                       ),
                                                     ),
@@ -667,98 +610,74 @@ class _WalletTwoState extends State<WalletTwo> {
                                               borderRadius:
                                                   BorderRadius.circular(10),
                                             ),
-                                            child: GestureDetector(
-                                              onTap: () {
-                                                // _showReceiveMobile();
-                                                Navigator.push(
-                                                    context,
-                                                    MaterialPageRoute(
-                                                        builder: (context) =>
-                                                            WalletReceive()));
-                                              },
-                                              child: Column(
-                                                children: [
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 25),
-                                                    child: ClipRRect(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              30),
-                                                      child: Container(
-                                                        height: 42,
-                                                        width: 42,
-                                                        color: blue1,
-                                                        child: IconButton(
-                                                            onPressed: () {
-                                                              Navigator.push(
-                                                                  context,
-                                                                  MaterialPageRoute(
-                                                                      builder:
-                                                                          (context) =>
-                                                                              WalletReceive()));
-                                                            },
-                                                            icon: Icon(
-                                                              Icons
-                                                                  .file_download_outlined,
-                                                              color:
-                                                                  Colors.white,
-                                                              size: 20,
-                                                            )),
+                                            child: Column(
+                                              children: [
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 25),
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    child: Container(
+                                                      height: 42,
+                                                      width: 42,
+                                                      color: blue1,
+                                                      child: Icon(
+                                                        Icons
+                                                            .file_download_outlined,
+                                                        color: Colors.white,
+                                                        size: 20,
                                                       ),
                                                     ),
                                                   ),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            top: 15),
-                                                    child: Text(
-                                                      (lang.length != null &&
-                                                              lang.length !=
-                                                                  0 &&
-                                                              userLanguage[
-                                                                      'receive'] !=
-                                                                  null)
-                                                          ? "${userLanguage['receive']}"
-                                                          : "Receive",
-                                                      style:
-                                                          GoogleFonts.poppins(
-                                                              fontSize: 13,
-                                                              color:
-                                                                  Colors.grey,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w400),
-                                                    ),
-                                                  )
-                                                ],
-                                              ),
+                                                ),
+                                                Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          top: 15),
+                                                  child: Text(
+                                                    (lang.length != null &&
+                                                            lang.length != 0 &&
+                                                            userLanguage[
+                                                                    'receive'] !=
+                                                                null)
+                                                        ? "${userLanguage['receive']}"
+                                                        : "Receive",
+                                                    style: GoogleFonts.poppins(
+                                                        fontSize: 13,
+                                                        color: Colors.grey,
+                                                        fontWeight:
+                                                            FontWeight.w400),
+                                                  ),
+                                                )
+                                              ],
                                             ),
                                           ),
                                         ),
-                                        Container(
-                                          height: MediaQuery.of(context)
-                                                  .size
-                                                  .height /
-                                              6.5,
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              4,
+                                        GestureDetector(
+                                          onTap: () {
+                                            setState(() {
+                                              plaidconnect = true;
+                                            });
+                                          },
+                                          child: Container(
+                                            height: MediaQuery.of(context)
+                                                    .size
+                                                    .height /
+                                                6.5,
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                4,
 
-                                          //color: button,
-                                          decoration: BoxDecoration(
-                                            color: button,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: GestureDetector(
-                                            onTap: () {
-                                              setState(() {
-                                                plaidconnect = true;
-                                              });
-                                            },
+                                            //color: button,
+                                            decoration: BoxDecoration(
+                                              color: button,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
                                             child: Column(
                                               children: [
                                                 Padding(
@@ -773,20 +692,12 @@ class _WalletTwoState extends State<WalletTwo> {
                                                       height: 42,
                                                       width: 42,
                                                       color: Colors.orange[300],
-                                                      child: IconButton(
-                                                          // onPressed: () {},
-                                                          onPressed: () {
-                                                            setState(() {
-                                                              plaidconnect =
-                                                                  true;
-                                                            });
-                                                          },
-                                                          icon: Icon(
-                                                            Icons
-                                                                .attach_money_outlined,
-                                                            color: Colors.white,
-                                                            size: 20,
-                                                          )),
+                                                      child: Icon(
+                                                        Icons
+                                                            .attach_money_outlined,
+                                                        color: Colors.white,
+                                                        size: 20,
+                                                      ),
                                                     ),
                                                   ),
                                                 ),
@@ -847,93 +758,108 @@ class _WalletTwoState extends State<WalletTwo> {
                                                 ),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 25),
-                                              child: Container(
-                                                height: 35,
-                                                width: 85,
-                                                decoration: BoxDecoration(
-                                                  color: blue.withOpacity(0.2),
-                                                  borderRadius:
-                                                      BorderRadius.circular(10),
-                                                ),
-                                                child: Center(
-                                                  child: Text(
-                                                    "MORE DETAILS",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 8,
-                                                      fontWeight:
-                                                          FontWeight.w600,
-                                                      color: blue1,
-                                                    ),
-                                                  ),
-                                                ),
-                                              ),
-                                            )
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       right: 25),
+                                            //   child: Container(
+                                            //     height: 35,
+                                            //     width: 85,
+                                            //     decoration: BoxDecoration(
+                                            //       color: blue.withOpacity(0.2),
+                                            //       borderRadius:
+                                            //           BorderRadius.circular(10),
+                                            //     ),
+                                            //     child: Center(
+                                            //       child: Text(
+                                            //         "MORE DETAILS",
+                                            //         style: GoogleFonts.poppins(
+                                            //           fontSize: 8,
+                                            //           fontWeight:
+                                            //               FontWeight.w600,
+                                            //           color: blue1,
+                                            //         ),
+                                            //       ),
+                                            //     ),
+                                            //   ),
+                                            // )
                                           ],
                                         ),
                                         SizedBox(height: 25),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  left: 15),
-                                              child: RichText(
-                                                text: TextSpan(
-                                                  text: 'You Spent',
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 12,
-                                                    color: text1,
-                                                  ),
-                                                  children: <TextSpan>[
-                                                    TextSpan(
-                                                      text: ' 1654.12',
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                        fontSize: 14,
-                                                        fontWeight:
-                                                            FontWeight.w600,
-                                                        color: Colors.white,
-                                                      ),
-                                                    ),
-                                                    TextSpan(
-                                                      text: ' Gwei',
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                        fontSize: 10,
-                                                        color: Colors.orange,
-                                                      ),
-                                                    ),
-                                                    TextSpan(
-                                                      text:
-                                                          ' on food\nthis month, that’s higher\nthan normal.',
-                                                      style: GoogleFonts
-                                                          .montserrat(
-                                                        fontSize: 14,
-                                                        color: text1,
-                                                      ),
-                                                    ),
-                                                  ],
-                                                ),
+                                        // Row(
+                                        //   mainAxisAlignment:
+                                        //       MainAxisAlignment.spaceBetween,
+                                        //   children: [
+                                        Container(
+                                          padding: EdgeInsets.only(
+                                              left: 20, right: 20),
+                                          child: Align(
+                                            alignment: Alignment.center,
+                                            child: Text(
+                                              "We are processing your information. Please check back again later.",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 12,
+                                                color: text1,
                                               ),
+                                              textAlign: TextAlign.center,
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 15),
-                                              child: Container(
-                                                height: 54,
-                                                width: 104,
-                                                child: Image.asset(
-                                                  "assets/images/reportbar.png",
-                                                  fit: BoxFit.contain,
-                                                ),
-                                              ),
-                                            )
-                                          ],
+                                          ),
                                         ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       left: 15),
+                                        //   child: RichText(
+                                        //     text: TextSpan(
+                                        //       text: 'You Spent',
+                                        //       style: GoogleFonts.poppins(
+                                        //         fontSize: 12,
+                                        //         color: text1,
+                                        //       ),
+                                        //       children: <TextSpan>[
+                                        //         TextSpan(
+                                        //           text: ' 1654.12',
+                                        //           style: GoogleFonts
+                                        //               .montserrat(
+                                        //             fontSize: 14,
+                                        //             fontWeight:
+                                        //                 FontWeight.w600,
+                                        //             color: Colors.white,
+                                        //           ),
+                                        //         ),
+                                        //         TextSpan(
+                                        //           text: ' Gwei',
+                                        //           style: GoogleFonts
+                                        //               .montserrat(
+                                        //             fontSize: 10,
+                                        //             color: Colors.orange,
+                                        //           ),
+                                        //         ),
+                                        //         TextSpan(
+                                        //           text:
+                                        //               ' on food\nthis month, that’s higher\nthan normal.',
+                                        //           style: GoogleFonts
+                                        //               .montserrat(
+                                        //             fontSize: 14,
+                                        //             color: text1,
+                                        //           ),
+                                        //         ),
+                                        //       ],
+                                        //     ),
+                                        //   ),
+                                        // ),
+                                        // Padding(
+                                        //   padding: const EdgeInsets.only(
+                                        //       right: 15),
+                                        //   child: Container(
+                                        //     height: 54,
+                                        //     width: 104,
+                                        //     child: Image.asset(
+                                        //       "assets/images/reportbar.png",
+                                        //       fit: BoxFit.contain,
+                                        //     ),
+                                        //   ),
+                                        // )
+                                        //   ],
+                                        // ),
                                       ],
                                     ),
                                   ),
@@ -1077,23 +1003,49 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                         .white),
                                                               ),
                                                             ),
-                                                            subtitle: Container(
-                                                              padding: EdgeInsets
-                                                                  .only(
-                                                                      left: 20),
-                                                              child: Text(
-                                                                (DateFormat.yMMMd()
-                                                                        .format(
-                                                                            transactions1[index].date))
-                                                                    .toString(),
-                                                                style:
-                                                                    GoogleFonts
+                                                            subtitle: Row(
+                                                              children: [
+                                                                Container(
+                                                                  padding: EdgeInsets
+                                                                      .only(
+                                                                          left:
+                                                                              20),
+                                                                  child: Text(
+                                                                    (DateFormat.yMMMd()
+                                                                            .format(transactions1[index].date))
+                                                                        .toString(),
+                                                                    style: GoogleFonts
                                                                         .poppins(
-                                                                  fontSize: 12,
-                                                                  color: Color(
-                                                                      0xff9395A4),
+                                                                      fontSize:
+                                                                          12,
+                                                                      color: Color(
+                                                                          0xff9395A4),
+                                                                    ),
+                                                                  ),
                                                                 ),
-                                                              ),
+                                                                
+                                                                Icon(
+                                                                  Icons.more_vert_outlined
+                                                                      ,
+                                                                  color: white,
+                                                                ),
+                                                                Text(
+                                                                  transactions1[
+                                                                              index]
+                                                                          .amount +
+                                                                      " " +
+                                                                      transactions1[
+                                                                              index]
+                                                                          .iso_currency_code,
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        12,
+                                                                    color:
+                                                                        white,
+                                                                  ),
+                                                                ),
+                                                              ],
                                                             ),
                                                             trailing: Container(
                                                               height: 40,
@@ -1118,10 +1070,10 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                     left: 14,
                                                                     top: 15,
                                                                     child: Text(
-                                                                      ((double.parse(transactions1[index].amount) - double.parse(transactions1[index].amount).floorToDouble()) *
-                                                                              100)
+                                                                      ((double.parse(transactions1[index]
+                                                                              .sats)))
                                                                           .toStringAsFixed(
-                                                                              1),
+                                                                              2),
                                                                       style: GoogleFonts
                                                                           .montserrat(
                                                                         fontSize:

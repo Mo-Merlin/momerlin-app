@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:health/health.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/theme/theme.dart';
@@ -133,6 +134,14 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
+enum AppState {
+  DATA_NOT_FETCHED,
+  FETCHING_DATA,
+  DATA_READY,
+  NO_DATA,
+  AUTH_NOT_GRANTED
+}
+
 class _MyActivityState extends State<MyActivity> {
   // ignore: unused_field
   CalendarController _controller;
@@ -160,9 +169,71 @@ class _MyActivityState extends State<MyActivity> {
       // fetchData();
 
       gettoken();
+    } else if (user[0]["healthfitenable"] == 1) {
+      fetchData1();
+    } else {
+      getjoinChallenges();
     }
+  }
 
-    getjoinChallenges();
+  num steps1 = 0;
+  num distance = 0;
+  List<HealthDataPoint> _healthDataList = [];
+  // ignore: unused_field
+  AppState _state = AppState.DATA_NOT_FETCHED;
+  DateTime now = DateTime.now();
+  Future fetchData1() async {
+    // get everything from midnight until now
+
+    DateTime startDate = DateTime(now.year, now.month, now.day, 0, 0, 0);
+    DateTime endDate = DateTime.now();
+
+    HealthFactory health = HealthFactory();
+
+    // define the types to get
+    List<HealthDataType> types = [
+      HealthDataType.DISTANCE_WALKING_RUNNING,
+    ];
+
+    setState(() => _state = AppState.FETCHING_DATA);
+
+    // you MUST request access to the data types before reading them
+    bool accessWasGranted = await health.requestAuthorization(types);
+
+    num steps1 = 0;
+
+    if (accessWasGranted) {
+      try {
+        // fetch new data
+        List<HealthDataPoint> healthData =
+            await health.getHealthDataFromTypes(startDate, endDate, types);
+
+        // save all the new data points
+        _healthDataList.addAll(healthData);
+      } catch (e) {
+        print("Caught exception in getHealthDataFromTypes: $e");
+      }
+
+      // filter out duplicates
+      _healthDataList = HealthFactory.removeDuplicates(_healthDataList);
+
+      // print the results
+      _healthDataList.forEach((x) {
+        steps1 += x.value.round();
+      });
+      distance = steps1 / 1000;
+      getjoinChallenges();
+      print("Steps: $steps1 $distance");
+
+      // update the UI to display the results
+      setState(() {
+        _state =
+            _healthDataList.isEmpty ? AppState.NO_DATA : AppState.DATA_READY;
+      });
+    } else {
+      print("Authorization not granted");
+      setState(() => _state = AppState.DATA_NOT_FETCHED);
+    }
   }
 
   var token;
@@ -173,7 +244,6 @@ class _MyActivityState extends State<MyActivity> {
       token = ggAuth.accessToken;
       // getmyChallenges();
       getjoinChallenges();
-     
     } catch (error) {
       print(error);
     }
@@ -183,8 +253,8 @@ class _MyActivityState extends State<MyActivity> {
   //TODO: LanguageEnd
 
   Future<void> getjoinChallenges() async {
-    
-    var res = await UserRepository().joingetchallenge(user[0]["uid"], token);
+    var res =
+        await UserRepository().joingetchallenge(user[0]["uid"], token, distance);
 
     setState(() {
       loading = false;
@@ -197,7 +267,6 @@ class _MyActivityState extends State<MyActivity> {
       if (res["success"] == true) {
         joingetchallenge = [];
         for (var i = 0; i < res["challenges"]["docs"].length; i++) {
-         
           joingetchallenge
               .add(JoingetChallenges.fromJson(res["challenges"]["docs"][i]));
         }
@@ -212,7 +281,6 @@ class _MyActivityState extends State<MyActivity> {
     }
   }
 
-  
   List<Color> myActivityColorList = [
     blue1,
     spendingPink,
@@ -556,11 +624,10 @@ class _MyActivityState extends State<MyActivity> {
                                         MaterialPageRoute(
                                             builder: (context) =>
                                                 Challengesdetail(
-                                                            challange:
-                                                                joingetchallenge[
-                                                                        index]
-                                                                    .challenge
-                                                                    .id)));
+                                                    challange:
+                                                        joingetchallenge[index]
+                                                            .challenge
+                                                            .id)));
                                   },
                                   child: Stack(
                                     children: [

@@ -176,12 +176,13 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                         GestureDetector(
                           onTap: () {
                             Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Challengesdetail(
-                                            challange: widget.id),
-                                      ),
-                                    );
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Challengesdetail(
+                                  challange: widget.id,
+                                ),
+                              ),
+                            );
                           },
                           child: Container(
                             width: MediaQuery.of(context).size.width * 0.8,
