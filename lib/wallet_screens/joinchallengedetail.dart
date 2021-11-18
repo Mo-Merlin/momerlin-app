@@ -1430,16 +1430,17 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                 loading == false
                     ? Positioned(
                         top: MediaQuery.of(context).size.height * 0.25,
-                        left: MediaQuery.of(context).size.width * 0.05,
-                        right: MediaQuery.of(context).size.width * 0.03,
+                        left: MediaQuery.of(context).size.width * 0.2,
+                        // right: MediaQuery.of(context).size.width * 0.03,
                         child: Container(
-                          height: MediaQuery.of(context).size.height * 0.22,
-                          width: MediaQuery.of(context).size.width * 0.8,
+                          height: MediaQuery.of(context).size.height * 0.24,
+                          width: MediaQuery.of(context).size.width * 0.55,
                           decoration: BoxDecoration(
-                              color: Colors.white.withOpacity(0.1),
-                              borderRadius: BorderRadius.circular(12)),
-                          child: Center(child: SpinKitRing(color: white)),
-                        ))
+                              color: white.withOpacity(0.9),
+                              borderRadius: BorderRadius.circular(24)),
+                          child: Center(child: SpinKitRing(color: blue2)),
+                        ),
+                      )
                     : SizedBox(),
               ],
             ),

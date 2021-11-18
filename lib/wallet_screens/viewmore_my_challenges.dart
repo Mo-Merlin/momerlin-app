@@ -55,7 +55,7 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
   @override
   void initState() {
     super.initState();
- 
+
     getUserLanguage();
   }
 
@@ -198,15 +198,14 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
               height: 20,
             ),
             loading == true
-                ? Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
-                    width: MediaQuery.of(context).size.width,
-                    color: backgroundcolor,
-                    child: Center(
-                      child: SpinKitSpinningLines(
-                        color: white,
-                        size: 60,
-                      ),
+                ? Center(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.24,
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      decoration: BoxDecoration(
+                          color: white.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(24)),
+                      child: Center(child: SpinKitRing(color: blue2)),
                     ),
                   )
                 : mychallenge.length == 0

@@ -195,9 +195,13 @@ class _MyEarningsState extends State<MyEarnings> {
             width: MediaQuery.of(context).size.width,
             color: backgroundcolor,
             child: Center(
-              child: SpinKitRing(
-                color: white,
-                size: 60,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.24,
+                width: MediaQuery.of(context).size.width * 0.55,
+                decoration: BoxDecoration(
+                    color: white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(24)),
+                child: Center(child: SpinKitRing(color: blue2)),
               ),
             ),
           )

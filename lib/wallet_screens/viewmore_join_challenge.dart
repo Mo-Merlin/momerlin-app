@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -364,15 +363,14 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
           // ),
 
           loading == true
-              ? Container(
-                  height: MediaQuery.of(context).size.height * 0.23,
-                  width: MediaQuery.of(context).size.width,
-                  color: backgroundcolor,
-                  child: Center(
-                    child: SpinKitSpinningLines(
-                      color: white,
-                      size: 60,
-                    ),
+              ? Center(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height * 0.24,
+                    width: MediaQuery.of(context).size.width * 0.55,
+                    decoration: BoxDecoration(
+                        color: white.withOpacity(0.9),
+                        borderRadius: BorderRadius.circular(24)),
+                    child: Center(child: SpinKitRing(color: blue2)),
                   ),
                 )
               : challengesOne.length == 0
