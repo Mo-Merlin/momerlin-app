@@ -54,11 +54,15 @@ class _MyReportsState extends State<MyReports> {
         ? Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: white,
+            color: backgroundcolor,
             child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
-                size: 60,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.24,
+                width: MediaQuery.of(context).size.width * 0.55,
+                decoration: BoxDecoration(
+                    color: white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(24)),
+                child: Center(child: SpinKitRing(color: blue2)),
               ),
             ),
           )
@@ -128,7 +132,21 @@ class _MyReportsState extends State<MyReports> {
                 ),
               ],
             ),
-            body: SingleChildScrollView(
+            body:
+                // loading == true
+                //     ? Container(
+                //         height: MediaQuery.of(context).size.height,
+                //         width: MediaQuery.of(context).size.width,
+                //         color: backgroundcolor,
+                //         child: Center(
+                //           child: SpinKitRing(
+                //             color: white,
+                //             size: 60,
+                //           ),
+                //         ),
+                //       )
+                //     :
+                SingleChildScrollView(
               child: Column(
                 children: [
                   // APPBAR DESIGN WITH BALANCE

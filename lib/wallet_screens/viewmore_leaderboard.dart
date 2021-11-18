@@ -300,7 +300,7 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
     "https://cdn.imgbin.com/1/8/12/imgbin-computer-icons-user-profile-avatar-woman-business-woman-2x9qVDw4EgxX299EhCLm9fN89.jpg",
     "https://www.clipartmax.com/png/middle/171-1717870_stockvader-predicted-cron-for-may-user-profile-icon-png.png",
   ];
-  
+
   List<Color> leaderboardNumberColorList = [
     orange,
     blue1,
@@ -399,15 +399,14 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
               height: 20,
             ),
             loading == true
-                ? Container(
-                    height: MediaQuery.of(context).size.height * 0.23,
-                    width: MediaQuery.of(context).size.width,
-                    color: backgroundcolor,
-                    child: Center(
-                      child: SpinKitSpinningLines(
-                        color: white,
-                        size: 60,
-                      ),
+                ? Center(
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.24,
+                      width: MediaQuery.of(context).size.width * 0.55,
+                      decoration: BoxDecoration(
+                          color: white.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(24)),
+                      child: Center(child: SpinKitRing(color: blue2)),
                     ),
                   )
                 : leaderboardAll.length == 0

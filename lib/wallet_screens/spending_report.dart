@@ -56,12 +56,11 @@ class _SpendingReportState extends State<SpendingReport> {
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
-    if (lang.length != null && lang.length != 0) {
-      userLanguage = lang[0];
-    }
+    // if (lang.length != null && lang.length != 0) {
+    //   userLanguage = lang[0];
+    // }
     setState(() {
-      
-    loading = false;
+      loading = false;
     });
   }
 
@@ -128,82 +127,104 @@ class _SpendingReportState extends State<SpendingReport> {
   ];
   @override
   Widget build(BuildContext context) {
-    return loading==true? Container(
+    return loading == true
+        ? Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: white,
+            color: backgroundcolor,
             child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
-                size: 60,
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.24,
+                width: MediaQuery.of(context).size.width * 0.55,
+                decoration: BoxDecoration(
+                    color: white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(24)),
+                child: Center(child: SpinKitRing(color: blue2)),
               ),
             ),
-          ):Scaffold(
-      backgroundColor: backgroundcolor,
-      appBar: AppBar(
-        backgroundColor: Color(0xff7D7BF2),
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Container(
-              // height: 50,
-              // width: 50,
-              color: button,
-              child: IconButton(
-                onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Tabscreen(
-                        index: 1,
+          )
+        : Scaffold(
+            backgroundColor: backgroundcolor,
+            appBar: AppBar(
+              backgroundColor: Color(0xff7D7BF2),
+              elevation: 0,
+              leading: Padding(
+                padding: const EdgeInsets.all(5.0),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(30),
+                  child: Container(
+                    // height: 50,
+                    // width: 50,
+                    color: button,
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Tabscreen(
+                              index: 1,
+                            ),
+                          ),
+                        );
+                      },
+                      icon: Icon(
+                        Icons.arrow_back,
+                        color: Colors.white,
                       ),
                     ),
-                  );
-                },
-                icon: Icon(
-                  Icons.arrow_back,
+                  ),
+                ),
+              ),
+              title: Text(
+                (lang.length != null &&
+                        lang.length != 0 &&
+                        userLanguage['spendingReports'] != null)
+                    ? "${userLanguage['spendingReports']}"
+                    : "SPENDING REPORTS",
+                style: GoogleFonts.poppins(
                   color: Colors.white,
+                  fontSize: 15,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
-            ),
-          ),
-        ),
-        title: Text(
-          (lang.length != null &&
-                  lang.length != 0 &&
-                  userLanguage['spendingReports'] != null)
-              ? "${userLanguage['spendingReports']}"
-              : "SPENDING REPORTS",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WalletProfile()));
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover,
-                  width: 46,
-                  height: 46,
+              actions: [
+                Padding(
+                  padding: const EdgeInsets.all(5),
+                  child: GestureDetector(
+                    onTap: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WalletProfile()));
+                    },
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(30),
+                      child: Image.asset(
+                        "assets/images/profile.png",
+                        fit: BoxFit.cover,
+                        width: 46,
+                        height: 46,
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+              ],
             ),
-          ),
-        ],
-      ),
-      body: Stack(
+            body:
+                // loading == true
+                //     ? Container(
+                //         height: MediaQuery.of(context).size.height,
+                //         width: MediaQuery.of(context).size.width,
+                //         color: backgroundcolor,
+                //         child: Center(
+                //           child: SpinKitRing(
+                //             color: white,
+                //             size: 60,
+                //           ),
+                //         ),
+                //       )
+                //     :
+                Stack(
               children: [
                 SingleChildScrollView(
                   child: Column(
@@ -782,7 +803,7 @@ class _SpendingReportState extends State<SpendingReport> {
                 ),
               ],
             ),
-    );
+          );
   }
 
   List<GDPData> getChartData() {

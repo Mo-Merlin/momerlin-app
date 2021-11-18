@@ -3304,7 +3304,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         children: [
                           IconButton(
                             onPressed: () {
-                              showdialog(context);
+                              //showdialog(context);
+                              _enterNickname(context);
                             },
                             icon: Icon(
                               Icons.add,
@@ -3337,6 +3338,529 @@ class _WalletChallengesState extends State<WalletChallenges> {
           ],
         ),
       ),
+    );
+  }
+
+  //** NICKNAME BOTTOM SHEET */
+  bool nickNameChecking = false;
+  var nicknameAvailable = "default";
+  String nickNameErrorMessage = "";
+  final formKey = GlobalKey<FormState>();
+  final TextEditingController _nicknameController = TextEditingController();
+  void _enterNickname(BuildContext context) async {
+    showModalBottomSheet(
+      backgroundColor: backgroundcolor.withOpacity(0.1),
+      isScrollControlled: true,
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+            builder: (BuildContext context, StateSetter setState) {
+          return Scaffold(
+            // appBar: AppBar(
+            //   backgroundColor: backgroundcolor.withOpacity(0),
+            //   elevation: 0,
+            //   leading: Padding(
+            //     padding: const EdgeInsets.all(5.0),
+            //     child: Container(
+            //       width: 50,
+            //       height: 50,
+            //       decoration:
+            //           BoxDecoration(shape: BoxShape.circle, color: gridcolor),
+            //       child: Center(
+            //         child:
+            //             Icon(Icons.arrow_back, size: 20, color: Colors.white),
+            //       ),
+            //     ),
+            //   ),
+            //   title: Text(
+            //     (lang.length != null &&
+            //             lang.length != 0 &&
+            //             userLanguage['createachellenge'] != null)
+            //         ? "${userLanguage['createachellenge']}"
+            //         : "CREATE A \nCHALLENGE",
+            //     style: GoogleFonts.poppins(
+            //       decoration: TextDecoration.none,
+            //       height: 1,
+            //       color: Colors.white,
+            //       fontSize: 17,
+            //       fontWeight: FontWeight.w600,
+            //     ),
+            //   ),
+            //   actions: [
+            //     Padding(
+            //       padding: const EdgeInsets.only(right: 10),
+            //       child: LinearPercentIndicator(
+            //         width: 100,
+            //         lineHeight: 25.0,
+            //         percent: 0.25,
+            //         center: Padding(
+            //           padding: const EdgeInsets.only(left: 54),
+            //           child: Text(
+            //             "25%",
+            //             style: GoogleFonts.poppins(
+            //                 color: white,
+            //                 letterSpacing: 1,
+            //                 fontSize: 12,
+            //                 fontWeight: FontWeight.w400),
+            //           ),
+            //         ),
+            //         linearStrokeCap: LinearStrokeCap.roundAll,
+            //         backgroundColor: backgroundcolor,
+            //         progressColor: blue,
+            //       ),
+            //     ),
+            //   ],
+            // ),
+            backgroundColor: backgroundcolor.withOpacity(0.1),
+            // color: backgroundcolor.withOpacity(0.7),
+            // margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+            body: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                Row(
+                  children: [
+                    Card(
+                      color: gridcolor,
+                      elevation: 20,
+                      // shadowColor: button.withOpacity(0.5),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(150),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: GestureDetector(
+                        onTap: () {
+                          Navigator.pop(context);
+                        },
+                        child: Container(
+                          width: 50,
+                          height: 50,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle, color: gridcolor),
+                          child: Center(
+                            child: Icon(Icons.arrow_back,
+                                size: 20, color: Colors.white),
+                          ),
+                        ),
+                      ),
+                    ),
+                    Text(
+                      (lang.length != null &&
+                              lang.length != 0 &&
+                              userLanguage['createachellenge'] != null)
+                          ? "${userLanguage['createachellenge']}"
+                          : "CREATE A \nCHALLENGE",
+                      style: GoogleFonts.poppins(
+                        decoration: TextDecoration.none,
+                        height: 1,
+                        color: Colors.white,
+                        fontSize: 17,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    Spacer(),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 10),
+                      child: LinearPercentIndicator(
+                        width: 100,
+                        lineHeight: 25.0,
+                        percent: 0.25,
+                        center: Padding(
+                          padding: const EdgeInsets.only(left: 54),
+                          child: Text(
+                            "25%",
+                            style: GoogleFonts.poppins(
+                                color: white,
+                                letterSpacing: 1,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400),
+                          ),
+                        ),
+                        linearStrokeCap: LinearStrokeCap.roundAll,
+                        backgroundColor: backgroundcolor,
+                        progressColor: blue,
+                      ),
+                    ),
+                  ],
+                ),
+                Spacer(),
+                Align(
+                  alignment: Alignment.bottomCenter,
+                  child: Card(
+                    shadowColor: button.withOpacity(0.5),
+                    color: Color(0xff1C203A),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(32),
+                      // side: new BorderSide(color: Colors.black, width: 1.0),
+                    ),
+                    child: Container(
+                      height: 467,
+                      width: MediaQuery.of(context).size.width,
+                      padding: EdgeInsets.all(0),
+                      child: Column(
+                        children: [
+                          SizedBox(height: 40),
+                          Text(
+                            "Select an Activity",
+                            style: GoogleFonts.poppins(
+                              color: Colors.white,
+                              fontSize: 25,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 70),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Container(
+                                height: 188,
+                                width: 134,
+                                decoration: BoxDecoration(
+                                    color: iswalking == true ? blue1 : button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    selecttype = "";
+                                    setState(() {
+                                      selecttype = "Walking";
+                                      iswalking = !iswalking;
+                                      isrunning = false;
+                                    });
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 25),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          child: Container(
+                                              height: 25,
+                                              width: 25,
+                                              color: backgroundcolor,
+                                              child: iswalking == true
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          iswalking = true;
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.check,
+                                                        color: blue1,
+                                                        size: 10,
+                                                      ),
+                                                    )
+                                                  : SizedBox(
+                                                      height: 0,
+                                                    ) // : SizedBox(0),
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Container(
+                                            height: 60,
+                                            width: 48,
+                                            //color: Colors.red,
+                                            child: Image.asset(
+                                              "assets/images/walking.png",
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Text(
+                                          (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['walking'] !=
+                                                      null)
+                                              ? "${userLanguage['walking']}"
+                                              : "WALKING",
+                                          style: GoogleFonts.poppins(
+                                              decoration: TextDecoration.none,
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                              SizedBox(width: 30),
+                              Container(
+                                height: 188,
+                                width: 134,
+                                decoration: BoxDecoration(
+                                    color: isrunning == true ? blue1 : button,
+                                    borderRadius: BorderRadius.circular(15)),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    selecttype = "";
+                                    setState(() {
+                                      selecttype = "Running";
+                                      isrunning = !isrunning;
+                                      iswalking = false;
+                                    });
+                                  },
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 25),
+                                        child: ClipRRect(
+                                          borderRadius:
+                                              BorderRadius.circular(30),
+                                          child: Container(
+                                              height: 25,
+                                              width: 25,
+                                              color: backgroundcolor,
+                                              child: isrunning == true
+                                                  ? IconButton(
+                                                      onPressed: () {
+                                                        setState(() {
+                                                          isrunning = true;
+                                                        });
+                                                      },
+                                                      icon: Icon(
+                                                        Icons.check,
+                                                        color: blue1,
+                                                        size: 10,
+                                                      ),
+                                                    )
+                                                  : SizedBox(
+                                                      height: 0,
+                                                    ) // : SizedBox(0),
+                                              ),
+                                        ),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 12),
+                                        child: Container(
+                                            height: 60,
+                                            width: 48,
+                                            //color: Colors.red,
+                                            child: Image.asset(
+                                              "assets/images/running.png",
+                                              fit: BoxFit.fill,
+                                            )),
+                                      ),
+                                      Padding(
+                                        padding: const EdgeInsets.only(top: 10),
+                                        child: Text(
+                                          (lang.length != null &&
+                                                  lang.length != 0 &&
+                                                  userLanguage['running'] !=
+                                                      null)
+                                              ? "${userLanguage['running']}"
+                                              : "RUNNING",
+                                          style: GoogleFonts.poppins(
+                                              decoration: TextDecoration.none,
+                                              color: Colors.white,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          SizedBox(
+                            height: 50,
+                          ),
+                          Container(
+                            height: 55,
+                            width: 321,
+                            // ignore: deprecated_member_use
+                            child: RaisedButton(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                              onPressed: () {
+                                if (iswalking == true || isrunning == true) {
+                                  Navigator.pop(context);
+                                  selectsat(context);
+                                }
+                                return;
+                              },
+                              //color: blue.withOpacity(0.3),
+                              color: iswalking == true || isrunning == true
+                                  ? blue1
+                                  : button,
+                              child: Text(
+                                (lang.length != null &&
+                                        lang.length != 0 &&
+                                        userLanguage['next'] != null)
+                                    ? "${userLanguage['next']}"
+                                    : "NEXT",
+                                style: GoogleFonts.poppins(
+                                  //color: blue1,
+                                  color: Colors.white,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w600,
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                // SizedBox(
+                //   height: 30,
+                // ),
+              ],
+            ),
+          );
+          // Container(
+          //   decoration: BoxDecoration(
+          //       color: button.withOpacity(0.5),
+          //       borderRadius: BorderRadius.only(
+          //         topLeft: Radius.circular(25),
+          //         topRight: Radius.circular(25),
+          //       )),
+          //   padding: EdgeInsets.only(
+          //     bottom: MediaQuery.of(context).viewInsets.bottom,
+          //   ),
+          //   // You can wrap this Column with Padding of 8.0 for better design
+          //   child: Padding(
+          //     padding: const EdgeInsets.all(15.0),
+          //     child: Column(mainAxisSize: MainAxisSize.min, children: <Widget>[
+          //       SizedBox(
+          //         height: MediaQuery.of(context).size.height * 0.02,
+          //       ),
+          //       Text(
+          //         (lang.length != null &&
+          //                 lang.length != 0 &&
+          //                 userLanguage['createyournicknamehere'] != null)
+          //             ? "${userLanguage['createyournicknamehere']}"
+          //             : "CREATE YOUR NICKNAME HERE",
+          //         textAlign: TextAlign.center,
+          //         style: GoogleFonts.poppins(
+          //           color: white,
+          //           fontSize: 20,
+          //           fontWeight: FontWeight.w600,
+          //         ),
+          //       ),
+          //       SizedBox(
+          //         height: MediaQuery.of(context).size.height * 0.03,
+          //       ),
+          //       Form(
+          //         key: formKey,
+          //         child: TextFormField(
+          //           onChanged: (value) {
+          //             // setState(() {
+          //             //   nickNameChecking = false;
+          //             //   nickNameErrorMessage = "12345";
+          //             // });
+          //           },
+          //           style: TextStyle(color: Colors.white),
+          //           validator: (_nicknameController) {
+          //             if (_nicknameController.isEmpty)
+          //               return 'Please enter nickname';
+
+          //             if (nicknameAvailable == "available") {
+          //               return "Nickname is unavailable";
+          //             }
+
+          //             return null;
+          //           },
+          //           autofocus: true,
+          //           controller: _nicknameController,
+          //           decoration: InputDecoration(
+          //             border: OutlineInputBorder(
+          //               borderRadius: BorderRadius.all(Radius.circular(15)),
+          //               borderSide: BorderSide(
+          //                 color: Color(0xffedeff5),
+          //               ),
+          //             ),
+          //             enabledBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.all(Radius.circular(15)),
+          //               borderSide: BorderSide(
+          //                 color: Color(0xffedeff5),
+          //               ),
+          //             ),
+          //             focusedBorder: OutlineInputBorder(
+          //               borderRadius: BorderRadius.all(Radius.circular(15)),
+          //               borderSide: BorderSide(color: white),
+          //             ),
+          //             isDense: true,
+          //             labelText: 'Nickname',
+          //             labelStyle: TextStyle(
+          //               // fontFamily: 'Dosis-Book',
+          //               color: white,
+          //               fontSize: 18,
+          //             ),
+          //             prefixIcon: Icon(
+          //               Icons.star,
+          //               color: Colors.red,
+          //               size: 10,
+          //             ),
+          //           ),
+          //           minLines: 1,
+          //           maxLines: 1,
+          //           //autovalidate: true,
+          //           autocorrect: false,
+          //         ),
+          //       ),
+
+          //       SizedBox(
+          //         height: MediaQuery.of(context).size.height * 0.04,
+          //       ),
+          //       Center(
+          //         child: Row(
+          //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+          //           children: [
+          //             Container(
+          //               height: MediaQuery.of(context).size.height * 0.06,
+          //               width: MediaQuery.of(context).size.width * 0.9,
+          //               decoration: BoxDecoration(
+          //                   borderRadius: BorderRadius.circular(15)),
+          //               // ignore: deprecated_member_use
+          //               child: RaisedButton(
+          //                 shape: RoundedRectangleBorder(
+          //                   borderRadius: BorderRadius.circular(15),
+          //                 ),
+          //                 onPressed: () {
+          //                   //checkUserNickname();
+          //                   if (formKey.currentState.validate()) {
+          //                     formKey.currentState.save();
+          //                   }
+          //                 },
+          //                 color: blue1.withOpacity(0.2),
+          //                 child: Text(
+          //                   (lang.length != null &&
+          //                           lang.length != 0 &&
+          //                           userLanguage['proceed'] != null)
+          //                       ? "${userLanguage['proceed']}"
+          //                       : "PROCEED",
+          //                   style: GoogleFonts.poppins(
+          //                     //color: blue1,
+          //                     color: blue2,
+          //                     fontSize: 15,
+          //                     fontWeight: FontWeight.w600,
+          //                   ),
+          //                 ),
+          //               ),
+          //             ),
+          //           ],
+          //         ),
+          //       )
+          //     ]),
+          //   ),
+          // );
+        });
+      },
     );
   }
 
@@ -3797,7 +4321,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               children: [
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                      MediaQuery.of(context).size.height * 0.15,
                                   // width: MediaQuery.of(context).size.width,
                                   //color: Colors.red,
                                   child: Center(
@@ -3846,11 +4370,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.001,
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.21,
+                              height: MediaQuery.of(context).size.height * 0.2,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -3863,7 +4388,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.12,
+                              height: MediaQuery.of(context).size.height * 0.05,
                             ),
                             Container(
                               height: 55,
@@ -4033,7 +4558,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               children: [
                                 Container(
                                   height:
-                                      MediaQuery.of(context).size.height * 0.2,
+                                      MediaQuery.of(context).size.height * 0.15,
                                   // width: MediaQuery.of(context).size.width,
                                   //color: Colors.red,
                                   child: Center(
@@ -4068,11 +4593,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.001,
                             ),
                             // HorizontalList(),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.21,
+                              height: MediaQuery.of(context).size.height * 0.2,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -4086,7 +4612,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                             ),
 
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.12,
+                              height: MediaQuery.of(context).size.height * 0.05,
                             ),
                             Container(
                               height: 55,
@@ -4639,10 +5165,11 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ],
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.02,
+                              height:
+                                  MediaQuery.of(context).size.height * 0.001,
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.21,
+                              height: MediaQuery.of(context).size.height * 0.15,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -4655,7 +5182,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               ),
                             ),
                             SizedBox(
-                              height: MediaQuery.of(context).size.height * 0.04,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             Text(
                               "WINNER GETS",
@@ -4672,7 +5199,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
-                              height: 30,
+                              height: MediaQuery.of(context).size.height * 0.03,
                             ),
                             Container(
                               height: 55,
@@ -5446,6 +5973,10 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                           fontWeight: FontWeight.w600,
                                         ),
                                       )),
+                                ),
+                                SizedBox(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.02,
                                 ),
                               ],
                             ),
