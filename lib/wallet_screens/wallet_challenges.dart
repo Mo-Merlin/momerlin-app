@@ -1300,51 +1300,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         ),
                       ),
                     ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 12),
-                      child: Stack(
-                        children: [
-                          CircularProgressIndicator(
-                            strokeWidth: 3,
-                            backgroundColor: blue,
-                            valueColor:
-                                new AlwaysStoppedAnimation<Color>(blue1),
-                          ),
-                          Positioned(
-                            child: Stack(
-                              children: [
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 12, top: 5),
-                                  child: Text(
-                                    (lang.length != null &&
-                                            lang.length != 0 &&
-                                            userLanguage['level'] != null)
-                                        ? "${userLanguage['level']}"
-                                        : "LEVEL",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 5,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                Padding(
-                                  padding:
-                                      const EdgeInsets.only(left: 10, top: 12),
-                                  child: Text(
-                                    "02",
-                                    style: GoogleFonts.poppins(
-                                        fontSize: 13,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w600),
-                                  ),
-                                )
-                              ],
-                            ),
-                          )
-                        ],
-                      ),
-                    )
+                    
                   ],
                 ),
               ),
