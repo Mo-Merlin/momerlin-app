@@ -15,6 +15,48 @@ import 'package:momerlin/wallet_screens/wallet_receive.dart';
 import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 
+class Dialogs {
+  static Future<void> showLoadingDialog(
+      BuildContext context, GlobalKey key) async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false,
+        builder: (BuildContext context) {
+          return new WillPopScope(
+              onWillPop: () async => false,
+              child: SimpleDialog(
+                  key: key,
+                  backgroundColor: Colors.black54,
+                  children: <Widget>[
+                    Center(
+                      child: Column(children: [
+                        CircularProgressIndicator(),
+                        SizedBox(
+                          height: 10,
+                        ),
+                        Text(
+                          "Please Wait....",
+                          style: TextStyle(color: Colors.blueAccent),
+                        )
+                      ]),
+                    )
+                  ]));
+        });
+  }
+}
+
+// Future<void> _handleSubmit(BuildContext context) async {
+//   try {
+//     Dialogs.showLoadingDialog(context, _keyLoader); //invoking login
+//     await serivce.login(user.uid);
+//     Navigator.of(_keyLoader.currentContext, rootNavigator: true)
+//         .pop(); //close the dialoge
+//     Navigator.pushReplacementNamed(context, "/home");
+//   } catch (error) {
+//     print(error);
+//   }
+// }
+
 class Transaction {
   var amount;
   var sats;
@@ -214,7 +256,6 @@ class _WalletTwoState extends State<WalletTwo> {
   Future<void> _onSuccessCallback(
       String publicToken, LinkSuccessMetadata metadata) async {
     setState(() {
-
       plaidconnect = false;
       buttonpressed = false;
     });
@@ -241,10 +282,10 @@ class _WalletTwoState extends State<WalletTwo> {
         ? Container(
             height: MediaQuery.of(context).size.height,
             width: MediaQuery.of(context).size.width,
-            color: white,
+            color: backgroundcolor,
             child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
+              child: SpinKitRing(
+                color: white,
                 size: 60,
               ),
             ),
@@ -1023,10 +1064,9 @@ class _WalletTwoState extends State<WalletTwo> {
                                                                     ),
                                                                   ),
                                                                 ),
-                                                                
                                                                 Icon(
-                                                                  Icons.more_vert_outlined
-                                                                      ,
+                                                                  Icons
+                                                                      .more_vert_outlined,
                                                                   color: white,
                                                                 ),
                                                                 Text(

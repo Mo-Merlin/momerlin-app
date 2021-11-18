@@ -56,12 +56,11 @@ class _SpendingReportState extends State<SpendingReport> {
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
-    if (lang.length != null && lang.length != 0) {
-      userLanguage = lang[0];
-    }
+    // if (lang.length != null && lang.length != 0) {
+    //   userLanguage = lang[0];
+    // }
     setState(() {
-      
-    loading = false;
+      loading = false;
     });
   }
 
@@ -128,17 +127,21 @@ class _SpendingReportState extends State<SpendingReport> {
   ];
   @override
   Widget build(BuildContext context) {
-    return loading==true? Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: white,
-            child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
-                size: 60,
-              ),
-            ),
-          ):Scaffold(
+    return
+        // loading == true
+        //     ? Container(
+        //         height: MediaQuery.of(context).size.height,
+        //         width: MediaQuery.of(context).size.width,
+        //         color: white,
+        //         child: Center(
+        //           child: SpinKitSpinningLines(
+        //             color: backgroundcolor,
+        //             size: 60,
+        //           ),
+        //         ),
+        //       )
+        //     :
+        Scaffold(
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: Color(0xff7D7BF2),
@@ -203,7 +206,19 @@ class _SpendingReportState extends State<SpendingReport> {
           ),
         ],
       ),
-      body: Stack(
+      body: loading == true
+          ? Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: backgroundcolor,
+              child: Center(
+                child: SpinKitRing(
+                  color: white,
+                  size: 60,
+                ),
+              ),
+            )
+          : Stack(
               children: [
                 SingleChildScrollView(
                   child: Column(

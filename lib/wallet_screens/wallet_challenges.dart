@@ -907,6 +907,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getapp();
     getAllLeaderboard();
     recentWinners1();
+    
   }
 
   var gweibalance = "0";
@@ -6023,7 +6024,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       MediaQuery.of(context).size.height * 0.02,
                                 ),
                               ],
-                            
                             ),
                           ),
                         ),

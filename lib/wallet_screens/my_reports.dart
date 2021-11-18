@@ -50,85 +50,97 @@ class _MyReportsState extends State<MyReports> {
 
   @override
   Widget build(BuildContext context) {
-    return loading == true
-        ? Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: white,
-            child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
-                size: 60,
-              ),
-            ),
-          )
-        : Scaffold(
-            backgroundColor: backgroundcolor,
-            appBar: AppBar(
-              backgroundColor: blue2,
-              elevation: 0,
-              leading: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    // height: 50,
-                    // width: 50,
-                    color: button,
-                    child: IconButton(
-                        onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Tabscreen(
-                                index: 0,
-                              ),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        )),
-                  ),
-                ),
-              ),
-              title: Text(
-                (lang.length != null &&
-                        lang.length != 0 &&
-                        userLanguage['myreports'] != null)
-                    ? "${userLanguage['myreports']}"
-                    : "MY REPORTS",
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 15,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              actions: [
-                Padding(
-                  padding: const EdgeInsets.all(5),
-                  child: GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WalletProfile()));
-                    },
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(30),
-                      child: Image.asset(
-                        "assets/images/profile.png",
-                        fit: BoxFit.cover,
-                        width: 46,
-                        height: 46,
+    return
+        // loading == true
+        //     ? Container(
+        //         height: MediaQuery.of(context).size.height,
+        //         width: MediaQuery.of(context).size.width,
+        //         color: white,
+        //         child: Center(
+        //           child: SpinKitSpinningLines(
+        //             color: backgroundcolor,
+        //             size: 60,
+        //           ),
+        //         ),
+        //       )
+        //     :
+        Scaffold(
+      backgroundColor: backgroundcolor,
+      appBar: AppBar(
+        backgroundColor: blue2,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 50,
+              // width: 50,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Tabscreen(
+                          index: 0,
+                        ),
                       ),
-                    ),
-                  ),
-                ),
-              ],
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
             ),
-            body: SingleChildScrollView(
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['myreports'] != null)
+              ? "${userLanguage['myreports']}"
+              : "MY REPORTS",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 15,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+        actions: [
+          Padding(
+            padding: const EdgeInsets.all(5),
+            child: GestureDetector(
+              onTap: () {
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WalletProfile()));
+              },
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(30),
+                child: Image.asset(
+                  "assets/images/profile.png",
+                  fit: BoxFit.cover,
+                  width: 46,
+                  height: 46,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+      body: loading == true
+          ? Container(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              color: backgroundcolor,
+              child: Center(
+                child: SpinKitRing(
+                  color: white,
+                  size: 60,
+                ),
+              ),
+            )
+          : SingleChildScrollView(
               child: Column(
                 children: [
                   // APPBAR DESIGN WITH BALANCE
@@ -310,6 +322,6 @@ class _MyReportsState extends State<MyReports> {
                 ],
               ),
             ),
-          );
+    );
   }
 }
