@@ -2162,75 +2162,61 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
         return StatefulBuilder(
           // You need this, notice the parameters below:
           builder: (BuildContext context, StateSetter setState) {
-            return SingleChildScrollView(
-              child: Container(
-                color: backgroundcolor.withOpacity(0.4),
-                margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Card(
-                          color: gridcolor,
-                          elevation: 20,
-                          // shadowColor: button.withOpacity(0.5),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(150),
-                            // side: new BorderSide(color: Colors.black, width: 1.0),
-                          ),
-                          child: InkWell(
-                            onTap: () {
-                              Navigator.pop(context);
-                            },
-                            child: Container(
-                              width: 50,
-                              height: 50,
-                              decoration: BoxDecoration(
-                                  shape: BoxShape.circle, color: gridcolor),
-                              child: Center(
-                                child: Icon(Icons.arrow_back,
-                                    size: 20, color: Colors.white),
-                              ),
-                            ),
-                          ),
-                        ),
-                        // Text(
-                        //   (lang.length != null &&
-                        //           lang.length != 0 &&
-                        //           userLanguage['createachellenge'] != null)
-                        //       ? "${userLanguage['createachellenge']}"
-                        //       : "CREATE A \nCHALLENGE",
-                        //   style: GoogleFonts.poppins(
-                        //     decoration: TextDecoration.none,
-                        //     height: 1,
-                        //     color: Colors.white,
-                        //     fontSize: 17,
-                        //     fontWeight: FontWeight.w600,
-                        //   ),
-                        // ),
-                      ],
+            return Scaffold(
+              backgroundColor: backgroundcolor.withOpacity(0.4),
+              appBar: AppBar(
+                backgroundColor: backgroundcolor.withOpacity(0.4),
+                leading: Card(
+                  color: gridcolor,
+                  elevation: 20,
+                  // shadowColor: button.withOpacity(0.5),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(150),
+                    // side: new BorderSide(color: Colors.black, width: 1.0),
+                  ),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.pop(context);
+                    },
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                          shape: BoxShape.circle, color: gridcolor),
+                      child: Center(
+                        child: Icon(Icons.arrow_back,
+                            size: 20, color: Colors.white),
+                      ),
                     ),
-                    // SizedBox(
-                    //   height: MediaQuery.of(context).size.height * 0.2,
-                    // ),
-                    Container(
-                      height: MediaQuery.of(context).size.height * 0.8,
-                      width: MediaQuery.of(context).size.width * 0.85,
-                      //color: Colors.red,
-                      child: Stack(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(top: 140),
-                            child: Container(
-                              height: MediaQuery.of(context).size.height * 0.7,
-                              width: MediaQuery.of(context).size.width * 0.85,
-                              decoration: BoxDecoration(
-                                color: backgroundcolor,
-                                borderRadius: BorderRadius.circular(25),
-                              ),
-                              child: SingleChildScrollView(
+                  ),
+                ),
+              ),
+              body: SingleChildScrollView(
+                child: Container(
+                  width: MediaQuery.of(context).size.width,
+                  color: backgroundcolor.withOpacity(0.4),
+                  margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      Container(
+                        // height: MediaQuery.of(context).size.height * 0.8,
+                        width: MediaQuery.of(context).size.width * 0.85,
+
+                        child: Stack(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(top: 140),
+                              child: Container(
+                                alignment: Alignment.center,
+                                // height:
+                                //     MediaQuery.of(context).size.height * 0.7,
+                                width: MediaQuery.of(context).size.width * 0.85,
+                                decoration: BoxDecoration(
+                                  color: backgroundcolor,
+                                  borderRadius: BorderRadius.circular(25),
+                                ),
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
@@ -2448,21 +2434,24 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                 ),
                               ),
                             ),
-                          ),
-                          Positioned(
-                            top: 0,
-                            left: MediaQuery.of(context).size.width * 0.03,
-                            child: Image.asset("assets/images/jc1.png"),
-                          ),
-                          Positioned(
-                            top: MediaQuery.of(context).size.height * 0.055,
-                            left: MediaQuery.of(context).size.width * 0.065,
-                            child: Image.asset("assets/images/jc2.png"),
-                          ),
-                        ],
+                            Positioned(
+                              top: 0,
+                              left: MediaQuery.of(context).size.width * 0.03,
+                              child: Image.asset("assets/images/jc1.png"),
+                            ),
+                            Positioned(
+                              top: MediaQuery.of(context).size.height * 0.055,
+                              left: MediaQuery.of(context).size.width * 0.065,
+                              child: Image.asset("assets/images/jc2.png"),
+                            ),
+                          ],
+                        ),
                       ),
-                    ),
-                  ],
+                      SizedBox(
+                        height: 20,
+                      ),
+                    ],
+                  ),
                 ),
               ),
             );

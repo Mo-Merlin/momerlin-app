@@ -148,9 +148,9 @@ class _WalletTwoState extends State<WalletTwo> {
           backgroundColor: Colors.red,
         ));
       }
-      // setState(() {
+      setState(() {
       loading = false;
-      // });
+      });
     }
   }
 
@@ -187,6 +187,7 @@ class _WalletTwoState extends State<WalletTwo> {
     }
     // getTransaction();
     getTransactionuseraddress();
+   
   }
 
   @override
