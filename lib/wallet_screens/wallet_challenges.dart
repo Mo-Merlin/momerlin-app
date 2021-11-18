@@ -907,7 +907,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
     getapp();
     getAllLeaderboard();
     recentWinners1();
-    
   }
 
   var gweibalance = "0";
