@@ -3,6 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/models/spendingreportsmodel.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
@@ -59,14 +60,58 @@ class _SpendingReportState extends State<SpendingReport> {
     // if (lang.length != null && lang.length != 0) {
     //   userLanguage = lang[0];
     // }
-    setState(() {
-      loading = false;
-    });
+    getSpendingReports();
   }
 
   // ignore: todo
   //TODO: LanguageEnd
 
+  List<SpendingReports> spendingreports = [];
+  Future<void> getSpendingReports() async {
+    setState(() {
+      loading = false;
+    });
+
+    // ignore: unused_local_variable
+    var res =
+        await UserRepository().getSpendingReports(user[0]["walletaddress"]);
+    print("pavithra ${res["transactions"]}");
+    if (res["success"] == true) {
+      spendingreports = [];
+
+      for (var i = 0; i < res["transactions"].length; i++) {
+        spendingreports.add(SpendingReports.fromJson(res["transactions"][i]));
+      }
+    }
+  }
+
+  var trophy = [
+    Image.asset(
+      "assets/images/berger.png",
+      fit: BoxFit.none,
+      width: 50,
+      height: 50,
+    ),
+    Image.asset(
+      "assets/images/coffee.png",
+      fit: BoxFit.none,
+      width: 50,
+      height: 50,
+    ),
+    Image.asset(
+      "assets/images/spendingcoin.png",
+      fit: BoxFit.none,
+      width: 50,
+      height: 50,
+    ),
+  ];
+
+  var percentage = ["53%", "27%", "20%"];
+  var transaction = [
+    "134 Transactions",
+    "24 Transactions",
+    "12 Transactions",
+  ];
   List spendingElements = [
     {
       "image": "berger",
@@ -117,14 +162,7 @@ class _SpendingReportState extends State<SpendingReport> {
       "percentage": "20%",
     },
   ];
-  var spendingColors = [
-    spendingBlue,
-    spendingPink,
-    spendingGreen,
-    spendingBlue,
-    spendingPink,
-    spendingGreen,
-  ];
+  var spendingColors = [spendingBlue, spendingPink, spendingGreen];
   @override
   Widget build(BuildContext context) {
     return
@@ -698,37 +736,38 @@ class _SpendingReportState extends State<SpendingReport> {
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 // controller: myscrollController,
-                                itemCount: spendingElements.length,
+                                itemCount: spendingreports.length,
                                 // padding: EdgeInsets.zero,
                                 itemBuilder: (BuildContext context, int index) {
                                   return ListTile(
                                     leading: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
-                                        color: spendingColors[index],
-                                        child: Image.asset(
-                                          "assets/images/${spendingElements[index]['image']}.png",
-                                          fit: BoxFit.none,
-                                          width: 50,
-                                          height: 50,
-                                        ),
+                                        width: 50,
+                                        height: 50,
+                                        color: spendingColors[
+                                            index % spendingColors.length],
+                                        child: trophy[index % trophy.length],
                                       ),
                                     ),
                                     title: Text(
                                       // "Food",
-                                      spendingElements[index]["title"],
+                                      spendingreports[index].category,
                                       style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         color: Colors.white,
                                         fontWeight: FontWeight.w500,
                                       ),
                                     ),
-                                    subtitle: Text(
-                                      spendingElements[index]['subtitle'],
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: text1,
-                                        // fontWeight: FontWeight.w500,
+                                    subtitle: Container(
+                                      child: Text(
+                                        transaction[index % transaction.length],
+                                        maxLines: 2,
+                                        style: GoogleFonts.poppins(
+                                          fontSize: 12,
+                                          color: text1,
+                                          // fontWeight: FontWeight.w500,
+                                        ),
                                       ),
                                     ),
                                     trailing: Wrap(
@@ -739,15 +778,16 @@ class _SpendingReportState extends State<SpendingReport> {
                                           animation: true,
                                           percent: 0.7,
                                           center: Text(
-                                            spendingElements[index]
-                                                ['percentage'],
+                                            percentage[
+                                                index % percentage.length],
                                             style: GoogleFonts.montserrat(
                                               fontSize: 10,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                          progressColor: spendingColors[index],
+                                          progressColor: spendingColors[
+                                              index % spendingColors.length],
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -766,8 +806,10 @@ class _SpendingReportState extends State<SpendingReport> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                spendingElements[index]
-                                                    ['value'],
+                                                double.parse(
+                                                        spendingreports[index]
+                                                            .sats)
+                                                    .toStringAsFixed(2),
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 12,
                                                   color: Colors.white,
@@ -778,7 +820,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                                 width: 2,
                                               ),
                                               Text(
-                                                spendingElements[index]['type'],
+                                                " Gwei",
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 9,
                                                   color: Colors.orange,
