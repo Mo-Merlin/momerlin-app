@@ -141,7 +141,7 @@ class _MyReportsState extends State<MyReports> {
                 decoration: BoxDecoration(
                     color: white.withOpacity(0.9),
                     borderRadius: BorderRadius.circular(24)),
-                child: Center(child: SpinKitRing(color: blue2)),
+                child: Center(child: SpinKitRing(color: blue1)),
               ),
             )
           : SingleChildScrollView(
