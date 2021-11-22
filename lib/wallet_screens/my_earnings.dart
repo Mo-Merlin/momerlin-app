@@ -1,16 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
+// import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/models/myearningactivitymodel.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+
+import 'dart:async';
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:charts_flutter/flutter.dart' as charts;
 // import 'package:momerlin/wallet_screens/my_earnings_expenses.da÷rt';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 // import 'package:intl/intl.dart';
 //import 'package:bezier_chart/bezier_chart.dart';
 // import 'package:fl_chart/fl_chart.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 class MyEarnings extends StatefulWidget {
   const MyEarnings({Key key}) : super(key: key);
@@ -22,17 +31,17 @@ class MyEarnings extends StatefulWidget {
 class _MyEarningsState extends State<MyEarnings> {
   // List<SalesData> _chartData;
   // TooltipBehavior _tooltipBehavior;
-  bool isHourChart = true;
+  bool isHourChart = false;
   bool isWeekChart = false;
   bool isYearChart = false;
-  bool isAllChart = false;
+  bool isAllChart = true;
 
   //var selectChartType;
 
-  bool isHour = true;
+  bool isHour = false;
   bool isWeek = false;
   bool isYear = false;
-  bool isAll = false;
+  bool isAll = true;
   var selectType;
   var balance = 0.00;
 
@@ -40,15 +49,19 @@ class _MyEarningsState extends State<MyEarnings> {
   @override
   void initState() {
     super.initState();
+    // getCoinsTimeSeries();
     getUserLanguage();
     // _chartData = getChartData();
     // _tooltipBehavior = TooltipBehavior(enable: true);
   }
 
+  var currentTime = new DateTime.now();
   bool tweleve = true;
   bool week = false;
   bool loading = true;
   var gweibalance = "0";
+
+  var difference = 0;
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
@@ -56,14 +69,29 @@ class _MyEarningsState extends State<MyEarnings> {
 
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-
+    getmyEarningActivity();
     gweibalance = res["user"]["gwei"];
     // if (lang.length != null && lang.length != 0) {
     //   userLanguage = lang[0];
     // }
+  }
+
+  List<MyEarningActivity> myEarningActivity = [];
+  Future<void> getmyEarningActivity() async {
+    // ignore: unused_local_variable
+    var res = await UserRepository().getmyEarningActivity(user[0]["uid"]);
     setState(() {
       loading = false;
     });
+    dataJSON = [];
+    print("pavithramanoharan ${res["activities"]}");
+    if (res["success"] == true) {
+      myEarningActivity = [];
+      dataJSON = res["activities"];
+      for (var i = 0; i < res["activities"].length; i++) {
+        myEarningActivity.add(MyEarningActivity.fromJson(res["activities"][i]));
+      }
+    }
   }
 
   // ignore: todo
@@ -126,7 +154,7 @@ class _MyEarningsState extends State<MyEarnings> {
     {
       "image": "earndown",
       "title": "2 days ago",
-      "subtitle": "24 Transactions",
+      "subtitle": "3 days ago",
       "symbol": "-",
       "value": "220.00",
       "type": "Gwei",
@@ -153,7 +181,7 @@ class _MyEarningsState extends State<MyEarnings> {
     {
       "image": "earnup",
       "title": "August 30th",
-      "subtitle": "24 Transactions",
+      "subtitle": "4 days ago",
       "symbol": "-",
       "value": "300.00",
       "type": "Gwei",
@@ -364,7 +392,7 @@ class _MyEarningsState extends State<MyEarnings> {
 
                                 setState(() {
                                   selectType = "Hour";
-                                  isHour = true;
+                                  isHour = false;
                                   isWeek = false;
                                   isYear = false;
                                   isAll = false;
@@ -372,7 +400,7 @@ class _MyEarningsState extends State<MyEarnings> {
                                   isHourChart = true;
                                   isWeekChart = false;
                                   isYearChart = false;
-                                  isAllChart = false;
+                                  isAllChart = true;
                                 });
                               },
                               child: Container(
@@ -437,14 +465,14 @@ class _MyEarningsState extends State<MyEarnings> {
                                 selectType = "";
                                 setState(() {
                                   selectType = "Year";
-                                  isYear = true;
+                                  isYear = false;
                                   isWeek = false;
                                   isHour = false;
                                   isAll = false;
                                   isHourChart = false;
                                   isWeekChart = false;
                                   isYearChart = true;
-                                  isAllChart = false;
+                                  isAllChart = true;
                                 });
                               },
                               child: Container(
@@ -511,6 +539,7 @@ class _MyEarningsState extends State<MyEarnings> {
                           ],
                         ),
                       ),
+
                       SizedBox(
                         height: 30,
                       ),
@@ -746,43 +775,44 @@ class _MyEarningsState extends State<MyEarnings> {
                         visible: isAllChart,
                         child: Container(
                           height: 300,
-                          width: 350,
+                          width: 450,
+                          child: chartWidget(),
                           //color: Colors.blueAccent,
                           //child: Text("YEAR CHART"),
-                          child: SfCartesianChart(
-                            zoomPanBehavior: ZoomPanBehavior(
-                              enablePinching: true,
-                              zoomMode: ZoomMode.x,
-                              enablePanning: true,
-                            ),
-                            enableAxisAnimation: true,
+                          // child: SfCartesianChart(
+                          //   zoomPanBehavior: ZoomPanBehavior(
+                          //     enablePinching: true,
+                          //     zoomMode: ZoomMode.x,
+                          //     enablePanning: true,
+                          //   ),
+                          //   enableAxisAnimation: true,
 
-                            tooltipBehavior: TooltipBehavior(
-                                enable: true, color: Colors.orange),
-                            isTransposed: false,
-                            backgroundColor: backgroundcolor,
+                          //   tooltipBehavior: TooltipBehavior(
+                          //       enable: true, color: Colors.orange),
+                          //   isTransposed: false,
+                          //   backgroundColor: backgroundcolor,
 
-                            primaryXAxis: CategoryAxis(
-                              interval: 1,
-                              majorGridLines: MajorGridLines(width: 0),
-                              edgeLabelPlacement: EdgeLabelPlacement.shift,
-                              //intervalType: DateTimeIntervalType.years,
-                            ),
-                            series: <SplineSeries<AllChartData, String>>[
-                              SplineSeries<AllChartData, String>(
-                                  color: Colors.orange,
-                                  dataSource: allChartData,
-                                  xValueMapper: (AllChartData sales, _) =>
-                                      sales.x,
-                                  yValueMapper: (AllChartData sales, _) =>
-                                      sales.y,
-                                  dataLabelSettings: DataLabelSettings(
-                                      isVisible:
-                                          false) // Enables the data label.
-                                  )
-                            ],
-                            //Specifying date time interval type as hours
-                          ),
+                          //   primaryXAxis: CategoryAxis(
+                          //     interval: 1,
+                          //     majorGridLines: MajorGridLines(width: 0),
+                          //     edgeLabelPlacement: EdgeLabelPlacement.shift,
+                          //     //intervalType: DateTimeIntervalType.years,
+                          //   ),
+                          //   series: <SplineSeries<AllChartData, String>>[
+                          //     SplineSeries<AllChartData, String>(
+                          //         color: Colors.orange,
+                          //         dataSource: allChartData,
+                          //         xValueMapper: (AllChartData sales, _) =>
+                          //             sales.x,
+                          //         yValueMapper: (AllChartData sales, _) =>
+                          //             sales.y,
+                          //         dataLabelSettings: DataLabelSettings(
+                          //             isVisible:
+                          //                 false) // Enables the data label.
+                          //         )
+                          //   ],
+                          //   //Specifying date time interval type as hours
+                          // ),
                         ),
                       ),
                       SizedBox(
@@ -856,35 +886,33 @@ class _MyEarningsState extends State<MyEarnings> {
                               padding: EdgeInsets.only(top: 70),
                               // top: 50,
                               child: ListView.builder(
+                                reverse: true,
                                 shrinkWrap: true,
                                 physics: NeverScrollableScrollPhysics(),
                                 // controller: myscrollController,
-                                itemCount: 6,
+                                itemCount: myEarningActivity.length,
                                 // padding: EdgeInsets.zero,
                                 itemBuilder: (BuildContext context, int index) {
                                   return ListTile(
                                     leading: ClipRRect(
                                       borderRadius: BorderRadius.circular(30),
                                       child: Container(
-                                        color: earningColors[index],
-                                        child: Image.asset(
-                                          "assets/images/${earningElements[index]['image']}.png",
+                                        color: HexColor(
+                                            myEarningActivity[index].color),
+                                        child: Image.network(
+                                          myEarningActivity[index].image,
                                           fit: BoxFit.none,
                                           width: 50,
                                           height: 50,
                                         ),
                                       ),
                                     ),
-                                    title: Text(
-                                      earningElements[index]['title'],
-                                      style: GoogleFonts.poppins(
-                                        fontSize: 12,
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                    ),
+                                    title: Text(myEarningActivity[index].title,
+                                        style: textsize),
                                     subtitle: Text(
-                                      earningElements[index]['subtitle'],
+                                      timeago.format(
+                                          myEarningActivity[index].date),
+                                      // earningElements[index]['subtitle'],
                                       style: GoogleFonts.poppins(
                                         fontSize: 9,
                                         color: text1,
@@ -903,27 +931,13 @@ class _MyEarningsState extends State<MyEarnings> {
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
-                                          Text(
-                                            earningElements[index]['symbol'],
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 12,
-                                              color: earningSymbolColor[index],
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
-                                          Text(
-                                            earningElements[index]['value'],
-                                            style: GoogleFonts.poppins(
-                                              fontSize: 12,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-                                            ),
-                                          ),
+                                          Text(myEarningActivity[index].amount,
+                                              style: textsize),
                                           SizedBox(
                                             width: 2,
                                           ),
                                           Text(
-                                            earningElements[index]['type'],
+                                            " Gwei",
                                             style: GoogleFonts.poppins(
                                               fontSize: 9,
                                               color: Colors.orange,
@@ -1039,6 +1053,95 @@ class _MyEarningsState extends State<MyEarnings> {
             ),
     );
   }
+  //  Future<void> getCoinsTimeSeries() async {
+  //   String url =
+  //       "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=360&aggregate=1&e=CCCAGG";
+  //   var response = await http
+  //       .get(Uri.encodeFull(url), headers: {"Accept": "application/json"});
+
+  //   if (this.mounted) {
+  //     this.setState(() {
+  //       var extractdata = json.decode(response.body);
+  //       dataJSON = extractdata["Data"];
+  //     });
+  //   }
+  // }
+
+  List dataJSON;
+  Widget chartWidget() {
+    List<TimeSeriesPrice> tsdata = [];
+    if (dataJSON != null) {
+      for (Map m in dataJSON) {
+        try {
+          print("PAVITHRA");
+          print(DateTime.parse(m['date']));
+          tsdata.add(
+              new TimeSeriesPrice(DateTime.now(), double.parse(m['amount'])));
+        } catch (e) {
+          print(e.toString());
+        }
+      }
+    } else {
+      // Dummy list to prevent dataJSON = NULL
+      tsdata.add(new TimeSeriesPrice(new DateTime.now(), 0.0));
+    }
+    print("PAVITHRA");
+    print(tsdata[0].time.runtimeType);
+
+    var series = [
+      new charts.Series<TimeSeriesPrice, DateTime>(
+        id: 'Price',
+        colorFn: (_, __) => charts.MaterialPalette.deepOrange.shadeDefault,
+        domainFn: (TimeSeriesPrice coinsPrice, _) => coinsPrice.time,
+        measureFn: (TimeSeriesPrice coinsPrice, _) => coinsPrice.price,
+        data: tsdata,
+      ),
+    ];
+
+    var chart = new charts.TimeSeriesChart(
+      series,
+      animate: true,
+      animationDuration: Duration(seconds: 2),
+      defaultRenderer:
+          charts.LineRendererConfig(includeArea: true, stacked: true),
+      primaryMeasureAxis: new charts.NumericAxisSpec(
+        tickProviderSpec:
+            new charts.BasicNumericTickProviderSpec(desiredTickCount: 6),
+      ),
+
+      domainAxis: new charts.DateTimeAxisSpec(
+        tickFormatterSpec: new charts.AutoDateTimeTickFormatterSpec(
+          day: new charts.TimeFormatterSpec(
+              format: 'MM/dd', transitionFormat: 'MM/dd'),
+        ),
+      ),
+      behaviors: [
+        new charts.ChartTitle('Gwei',
+            titleStyleSpec: charts.TextStyleSpec(
+                color: charts.ColorUtil.fromDartColor(orange)),
+            behaviorPosition: charts.BehaviorPosition.start,
+            titleOutsideJustification:
+                charts.OutsideJustification.middleDrawArea),
+      ],
+      // defaultRenderer: new charts.LineRendererConfig(includePoints: true)
+    );
+
+    return new Container(
+      child: new Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: <Widget>[
+          new Padding(
+            padding: new EdgeInsets.only(left: 5),
+            child: new SizedBox(
+              height: 300.0,
+              width: 600,
+              child: chart,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
 
   List<SalesData> getChartData() {
     final List<SalesData> chartData = [
@@ -1084,4 +1187,10 @@ class AllChartData {
 
   final String x;
   final double y;
+}
+
+class TimeSeriesPrice {
+  final DateTime time;
+  final double price;
+  TimeSeriesPrice(this.time, this.price);
 }

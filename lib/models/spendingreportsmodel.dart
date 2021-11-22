@@ -1,32 +1,31 @@
+import 'dart:ui';
+
 class SpendingReports {
+  String displayName;
+  String category;
+  String image;
+  var color;
+  int transactionsCount;
+  var percentage;
   var amount;
-  var sats;
-  DateTime date;
-  String merchantName;
-  var isocurrencycode;
-  var category;
-  var name;
-  var address;
   SpendingReports({
-    this.amount,
-    this.date,
-    this.merchantName,
-    this.sats,
-    this.isocurrencycode,
+    this.displayName,
     this.category,
-    this.name,
-    this.address,
+    this.image,
+    this.color,
+    this.transactionsCount,
+    this.percentage,
+    this.amount,
   });
 
   factory SpendingReports.fromJson(Map<String, dynamic> json) =>
       SpendingReports(
-          amount: json["amount"],
-          date: DateTime.parse(json["time"]),
-          sats: json["sats"],
-          isocurrencycode: json['iso_currency_code'],
-          merchantName:
-              json["merchant_name"] == null ? null : json["merchant_name"],
-          category: json["category"],
-          name: json["name"],
-          address: json["address"]);
+        displayName: json["displayName"],
+        category: json["category"],
+        image: json["image"],
+        color: json["color"],
+        transactionsCount: json["transactionsCount"],
+        percentage: json["percentage"],
+        amount: json["amount"],
+      );
 }

@@ -168,7 +168,8 @@ class UserRepository {
   Future<dynamic> getSpendingReports(walletaddress) async {
     try {
       var res = await http.get(
-        '${url + "expenses?address=$walletaddress"}',
+        // '${url + "expenses?address=$walletaddress"}',
+        '${url + "myExpenses"}',
       );
       var checkres = jsonDecode(res.body);
 
@@ -181,7 +182,24 @@ class UserRepository {
       return false;
     }
   }
+//getspendingreports
 
+  Future<dynamic> getmyEarningActivity(uid) async {
+    try {
+      var res = await http.get(
+        '${url + "myActivity/$uid"}',
+      );
+      var checkres = jsonDecode(res.body);
+
+      checkres["status"] = true;
+
+      return checkres;
+    } catch (e) {
+      print(e);
+      print("error");
+      return false;
+    }
+  }
 
   Future<dynamic> getTransaction1(walletaddress) async {
     try {

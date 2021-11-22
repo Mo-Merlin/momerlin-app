@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:hexcolor/hexcolor.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/spendingreportsmodel.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
 import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 //import 'package:pie_chart/pie_chart.dart';
 //import 'package:fl_chart/fl_chart.dart';
+import 'package:pie_chart/pie_chart.dart';
 
 class SpendingReport extends StatefulWidget {
   const SpendingReport({Key key}) : super(key: key);
@@ -21,21 +24,17 @@ class SpendingReport extends StatefulWidget {
 }
 
 class _SpendingReportState extends State<SpendingReport> {
-  bool isWeek = true;
+  bool isWeek = false;
   bool isMonth = false;
   bool isYear = false;
-  bool isAll = false;
+  bool isAll = true;
   var selectType;
   bool loading = true;
   bool isVisibleInfo = true;
   bool chartClick = true;
-  List<GDPData> _chartData;
+  List<GDPData> _chartData=[];
   TooltipBehavior _tooltipBehavior;
-  Map<String, double> dataMap = {
-    "Flutter": 5,
-    "React": 1,
-    "Xamarin": 1,
-  };
+  Map<String, double> dataMap = {};
 
   var balance = 0.00;
   var userLanguage, lang, user = [];
@@ -43,7 +42,7 @@ class _SpendingReportState extends State<SpendingReport> {
   void initState() {
     super.initState();
     getUserLanguage();
-    _chartData = getChartData();
+    // _chartData = getChartData();
     _tooltipBehavior = TooltipBehavior(enable: true);
   }
 
@@ -54,6 +53,7 @@ class _SpendingReportState extends State<SpendingReport> {
     lang = await UserDataSource().getLanguage();
 
     user = await UserDataSource().getUser();
+    print(user[0]);
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
@@ -65,22 +65,28 @@ class _SpendingReportState extends State<SpendingReport> {
 
   // ignore: todo
   //TODO: LanguageEnd
-
+  List<GDPData> chartData = [];
   List<SpendingReports> spendingreports = [];
   Future<void> getSpendingReports() async {
+    // ignore: unused_local_variable
+    var res =
+        await UserRepository().getSpendingReports(user[0]["walletaddress"]);
     setState(() {
       loading = false;
     });
 
-    // ignore: unused_local_variable
-    var res =
-        await UserRepository().getSpendingReports(user[0]["walletaddress"]);
-    print("pavithra ${res["transactions"]}");
     if (res["success"] == true) {
       spendingreports = [];
-
-      for (var i = 0; i < res["transactions"].length; i++) {
-        spendingreports.add(SpendingReports.fromJson(res["transactions"][i]));
+ _chartData = [];
+      for (var i = 0; i < res["expenses"].length; i++) {
+       
+        _chartData.add(GDPData(res["expenses"][i]["displayName"],
+            res["expenses"][i]["percentage"]*100, HexColor(res["expenses"][i]["color"])));
+        dataMap = {
+          res["expenses"][i]["displayName"]:
+              double.parse(res["expenses"][i]["amount"].toString())
+        };
+        spendingreports.add(SpendingReports.fromJson(res["expenses"][i]));
       }
     }
   }
@@ -111,56 +117,6 @@ class _SpendingReportState extends State<SpendingReport> {
     "134 Transactions",
     "24 Transactions",
     "12 Transactions",
-  ];
-  List spendingElements = [
-    {
-      "image": "berger",
-      "title": "Food",
-      "subtitle": "134 Transactions",
-      "value": "-1654.12",
-      "type": "Gwei",
-      "percentage": "53%",
-    },
-    {
-      "image": "coffee",
-      "title": "Coffee",
-      "subtitle": "24 Transactions",
-      "value": "-254.12",
-      "type": "Gwei",
-      "percentage": "27%",
-    },
-    {
-      "image": "spendingcoin",
-      "title": "Transfers",
-      "subtitle": "12 Transactions",
-      "value": "-125.21",
-      "type": "Gwei",
-      "percentage": "20%",
-    },
-    {
-      "image": "berger",
-      "title": "Food",
-      "subtitle": "134 Transactions",
-      "value": "-1654.12",
-      "type": "Gwei",
-      "percentage": "53%",
-    },
-    {
-      "image": "coffee",
-      "title": "Coffee",
-      "subtitle": "24 Transactions",
-      "value": "-254.12",
-      "type": "Gwei",
-      "percentage": "27%",
-    },
-    {
-      "image": "spendingcoin",
-      "title": "Transfers",
-      "subtitle": "12 Transactions",
-      "value": "-125.21",
-      "type": "Gwei",
-      "percentage": "20%",
-    },
   ];
   var spendingColors = [spendingBlue, spendingPink, spendingGreen];
   @override
@@ -325,6 +281,13 @@ class _SpendingReportState extends State<SpendingReport> {
                       SizedBox(
                         height: 15,
                       ),
+                      // PieChart(
+                      //   dataMap: dataMap,
+                      //   animationDuration: Duration(milliseconds: 800),
+                      //   chartLegendSpacing: 32.0,
+                      //   chartRadius: MediaQuery.of(context).size.width / 2.7,
+                      //   chartType: ChartType.ring,
+                      // ),
                       Container(
                         height: 56,
                         width: 280,
@@ -339,11 +302,11 @@ class _SpendingReportState extends State<SpendingReport> {
                               onTap: () {
                                 selectType = "";
                                 setState(() {
-                                  selectType = "Week";
-                                  isWeek = true;
+                                  selectType = "All";
+                                  isWeek = false;
                                   isMonth = false;
                                   isYear = false;
-                                  isAll = false;
+                                  isAll = true;
                                 });
                               },
                               child: Container(
@@ -371,11 +334,11 @@ class _SpendingReportState extends State<SpendingReport> {
                               onTap: () {
                                 selectType = "";
                                 setState(() {
-                                  selectType = "Month";
-                                  isMonth = true;
+                                  selectType = "All";
+                                  isMonth = false;
                                   isWeek = false;
                                   isYear = false;
-                                  isAll = false;
+                                  isAll = true;
                                 });
                               },
                               child: Container(
@@ -403,11 +366,11 @@ class _SpendingReportState extends State<SpendingReport> {
                               onTap: () {
                                 selectType = "";
                                 setState(() {
-                                  selectType = "Year";
-                                  isYear = true;
+                                  selectType = "All";
+                                  isYear = false;
                                   isWeek = false;
                                   isMonth = false;
-                                  isAll = false;
+                                  isAll = true;
                                 });
                               },
                               child: Container(
@@ -506,166 +469,158 @@ class _SpendingReportState extends State<SpendingReport> {
                       Container(
                         height: 300,
                         //color: Colors.amberAccent,
-                        child: GestureDetector(
-                          onTap: () {
-                            isVisibleInfo = !isVisibleInfo;
-                          },
-                          child: SfCircularChart(
-                            palette: <Color>[
-                              spendingBlue,
-                              spendingPink,
-                              spendingGreen,
-                            ],
-                            annotations: <CircularChartAnnotation>[
-                              CircularChartAnnotation(
-                                widget: Container(
-                                  /**  TEXT DESIGN 1 **/
-                                  child: Text(
-                                      'Select a portion\nof the chart to\nview details',
-                                      style: GoogleFonts.poppins(
-                                          fontSize: 10, color: text1)),
 
-                                  /**  TEXT DESIGN 2 **/
+                        child: SfCircularChart(
+                        
+                          annotations: <CircularChartAnnotation>[
+                            CircularChartAnnotation(
+                              widget: Container(
+                                /**  TEXT DESIGN 1 **/
+                                child: Text(
+                                    'Select a portion\nof the chart to\nview details',
+                                    style: GoogleFonts.poppins(
+                                        fontSize: 10, color: text1)),
 
-                                  // child: RichText(
-                                  //   text: TextSpan(
-                                  //     text: '            FOOD',
-                                  //     style: GoogleFonts.poppins(
-                                  //       fontSize: 10,
-                                  //       color: white,
-                                  //       fontWeight: FontWeight.w600,
-                                  //     ),
-                                  //     children: <TextSpan>[
-                                  //       TextSpan(
-                                  //         text: '\n 53%',
-                                  //         style: GoogleFonts.montserrat(
-                                  //           fontSize: 31,
-                                  //           fontWeight: FontWeight.w600,
-                                  //           color: white,
-                                  //         ),
-                                  //       ),
-                                  //     ],
-                                  //   ),
-                                  // ),
-                                ),
-                              )
-                            ],
-                            // title: ChartTitle(
-                            //     text: "Select a portion of the chart to view details",
-                            //     textStyle: GoogleFonts.poppins(
-                            //       fontSize: 10,
-                            //       color: text1,
-                            //     )),
-                            // legend: Legend(
-                            //     isVisible: true,
-                            //     overflowMode: LegendItemOverflowMode.wrap),
-                            tooltipBehavior: _tooltipBehavior,
-                            series: <CircularSeries>[
-                              DoughnutSeries<GDPData, String>(
-                                dataSource: _chartData,
-                                xValueMapper: (GDPData data, _) =>
-                                    data.continent,
-                                yValueMapper: (GDPData data, _) => data.gdp,
-                                //dataLabelSettings: DataLabelSettings(isVisible: true),
-                                enableTooltip: true,
-                                selectionBehavior:
-                                    SelectionBehavior(enable: chartClick),
-                                explode: false,
-                              )
-                            ],
-                          ),
+                                /**  TEXT DESIGN 2 **/
+
+                                // child: RichText(
+                                //   text: TextSpan(
+                                //     text: '            FOOD',
+                                //     style: GoogleFonts.poppins(
+                                //       fontSize: 10,
+                                //       color: white,
+                                //       fontWeight: FontWeight.w600,
+                                //     ),
+                                //     children: <TextSpan>[
+                                //       TextSpan(
+                                //         text: '\n 53%',
+                                //         style: GoogleFonts.montserrat(
+                                //           fontSize: 31,
+                                //           fontWeight: FontWeight.w600,
+                                //           color: white,
+                                //         ),
+                                //       ),
+                                //     ],
+                                //   ),
+                                // ),
+                              ),
+                            )
+                          ],
+                          // title: ChartTitle(
+                          //     text: "Select a portion of the chart to view details",
+                          //     textStyle: GoogleFonts.poppins(
+                          //       fontSize: 10,
+                          //       color: text1,
+                          //     )),
+                          // legend: Legend(
+                          //     isVisible: true,
+                          //     overflowMode: LegendItemOverflowMode.wrap),
+                          tooltipBehavior: _tooltipBehavior,
+                          series: <CircularSeries>[
+                            DoughnutSeries<GDPData, String>(
+                              dataSource: _chartData,
+                               pointColorMapper:(GDPData data,  _) => data.color,
+                              xValueMapper: (GDPData data, _) => data.continent,
+                              yValueMapper: (GDPData data, _) => data.gdp,
+                              //dataLabelSettings: DataLabelSettings(isVisible: true),
+                              enableTooltip: true,
+                              selectionBehavior:
+                                  SelectionBehavior(enable: chartClick),
+                              explode: false,
+                            )
+                          ],
                         ),
                       ),
                       SizedBox(
                         height: 2,
                       ),
-                      Visibility(
-                        visible: isVisibleInfo,
-                        child: Container(
-                          height: 148,
-                          width: 335,
-                          decoration: BoxDecoration(
-                            color: button,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, left: 20),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['info'] != null)
-                                      ? "${userLanguage['info']}"
-                                      : "Info",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 5, left: 20),
-                                child: RichText(
-                                  text: TextSpan(
-                                    text: 'You Spent',
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 12,
-                                      color: text1,
-                                    ),
-                                    children: <TextSpan>[
-                                      TextSpan(
-                                        text: ' 1654.12',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 14,
-                                          fontWeight: FontWeight.w600,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text: ' Gwei',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 10,
-                                          color: Colors.orange,
-                                        ),
-                                      ),
-                                      TextSpan(
-                                        text:
-                                            ' on food this month, that’s higher than normal.',
-                                        style: GoogleFonts.montserrat(
-                                          fontSize: 14,
-                                          color: text1,
-                                        ),
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 10, left: 20),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage[
-                                                  'whatcanwedotolowerthatnumber'] !=
-                                              null)
-                                      ? "${userLanguage['whatcanwedotolowerthatnumber']}"
-                                      : "What can we do to lower that number?",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    color: text1,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
+                      // Visibility(
+                      //   visible: isVisibleInfo,
+                      //   child: Container(
+                      //     height: 148,
+                      //     width: 335,
+                      //     decoration: BoxDecoration(
+                      //       color: button,
+                      //       borderRadius: BorderRadius.circular(20),
+                      //     ),
+                      //     child: Column(
+                      //       crossAxisAlignment: CrossAxisAlignment.start,
+                      //       children: [
+                      //         Padding(
+                      //           padding:
+                      //               const EdgeInsets.only(top: 20, left: 20),
+                      //           child: Text(
+                      //             (lang.length != null &&
+                      //                     lang.length != 0 &&
+                      //                     userLanguage['info'] != null)
+                      //                 ? "${userLanguage['info']}"
+                      //                 : "Info",
+                      //             style: GoogleFonts.poppins(
+                      //               fontSize: 20,
+                      //               fontWeight: FontWeight.w600,
+                      //               color: Colors.white,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         Padding(
+                      //           padding:
+                      //               const EdgeInsets.only(top: 5, left: 20),
+                      //           child: RichText(
+                      //             text: TextSpan(
+                      //               text: 'You Spent',
+                      //               style: GoogleFonts.poppins(
+                      //                 fontSize: 12,
+                      //                 color: text1,
+                      //               ),
+                      //               children: <TextSpan>[
+                      //                 TextSpan(
+                      //                   text: ' 1654.12',
+                      //                   style: GoogleFonts.montserrat(
+                      //                     fontSize: 14,
+                      //                     fontWeight: FontWeight.w600,
+                      //                     color: Colors.white,
+                      //                   ),
+                      //                 ),
+                      //                 TextSpan(
+                      //                   text: ' Gwei',
+                      //                   style: GoogleFonts.montserrat(
+                      //                     fontSize: 10,
+                      //                     color: Colors.orange,
+                      //                   ),
+                      //                 ),
+                      //                 TextSpan(
+                      //                   text:
+                      //                       ' on food this month, that’s higher than normal.',
+                      //                   style: GoogleFonts.montserrat(
+                      //                     fontSize: 14,
+                      //                     color: text1,
+                      //                   ),
+                      //                 ),
+                      //               ],
+                      //             ),
+                      //           ),
+                      //         ),
+                      //         Padding(
+                      //           padding:
+                      //               const EdgeInsets.only(top: 10, left: 20),
+                      //           child: Text(
+                      //             (lang.length != null &&
+                      //                     lang.length != 0 &&
+                      //                     userLanguage[
+                      //                             'whatcanwedotolowerthatnumber'] !=
+                      //                         null)
+                      //                 ? "${userLanguage['whatcanwedotolowerthatnumber']}"
+                      //                 : "What can we do to lower that number?",
+                      //             style: GoogleFonts.poppins(
+                      //               fontSize: 12,
+                      //               color: text1,
+                      //             ),
+                      //           ),
+                      //         ),
+                      //       ],
+                      //     ),
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 10,
                       ),
@@ -745,14 +700,34 @@ class _SpendingReportState extends State<SpendingReport> {
                                       child: Container(
                                         width: 50,
                                         height: 50,
-                                        color: spendingColors[
-                                            index % spendingColors.length],
-                                        child: trophy[index % trophy.length],
+                                        color: HexColor(
+                                            spendingreports[index].color),
+                                        child: Center(
+                                          child: spendingreports[index].image !=
+                                                  null
+                                              ? Image.network(
+                                                  spendingreports[index].image,
+                                                  fit: BoxFit.none,
+                                                  width: 50,
+                                                  height: 50,
+                                                )
+                                              : Text(
+                                                  // "Food",
+                                                  spendingreports[index]
+                                                      .displayName
+                                                      .substring(0, 1),
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 18,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                ),
+                                        ),
                                       ),
                                     ),
                                     title: Text(
                                       // "Food",
-                                      spendingreports[index].category,
+                                      spendingreports[index].displayName,
                                       style: GoogleFonts.poppins(
                                         fontSize: 18,
                                         color: Colors.white,
@@ -761,7 +736,10 @@ class _SpendingReportState extends State<SpendingReport> {
                                     ),
                                     subtitle: Container(
                                       child: Text(
-                                        transaction[index % transaction.length],
+                                        spendingreports[index]
+                                                .transactionsCount
+                                                .toString() +
+                                            " Transactions",
                                         maxLines: 2,
                                         style: GoogleFonts.poppins(
                                           fontSize: 12,
@@ -778,16 +756,17 @@ class _SpendingReportState extends State<SpendingReport> {
                                           animation: true,
                                           percent: 0.7,
                                           center: Text(
-                                            percentage[
-                                                index % percentage.length],
+                                            "${spendingreports[index].percentage * 100}"
+                                                    .toString() +
+                                                "%",
                                             style: GoogleFonts.montserrat(
                                               fontSize: 10,
                                               color: Colors.white,
                                               fontWeight: FontWeight.w600,
                                             ),
                                           ),
-                                          progressColor: spendingColors[
-                                              index % spendingColors.length],
+                                          progressColor: HexColor(
+                                              spendingreports[index].color),
                                         ),
                                         SizedBox(
                                           width: 10,
@@ -806,9 +785,8 @@ class _SpendingReportState extends State<SpendingReport> {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                double.parse(
-                                                        spendingreports[index]
-                                                            .sats)
+                                                spendingreports[index]
+                                                    .amount
                                                     .toStringAsFixed(2),
                                                 style: GoogleFonts.poppins(
                                                   fontSize: 12,
@@ -845,22 +823,11 @@ class _SpendingReportState extends State<SpendingReport> {
             ),
     );
   }
-
-  List<GDPData> getChartData() {
-    final List<GDPData> chartData = [
-      GDPData('Food', 4000),
-      GDPData('Coffee', 1400),
-      GDPData('Transfers', 1420),
-      // GDPData('Europe', 23050),
-      // GDPData('N America', 24880),
-      // GDPData('Asia', 34390),
-    ];
-    return chartData;
-  }
 }
 
 class GDPData {
-  GDPData(this.continent, this.gdp);
-  final String continent;
-  final int gdp;
+  GDPData(this.continent, this.gdp, this.color);
+  final continent;
+  final gdp;
+  final Color color;
 }

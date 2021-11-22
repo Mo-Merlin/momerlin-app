@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 final backgroundcolor = Color(0xff141629);
 final blue = Color(0xff6C6AEB);
@@ -21,3 +22,8 @@ final containerOrange = Color(0xffEB9355);
 final containerGreen = Color(0xff8BDD71);
 final gPink = Color(0xffEB6A98);
 final gBlue = Color(0xff9E7DFC);
+final textsize=GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.white,
+                                        fontWeight: FontWeight.w500,
+                                      );
