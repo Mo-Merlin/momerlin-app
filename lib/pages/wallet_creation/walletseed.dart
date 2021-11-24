@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/pages/wallet_creation/walletseed1.dart';
 import 'package:momerlin/theme/theme.dart';
 
 import 'package:bip39/bip39.dart' as bip39;
-import 'package:momerlin/walletcreation.dart/walletseed1.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletSeedPage extends StatefulWidget {

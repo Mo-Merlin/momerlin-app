@@ -5,7 +5,7 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/walletcreation.dart/walletsucess.dart';
+import 'walletsucess.dart';
 
 import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:percent_indicator/linear_percent_indicator.dart';

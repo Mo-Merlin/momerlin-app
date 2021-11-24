@@ -3,11 +3,12 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/pages/transaction/wallet_profile.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/my_earnings.dart';
-import 'package:momerlin/wallet_screens/spending_report.dart';
-import 'package:momerlin/wallet_screens/wallet_profile.dart';
+
+import 'my_earnings.dart';
+import 'spending_report.dart';
 
 class MyReports extends StatefulWidget {
   const MyReports({Key key}) : super(key: key);

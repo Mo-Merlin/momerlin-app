@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:charts_flutter/flutter.dart' as charts;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -6,19 +9,10 @@ import 'package:hexcolor/hexcolor.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/myearningactivitymodel.dart';
+import 'package:momerlin/pages/transaction/wallet_profile.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-
-import 'dart:async';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
-import 'package:charts_flutter/flutter.dart' as charts;
-// import 'package:momerlin/wallet_screens/my_earnings_expenses.da÷rt';
-import 'package:momerlin/wallet_screens/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
-// import 'package:intl/intl.dart';
-//import 'package:bezier_chart/bezier_chart.dart';
-// import 'package:fl_chart/fl_chart.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class MyEarnings extends StatefulWidget {

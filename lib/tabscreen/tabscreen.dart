@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-//import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:momerlin/pages/reportspages/my_reports.dart';
+import 'package:momerlin/pages/transaction/wallet_main.dart';
+import 'package:momerlin/pages/transaction/wallet_profile.dart';
+import 'package:momerlin/pages/wallet_challenge/wallet_challenges.dart';
 import 'package:momerlin/theme/theme.dart';
-//import 'package:momerlin/wallet_screens/my_activity.dart';
-import 'package:momerlin/wallet_screens/my_reports.dart';
-import 'package:momerlin/wallet_screens/wallet_challenges.dart';
-import 'package:momerlin/wallet_screens/wallet_profile.dart';
-import 'package:momerlin/wallet_screens/wallet_two.dart';
 
 class Tabscreen extends StatefulWidget {
   final index;

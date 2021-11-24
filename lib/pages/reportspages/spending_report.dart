@@ -7,14 +7,11 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/spendingreportsmodel.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/my_earnings_expenses.dart';
-import 'package:momerlin/wallet_screens/wallet_profile.dart';
+
+import 'package:momerlin/pages/transaction/wallet_profile.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 //import 'package:syncfusion_flutter_charts/sparkcharts.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-//import 'package:pie_chart/pie_chart.dart';
-//import 'package:fl_chart/fl_chart.dart';
-import 'package:pie_chart/pie_chart.dart';
 
 class SpendingReport extends StatefulWidget {
   const SpendingReport({Key key}) : super(key: key);

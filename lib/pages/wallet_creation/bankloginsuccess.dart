@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/pages/transaction/wallet_main.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/wallet_screens/wallet_two.dart';
-import 'package:percent_indicator/linear_percent_indicator.dart';
 
-class BankLogin extends StatefulWidget {
-  final image;
-  BankLogin(this.image);
+class BankLoginSuccess extends StatefulWidget {
   @override
-  _BankLogin createState() => _BankLogin();
+  _BankLoginSuccess createState() => _BankLoginSuccess();
 }
 
-class _BankLogin extends State<BankLogin> {
+class _BankLoginSuccess extends State<BankLoginSuccess> {
   var userLanguage, lang = [];
   bool banklogin = false;
   @override
@@ -37,52 +34,6 @@ class _BankLogin extends State<BankLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundcolor,
-      appBar: AppBar(
-        elevation: 0,
-        backgroundColor: backgroundcolor,
-        leading: Container(
-          padding: EdgeInsets.all(5),
-          child: GestureDetector(
-            onTap: () {
-              Navigator.pop(context);
-            },
-            child: Container(
-              width: 50,
-              height: 50,
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(50), color: button),
-              child: Icon(
-                Icons.arrow_back,
-                color: white,
-                size: 30,
-              ),
-            ),
-          ),
-        ),
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            Spacer(),
-            Image.asset("assets/images/MOMERLIN.png"),
-            Spacer(),
-            LinearPercentIndicator(
-              width: 102.0,
-              lineHeight: 25.0,
-              percent: 0.4,
-              center: Text(
-                "50%",
-                textAlign: TextAlign.end,
-                style: GoogleFonts.poppins(
-                    color: white, fontSize: 12, fontWeight: FontWeight.w400),
-              ),
-              // trailing: Icon(Icons.mood),
-              linearStrokeCap: LinearStrokeCap.roundAll,
-              backgroundColor: Colors.grey,
-              progressColor: blue,
-            ),
-          ],
-        ),
-      ),
       body: Container(
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,

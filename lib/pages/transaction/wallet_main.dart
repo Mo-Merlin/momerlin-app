@@ -1,19 +1,21 @@
 //import 'dart:math';
 import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/models/transactionmodel.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:momerlin/wallet_screens/wallet_profile.dart';
-import 'package:momerlin/wallet_screens/wallet_receive.dart';
-import 'package:momerlin/wallet_screens/wallet_send.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
+
+// import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'wallet_profile.dart';
+import 'wallet_receive.dart';
+import 'wallet_send.dart';
 
 class Dialogs {
   static Future<void> showLoadingDialog(
@@ -57,29 +59,7 @@ class Dialogs {
 //   }
 // }
 
-class Transaction {
-  var amount;
-  var sats;
-  DateTime date;
-  String merchantName;
-  var iso_currency_code;
-  Transaction({
-    this.amount,
-    this.date,
-    this.merchantName,
-    this.sats,
-    this.iso_currency_code,
-  });
 
-  factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
-        amount: json["amount"],
-        date: DateTime.parse(json["time"]),
-        sats: json["sats"],
-        iso_currency_code: json['iso_currency_code'],
-        merchantName:
-            json["merchant_name"] == null ? null : json["merchant_name"],
-      );
-}
 
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);

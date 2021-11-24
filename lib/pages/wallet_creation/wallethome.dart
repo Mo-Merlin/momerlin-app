@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
+import 'package:momerlin/pages/wallet_creation/walletseed.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:momerlin/walletcreation.dart/importwallet.dart';
-import 'package:momerlin/walletcreation.dart/walletseed.dart';
+
+import 'importwallet.dart';
 
 class WalletHomePage extends StatefulWidget {
   @override

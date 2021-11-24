@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
@@ -11,26 +12,17 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-// import 'package:intl/intl.dart';
-import 'package:device_apps/device_apps.dart';
-//import 'package:momerlin/wallet_screens/horizontallist.dart';
-import 'package:momerlin/wallet_screens/my_activity.dart';
-import 'package:momerlin/wallet_screens/viewmore_join_challenge.dart';
-import 'package:momerlin/wallet_screens/viewmore_leaderboard.dart';
-import 'package:momerlin/wallet_screens/viewmore_my_challenges.dart';
-import 'package:momerlin/wallet_screens/viewmore_recent_winners.dart';
-// import 'package:momerlin/wallet_screens/my_reports.dart';
-import 'package:momerlin/wallet_screens/wallet_challenge_final.dart';
-// import 'package:momerlin/wallet_screens/wallet_creating_challenge.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:scroll_snap_list/scroll_snap_list.dart';
 
 import 'challangedetails.dart';
 import 'joinchallengedetail.dart';
-// import 'leaderboard.dart';
-// import 'mychallengedetails.dart';
-// import 'googlesign.dart';
-// import 'healthkit.dart';
+import 'my_activity.dart';
+import 'viewmore_join_challenge.dart';
+import 'viewmore_leaderboard.dart';
+import 'viewmore_my_challenges.dart';
+import 'viewmore_recent_winners.dart';
+import 'wallet_challenge_final.dart';
 
 class Challenges {
   String id;
@@ -1300,7 +1292,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         ),
                       ),
                     ),
-                    
                   ],
                 ),
               ),
