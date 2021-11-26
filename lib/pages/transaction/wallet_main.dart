@@ -59,8 +59,6 @@ class Dialogs {
 //   }
 // }
 
-
-
 class WalletTwo extends StatefulWidget {
   const WalletTwo({Key key}) : super(key: key);
 
@@ -910,7 +908,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                       EdgeInsets.only(left: 20),
                                                   child: Text(
                                                     transactions1[index]
-                                                        .merchantName,
+                                                        .merchantName
+                                                        .toString(),
                                                     style: GoogleFonts.poppins(
                                                         fontSize: 18,
                                                         fontWeight:
@@ -943,10 +942,11 @@ class _WalletTwoState extends State<WalletTwo> {
                                                     ),
                                                     Text(
                                                       transactions1[index]
-                                                              .amount +
+                                                              .amount
+                                                              .toString() +
                                                           " " +
                                                           transactions1[index]
-                                                              .iso_currency_code,
+                                                              .isoCurrencyCode,
                                                       style:
                                                           GoogleFonts.poppins(
                                                         fontSize: 12,
@@ -975,7 +975,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                                           ((double.parse(
                                                                   transactions1[
                                                                           index]
-                                                                      .sats)))
+                                                                      .sats
+                                                                      .toString())))
                                                               .toStringAsFixed(
                                                                   2),
                                                           style: GoogleFonts

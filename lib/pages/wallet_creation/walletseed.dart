@@ -164,6 +164,7 @@ class _WalletSeedPage extends State<WalletSeedPage> {
                     GridView.builder(
                       shrinkWrap: true,
                       itemCount: seed1.length,
+                      physics: NeverScrollableScrollPhysics(),
                       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                           childAspectRatio: 1.8,

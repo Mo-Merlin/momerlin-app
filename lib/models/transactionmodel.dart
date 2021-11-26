@@ -1,23 +1,34 @@
 class Transaction {
-  var amount;
-  var sats;
-  DateTime date;
-  String merchantName;
-  var iso_currency_code;
+  String address;
+    String amount;
+    String category;
+    DateTime date;
+    String isoCurrencyCode;
+    String merchantName;
+    String name;
+    var sats;
+ 
   Transaction({
-    this.amount,
-    this.date,
-    this.merchantName,
-    this.sats,
-    this.iso_currency_code,
+        this.address,
+        this.amount,
+        this.category,
+        this.date,
+        this.isoCurrencyCode,
+        this.merchantName,
+        this.name,
+        this.sats
   });
 
   factory Transaction.fromJson(Map<String, dynamic> json) => Transaction(
+    address: json["address"],
         amount: json["amount"],
-        date: DateTime.parse(json["time"]),
+        category: json["category"],
+         isoCurrencyCode: json["iso_currency_code"],
+        merchantName: json["merchant_name"],
+        name: json["name"],
         sats: json["sats"],
-        iso_currency_code: json['iso_currency_code'],
-        merchantName:
-            json["merchant_name"] == null ? null : json["merchant_name"],
+        
+        date: DateTime.parse(json["time"]),
+      
       );
 }

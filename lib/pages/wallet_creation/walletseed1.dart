@@ -272,6 +272,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: seed1.length,
+                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 3,
                     childAspectRatio: 1.8,
@@ -314,6 +315,7 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
               GridView.builder(
                 shrinkWrap: true,
                 itemCount: selectedseed.length,
+                physics: NeverScrollableScrollPhysics(),
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 4,
                     childAspectRatio: 2.5,

@@ -139,6 +139,7 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
+      
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -166,10 +167,11 @@ class UserRepository {
   //getspendingreports
 
   Future<dynamic> getSpendingReports(walletaddress) async {
+    
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
-        '${url + "myExpenses"}',
+        '${url + "myExpenses/$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
 

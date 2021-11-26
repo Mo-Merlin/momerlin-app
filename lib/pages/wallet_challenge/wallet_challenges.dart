@@ -873,6 +873,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   // bool viewProfile = false;
   List<int> data = [];
   List<int> km = [];
+
+  List<int> day = [];
   List<int> wage = [];
   bool googlefitint = false;
   var refreshKey = GlobalKey<RefreshIndicatorState>();
@@ -889,6 +891,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   int value = 0;
   int wagevalue = 0;
   int kmvalue = 0;
+
+  int dayvalue = 0;
   var startdate;
   var exprydate;
   @override
@@ -1056,14 +1060,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
       "mode": selecttype,
       "type": challenge,
       "totalCompetitors": wagar,
-      "streakDays": 4,
+      "streakDays": daychallenge,
       "totalKm": kmchallenge,
       "createdBy": user[0]["uid"],
       "startAt": today1,
       "endAt": expiryDate,
       "wage": competitorsgets,
     });
-    print("createchallange ${createchallange["challenge"]["_id"]}");
+    print("createchallange ${createchallange}");
     if (createchallange == false) {
       Scaffold.of(context)
           // ignore: deprecated_member_use
@@ -1072,7 +1076,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
         backgroundColor: Colors.red,
       ));
     } else {
-      if (createchallange["status"] == true) {
+      if (createchallange["success"] == true) {
         Navigator.push(
           context,
           MaterialPageRoute(
@@ -1084,7 +1088,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
         Scaffold.of(context)
             // ignore: deprecated_member_use
             .showSnackBar(SnackBar(
-          content: Text('Please Try Again!'),
+          content: Text(createchallange["error"]),
           backgroundColor: Colors.red,
         ));
       }
@@ -3337,6 +3341,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   var nicknameAvailable = "default";
   String nickNameErrorMessage = "";
   final formKey = GlobalKey<FormState>();
+  // ignore: unused_field
   final TextEditingController _nicknameController = TextEditingController();
   void _enterNickname(BuildContext context) async {
     showModalBottomSheet(
@@ -3862,6 +3867,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   var wagar;
   var challenge;
   var kmchallenge;
+  var daychallenge;
   var competitorsgets;
   var winnergets;
   // Selecttype start//
@@ -4616,6 +4622,229 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                 onPressed: () {
                                   kmchallenge = km[_kmfocusedIndex];
                                   Navigator.pop(context);
+                                  selectDay(context);
+
+                                  // print(_focusedIndex);
+                                },
+                                //color: blue.withOpacity(0.3),
+                                color: blue1,
+                                child: Text(
+                                  (lang.length != null &&
+                                          lang.length != 0 &&
+                                          userLanguage['next'] != null)
+                                      ? "${userLanguage['next']}"
+                                      : "NEXT",
+                                  style: GoogleFonts.poppins(
+                                    //color: blue1,
+                                    color: Colors.white,
+                                    fontSize: 15,
+                                    fontWeight: FontWeight.w600,
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  // SizedBox(
+                  //   height: 30,
+                  // ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  // selectKM end//
+  int _dayfocusedIndex = 0;
+
+  // selectKM start//
+  void selectDay(BuildContext context) {
+    for (int i = 0; i < 40; i++) {
+      dayvalue = dayvalue + 1;
+      day.add(dayvalue);
+    }
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            void _onItemFocus(int index) {
+              setState(() {
+                _dayfocusedIndex = index;
+              });
+            }
+
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              margin: EdgeInsets.only(top: 0, left: 0, bottom: 0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        // shadowColor: button.withOpacity(0.5),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                          // side: new BorderSide(color: Colors.black, width: 1.0),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Text(
+                        (lang.length != null &&
+                                lang.length != 0 &&
+                                userLanguage['createachellenge'] != null)
+                            ? "${userLanguage['createachellenge']}"
+                            : "CREATE A \nCHALLENGE",
+                        style: GoogleFonts.poppins(
+                          decoration: TextDecoration.none,
+                          height: 1,
+                          color: Colors.white,
+                          fontSize: 17,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      Spacer(),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 10),
+                        child: LinearPercentIndicator(
+                          width: 100,
+                          lineHeight: 25.0,
+                          percent: 0.40,
+                          center: Padding(
+                            padding: const EdgeInsets.only(left: 54),
+                            child: Text(
+                              "50%",
+                              style: GoogleFonts.poppins(
+                                  color: white,
+                                  letterSpacing: 1,
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400),
+                            ),
+                          ),
+                          // trailing: Icon(Icons.mood),
+                          linearStrokeCap: LinearStrokeCap.roundAll,
+                          backgroundColor: backgroundcolor,
+                          progressColor: blue,
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Card(
+                      shadowColor: button.withOpacity(0.5),
+                      color: Color(0xff1C203A),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(32),
+                        // side: new BorderSide(color: Colors.black, width: 1.0),
+                      ),
+                      child: Container(
+                        height: 467,
+                        width: MediaQuery.of(context).size.width,
+                        padding: EdgeInsets.all(0),
+                        child: Column(
+                          children: [
+                            // SizedBox(height: 20),
+                            Row(
+                              crossAxisAlignment: CrossAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Container(
+                                  height:
+                                      MediaQuery.of(context).size.height * 0.15,
+                                  // width: MediaQuery.of(context).size.width,
+                                  //color: Colors.red,
+                                  child: Center(
+                                    child: RichText(
+                                        text: TextSpan(children: [
+                                      TextSpan(
+                                          text: 'How many',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                      TextSpan(
+                                          text: ' Days ',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.orange,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w500,
+                                          )),
+                                      TextSpan(
+                                          text:
+                                              'would\nyou like for challenge? ',
+                                          style: GoogleFonts.poppins(
+                                            color: Colors.white,
+                                            height: 1,
+                                            fontSize: 25,
+                                            fontWeight: FontWeight.w600,
+                                          )),
+                                    ])),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            SizedBox(
+                              height:
+                                  MediaQuery.of(context).size.height * 0.001,
+                            ),
+                            // HorizontalList(),
+                            Container(
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: ScrollSnapList(
+                                duration: 500,
+                                scrollPhysics: BouncingScrollPhysics(),
+                                onItemFocus: _onItemFocus,
+                                itemSize: 50,
+                                itemBuilder: _buildDAYItem,
+                                itemCount: km.length,
+                                reverse: false,
+                                dynamicItemSize: false,
+                              ),
+                            ),
+
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            Container(
+                              height: 55,
+                              width: MediaQuery.of(context).size.width * 0.8,
+                              // ignore: deprecated_member_use
+                              child: RaisedButton(
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(30),
+                                ),
+                                onPressed: () {
+                                  daychallenge = day[_dayfocusedIndex];
+                                  Navigator.pop(context);
                                   selectchallengetype(context);
 
                                   // print(_focusedIndex);
@@ -4655,6 +4884,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 
   // selectKM end//
+
 
   // selectchallengetype start//
   void selectchallengetype(BuildContext context) {
@@ -5245,7 +5475,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     var todayDate = new DateTime.now();
     var todayDate1 = new DateTime.now();
     var days =
-        new DateTime(todayDate1.year, todayDate1.month, todayDate1.day + 7);
+        new DateTime(todayDate1.year, todayDate1.month, todayDate1.day + daychallenge);
     var expiryDate = (DateFormat.yMMMd().format(days)).toString();
     var today1 = (DateFormat.yMMMd().format(todayDate)).toString();
     showDialog(
@@ -8572,6 +8802,74 @@ class _WalletChallengesState extends State<WalletChallenges> {
                         ? FontWeight.bold
                         : FontWeight.normal,
                     fontSize: _kmfocusedIndex == index ? 25 : 20)),
+          ),
+          Container(
+            margin: EdgeInsets.only(left: 3, top: 5),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.end,
+              children: [
+                Container(
+                  height: 60,
+                  width: 2,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(right: 7),
+                  height: 40,
+                  width: 1,
+                  decoration: BoxDecoration(
+                    color: blue,
+                    borderRadius: BorderRadius.all(Radius.circular(50)),
+                  ),
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+   Widget _buildDAYItem(BuildContext context, int index) {
+    var blue = Color(0xFF282C4A);
+    var orange = Color(0xFFFF8C00);
+    var nonlabel = Color(0xFF808DA7);
+    //horizontal
+    return Container(
+      width: 50,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.end,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Container(
+            alignment: Alignment.centerLeft,
+            child: Text("${day[index]}",
+                textScaleFactor: 1.0,
+                style: GoogleFonts.poppins(
+                    color: _dayfocusedIndex == index ? orange : nonlabel,
+                    fontWeight: _dayfocusedIndex == index
+                        ? FontWeight.bold
+                        : FontWeight.normal,
+                    fontSize: _dayfocusedIndex == index ? 25 : 20)),
           ),
           Container(
             margin: EdgeInsets.only(left: 3, top: 5),
