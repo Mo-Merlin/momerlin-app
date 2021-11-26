@@ -1,6 +1,8 @@
 // import 'localstorage/auth_header.dart';
 import 'dart:io';
 
+import 'package:momerlin/models/spendingreportsmodel.dart';
+
 import 'localstorage/userdata_source.dart';
 import 'dart:async';
 import 'dart:convert';
@@ -139,7 +141,7 @@ class UserRepository {
       );
 
       var checkres = jsonDecode(res.body);
-      
+
       checkres["status"] = true;
       return checkres;
     } catch (e) {
@@ -167,7 +169,6 @@ class UserRepository {
   //getspendingreports
 
   Future<dynamic> getSpendingReports(walletaddress) async {
-    
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
@@ -184,7 +185,27 @@ class UserRepository {
       return false;
     }
   }
-//getspendingreports
+
+  //getspendingreports
+
+  Future<dynamic> getSpendingReportsbycategory(category, walletaddress) async {
+    try {
+      var res = await http.get(
+        // '${url + "expenses?address=$walletaddress"}',
+        '${url + "transactions/category/$category?address=$walletaddress"}',
+      );
+      var checkres = jsonDecode(res.body);
+
+      checkres["status"] = true;
+
+      return checkres;
+    } catch (e) {
+      print(e);
+      print("error");
+      return false;
+    }
+  }
+//getmyearningreports
 
   Future<dynamic> getmyEarningActivity(uid) async {
     try {
