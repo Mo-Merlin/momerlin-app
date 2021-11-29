@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/spendingreportsmodel.dart';
@@ -43,7 +44,10 @@ class _SpendingReportState extends State<SpendingReport> {
     super.initState();
     getUserLanguage();
     // _chartData = getChartData();
-    _tooltipBehavior = TooltipBehavior(enable: true);
+    _tooltipBehavior = TooltipBehavior(
+        enable: true,
+        activationMode: ActivationMode.singleTap,
+        tooltipPosition: TooltipPosition.pointer);
   }
 
   var gweibalance = "0";
@@ -101,12 +105,45 @@ class _SpendingReportState extends State<SpendingReport> {
     }
   }
 
+  Future<void> getMyspendingReportsfilter(startdate, enddate) async {
+    // ignore: unused_local_variable
+    var res = await UserRepository().getMyspendingReportsfilter(
+        user[0]["walletaddress"], startdate, enddate);
+    setState(() {
+      loading = false;
+    });
+    if (res["success"] == true) {
+      spendingreports = [];
+      _chartData = [];
+      for (var i = 0; i < res["spendings"].length; i++) {
+        _chartData.add(
+          GDPData(
+            res["spendings"][i]["category"]["displayName"],
+            res["spendings"][i]["percentage"],
+            res["spendings"][i]["amount"],
+            HexColor(
+              res["spendings"][i]["category"]["color"],
+            ),
+          ),
+        );
+        // dataMap = {
+        //   res["spendings"][i]["category"]["displayName"]:
+        //       double.parse(res["spendings"][i]["amount"].toString())
+
+        //};
+        spendingreports.add(SpendingReports.fromJson(res["spendings"][i]));
+      }
+    } else {
+      text = res["error"];
+    }
+  }
+
   List<Categorytransaction> categorytransactions = [];
   Future<void> getcategorytransactions(category) async {
     // ignore: unused_local_variable
     var res = await UserRepository()
         .getSpendingReportsbycategory(category, user[0]["walletaddress"]);
-    print("PAVITHRAMUGGI $res");
+
     setState(() {
       loading = false;
     });
@@ -154,6 +191,8 @@ class _SpendingReportState extends State<SpendingReport> {
               color: button,
               child: IconButton(
                 onPressed: () {
+                  //   info == null
+                  //?
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
@@ -162,6 +201,10 @@ class _SpendingReportState extends State<SpendingReport> {
                       ),
                     ),
                   );
+                  // :   categorytransactions = [];
+                  // setState(() {
+                  //    info = null;
+                  // });
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -327,13 +370,28 @@ class _SpendingReportState extends State<SpendingReport> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          var now = new DateTime.now();
+
+                                          var todaydate =
+                                              now.subtract(Duration(days: 1));
+                                          var now_1w = todaydate
+                                              .subtract(Duration(days: 7));
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(todaydate);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1w);
+                                          print(startDate);
+                                          print(endDate);
+                                          getMyspendingReportsfilter(
+                                              startDate, endDate);
                                           selectType = "";
                                           setState(() {
-                                            selectType = "All";
-                                            isWeek = false;
+                                            selectType = "Week";
+                                            isWeek = true;
                                             isMonth = false;
                                             isYear = false;
-                                            isAll = true;
+                                            isAll = false;
                                           });
                                         },
                                         child: Container(
@@ -362,13 +420,30 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          var now = new DateTime.now();
+
+                                          var now_1m = new DateTime(
+                                              now.year, now.month - 1, now.day);
+                                          print(now_1m);
+                                          var now_1y = new DateTime(
+                                              now.year - 1, now.month, now.day);
+                                          print(now_1y);
+
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(now);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1m);
+
+                                          getMyspendingReportsfilter(
+                                              startDate, endDate);
                                           selectType = "";
                                           setState(() {
-                                            selectType = "All";
-                                            isMonth = false;
+                                            selectType = "Month";
+                                            isMonth = true;
                                             isWeek = false;
                                             isYear = false;
-                                            isAll = true;
+                                            isAll = false;
                                           });
                                         },
                                         child: Container(
@@ -397,13 +472,28 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          var now = new DateTime.now();
+
+                                          var now_1y = new DateTime(
+                                              now.year - 1, now.month, now.day);
+
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(now);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1y);
+                                          print(startDate);
+                                          print(endDate);
+                                          getMyspendingReportsfilter(
+                                              startDate, endDate);
+
                                           selectType = "";
                                           setState(() {
-                                            selectType = "All";
-                                            isYear = false;
+                                            selectType = "Year";
+                                            isYear = true;
                                             isWeek = false;
                                             isMonth = false;
-                                            isAll = true;
+                                            isAll = false;
                                           });
                                         },
                                         child: Container(
@@ -432,6 +522,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          getSpendingReports();
                                           selectType = "";
                                           setState(() {
                                             selectType = "All";
@@ -621,6 +712,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                         ),
                                       ),
                                     ],
+                                    tooltipBehavior: _tooltipBehavior,
                                     series: <CircularSeries>[
                                       DoughnutSeries<GDPData, String>(
                                         dataSource: _chartData,
@@ -631,13 +723,17 @@ class _SpendingReportState extends State<SpendingReport> {
                                         yValueMapper: (GDPData data, _) =>
                                             data.name,
                                         radius: '100%',
-                                        //dataLabelSettings: DataLabelSettings(isVisible: true),
-                                        // enableTooltip: true,
+                                        // dataLabelSettings: DataLabelSettings(isVisible: true),
+
+                                        enableTooltip: true,
+                                        selectionBehavior: SelectionBehavior(
+                                            enable: chartClick),
+                                        explode: false,
                                         onPointTap:
                                             (ChartPointDetails details) {
                                           //setState(() {
                                           if (info == null) {
-                                            categorytransactions = [];
+                                            //  categorytransactions = [];
                                             getcategorytransactions(
                                                 spendingreports[details
                                                         .viewportPointIndex]
@@ -653,7 +749,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                               info = null;
                                             });
                                           } else {
-                                            categorytransactions = [];
+                                            // categorytransactions = [];
                                             getcategorytransactions(
                                                 spendingreports[details
                                                         .viewportPointIndex]
@@ -666,8 +762,6 @@ class _SpendingReportState extends State<SpendingReport> {
                                           //  });
                                         },
 
-                                        selectionBehavior: SelectionBehavior(
-                                            enable: chartClick),
                                         // explode: false,
                                       )
                                     ],
