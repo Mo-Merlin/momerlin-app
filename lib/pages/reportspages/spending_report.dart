@@ -78,6 +78,8 @@ class _SpendingReportState extends State<SpendingReport> {
         await UserRepository().getSpendingReports(user[0]["walletaddress"]);
     setState(() {
       loading = false;
+
+      chartClick = true;
     });
     if (res["success"] == true) {
       spendingreports = [];
@@ -106,7 +108,9 @@ class _SpendingReportState extends State<SpendingReport> {
   }
 
   Future<void> getMyspendingReportsfilter(startdate, enddate) async {
+    
     // ignore: unused_local_variable
+
     var res = await UserRepository().getMyspendingReportsfilter(
         user[0]["walletaddress"], startdate, enddate);
     setState(() {
@@ -370,6 +374,9 @@ class _SpendingReportState extends State<SpendingReport> {
                                     children: [
                                       GestureDetector(
                                         onTap: () {
+                                          chartClick = false;
+                                          info = null;
+                                          categorytransactions = [];
                                           var now = new DateTime.now();
 
                                           var todaydate =
@@ -420,6 +427,9 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          chartClick = false;
+                                          info = null;
+                                          categorytransactions = [];
                                           var now = new DateTime.now();
 
                                           var now_1m = new DateTime(
@@ -472,6 +482,9 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          chartClick = false;
+                                          info = null;
+                                          categorytransactions = [];
                                           var now = new DateTime.now();
 
                                           var now_1y = new DateTime(
@@ -522,7 +535,11 @@ class _SpendingReportState extends State<SpendingReport> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          chartClick = false;
+                                          info = null;
+                                          categorytransactions = [];
                                           getSpendingReports();
+
                                           selectType = "";
                                           setState(() {
                                             selectType = "All";
