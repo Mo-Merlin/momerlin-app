@@ -22,10 +22,12 @@ class Transaction {
         address: json["address"],
         amount: json["amount"],
         category: json["category"],
+
+        date: DateTime.fromMillisecondsSinceEpoch(num.parse(json["createdAt"])),
         isoCurrencyCode: json["iso_currency_code"],
         merchantName: json["merchant_name"],
         name: json["name"],
         sats: json["sats"],
-        date: DateTime.parse(json["time"]),
+        // date: DateTime.parse(json["time"]),
       );
 }

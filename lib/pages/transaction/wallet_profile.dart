@@ -101,14 +101,15 @@ class _WalletProfileState extends State<WalletProfile> {
                     color: button,
                     child: IconButton(
                         onPressed: () {
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Tabscreen(
-                                index: 0,
-                              ),
-                            ),
-                          );
+                          Navigator.pop(context);
+                          // Navigator.pushReplacement(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: (_) => Tabscreen(
+                          //       index: 0,
+                          //     ),
+                          //   ),
+                          // );
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -226,16 +227,67 @@ class _WalletProfileState extends State<WalletProfile> {
                                 children: [
                                   Center(
                                     child: Container(
-                                      width: 160,
-                                      child: Text(
-                                        user[0]["walletaddress"],
-                                        textAlign: TextAlign.center,
-                                        overflow: TextOverflow.ellipsis,
-                                        // overflow: Overflow.clip,
-                                        style: TextStyle(
-                                            fontSize: 14, color: Colors.white),
-                                      ),
-                                    ),
+                                        padding: EdgeInsets.only(left: 10),
+                                        width: 150,
+                                        height: 34,
+                                        child: Row(
+                                          children: <Widget>[
+                                            Expanded(
+                                              child: Text(
+                                                user[0]["walletaddress"]
+                                                            .length >
+                                                        8
+                                                    ? user[0]["walletaddress"]
+                                                        .substring(
+                                                            0,
+                                                            user[0]["walletaddress"]
+                                                                    .length -
+                                                                8)
+                                                    : user[0]["walletaddress"],
+                                                maxLines: 1,
+                                                textAlign: TextAlign.end,
+                                                overflow: TextOverflow.ellipsis,
+                                                style: GoogleFonts.poppins(
+                                                  color: white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              child: Text(
+                                                user[0]["walletaddress"]
+                                                            .length >
+                                                        8
+                                                    ? user[0]["walletaddress"]
+                                                        .substring(
+                                                            user[0]["walletaddress"]
+                                                                    .length -
+                                                                8)
+                                                    : '',
+                                                maxLines: 1,
+                                                textAlign: TextAlign.start,
+                                                style: GoogleFonts.poppins(
+                                                  color: white,
+                                                  fontSize: 12,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ),
+                                          ],
+                                        )
+                                        // Center(
+                                        // child: Text(
+                                        //   user[0]["walletaddress"],
+                                        //   textAlign: TextAlign.center,
+                                        //   overflow: TextOverflow.ellipsis,
+                                        //   style: GoogleFonts.poppins(
+                                        //     color: white,
+                                        //     fontSize: 12,
+                                        //     fontWeight: FontWeight.w400,
+                                        //   ),
+                                        // ),
+                                        ),
                                   ),
                                   // Spacer(),
                                   ClipRRect(
@@ -251,7 +303,13 @@ class _WalletProfileState extends State<WalletProfile> {
                                             user[0]["walletaddress"],
                                           ).then(
                                             (result) {
-                                              _showScaffold('Address Copied');
+                                              Scaffold.of(context)
+                                                  .showSnackBar(SnackBar(
+                                                content: Text(
+                                                    'Wallet address copied to clipboard.'),
+                                                backgroundColor: blue1,
+                                              ));
+                                              //  _showScaffold('Wallet address copied to clipboard.');
                                             },
                                           );
                                         },
@@ -379,156 +437,156 @@ class _WalletProfileState extends State<WalletProfile> {
                       ),
                     ),
                   ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 10),
-                    child: Container(
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: button,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceAround,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(left: 20, top: 10),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['selectcurrency'] !=
-                                              null)
-                                      ? "${userLanguage['selectcurrency']}"
-                                      : "SELECT CURRENCY",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding:
-                                    const EdgeInsets.only(top: 20, right: 25),
-                                child: Container(
-                                  height: 35,
-                                  width: 80,
-                                  decoration: BoxDecoration(
-                                      color: backgroundcolor,
-                                      borderRadius: BorderRadius.circular(10)),
-                                  child: Center(
-                                    child: new Theme(
-                                      data: Theme.of(context).copyWith(
-                                        canvasColor: backgroundcolor,
-                                      ),
-                                      child: DropdownButton<String>(
-                                        //focusColor: backgroundcolor,
-                                        value: _chosenValue,
-                                        underline: Container(),
-                                        //elevation: 5,
-                                        style: TextStyle(color: Colors.red),
-                                        iconEnabledColor: blue1,
-                                        items: <String>[
-                                          '€ EUR',
-                                          '£ GBP',
-                                          '¥ JPY',
-                                          '₴ UAH',
-                                        ].map<DropdownMenuItem<String>>(
-                                            (String value) {
-                                          return DropdownMenuItem<String>(
-                                            value: value,
-                                            child: Text(
-                                              value,
-                                              style: GoogleFonts.montserrat(
-                                                fontSize: 12,
-                                                color: Colors.white,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
-                                          );
-                                        }).toList(),
-                                        hint: Text("\$USD",
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: 12,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w600,
-                                            )),
-                                        onChanged: (String value) {
-                                          setState(() {
-                                            _chosenValue = value;
-                                          });
-                                        },
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding:
-                        const EdgeInsets.only(left: 20, right: 20, top: 10),
-                    child: Container(
-                      height: 70,
-                      decoration: BoxDecoration(
-                        color: button,
-                        borderRadius: BorderRadius.circular(15),
-                      ),
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    right: 50, left: 20, top: 15),
-                                child: Text(
-                                  (lang.length != null &&
-                                          lang.length != 0 &&
-                                          userLanguage['support'] != null)
-                                      ? "${userLanguage['support']}"
-                                      : "SUPPORT",
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 12,
-                                    fontWeight: FontWeight.w600,
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              Spacer(),
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 50, right: 25, top: 15),
-                                child: ClipRRect(
-                                  borderRadius: BorderRadius.circular(15),
-                                  child: Container(
-                                    height: 42,
-                                    width: 42,
-                                    color: backgroundcolor,
-                                    child: IconButton(
-                                        onPressed: () {},
-                                        icon: Icon(
-                                          Icons.search,
-                                          size: 20,
-                                          color: blue1,
-                                        )),
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
+                  // Padding(
+                  //   padding:
+                  //       const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  //   child: Container(
+                  //     height: 70,
+                  //     decoration: BoxDecoration(
+                  //       color: button,
+                  //       borderRadius: BorderRadius.circular(15),
+                  //     ),
+                  //     child: Column(
+                  //       children: [
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  //           children: [
+                  //             Padding(
+                  //               padding:
+                  //                   const EdgeInsets.only(left: 20, top: 10),
+                  //               child: Text(
+                  //                 (lang.length != null &&
+                  //                         lang.length != 0 &&
+                  //                         userLanguage['selectcurrency'] !=
+                  //                             null)
+                  //                     ? "${userLanguage['selectcurrency']}"
+                  //                     : "SELECT CURRENCY",
+                  //                 style: GoogleFonts.poppins(
+                  //                   fontSize: 12,
+                  //                   fontWeight: FontWeight.w600,
+                  //                   color: Colors.white,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //             Spacer(),
+                  //             Padding(
+                  //               padding:
+                  //                   const EdgeInsets.only(top: 20, right: 25),
+                  //               child: Container(
+                  //                 height: 35,
+                  //                 width: 80,
+                  //                 decoration: BoxDecoration(
+                  //                     color: backgroundcolor,
+                  //                     borderRadius: BorderRadius.circular(10)),
+                  //                 child: Center(
+                  //                   child: new Theme(
+                  //                     data: Theme.of(context).copyWith(
+                  //                       canvasColor: backgroundcolor,
+                  //                     ),
+                  //                     child: DropdownButton<String>(
+                  //                       //focusColor: backgroundcolor,
+                  //                       value: _chosenValue,
+                  //                       underline: Container(),
+                  //                       //elevation: 5,
+                  //                       style: TextStyle(color: Colors.red),
+                  //                       iconEnabledColor: blue1,
+                  //                       items: <String>[
+                  //                         '€ EUR',
+                  //                         '£ GBP',
+                  //                         '¥ JPY',
+                  //                         '₴ UAH',
+                  //                       ].map<DropdownMenuItem<String>>(
+                  //                           (String value) {
+                  //                         return DropdownMenuItem<String>(
+                  //                           value: value,
+                  //                           child: Text(
+                  //                             value,
+                  //                             style: GoogleFonts.montserrat(
+                  //                               fontSize: 12,
+                  //                               color: Colors.white,
+                  //                               fontWeight: FontWeight.w600,
+                  //                             ),
+                  //                           ),
+                  //                         );
+                  //                       }).toList(),
+                  //                       hint: Text("\$USD",
+                  //                           style: GoogleFonts.montserrat(
+                  //                             fontSize: 12,
+                  //                             color: Colors.white,
+                  //                             fontWeight: FontWeight.w600,
+                  //                           )),
+                  //                       onChanged: (String value) {
+                  //                         setState(() {
+                  //                           _chosenValue = value;
+                  //                         });
+                  //                       },
+                  //                     ),
+                  //                   ),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding:
+                  //       const EdgeInsets.only(left: 20, right: 20, top: 10),
+                  //   child: Container(
+                  //     height: 70,
+                  //     decoration: BoxDecoration(
+                  //       color: button,
+                  //       borderRadius: BorderRadius.circular(15),
+                  //     ),
+                  //     child: Column(
+                  //       children: [
+                  //         Row(
+                  //           mainAxisAlignment: MainAxisAlignment.start,
+                  //           children: [
+                  //             Padding(
+                  //               padding: const EdgeInsets.only(
+                  //                   right: 50, left: 20, top: 15),
+                  //               child: Text(
+                  //                 (lang.length != null &&
+                  //                         lang.length != 0 &&
+                  //                         userLanguage['support'] != null)
+                  //                     ? "${userLanguage['support']}"
+                  //                     : "SUPPORT",
+                  //                 style: GoogleFonts.poppins(
+                  //                   fontSize: 12,
+                  //                   fontWeight: FontWeight.w600,
+                  //                   color: Colors.white,
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //             Spacer(),
+                  //             Padding(
+                  //               padding: const EdgeInsets.only(
+                  //                   left: 50, right: 25, top: 15),
+                  //               child: ClipRRect(
+                  //                 borderRadius: BorderRadius.circular(15),
+                  //                 child: Container(
+                  //                   height: 42,
+                  //                   width: 42,
+                  //                   color: backgroundcolor,
+                  //                   child: IconButton(
+                  //                       onPressed: () {},
+                  //                       icon: Icon(
+                  //                         Icons.search,
+                  //                         size: 20,
+                  //                         color: blue1,
+                  //                       )),
+                  //                 ),
+                  //               ),
+                  //             ),
+                  //           ],
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
+                  // ),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 10),

@@ -321,25 +321,25 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
           SizedBox(
             height: 10,
           ),
-          Center(
-            child: Image.asset(
-              "assets/images/promo_card_1.png",
-              fit: BoxFit.cover,
-            ),
-          ),
-          SizedBox(
-            height: 25,
-          ),
-          Center(
-            child: Container(
-              height: 3,
-              width: 64,
-              decoration: BoxDecoration(
-                color: text1,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
+          // Center(
+          //   child: Image.asset(
+          //     "assets/images/promo_card_1.png",
+          //     fit: BoxFit.cover,
+          //   ),
+          // ),
+          // SizedBox(
+          //   height: 25,
+          // ),
+          // Center(
+          //   child: Container(
+          //     height: 3,
+          //     width: 64,
+          //     decoration: BoxDecoration(
+          //       color: text1,
+          //       borderRadius: BorderRadius.circular(10),
+          //     ),
+          //   ),
+          // ),
           SizedBox(
             height: 20,
           ),

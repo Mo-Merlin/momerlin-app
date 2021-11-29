@@ -234,7 +234,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
           ),
         ),
         title: Text(
-          "Challenge Detail".toUpperCase(),
+          "Challenge Details".toUpperCase(),
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontSize: 15,
@@ -398,24 +398,23 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.note_add_outlined,
-                                              color: Colors.white,
-                                              size: 12,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 10),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //          child: Icon(
+                                  //             Icons.note_add_outlined,
+                                  //             color: Colors.white,
+                                  //             size: 12,
+                                  //           )),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -605,25 +604,24 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                            size: 11,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //         child: Icon(
+                                  //           Icons.check,
+                                  //           color: Colors.white,
+                                  //           size: 11,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -679,25 +677,24 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.note_add_outlined,
-                                            color: Colors.white,
-                                            size: 12,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //         child: Icon(
+                                  //           Icons.group,
+                                  //           color: Colors.white,
+                                  //           size: 12,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -757,31 +754,31 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: loading == false
-                                            ? blue1
-                                            : difference >= 0
-                                                ? Colors.redAccent
-                                                : Colors.green,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            difference >= 0
-                                                ? Icons.check
-                                                : Icons.add_task_outlined,
-                                            color: Colors.white,
-                                            size: 10,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: loading == false
+                                  //           ? blue1
+                                  //           : difference >= 0
+                                  //               ? Colors.redAccent
+                                  //               : Colors.green,
+                                  //       child: IconButton(
+                                  //         onPressed: () {},
+                                  //         icon: Icon(
+                                  //           difference >= 0
+                                  //               ? Icons.check
+                                  //               : Icons.add_task_outlined,
+                                  //           color: Colors.white,
+                                  //           size: 10,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),

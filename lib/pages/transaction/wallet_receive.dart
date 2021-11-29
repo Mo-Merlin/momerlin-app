@@ -4,9 +4,11 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:qr_flutter/qr_flutter.dart';
-
+// import 'package:share/share.dart';
 import 'package:clipboard/clipboard.dart';
+import 'package:share/share.dart';
 
+import 'dart:io';
 class WalletReceive extends StatefulWidget {
   @override
   _WalletReceiveState createState() => _WalletReceiveState();
@@ -40,6 +42,14 @@ class _WalletReceiveState extends State<WalletReceive> {
 
   // ignore: todo
   //TODO: LanguageEnd
+  _onShareData(BuildContext context) async {
+    final RenderBox box = context.findRenderObject();
+    {
+      await Share.share(user[0]["walletaddress"],
+          subject: user[0]["walletaddress"],
+          sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+    }
+  }
 
   String text = '';
   // String _scanBarcode = "";
@@ -156,29 +166,82 @@ class _WalletReceiveState extends State<WalletReceive> {
                                     child: Row(
                                       children: [
                                         Container(
-                                          width: MediaQuery.of(context)
-                                                  .size
-                                                  .width /
-                                              2.4,
-                                          height: 34,
-                                          decoration: BoxDecoration(
-                                            color: backgroundcolor,
-                                            borderRadius:
-                                                BorderRadius.circular(10),
-                                          ),
-                                          child: Center(
-                                            child: Text(
-                                              user[0]["walletaddress"],
-                                              textAlign: TextAlign.center,
-                                              overflow: TextOverflow.ellipsis,
-                                              style: GoogleFonts.poppins(
-                                                color: white,
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w400,
-                                              ),
+                                            padding: EdgeInsets.only(left: 10),
+                                            width: MediaQuery.of(context)
+                                                    .size
+                                                    .width /
+                                                2.4,
+                                            height: 34,
+                                            decoration: BoxDecoration(
+                                              color: backgroundcolor,
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
                                             ),
-                                          ),
-                                        ),
+                                            child: Row(
+                                              children: <Widget>[
+                                                Expanded(
+                                                  child: Text(
+                                                    user[0]["walletaddress"]
+                                                                .length >
+                                                            8
+                                                        ? user[0][
+                                                                "walletaddress"]
+                                                            .substring(
+                                                                0,
+                                                                user[0]["walletaddress"]
+                                                                        .length -
+                                                                    8)
+                                                        : user[0]
+                                                            ["walletaddress"],
+                                                    maxLines: 1,
+                                                    textAlign: TextAlign.end,
+                                                    overflow:
+                                                        TextOverflow.ellipsis,
+                                                    style: GoogleFonts.poppins(
+                                                      color: white,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                                Expanded(
+                                                  child: Text(
+                                                    user[0]["walletaddress"]
+                                                                .length >
+                                                            8
+                                                        ? user[0][
+                                                                "walletaddress"]
+                                                            .substring(user[0][
+                                                                        "walletaddress"]
+                                                                    .length -
+                                                                8)
+                                                        : '',
+                                                    maxLines: 1,
+                                                    textAlign: TextAlign.start,
+                                                    style: GoogleFonts.poppins(
+                                                      color: white,
+                                                      fontSize: 12,
+                                                      fontWeight:
+                                                          FontWeight.w400,
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            )
+                                            // Center(
+                                            // child: Text(
+                                            //   user[0]["walletaddress"],
+                                            //   textAlign: TextAlign.center,
+                                            //   overflow: TextOverflow.ellipsis,
+                                            //   style: GoogleFonts.poppins(
+                                            //     color: white,
+                                            //     fontSize: 12,
+                                            //     fontWeight: FontWeight.w400,
+                                            //   ),
+                                            // ),
+                                            ),
+                                        // ),
                                         SizedBox(
                                           width: 5,
                                         ),
@@ -202,7 +265,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                                               ).then(
                                                 (result) {
                                                   _showScaffold(
-                                                      'Address Copied');
+                                                      'Wallet address copied to clipboard.');
                                                 },
                                               );
                                             },
@@ -224,10 +287,16 @@ class _WalletReceiveState extends State<WalletReceive> {
                   ),
                   GestureDetector(
                     onTap: () {
-                      setState(() {
-                        buttonpressed = true;
-                      });
-                      Navigator.pop(context);
+                      // setState(() {
+                      //   buttonpressed = true;
+                      // });
+                      Share.share(
+                        user[0]["walletaddress"],
+                        subject: "Wallet Address",
+                      );
+
+                      // _onShareData(context);
+                      // Navigator.pop(context);
                     },
                     child: Container(
                       width: MediaQuery.of(context).size.width * 0.6,

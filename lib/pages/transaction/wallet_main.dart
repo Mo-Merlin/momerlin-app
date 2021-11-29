@@ -66,7 +66,7 @@ class WalletTwo extends StatefulWidget {
   _WalletTwoState createState() => _WalletTwoState();
 }
 
-class _WalletTwoState extends State<WalletTwo> {
+class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
   PlaidLink _plaidLinkToken;
   var userLanguage, user, lang = [];
   bool loading = true;
@@ -127,7 +127,7 @@ class _WalletTwoState extends State<WalletTwo> {
     loading = false;
     // });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-
+    print(res);
     if (res == false) {
       // Scaffold
       //     .of(context)
@@ -173,30 +173,44 @@ class _WalletTwoState extends State<WalletTwo> {
 
     // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
+    gweibalance = "0";
+    print(res);
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
-          content: Text('Bank account connection successful'),
+          content: Text('Transactions synced successfully'),
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => Tabscreen()),
-          (Route<dynamic> route) => false);
 
-      getUserLanguage();
+      var res = await UserRepository().getUser(user[0]["walletaddress"]);
+
+      gweibalance = res["user"]["gwei"];
+      getTransactionuseraddress();
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (context) => Tabscreen()),
+      //     (Route<dynamic> route) => false);
+
+      // getUserLanguage();
     } else {
       plaidconnection(context);
     }
   }
 
   var gweibalance = "0";
+  var usdgweibalance = 0.0;
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
+
+    //  var exchangeValueinUSD = '1.00';
+    // var value = (double.parse(res["user"]["gwei"]) * double.parse(exchangeValueinUSD));
+
+    // usdgweibalance = (value * 4000).toStringAsFixed(2);
+    usdgweibalance = double.parse(res["user"]["gwei"]) * 0.00000293;
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
     }
@@ -207,10 +221,32 @@ class _WalletTwoState extends State<WalletTwo> {
   @override
   void initState() {
     loading = true;
-
     getUserLanguage();
     getToken();
     super.initState();
+
+    WidgetsBinding.instance.addObserver(this);
+       print("PAVITHRAMANoharan121232323");
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    print("PAVITHRAMANoharan1212323");
+    if (state == AppLifecycleState.resumed) {
+      print("PAVITHRAMANoharan");
+      setState(() {});
+      getUserLanguage();
+      WidgetsBinding.instance.addObserver(this);
+    } else {
+      print("PAVITHRA1232434");
+      setState(() {});
+    }
   }
 
   void _onEventCallback(String event, LinkEventMetadata metadata) {
@@ -241,9 +277,10 @@ class _WalletTwoState extends State<WalletTwo> {
     });
     await UserRepository().updateToken({"public_token": publicToken});
     // getTransaction();
-    var res1 = await UserRepository().updateplaidlogin(1);
-    print(res1);
     // ignore: unused_local_variable
+    var res1 = await UserRepository().updateplaidlogin(1);
+    gweibalance = "0";
+    usdgweibalance = 0;
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -252,11 +289,16 @@ class _WalletTwoState extends State<WalletTwo> {
           backgroundColor: Colors.green,
         ),
       );
-      Navigator.of(context).pushAndRemoveUntil(
-          MaterialPageRoute(builder: (context) => Tabscreen()),
-          (Route<dynamic> route) => false);
+      var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
-      getUserLanguage();
+      gweibalance = res["user"]["gwei"];
+      usdgweibalance = double.parse(res["user"]["gwei"]) * 0.00000293;
+      getTransactionuseraddress();
+      // Navigator.of(context).pushAndRemoveUntil(
+      //     MaterialPageRoute(builder: (context) => Tabscreen()),
+      //     (Route<dynamic> route) => false);
+
+      // getUserLanguage();
     }
 
     final usersave =
@@ -415,7 +457,8 @@ class _WalletTwoState extends State<WalletTwo> {
                                         ),
                                         child: Center(
                                           child: Text(
-                                            "0.00 USD",
+                                            usdgweibalance.toStringAsFixed(3) +
+                                                " USD",
                                             style: GoogleFonts.montserrat(
                                               fontSize: 10,
                                               color: Colors.white,
@@ -578,10 +621,12 @@ class _WalletTwoState extends State<WalletTwo> {
                                 ),
                                 GestureDetector(
                                   onTap: () {
+                                    print(user[0]["plaidlogin"]);
                                     if (user[0]["plaidlogin"] == 0) {
                                       plaidconnection(context);
                                     } else {
-                                      getTransaction();
+                                      plaidalredyconnection(context);
+                                      // getTransaction();
                                     }
                                   },
                                   child: Container(
@@ -858,7 +903,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                     padding:
                                         EdgeInsets.only(left: 50, right: 50),
                                     child: Text(
-                                      "Abracadabra look over here,Spend some Gwei and it will appea",
+                                      "Abracadabra look over here,Spend some Gwei and it will appear",
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.poppins(
                                           fontSize: 13,
@@ -972,13 +1017,10 @@ class _WalletTwoState extends State<WalletTwo> {
                                                         left: 14,
                                                         top: 15,
                                                         child: Text(
-                                                          ((double.parse(
-                                                                  transactions1[
-                                                                          index]
-                                                                      .sats
-                                                                      .toString())))
-                                                              .toStringAsFixed(
-                                                                  2),
+                                                          transactions1[index]
+                                                              .sats
+                                                              .toInt()
+                                                              .toString(),
                                                           style: GoogleFonts
                                                               .montserrat(
                                                             fontSize: 12,
@@ -1483,6 +1525,7 @@ class _WalletTwoState extends State<WalletTwo> {
                                       color: button,
                                       onPressed: () {
                                         _plaidLinkToken.open();
+                                        Navigator.pop(context);
                                       },
                                       child: Row(
                                         mainAxisAlignment:
@@ -1490,6 +1533,170 @@ class _WalletTwoState extends State<WalletTwo> {
                                         children: [
                                           Text(
                                             "Get Started!",
+                                            textAlign: TextAlign.center,
+                                            style: GoogleFonts.poppins(
+                                                color: white,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w700),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                        // SizedBox(
+                        //   height: 30,
+                        // ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            );
+          },
+        );
+      },
+    );
+  }
+
+  void plaidalredyconnection(BuildContext context) {
+    showDialog(
+      context: context,
+      barrierDismissible: true,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          // You need this, notice the parameters below:
+          builder: (BuildContext context, StateSetter setState) {
+            return Container(
+              color: backgroundcolor.withOpacity(0.7),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  Row(
+                    children: [
+                      Card(
+                        color: gridcolor,
+                        elevation: 20,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(150),
+                        ),
+                        child: GestureDetector(
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                          child: Container(
+                            width: 50,
+                            height: 50,
+                            decoration: BoxDecoration(
+                                shape: BoxShape.circle, color: gridcolor),
+                            child: Center(
+                              child: Icon(Icons.arrow_back,
+                                  size: 20, color: Colors.white),
+                            ),
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10),
+                        child: Text(
+                          "Plaid Connection",
+                          style: GoogleFonts.poppins(
+                            decoration: TextDecoration.none,
+                            color: Colors.white,
+                            fontSize: 15,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  Spacer(),
+                  SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        Center(
+                          child: Container(
+                            height: 200,
+                            width: 200,
+                            child: Image.asset(
+                              "assets/images/toyface.png",
+                              fit: BoxFit.cover,
+                            ),
+                          ),
+                        ),
+                        Align(
+                          alignment: Alignment.bottomCenter,
+                          child: Card(
+                            shadowColor: button.withOpacity(0.5),
+                            color: Color(0xff1C203A),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32),
+                              // side: new BorderSide(color: Colors.black, width: 1.0),
+                            ),
+                            child: Container(
+                              height: MediaQuery.of(context).size.height * 0.4,
+                              width: MediaQuery.of(context).size.width,
+                              padding: EdgeInsets.all(0),
+                              child: Column(
+                                children: [
+                                  SizedBox(height: 20),
+                                  Container(
+                                      height: 4,
+                                      width: 50,
+                                      decoration: BoxDecoration(
+                                          color: text1,
+                                          borderRadius:
+                                              BorderRadius.circular(15))),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+
+                                  // SizedBox(
+                                  //   height: 20,
+                                  // ),
+                                  Container(
+                                    padding:
+                                        EdgeInsets.only(left: 20, right: 20),
+                                    child: Text(
+                                      "We will sync transactions from your bank account. Please click proceed to continue",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.w400,
+                                        color: white,
+                                      ),
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Container(
+                                    height: 55,
+                                    width:
+                                        MediaQuery.of(context).size.width * 0.6,
+                                    // ignore: deprecated_member_use
+                                    child: RaisedButton(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(30),
+                                      ),
+                                      color: button,
+                                      onPressed: () {
+                                        getTransaction();
+                                        Navigator.pop(context);
+                                      },
+                                      child: Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Text(
+                                            "Proceed",
                                             textAlign: TextAlign.center,
                                             style: GoogleFonts.poppins(
                                                 color: white,

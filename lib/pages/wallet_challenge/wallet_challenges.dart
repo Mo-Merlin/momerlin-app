@@ -912,8 +912,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
+    print(user[0]);
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    print("PAVIMANO ${res["user"]["gwei"]}");
+   
     gweibalance = res["user"]["gwei"];
     if (user[0]["googlefitenable"] == 1) {
       fetchData();

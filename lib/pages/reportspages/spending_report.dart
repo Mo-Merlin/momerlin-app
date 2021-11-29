@@ -638,30 +638,30 @@ class _SpendingReportState extends State<SpendingReport> {
                                           //setState(() {
                                           if (info == null) {
                                             categorytransactions = [];
+                                            getcategorytransactions(
+                                                spendingreports[details
+                                                        .viewportPointIndex]
+                                                    .category
+                                                    .name);
                                             setState(() {
                                               info = details.viewportPointIndex;
                                             });
-
-                                            getcategorytransactions(
-                                                spendingreports[info]
-                                                    .category
-                                                    .name);
                                           } else if (info ==
                                               details.viewportPointIndex) {
+                                            categorytransactions = [];
                                             setState(() {
                                               info = null;
-
-                                              categorytransactions = [];
                                             });
                                           } else {
                                             categorytransactions = [];
+                                            getcategorytransactions(
+                                                spendingreports[details
+                                                        .viewportPointIndex]
+                                                    .category
+                                                    .name);
                                             setState(() {
                                               info = details.viewportPointIndex;
                                             });
-                                            getcategorytransactions(
-                                                spendingreports[info]
-                                                    .category
-                                                    .name);
                                           }
                                           //  });
                                         },
@@ -831,7 +831,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                         //color: button,
                                         child: Container(
                                           padding: const EdgeInsets.only(
-                                              left: 20, right: 20),
+                                              left: 10, right: 10),
                                           child: Column(
                                             children: [
                                               SizedBox(
@@ -1211,52 +1211,23 @@ class _SpendingReportState extends State<SpendingReport> {
                                           ),
                                         ),
                                         //color: button,
-                                        child:Container(
+                                        child: Container(
                                           padding: const EdgeInsets.only(
-                                              left: 20, right: 20),
+                                              left: 10, right: 10),
                                           child: Column(
                                             children: [
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              Padding(
-                                                padding: const EdgeInsets.only(
-                                                    top: 15, left: 15),
-                                                child: ListTile(
-                                                  title: Text(
-                                                    'Expenses',
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 17,
-                                                      color: Colors.white,
-                                                      fontWeight: FontWeight.w700,
-                                                    ),
+                                              ListTile(
+                                                title: Text(
+                                                  'Expenses',
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 17,
+                                                    color: Colors.white,
+                                                    fontWeight: FontWeight.w700,
                                                   ),
                                                 ),
-                                              ),
-                                             SizedBox(
-                                                height: 10,
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                children: [
-                                                  // Padding(
-                                                  //   padding: const EdgeInsets.only(left: 20),
-                                                  //   child: Text(
-                                                  //     (lang.length != null &&
-                                                  //             lang.length != 0 &&
-                                                  //             userLanguage['expenses'] != null)
-                                                  //         ? "${userLanguage['expenses']}"
-                                                  //         : "Expenses",
-                                                  //     style: GoogleFonts.poppins(
-                                                  //       fontSize: 20,
-                                                  //       color: Colors.white,
-                                                  //       fontWeight: FontWeight.w500,
-                                                  //     ),
-                                                  //   ),
-                                                  // ),
-                                                ],
                                               ),
                                               ListView.builder(
                                                 shrinkWrap: true,

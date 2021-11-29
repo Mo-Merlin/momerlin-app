@@ -438,7 +438,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           ),
         ),
         title: Text(
-          "Challenge Detail".toUpperCase(),
+          "Challenge Details".toUpperCase(),
           style: GoogleFonts.poppins(
             color: Colors.white,
             fontSize: 15,
@@ -567,8 +567,6 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                   color: button,
                                   borderRadius: BorderRadius.circular(15)),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
@@ -590,6 +588,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
+                                  SizedBox(width: 10,),
                                   Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&
@@ -602,24 +601,24 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                         fontSize: 12,
                                         fontWeight: FontWeight.w400),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 10),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                            onPressed: () {},
-                                            icon: Icon(
-                                              Icons.note_add_outlined,
-                                              color: Colors.white,
-                                              size: 12,
-                                            )),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 10),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //         child: Icon(
+                                  //           Icons.note_add_outlined,
+                                  //           color: Colors.white,
+                                  //           size: 12,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -809,25 +808,24 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                     ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.check,
-                                            color: Colors.white,
-                                            size: 11,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //         child: Icon(
+                                  //           Icons.check,
+                                  //           color: Colors.white,
+                                  //           size: 11,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -883,25 +881,24 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: blue1,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            Icons.note_add_outlined,
-                                            color: Colors.white,
-                                            size: 12,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: Container(
+                                  //       height: 25,
+                                  //       width: 25,
+                                  //       color: blue1,
+                                  //       child: Center(
+                                  //         child: Icon(
+                                  //           Icons.group,
+                                  //           color: Colors.white,
+                                  //           size: 12,
+                                  //         ),
+                                  //       ),
+                                  //     ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
@@ -961,31 +958,30 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  Padding(
-                                    padding: const EdgeInsets.only(right: 25),
-                                    child: ClipRRect(
-                                      borderRadius: BorderRadius.circular(30),
-                                      child: Container(
-                                        height: 25,
-                                        width: 25,
-                                        color: loading == false
-                                            ? blue1
-                                            : difference >= 0
-                                                ? Colors.redAccent
-                                                : Colors.green,
-                                        child: IconButton(
-                                          onPressed: () {},
-                                          icon: Icon(
-                                            difference >= 0
-                                                ? Icons.check
-                                                : Icons.add_task_outlined,
-                                            color: Colors.white,
-                                            size: 10,
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+                                  // Padding(
+                                  //   padding: const EdgeInsets.only(right: 25),
+                                  //   child: ClipRRect(
+                                  //     borderRadius: BorderRadius.circular(30),
+                                  //     child: difference >= 0
+                                  //         ? SizedBox(
+                                  //             height: 0,
+                                  //           )
+                                  //         : Container(
+                                  //             height: 25,
+                                  //             width: 25,
+                                  //             color: loading == false
+                                  //                 ? blue1
+                                  //                 : Colors.green,
+                                  //             child: Center(
+                                  //               child: Icon(
+                                  //                 Icons.add_task_outlined,
+                                  //                 color: Colors.white,
+                                  //                 size: 10,
+                                  //               ),
+                                  //             ),
+                                  //           ),
+                                  //   ),
+                                  // ),
                                 ],
                               ),
                             ),
