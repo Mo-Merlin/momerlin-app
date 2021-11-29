@@ -1,10 +1,13 @@
+import 'dart:io';
+
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:image_picker/image_picker.dart';
+import 'package:image_cropper/image_cropper.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -18,6 +21,9 @@ class WalletProfile extends StatefulWidget {
 class _WalletProfileState extends State<WalletProfile> {
   var userLanguage, user, lang = [];
   bool loading = true;
+  File imageFile;
+  ImagePicker _picker = ImagePicker();
+
   @override
   void initState() {
     loading = true;
@@ -59,6 +65,100 @@ class _WalletProfileState extends State<WalletProfile> {
     }
   }
 
+  selectImage() {
+    showModalBottomSheet(
+        isScrollControlled: true,
+        context: this.context,
+        builder: (context) {
+          return Container(
+            height: MediaQuery.of(context).size.height * 0.3,
+            padding: EdgeInsets.all(20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              children: [
+                Text(
+                  "Upload Your Profile Picture",
+                  style: TextStyle(fontSize: 20),
+                ),
+                //
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          getImage(ImageSource.camera);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              Icons.camera,
+                              size: 35,
+                            ),
+                            Text(
+                              "Camera",
+                              style: TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pop(context);
+                          getImage(ImageSource.gallery);
+                        },
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Icon(
+                              Icons.photo_sharp,
+                              size: 35,
+                            ),
+                            Text(
+                              "Gallery",
+                              style: TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                //
+              ],
+            ),
+          );
+        });
+  }
+
+  getImage(ImageSource source) async {
+    File image = await ImagePicker.pickImage(source: source);
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: blue2,
+            toolbarTitle: "Set an image",
+            toolbarWidgetColor: Colors.white,
+            //statusBarColor: smartchatgold.withOpacity(0.3),
+            backgroundColor: Colors.black,
+          ));
+      setState(() {
+        imageFile = cropped;
+        // imageFile = image;
+      });
+    }
+  }
+
   TextEditingController _controller = TextEditingController();
   Future<void> getuser() async {
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
@@ -72,6 +172,7 @@ class _WalletProfileState extends State<WalletProfile> {
   // ignore: todo
   //TODO: LanguageEnd
   String _chosenValue;
+
   @override
   Widget build(BuildContext context) {
     return loading == true
@@ -141,14 +242,24 @@ class _WalletProfileState extends State<WalletProfile> {
                     children: [
                       Padding(
                         padding: const EdgeInsets.only(top: 25, left: 30),
-                        child: Container(
-                          //color: Colors.redAccent,
+                        child: GestureDetector(
+                          onTap: () {
+                            selectImage();
+                          },
                           child: Container(
-                            child: Image.asset(
-                              "assets/images/profile.png",
-                              fit: BoxFit.fill,
-                              width: 76,
-                              height: 76,
+                            width: 76,
+                            height: 76,
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(100),
+                              child: imageFile != null
+                                  ? Image.file(
+                                      imageFile,
+                                      fit: BoxFit.cover,
+                                    )
+                                  : Image.asset(
+                                      "assets/images/profile.png",
+                                      fit: BoxFit.fill,
+                                    ),
                             ),
                           ),
                         ),
