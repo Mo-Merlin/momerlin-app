@@ -214,7 +214,7 @@ class UserRepository {
         '${url + "myActivity/$id??startDate=$startdate&endDate=$enddate"}',
       );
       var checkres = jsonDecode(res.body);
-      print(checkres);
+      print("checkres $checkres");
       checkres["status"] = true;
 
       return checkres;

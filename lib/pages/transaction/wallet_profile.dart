@@ -22,6 +22,7 @@ class _WalletProfileState extends State<WalletProfile> {
   var userLanguage, user, lang = [];
   bool loading = true;
   File imageFile;
+  // ignore: unused_field
   ImagePicker _picker = ImagePicker();
 
   @override
