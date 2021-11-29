@@ -186,6 +186,26 @@ class UserRepository {
     }
   }
 
+  //GETFILTER
+  Future<dynamic> getMyspendingReportsfilter(
+      walletaddress, startdate, enddate) async {
+    try {
+      var res = await http.get(
+        // '${url + "expenses?address=$walletaddress"}',
+        '${url + "myExpenses/$walletaddress?startDate=$startdate&endDate=$enddate"}',
+      );
+      var checkres = jsonDecode(res.body);
+      print(checkres);
+      checkres["status"] = true;
+
+      return checkres;
+    } catch (e) {
+      print(e);
+      print("error");
+      return false;
+    }
+  }
+
   //getspendingreports
 
   Future<dynamic> getSpendingReportsbycategory(category, walletaddress) async {
