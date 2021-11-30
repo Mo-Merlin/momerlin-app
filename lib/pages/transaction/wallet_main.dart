@@ -226,7 +226,6 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     super.initState();
 
     WidgetsBinding.instance.addObserver(this);
-       print("PAVITHRAMANoharan121232323");
   }
 
   @override
@@ -443,31 +442,31 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                         ],
                                       ),
                                     ),
-                                    Positioned(
-                                      top: MediaQuery.of(context).size.height *
-                                          0.3,
-                                      child: Container(
-                                        // color: button,
-                                        height: 32,
-                                        width: 82,
-                                        decoration: BoxDecoration(
-                                          color: Color(0xff6B69C4),
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        child: Center(
-                                          child: Text(
-                                            usdgweibalance.toStringAsFixed(3) +
-                                                " USD",
-                                            style: GoogleFonts.montserrat(
-                                              fontSize: 10,
-                                              color: Colors.white,
-                                              fontWeight: FontWeight.w400,
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
+                                    // Positioned(
+                                    //   top: MediaQuery.of(context).size.height *
+                                    //       0.3,
+                                    //   child: Container(
+                                    //     // color: button,
+                                    //     height: 32,
+                                    //     width: 82,
+                                    //     decoration: BoxDecoration(
+                                    //       color: Color(0xff6B69C4),
+                                    //       borderRadius:
+                                    //           BorderRadius.circular(10),
+                                    //     ),
+                                    //     child: Center(
+                                    //       child: Text(
+                                    //         usdgweibalance.toStringAsFixed(3) +
+                                    //             " USD",
+                                    //         style: GoogleFonts.montserrat(
+                                    //           fontSize: 10,
+                                    //           color: Colors.white,
+                                    //           fontWeight: FontWeight.w400,
+                                    //         ),
+                                    //       ),
+                                    //     ),
+                                    //   ),
+                                    // ),
                                   ],
                                 ),
                                 // Positioned(
@@ -503,11 +502,11 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                WalletSend()));
+                                    // Navigator.push(
+                                    //     context,
+                                    //     MaterialPageRoute(
+                                    //         builder: (context) =>
+                                    //             WalletSend()));
                                   },
                                   child: Container(
                                       height:
@@ -543,18 +542,31 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                           Padding(
                                             padding:
                                                 const EdgeInsets.only(top: 15),
-                                            child: Text(
-                                              (lang.length != null &&
-                                                      lang.length != 0 &&
-                                                      userLanguage['send'] !=
-                                                          null)
-                                                  ? "${userLanguage['send']}"
-                                                  : "Send",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 13,
-                                                color: Colors.grey,
-                                                fontWeight: FontWeight.w400,
-                                              ),
+                                            child: Column(
+                                              children: [
+                                                Text(
+                                                  (lang.length != null &&
+                                                          lang.length != 0 &&
+                                                          userLanguage[
+                                                                  'send'] !=
+                                                              null)
+                                                      ? "${userLanguage['send']}"
+                                                      : "Send",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 13,
+                                                    color: Colors.grey,
+                                                    fontWeight: FontWeight.w400,
+                                                  ),
+                                                ),
+                                                Text(
+                                                  "   (Comming Soon)   ",
+                                                  style: GoogleFonts.poppins(
+                                                    fontSize: 10,
+                                                    color: text1,
+                                                  ),
+                                                  textAlign:TextAlign.center
+                                                ),
+                                              ],
                                             ),
                                           )
                                         ],
@@ -751,7 +763,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                     child: Text(
                                       "We are processing your information. Please check back again later.",
                                       style: GoogleFonts.poppins(
-                                        fontSize: 12,
+                                        fontSize: 10,
                                         color: text1,
                                       ),
                                       textAlign: TextAlign.center,

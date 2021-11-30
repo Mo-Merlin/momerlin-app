@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:intl/intl.dart';
 // import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
@@ -87,7 +88,41 @@ class _MyEarningsState extends State<MyEarnings> {
       ));
     } else if (res["success"] == true) {
       dataJSON = [];
-      print("pavithramanoharan ${res["activities"]}");
+      if (res["success"] == true) {
+        myEarningActivity = [];
+
+        for (var i = 0; i < res["activities"].length; i++) {
+          dataJSON = res["activities"];
+          myEarningActivity
+              .add(MyEarningActivity.fromJson(res["activities"][i]));
+        }
+      }
+    } else {
+      Scaffold.of(context)
+          // ignore: deprecated_member_use
+          .showSnackBar(SnackBar(
+        content: Text(res["error"]),
+        backgroundColor: Colors.red,
+      ));
+    }
+  }
+
+  Future<void> getmyEarningfilterActivity(startdate, enddate) async {
+    // ignore: unused_local_variable
+    var res = await UserRepository()
+        .getMyearningReportsfilter(user[0]["uid"], startdate, enddate);
+    setState(() {
+      loading = false;
+    });
+    if (res == false) {
+      Scaffold.of(context)
+          // ignore: deprecated_member_use
+          .showSnackBar(SnackBar(
+        content: Text("No Internet Connection"),
+        backgroundColor: Colors.red,
+      ));
+    } else if (res["success"] == true) {
+      dataJSON = [];
       if (res["success"] == true) {
         myEarningActivity = [];
 
@@ -109,125 +144,6 @@ class _MyEarningsState extends State<MyEarnings> {
 
   // ignore: todo
   //TODO: LanguageEnd
-  List<HourChartData> hourChartData = <HourChartData>[
-    HourChartData(x: DateTime(2015, 1, 1, 5), yValue: 1.13),
-    HourChartData(x: DateTime(2015, 1, 2, 2), yValue: 1.12),
-    HourChartData(x: DateTime(2015, 1, 3, 3), yValue: 1.08),
-    HourChartData(x: DateTime(2015, 1, 4, 4), yValue: 1.12),
-    HourChartData(x: DateTime(2015, 1, 5, 5), yValue: 1.1),
-    HourChartData(x: DateTime(2015, 1, 6, 6), yValue: 1.12),
-    HourChartData(x: DateTime(2015, 1, 7, 7), yValue: 1.1),
-    HourChartData(x: DateTime(2015, 1, 8, 8), yValue: 1.12),
-    HourChartData(x: DateTime(2015, 1, 9, 9), yValue: 1.16),
-    HourChartData(x: DateTime(2015, 1, 12, 12), yValue: 1.1),
-  ];
-  List<WeekChartData> weekChartData = <WeekChartData>[
-    WeekChartData(x: "Sun", y: 0),
-    WeekChartData(x: "Mon", y: 10),
-    WeekChartData(x: "Tue", y: 3),
-    WeekChartData(x: "Wed", y: 6),
-    WeekChartData(x: "Thu", y: 2),
-    WeekChartData(x: "Fri", y: 12),
-    WeekChartData(x: "Sat", y: 7),
-  ];
-  List<YearChartData> yearChartData = <YearChartData>[
-    YearChartData(x: "Jan", y: 0),
-    YearChartData(x: "Feb", y: 10),
-    YearChartData(x: "Mar", y: 3),
-    YearChartData(x: "Apr", y: 6),
-    YearChartData(x: "May", y: 2),
-    YearChartData(x: "Jun", y: 12),
-    YearChartData(x: "Jul", y: 11),
-    YearChartData(x: "Aug", y: 3),
-    YearChartData(x: "Sep", y: 7),
-    YearChartData(x: "Oct", y: 10),
-    YearChartData(x: "Nov", y: 14),
-    YearChartData(x: "Dec", y: 11),
-  ];
-  List<AllChartData> allChartData = <AllChartData>[
-    AllChartData(x: "2021", y: 0),
-    AllChartData(x: "2020", y: 10),
-    AllChartData(x: "2019", y: 3),
-    AllChartData(x: "2018", y: 6),
-    AllChartData(x: "2017", y: 2),
-    AllChartData(x: "2016", y: 12),
-    AllChartData(x: "2015", y: 7),
-  ];
-
-  List earningElements = [
-    {
-      "image": "earntrophybrown",
-      "title": "Walk Challenge Win",
-      "subtitle": "Yesterday",
-      "symbol": "+",
-      "value": "500.00",
-      "type": "Gwei",
-      "percentage": "53%",
-    },
-    {
-      "image": "earndown",
-      "title": "2 days ago",
-      "subtitle": "3 days ago",
-      "symbol": "-",
-      "value": "220.00",
-      "type": "Gwei",
-      "percentage": "27%",
-    },
-    {
-      "image": "earntrophygold",
-      "title": "Run Challenge Win",
-      "subtitle": "Yesterday",
-      "symbol": "+",
-      "value": "1000.00",
-      "type": "Gwei",
-      "percentage": "20%",
-    },
-    {
-      "image": "earndown",
-      "title": "Walk Challenge Win",
-      "subtitle": "3 days ago",
-      "symbol": "-",
-      "value": "27.00",
-      "type": "Gwei",
-      "percentage": "53%",
-    },
-    {
-      "image": "earnup",
-      "title": "August 30th",
-      "subtitle": "4 days ago",
-      "symbol": "-",
-      "value": "300.00",
-      "type": "Gwei",
-      "percentage": "27%",
-    },
-    {
-      "image": "earntrophygold",
-      "title": "Run Challenge Win",
-      "subtitle": "Yesterday",
-      "symbol": "+",
-      "value": "1000.00",
-      "type": "Gwei",
-      "percentage": "20%",
-    },
-  ];
-  var earningColors = [
-    earningOrange,
-    earningBlue,
-    spendingPink,
-    earningBlue,
-    earningBlue,
-    spendingPink,
-  ];
-
-  var earningSymbolColor = [
-    spendingGreen,
-    spendingPink,
-    spendingGreen,
-    spendingPink,
-    spendingPink,
-    spendingGreen,
-  ];
-
   @override
   Widget build(BuildContext context) {
     return
@@ -453,49 +369,63 @@ class _MyEarningsState extends State<MyEarnings> {
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceAround,
                                     children: [
+                                      // GestureDetector(
+                                      //   onTap: () {
+                                      //     selectType = "";
+
+                                      //     setState(() {
+                                      //       selectType = "Hour";
+                                      //       isHour = false;
+                                      //       isWeek = false;
+                                      //       isYear = false;
+                                      //       isAll = false;
+
+                                      //       isHourChart = true;
+                                      //       isWeekChart = false;
+                                      //       isYearChart = false;
+                                      //       isAllChart = true;
+                                      //     });
+                                      //   },
+                                      //   child: Container(
+                                      //     height: 48,
+                                      //     width: 70,
+                                      //     decoration: isHour == true
+                                      //         ? BoxDecoration(
+                                      //             color: button,
+                                      //             borderRadius:
+                                      //                 BorderRadius.circular(25),
+                                      //           )
+                                      //         : BoxDecoration(),
+                                      //     child: Center(
+                                      //       child: Text(
+                                      //         "12H",
+                                      //         style: GoogleFonts.poppins(
+                                      //           fontSize: 14,
+                                      //           fontWeight: FontWeight.w600,
+                                      //           color: isHour == true
+                                      //               ? white
+                                      //               : text1,
+                                      //         ),
+                                      //       ),
+                                      //     ),
+                                      //   ),
+                                      // ),
                                       GestureDetector(
                                         onTap: () {
-                                          selectType = "";
+                                          var now = new DateTime.now();
 
-                                          setState(() {
-                                            selectType = "Hour";
-                                            isHour = false;
-                                            isWeek = false;
-                                            isYear = false;
-                                            isAll = false;
+                                          var now_1y = new DateTime(
+                                              now.year - 1, now.month, now.day);
 
-                                            isHourChart = true;
-                                            isWeekChart = false;
-                                            isYearChart = false;
-                                            isAllChart = true;
-                                          });
-                                        },
-                                        child: Container(
-                                          height: 48,
-                                          width: 70,
-                                          decoration: isHour == true
-                                              ? BoxDecoration(
-                                                  color: button,
-                                                  borderRadius:
-                                                      BorderRadius.circular(25),
-                                                )
-                                              : BoxDecoration(),
-                                          child: Center(
-                                            child: Text(
-                                              "12H",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                                color: isHour == true
-                                                    ? white
-                                                    : text1,
-                                              ),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () {
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(now);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1y);
+                                          print(startDate);
+                                          print(endDate);
+                                          getmyEarningfilterActivity(
+                                              startDate, endDate);
                                           selectType = "";
                                           setState(() {
                                             selectType = "Week";
@@ -503,10 +433,10 @@ class _MyEarningsState extends State<MyEarnings> {
                                             isHour = false;
                                             isYear = false;
                                             isAll = false;
-                                            isHourChart = false;
-                                            isWeekChart = true;
-                                            isYearChart = false;
-                                            isAllChart = false;
+                                            // isHourChart = false;
+                                            // isWeekChart = true;
+                                            // isYearChart = false;
+                                            // isAllChart = false;
                                           });
                                         },
                                         child: Container(
@@ -535,17 +465,80 @@ class _MyEarningsState extends State<MyEarnings> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          var now = new DateTime.now();
+
+                                          var now_1m = new DateTime(
+                                              now.year, now.month - 1, now.day);
+                                          print(now_1m);
+                                          var now_1y = new DateTime(
+                                              now.year - 1, now.month, now.day);
+                                          print(now_1y);
+
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(now);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1m);
+
+                                          getmyEarningfilterActivity(
+                                              startDate, endDate);
+                                          selectType = "";
+                                          setState(() {
+                                            selectType = "Month";
+                                            isHour = true;
+                                            isWeek = false;
+                                            isYear = false;
+                                            isAll = false;
+                                          });
+                                        },
+                                        child: Container(
+                                          height: 48,
+                                          width: 70,
+                                          decoration: isHour == true
+                                              ? BoxDecoration(
+                                                  color: button,
+                                                  borderRadius:
+                                                      BorderRadius.circular(25),
+                                                )
+                                              : BoxDecoration(),
+                                          child: Center(
+                                            child: Text(
+                                              "1M",
+                                              style: GoogleFonts.poppins(
+                                                fontSize: 14,
+                                                fontWeight: FontWeight.w600,
+                                                color: isHour == true
+                                                    ? white
+                                                    : text1,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+
+                                      GestureDetector(
+                                        onTap: () {
+                                          var now = new DateTime.now();
+
+                                          var now_1y = new DateTime(
+                                              now.year - 1, now.month, now.day);
+
+                                          var endDate = DateFormat('yyyy-MM-dd')
+                                              .format(now);
+                                          var startDate =
+                                              DateFormat('yyyy-MM-dd')
+                                                  .format(now_1y);
+                                          print(startDate);
+                                          print(endDate);
+                                          getmyEarningfilterActivity(
+                                              startDate, endDate);
                                           selectType = "";
                                           setState(() {
                                             selectType = "Year";
-                                            isYear = false;
+                                            isYear = true;
                                             isWeek = false;
                                             isHour = false;
                                             isAll = false;
-                                            isHourChart = false;
-                                            isWeekChart = false;
-                                            isYearChart = true;
-                                            isAllChart = true;
                                           });
                                         },
                                         child: Container(
@@ -574,6 +567,7 @@ class _MyEarningsState extends State<MyEarnings> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
+                                          getmyEarningActivity();
                                           selectType = "";
                                           setState(() {
                                             selectType = "All";
@@ -581,10 +575,10 @@ class _MyEarningsState extends State<MyEarnings> {
                                             isHour = false;
                                             isWeek = false;
                                             isYear = false;
-                                            isHourChart = false;
-                                            isWeekChart = false;
-                                            isYearChart = false;
-                                            isAllChart = true;
+                                            // isHourChart = false;
+                                            // isWeekChart = false;
+                                            // isYearChart = false;
+                                            // isAllChart = true;
                                           });
                                         },
                                         child: Container(
@@ -718,198 +712,195 @@ class _MyEarningsState extends State<MyEarnings> {
                                 // ),
 
                                 /**HOUR CHART */
-                                Visibility(
-                                  visible: isHourChart,
-                                  child: Container(
-                                    height: 300,
-                                    width: 350,
-                                    child: SfCartesianChart(
-                                      zoomPanBehavior: ZoomPanBehavior(
-                                        enablePinching: true,
-                                        zoomMode: ZoomMode.x,
-                                        enablePanning: true,
-                                      ),
-                                      enableAxisAnimation: true,
-                                      tooltipBehavior: TooltipBehavior(
-                                          enable: true, color: Colors.orange),
-                                      isTransposed: false,
-                                      backgroundColor: backgroundcolor,
+                                // Visibility(
+                                //   visible: isHourChart,
+                                //   child: Container(
+                                //     height: 300,
+                                //     width: 350,
+                                //     child: SfCartesianChart(
+                                //       zoomPanBehavior: ZoomPanBehavior(
+                                //         enablePinching: true,
+                                //         zoomMode: ZoomMode.x,
+                                //         enablePanning: true,
+                                //       ),
+                                //       enableAxisAnimation: true,
+                                //       tooltipBehavior: TooltipBehavior(
+                                //           enable: true, color: Colors.orange),
+                                //       isTransposed: false,
+                                //       backgroundColor: backgroundcolor,
 
-                                      //Specifying date time interval type as hours
-                                      primaryXAxis: DateTimeAxis(
-                                          interval: 6,
-                                          majorGridLines:
-                                              MajorGridLines(width: 0),
-                                          edgeLabelPlacement:
-                                              EdgeLabelPlacement.shift,
-                                          intervalType:
-                                              DateTimeIntervalType.hours),
-                                      series: <
-                                          ChartSeries<HourChartData, DateTime>>[
-                                        SplineSeries<HourChartData, DateTime>(
-                                          color: Colors.orange,
-                                          dataSource: hourChartData,
-                                          xValueMapper:
-                                              (HourChartData sales, _) =>
-                                                  sales.x,
-                                          yValueMapper:
-                                              (HourChartData sales, _) =>
-                                                  sales.yValue,
-                                          // name: 'Sales',
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                /**WEEK CHART */
-                                Visibility(
-                                  visible: isWeekChart,
-                                  child: Container(
-                                    height: 300,
-                                    width: 350,
-                                    // color: Colors.amber,
-                                    // child: Text("WEEK CHART"),
-                                    child: SfCartesianChart(
-                                      zoomPanBehavior: ZoomPanBehavior(
-                                        enablePinching: true,
-                                        zoomMode: ZoomMode.x,
-                                        enablePanning: true,
-                                      ),
-                                      enableAxisAnimation: true,
-                                      tooltipBehavior: TooltipBehavior(
-                                          enable: true, color: Colors.orange),
-                                      isTransposed: false,
-                                      backgroundColor: backgroundcolor,
+                                //       //Specifying date time interval type as hours
+                                //       primaryXAxis: DateTimeAxis(
+                                //           interval: 6,
+                                //           majorGridLines:
+                                //               MajorGridLines(width: 0),
+                                //           edgeLabelPlacement:
+                                //               EdgeLabelPlacement.shift,
+                                //           intervalType:
+                                //               DateTimeIntervalType.hours),
+                                //       series: <
+                                //           ChartSeries<HourChartData, DateTime>>[
+                                //         SplineSeries<HourChartData, DateTime>(
+                                //           color: Colors.orange,
+                                //           dataSource: hourChartData,
+                                //           xValueMapper:
+                                //               (HourChartData sales, _) =>
+                                //                   sales.x,
+                                //           yValueMapper:
+                                //               (HourChartData sales, _) =>
+                                //                   sales.yValue,
+                                //           // name: 'Sales',
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                                // /**WEEK CHART */
+                                // Visibility(
+                                //   visible: isWeekChart,
+                                //   child: Container(
+                                //     height: 300,
+                                //     width: 350,
+                                //     // color: Colors.amber,
+                                //     // child: Text("WEEK CHART"),
+                                //     child: SfCartesianChart(
+                                //       zoomPanBehavior: ZoomPanBehavior(
+                                //         enablePinching: true,
+                                //         zoomMode: ZoomMode.x,
+                                //         enablePanning: true,
+                                //       ),
+                                //       enableAxisAnimation: true,
+                                //       tooltipBehavior: TooltipBehavior(
+                                //           enable: true, color: Colors.orange),
+                                //       isTransposed: false,
+                                //       backgroundColor: backgroundcolor,
 
-                                      //Specifying date time interval type as hours
-                                      primaryXAxis: CategoryAxis(
-                                        interval: 1,
-                                        majorGridLines:
-                                            MajorGridLines(width: 0),
-                                        edgeLabelPlacement:
-                                            EdgeLabelPlacement.shift,
-                                      ),
-                                      series: <
-                                          ChartSeries<WeekChartData, String>>[
-                                        SplineSeries<WeekChartData, String>(
-                                          color: Colors.orange,
-                                          dataSource: weekChartData,
-                                          xValueMapper:
-                                              (WeekChartData sales, _) =>
-                                                  sales.x,
-                                          yValueMapper:
-                                              (WeekChartData sales, _) =>
-                                                  sales.y,
-                                          name: 'Sales',
-                                        )
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                /**YEAR CHART */
-                                Visibility(
-                                  visible: isYearChart,
-                                  child: Container(
-                                    height: 300,
-                                    width: 350,
-                                    //color: Colors.blueAccent,
-                                    //child: Text("YEAR CHART"),
-                                    child: SfCartesianChart(
-                                      zoomPanBehavior: ZoomPanBehavior(
-                                        enablePinching: true,
-                                        zoomMode: ZoomMode.x,
-                                        enablePanning: true,
-                                      ),
-                                      enableAxisAnimation: true,
+                                //       //Specifying date time interval type as hours
+                                //       primaryXAxis: CategoryAxis(
+                                //         interval: 1,
+                                //         majorGridLines:
+                                //             MajorGridLines(width: 0),
+                                //         edgeLabelPlacement:
+                                //             EdgeLabelPlacement.shift,
+                                //       ),
+                                //       series: <
+                                //           ChartSeries<WeekChartData, String>>[
+                                //         SplineSeries<WeekChartData, String>(
+                                //           color: Colors.orange,
+                                //           dataSource: weekChartData,
+                                //           xValueMapper:
+                                //               (WeekChartData sales, _) =>
+                                //                   sales.x,
+                                //           yValueMapper:
+                                //               (WeekChartData sales, _) =>
+                                //                   sales.y,
+                                //           name: 'Sales',
+                                //         )
+                                //       ],
+                                //     ),
+                                //   ),
+                                // ),
+                                // SizedBox(
+                                //   height: 10,
+                                // ),
+                                // /**YEAR CHART */
+                                // Visibility(
+                                //   visible: isYearChart,
+                                //   child: Container(
+                                //     height: 300,
+                                //     width: 350,
+                                //     //color: Colors.blueAccent,
+                                //     //child: Text("YEAR CHART"),
+                                //     child: SfCartesianChart(
+                                //       zoomPanBehavior: ZoomPanBehavior(
+                                //         enablePinching: true,
+                                //         zoomMode: ZoomMode.x,
+                                //         enablePanning: true,
+                                //       ),
+                                //       enableAxisAnimation: true,
 
-                                      tooltipBehavior: TooltipBehavior(
-                                          enable: true, color: Colors.orange),
-                                      isTransposed: false,
-                                      backgroundColor: backgroundcolor,
+                                //       tooltipBehavior: TooltipBehavior(
+                                //           enable: true, color: Colors.orange),
+                                //       isTransposed: false,
+                                //       backgroundColor: backgroundcolor,
 
-                                      primaryXAxis: CategoryAxis(
-                                        labelRotation: -50,
-                                        interval: 1,
-                                        majorGridLines:
-                                            MajorGridLines(width: 0),
-                                        edgeLabelPlacement:
-                                            EdgeLabelPlacement.shift,
-                                        //intervalType: DateTimeIntervalType.years,
-                                      ),
-                                      series: <
-                                          SplineSeries<YearChartData, String>>[
-                                        SplineSeries<YearChartData, String>(
-                                            color: Colors.orange,
-                                            dataSource: yearChartData,
-                                            xValueMapper:
-                                                (YearChartData sales, _) =>
-                                                    sales.x,
-                                            yValueMapper:
-                                                (YearChartData sales, _) =>
-                                                    sales.y,
-                                            dataLabelSettings: DataLabelSettings(
-                                                isVisible:
-                                                    false) // Enables the data label.
-                                            )
-                                      ],
-                                      //Specifying date time interval type as hours
-                                    ),
-                                  ),
-                                ),
+                                //       primaryXAxis: CategoryAxis(
+                                //         labelRotation: -50,
+                                //         interval: 1,
+                                //         majorGridLines:
+                                //             MajorGridLines(width: 0),
+                                //         edgeLabelPlacement:
+                                //             EdgeLabelPlacement.shift,
+                                //         //intervalType: DateTimeIntervalType.years,
+                                //       ),
+                                //       series: <
+                                //           SplineSeries<YearChartData, String>>[
+                                //         SplineSeries<YearChartData, String>(
+                                //             color: Colors.orange,
+                                //             dataSource: yearChartData,
+                                //             xValueMapper:
+                                //                 (YearChartData sales, _) =>
+                                //                     sales.x,
+                                //             yValueMapper:
+                                //                 (YearChartData sales, _) =>
+                                //                     sales.y,
+                                //             dataLabelSettings: DataLabelSettings(
+                                //                 isVisible:
+                                //                     false) // Enables the data label.
+                                //             )
+                                //       ],
+                                //       //Specifying date time interval type as hours
+                                //     ),
+                                //   ),
+                                // ),
 
                                 SizedBox(
                                   height: 10,
                                 ),
                                 /**ALL CHART */ /**YEAR CHART */
-                                Visibility(
-                                  visible: isAllChart,
-                                  child: Container(
-                                    height: 300,
-                                    width: 450,
-                                    child: chartWidget(),
-                                    //color: Colors.blueAccent,
-                                    //child: Text("YEAR CHART"),
-                                    // child: SfCartesianChart(
-                                    //   zoomPanBehavior: ZoomPanBehavior(
-                                    //     enablePinching: true,
-                                    //     zoomMode: ZoomMode.x,
-                                    //     enablePanning: true,
-                                    //   ),
-                                    //   enableAxisAnimation: true,
+                                Container(
+                                  height: 300,
+                                  width: 450,
+                                  child: chartWidget(),
+                                  //color: Colors.blueAccent,
+                                  //child: Text("YEAR CHART"),
+                                  // child: SfCartesianChart(
+                                  //   zoomPanBehavior: ZoomPanBehavior(
+                                  //     enablePinching: true,
+                                  //     zoomMode: ZoomMode.x,
+                                  //     enablePanning: true,
+                                  //   ),
+                                  //   enableAxisAnimation: true,
 
-                                    //   tooltipBehavior: TooltipBehavior(
-                                    //       enable: true, color: Colors.orange),
-                                    //   isTransposed: false,
-                                    //   backgroundColor: backgroundcolor,
+                                  //   tooltipBehavior: TooltipBehavior(
+                                  //       enable: true, color: Colors.orange),
+                                  //   isTransposed: false,
+                                  //   backgroundColor: backgroundcolor,
 
-                                    //   primaryXAxis: CategoryAxis(
-                                    //     interval: 1,
-                                    //     majorGridLines: MajorGridLines(width: 0),
-                                    //     edgeLabelPlacement: EdgeLabelPlacement.shift,
-                                    //     //intervalType: DateTimeIntervalType.years,
-                                    //   ),
-                                    //   series: <SplineSeries<AllChartData, String>>[
-                                    //     SplineSeries<AllChartData, String>(
-                                    //         color: Colors.orange,
-                                    //         dataSource: allChartData,
-                                    //         xValueMapper: (AllChartData sales, _) =>
-                                    //             sales.x,
-                                    //         yValueMapper: (AllChartData sales, _) =>
-                                    //             sales.y,
-                                    //         dataLabelSettings: DataLabelSettings(
-                                    //             isVisible:
-                                    //                 false) // Enables the data label.
-                                    //         )
-                                    //   ],
-                                    //   //Specifying date time interval type as hours
-                                    // ),
-                                  ),
+                                  //   primaryXAxis: CategoryAxis(
+                                  //     interval: 1,
+                                  //     majorGridLines: MajorGridLines(width: 0),
+                                  //     edgeLabelPlacement: EdgeLabelPlacement.shift,
+                                  //     //intervalType: DateTimeIntervalType.years,
+                                  //   ),
+                                  //   series: <SplineSeries<AllChartData, String>>[
+                                  //     SplineSeries<AllChartData, String>(
+                                  //         color: Colors.orange,
+                                  //         dataSource: allChartData,
+                                  //         xValueMapper: (AllChartData sales, _) =>
+                                  //             sales.x,
+                                  //         yValueMapper: (AllChartData sales, _) =>
+                                  //             sales.y,
+                                  //         dataLabelSettings: DataLabelSettings(
+                                  //             isVisible:
+                                  //                 false) // Enables the data label.
+                                  //         )
+                                  //   ],
+                                  //   //Specifying date time interval type as hours
+                                  // ),
                                 ),
                                 SizedBox(
                                   height: 10,
@@ -1186,8 +1177,6 @@ class _MyEarningsState extends State<MyEarnings> {
     if (dataJSON != null) {
       for (Map m in dataJSON) {
         try {
-          print("PAVITHRA");
-          print(DateTime.parse(m['date']));
           tsdata.add(
               new TimeSeriesPrice(DateTime.now(), double.parse(m['amount'])));
         } catch (e) {
@@ -1198,8 +1187,6 @@ class _MyEarningsState extends State<MyEarnings> {
       // Dummy list to prevent dataJSON = NULL
       tsdata.add(new TimeSeriesPrice(new DateTime.now(), 0.0));
     }
-    print("PAVITHRA");
-    print(tsdata[0].time.runtimeType);
 
     var series = [
       new charts.Series<TimeSeriesPrice, DateTime>(
@@ -1214,7 +1201,7 @@ class _MyEarningsState extends State<MyEarnings> {
     var chart = new charts.TimeSeriesChart(
       series,
       animate: true,
-      animationDuration: Duration(seconds: 2),
+      animationDuration: Duration(seconds: 0),
       defaultRenderer:
           charts.LineRendererConfig(includeArea: true, stacked: true),
       primaryMeasureAxis: new charts.NumericAxisSpec(
