@@ -15,14 +15,13 @@ class Tabscreen extends StatefulWidget {
 }
 
 class _TabscreenState extends State<Tabscreen>
-    with TickerProviderStateMixin, WidgetsBindingObserver {
+    with TickerProviderStateMixin {
   int _selectedIndex = 0;
   bool showJades = false;
   @override
   void initState() {
     super.initState();
 
-    WidgetsBinding.instance.addObserver(this);
     _animationController = AnimationController(
       vsync: this,
       value: 2.0,
@@ -37,29 +36,7 @@ class _TabscreenState extends State<Tabscreen>
     }
   }
 
-  AppLifecycleState _lastLifecycleState;
-  @override
-  void didChangeAppLifecycleState(AppLifecycleState state) async {
-    setState(() {
-      _lastLifecycleState = state;
-    });
-
-    if (AppLifecycleState.resumed == _lastLifecycleState) {
-      setState(() {
-        print("Resumed");
-      });
-    }
-    if (AppLifecycleState.inactive == _lastLifecycleState) {
-      setState(() {
-        print("Inactive");
-      });
-    }
-    if (AppLifecycleState.paused == _lastLifecycleState) {
-      setState(() {
-        print("Paused");
-      });
-    }
-  }
+  
 
   AnimationController _animationController;
   Animation animation;

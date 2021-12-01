@@ -36,7 +36,7 @@ class _MyReportsState extends State<MyReports> {
 
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    print("Pavithra ${res["user"]}");
+    
     gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];

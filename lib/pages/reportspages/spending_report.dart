@@ -142,7 +142,7 @@ class _SpendingReportState extends State<SpendingReport> {
     lang = await UserDataSource().getLanguage();
 
     user = await UserDataSource().getUser();
-    print("pavim ${user[0]}");
+  
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
@@ -164,7 +164,6 @@ class _SpendingReportState extends State<SpendingReport> {
         await UserRepository().getSpendingReports(user[0]["walletaddress"]);
     setState(() {
       loading = false;
-
     });
     if (res["success"] == true) {
       spendingreports = [];
@@ -237,6 +236,7 @@ class _SpendingReportState extends State<SpendingReport> {
     });
     if (res["success"] == true) {
       categorytransactions = [];
+     
       for (var i = 0; i < res["transactions"].length; i++) {
         categorytransactions
             .add(Categorytransaction.fromJson(res["transactions"][i]));
@@ -567,10 +567,10 @@ class _SpendingReportState extends State<SpendingReport> {
 
                                           var now_1m = new DateTime(
                                               now.year, now.month - 1, now.day);
-                                          print(now_1m);
+                                        
                                           var now_1y = new DateTime(
                                               now.year - 1, now.month, now.day);
-                                          print(now_1y);
+                                       
 
                                           var endDate = DateFormat('yyyy-MM-dd')
                                               .format(now);
@@ -630,8 +630,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var startDate =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(now_1y);
-                                          print(startDate);
-                                          print(endDate);
+                                       
                                           getMyspendingReportsfilter(
                                               startDate, endDate);
 
@@ -1169,115 +1168,326 @@ class _SpendingReportState extends State<SpendingReport> {
                                               SizedBox(
                                                 height: 20,
                                               ),
-                                              ListTile(
-                                                leading: ClipRRect(
-                                                  borderRadius:
-                                                      BorderRadius.circular(30),
-                                                  child: Container(
-                                                    width: 50,
-                                                    height: 50,
-                                                    color: HexColor(
-                                                        spendingreports[info]
-                                                            .category
-                                                            .color),
-                                                    child: Center(
-                                                      child: spendingreports[
-                                                                      info]
-                                                                  .category
-                                                                  .image
-                                                                  .length >
-                                                              1
-                                                          ? CachedNetworkImage(
-                                                              imageUrl:
-                                                                  spendingreports[
-                                                                          info]
-                                                                      .category
-                                                                      .image,
-                                                              placeholder: (context,
-                                                                      url) =>
-                                                                  new CircularProgressIndicator(
-                                                                color: white,
+                                              GestureDetector(
+                                                onTap: () {
+                                                  categorytransactions = [];
+                                                  setState(() {
+                                                    info = null;
+                                                  });
+                                                },
+                                                child: ListTile(
+                                                  leading: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            30),
+                                                    child: Container(
+                                                      width: 50,
+                                                      height: 50,
+                                                      color: HexColor(
+                                                          spendingreports[info]
+                                                              .category
+                                                              .color),
+                                                      child: Center(
+                                                        child: spendingreports[
+                                                                        info]
+                                                                    .category
+                                                                    .image
+                                                                    .length >
+                                                                1
+                                                            ? CachedNetworkImage(
+                                                                imageUrl:
+                                                                    spendingreports[
+                                                                            info]
+                                                                        .category
+                                                                        .image,
+                                                                placeholder: (context,
+                                                                        url) =>
+                                                                    new CircularProgressIndicator(
+                                                                  color: white,
+                                                                ),
+                                                                errorWidget: (context,
+                                                                        url,
+                                                                        error) =>
+                                                                    new Icon(Icons
+                                                                        .error),
+                                                              )
+                                                            : Text(
+                                                                // "Food",
+                                                                spendingreports[
+                                                                        info]
+                                                                    .category
+                                                                    .image,
+                                                                style:
+                                                                    GoogleFonts
+                                                                        .poppins(
+                                                                  fontSize: 18,
+                                                                  color: Colors
+                                                                      .white,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .w500,
+                                                                ),
                                                               ),
-                                                              errorWidget: (context,
-                                                                      url,
-                                                                      error) =>
-                                                                  new Icon(Icons
-                                                                      .error),
-                                                            )
-                                                          : Text(
-                                                              // "Food",
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  title: Text(
+                                                    // "Food",
+                                                    spendingreports[info]
+                                                        .category
+                                                        .displayName,
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 18,
+                                                      color: Colors.white,
+                                                      fontWeight:
+                                                          FontWeight.w500,
+                                                    ),
+                                                  ),
+                                                  subtitle: Container(
+                                                    child: Text(
+                                                      spendingreports[info]
+                                                              .transactionsCount
+                                                              .toString() +
+                                                          " Transactions",
+                                                      maxLines: 2,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 12,
+                                                        color: text1,
+                                                        // fontWeight: FontWeight.w500,
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  trailing: Wrap(
+                                                    children: [
+                                                      CircularPercentIndicator(
+                                                        radius: 40,
+                                                        lineWidth: 2,
+                                                        animation: true,
+                                                        percent: 0.7,
+                                                        center: Text(
+                                                          spendingreports[info]
+                                                                  .percentage
+                                                                  .toInt()
+                                                                  .toString() +
+                                                              "%",
+                                                          style: GoogleFonts
+                                                              .montserrat(
+                                                            fontSize: 10,
+                                                            color: Colors.white,
+                                                            fontWeight:
+                                                                FontWeight.w600,
+                                                          ),
+                                                        ),
+                                                        progressColor: HexColor(
+                                                            spendingreports[
+                                                                    info]
+                                                                .category
+                                                                .color),
+                                                      ),
+                                                      SizedBox(
+                                                        width: 10,
+                                                      ),
+                                                      Container(
+                                                        height: 40,
+                                                        width: 100,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: Color(
+                                                                  0xff707070)
+                                                              .withOpacity(0.4),
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(10),
+                                                        ),
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .center,
+                                                          children: [
+                                                            Text(
                                                               spendingreports[
                                                                       info]
-                                                                  .category
-                                                                  .image,
+                                                                  .amount
+                                                                  .toInt()
+                                                                  .toString(),
                                                               style: GoogleFonts
                                                                   .poppins(
-                                                                fontSize: 18,
+                                                                fontSize: 12,
                                                                 color: Colors
                                                                     .white,
                                                                 fontWeight:
                                                                     FontWeight
-                                                                        .w500,
+                                                                        .w600,
                                                               ),
                                                             ),
-                                                    ),
-                                                  ),
-                                                ),
-                                                title: Text(
-                                                  // "Food",
-                                                  spendingreports[info]
-                                                      .category
-                                                      .displayName,
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 18,
-                                                    color: Colors.white,
-                                                    fontWeight: FontWeight.w500,
-                                                  ),
-                                                ),
-                                                subtitle: Container(
-                                                  child: Text(
-                                                    spendingreports[info]
-                                                            .transactionsCount
-                                                            .toString() +
-                                                        " Transactions",
-                                                    maxLines: 2,
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 12,
-                                                      color: text1,
-                                                      // fontWeight: FontWeight.w500,
-                                                    ),
-                                                  ),
-                                                ),
-                                                trailing: Wrap(
-                                                  children: [
-                                                    CircularPercentIndicator(
-                                                      radius: 40,
-                                                      lineWidth: 2,
-                                                      animation: true,
-                                                      percent: 0.7,
-                                                      center: Text(
-                                                        spendingreports[info]
-                                                                .percentage
-                                                                .toInt()
-                                                                .toString() +
-                                                            "%",
-                                                        style: GoogleFonts
-                                                            .montserrat(
-                                                          fontSize: 10,
-                                                          color: Colors.white,
-                                                          fontWeight:
-                                                              FontWeight.w600,
+                                                            SizedBox(
+                                                              width: 2,
+                                                            ),
+                                                            Text(
+                                                              " Gwei",
+                                                              style: GoogleFonts
+                                                                  .poppins(
+                                                                fontSize: 9,
+                                                                color: Colors
+                                                                    .orange,
+                                                              ),
+                                                            ),
+                                                          ],
                                                         ),
                                                       ),
-                                                      progressColor: HexColor(
-                                                          spendingreports[info]
-                                                              .category
-                                                              .color),
+                                                    ],
+                                                  ),
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              Container(
+                                                height: 2,
+                                                width: 200,
+                                                color: Color(0xff707070)
+                                                    .withOpacity(0.4),
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              ListView.builder(
+                                                shrinkWrap: true,
+                                                physics:
+                                                    NeverScrollableScrollPhysics(),
+                                                // controller: myscrollController,
+                                                itemCount:
+                                                    categorytransactions.length,
+                                                // padding: EdgeInsets.zero,
+                                                itemBuilder:
+                                                    (BuildContext context,
+                                                        int index) {
+                                                  return ListTile(
+                                                    leading: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              30),
+                                                      child: Container(
+                                                        width: 50,
+                                                        height: 50,
+                                                        color: HexColor(
+                                                            categorytransactions[
+                                                                    index]
+                                                                .category
+                                                                .color),
+                                                        child: Center(
+                                                          child: categorytransactions[
+                                                                          index]
+                                                                      .category
+                                                                      .image
+                                                                      .length >
+                                                                  1
+                                                              ? CachedNetworkImage(
+                                                                  imageUrl: categorytransactions[
+                                                                          index]
+                                                                      .category
+                                                                      .image,
+                                                                  placeholder: (context,
+                                                                          url) =>
+                                                                      new CircularProgressIndicator(
+                                                                    color:
+                                                                        white,
+                                                                  ),
+                                                                  errorWidget: (context,
+                                                                          url,
+                                                                          error) =>
+                                                                      new Icon(Icons
+                                                                          .error),
+                                                                )
+//  Image.network(
+//                                                   spendingreports[index].category.image,
+//                                                   fit: BoxFit.none,
+//                                                   width: 50,
+//                                                   height: 50,
+//                                                 )
+                                                              : Text(
+                                                                  // "Food",
+                                                                  categorytransactions[
+                                                                          index]
+                                                                      .category
+                                                                      .image,
+                                                                  style: GoogleFonts
+                                                                      .poppins(
+                                                                    fontSize:
+                                                                        18,
+                                                                    color: Colors
+                                                                        .white,
+                                                                    fontWeight:
+                                                                        FontWeight
+                                                                            .w500,
+                                                                  ),
+                                                                ),
+                                                        ),
+                                                      ),
                                                     ),
-                                                    SizedBox(
-                                                      width: 10,
+                                                    title: Text(
+                                                      // "Food",
+                                                      categorytransactions[
+                                                              index]
+                                                          .merchantName,
+                                                      style:
+                                                          GoogleFonts.poppins(
+                                                        fontSize: 18,
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.w500,
+                                                      ),
                                                     ),
-                                                    Container(
+                                                    subtitle: Container(
+                                                      child: Text(
+                                                        timeago.format(
+                                                            categorytransactions[
+                                                                    index]
+                                                                .createdAt),
+                                                        maxLines: 2,
+                                                        style:
+                                                            GoogleFonts.poppins(
+                                                          fontSize: 12,
+                                                          color: text1,
+                                                          // fontWeight: FontWeight.w500,
+                                                        ),
+                                                      ),
+                                                    ),
+                                                    // trailing: Wrap(
+                                                    //   children: [
+                                                    //     CircularPercentIndicator(
+                                                    //       radius: 40,
+                                                    //       lineWidth: 2,
+                                                    //       animation: true,
+                                                    //       percent: 0.7,
+                                                    //       center: Text(
+                                                    //         spendingreports[
+                                                    //                     index]
+                                                    //                 .percentage
+                                                    //                 .toInt()
+                                                    //                 .toString() +
+                                                    //             "%",
+                                                    //         style: GoogleFonts
+                                                    //             .montserrat(
+                                                    //           fontSize: 10,
+                                                    //           color:
+                                                    //               Colors.white,
+                                                    //           fontWeight:
+                                                    //               FontWeight
+                                                    //                   .w600,
+                                                    //         ),
+                                                    //       ),
+                                                    //       progressColor: HexColor(
+                                                    //           spendingreports[
+                                                    //                   index]
+                                                    //               .category
+                                                    //               .color),
+                                                    //     ),
+                                                    //     SizedBox(
+                                                    //       width: 10,
+                                                    //     ),
+                                                    trailing: Container(
                                                       height: 40,
                                                       width: 100,
                                                       decoration: BoxDecoration(
@@ -1293,9 +1503,9 @@ class _SpendingReportState extends State<SpendingReport> {
                                                                 .center,
                                                         children: [
                                                           Text(
-                                                            spendingreports[
-                                                                    info]
-                                                                .amount
+                                                            categorytransactions[
+                                                                    index]
+                                                                .sats
                                                                 .toInt()
                                                                 .toString(),
                                                             style: GoogleFonts
@@ -1323,213 +1533,11 @@ class _SpendingReportState extends State<SpendingReport> {
                                                         ],
                                                       ),
                                                     ),
-                                                  ],
-                                                ),
+                                                    // ],
+                                                    // ),
+                                                  );
+                                                },
                                               ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              Container(
-                                                height: 2,
-                                                width: 200,
-                                                color: Color(0xff707070)
-                                                    .withOpacity(0.4),
-                                              ),
-                                              SizedBox(
-                                                height: 10,
-                                              ),
-                                              categorytransactions.length == 0
-                                                  ? SpinKitRing(color: blue2)
-                                                  : ListView.builder(
-                                                      shrinkWrap: true,
-                                                      physics:
-                                                          NeverScrollableScrollPhysics(),
-                                                      // controller: myscrollController,
-                                                      itemCount:
-                                                          categorytransactions
-                                                              .length,
-                                                      // padding: EdgeInsets.zero,
-                                                      itemBuilder:
-                                                          (BuildContext context,
-                                                              int index) {
-                                                        return ListTile(
-                                                          leading: ClipRRect(
-                                                            borderRadius:
-                                                                BorderRadius
-                                                                    .circular(
-                                                                        30),
-                                                            child: Container(
-                                                              width: 50,
-                                                              height: 50,
-                                                              color: HexColor(
-                                                                  categorytransactions[
-                                                                          info]
-                                                                      .category
-                                                                      .color),
-                                                              child: Center(
-                                                                child: categorytransactions[info]
-                                                                            .category
-                                                                            .image
-                                                                            .length >
-                                                                        1
-                                                                    ? CachedNetworkImage(
-                                                                        imageUrl: categorytransactions[info]
-                                                                            .category
-                                                                            .image,
-                                                                        placeholder:
-                                                                            (context, url) =>
-                                                                                new CircularProgressIndicator(
-                                                                          color:
-                                                                              white,
-                                                                        ),
-                                                                        errorWidget: (context,
-                                                                                url,
-                                                                                error) =>
-                                                                            new Icon(Icons.error),
-                                                                      )
-//  Image.network(
-//                                                   spendingreports[index].category.image,
-//                                                   fit: BoxFit.none,
-//                                                   width: 50,
-//                                                   height: 50,
-//                                                 )
-                                                                    : Text(
-                                                                        // "Food",
-                                                                        categorytransactions[info]
-                                                                            .category
-                                                                            .image,
-                                                                        style: GoogleFonts
-                                                                            .poppins(
-                                                                          fontSize:
-                                                                              18,
-                                                                          color:
-                                                                              Colors.white,
-                                                                          fontWeight:
-                                                                              FontWeight.w500,
-                                                                        ),
-                                                                      ),
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          title: Text(
-                                                            // "Food",
-                                                            categorytransactions[
-                                                                    index]
-                                                                .merchantName,
-                                                            style: GoogleFonts
-                                                                .poppins(
-                                                              fontSize: 18,
-                                                              color:
-                                                                  Colors.white,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500,
-                                                            ),
-                                                          ),
-                                                          subtitle: Container(
-                                                            child: Text(
-                                                              timeago.format(
-                                                                  categorytransactions[
-                                                                          index]
-                                                                      .createdAt),
-                                                              maxLines: 2,
-                                                              style: GoogleFonts
-                                                                  .poppins(
-                                                                fontSize: 12,
-                                                                color: text1,
-                                                                // fontWeight: FontWeight.w500,
-                                                              ),
-                                                            ),
-                                                          ),
-                                                          // trailing: Wrap(
-                                                          //   children: [
-                                                          //     CircularPercentIndicator(
-                                                          //       radius: 40,
-                                                          //       lineWidth: 2,
-                                                          //       animation: true,
-                                                          //       percent: 0.7,
-                                                          //       center: Text(
-                                                          //         spendingreports[
-                                                          //                     index]
-                                                          //                 .percentage
-                                                          //                 .toInt()
-                                                          //                 .toString() +
-                                                          //             "%",
-                                                          //         style: GoogleFonts
-                                                          //             .montserrat(
-                                                          //           fontSize: 10,
-                                                          //           color:
-                                                          //               Colors.white,
-                                                          //           fontWeight:
-                                                          //               FontWeight
-                                                          //                   .w600,
-                                                          //         ),
-                                                          //       ),
-                                                          //       progressColor: HexColor(
-                                                          //           spendingreports[
-                                                          //                   index]
-                                                          //               .category
-                                                          //               .color),
-                                                          //     ),
-                                                          //     SizedBox(
-                                                          //       width: 10,
-                                                          //     ),
-                                                          trailing: Container(
-                                                            height: 40,
-                                                            width: 100,
-                                                            decoration:
-                                                                BoxDecoration(
-                                                              color: Color(
-                                                                      0xff707070)
-                                                                  .withOpacity(
-                                                                      0.4),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          10),
-                                                            ),
-                                                            child: Row(
-                                                              mainAxisAlignment:
-                                                                  MainAxisAlignment
-                                                                      .center,
-                                                              children: [
-                                                                Text(
-                                                                  categorytransactions[
-                                                                          index]
-                                                                      .sats
-                                                                      .toInt()
-                                                                      .toString(),
-                                                                  style: GoogleFonts
-                                                                      .poppins(
-                                                                    fontSize:
-                                                                        12,
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600,
-                                                                  ),
-                                                                ),
-                                                                SizedBox(
-                                                                  width: 2,
-                                                                ),
-                                                                Text(
-                                                                  " Gwei",
-                                                                  style: GoogleFonts
-                                                                      .poppins(
-                                                                    fontSize: 9,
-                                                                    color: Colors
-                                                                        .orange,
-                                                                  ),
-                                                                ),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                          // ],
-                                                          // ),
-                                                        );
-                                                      },
-                                                    ),
                                             ],
                                           ),
                                         ),
