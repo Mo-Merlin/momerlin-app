@@ -127,7 +127,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     loading = false;
     // });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-    print(res);
+   
     if (res == false) {
       // Scaffold
       //     .of(context)
@@ -174,7 +174,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     gweibalance = "0";
-    print(res);
+    
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -236,14 +236,13 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-    print("PAVITHRAMANoharan1212323");
+   
     if (state == AppLifecycleState.resumed) {
-      print("PAVITHRAMANoharan");
+    
       setState(() {});
       getUserLanguage();
       WidgetsBinding.instance.addObserver(this);
     } else {
-      print("PAVITHRA1232434");
       setState(() {});
     }
   }
@@ -523,7 +522,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                         children: [
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 25),
+                                                const EdgeInsets.only(top: 20),
                                             child: ClipRRect(
                                               borderRadius:
                                                   BorderRadius.circular(30),
@@ -541,7 +540,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                           ),
                                           Padding(
                                             padding:
-                                                const EdgeInsets.only(top: 15),
+                                                const EdgeInsets.only(top: 5),
                                             child: Column(
                                               children: [
                                                 Text(
@@ -559,7 +558,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                                   ),
                                                 ),
                                                 Text(
-                                                  "   (Comming Soon)   ",
+                                                  "   (Coming Soon)   ",
                                                   style: GoogleFonts.poppins(
                                                     fontSize: 10,
                                                     color: text1,
@@ -595,7 +594,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(top: 25),
+                                              const EdgeInsets.only(top: 20),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(30),
@@ -613,7 +612,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(top: 15),
+                                              const EdgeInsets.only(top: 5),
                                           child: Text(
                                             (lang.length != null &&
                                                     lang.length != 0 &&
@@ -656,7 +655,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                       children: [
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(top: 25),
+                                              const EdgeInsets.only(top: 20),
                                           child: ClipRRect(
                                             borderRadius:
                                                 BorderRadius.circular(30),
@@ -674,7 +673,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                         ),
                                         Padding(
                                           padding:
-                                              const EdgeInsets.only(top: 15),
+                                              const EdgeInsets.only(top: 5),
                                           child: Text(
                                             (lang.length != null &&
                                                     lang.length != 0 &&

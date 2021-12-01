@@ -195,7 +195,7 @@ class UserRepository {
         '${url + "myExpenses/$walletaddress?startDate=$startdate&endDate=$enddate"}',
       );
       var checkres = jsonDecode(res.body);
-      print(checkres);
+   
       checkres["status"] = true;
 
       return checkres;
@@ -214,7 +214,7 @@ class UserRepository {
         '${url + "myActivity/$id??startDate=$startdate&endDate=$enddate"}',
       );
       var checkres = jsonDecode(res.body);
-      print("checkres $checkres");
+     
       checkres["status"] = true;
 
       return checkres;
@@ -234,7 +234,7 @@ class UserRepository {
         '${url + "transactions/category/$category?address=$walletaddress"}',
       );
       var checkres = jsonDecode(res.body);
-
+     
       checkres["status"] = true;
 
       return checkres;

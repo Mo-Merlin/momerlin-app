@@ -115,7 +115,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                   Center(
                     child: Container(
                       // width: MediaQuery.of(context).size.width / 1.2,
-                      height: MediaQuery.of(context).size.height / 2.2,
+                      height: MediaQuery.of(context).size.height / 1.9,
                       // height: 356,
                       width: 300,
                       decoration: BoxDecoration(

@@ -912,7 +912,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
-    print(user[0]);
+
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
    
     gweibalance = res["user"]["gwei"];
@@ -1020,7 +1020,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     });
     var res = await UserRepository()
         .joingetchallenge(user[0]["uid"], token, distance);
-    print("PAVIMANo $res");
+ 
     setState(() {
       loading = false;
     });
