@@ -142,7 +142,7 @@ class _SpendingReportState extends State<SpendingReport> {
     lang = await UserDataSource().getLanguage();
 
     user = await UserDataSource().getUser();
-  
+
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
     gweibalance = res["user"]["gwei"];
@@ -236,7 +236,7 @@ class _SpendingReportState extends State<SpendingReport> {
     });
     if (res["success"] == true) {
       categorytransactions = [];
-     
+
       for (var i = 0; i < res["transactions"].length; i++) {
         categorytransactions
             .add(Categorytransaction.fromJson(res["transactions"][i]));
@@ -280,14 +280,15 @@ class _SpendingReportState extends State<SpendingReport> {
               child: IconButton(
                 onPressed: () {
                   info == null
-                      ? Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                              index: 1,
-                            ),
-                          ),
-                        )
+                      ? Navigator.pop(context)
+                      // Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (_) => Tabscreen(
+                      //         index: 1,
+                      //       ),
+                      //     ),
+                      //   )
                       : categorytransactions = [];
                   chartClick = false;
                   setState(() {
@@ -322,8 +323,16 @@ class _SpendingReportState extends State<SpendingReport> {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WalletProfile()));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => Tabscreen(
+                      index: 3,
+                    ),
+                  ),
+                );
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),
@@ -567,10 +576,9 @@ class _SpendingReportState extends State<SpendingReport> {
 
                                           var now_1m = new DateTime(
                                               now.year, now.month - 1, now.day);
-                                        
+
                                           var now_1y = new DateTime(
                                               now.year - 1, now.month, now.day);
-                                       
 
                                           var endDate = DateFormat('yyyy-MM-dd')
                                               .format(now);
@@ -630,7 +638,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var startDate =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(now_1y);
-                                       
+
                                           getMyspendingReportsfilter(
                                               startDate, endDate);
 

@@ -179,14 +179,15 @@ class _MyEarningsState extends State<MyEarnings> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Tabscreen(
-                          index: 1,
-                        ),
-                      ),
-                    );
+                    Navigator.pop(context);
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => Tabscreen(
+                    //       index: 1,
+                    //     ),
+                    //   ),
+                    // );
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -213,8 +214,16 @@ class _MyEarningsState extends State<MyEarnings> {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WalletProfile()));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => Tabscreen(
+                      index: 3,
+                    ),
+                  ),
+                );
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),

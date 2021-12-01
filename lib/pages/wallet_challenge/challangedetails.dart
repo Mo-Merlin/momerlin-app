@@ -219,12 +219,13 @@ class _ChallengesdetailState extends State<Challengesdetail> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                                  index: 2,
-                                )));
+                    Navigator.pop(context);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (_) => Tabscreen(
+                    //               index: 2,
+                    //             )));
                   },
                   icon: Icon(
                     Icons.arrow_back,

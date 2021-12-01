@@ -314,6 +314,14 @@ class _MyActivityState extends State<MyActivity> {
               child: IconButton(
                 onPressed: () {
                   Navigator.pop(context);
+                  //Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => Tabscreen(
+                  //       index: 2,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 icon: Icon(
                   Icons.arrow_back,

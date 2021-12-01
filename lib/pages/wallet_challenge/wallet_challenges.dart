@@ -743,7 +743,8 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
-class _WalletChallengesState extends State<WalletChallenges> {
+class _WalletChallengesState extends State<WalletChallenges>
+    with WidgetsBindingObserver {
   List<HealthDataPoint> _healthDataList = [];
   // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
@@ -897,13 +898,76 @@ class _WalletChallengesState extends State<WalletChallenges> {
   var exprydate;
   @override
   void initState() {
+    loading = true;
     super.initState();
     getUserLanguage();
     getChallenges();
     getapp();
     getAllLeaderboard();
     recentWinners1();
+
+    WidgetsBinding.instance.addObserver(this);
   }
+
+  @override
+  void dispose() {
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.resumed) {
+  //     setState(() {});
+  //     getUserLanguage();
+  //     print("Gopi RESUMED 222 wallet main...............................");
+  //     WidgetsBinding.instance.addObserver(this);
+  //   } else {
+  //     setState(() {});
+  //   }
+  // }
+
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   // super.didChangeAppLifecycleState(state);
+
+  //   // switch (state) {
+  //   //   case AppLifecycleState.paused:
+  //   //     print("GOPI PAUSED wallet challenges");
+  //   //     break;
+  //   //   case AppLifecycleState.resumed:
+  //   //     print("GOPI Resumed");
+  //   //     setState(() {});
+  //   //     getUserLanguage();
+  //   //     getChallenges();
+  //   //     getapp();
+  //   //     getAllLeaderboard();
+  //   //     recentWinners1();
+  //   //     WidgetsBinding.instance.addObserver(this);
+
+  //   //     break;
+  //   //   case AppLifecycleState.inactive:
+  //   //     print('Gopi inactive');
+  //   //     break;
+  //   //   case AppLifecycleState.detached:
+  //   //     print('Gopi detached ');
+  //   //     break;
+  //   //   default:
+  //   // }
+
+  //   if (state == AppLifecycleState.resumed) {
+  //     setState(() {});
+  //     print("GOPINATHAN AR : ..............................");
+  //     getUserLanguage();
+  //     getChallenges();
+  //     getapp();
+  //     getAllLeaderboard();
+  //     recentWinners1();
+  //     WidgetsBinding.instance.addObserver(this);
+  //   } else {
+  //     setState(() {});
+  //   }
+  // }
 
   var gweibalance = "0";
 
@@ -914,7 +978,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     user = await UserDataSource().getUser();
 
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-   
+
     gweibalance = res["user"]["gwei"];
     if (user[0]["googlefitenable"] == 1) {
       fetchData();
@@ -1020,7 +1084,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     });
     var res = await UserRepository()
         .joingetchallenge(user[0]["uid"], token, distance);
- 
+
     setState(() {
       loading = false;
     });
@@ -1230,11 +1294,12 @@ class _WalletChallengesState extends State<WalletChallenges> {
               color: button,
               child: IconButton(
                 onPressed: () {
+                  //Navigator.pop(context);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => Tabscreen(
-                        index: 0,
+                        index: 1,
                       ),
                     ),
                   );
@@ -4886,7 +4951,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   // selectKM end//
 
-
   // selectchallengetype start//
   void selectchallengetype(BuildContext context) {
     showDialog(
@@ -5475,8 +5539,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   void selectshowsummary(BuildContext context) {
     var todayDate = new DateTime.now();
     var todayDate1 = new DateTime.now();
-    var days =
-        new DateTime(todayDate1.year, todayDate1.month, todayDate1.day + daychallenge);
+    var days = new DateTime(
+        todayDate1.year, todayDate1.month, todayDate1.day + daychallenge);
     var expiryDate = (DateFormat.yMMMd().format(days)).toString();
     var today1 = (DateFormat.yMMMd().format(todayDate)).toString();
     showDialog(
@@ -8850,7 +8914,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       ),
     );
   }
-   Widget _buildDAYItem(BuildContext context, int index) {
+
+  Widget _buildDAYItem(BuildContext context, int index) {
     var blue = Color(0xFF282C4A);
     var orange = Color(0xFFFF8C00);
     var nonlabel = Color(0xFF808DA7);

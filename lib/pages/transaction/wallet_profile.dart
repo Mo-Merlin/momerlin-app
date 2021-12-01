@@ -179,65 +179,78 @@ class _WalletProfileState extends State<WalletProfile> {
 
   @override
   Widget build(BuildContext context) {
-    return loading == true
-        ? Container(
-            height: MediaQuery.of(context).size.height,
-            width: MediaQuery.of(context).size.width,
-            color: white,
-            child: Center(
-              child: SpinKitSpinningLines(
-                color: backgroundcolor,
-                size: 60,
-              ),
+    return
+        // loading == true
+        //     ? Container(
+        //         height: MediaQuery.of(context).size.height,
+        //         width: MediaQuery.of(context).size.width,
+        //         color: white,
+        //         child: Center(
+        //           child: SpinKitSpinningLines(
+        //             color: backgroundcolor,
+        //             size: 60,
+        //           ),
+        //         ),
+        //       )
+        //     :
+        Scaffold(
+      key: scaffoldKeyWallet,
+      appBar: AppBar(
+        backgroundColor: backgroundcolor,
+        elevation: 0,
+        leading: Padding(
+          padding: const EdgeInsets.all(5.0),
+          child: ClipRRect(
+            borderRadius: BorderRadius.circular(30),
+            child: Container(
+              // height: 30,
+              // width: 30,
+              color: button,
+              child: IconButton(
+                  onPressed: () {
+                    // Navigator.pop(context);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => Tabscreen(
+                          index: 0,
+                        ),
+                      ),
+                    );
+                  },
+                  icon: Icon(
+                    Icons.arrow_back,
+                    color: Colors.white,
+                  )),
             ),
-          )
-        : Scaffold(
-            key: scaffoldKeyWallet,
-            appBar: AppBar(
-              backgroundColor: backgroundcolor,
-              elevation: 0,
-              leading: Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30),
-                  child: Container(
-                    // height: 30,
-                    // width: 30,
-                    color: button,
-                    child: IconButton(
-                        onPressed: () {
-                          // Navigator.pop(context);
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Tabscreen(
-                                index: 0,
-                              ),
-                            ),
-                          );
-                        },
-                        icon: Icon(
-                          Icons.arrow_back,
-                          color: Colors.white,
-                        )),
-                  ),
-                ),
+          ),
+        ),
+        title: Text(
+          (lang.length != null &&
+                  lang.length != 0 &&
+                  userLanguage['yourprofile'] != null)
+              ? "${userLanguage['yourprofile']}"
+              : "YOUR PROFILE",
+          style: GoogleFonts.poppins(
+            color: Colors.white,
+            fontSize: 12,
+            fontWeight: FontWeight.w600,
+          ),
+        ),
+      ),
+      backgroundColor: backgroundcolor,
+      body: loading == true
+          ? Center(
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.24,
+                width: MediaQuery.of(context).size.width * 0.55,
+                decoration: BoxDecoration(
+                    color: white.withOpacity(0.9),
+                    borderRadius: BorderRadius.circular(24)),
+                child: Center(child: SpinKitRing(color: blue1)),
               ),
-              title: Text(
-                (lang.length != null &&
-                        lang.length != 0 &&
-                        userLanguage['yourprofile'] != null)
-                    ? "${userLanguage['yourprofile']}"
-                    : "YOUR PROFILE",
-                style: GoogleFonts.poppins(
-                  color: Colors.white,
-                  fontSize: 12,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-            backgroundColor: backgroundcolor,
-            body: SingleChildScrollView(
+            )
+          : SingleChildScrollView(
               child: Column(
                 children: [
                   Row(
@@ -738,7 +751,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      launch("https://twitter.com/Smartchainers1");
+                                      launch(
+                                          "https://twitter.com/Smartchainers1");
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
@@ -762,8 +776,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                        launch("https://www.facebook.com/SmartChainers/");
-                                     
+                                      launch(
+                                          "https://www.facebook.com/SmartChainers/");
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -776,7 +790,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                           color: backgroundcolor,
                                           child: Icon(
                                             Icons.facebook,
-                                              color: Colors.blue,
+                                            color: Colors.blue,
                                             size: 15,
                                           ),
                                         ),
@@ -883,7 +897,7 @@ class _WalletProfileState extends State<WalletProfile> {
                 ],
               ),
             ),
-          );
+    );
   }
 
   final GlobalKey<ScaffoldState> scaffoldKeyWallet =

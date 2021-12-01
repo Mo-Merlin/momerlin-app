@@ -17,7 +17,7 @@ class MyReports extends StatefulWidget {
   _MyReportsState createState() => _MyReportsState();
 }
 
-class _MyReportsState extends State<MyReports> {
+class _MyReportsState extends State<MyReports> with WidgetsBindingObserver {
   var balance = 0.00;
   var userLanguage, lang, user = [];
   @override
@@ -25,6 +25,36 @@ class _MyReportsState extends State<MyReports> {
     super.initState();
     getUserLanguage();
     //_controller = CalendarController();
+
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void dispose() {
+    // ignore: todo
+    // TODO: implement dispose
+    super.dispose();
+    WidgetsBinding.instance.removeObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    // ignore: todo
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        print("GOPI PAUSED my_reports");
+        break;
+      case AppLifecycleState.resumed:
+        setState(() {});
+        print("GOPI Resumed my_reports");
+        getUserLanguage();
+        WidgetsBinding.instance.addObserver(this);
+        break;
+      default:
+    }
   }
 
   var gweibalance = "0";
@@ -36,7 +66,7 @@ class _MyReportsState extends State<MyReports> {
 
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    
+
     gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
@@ -118,8 +148,16 @@ class _MyReportsState extends State<MyReports> {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WalletProfile()));
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => Tabscreen(
+                      index: 3,
+                    ),
+                  ),
+                );
+                // Navigator.push(context,
+                //     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(30),

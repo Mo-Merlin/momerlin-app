@@ -127,7 +127,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     loading = false;
     // });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-   
+
     if (res == false) {
       // Scaffold
       //     .of(context)
@@ -174,7 +174,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     gweibalance = "0";
-    
+
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -234,16 +234,52 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     WidgetsBinding.instance.removeObserver(this);
   }
 
+  // @override
+  // void didChangeAppLifecycleState(AppLifecycleState state) {
+  //   if (state == AppLifecycleState.resumed) {
+  //     setState(() {});
+  //     getUserLanguage();
+  //     print("Gopi RESUMED wallet main...............................");
+  //     WidgetsBinding.instance.addObserver(this);
+  //   } else {
+  //     setState(() {});
+  //   }
+  // }
+
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-   
-    if (state == AppLifecycleState.resumed) {
-    
-      setState(() {});
-      getUserLanguage();
-      WidgetsBinding.instance.addObserver(this);
-    } else {
-      setState(() {});
+    // ignore: todo
+    // TODO: implement didChangeAppLifecycleState
+    super.didChangeAppLifecycleState(state);
+
+    // if (state == AppLifecycleState.resumed) {
+    //   setState(() {});
+    //   getUserLanguage();
+    //   print("Gopi RESUMED wallet main...............................");
+    //   WidgetsBinding.instance.addObserver(this);
+    // } else {
+    //   setState(() {});
+    // }
+
+    switch (state) {
+      case AppLifecycleState.paused:
+        print("GOPI PAUSED wallet main");
+        break;
+      case AppLifecycleState.resumed:
+        print("GOPI Resumed wallet main");
+        setState(() {});
+        getUserLanguage();
+
+        WidgetsBinding.instance.addObserver(this);
+
+        break;
+      case AppLifecycleState.inactive:
+        print('Gopi inactive wallet main');
+        break;
+      case AppLifecycleState.detached:
+        print('Gopi detached wallet main');
+        break;
+      default:
     }
   }
 
@@ -382,11 +418,20 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                       child: Center(
                                         child: GestureDetector(
                                           onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        WalletProfile()));
+                                            // Navigator.push(
+                                            //     context,
+                                            //     MaterialPageRoute(
+                                            //         builder: (context) =>
+                                            //             WalletProfile()));
+
+                                            Navigator.pushReplacement(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (_) => Tabscreen(
+                                                  index: 3,
+                                                ),
+                                              ),
+                                            );
                                           },
                                           child: Container(
                                             height: 60,
@@ -557,14 +602,13 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Text(
-                                                  "   (Coming Soon)   ",
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 10,
-                                                    color: text1,
-                                                  ),
-                                                  textAlign:TextAlign.center
-                                                ),
+                                                Text("   (Coming Soon)   ",
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 10,
+                                                      color: text1,
+                                                    ),
+                                                    textAlign:
+                                                        TextAlign.center),
                                               ],
                                             ),
                                           )
