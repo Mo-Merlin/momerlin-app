@@ -476,21 +476,22 @@ class LeaderboardAllCompetitor {
   LeaderboardAllCompetitor({
     this.id,
     this.fullName,
+    this.imageurl,
   });
 
   String id;
   String fullName;
+  var imageurl;
 
   factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderboardAllCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
+        imageurl: json["imageUrl"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 // To parse this JSON data, do
@@ -699,21 +700,22 @@ class LeaderCompetitor {
   LeaderCompetitor({
     this.id,
     this.fullName,
+    this.imageurl,
   });
 
   String id;
   String fullName;
+  var imageurl;
 
   factory LeaderCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
+        imageurl: json["imageUrl"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 class WalletChallenges extends StatefulWidget {
@@ -914,7 +916,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     user = await UserDataSource().getUser();
 
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-   
+
     gweibalance = res["user"]["gwei"];
     if (user[0]["googlefitenable"] == 1) {
       fetchData();
@@ -1020,7 +1022,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     });
     var res = await UserRepository()
         .joingetchallenge(user[0]["uid"], token, distance);
- 
+
     setState(() {
       loading = false;
     });
@@ -1600,9 +1602,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             height: 30,
                                             width: 30,
                                             color: button,
-                                            child: Image.network(
-                                              url[index % url.length],
-                                              fit: BoxFit.cover,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: recentWinners[index]
+                                                          .competitor
+                                                          .imageurl !=
+                                                      ""
+                                                  ? Image.network(
+                                                      recentWinners[index]
+                                                          .competitor
+                                                          .imageurl,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Center(
+                                                      child: Text(
+                                                        recentWinners[index]
+                                                            .competitor
+                                                            .fullName
+                                                            .substring(0, 1),
+                                                        style: TextStyle(
+                                                            color: white,
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -2847,10 +2873,42 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                           height: 35,
                                                           width: 35,
                                                           color: button,
-                                                          child: Image.network(
-                                                            url[index %
-                                                                url.length],
-                                                            fit: BoxFit.cover,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child: leaderboardAll[
+                                                                            index]
+                                                                        .competitor
+                                                                        .imageurl !=
+                                                                    ""
+                                                                ? Image.network(
+                                                                    leaderboardAll[
+                                                                            index]
+                                                                        .competitor
+                                                                        .imageurl,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  )
+                                                                : Center(
+                                                                    child: Text(
+                                                                      leaderboardAll[
+                                                                              index]
+                                                                          .competitor
+                                                                          .fullName
+                                                                          .substring(
+                                                                              0,
+                                                                              1),
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              white,
+                                                                          fontSize:
+                                                                              17,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),
@@ -4886,7 +4944,6 @@ class _WalletChallengesState extends State<WalletChallenges> {
 
   // selectKM end//
 
-
   // selectchallengetype start//
   void selectchallengetype(BuildContext context) {
     showDialog(
@@ -5475,8 +5532,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   void selectshowsummary(BuildContext context) {
     var todayDate = new DateTime.now();
     var todayDate1 = new DateTime.now();
-    var days =
-        new DateTime(todayDate1.year, todayDate1.month, todayDate1.day + daychallenge);
+    var days = new DateTime(
+        todayDate1.year, todayDate1.month, todayDate1.day + daychallenge);
     var expiryDate = (DateFormat.yMMMd().format(days)).toString();
     var today1 = (DateFormat.yMMMd().format(todayDate)).toString();
     showDialog(
@@ -8850,7 +8907,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
       ),
     );
   }
-   Widget _buildDAYItem(BuildContext context, int index) {
+
+  Widget _buildDAYItem(BuildContext context, int index) {
     var blue = Color(0xFF282C4A);
     var orange = Color(0xFFFF8C00);
     var nonlabel = Color(0xFF808DA7);

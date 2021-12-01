@@ -24,6 +24,7 @@ if (flutterVersionName == null) {
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 29
@@ -58,6 +59,7 @@ flutter {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation "com.plaid.link:sdk-core:3.5.1"
+    implementation 'com.google.firebase:firebase-core:9.6.1'
     //Googlefit
     implementation 'com.google.android.gms:play-services-fitness:18.0.0'
     implementation 'com.google.android.gms:play-services-auth:17.0.0'

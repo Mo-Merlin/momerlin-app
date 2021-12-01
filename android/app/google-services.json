@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "249068480908",
+    "project_id": "momerlin-3aa88",
+    "storage_bucket": "momerlin-3aa88.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:249068480908:android:598d6015a02d704789cea9",
+        "android_client_info": {
+          "package_name": "com.smartchain.momerlin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "249068480908-7ujm5hrgtv13vqcirmggsd7uccjerno7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVvL3P-jzHKrjeTLh1PFAOcaoebOWVDR0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "249068480908-7ujm5hrgtv13vqcirmggsd7uccjerno7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

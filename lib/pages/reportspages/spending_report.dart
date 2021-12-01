@@ -136,15 +136,16 @@ class _SpendingReportState extends State<SpendingReport> {
     }
   }
 
+  var imageFile = "";
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
     lang = await UserDataSource().getLanguage();
 
     user = await UserDataSource().getUser();
-  
-    var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
+    var res = await UserRepository().getUser(user[0]["walletaddress"]);
+    imageFile = res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
     // if (lang.length != null && lang.length != 0) {
     //   userLanguage = lang[0];
@@ -236,7 +237,7 @@ class _SpendingReportState extends State<SpendingReport> {
     });
     if (res["success"] == true) {
       categorytransactions = [];
-     
+
       for (var i = 0; i < res["transactions"].length; i++) {
         categorytransactions
             .add(Categorytransaction.fromJson(res["transactions"][i]));
@@ -326,13 +327,16 @@ class _SpendingReportState extends State<SpendingReport> {
                     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover,
-                  width: 46,
-                  height: 46,
-                ),
+                borderRadius: BorderRadius.circular(100),
+                child: imageFile == ""
+                    ? Image.asset(
+                        "assets/images/profile.png",
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        imageFile,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),
@@ -567,10 +571,9 @@ class _SpendingReportState extends State<SpendingReport> {
 
                                           var now_1m = new DateTime(
                                               now.year, now.month - 1, now.day);
-                                        
+
                                           var now_1y = new DateTime(
                                               now.year - 1, now.month, now.day);
-                                       
 
                                           var endDate = DateFormat('yyyy-MM-dd')
                                               .format(now);
@@ -630,7 +633,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var startDate =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(now_1y);
-                                       
+
                                           getMyspendingReportsfilter(
                                               startDate, endDate);
 

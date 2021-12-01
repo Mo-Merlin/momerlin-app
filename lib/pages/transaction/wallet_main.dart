@@ -83,6 +83,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     return null;
   }
 
+  var imageFile="";
   var balance = 0.00;
   List<Transaction> transactions1 = [];
   bool plaidconnect = false, buttonpressed = false;
@@ -127,7 +128,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     loading = false;
     // });
     var res = await UserRepository().getTransaction1(user[0]["walletaddress"]);
-   
+
     if (res == false) {
       // Scaffold
       //     .of(context)
@@ -174,7 +175,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     // ignore: unused_local_variable
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     gweibalance = "0";
-    
+
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
@@ -195,6 +196,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     } else {
       plaidconnection(context);
     }
+    user = await UserDataSource().getUser();
   }
 
   var gweibalance = "0";
@@ -203,7 +205,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     lang = await UserDataSource().getLanguage();
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-
+    imageFile = res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
 
     //  var exchangeValueinUSD = '1.00';
@@ -236,9 +238,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
 
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
-   
     if (state == AppLifecycleState.resumed) {
-    
       setState(() {});
       getUserLanguage();
       WidgetsBinding.instance.addObserver(this);
@@ -279,6 +279,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     var res1 = await UserRepository().updateplaidlogin(1);
     gweibalance = "0";
     usdgweibalance = 0;
+
     var res = await UserRepository().getTransaction(user[0]["walletaddress"]);
     if (res["success"] == true) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -298,7 +299,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
 
       // getUserLanguage();
     }
-
+    user = await UserDataSource().getUser();
     final usersave =
         await UserRepository().storeUser({"publictoken": publicToken});
     setState(() {
@@ -391,11 +392,18 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                           child: Container(
                                             height: 60,
                                             width: 60,
-                                            child: Image.asset(
-                                              "assets/images/profile.png",
-                                              fit: BoxFit.fill,
-                                              width: 60,
-                                              height: 60,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: imageFile == ""
+                                                  ? Image.asset(
+                                                      "assets/images/profile.png",
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : Image.network(
+                                                      imageFile,
+                                                      fit: BoxFit.cover,
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -557,14 +565,13 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Text(
-                                                  "   (Coming Soon)   ",
-                                                  style: GoogleFonts.poppins(
-                                                    fontSize: 10,
-                                                    color: text1,
-                                                  ),
-                                                  textAlign:TextAlign.center
-                                                ),
+                                                Text("   (Coming Soon)   ",
+                                                    style: GoogleFonts.poppins(
+                                                      fontSize: 10,
+                                                      color: text1,
+                                                    ),
+                                                    textAlign:
+                                                        TextAlign.center),
                                               ],
                                             ),
                                           )

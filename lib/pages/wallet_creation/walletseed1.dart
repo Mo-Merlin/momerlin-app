@@ -7,7 +7,7 @@ import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'walletsucess.dart';
 
-import 'package:bitcoins/bitcoins.dart' as bitcoins;
+// import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:percent_indicator/linear_percent_indicator.dart';
 
 class WalletSeedCheckPage extends StatefulWidget {
@@ -124,17 +124,18 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
   storeUser() async {
     loading = true;
     String _pk = Web3.privateKeyFromMnemonic(widget.seed1);
-    var walletMain = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.mainnet);
-    print(walletMain.getAddress(0));
-    var walletTest = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.testnet3);
-    print(walletTest.getAddress(0));
+    // var walletMain = bitcoins.WalletBTC(
+    //     seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.mainnet);
+    // print(walletMain.getAddress(0));
+    // var walletTest = bitcoins.WalletBTC(
+    //     seed: bitcoins.mnemonicToSeed(widget.seed1), net: bitcoins.testnet3);
+    // print(walletTest.getAddress(0));
     String _address = await Web3().getAddressFromPrivateKey(_pk);
     print(_address);
     var user = await UserRepository().adduser({
       "ethAddress": _address,
-      "btcAddress": walletMain.getAddress(0),
+      "imageUrl":"",
+      // "btcAddress": walletMain.getAddress(0),
       "fullName": _nicknameController.text,
     });
     if (user == false) {
@@ -148,8 +149,8 @@ class _WalletSeedCheckPage extends State<WalletSeedCheckPage> {
         final usersave = await UserRepository().storeUser({
           "uid": user["user"]["_id"],
           "address": _address,
-          "btcTestnetAddress": walletTest.getAddress(0),
-          "btcMainnetAddress": walletMain.getAddress(0),
+          // "btcTestnetAddress": walletTest.getAddress(0),
+          // "btcMainnetAddress": walletMain.getAddress(0),
           "seed": widget.seed1,
           "language": "English",
           "googlefitenable": 0,

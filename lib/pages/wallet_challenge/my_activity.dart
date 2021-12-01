@@ -144,7 +144,7 @@ enum AppState {
 
 class _MyActivityState extends State<MyActivity> {
   // ignore: unused_field
-  CalendarController _controller;
+  // CalendarController _controller;
 
   List<JoingetChallenges> joingetchallenge = [];
   bool loading = true;
@@ -153,7 +153,7 @@ class _MyActivityState extends State<MyActivity> {
   void initState() {
     super.initState();
     getUserLanguage();
-    _controller = CalendarController();
+    // _controller = CalendarController();
   }
 
   // ignore: todo

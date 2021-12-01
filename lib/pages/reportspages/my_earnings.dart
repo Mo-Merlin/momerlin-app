@@ -41,6 +41,7 @@ class _MyEarningsState extends State<MyEarnings> {
   var selectType;
   var balance = 0.00;
 
+  var imageFile = "";
   var userLanguage, lang, user = [];
   @override
   void initState() {
@@ -66,6 +67,7 @@ class _MyEarningsState extends State<MyEarnings> {
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
     getmyEarningActivity();
+    imageFile = res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
     // if (lang.length != null && lang.length != 0) {
     //   userLanguage = lang[0];
@@ -76,6 +78,7 @@ class _MyEarningsState extends State<MyEarnings> {
   Future<void> getmyEarningActivity() async {
     // ignore: unused_local_variable
     var res = await UserRepository().getmyEarningActivity(user[0]["uid"]);
+    print("res12213213 $res");
     setState(() {
       loading = false;
     });
@@ -217,13 +220,16 @@ class _MyEarningsState extends State<MyEarnings> {
                     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover,
-                  width: 46,
-                  height: 46,
-                ),
+                borderRadius: BorderRadius.circular(100),
+                child: imageFile == ""
+                    ? Image.asset(
+                        "assets/images/profile.png",
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        imageFile,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),

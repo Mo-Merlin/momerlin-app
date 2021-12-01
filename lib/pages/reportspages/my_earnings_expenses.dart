@@ -17,6 +17,7 @@ class _MyEarningsExpensesState extends State<MyEarningsExpenses> {
   TooltipBehavior _tooltipBehavior;
 
   var balance = 0.00;
+  var imageFile="";
   var userLanguage, lang = [];
   @override
   void initState() {

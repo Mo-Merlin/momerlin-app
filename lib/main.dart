@@ -7,10 +7,17 @@ import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:flutter/material.dart';
 // import 'package:momerlin/walletcreation.dart/walletsucess.dart';
 import './simpleBlocObserver.dart';
+import 'dart:async';
+import 'dart:core';
 
-void main() {
+import 'package:firebase_core/firebase_core.dart';
+Future<void> main() async {
+ 
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp();
   Bloc.observer = SimpleBlocObserver();
+  
   runApp(BlocProvider(
     create: (context) => AuthenticationBloc()..add(AppStarted()),
     child: MyApp(),

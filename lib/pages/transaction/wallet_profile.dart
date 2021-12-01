@@ -1,17 +1,17 @@
 import 'dart:io';
 
 import 'package:clipboard/clipboard.dart';
+import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:image_cropper/image_cropper.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import 'package:url_launcher/url_launcher.dart';
 
 class WalletProfile extends StatefulWidget {
@@ -24,35 +24,74 @@ class WalletProfile extends StatefulWidget {
 class _WalletProfileState extends State<WalletProfile> {
   var userLanguage, user, lang = [];
   bool loading = true;
-  File imageFile;
+  var imageFile="";
   // ignore: unused_field
   ImagePicker _picker = ImagePicker();
 
-  @override
-  void initState() {
-    loading = true;
-    super.initState();
-    getUserLanguage();
-  }
+  TextEditingController _controller = TextEditingController();
+  String imageURL;
+  getImage(ImageSource source) async {
+    File image = await ImagePicker.pickImage(source: source);
+    if (image != null) {
+      File cropped = await ImageCropper.cropImage(
+          sourcePath: image.path,
+          aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
+          compressQuality: 100,
+          maxWidth: 700,
+          maxHeight: 700,
+          compressFormat: ImageCompressFormat.jpg,
+          androidUiSettings: AndroidUiSettings(
+            toolbarColor: blue2,
+            toolbarTitle: "Set an image",
+            toolbarWidgetColor: Colors.white,
+            //statusBarColor: smartchatgold.withOpacity(0.3),
+            backgroundColor: Colors.black,
+          ));
+      var extendion = cropped.path.split('/').last;
+      var n = extendion.split('.').last;
+      print('s: $extendion');
+      print(extendion.split('.').last);
+      firebase_storage.Reference firebaseStorageRef = firebase_storage
+          .FirebaseStorage.instance
+          .ref()
+          .child('profile/${DateTime.now()}.$n');
+      firebase_storage.UploadTask uploadTask =
+          firebaseStorageRef.putFile(cropped);
+      imageURL = await (await uploadTask).ref.getDownloadURL();
+      var res = await UserRepository()
+          .updateuser(user[0]["uid"], _controller.text, imageURL);
 
-  // ignore: todo
-  //TODO :languagestart
-  Future<void> getUserLanguage() async {
-    lang = await UserDataSource().getLanguage();
-    user = await UserDataSource().getUser();
-    getuser();
-    setState(() {
-      loading = false;
-    });
-    if (lang.length != null && lang.length != 0) {
-      userLanguage = lang[0];
+      if (res["success"] == true) {
+        var res = await UserRepository().getUser(user[0]["walletaddress"]);
+
+        setState(() {
+          var name = res["user"]["fullName"];
+          imageFile = res["user"]["imageUrl"];
+          _controller.text = name;
+        });
+        // ignore: deprecated_member_use
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Profile Picture has been updated successfully.'),
+          backgroundColor: Colors.green,
+        ));
+      } else {
+        // ignore: deprecated_member_use
+        Scaffold.of(context).showSnackBar(SnackBar(
+          content: Text('Image cannot be updated.'),
+          backgroundColor: Colors.red,
+        ));
+      }
+
+     
+      // return imageURL;//
+
     }
   }
 
-  void updateuser(id, fullname) async {
+  void updateuser(id, fullname, image) async {
     // ignore: unused_local_variable
-    var res =
-        await UserRepository().updateuser(user[0]["uid"], _controller.text);
+    var res = await UserRepository()
+        .updateuser(user[0]["uid"], _controller.text, image);
 
     if (res["success"] == true) {
       // ignore: deprecated_member_use
@@ -67,6 +106,37 @@ class _WalletProfileState extends State<WalletProfile> {
         backgroundColor: Colors.red,
       ));
     }
+  }
+
+  Future<void> getuser() async {
+    var res = await UserRepository().getUser(user[0]["walletaddress"]);
+    print("PAVITJRA $res");
+    setState(() {
+      var name = res["user"]["fullName"];
+      imageFile = res["user"]["imageUrl"];
+      _controller.text = name;
+    });
+  }
+
+  Future<void> getUserLanguage() async {
+    lang = await UserDataSource().getLanguage();
+    user = await UserDataSource().getUser();
+    getuser();
+    setState(() {
+      loading = false;
+    });
+    if (lang.length != null && lang.length != 0) {
+      userLanguage = lang[0];
+    }
+  }
+
+  // ignore: todo
+  //TODO: LanguageEnd
+  @override
+  void initState() {
+    loading = true;
+    super.initState();
+    getUserLanguage();
   }
 
   selectImage() {
@@ -139,43 +209,31 @@ class _WalletProfileState extends State<WalletProfile> {
         });
   }
 
-  getImage(ImageSource source) async {
-    File image = await ImagePicker.pickImage(source: source);
-    if (image != null) {
-      File cropped = await ImageCropper.cropImage(
-          sourcePath: image.path,
-          aspectRatio: CropAspectRatio(ratioX: 1, ratioY: 1),
-          compressQuality: 100,
-          maxWidth: 700,
-          maxHeight: 700,
-          compressFormat: ImageCompressFormat.jpg,
-          androidUiSettings: AndroidUiSettings(
-            toolbarColor: blue2,
-            toolbarTitle: "Set an image",
-            toolbarWidgetColor: Colors.white,
-            //statusBarColor: smartchatgold.withOpacity(0.3),
-            backgroundColor: Colors.black,
-          ));
-      setState(() {
-        imageFile = cropped;
-        // imageFile = image;
-      });
-    }
+  void _showScaffold(String message) {
+    // ignore: deprecated_member_use
+    scaffoldKeyWallet.currentState.showSnackBar(
+      SnackBar(
+        content: Text(
+          message,
+          style: GoogleFonts.poppins(
+            color: white,
+            fontSize: 17,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+        backgroundColor: blue1,
+      ),
+    );
   }
 
-  TextEditingController _controller = TextEditingController();
-  Future<void> getuser() async {
-    var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    setState(() {
-      var name = res["user"]["fullName"];
-      _controller.text = name;
-    });
-  }
-
-  bool iconchanged = false;
   // ignore: todo
-  //TODO: LanguageEnd
+  //TODO :languagestart
+  bool iconchanged = false;
+
   String _chosenValue;
+
+  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
+      new GlobalKey<ScaffoldState>();
 
   @override
   Widget build(BuildContext context) {
@@ -255,8 +313,8 @@ class _WalletProfileState extends State<WalletProfile> {
                             height: 76,
                             child: ClipRRect(
                               borderRadius: BorderRadius.circular(100),
-                              child: imageFile != null
-                                  ? Image.file(
+                              child: imageFile != ""
+                                  ? Image.network(
                                       imageFile,
                                       fit: BoxFit.cover,
                                     )
@@ -312,8 +370,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                     IconButton(
                                       onPressed: () {
                                         iconchanged == true
-                                            ? updateuser(
-                                                user[0]["uid"], _controller)
+                                            ? updateuser(user[0]["uid"],
+                                                _controller, imageURL)
                                             : print("");
                                       },
                                       icon: iconchanged == true
@@ -738,7 +796,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                 children: [
                                   GestureDetector(
                                     onTap: () {
-                                      launch("https://twitter.com/Smartchainers1");
+                                      launch(
+                                          "https://twitter.com/Smartchainers1");
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(top: 10),
@@ -762,8 +821,8 @@ class _WalletProfileState extends State<WalletProfile> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                        launch("https://www.facebook.com/SmartChainers/");
-                                     
+                                      launch(
+                                          "https://www.facebook.com/SmartChainers/");
                                     },
                                     child: Padding(
                                       padding: const EdgeInsets.only(
@@ -776,7 +835,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                           color: backgroundcolor,
                                           child: Icon(
                                             Icons.facebook,
-                                              color: Colors.blue,
+                                            color: Colors.blue,
                                             size: 15,
                                           ),
                                         ),
@@ -884,24 +943,5 @@ class _WalletProfileState extends State<WalletProfile> {
               ),
             ),
           );
-  }
-
-  final GlobalKey<ScaffoldState> scaffoldKeyWallet =
-      new GlobalKey<ScaffoldState>();
-  void _showScaffold(String message) {
-    // ignore: deprecated_member_use
-    scaffoldKeyWallet.currentState.showSnackBar(
-      SnackBar(
-        content: Text(
-          message,
-          style: GoogleFonts.poppins(
-            color: white,
-            fontSize: 17,
-            fontWeight: FontWeight.w400,
-          ),
-        ),
-        backgroundColor: blue1,
-      ),
-    );
   }
 }

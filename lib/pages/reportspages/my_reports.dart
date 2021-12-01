@@ -28,6 +28,7 @@ class _MyReportsState extends State<MyReports> {
   }
 
   var gweibalance = "0";
+  var imageFile="";
   bool loading = true;
   // ignore: todo
   //TODO :languagestart
@@ -36,7 +37,7 @@ class _MyReportsState extends State<MyReports> {
 
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    
+    imageFile=res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
@@ -122,14 +123,18 @@ class _MyReportsState extends State<MyReports> {
                     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover,
-                  width: 46,
-                  height: 46,
-                ),
-              ),
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: imageFile == ""
+                                                  ? Image.asset(
+                                                      "assets/images/profile.png",
+                                                      fit: BoxFit.fill,
+                                                    )
+                                                  : Image.network(
+                                                      imageFile,
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                            ),
             ),
           ),
         ],
