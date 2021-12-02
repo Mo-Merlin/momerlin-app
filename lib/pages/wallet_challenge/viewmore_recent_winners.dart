@@ -216,21 +216,21 @@ class LeaderCompetitor {
   LeaderCompetitor({
     this.id,
     this.fullName,
+    this.imageurl,
   });
 
   String id;
   String fullName;
+  var imageurl;
 
   factory LeaderCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderCompetitor(
-        id: json["_id"],
-        fullName: json["fullName"],
-      );
+          id: json["_id"],
+          fullName: json["fullName"],
+          imageurl: json["imageUrl"]);
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 class ViewmoreRecentWinners extends StatefulWidget {
@@ -483,9 +483,35 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
                                                 height: 35,
                                                 width: 35,
                                                 color: button,
-                                                child: Image.network(
-                                                  url[index % url.length],
-                                                  fit: BoxFit.cover,
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          100),
+                                                  child: recentWinners[index]
+                                                              .competitor
+                                                              .imageurl !=
+                                                          ""
+                                                      ? Image.network(
+                                                          recentWinners[index]
+                                                              .competitor
+                                                              .imageurl,
+                                                          fit: BoxFit.cover,
+                                                        )
+                                                      : Center(
+                                                          child: Text(
+                                                            recentWinners[index]
+                                                                .competitor
+                                                                .fullName
+                                                                .substring(
+                                                                    0, 1),
+                                                            style: TextStyle(
+                                                                color: white,
+                                                                fontSize: 17,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .bold),
+                                                          ),
+                                                        ),
                                                 ),
                                               ),
                                             ),
