@@ -260,7 +260,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     // } else {
     //   setState(() {});
     // }
-
+//PAVI
     switch (state) {
       case AppLifecycleState.paused:
         print("GOPI PAUSED wallet main");
