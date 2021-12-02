@@ -48,6 +48,7 @@ class _SpendingReportState extends State<SpendingReport> {
     // _chartData = getChartData();
     _tooltipBehavior = TooltipBehavior(
         enable: true,
+        duration: 10000,
         activationMode: ActivationMode.singleTap,
         tooltipPosition: TooltipPosition.pointer);
   }
@@ -572,8 +573,8 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var now_1m = new DateTime(
                                               now.year, now.month - 1, now.day);
 
-                                          var now_1y = new DateTime(
-                                              now.year - 1, now.month, now.day);
+                                          // var now_1y = new DateTime(
+                                          //     now.year - 1, now.month, now.day);
 
                                           var endDate = DateFormat('yyyy-MM-dd')
                                               .format(now);
@@ -960,6 +961,26 @@ class _SpendingReportState extends State<SpendingReport> {
                                                   data.name,
                                               radius: '100%',
                                               // dataLabelSettings: DataLabelSettings(isVisible: true),
+                                              // dataLabelSettings:
+                                              //     DataLabelSettings(
+                                                    
+                                              //         // labelPosition:
+                                              //         //     ChartDataLabelPosition
+                                              //         //         .outside,
+                                              //         isVisible: true,
+                                              //         // Templating the data label
+                                              //         builder: (dynamic data,
+                                              //             dynamic point,
+                                              //             dynamic series,
+                                              //             int pointIndex,
+                                              //             int seriesIndex) {
+                                              //           return Container(
+                                              //               height: 30,
+                                              //               width: 30,
+                                              //               child: Text(
+                                              //               pointIndex.toString(),
+                                              //               ));
+                                              //         }),
 
                                               enableTooltip: true,
                                               selectionBehavior:

@@ -242,41 +242,41 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     // TODO: implement didChangeAppLifecycleState
     super.didChangeAppLifecycleState(state);
 
-    // if (state == AppLifecycleState.resumed) {
-    //   setState(() {});
-    //   getUserLanguage();
-    //   print("Gopi RESUMED wallet main...............................");
-    //   WidgetsBinding.instance.addObserver(this);
-    // } else {
-    //   setState(() {});
-    // }
-//PAVI
-    switch (state) {
-      case AppLifecycleState.paused:
-        print("GOPI PAUSED wallet main");
-        break;
-      case AppLifecycleState.resumed:
-        print("GOPI Resumed wallet main");
-        setState(() {});
-        getUserLanguage();
-
-        WidgetsBinding.instance.addObserver(this);
-
-        break;
-      case AppLifecycleState.inactive:
-        print('Gopi inactive wallet main');
-        break;
-      case AppLifecycleState.detached:
-        print('Gopi detached wallet main');
-        break;
-      default:
     if (state == AppLifecycleState.resumed) {
       setState(() {});
       getUserLanguage();
+      print("Gopi RESUMED wallet main...............................");
       WidgetsBinding.instance.addObserver(this);
     } else {
       setState(() {});
     }
+//PAVI
+    // switch (state) {
+    //   case AppLifecycleState.paused:
+    //     print("GOPI PAUSED wallet main");
+    //     break;
+    //   case AppLifecycleState.resumed:
+    //     print("GOPI Resumed wallet main");
+    //     setState(() {});
+    //     getUserLanguage();
+
+    //     WidgetsBinding.instance.addObserver(this);
+
+    //     break;
+    //   case AppLifecycleState.inactive:
+    //     print('Gopi inactive wallet main');
+    //     break;
+    //   case AppLifecycleState.detached:
+    //     print('Gopi detached wallet main');
+    //     break;
+    //   default:
+    // if (state == AppLifecycleState.resumed) {
+    //   setState(() {});
+    //   getUserLanguage();
+    //   WidgetsBinding.instance.addObserver(this);
+    // } else {
+    //   setState(() {});
+    // }
   }
 
   void _onEventCallback(String event, LinkEventMetadata metadata) {

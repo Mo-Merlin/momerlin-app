@@ -8,8 +8,9 @@ import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
 class Challengesdetail extends StatefulWidget {
+  final bool  focus;
   final challange;
-  const Challengesdetail({Key key, this.challange}) : super(key: key);
+  const Challengesdetail({Key key, this.challange,this.focus}) : super(key: key);
 
   @override
   _ChallengesdetailState createState() => _ChallengesdetailState();
@@ -143,7 +144,6 @@ class _ChallengesdetailState extends State<Challengesdetail> {
       final endat = DateTime.parse(challangedetail['endAt']);
       final date2 = DateTime.now();
       difference = date2.difference(endat).inDays;
-
       for (var i = 0; i < res["leaders"].length; i++) {
         mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
       }
@@ -186,7 +186,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
     spendingPink,
     containerOrange,
   ];
-
+bool refresh =false;
   @override
   Widget build(BuildContext context) {
     return
@@ -219,12 +219,13 @@ class _ChallengesdetailState extends State<Challengesdetail> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                                  index: 2,
-                                )));
+                    Navigator.pop(context,refresh);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (_) => Tabscreen(
+                    //               index: 2,
+                    //             )));
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -742,7 +743,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           )
                                         : Text(
-                                            difference == 0
+                                            difference == 1
                                                 ? "Challenge ended yesterday"
                                                 : difference >= 0
                                                     ? "Challenge ended on ${endDate.toString()}"

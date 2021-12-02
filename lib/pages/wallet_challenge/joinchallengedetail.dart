@@ -14,7 +14,8 @@ import 'package:momerlin/theme/theme.dart';
 
 class JoinChallengesdetail extends StatefulWidget {
   final challange;
-  const JoinChallengesdetail({Key key, this.challange}) : super(key: key);
+  final bool focus;
+  const JoinChallengesdetail({Key key, this.challange,this.focus}) : super(key: key);
 
   @override
   _JoinChallengesdetail createState() => _JoinChallengesdetail();
@@ -194,7 +195,16 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       setState(() {
         loading = true;
       });
-
+      for (var i = 0; i < res["challenge"]["competitors"].length; i++) {
+        print(res["challenge"]["competitors"]);
+        if (user[0]["uid"] == res["challenge"]["competitors"][i]["userId"]) {
+          joinchallenge = true;
+          print(joinchallenge);
+        } else {
+          joinchallenge = false;
+          print(joinchallenge);
+        }
+      }
       challangedetail = res['challenge'];
       DateTime parseDate = new DateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
           .parse(challangedetail['startAt']);
@@ -205,15 +215,14 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
       var endinputDate = DateTime.parse(parseendDate.toString());
       endDate = (DateFormat.yMMMd().format(endinputDate)).toString();
       final endat = DateTime.parse(challangedetail['endAt']);
+      print(endat);
       final date2 = DateTime.now();
-      difference = date2.difference(endat).inDays;
-      for (var i = 0; i < res["challenge"]["competitors"].length; i++) {
-        if (user[0]["uid"] == res["challenge"]["competitors"][i]["userId"]) {
-          joinchallenge = true;
-        } else {
-          joinchallenge = false;
-        }
-      }
+      setState(() {
+        difference = date2.difference(endat).inDays;
+      });
+      print(date2);
+      print("PAIVTHRA $difference");
+
       for (var i = 0; i < res["leaders"].length; i++) {
         mychallengesdetail.add(MyChallengesDetail.fromJson(res["leaders"][i]));
       }
@@ -423,12 +432,13 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                                  index: 2,
-                                )));
+                    Navigator.pop(context,false);
+                    // Navigator.pushReplacement(
+                    //     context,
+                    //     MaterialPageRoute(
+                    //         builder: (_) => Tabscreen(
+                    //               index: 2,
+                    //             )));
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -588,7 +598,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  SizedBox(width: 10,),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
                                   Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&
@@ -946,9 +958,9 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           )
                                         : Text(
-                                            difference == 0
+                                            difference == 1
                                                 ? "Challenge ended yesterday"
-                                                : difference >= 0
+                                                : difference > 0
                                                     ? "Challenge ended on ${endDate.toString()}"
                                                     : "Challenge ongoing now",
                                             style: GoogleFonts.poppins(
@@ -1443,7 +1455,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
           ),
         ),
       ),
-      bottomNavigationBar: joinchallenge == false && difference < 0
+      bottomNavigationBar: joinchallenge == false && difference < 1
           ? GestureDetector(
               onTap: () {
                 getUserLanguage();

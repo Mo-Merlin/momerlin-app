@@ -1204,7 +1204,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
     spendingPink,
     text1,
   ];
-
+  var result = true;
   var trophy = [
     Image.asset("assets/images/trophy3.png"),
     Image.asset("assets/images/trophy2.png"),
@@ -1454,16 +1454,26 @@ class _WalletChallengesState extends State<WalletChallenges> {
                               itemCount: recentWinners.length,
                               itemBuilder: (context, index) {
                                 return GestureDetector(
-                                  onTap: () {
-                                    Navigator.push(
+                                  onTap: () async {
+                                    result = await Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                         builder: (context) => Challengesdetail(
+                                          focus: true,
                                           challange:
                                               recentWinners[index].challenge.id,
                                         ),
                                       ),
                                     );
+                                    if (result == false) {
+                                      getChallenges();
+                                      getUserLanguage();
+                                      getmyChallenges();
+                                      getjoinChallenges();
+
+                                      getAllLeaderboard();
+                                      recentWinners1();
+                                    }
                                   },
                                   child: Stack(
                                     children: [
@@ -1765,17 +1775,28 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       itemCount: challengesOne.length,
                                       itemBuilder: (context, index) {
                                         return InkWell(
-                                          onTap: () {
-                                            Navigator.push(
+                                          onTap: () async {
+                                            result = await Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     JoinChallengesdetail(
+                                                  focus: true,
                                                   challange:
                                                       challengesOne[index],
                                                 ),
                                               ),
                                             );
+
+                                            if (result == false) {
+                                              getChallenges();
+                                              getUserLanguage();
+                                              getmyChallenges();
+                                              getjoinChallenges();
+
+                                              getAllLeaderboard();
+                                              recentWinners1();
+                                            }
                                           },
                                           child: Stack(
                                             children: [
@@ -2095,17 +2116,29 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       itemCount: mychallenge.length,
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
+                                          onTap: () async {
+                                            result = await Navigator.push(
                                               context,
                                               MaterialPageRoute(
                                                 builder: (context) =>
                                                     Challengesdetail(
+                                                  focus: true,
                                                   challange:
-                                                      mychallenge[index].id,
+                                                      recentWinners[index]
+                                                          .challenge
+                                                          .id,
                                                 ),
                                               ),
                                             );
+                                            if (result == false) {
+                                              getChallenges();
+                                              getUserLanguage();
+                                              getmyChallenges();
+                                              getjoinChallenges();
+
+                                              getAllLeaderboard();
+                                              recentWinners1();
+                                            }
                                           },
                                           child: Stack(
                                             children: [
@@ -2428,17 +2461,29 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       shrinkWrap: true,
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
-                                          onTap: () {
-                                            Navigator.push(
-                                                context,
-                                                MaterialPageRoute(
-                                                    builder: (context) =>
-                                                        Challengesdetail(
-                                                            challange:
-                                                                joingetchallenge[
-                                                                        index]
-                                                                    .challenge
-                                                                    .id)));
+                                          onTap: () async {
+                                            result = await Navigator.push(
+                                              context,
+                                              MaterialPageRoute(
+                                                builder: (context) =>
+                                                    Challengesdetail(
+                                                  focus: true,
+                                                  challange:
+                                                      recentWinners[index]
+                                                          .challenge
+                                                          .id,
+                                                ),
+                                              ),
+                                            );
+                                            if (result == false) {
+                                              getChallenges();
+                                              getUserLanguage();
+                                              getmyChallenges();
+                                              getjoinChallenges();
+
+                                              getAllLeaderboard();
+                                              recentWinners1();
+                                            }
                                           },
                                           child: Stack(
                                             children: [
@@ -2789,17 +2834,28 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       : 3,
                                   itemBuilder: (context, index) {
                                     return InkWell(
-                                      onTap: () {
-                                        Navigator.push(
-                                            context,
-                                            MaterialPageRoute(
-                                                builder: (context) =>
-                                                    Challengesdetail(
-                                                        challange:
-                                                            leaderboardAll[
-                                                                    index]
-                                                                .challenge
-                                                                .id)));
+                                      onTap: () async {
+                                        result = await Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) =>
+                                                Challengesdetail(
+                                              focus: true,
+                                              challange: recentWinners[index]
+                                                  .challenge
+                                                  .id,
+                                            ),
+                                          ),
+                                        );
+                                        if (result == false) {
+                                          getChallenges();
+                                          getUserLanguage();
+                                          getmyChallenges();
+                                          getjoinChallenges();
+
+                                          getAllLeaderboard();
+                                          recentWinners1();
+                                        }
                                         // leaderboardProfile(context);
                                       },
                                       child: Column(

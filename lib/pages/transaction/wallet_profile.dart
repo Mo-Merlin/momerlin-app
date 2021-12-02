@@ -24,14 +24,14 @@ class WalletProfile extends StatefulWidget {
 class _WalletProfileState extends State<WalletProfile> {
   var userLanguage, user, lang = [];
   bool loading = true;
-  var imageFile="";
+  var imageFile = "";
   // ignore: unused_field
   ImagePicker _picker = ImagePicker();
 
   TextEditingController _controller = TextEditingController();
   String imageURL;
   getImage(ImageSource source) async {
-    File image = await ImagePicker.pickImage(source: source);
+    final image = await _picker.pickImage(source: source,);
     if (image != null) {
       File cropped = await ImageCropper.cropImage(
           sourcePath: image.path,
@@ -82,7 +82,6 @@ class _WalletProfileState extends State<WalletProfile> {
         ));
       }
 
-     
       // return imageURL;//
 
     }
