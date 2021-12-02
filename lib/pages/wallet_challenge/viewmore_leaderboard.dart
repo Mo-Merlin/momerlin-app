@@ -216,24 +216,20 @@ class CompetitorElement {
 }
 
 class LeaderboardAllCompetitor {
-  LeaderboardAllCompetitor({
-    this.id,
-    this.fullName,
-  });
+  LeaderboardAllCompetitor({this.id, this.fullName, this.imageurl});
 
   String id;
   String fullName;
-
+  var imageurl;
   factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderboardAllCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
+        imageurl: json["imageUrl"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 class ViewmoreLeaderboard extends StatefulWidget {
@@ -338,15 +334,14 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pop(context);
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (_) => Tabscreen(
-                  //       index: 2,
-                  //     ),
-                  //   ),
-                  // );
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => Tabscreen(
+                        index: 2,
+                      ),
+                    ),
+                  );
                 },
                 icon: Icon(
                   Icons.arrow_back,
@@ -519,9 +514,37 @@ class _ViewmoreLeaderboardState extends State<ViewmoreLeaderboard> {
                                                   height: 35,
                                                   width: 35,
                                                   color: button,
-                                                  child: Image.network(
-                                                    url[index % url.length],
-                                                    fit: BoxFit.cover,
+                                                  child: ClipRRect(
+                                                    borderRadius:
+                                                        BorderRadius.circular(
+                                                            100),
+                                                    child: leaderboardAll[index]
+                                                                .competitor
+                                                                .imageurl !=
+                                                            ""
+                                                        ? Image.network(
+                                                            leaderboardAll[
+                                                                    index]
+                                                                .competitor
+                                                                .imageurl,
+                                                            fit: BoxFit.cover,
+                                                          )
+                                                        : Center(
+                                                            child: Text(
+                                                              leaderboardAll[
+                                                                      index]
+                                                                  .competitor
+                                                                  .fullName
+                                                                  .substring(
+                                                                      0, 1),
+                                                              style: TextStyle(
+                                                                  color: white,
+                                                                  fontSize: 17,
+                                                                  fontWeight:
+                                                                      FontWeight
+                                                                          .bold),
+                                                            ),
+                                                          ),
                                                   ),
                                                 ),
                                               ),

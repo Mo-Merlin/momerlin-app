@@ -423,13 +423,12 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
-                    // Navigator.pushReplacement(
-                    //     context,
-                    //     MaterialPageRoute(
-                    //         builder: (_) => Tabscreen(
-                    //               index: 2,
-                    //             )));
+                    Navigator.pushReplacement(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => Tabscreen(
+                                  index: 2,
+                                )));
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -589,9 +588,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  SizedBox(
-                                    width: 10,
-                                  ),
+                                  SizedBox(width: 10,),
                                   Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&

@@ -1,4 +1,4 @@
-import 'package:bitcoins/bitcoins.dart' as bitcoins;
+//import 'package:bitcoins/bitcoins.dart' as bitcoins;
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,12 +41,12 @@ class _ImportWalletPage extends State<ImportWalletPage> {
   storeUser() async {
     // String seed1 = _controller.text;
     String _pk = Web3.privateKeyFromMnemonic(seed);
-    var walletMain = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.mainnet);
-    print(walletMain.getAddress(0));
-    var walletTest = bitcoins.WalletBTC(
-        seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.testnet3);
-    print(walletTest.getAddress(0));
+    // var walletMain = bitcoins.WalletBTC(
+    //     seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.mainnet);
+    // print(walletMain.getAddress(0));
+    // var walletTest = bitcoins.WalletBTC(
+    //     seed: bitcoins.mnemonicToSeed(seed), net: bitcoins.testnet3);
+    // print(walletTest.getAddress(0));
     String _address = await Web3().getAddressFromPrivateKey(_pk);
     print(_address);
     var res = await UserRepository().getUser(_address);
@@ -56,8 +56,8 @@ class _ImportWalletPage extends State<ImportWalletPage> {
       final usersave = await UserRepository().storeUser({
         "uid": res["user"]["_id"],
         "address": _address,
-        "btcTestnetAddress": walletTest.getAddress(0),
-        "btcMainnetAddress": walletMain.getAddress(0),
+        // "btcTestnetAddress": walletTest.getAddress(0),
+        // "btcMainnetAddress": walletMain.getAddress(0),
         "seed": seed,
         "language": "English",
         "googlefitenable": 0,
@@ -70,7 +70,8 @@ class _ImportWalletPage extends State<ImportWalletPage> {
     } else {
       var user = await UserRepository().adduser({
         "ethAddress": _address,
-        "btcAddress": walletMain.getAddress(0),
+        "imageUrl":"",
+        // "btcAddress": walletMain.getAddress(0),
         "fullName": "NickName",
       });
       if (user == false) {
@@ -84,8 +85,8 @@ class _ImportWalletPage extends State<ImportWalletPage> {
           final usersave = await UserRepository().storeUser({
             "uid": user["user"]["_id"],
             "address": _address,
-            "btcTestnetAddress": walletTest.getAddress(0),
-            "btcMainnetAddress": walletMain.getAddress(0),
+            // "btcTestnetAddress": walletTest.getAddress(0),
+            // "btcMainnetAddress": walletMain.getAddress(0),
             "seed": seed,
             "language": "English",
             "googlefitenable": 0,

@@ -136,6 +136,7 @@ class _SpendingReportState extends State<SpendingReport> {
     }
   }
 
+  var imageFile = "";
   // ignore: todo
   //TODO :languagestart
   Future<void> getUserLanguage() async {
@@ -144,7 +145,7 @@ class _SpendingReportState extends State<SpendingReport> {
     user = await UserDataSource().getUser();
 
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-
+    imageFile = res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
     // if (lang.length != null && lang.length != 0) {
     //   userLanguage = lang[0];
@@ -280,15 +281,14 @@ class _SpendingReportState extends State<SpendingReport> {
               child: IconButton(
                 onPressed: () {
                   info == null
-                      ? Navigator.pop(context)
-                      // Navigator.pushReplacement(
-                      //     context,
-                      //     MaterialPageRoute(
-                      //       builder: (_) => Tabscreen(
-                      //         index: 1,
-                      //       ),
-                      //     ),
-                      //   )
+                      ? Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => Tabscreen(
+                              index: 1,
+                            ),
+                          ),
+                        )
                       : categorytransactions = [];
                   chartClick = false;
                   setState(() {
@@ -323,25 +323,20 @@ class _SpendingReportState extends State<SpendingReport> {
             padding: const EdgeInsets.all(5),
             child: GestureDetector(
               onTap: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => Tabscreen(
-                      index: 3,
-                    ),
-                  ),
-                );
-                // Navigator.push(context,
-                //     MaterialPageRoute(builder: (context) => WalletProfile()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(30),
-                child: Image.asset(
-                  "assets/images/profile.png",
-                  fit: BoxFit.cover,
-                  width: 46,
-                  height: 46,
-                ),
+                borderRadius: BorderRadius.circular(100),
+                child: imageFile == ""
+                    ? Image.asset(
+                        "assets/images/profile.png",
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        imageFile,
+                        fit: BoxFit.cover,
+                      ),
               ),
             ),
           ),

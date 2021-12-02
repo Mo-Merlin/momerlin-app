@@ -476,21 +476,22 @@ class LeaderboardAllCompetitor {
   LeaderboardAllCompetitor({
     this.id,
     this.fullName,
+    this.imageurl,
   });
 
   String id;
   String fullName;
+  var imageurl;
 
   factory LeaderboardAllCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderboardAllCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
+        imageurl: json["imageUrl"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 // To parse this JSON data, do
@@ -699,21 +700,22 @@ class LeaderCompetitor {
   LeaderCompetitor({
     this.id,
     this.fullName,
+    this.imageurl,
   });
 
   String id;
   String fullName;
+  var imageurl;
 
   factory LeaderCompetitor.fromJson(Map<String, dynamic> json) =>
       LeaderCompetitor(
         id: json["_id"],
         fullName: json["fullName"],
+        imageurl: json["imageUrl"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "_id": id,
-        "fullName": fullName,
-      };
+  Map<String, dynamic> toJson() =>
+      {"_id": id, "fullName": fullName, "imageUrl": imageurl};
 }
 
 class WalletChallenges extends StatefulWidget {
@@ -743,8 +745,7 @@ GoogleSignIn _googleSignIn = GoogleSignIn(
   ],
 );
 
-class _WalletChallengesState extends State<WalletChallenges>
-    with WidgetsBindingObserver {
+class _WalletChallengesState extends State<WalletChallenges> {
   List<HealthDataPoint> _healthDataList = [];
   // ignore: unused_field
   AppState _state = AppState.DATA_NOT_FETCHED;
@@ -898,76 +899,13 @@ class _WalletChallengesState extends State<WalletChallenges>
   var exprydate;
   @override
   void initState() {
-    loading = true;
     super.initState();
     getUserLanguage();
     getChallenges();
     getapp();
     getAllLeaderboard();
     recentWinners1();
-
-    WidgetsBinding.instance.addObserver(this);
   }
-
-  @override
-  void dispose() {
-    super.dispose();
-    WidgetsBinding.instance.removeObserver(this);
-  }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   if (state == AppLifecycleState.resumed) {
-  //     setState(() {});
-  //     getUserLanguage();
-  //     print("Gopi RESUMED 222 wallet main...............................");
-  //     WidgetsBinding.instance.addObserver(this);
-  //   } else {
-  //     setState(() {});
-  //   }
-  // }
-
-  // @override
-  // void didChangeAppLifecycleState(AppLifecycleState state) {
-  //   // super.didChangeAppLifecycleState(state);
-
-  //   // switch (state) {
-  //   //   case AppLifecycleState.paused:
-  //   //     print("GOPI PAUSED wallet challenges");
-  //   //     break;
-  //   //   case AppLifecycleState.resumed:
-  //   //     print("GOPI Resumed");
-  //   //     setState(() {});
-  //   //     getUserLanguage();
-  //   //     getChallenges();
-  //   //     getapp();
-  //   //     getAllLeaderboard();
-  //   //     recentWinners1();
-  //   //     WidgetsBinding.instance.addObserver(this);
-
-  //   //     break;
-  //   //   case AppLifecycleState.inactive:
-  //   //     print('Gopi inactive');
-  //   //     break;
-  //   //   case AppLifecycleState.detached:
-  //   //     print('Gopi detached ');
-  //   //     break;
-  //   //   default:
-  //   // }
-
-  //   if (state == AppLifecycleState.resumed) {
-  //     setState(() {});
-  //     print("GOPINATHAN AR : ..............................");
-  //     getUserLanguage();
-  //     getChallenges();
-  //     getapp();
-  //     getAllLeaderboard();
-  //     recentWinners1();
-  //     WidgetsBinding.instance.addObserver(this);
-  //   } else {
-  //     setState(() {});
-  //   }
-  // }
 
   var gweibalance = "0";
 
@@ -1294,12 +1232,11 @@ class _WalletChallengesState extends State<WalletChallenges>
               color: button,
               child: IconButton(
                 onPressed: () {
-                  //Navigator.pop(context);
                   Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(
                       builder: (_) => Tabscreen(
-                        index: 1,
+                        index: 0,
                       ),
                     ),
                   );
@@ -1665,9 +1602,33 @@ class _WalletChallengesState extends State<WalletChallenges>
                                             height: 30,
                                             width: 30,
                                             color: button,
-                                            child: Image.network(
-                                              url[index % url.length],
-                                              fit: BoxFit.cover,
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(100),
+                                              child: recentWinners[index]
+                                                          .competitor
+                                                          .imageurl !=
+                                                      ""
+                                                  ? Image.network(
+                                                      recentWinners[index]
+                                                          .competitor
+                                                          .imageurl,
+                                                      fit: BoxFit.cover,
+                                                    )
+                                                  : Center(
+                                                      child: Text(
+                                                        recentWinners[index]
+                                                            .competitor
+                                                            .fullName
+                                                            .substring(0, 1),
+                                                        style: TextStyle(
+                                                            color: white,
+                                                            fontSize: 17,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                    ),
                                             ),
                                           ),
                                         ),
@@ -2912,10 +2873,42 @@ class _WalletChallengesState extends State<WalletChallenges>
                                                           height: 35,
                                                           width: 35,
                                                           color: button,
-                                                          child: Image.network(
-                                                            url[index %
-                                                                url.length],
-                                                            fit: BoxFit.cover,
+                                                          child: ClipRRect(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        100),
+                                                            child: leaderboardAll[
+                                                                            index]
+                                                                        .competitor
+                                                                        .imageurl !=
+                                                                    ""
+                                                                ? Image.network(
+                                                                    leaderboardAll[
+                                                                            index]
+                                                                        .competitor
+                                                                        .imageurl,
+                                                                    fit: BoxFit
+                                                                        .cover,
+                                                                  )
+                                                                : Center(
+                                                                    child: Text(
+                                                                      leaderboardAll[
+                                                                              index]
+                                                                          .competitor
+                                                                          .fullName
+                                                                          .substring(
+                                                                              0,
+                                                                              1),
+                                                                      style: TextStyle(
+                                                                          color:
+                                                                              white,
+                                                                          fontSize:
+                                                                              17,
+                                                                          fontWeight:
+                                                                              FontWeight.bold),
+                                                                    ),
+                                                                  ),
                                                           ),
                                                         ),
                                                       ),

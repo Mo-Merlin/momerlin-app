@@ -54,7 +54,7 @@ class UserRepository {
   Future<dynamic> updateToken(data) async {
     try {
       var body = json.encode(data);
-      var res = await http.post('${url + "set_access_token"}',
+      var res = await http.post(Uri.parse('${url + "set_access_token"}'),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -72,7 +72,7 @@ class UserRepository {
   Future<dynamic> getToken() async {
     try {
       var res = await http.post(
-        '${url + "create_link_token"}',
+        (Uri.parse('${url + "create_link_token"}')),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -93,7 +93,7 @@ class UserRepository {
     try {
       var body = json.encode(data);
 
-      var res = await http.post('${url + "user"}',
+      var res = await http.post((Uri.parse('${url + "user"}')),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -109,14 +109,14 @@ class UserRepository {
   }
 
 //updateuser
-  Future<dynamic> updateuser(id, fullname) async {
+  Future<dynamic> updateuser(id, fullname, image) async {
     // print(
     // "12345678 $id , $fullname",
     // );
     try {
-      var data = ({"fullName": fullname});
+      var data = ({"fullName": fullname, "imageUrl": image});
       var body = json.encode(data);
-      var res = await http.put('${url + "user/$id"}',
+      var res = await http.put((Uri.parse('${url + "user/$id"}')),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -137,7 +137,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/leaderboard";
 
       var res = await http.get(
-        '${url + "user/get?id=$id"}',
+        (Uri.parse('${url + "user/get?id=$id"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -153,7 +153,7 @@ class UserRepository {
   Future<dynamic> getTransaction(walletaddress) async {
     try {
       var res = await http.get(
-        '${url + "transactions?address=$walletaddress"}',
+        (Uri.parse('${url + "transactions?address=$walletaddress"}')),
       );
       var checkres = jsonDecode(res.body);
 
@@ -172,7 +172,7 @@ class UserRepository {
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
-        '${url + "myExpenses/$walletaddress"}',
+        (Uri.parse('${url + "myExpenses/$walletaddress"}')),
       );
       var checkres = jsonDecode(res.body);
 
@@ -192,10 +192,11 @@ class UserRepository {
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
-        '${url + "myExpenses/$walletaddress?startDate=$startdate&endDate=$enddate"}',
+        (Uri.parse(
+            '${url + "myExpenses/$walletaddress?startDate=$startdate&endDate=$enddate"}')),
       );
       var checkres = jsonDecode(res.body);
-   
+
       checkres["status"] = true;
 
       return checkres;
@@ -211,10 +212,11 @@ class UserRepository {
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
-        '${url + "myActivity/$id??startDate=$startdate&endDate=$enddate"}',
+        (Uri.parse(
+            '${url + "myActivity/$id??startDate=$startdate&endDate=$enddate"}')),
       );
       var checkres = jsonDecode(res.body);
-     
+
       checkres["status"] = true;
 
       return checkres;
@@ -231,10 +233,11 @@ class UserRepository {
     try {
       var res = await http.get(
         // '${url + "expenses?address=$walletaddress"}',
-        '${url + "transactions/category/$category?address=$walletaddress"}',
+        (Uri.parse(
+            '${url + "transactions/category/$category?address=$walletaddress"}')),
       );
       var checkres = jsonDecode(res.body);
-     
+
       checkres["status"] = true;
 
       return checkres;
@@ -249,10 +252,9 @@ class UserRepository {
   Future<dynamic> getmyEarningActivity(uid) async {
     try {
       var res = await http.get(
-        '${url + "myActivity/$uid"}',
+        (Uri.parse('${url + "myActivity/$uid"}')),
       );
       var checkres = jsonDecode(res.body);
-
       checkres["status"] = true;
 
       return checkres;
@@ -268,7 +270,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/";
 //
       var res = await http.get(
-        '${url + "momerlin/transactions?address=$walletaddress"}',
+        (Uri.parse('${url + "momerlin/transactions?address=$walletaddress"}')),
       );
       var checkres = jsonDecode(res.body);
       checkres["status"] = true;
@@ -286,7 +288,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/challenges";
 
       var res = await http.get(
-        '${url + "challenges"}',
+        (Uri.parse('${url + "challenges"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -304,7 +306,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/challenges";
 
       var res = await http.get(
-        '${url + "user/challenges?id=$id"}',
+        (Uri.parse('${url + "user/challenges?id=$id"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -321,7 +323,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/challenges";
 
       var res = await http.get(
-        '${url + "/challenge/$challangeid"}',
+        (Uri.parse('${url + "/challenge/$challangeid"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -339,7 +341,7 @@ class UserRepository {
     try {
       var body = json.encode(data);
 
-      var res = await http.post('${url + "challenge/create"}',
+      var res = await http.post((Uri.parse('${url + "challenge/create"}')),
           headers: <String, String>{
             'Content-Type': 'application/json; charset=UTF-8',
           },
@@ -357,7 +359,7 @@ class UserRepository {
   Future<dynamic> joiningchallenge(id, challengeId) async {
     try {
       var res = await http.put(
-        '${url + "challenge/join?id=$id&challenge=$challengeId"}',
+        (Uri.parse('${url + "challenge/join?id=$id&challenge=$challengeId"}')),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -386,7 +388,7 @@ class UserRepository {
 
       var body = json.encode(data);
       var res = await http.put(
-        '${url + "challenge/joined/$id?page=1&limit=10"}',
+        (Uri.parse('${url + "challenge/joined/$id?page=1&limit=10"}')),
         headers: <String, String>{
           'Content-Type': 'application/json; charset=UTF-8',
         },
@@ -406,7 +408,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/leaderboard";
 
       var res = await http.get(
-        '${url + "leaderboard"}',
+        (Uri.parse('${url + "leaderboard"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -423,7 +425,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/users";
 
       var res = await http.get(
-        '${url + "users"}',
+        (Uri.parse('${url + "users"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -440,7 +442,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/user/checkName/:name";
 
       var res = await http.get(
-        '${url + "user/checkName/$nickName"}',
+        (Uri.parse('${url + "user/checkName/$nickName"}')),
       );
 
       var checkres = jsonDecode(res.body);
@@ -457,7 +459,7 @@ class UserRepository {
       // var url = "http://192.168.43.124:8000/api/leaderboard";
 
       var res = await http.get(
-        '${url + "challenges/winners"}',
+        (Uri.parse('${url + "challenges/winners"}')),
       );
 
       var checkres = jsonDecode(res.body);
