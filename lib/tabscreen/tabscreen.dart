@@ -14,8 +14,7 @@ class Tabscreen extends StatefulWidget {
   _TabscreenState createState() => new _TabscreenState();
 }
 
-class _TabscreenState extends State<Tabscreen>
-    with TickerProviderStateMixin {
+class _TabscreenState extends State<Tabscreen> with TickerProviderStateMixin {
   int _selectedIndex = 0;
   bool showJades = false;
   @override
@@ -36,8 +35,6 @@ class _TabscreenState extends State<Tabscreen>
     }
   }
 
-  
-
   AnimationController _animationController;
   Animation animation;
 
@@ -53,9 +50,9 @@ class _TabscreenState extends State<Tabscreen>
             index: _selectedIndex,
             children: [
               MyAnimation(animation: animation, child: WalletTwo()),
-              MyAnimation(animation: animation, child: MyReports()),
-              MyAnimation(animation: animation, child: WalletChallenges()),
-              MyAnimation(animation: animation, child: WalletProfile())
+              MyAnimation(animation: animation, child: MyReports(selectindex:selectindex)),
+              MyAnimation(animation: animation, child: WalletChallenges(selectindex:selectindex)),
+              MyAnimation(animation: animation, child: WalletProfile(selectindex:selectindex))
             ],
           ),
           Positioned(
@@ -223,7 +220,12 @@ class _TabscreenState extends State<Tabscreen>
     );
   }
 
+  var selectindex = 0;
   void _onItemTapped(int index) async {
+    setState(() {
+      selectindex = _selectedIndex;
+      print("PAVITHRA $selectindex");
+    });
     setState(() {
       _selectedIndex = index;
       FocusScope.of(context).requestFocus(FocusNode());

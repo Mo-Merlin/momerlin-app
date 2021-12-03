@@ -8,14 +8,14 @@ import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/transactionmodel.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+//import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 
 // import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'wallet_profile.dart';
 import 'wallet_receive.dart';
-import 'wallet_send.dart';
+//import 'wallet_send.dart';
 
 class Dialogs {
   static Future<void> showLoadingDialog(
@@ -25,24 +25,28 @@ class Dialogs {
         barrierDismissible: false,
         builder: (BuildContext context) {
           return new WillPopScope(
-              onWillPop: () async => false,
-              child: SimpleDialog(
-                  key: key,
-                  backgroundColor: Colors.black54,
-                  children: <Widget>[
-                    Center(
-                      child: Column(children: [
-                        CircularProgressIndicator(),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Text(
-                          "Please Wait....",
-                          style: TextStyle(color: Colors.blueAccent),
-                        )
-                      ]),
-                    )
-                  ]));
+            onWillPop: () async => false,
+            child: SimpleDialog(
+              key: key,
+              backgroundColor: Colors.black54,
+              children: <Widget>[
+                Center(
+                  child: Column(
+                    children: [
+                      CircularProgressIndicator(),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Text(
+                        "Please Wait....",
+                        style: TextStyle(color: Colors.blueAccent),
+                      )
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          );
         });
   }
 }
@@ -83,7 +87,7 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
     return null;
   }
 
-  var imageFile="";
+  var imageFile = "";
   var balance = 0.00;
   List<Transaction> transactions1 = [];
   bool plaidconnect = false, buttonpressed = false;

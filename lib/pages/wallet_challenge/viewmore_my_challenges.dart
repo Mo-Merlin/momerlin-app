@@ -41,7 +41,8 @@ class MyChallenges {
 }
 
 class ViewmoreMyChallenge extends StatefulWidget {
-  const ViewmoreMyChallenge({Key key}) : super(key: key);
+  final bool focus;
+  const ViewmoreMyChallenge({Key key,this.focus}) : super(key: key);
 
   @override
   _ViewmoreMyChallengeState createState() => _ViewmoreMyChallengeState();
@@ -137,14 +138,15 @@ class _ViewmoreMyChallengeState extends State<ViewmoreMyChallenge> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Tabscreen(
-                        index: 2,
-                      ),
-                    ),
-                  );
+                   Navigator.pop(context,false);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => Tabscreen(
+                  //       index: 2,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 icon: Icon(
                   Icons.arrow_back,

@@ -262,6 +262,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
   Future<void> gettoken() async {
     try {
       await UserRepository().updateUser(1);
+      user = await UserDataSource().getUser();
       final result = await _googleSignIn.signIn();
       final ggAuth = await result.authentication;
       token = ggAuth.accessToken;
@@ -1991,8 +1992,8 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                             ),
                             GestureDetector(
                               onTap: () {
-                                Navigator.pop(context);
-                                notEnoughBalance(context);
+                                // Navigator.pop(context);
+                                // notEnoughBalance(context);
                               },
                               child: Container(
                                 height:
@@ -2731,14 +2732,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          Navigator.pushReplacement(
-                                            context,
-                                            MaterialPageRoute(
-                                              builder: (_) => Tabscreen(
-                                                index: 2,
-                                              ),
-                                            ),
-                                          );
+                                          Navigator.pop(context,false);
                                         },
                                         child: Text(
                                           (lang.length != null &&

@@ -183,7 +183,8 @@ class GetChallenge {
 }
 
 class ViewmoreJoinChallenge extends StatefulWidget {
-  const ViewmoreJoinChallenge({Key key}) : super(key: key);
+  final bool focus;
+  const ViewmoreJoinChallenge({Key key,this.focus}) : super(key: key);
 
   @override
   _ViewmoreJoinChallengeState createState() => _ViewmoreJoinChallengeState();
@@ -283,14 +284,15 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Tabscreen(
-                        index: 2,
-                      ),
-                    ),
-                  );
+                   Navigator.pop(context,false);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => Tabscreen(
+                  //       index: 2,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 icon: Icon(
                   Icons.arrow_back,

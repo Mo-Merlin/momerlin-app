@@ -234,7 +234,8 @@ class LeaderCompetitor {
 }
 
 class ViewmoreRecentWinners extends StatefulWidget {
-  const ViewmoreRecentWinners({Key key}) : super(key: key);
+  final bool focus;
+  const ViewmoreRecentWinners({Key key,this.focus}) : super(key: key);
 
   @override
   _ViewmoreRecentWinnersState createState() => _ViewmoreRecentWinnersState();
@@ -343,14 +344,15 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => Tabscreen(
-                        index: 2,
-                      ),
-                    ),
-                  );
+                   Navigator.pop(context,false);
+                  // Navigator.pushReplacement(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (_) => Tabscreen(
+                  //       index: 2,
+                  //     ),
+                  //   ),
+                  // );
                 },
                 icon: Icon(
                   Icons.arrow_back,

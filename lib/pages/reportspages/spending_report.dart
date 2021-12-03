@@ -47,9 +47,9 @@ class _SpendingReportState extends State<SpendingReport> {
     getUserLanguage();
     // _chartData = getChartData();
     _tooltipBehavior = TooltipBehavior(
-        enable: true,
-        duration: 10000,
         activationMode: ActivationMode.singleTap,
+        enable: true,
+        duration: 500000,
         tooltipPosition: TooltipPosition.pointer);
   }
 
@@ -164,6 +164,7 @@ class _SpendingReportState extends State<SpendingReport> {
     // ignore: unused_local_variable
     var res =
         await UserRepository().getSpendingReports(user[0]["walletaddress"]);
+    print(res);
     setState(() {
       loading = false;
     });
@@ -282,14 +283,15 @@ class _SpendingReportState extends State<SpendingReport> {
               child: IconButton(
                 onPressed: () {
                   info == null
-                      ? Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => Tabscreen(
-                              index: 1,
-                            ),
-                          ),
-                        )
+                      ? Navigator.pop(context, false)
+                      // ? Navigator.pushReplacement(
+                      //     context,
+                      //     MaterialPageRoute(
+                      //       builder: (_) => Tabscreen(
+                      //         index: 1,
+                      //       ),
+                      //     ),
+                      //   )
                       : categorytransactions = [];
                   chartClick = false;
                   setState(() {
@@ -430,7 +432,7 @@ class _SpendingReportState extends State<SpendingReport> {
                       text != null
                           ? Container(
                               padding:
-                                  EdgeInsets.only(left: 20, right: 20, top: 30),
+                                  EdgeInsets.only(left: 20, right: 20, top: 150),
                               alignment: Alignment.center,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -440,14 +442,14 @@ class _SpendingReportState extends State<SpendingReport> {
                                       "No transactions for the selected period. Please sync latest transactions from your account",
                                       textAlign: TextAlign.center,
                                       style: GoogleFonts.poppins(
-                                        fontSize: 19,
-                                        fontWeight: FontWeight.w600,
+                                        fontSize: 12,
+                                        //fontWeight: FontWeight.w600,
                                         color: Colors.white,
                                       ),
                                     ),
                                   ),
                                   SizedBox(
-                                    height: 80,
+                                    height: 20,
                                   ),
                                   GestureDetector(
                                     onTap: () {
@@ -479,7 +481,7 @@ class _SpendingReportState extends State<SpendingReport> {
                                               MainAxisAlignment.center,
                                           children: [
                                             Text(
-                                              'Sync transactions',
+                                              'Connect bank account',
                                               style: TextStyle(
                                                 fontSize: 12,
                                                 fontWeight: FontWeight.w700,
@@ -948,7 +950,8 @@ class _SpendingReportState extends State<SpendingReport> {
                                               ),
                                             ),
                                           ],
-                                          tooltipBehavior: _tooltipBehavior,
+                                          tooltipBehavior: TooltipBehavior(
+                                              enable: true, shared: true),
                                           series: <CircularSeries>[
                                             DoughnutSeries<GDPData, String>(
                                               dataSource: _chartData,
@@ -960,10 +963,11 @@ class _SpendingReportState extends State<SpendingReport> {
                                               yValueMapper: (GDPData data, _) =>
                                                   data.name,
                                               radius: '100%',
+
                                               // dataLabelSettings: DataLabelSettings(isVisible: true),
                                               // dataLabelSettings:
                                               //     DataLabelSettings(
-                                                    
+
                                               //         // labelPosition:
                                               //         //     ChartDataLabelPosition
                                               //         //         .outside,

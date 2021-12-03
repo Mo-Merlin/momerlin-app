@@ -12,6 +12,7 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/myearningactivitymodel.dart';
 import 'package:momerlin/pages/transaction/wallet_profile.dart';
 import 'package:momerlin/pages/wallet_challenge/viewmore_join_challenge.dart';
+import 'package:momerlin/pages/wallet_challenge/wallet_challenges.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -169,8 +170,9 @@ class _MyEarningsState extends State<MyEarnings> {
         //     :
         Scaffold(
       backgroundColor: backgroundcolor,
+       extendBody: true,
       appBar: AppBar(
-        backgroundColor: Color(0xff7D7BF2),
+        backgroundColor: blue2,
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -182,14 +184,15 @@ class _MyEarningsState extends State<MyEarnings> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Tabscreen(
-                          index: 1,
-                        ),
-                      ),
-                    );
+                    Navigator.pop(context, false);
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => Tabscreen(
+                    //       index: 1,
+                    //     ),
+                    //   ),
+                    // );
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -312,54 +315,57 @@ class _MyEarningsState extends State<MyEarnings> {
                         height: 15,
                       ),
                       myEarningActivity.length == 0
-                          ? Container(
-                              padding:
-                                  EdgeInsets.only(left: 20, right: 20, top: 30),
-                              alignment: Alignment.center,
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                  Text(
-                                    "Please participate in challenge to earn rewards",
-                                    textAlign: TextAlign.center,
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.w600,
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                  SizedBox(
-                                    height: 20,
-                                  ),
-                                  GestureDetector(
-                                    onTap: () {
-                                      Navigator.push(
-                                          context,
-                                          MaterialPageRoute(
-                                              builder: (context) =>
-                                                  ViewmoreJoinChallenge()));
-                                    },
-                                    child: Container(
-                                      height: 55,
-                                      width: MediaQuery.of(context).size.width *
-                                          0.6,
-                                      decoration: BoxDecoration(
-                                        color: blue1,
-                                        borderRadius: BorderRadius.circular(30),
+                          ? Center(
+                              child: Container(
+                                alignment: Alignment.center,
+                                padding: EdgeInsets.only(
+                                    left: 20, right: 20, top: 150),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      "Please participate in challenges or connect bank account transactions to view earningss",
+                                      textAlign: TextAlign.center,
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        color: Colors.white,
                                       ),
-                                      child: Center(
-                                        child: Text(
-                                          "VIEW CHALLENGE",
-                                          style: GoogleFonts.poppins(
-                                            fontSize: 18,
-                                            fontWeight: FontWeight.w600,
-                                            color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      height: 20,
+                                    ),
+                                    GestureDetector(
+                                      onTap: () {
+                                        Navigator.push(
+                                            context,
+                                            MaterialPageRoute(
+                                                builder: (context) =>
+                                                    WalletChallenges()));
+                                      },
+                                      child: Container(
+                                       width: MediaQuery.of(context).size.width *
+                                          0.6,
+                                      height:
+                                          MediaQuery.of(context).size.height *
+                                              0.06,
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(35),
+                                          color: blue1),
+                                        child: Center(
+                                          child: Text(
+                                            "VIEW CHALLENGES",
+                                            style: TextStyle(
+                                                fontSize: 12,
+                                                fontWeight: FontWeight.w700,
+                                                color: Colors.white,
+                                              ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             )
                           : Column(

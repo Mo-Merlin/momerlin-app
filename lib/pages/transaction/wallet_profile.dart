@@ -15,7 +15,8 @@ import 'package:momerlin/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class WalletProfile extends StatefulWidget {
-  const WalletProfile({Key key}) : super(key: key);
+  final selectindex;
+  const WalletProfile({Key key, this.selectindex}) : super(key: key);
 
   @override
   _WalletProfileState createState() => _WalletProfileState();
@@ -31,7 +32,9 @@ class _WalletProfileState extends State<WalletProfile> {
   TextEditingController _controller = TextEditingController();
   String imageURL;
   getImage(ImageSource source) async {
-    final image = await _picker.pickImage(source: source,);
+    final image = await _picker.pickImage(
+      source: source,
+    );
     if (image != null) {
       File cropped = await ImageCropper.cropImage(
           sourcePath: image.path,
@@ -135,6 +138,7 @@ class _WalletProfileState extends State<WalletProfile> {
   void initState() {
     loading = true;
     super.initState();
+    print(widget.selectindex);
     getUserLanguage();
   }
 
@@ -263,15 +267,18 @@ class _WalletProfileState extends State<WalletProfile> {
                     color: button,
                     child: IconButton(
                         onPressed: () {
-                          // Navigator.pop(context);
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Tabscreen(
-                                index: 0,
-                              ),
-                            ),
-                          );
+                          widget.selectindex != null && widget.selectindex < 4
+                              ?
+                              // Navigator.pop(context);
+                              Navigator.pushReplacement(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => Tabscreen(
+                                      index: widget.selectindex,
+                                    ),
+                                  ),
+                                )
+                              : Navigator.pop(context, false);
                         },
                         icon: Icon(
                           Icons.arrow_back,
@@ -347,7 +354,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                     Container(
                                       alignment: Alignment.topLeft,
                                       height: 40,
-                                      width: 150,
+                                      width: 210,
                                       child: TextField(
                                         onChanged: (value) {
                                           setState(() {
@@ -356,6 +363,26 @@ class _WalletProfileState extends State<WalletProfile> {
                                         },
                                         controller: _controller,
                                         decoration: new InputDecoration(
+                                          suffix: IconButton(
+                                            onPressed: () {
+                                              iconchanged == true
+                                                  ? updateuser(user[0]["uid"],
+                                                      _controller, imageFile)
+                                                  : print("");
+                                            },
+                                            icon: iconchanged == true
+                                                ? Icon(
+                                                    Icons.check_circle,
+                                                    color: Colors.green,
+                                                  )
+                                                : Icon(
+                                                    Icons.edit,
+                                                    color: white,
+                                                  ),
+                                            // icon: Icon(Icons.ac_unit,
+                                            //     color: Colors.white),
+                                          ),
+                                          //   suffix: Icon(Icons.ac_unit,color:Colors.white),
                                           filled: true,
                                           border: InputBorder.none,
                                           hintStyle:
@@ -366,23 +393,23 @@ class _WalletProfileState extends State<WalletProfile> {
                                             fontSize: 13, color: white),
                                       ),
                                     ),
-                                    IconButton(
-                                      onPressed: () {
-                                        iconchanged == true
-                                            ? updateuser(user[0]["uid"],
-                                                _controller, imageURL)
-                                            : print("");
-                                      },
-                                      icon: iconchanged == true
-                                          ? Icon(
-                                              Icons.check_circle,
-                                              color: Colors.green,
-                                            )
-                                          : Icon(
-                                              Icons.edit,
-                                              color: white,
-                                            ),
-                                    )
+                                    // IconButton(
+                                    //   onPressed: () {
+                                    //     iconchanged == true
+                                    //         ? updateuser(user[0]["uid"],
+                                    //             _controller, imageURL)
+                                    //         : print("");
+                                    //   },
+                                    //   icon: iconchanged == true
+                                    //       ? Icon(
+                                    //           Icons.check_circle,
+                                    //           color: Colors.green,
+                                    //         )
+                                    //       : Icon(
+                                    //           Icons.edit,
+                                    //           color: white,
+                                    //         ),
+                                    // )
                                   ],
                                 ),
                               ),

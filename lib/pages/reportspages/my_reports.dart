@@ -11,7 +11,8 @@ import 'my_earnings.dart';
 import 'spending_report.dart';
 
 class MyReports extends StatefulWidget {
-  const MyReports({Key key}) : super(key: key);
+  final selectindex;
+  const MyReports({Key key, this.selectindex}) : super(key: key);
 
   @override
   _MyReportsState createState() => _MyReportsState();
@@ -28,7 +29,7 @@ class _MyReportsState extends State<MyReports> {
   }
 
   var gweibalance = "0";
-  var imageFile="";
+  var imageFile = "";
   bool loading = true;
   // ignore: todo
   //TODO :languagestart
@@ -37,7 +38,7 @@ class _MyReportsState extends State<MyReports> {
 
     user = await UserDataSource().getUser();
     var res = await UserRepository().getUser(user[0]["walletaddress"]);
-    imageFile=res["user"]["imageUrl"];
+    imageFile = res["user"]["imageUrl"];
     gweibalance = res["user"]["gwei"];
     if (lang.length != null && lang.length != 0) {
       userLanguage = lang[0];
@@ -71,9 +72,11 @@ class _MyReportsState extends State<MyReports> {
         //       )
         //     :
         Scaffold(
+          extendBody: true,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
         backgroundColor: blue2,
+        
         elevation: 0,
         leading: Padding(
           padding: const EdgeInsets.all(5.0),
@@ -85,14 +88,18 @@ class _MyReportsState extends State<MyReports> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Tabscreen(
-                          index: 0,
-                        ),
-                      ),
-                    );
+                    widget.selectindex != null && widget.selectindex < 4
+                        ?
+                        // Navigator.pop(context);
+                        Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (_) => Tabscreen(
+                                index: widget.selectindex,
+                              ),
+                            ),
+                          )
+                        : Navigator.pop(context, false);
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -123,18 +130,17 @@ class _MyReportsState extends State<MyReports> {
                     MaterialPageRoute(builder: (context) => WalletProfile()));
               },
               child: ClipRRect(
-                                              borderRadius:
-                                                  BorderRadius.circular(100),
-                                              child: imageFile == ""
-                                                  ? Image.asset(
-                                                      "assets/images/profile.png",
-                                                      fit: BoxFit.fill,
-                                                    )
-                                                  : Image.network(
-                                                      imageFile,
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                            ),
+                borderRadius: BorderRadius.circular(100),
+                child: imageFile == ""
+                    ? Image.asset(
+                        "assets/images/profile.png",
+                        fit: BoxFit.fill,
+                      )
+                    : Image.network(
+                        imageFile,
+                        fit: BoxFit.cover,
+                      ),
+              ),
             ),
           ),
         ],

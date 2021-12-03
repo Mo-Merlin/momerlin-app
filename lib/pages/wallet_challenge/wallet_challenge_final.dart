@@ -9,7 +9,8 @@ import 'challangedetails.dart';
 
 class ChallengeFinal extends StatefulWidget {
   final id;
-  const ChallengeFinal({Key key, this.id}) : super(key: key);
+  final bool focus;
+  const ChallengeFinal({Key key, this.id, this.focus}) : super(key: key);
 
   @override
   _ChallengeFinalState createState() => _ChallengeFinalState();
@@ -51,14 +52,15 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => Tabscreen(
-                          index: 2,
-                        ),
-                      ),
-                    );
+                    Navigator.pop(context, false);
+                    // Navigator.pushReplacement(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //     builder: (_) => Tabscreen(
+                    //       index: 2,
+                    //     ),
+                    //   ),
+                    // );
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -126,14 +128,7 @@ class _ChallengeFinalState extends State<ChallengeFinal> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => Tabscreen(
-                                  index: 2,
-                                ),
-                              ),
-                            );
+                            Navigator.pop(context, false);
                           },
                           child: Container(
                             width: 196,

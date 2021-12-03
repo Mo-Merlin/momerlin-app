@@ -182,7 +182,9 @@ class UserRepository {
     } catch (e) {
       print(e);
       print("error");
-      return false;
+      var checkres = false;
+      //  checkres["status"]=false;
+      return checkres;
     }
   }
 
