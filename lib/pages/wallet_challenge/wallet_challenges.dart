@@ -735,8 +735,8 @@ enum AppState {
 }
 GoogleSignIn _googleSignIn = GoogleSignIn(
   // Optional clientId
-  clientId:
-      '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
+  // clientId:
+  //     '377180466305-inemb4g0usu09f9l9j5p2nrccgcje6bu.apps.googleusercontent.com',
   scopes: <String>[
     'email',
     'https://www.googleapis.com/auth/fitness.activity.read',
@@ -1063,13 +1063,13 @@ class _WalletChallengesState extends State<WalletChallenges> {
     var createchallange = await UserRepository().createchallenge({
       "mode": selecttype,
       "type": challenge,
-      "totalCompetitors": wagar,
+      "totalCompetitors": competitorsgets,
       "streakDays": daychallenge,
       "totalKm": kmchallenge,
       "createdBy": user[0]["uid"],
       "startAt": today1,
       "endAt": expiryDate,
-      "wage": competitorsgets,
+      "wage": wagar,
     });
     if (createchallange == false) {
       Scaffold.of(context)
@@ -1108,7 +1108,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 
   // ignore: non_constant_identifier_names
-  
+
   Future<void> getAllLeaderboard() async {
     setState(() {
       loading = false;
@@ -2134,6 +2134,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                       itemBuilder: (context, index) {
                                         return GestureDetector(
                                           onTap: () async {
+                                            print(
+                                              mychallenge[index].id,
+                                            );
                                             result = await Navigator.push(
                                               context,
                                               MaterialPageRoute(
@@ -2141,9 +2144,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     Challengesdetail(
                                                   focus: true,
                                                   challange:
-                                                      recentWinners[index]
-                                                          .challenge
-                                                          .id,
+                                                      mychallenge[index].id,
                                                 ),
                                               ),
                                             );
@@ -2496,7 +2497,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     Challengesdetail(
                                                   focus: true,
                                                   challange:
-                                                      recentWinners[index]
+                                                      joingetchallenge[index]
                                                           .challenge
                                                           .id,
                                                 ),
@@ -2878,7 +2879,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             builder: (context) =>
                                                 Challengesdetail(
                                               focus: true,
-                                              challange: recentWinners[index]
+                                              challange: leaderboardAll[index]
                                                   .challenge
                                                   .id,
                                             ),
@@ -5541,7 +5542,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   MediaQuery.of(context).size.height * 0.001,
                             ),
                             Container(
-                              height: MediaQuery.of(context).size.height * 0.15,
+                              height: MediaQuery.of(context).size.height * 0.16,
                               child: ScrollSnapList(
                                 duration: 500,
                                 scrollPhysics: BouncingScrollPhysics(),
@@ -5873,14 +5874,14 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                             borderRadius:
                                                 BorderRadius.circular(15)),
                                         child: Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
+                                          // mainAxisAlignment:
+                                          //     MainAxisAlignment.spaceBetween,
                                           children: [
                                             Padding(
                                               padding: const EdgeInsets.only(
                                                   left: 15),
                                               child: Text(
-                                                competitorsgets.toString(),
+                                                wagar.toString(),
                                                 style: GoogleFonts.montserrat(
                                                     decoration:
                                                         TextDecoration.none,
@@ -5889,6 +5890,9 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                     fontWeight:
                                                         FontWeight.w600),
                                               ),
+                                            ),
+                                            SizedBox(
+                                              width: 10,
                                             ),
                                             Text(
                                               (lang.length != null &&
@@ -5904,26 +5908,26 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                   fontSize: 12,
                                                   fontWeight: FontWeight.w400),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  color: blue1,
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.note_add_outlined,
-                                                        color: Colors.white,
-                                                        size: 12,
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       right: 10),
+                                            //   child: ClipRRect(
+                                            //     borderRadius:
+                                            //         BorderRadius.circular(30),
+                                            //     child: Container(
+                                            //       height: 25,
+                                            //       width: 25,
+                                            //       color: blue1,
+                                            //       child: IconButton(
+                                            //           onPressed: () {},
+                                            //           icon: Icon(
+                                            //             Icons.note_add_outlined,
+                                            //             color: Colors.white,
+                                            //             size: 12,
+                                            //           )),
+                                            //     ),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -6125,29 +6129,29 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                                         .w600),
                                                       ),
                                                     ),
-                                                    Padding(
-                                                      padding:
-                                                          const EdgeInsets.only(
-                                                              left: 10),
-                                                      child: ClipRRect(
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(30),
-                                                        child: Container(
-                                                          height: 25,
-                                                          width: 25,
-                                                          color: blue1,
-                                                          child: IconButton(
-                                                              onPressed: () {},
-                                                              icon: Icon(
-                                                                Icons.check,
-                                                                color: Colors
-                                                                    .white,
-                                                                size: 11,
-                                                              )),
-                                                        ),
-                                                      ),
-                                                    ),
+                                                    // Padding(
+                                                    //   padding:
+                                                    //       const EdgeInsets.only(
+                                                    //           left: 10),
+                                                    //   child: ClipRRect(
+                                                    //     borderRadius:
+                                                    //         BorderRadius
+                                                    //             .circular(30),
+                                                    //     child: Container(
+                                                    //       height: 25,
+                                                    //       width: 25,
+                                                    //       color: blue1,
+                                                    //       child: IconButton(
+                                                    //           onPressed: () {},
+                                                    //           icon: Icon(
+                                                    //             Icons.check,
+                                                    //             color: Colors
+                                                    //                 .white,
+                                                    //             size: 11,
+                                                    //           )),
+                                                    //     ),
+                                                    //   ),
+                                                    // ),
                                                   ],
                                                 ),
                                               ),
@@ -6234,7 +6238,7 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                               padding: const EdgeInsets.only(
                                                   left: 15),
                                               child: Text(
-                                                wagar.toString(),
+                                                competitorsgets.toString(),
                                                 style: GoogleFonts.poppins(
                                                     decoration:
                                                         TextDecoration.none,
@@ -6244,26 +6248,26 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                                         FontWeight.w600),
                                               ),
                                             ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 25),
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(30),
-                                                child: Container(
-                                                  height: 25,
-                                                  width: 25,
-                                                  color: blue1,
-                                                  child: IconButton(
-                                                      onPressed: () {},
-                                                      icon: Icon(
-                                                        Icons.note_add_outlined,
-                                                        color: Colors.white,
-                                                        size: 12,
-                                                      )),
-                                                ),
-                                              ),
-                                            ),
+                                            // Padding(
+                                            //   padding: const EdgeInsets.only(
+                                            //       right: 25),
+                                            //   child: ClipRRect(
+                                            //     borderRadius:
+                                            //         BorderRadius.circular(30),
+                                            //     child: Container(
+                                            //       height: 25,
+                                            //       width: 25,
+                                            //       color: blue1,
+                                            //       child: IconButton(
+                                            //           onPressed: () {},
+                                            //           icon: Icon(
+                                            //             Icons.note_add_outlined,
+                                            //             color: Colors.white,
+                                            //             size: 12,
+                                            //           )),
+                                            //     ),
+                                            //   ),
+                                            // ),
                                           ],
                                         ),
                                       ),
@@ -6323,33 +6327,33 @@ class _WalletChallengesState extends State<WalletChallenges> {
                                   ),
                                   // ignore: deprecated_member_use
                                   child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(30),
+                                    ),
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                      createChallenges();
+                                    },
+                                    color: blue1,
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['createchallenge'] !=
+                                                  null)
+                                          ? "${userLanguage['createchallenge']}"
+                                          : "CREATE CHALLENGE",
+                                      style: GoogleFonts.poppins(
+                                        color: Colors.white,
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
                                       ),
-                                      onPressed: () {
-                                        Navigator.pop(context);
-                                        createChallenges();
-                                      },
-                                      color: blue1,
-                                      child: Text(
-                                        (lang.length != null &&
-                                                lang.length != 0 &&
-                                                userLanguage[
-                                                        'createchallenge'] !=
-                                                    null)
-                                            ? "${userLanguage['createchallenge']}"
-                                            : "CREATE CHALLENGE",
-                                        style: GoogleFonts.poppins(
-                                          color: Colors.white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w600,
-                                        ),
-                                      )),
+                                    ),
+                                  ),
                                 ),
-                                SizedBox(
-                                  height:
-                                      MediaQuery.of(context).size.height * 0.02,
-                                ),
+                                // SizedBox(
+                                //   height:
+                                //       MediaQuery.of(context).size.height * 0.02,
+                                // ),
                               ],
                             ),
                           ),
@@ -7093,9 +7097,8 @@ class _WalletChallengesState extends State<WalletChallenges> {
   }
 //challange details screen end//
 
- 
   // ignore: non_constant_identifier_names
-  
+
   Widget _buildListItem(BuildContext context, int index) {
     var blue = Color(0xFF282C4A);
     var orange = Color(0xFFFF8C00);

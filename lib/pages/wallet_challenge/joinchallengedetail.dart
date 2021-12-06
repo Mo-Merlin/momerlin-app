@@ -15,7 +15,8 @@ import 'package:momerlin/theme/theme.dart';
 class JoinChallengesdetail extends StatefulWidget {
   final challange;
   final bool focus;
-  const JoinChallengesdetail({Key key, this.challange,this.focus}) : super(key: key);
+  const JoinChallengesdetail({Key key, this.challange, this.focus})
+      : super(key: key);
 
   @override
   _JoinChallengesdetail createState() => _JoinChallengesdetail();
@@ -433,7 +434,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context,false);
+                    Navigator.pop(context, false);
                     // Navigator.pushReplacement(
                     //     context,
                     //     MaterialPageRoute(
@@ -1626,16 +1627,23 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                     height: 50,
                                   ),
                                   Container(
+                                    padding: EdgeInsets.only(),
+
                                     height: 55,
                                     width:
                                         MediaQuery.of(context).size.width * 0.6,
+
+                                    decoration: BoxDecoration(
+                                        color: button,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
                                     // ignore: deprecated_member_use
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      color: button,
-                                      onPressed: () {
+                                    child: GestureDetector(
+                                      // shape: RoundedRectangleBorder(
+                                      //   borderRadius: BorderRadius.circular(30),
+                                      // ),
+                                      // color: button,
+                                      onTap: () {
                                         if (Platform.isAndroid) {
                                           Navigator.pop(context);
                                           if (user[0]["googlefitenable"] == 1) {
@@ -1658,7 +1666,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                             decoration: BoxDecoration(
                                                 color: white,
                                                 borderRadius:
-                                                    BorderRadius.circular(30)),
+                                                    BorderRadius.circular(100)),
                                             child: Image.asset(
                                               "assets/images/gfit.png",
                                             ),
@@ -1689,13 +1697,14 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                     height: 55,
                                     width:
                                         MediaQuery.of(context).size.width * 0.6,
+
+                                    decoration: BoxDecoration(
+                                        color: button,
+                                        borderRadius:
+                                            BorderRadius.circular(30)),
                                     // ignore: deprecated_member_use
-                                    child: RaisedButton(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(30),
-                                      ),
-                                      color: button,
-                                      onPressed: () {
+                                    child: GestureDetector(
+                                      onTap: () {
                                         if (Platform.isIOS) {
                                           Navigator.pop(context);
                                           if (user[0]["healthfitenable"] == 1) {
@@ -1722,7 +1731,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                                       .withOpacity(0.4),
                                                   borderRadius:
                                                       BorderRadius.circular(
-                                                          30)),
+                                                          100)),
                                               child: Image.asset(
                                                 "assets/images/ahkit.png",
                                               )),
@@ -2303,6 +2312,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
             return Scaffold(
               backgroundColor: backgroundcolor.withOpacity(0.4),
               appBar: AppBar(
+                brightness: Brightness.light,
                 backgroundColor: backgroundcolor.withOpacity(0.4),
                 leading: Card(
                   color: gridcolor,
@@ -2732,7 +2742,7 @@ class _JoinChallengesdetail extends State<JoinChallengesdetail> {
                                       ),
                                       GestureDetector(
                                         onTap: () {
-                                          Navigator.pop(context,false);
+                                          Navigator.pop(context, false);
                                         },
                                         child: Text(
                                           (lang.length != null &&

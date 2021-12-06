@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>249068480908-03hpue0jnnn7cqt4vkm92u63luaacloo.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.249068480908-03hpue0jnnn7cqt4vkm92u63luaacloo</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBGg4gDyOxvwSO1iCDtijeOpqLq7odzTiQ</string>
+	<key>GCM_SENDER_ID</key>
+	<string>249068480908</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.smartchainers.momerlin</string>
+	<key>PROJECT_ID</key>
+	<string>momerlin-3aa88</string>
+	<key>STORAGE_BUCKET</key>
+	<string>momerlin-3aa88.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:249068480908:ios:564a9306e227ce4e89cea9</string>
+</dict>
+</plist>

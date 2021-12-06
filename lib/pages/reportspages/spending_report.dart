@@ -118,7 +118,34 @@ class _SpendingReportState extends State<SpendingReport> {
       var res = await UserRepository().getUser(user[0]["walletaddress"]);
 
       gweibalance = res["user"]["gwei"];
-      getSpendingReports();
+      var res1 =
+        await UserRepository().getSpendingReports(user[0]["walletaddress"]);
+    print(res);
+   
+    if (res["success"] == true) {
+      spendingreports = [];
+      _chartData = [];
+      for (var i = 0; i < res1["spendings"].length; i++) {
+        _chartData.add(
+          GDPData(
+            res1["spendings"][i]["category"]["displayName"],
+            res1["spendings"][i]["percentage"],
+            res1["spendings"][i]["amount"],
+            HexColor(
+              res1["spendings"][i]["category"]["color"],
+            ),
+          ),
+        );
+        // dataMap = {
+        //   res["spendings"][i]["category"]["displayName"]:
+        //       double.parse(res["spendings"][i]["amount"].toString())
+
+        //};
+        spendingreports.add(SpendingReports.fromJson(res1["spendings"][i]));
+      }
+    } 
+    
+   //   getSpendingReports();
       // Navigator.of(context).pushAndRemoveUntil(
       //     MaterialPageRoute(builder: (context) => Tabscreen()),
       //     (Route<dynamic> route) => false);
@@ -523,13 +550,13 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var now_1w = todaydate
                                               .subtract(Duration(days: 7));
                                           var endDate = DateFormat('yyyy-MM-dd')
-                                              .format(todaydate);
+                                             .format(now);
                                           var startDate =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(now_1w);
 
                                           getMyspendingReportsfilter(
-                                              "2021-11-19", "2021-11-29");
+                                             startDate, endDate);
                                           selectType = "";
                                           setState(() {
                                             selectType = "Week";

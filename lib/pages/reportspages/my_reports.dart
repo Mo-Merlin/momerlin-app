@@ -47,10 +47,18 @@ class _MyReportsState extends State<MyReports> {
       loading = false;
     });
   }
-
+Future<Null> refreshList() async {
+    refreshKey.currentState?.show(atTop: false);
+    await Future.delayed(Duration(seconds: 2));
+    getUserLanguage();
+  
+    // gettoken();
+    return null;
+  }
   // ignore: todo
   //TODO: LanguageEnd
 
+  var refreshKey = GlobalKey<RefreshIndicatorState>();
   @override
   Widget build(BuildContext context) {
     return
@@ -71,273 +79,277 @@ class _MyReportsState extends State<MyReports> {
         //         ),
         //       )
         //     :
-        Scaffold(
-          extendBody: true,
+        RefreshIndicator(
+        key: refreshKey,
+        onRefresh: refreshList,
+          child: Scaffold(
+            extendBody: true,
       backgroundColor: backgroundcolor,
       appBar: AppBar(
-        backgroundColor: blue2,
-        
-        elevation: 0,
-        leading: Padding(
-          padding: const EdgeInsets.all(5.0),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(30),
-            child: Container(
-              // height: 50,
-              // width: 50,
-              color: button,
-              child: IconButton(
-                  onPressed: () {
-                    widget.selectindex != null && widget.selectindex < 4
-                        ?
-                        // Navigator.pop(context);
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (_) => Tabscreen(
-                                index: widget.selectindex,
+          backgroundColor: blue2,
+          
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                // height: 50,
+                // width: 50,
+                color: button,
+                child: IconButton(
+                    onPressed: () {
+                      widget.selectindex != null && widget.selectindex < 4
+                          ?
+                          // Navigator.pop(context);
+                          Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => Tabscreen(
+                                  index: widget.selectindex,
+                                ),
                               ),
-                            ),
-                          )
-                        : Navigator.pop(context, false);
-                  },
-                  icon: Icon(
-                    Icons.arrow_back,
-                    color: Colors.white,
-                  )),
-            ),
-          ),
-        ),
-        title: Text(
-          // (lang.length != null &&
-          //         lang.length != 0 &&
-          //         userLanguage['myreports'] != null)
-          //     ? "${userLanguage['myreports']}"
-          //     :
-          "MY REPORTS",
-          style: GoogleFonts.poppins(
-            color: Colors.white,
-            fontSize: 15,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Padding(
-            padding: const EdgeInsets.all(5),
-            child: GestureDetector(
-              onTap: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => WalletProfile()));
-              },
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(100),
-                child: imageFile == ""
-                    ? Image.asset(
-                        "assets/images/profile.png",
-                        fit: BoxFit.fill,
-                      )
-                    : Image.network(
-                        imageFile,
-                        fit: BoxFit.cover,
-                      ),
+                            )
+                          : Navigator.pop(context, false);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    )),
               ),
             ),
           ),
-        ],
+          title: Text(
+            // (lang.length != null &&
+            //         lang.length != 0 &&
+            //         userLanguage['myreports'] != null)
+            //     ? "${userLanguage['myreports']}"
+            //     :
+            "MY REPORTS",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 15,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+          actions: [
+            Padding(
+              padding: const EdgeInsets.all(5),
+              child: GestureDetector(
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => WalletProfile()));
+                },
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(100),
+                  child: imageFile == ""
+                      ? Image.asset(
+                          "assets/images/profile.png",
+                          fit: BoxFit.fill,
+                        )
+                      : Image.network(
+                          imageFile,
+                          fit: BoxFit.cover,
+                        ),
+                ),
+              ),
+            ),
+          ],
       ),
       body: loading == true
-          ? Center(
-              child: Container(
-                height: MediaQuery.of(context).size.height * 0.24,
-                width: MediaQuery.of(context).size.width * 0.55,
-                decoration: BoxDecoration(
-                    color: white.withOpacity(0.9),
-                    borderRadius: BorderRadius.circular(24)),
-                child: Center(child: SpinKitRing(color: blue1)),
-              ),
-            )
-          : SingleChildScrollView(
-              child: Column(
-                children: [
-                  // APPBAR DESIGN WITH BALANCE
-                  Stack(
-                    alignment: Alignment.center,
-                    children: [
-                      Positioned(
-                        child: Image.asset(
-                          "assets/images/rr1.png",
-                          width: MediaQuery.of(context).size.width,
-                          fit: BoxFit.fill,
-                          height: 130,
-                        ),
-                      ),
-                      Positioned(
-                        top: 20,
-                        child: Text(
-                          (lang.length != null &&
-                                  lang.length != 0 &&
-                                  userLanguage['yourBalanceIs'] != null)
-                              ? "${userLanguage['yourBalanceIs']}"
-                              : "Your balance is",
-                          style: GoogleFonts.poppins(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.white,
+            ? Center(
+                child: Container(
+                  height: MediaQuery.of(context).size.height * 0.24,
+                  width: MediaQuery.of(context).size.width * 0.55,
+                  decoration: BoxDecoration(
+                      color: white.withOpacity(0.9),
+                      borderRadius: BorderRadius.circular(24)),
+                  child: Center(child: SpinKitRing(color: blue1)),
+                ),
+              )
+            : SingleChildScrollView(
+                child: Column(
+                  children: [
+                    // APPBAR DESIGN WITH BALANCE
+                    Stack(
+                      alignment: Alignment.center,
+                      children: [
+                        Positioned(
+                          child: Image.asset(
+                            "assets/images/rr1.png",
+                            width: MediaQuery.of(context).size.width,
+                            fit: BoxFit.fill,
+                            height: 130,
                           ),
                         ),
-                      ),
-                      Positioned(
-                        top: 60,
-                        child: Row(
+                        Positioned(
+                          top: 20,
+                          child: Text(
+                            (lang.length != null &&
+                                    lang.length != 0 &&
+                                    userLanguage['yourBalanceIs'] != null)
+                                ? "${userLanguage['yourBalanceIs']}"
+                                : "Your balance is",
+                            style: GoogleFonts.poppins(
+                              fontSize: 20,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ),
+                        Positioned(
+                          top: 60,
+                          child: Row(
+                            children: [
+                              Text(
+                                gweibalance,
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 30,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                              SizedBox(
+                                width: 3,
+                              ),
+                              Text(
+                                "Gwei",
+                                style: GoogleFonts.montserrat(
+                                  fontSize: 12,
+                                  fontWeight: FontWeight.w400,
+                                  color: Colors.orange,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => SpendingReport()));
+                      },
+                      child: Container(
+                        height: 177,
+                        width: 308,
+                        decoration: BoxDecoration(
+                          color: grey,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Column(
                           children: [
+                            SizedBox(
+                              height: 30,
+                            ),
+                            Container(
+                              height: 50,
+                              width: 50,
+                              //color: blue1,
+                              child: Image.asset(
+                                "assets/images/coin.png",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                             Text(
-                              gweibalance,
-                              style: GoogleFonts.montserrat(
-                                fontSize: 30,
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['sendingReports'] != null)
+                                  ? "${userLanguage['sendingReports']}"
+                                  : "Spending Reports",
+                              style: GoogleFonts.poppins(
+                                fontSize: 25,
                                 fontWeight: FontWeight.w600,
                                 color: Colors.white,
                               ),
                             ),
-                            SizedBox(
-                              width: 3,
-                            ),
                             Text(
-                              "Gwei",
-                              style: GoogleFonts.montserrat(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['howmuchareyouspending'] !=
+                                          null)
+                                  ? "${userLanguage['howmuchareyouspending']}"
+                                  : "How much are you spending?",
+                              style: GoogleFonts.poppins(
                                 fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                color: Colors.orange,
+                                color: text1,
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => SpendingReport()));
-                    },
-                    child: Container(
-                      height: 177,
-                      width: 308,
-                      decoration: BoxDecoration(
-                        color: grey,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            //color: blue1,
-                            child: Image.asset(
-                              "assets/images/coin.png",
-                              fit: BoxFit.cover,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => MyEarnings()));
+                      },
+                      child: Container(
+                        height: 177,
+                        width: 308,
+                        decoration: BoxDecoration(
+                          color: grey,
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 30,
                             ),
-                          ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['sendingReports'] != null)
-                                ? "${userLanguage['sendingReports']}"
-                                : "Spending Reports",
-                            style: GoogleFonts.poppins(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
+                            Container(
+                              height: 50,
+                              width: 50,
+                              //color: blue1,
+                              child: Image.asset(
+                                "assets/images/pig_rr.png",
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['howmuchareyouspending'] !=
-                                        null)
-                                ? "${userLanguage['howmuchareyouspending']}"
-                                : "How much are you spending?",
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: text1,
+                            Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['earningReports'] != null)
+                                  ? "${userLanguage['earningReports']}"
+                                  : "Earning Reports",
+                              style: GoogleFonts.poppins(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w600,
+                                color: Colors.white,
+                              ),
                             ),
-                          ),
-                        ],
+                            Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage['howmuchareyouearning'] !=
+                                          null)
+                                  ? "${userLanguage['howmuchareyouearning']}"
+                                  : "How much are you earning?",
+                              style: GoogleFonts.poppins(
+                                fontSize: 12,
+                                color: text1,
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  SizedBox(
-                    height: 30,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => MyEarnings()));
-                    },
-                    child: Container(
-                      height: 177,
-                      width: 308,
-                      decoration: BoxDecoration(
-                        color: grey,
-                        borderRadius: BorderRadius.circular(30),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 30,
-                          ),
-                          Container(
-                            height: 50,
-                            width: 50,
-                            //color: blue1,
-                            child: Image.asset(
-                              "assets/images/pig_rr.png",
-                              fit: BoxFit.cover,
-                            ),
-                          ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['earningReports'] != null)
-                                ? "${userLanguage['earningReports']}"
-                                : "Earning Reports",
-                            style: GoogleFonts.poppins(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w600,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            (lang.length != null &&
-                                    lang.length != 0 &&
-                                    userLanguage['howmuchareyouearning'] !=
-                                        null)
-                                ? "${userLanguage['howmuchareyouearning']}"
-                                : "How much are you earning?",
-                            style: GoogleFonts.poppins(
-                              fontSize: 12,
-                              color: text1,
-                            ),
-                          ),
-                        ],
-                      ),
+                    SizedBox(
+                      height: 100,
                     ),
-                  ),
-                  SizedBox(
-                    height: 100,
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-    );
+    ),
+        );
   }
 }

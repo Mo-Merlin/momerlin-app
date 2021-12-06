@@ -918,8 +918,8 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                               borderRadius: BorderRadius.circular(10)),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 40),
+                      Container(
+                          margin: EdgeInsets.only(top: 30),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
@@ -968,8 +968,9 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                 ],
                               ),
                             )
-                          : Padding(
-                              padding: EdgeInsets.only(top: 50),
+                          : Container(
+                              margin: EdgeInsets.only(top: 60,bottom: 80),
+                            //  padding: EdgeInsets.only(top: 30),
                               // top: 50,
                               child: ListView.builder(
                                 shrinkWrap: true,

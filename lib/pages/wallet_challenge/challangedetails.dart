@@ -364,8 +364,8 @@ bool refresh =false;
                                   color: button,
                                   borderRadius: BorderRadius.circular(15)),
                               child: Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
                                 children: [
                                   Padding(
                                     padding: const EdgeInsets.only(left: 15),
@@ -387,6 +387,7 @@ bool refresh =false;
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
+                                  SizedBox(width:10),
                                   Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&
