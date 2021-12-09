@@ -10,6 +10,7 @@ import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
+import 'package:momerlin/pages/transaction/wallet_screen.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -32,7 +33,7 @@ class _WalletProfileState extends State<WalletProfile> {
   TextEditingController _controller = TextEditingController();
   String imageURL;
   getImage(ImageSource source) async {
-    final image = await _picker.pickImage(
+    final image = await ImagePicker.pickImage(
       source: source,
     );
     if (image != null) {
@@ -299,6 +300,42 @@ class _WalletProfileState extends State<WalletProfile> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              actions: [
+                IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => WalletScreen()));
+                    },
+                    icon: Icon(
+                      FontAwesomeIcons.wallet,
+                      color: Colors.white,
+                      size: 20,
+                    )),
+                // PopupMenuButton(
+                //   itemBuilder: (BuildContext bc) => [
+                //     PopupMenuItem(
+                //         child: Text(
+                //           "Wallet",
+                //           style: GoogleFonts.poppins(
+                //             color: Colors.black,
+                //             fontSize: 15,
+                //           ),
+                //         ),
+                //         value: "/wallet"),
+                //     // PopupMenuItem(
+                //     //     child: Text("New Group Chat"),
+                //     //     value: "/new-group-chat"),
+                //     // PopupMenuItem(child: Text("Settings"), value: "/settings"),
+                //   ],
+                //   onSelected: (route) {
+                //     print(route);
+                //     // Note You must create respective pages for navigation
+                //     Navigator.pushNamed(context, route);
+                //   },
+                // ),
+              ],
             ),
             backgroundColor: backgroundcolor,
             body: SingleChildScrollView(
