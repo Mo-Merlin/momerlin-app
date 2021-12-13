@@ -120,10 +120,11 @@ class _WalletFinalState extends State<WalletFinal> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => Tabscreen()));
+                            Navigator.pop(context);
+                            // Navigator.push(
+                            //     context,
+                            //     MaterialPageRoute(
+                            //         builder: (context) => Tabscreen()));
                           },
                           child: Container(
                             width: 245,

@@ -38,6 +38,7 @@ dependencies:
   # #bitcoin
   # bitcoin_flutter: ^2.0.2
   bip32: 
+  tuple: ^2.0.0
   #sqlite
   sqflite: ^2.0.0+4
   # Object Compare
@@ -58,6 +59,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   #qrflutter
   qr_flutter: ^4.0.0
+  qrscan: ^0.3.2
   #clipboard
   clipboard: ^0.1.3
   #virutual keyboard
@@ -84,16 +86,17 @@ dependencies:
   cached_network_image: ^3.2.0
   share: ^2.0.4
   #image picker
-  image_picker: 
+  image_picker: ^0.8.4+1
   #image cropper
   image_cropper: ^1.4.1
   url_launcher: ^6.0.10
   # firebase_storage:
   firebase_storage: ^10.1.0
-  
+  fluttertoast: ^8.0.7
   firebase_core: ^1.6.0
   # firebase: ^7.3.3
   # firebase_core: ^0.7.0
+  lottie: ^1.1.0
 
 
 
@@ -118,8 +121,8 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
-
-  # An image asset can refer to one or more resolution-specific "variants", see
+    - assets/momerlin/lottie/
+      # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
 
   # For details regarding adding assets from package dependencies, see

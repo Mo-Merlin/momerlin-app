@@ -61,8 +61,9 @@ class _WalletProfileState extends State<WalletProfile> {
 
   TextEditingController _controller = TextEditingController();
   String imageURL;
+  
   getImage(ImageSource source) async {
-    final image = await ImagePicker.pickImage(
+    final image = await _picker.pickImage(
       source: source,
     );
     if (image != null) {
