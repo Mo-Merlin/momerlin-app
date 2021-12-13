@@ -13,11 +13,40 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/pages/transaction/wallet_screen.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
+import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+class MenuItem {
+  final String menuTextName;
+  final IconData menuIconName;
+  const MenuItem({
+    this.menuTextName,
+    this.menuIconName,
+  });
+}
+
+class MenuItems {
+  static const List<MenuItem> menuItems = [
+    itemWallet,
+    itemShare,
+  ];
+  static const itemWallet = MenuItem(
+    menuTextName: 'Wallet',
+    menuIconName: FontAwesomeIcons.wallet,
+  );
+  static const itemShare = MenuItem(
+    menuTextName: 'Share',
+    menuIconName: FontAwesomeIcons.share,
+  );
+}
 
 class WalletProfile extends StatefulWidget {
   final selectindex;
-  const WalletProfile({Key key, this.selectindex}) : super(key: key);
+
+  const WalletProfile({
+    Key key,
+    this.selectindex,
+  }) : super(key: key);
 
   @override
   _WalletProfileState createState() => _WalletProfileState();
@@ -301,40 +330,78 @@ class _WalletProfileState extends State<WalletProfile> {
                 ),
               ),
               actions: [
-                IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WalletScreen()));
-                    },
-                    icon: Icon(
-                      FontAwesomeIcons.wallet,
-                      color: Colors.white,
-                      size: 20,
-                    )),
-                // PopupMenuButton(
-                //   itemBuilder: (BuildContext bc) => [
-                //     PopupMenuItem(
-                //         child: Text(
-                //           "Wallet",
-                //           style: GoogleFonts.poppins(
-                //             color: Colors.black,
-                //             fontSize: 15,
-                //           ),
-                //         ),
-                //         value: "/wallet"),
-                //     // PopupMenuItem(
-                //     //     child: Text("New Group Chat"),
-                //     //     value: "/new-group-chat"),
-                //     // PopupMenuItem(child: Text("Settings"), value: "/settings"),
-                //   ],
-                //   onSelected: (route) {
-                //     print(route);
-                //     // Note You must create respective pages for navigation
-                //     Navigator.pushNamed(context, route);
+                // IconButton(
+                //     onPressed: () {
+                //       Navigator.push(
+                //           context,
+                //           MaterialPageRoute(
+                //               builder: (context) => WalletScreen()));
+                //     },
+                //     icon: Icon(
+                //       FontAwesomeIcons.wallet,
+                //       color: Colors.white,
+                //       size: 20,
+                //     )),
+
+                // PopupMenuButton<MenuItem>(
+                //   onSelected: (menuItems) {
+                //     switch (menuItems) {
+                //       case MenuItems.itemWallet:
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => WalletScreen()));
+                //         break;
+                //       // case MenuItems.itemShare:
+                //       //   Navigator.push(
+                //       //       context,
+                //       //       MaterialPageRoute(
+                //       //           builder: (context) => ));
+                //       //   break;
+                //       default:
+                //     }
                 //   },
-                // ),
+                //   itemBuilder: (context) => [
+                //     PopupMenuItem<MenuItem>(
+                //         value: MenuItems.menuItems[0],
+                //         child: Row(
+                //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //           children: [
+                //             Icon(
+                //               FontAwesomeIcons.wallet,
+                //               color: Colors.black,
+                //               size: 18,
+                //             ),
+                //             Text(
+                //               "Wallet",
+                //               style: GoogleFonts.poppins(
+                //                 color: Colors.black,
+                //                 fontSize: 15,
+                //               ),
+                //             )
+                //           ],
+                //         )),
+                //     // PopupMenuItem<MenuItem>(
+                //     //     value: MenuItems.menuItems[1],
+                //     //     child: Row(
+                //     //       mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                //     //       children: [
+                //     //         Icon(
+                //     //           FontAwesomeIcons.share,
+                //     //           color: Colors.black,
+                //     //           size: 20,
+                //     //         ),
+                //     //         Text(
+                //     //           "Share",
+                //     //           style: GoogleFonts.poppins(
+                //     //             color: Colors.black,
+                //     //             fontSize: 13,
+                //     //           ),
+                //     //         )
+                //     //       ],
+                //     //     ))
+                //   ],
+                // )
               ],
             ),
             backgroundColor: backgroundcolor,
@@ -823,6 +890,52 @@ class _WalletProfileState extends State<WalletProfile> {
                   //     ),
                   //   ),
                   // ),
+                  Padding(
+                    padding:
+                        const EdgeInsets.only(left: 20, right: 20, top: 10),
+                    child: GestureDetector(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => WalletScreen()));
+                      },
+                      child: Container(
+                        height: 70,
+                        decoration: BoxDecoration(
+                          color: button,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Center(
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(
+                                        left: 20, top: 25),
+                                    child: Text(
+                                      (lang.length != null &&
+                                              lang.length != 0 &&
+                                              userLanguage['aboutus'] != null)
+                                          ? "${userLanguage['aboutus']}"
+                                          : "WALLET",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 12,
+                                        fontWeight: FontWeight.w600,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
                   Padding(
                     padding:
                         const EdgeInsets.only(left: 20, right: 20, top: 10),

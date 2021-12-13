@@ -8,7 +8,6 @@ import 'package:qr_flutter/qr_flutter.dart';
 import 'package:clipboard/clipboard.dart';
 import 'package:share/share.dart';
 
-import 'dart:io';
 class WalletReceive extends StatefulWidget {
   @override
   _WalletReceiveState createState() => _WalletReceiveState();
