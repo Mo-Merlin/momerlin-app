@@ -1,19 +1,13 @@
-// import 'dart:math';
 import 'dart:ui';
-
-// import 'package:decimal/decimal.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
-// import 'package:momerlin/data/web3.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:virtual_keyboard/virtual_keyboard.dart';
-
 import 'wallet_final.dart';
-// import 'package:web3dart/web3dart.dart';
 
 class WalletSend extends StatefulWidget {
   const WalletSend({Key key}) : super(key: key);

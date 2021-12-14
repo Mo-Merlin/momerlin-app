@@ -41,6 +41,7 @@ class _WalletReceiveState extends State<WalletReceive> {
 
   // ignore: todo
   //TODO: LanguageEnd
+  // ignore: unused_element
   _onShareData(BuildContext context) async {
     final RenderBox box = context.findRenderObject();
     {
@@ -95,7 +96,7 @@ class _WalletReceiveState extends State<WalletReceive> {
                 ),
               ),
               title: Text(
-                "Receive Gwei",
+                "RECEIVE FUNDS",
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontSize: 17,

@@ -3,7 +3,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+// import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'joinchallengedetail.dart';
 
@@ -184,7 +184,7 @@ class GetChallenge {
 
 class ViewmoreJoinChallenge extends StatefulWidget {
   final bool focus;
-  const ViewmoreJoinChallenge({Key key,this.focus}) : super(key: key);
+  const ViewmoreJoinChallenge({Key key, this.focus}) : super(key: key);
 
   @override
   _ViewmoreJoinChallengeState createState() => _ViewmoreJoinChallengeState();
@@ -284,7 +284,7 @@ class _ViewmoreJoinChallengeState extends State<ViewmoreJoinChallenge> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                   Navigator.pop(context,false);
+                  Navigator.pop(context, false);
                   // Navigator.pushReplacement(
                   //   context,
                   //   MaterialPageRoute(

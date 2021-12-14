@@ -11,11 +11,11 @@ import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/myearningactivitymodel.dart';
 import 'package:momerlin/pages/transaction/wallet_profile.dart';
-import 'package:momerlin/pages/wallet_challenge/viewmore_join_challenge.dart';
+//import 'package:momerlin/pages/wallet_challenge/viewmore_join_challenge.dart';
 import 'package:momerlin/pages/wallet_challenge/wallet_challenges.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+//import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+//import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class MyEarnings extends StatefulWidget {
@@ -170,7 +170,7 @@ class _MyEarningsState extends State<MyEarnings> {
         //     :
         Scaffold(
       backgroundColor: backgroundcolor,
-       extendBody: true,
+      extendBody: true,
       appBar: AppBar(
         backgroundColor: blue2,
         elevation: 0,
@@ -343,23 +343,24 @@ class _MyEarningsState extends State<MyEarnings> {
                                                     WalletChallenges()));
                                       },
                                       child: Container(
-                                       width: MediaQuery.of(context).size.width *
-                                          0.6,
-                                      height:
-                                          MediaQuery.of(context).size.height *
-                                              0.06,
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(35),
-                                          color: blue1),
+                                        width:
+                                            MediaQuery.of(context).size.width *
+                                                0.6,
+                                        height:
+                                            MediaQuery.of(context).size.height *
+                                                0.06,
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(35),
+                                            color: blue1),
                                         child: Center(
                                           child: Text(
                                             "VIEW CHALLENGES",
                                             style: TextStyle(
-                                                fontSize: 12,
-                                                fontWeight: FontWeight.w700,
-                                                color: Colors.white,
-                                              ),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.white,
+                                            ),
                                           ),
                                         ),
                                       ),

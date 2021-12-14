@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/spendingreportsmodel.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+//import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
 import 'package:timeago/timeago.dart' as timeago;
@@ -119,33 +119,33 @@ class _SpendingReportState extends State<SpendingReport> {
 
       gweibalance = res["user"]["gwei"];
       var res1 =
-        await UserRepository().getSpendingReports(user[0]["walletaddress"]);
-    print(res);
-   
-    if (res["success"] == true) {
-      spendingreports = [];
-      _chartData = [];
-      for (var i = 0; i < res1["spendings"].length; i++) {
-        _chartData.add(
-          GDPData(
-            res1["spendings"][i]["category"]["displayName"],
-            res1["spendings"][i]["percentage"],
-            res1["spendings"][i]["amount"],
-            HexColor(
-              res1["spendings"][i]["category"]["color"],
-            ),
-          ),
-        );
-        // dataMap = {
-        //   res["spendings"][i]["category"]["displayName"]:
-        //       double.parse(res["spendings"][i]["amount"].toString())
+          await UserRepository().getSpendingReports(user[0]["walletaddress"]);
+      print(res);
 
-        //};
-        spendingreports.add(SpendingReports.fromJson(res1["spendings"][i]));
+      if (res["success"] == true) {
+        spendingreports = [];
+        _chartData = [];
+        for (var i = 0; i < res1["spendings"].length; i++) {
+          _chartData.add(
+            GDPData(
+              res1["spendings"][i]["category"]["displayName"],
+              res1["spendings"][i]["percentage"],
+              res1["spendings"][i]["amount"],
+              HexColor(
+                res1["spendings"][i]["category"]["color"],
+              ),
+            ),
+          );
+          // dataMap = {
+          //   res["spendings"][i]["category"]["displayName"]:
+          //       double.parse(res["spendings"][i]["amount"].toString())
+
+          //};
+          spendingreports.add(SpendingReports.fromJson(res1["spendings"][i]));
+        }
       }
-    } 
-    
-   //   getSpendingReports();
+
+      //   getSpendingReports();
       // Navigator.of(context).pushAndRemoveUntil(
       //     MaterialPageRoute(builder: (context) => Tabscreen()),
       //     (Route<dynamic> route) => false);
@@ -458,8 +458,8 @@ class _SpendingReportState extends State<SpendingReport> {
 
                       text != null
                           ? Container(
-                              padding:
-                                  EdgeInsets.only(left: 20, right: 20, top: 150),
+                              padding: EdgeInsets.only(
+                                  left: 20, right: 20, top: 150),
                               alignment: Alignment.center,
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -550,13 +550,13 @@ class _SpendingReportState extends State<SpendingReport> {
                                           var now_1w = todaydate
                                               .subtract(Duration(days: 7));
                                           var endDate = DateFormat('yyyy-MM-dd')
-                                             .format(now);
+                                              .format(now);
                                           var startDate =
                                               DateFormat('yyyy-MM-dd')
                                                   .format(now_1w);
 
                                           getMyspendingReportsfilter(
-                                             startDate, endDate);
+                                              startDate, endDate);
                                           selectType = "";
                                           setState(() {
                                             selectType = "Week";

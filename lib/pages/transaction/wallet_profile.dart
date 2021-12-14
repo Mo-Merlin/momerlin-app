@@ -13,7 +13,7 @@ import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/pages/transaction/wallet_screen.dart';
 import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
-import 'package:share/share.dart';
+//import 'package:share/share.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class MenuItem {
@@ -61,7 +61,7 @@ class _WalletProfileState extends State<WalletProfile> {
 
   TextEditingController _controller = TextEditingController();
   String imageURL;
-  
+
   getImage(ImageSource source) async {
     final image = await _picker.pickImage(
       source: source,
@@ -243,6 +243,7 @@ class _WalletProfileState extends State<WalletProfile> {
         });
   }
 
+  // ignore: unused_element
   void _showScaffold(String message) {
     // ignore: deprecated_member_use
     scaffoldKeyWallet.currentState.showSnackBar(
@@ -264,6 +265,7 @@ class _WalletProfileState extends State<WalletProfile> {
   //TODO :languagestart
   bool iconchanged = false;
 
+  // ignore: unused_field
   String _chosenValue;
 
   final GlobalKey<ScaffoldState> scaffoldKeyWallet =
@@ -608,6 +610,7 @@ class _WalletProfileState extends State<WalletProfile> {
                                           ).then(
                                             (result) {
                                               Scaffold.of(context)
+                                                  // ignore: deprecated_member_use
                                                   .showSnackBar(SnackBar(
                                                 content: Text(
                                                     'Wallet address copied to clipboard.'),

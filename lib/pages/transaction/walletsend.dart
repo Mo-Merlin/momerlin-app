@@ -10,13 +10,13 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:lottie/lottie.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/pages/transaction/wallet_final.dart';
-import 'package:momerlin/services/toast.dart';
+//import 'package:momerlin/services/toast.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet%20api/eth_formetter.dart';
 import 'package:momerlin/wallet%20api/validate_address.dart';
 import 'package:momerlin/wallet%20api/wallet_api.dart';
 import '/models/ethgas.dart';
-import 'package:permission_handler/permission_handler.dart';
+// import 'package:permission_handler/permission_handler.dart';
 // import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:http/http.dart' as http;
 import 'package:web3dart/web3dart.dart';
@@ -37,6 +37,7 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   TextEditingController _controller = TextEditingController();
   TextEditingController _amount = TextEditingController();
+  // ignore: unused_field
   TextEditingController _password = TextEditingController();
   AnimationController _lottie;
   bool addressError = false;

@@ -4,7 +4,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+// import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
 import 'challangedetails.dart';
@@ -235,7 +235,7 @@ class LeaderCompetitor {
 
 class ViewmoreRecentWinners extends StatefulWidget {
   final bool focus;
-  const ViewmoreRecentWinners({Key key,this.focus}) : super(key: key);
+  const ViewmoreRecentWinners({Key key, this.focus}) : super(key: key);
 
   @override
   _ViewmoreRecentWinnersState createState() => _ViewmoreRecentWinnersState();
@@ -344,7 +344,7 @@ class _ViewmoreRecentWinnersState extends State<ViewmoreRecentWinners> {
               color: button,
               child: IconButton(
                 onPressed: () {
-                   Navigator.pop(context,false);
+                  Navigator.pop(context, false);
                   // Navigator.pushReplacement(
                   //   context,
                   //   MaterialPageRoute(

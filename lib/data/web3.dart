@@ -49,6 +49,7 @@ class Web3 {
 
   Future<String> getAddressFromPrivateKey(privateKey) async {
     try {
+      // ignore: deprecated_member_use
       final credentials = await _client.credentialsFromPrivateKey(privateKey);
       return (await credentials.extractAddress()).toString();
     } catch (e) {
@@ -60,6 +61,7 @@ class Web3 {
       String address, String privateKey, EtherAmount amount, BigInt fee) async {
     try {
       Credentials credentials =
+          // ignore: deprecated_member_use
           await ethClientMain.credentialsFromPrivateKey(privateKey);
       String txHash = await ethClientMain.sendTransaction(
           credentials,
@@ -84,6 +86,7 @@ class Web3 {
       String address, String privateKey, EtherAmount amount, BigInt fee) async {
     try {
       Credentials credentials =
+          // ignore: deprecated_member_use
           await _client.credentialsFromPrivateKey(privateKey);
       String txHash = await _client.sendTransaction(
           credentials,

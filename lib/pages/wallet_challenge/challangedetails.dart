@@ -4,13 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
-import 'package:momerlin/tabscreen/tabscreen.dart';
+// import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 
 class Challengesdetail extends StatefulWidget {
-  final bool  focus;
+  final bool focus;
   final challange;
-  const Challengesdetail({Key key, this.challange,this.focus}) : super(key: key);
+  const Challengesdetail({Key key, this.challange, this.focus})
+      : super(key: key);
 
   @override
   _ChallengesdetailState createState() => _ChallengesdetailState();
@@ -186,7 +187,7 @@ class _ChallengesdetailState extends State<Challengesdetail> {
     spendingPink,
     containerOrange,
   ];
-bool refresh =false;
+  bool refresh = false;
   @override
   Widget build(BuildContext context) {
     return
@@ -219,7 +220,7 @@ bool refresh =false;
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context,refresh);
+                    Navigator.pop(context, refresh);
                     // Navigator.pushReplacement(
                     //     context,
                     //     MaterialPageRoute(
@@ -387,7 +388,7 @@ bool refresh =false;
                                                 fontWeight: FontWeight.w600),
                                           ),
                                   ),
-                                  SizedBox(width:10),
+                                  SizedBox(width: 10),
                                   Text(
                                     (lang.length != null &&
                                             lang.length != 0 &&

@@ -75,6 +75,7 @@ class WalletScreen extends StatefulWidget {
 
 class _WalletScreenState extends State<WalletScreen>
     with WidgetsBindingObserver {
+  // ignore: unused_field
   PlaidLink _plaidLinkToken;
   var userLanguage, user, lang = [];
   bool loading = true;
@@ -303,7 +304,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                               'yourBalanceIs'] !=
                                                           null)
                                                   ? "${userLanguage['yourBalanceIs']}"
-                                                  : "Your balance is",
+                                                  : "Your balance",
                                               style: GoogleFonts.poppins(
                                                 fontSize: 25,
                                                 fontWeight: FontWeight.w600,
@@ -821,7 +822,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                             height: 20,
                                                           ),
                                                           Container(
-                                                            width: 100,
+                                                            width: 150,
                                                             child: transactions[
                                                                             index]
                                                                         [
@@ -860,7 +861,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                             child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .end,
+                                                                      .start,
                                                               children: [
                                                                 Text(
                                                                   amount1
