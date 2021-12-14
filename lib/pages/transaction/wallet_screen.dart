@@ -774,10 +774,10 @@ class _WalletScreenState extends State<WalletScreen>
                                                     //     "$ethNetworkUrl${transactions[index]['hash']}");
                                                   },
                                                   child: Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 10,
-                                                        right: 10,
-                                                        bottom: 10),
+                                                    // margin: EdgeInsets.only(
+                                                    //     left: 10,
+                                                    //     right: 10,
+                                                    //     bottom: 10),
                                                     padding:
                                                         EdgeInsets.symmetric(
                                                             vertical: 5),
@@ -794,6 +794,8 @@ class _WalletScreenState extends State<WalletScreen>
                                                     // ),
                                                     child: ListTile(
                                                       leading: Container(
+                                                        // color:
+                                                        //     Colors.amberAccent,
                                                         height: 50,
                                                         width: 50,
                                                         child: Icon(
@@ -822,7 +824,12 @@ class _WalletScreenState extends State<WalletScreen>
                                                             height: 20,
                                                           ),
                                                           Container(
-                                                            width: 150,
+                                                            // color: Colors.amber,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.4,
                                                             child: transactions[
                                                                             index]
                                                                         [
@@ -857,11 +864,19 @@ class _WalletScreenState extends State<WalletScreen>
                                                                   ),
                                                           ),
                                                           Container(
-                                                            width: 150,
+                                                            // color: Colors.red,
+                                                            width: MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width *
+                                                                0.3,
                                                             child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .start,
+                                                                      .end,
+                                                              mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .spaceAround,
                                                               children: [
                                                                 Text(
                                                                   amount1
@@ -870,7 +885,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                                   style: GoogleFonts
                                                                       .poppins(
                                                                     fontSize:
-                                                                        17,
+                                                                        15,
                                                                     color: Colors
                                                                         .white,
                                                                     fontWeight:
@@ -889,7 +904,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                                   style: GoogleFonts
                                                                       .poppins(
                                                                     fontSize:
-                                                                        16,
+                                                                        15,
                                                                     color: Colors
                                                                         .white,
                                                                     fontWeight:

@@ -15,6 +15,7 @@ import 'package:momerlin/theme/theme.dart';
 import 'package:momerlin/wallet%20api/eth_formetter.dart';
 import 'package:momerlin/wallet%20api/validate_address.dart';
 import 'package:momerlin/wallet%20api/wallet_api.dart';
+import 'package:virtual_keyboard/virtual_keyboard.dart';
 import '/models/ethgas.dart';
 // import 'package:permission_handler/permission_handler.dart';
 // import 'package:qrscan/qrscan.dart' as scanner;
@@ -257,326 +258,463 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     ThemeData theme = Theme.of(context);
-    return Container(
-      color: backgroundcolor,
-      child: SafeArea(
-        child: Scaffold(
-            key: _scaffoldKey,
-            backgroundColor: backgroundcolor,
-            body: Container(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Expanded(
-                    child: Column(
-                      children: [
-                        Container(
-                          color: backgroundcolor,
-                          child: Column(
-                            children: [
-                              Container(
-                                margin: EdgeInsets.only(top: 5),
-                                child: Row(
-                                  children: [
-                                    Container(
-                                        margin: EdgeInsets.only(left: 10),
-                                        child: IconButton(
-                                          icon: Icon(
-                                            Icons.arrow_back_ios,
-                                            size: 25,
-                                            color: white,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.pop(context);
-                                          },
-                                        )),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      padding: EdgeInsets.only(left: 5),
-                                      child: Text(
-                                        'Send to..',
-                                        overflow: TextOverflow.ellipsis,
-                                        style: GoogleFonts.poppins(
-                                          fontSize: 20,
-                                          fontWeight: FontWeight.w400,
-                                          color: Colors.white,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              gotbalance
-                                  ? Container(
-                                      margin: EdgeInsets.only(top: 5, right: 5),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.end,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              "Balance: ",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Container(
-                                            child: Text(
-                                              commonbalance.toString(),
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 17,
-                                                fontWeight: FontWeight.w400,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    )
-                                  : Container(),
-                              Container(
-                                padding: EdgeInsets.only(
-                                    left: 20, top: 0, right: 15),
-                                child: Column(
-                                  children: [
-                                    Container(
-                                      margin: EdgeInsets.only(top: 20),
-                                      child: Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Container(
-                                            child: Text(
-                                              "Amount: ",
-                                              style: GoogleFonts.poppins(
-                                                fontSize: 20,
-                                                fontWeight: FontWeight.w600,
-                                                color: Colors.white,
-                                              ),
-                                            ),
-                                          ),
-                                          Row(
-                                            children: [
-                                              Container(
-                                                alignment: Alignment.center,
-                                                width: 100,
-                                                height: 45,
-                                                margin:
-                                                    EdgeInsets.only(left: 10),
-                                                decoration: BoxDecoration(
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          10.0),
-                                                  color: white,
-                                                ),
-                                                child: TextField(
-                                                  keyboardType:
-                                                      TextInputType.number,
-                                                  controller: _amount,
-                                                  textAlign: TextAlign.center,
-                                                  showCursor: false,
-                                                  style: TextStyle(
-                                                      color: theme.textTheme
-                                                          .bodyText1.color,
-                                                      fontSize: 20),
-                                                  onChanged: (value) {
-                                                    setState(() {
-                                                      amountError = false;
-                                                      sending = false;
-                                                    });
-                                                  },
-                                                  decoration: InputDecoration(
-                                                    contentPadding:
-                                                        EdgeInsets.only(top: 0),
-                                                    border: InputBorder.none,
-                                                    hintText: '0',
-                                                    hintStyle:
-                                                        GoogleFonts.poppins(
-                                                      fontSize: 17,
-                                                      fontWeight:
-                                                          FontWeight.w400,
-                                                      color: amountError
-                                                          ? Colors.red
-                                                          : theme.textTheme
-                                                              .bodyText1.color,
-                                                    ),
-                                                    alignLabelWithHint: true,
-                                                  ),
-                                                  onTap: () {},
-                                                ),
-                                              ),
-                                            ],
-                                          ),
-                                          SizedBox(
-                                              width: MediaQuery.of(context)
-                                                      .size
-                                                      .width /
-                                                  4.25)
-                                        ],
-                                      ),
-                                    ),
-                                    amountError
-                                        ? Container(
-                                            margin: EdgeInsets.only(top: 5),
-                                            alignment: Alignment.topLeft,
-                                            child: Container(
-                                              child: Text(
-                                                errorMessage2,
-                                                style: GoogleFonts.poppins(
-                                                  fontSize: 14,
-                                                  fontWeight: FontWeight.w400,
-                                                  color: amountError
-                                                      ? Colors.red
-                                                      : theme.textTheme
-                                                          .bodyText1.color,
-                                                ),
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ),
-                                          )
-                                        : Container(),
-                                  ],
-                                ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(
-                                    top: 20, left: 20, right: 20),
-                                alignment: Alignment.center,
-                                width: MediaQuery.of(context).size.width,
-                                height: 45,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  color: white,
-                                ),
-                                child: TextField(
-                                  controller: _controller,
-                                  textAlign: TextAlign.start,
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 17,
-                                    fontWeight: FontWeight.w400,
-                                    color: Colors.black,
-                                  ),
-                                  onChanged: (value) {
-                                    setState(() {
-                                      addressError = false;
-                                    });
-                                  },
-                                  decoration: InputDecoration(
-                                      hintText: 'Enter the address',
-                                      hintStyle: TextStyle(
-                                          color:
-                                              theme.textTheme.bodyText1.color),
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          _scan();
-                                        },
-                                        icon: Icon(
-                                          Icons.qr_code_2,
-                                          color:
-                                              theme.textTheme.bodyText1.color,
-                                          size: 30,
-                                        ),
-                                      ),
-                                      contentPadding:
-                                          EdgeInsets.only(left: 10, top: 10),
-                                      border: InputBorder.none),
-                                  onTap: () {},
-                                ),
-                              ),
-                              addressError
-                                  ? Container(
-                                      alignment: Alignment.centerLeft,
-                                      margin: EdgeInsets.only(left: 25),
-                                      child: Row(
-                                        children: [
-                                          Icon(
-                                            FontAwesomeIcons.exclamationCircle,
-                                            size: 17,
-                                            color: Colors.red,
-                                          ),
-                                          SizedBox(width: 8),
-                                          Container(
-                                            margin: EdgeInsets.only(top: 5),
-                                            child: Text(
-                                              errorMessage,
-                                              style: TextStyle(
-                                                fontFamily: 'Avenir',
-                                                color: Colors.red,
-                                                fontSize: 15,
-                                                fontWeight: FontWeight.w500,
-                                              ),
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ),
-                                        ],
-                                      ))
-                                  : Container(),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Align(
-                                alignment: Alignment.center,
-                                child: Container(
-                                  height: 40,
-                                  margin: EdgeInsets.only(top: 15),
-                                  padding: EdgeInsets.symmetric(horizontal: 30),
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      color: blue1),
-                                  child: TextButton(
-                                    onPressed: sending
-                                        ? null
-                                        : () {
-                                            if (_amount.text == '') {
-                                              setState(() {
-                                                errorMessage2 =
-                                                    'Please enter amount';
-                                                amountError = true;
-                                                sending = true;
-                                              });
-                                            } else if (_controller.text == '') {
-                                              setState(() {
-                                                errorMessage =
-                                                    'Please enter address';
-                                                addressError = true;
-                                              });
-                                            } else if (ValidateETH()
-                                                .isValidEthereumAddress(
-                                                    _controller.text)) {
-                                              sendTransaction(_amount.text);
-                                            } else {
-                                              setState(() {
-                                                errorMessage =
-                                                    'Not a valid address';
-                                                addressError = true;
-                                              });
-                                            }
-                                          },
-                                    child: Text(
-                                      sending ? "Sending" : "Send",
-                                      style: GoogleFonts.poppins(
-                                          color: white,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w500),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ],
+    return Scaffold(
+        key: _scaffoldKey,
+        backgroundColor: backgroundcolor,
+        appBar: AppBar(
+          backgroundColor: backgroundcolor,
+          elevation: 0,
+          leading: Padding(
+            padding: const EdgeInsets.all(5.0),
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(30),
+              child: Container(
+                // height: 50,
+                // width: 50,
+                color: button,
+                child: IconButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    icon: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    )),
+              ),
+            ),
+          ),
+          title: Text(
+            (lang.length != null &&
+                    lang.length != 0 &&
+                    userLanguage['sendfunds'] != null)
+                ? "${userLanguage['sendfunds']}"
+                : "SEND FUNDS",
+            style: GoogleFonts.poppins(
+              color: Colors.white,
+              fontSize: 17,
+              fontWeight: FontWeight.w600,
+            ),
+          ),
+        ),
+        body: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.02,
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 5, right: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Container(
+                        height: 25,
+                        width: 25,
+                        child: CircleAvatar(
+                          child: Image.asset(
+                            "assets/images/ethereum_wallet.png",
+                            fit: BoxFit.fill,
                           ),
                         ),
-                      ],
-                    ),
+                      ),
+                      SizedBox(
+                        width: 8,
+                      ),
+                      Container(
+                        child: Text(
+                          "BALANCE : ",
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.white,
+                          ),
+                        ),
+                      ),
+                      gotbalance
+                          ? Container(
+                              child: Text(
+                                commonbalance.toString(),
+                                style: GoogleFonts.poppins(
+                                  fontSize: 17,
+                                  fontWeight: FontWeight.w600,
+                                  color: Colors.white,
+                                ),
+                              ),
+                            )
+                          : Container(),
+                    ],
                   ),
-                ],
-              ),
-            )),
-      ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                Text(
+                  (lang.length != null &&
+                          lang.length != 0 &&
+                          userLanguage['iwanttosend'] != null)
+                      ? "${userLanguage['iwanttosend']}"
+                      : "I want to send",
+                  style: GoogleFonts.poppins(
+                    color: Colors.white,
+                    fontSize: 21,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      // color: Colors.amber,
+                      width: MediaQuery.of(context).size.width * 0.25,
+                      child: TextField(
+                        keyboardType: TextInputType.number,
+                        controller: _amount,
+                        textAlign: TextAlign.center,
+                        showCursor: false,
+                        style: TextStyle(color: white, fontSize: 30),
+                        onChanged: (value) {
+                          setState(() {
+                            amountError = false;
+                            sending = false;
+                          });
+                        },
+                        decoration: InputDecoration(
+                          contentPadding: EdgeInsets.only(top: 0),
+                          border: InputBorder.none,
+                          hintText: '0',
+                          hintStyle: GoogleFonts.poppins(
+                            fontSize: 30,
+                            fontWeight: FontWeight.w400,
+                            color: amountError ? Colors.red : white,
+                          ),
+                          alignLabelWithHint: true,
+                        ),
+                        onTap: () {
+                          _showVirutalkeyboardMobile();
+                        },
+                      ),
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    Text(
+                      "ETH",
+                      style: GoogleFonts.montserrat(
+                        fontSize: 21,
+                        color: orange,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
+                  ],
+                ),
+                amountError
+                    ? Container(
+                        margin: EdgeInsets.only(top: 5),
+                        alignment: Alignment.center,
+                        child: Container(
+                          child: Text(
+                            errorMessage2,
+                            style: GoogleFonts.poppins(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w400,
+                              color: amountError
+                                  ? Colors.red
+                                  : theme.textTheme.bodyText1.color,
+                            ),
+                            textAlign: TextAlign.center,
+                          ),
+                        ),
+                      )
+                    : Container(),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.04,
+                ),
+                Container(
+                  // margin: EdgeInsets.only(top: 20, left: 20, right: 20),
+                  // alignment: Alignment.center,
+                  height: 80,
+                  decoration: new BoxDecoration(
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(10),
+                    color: gridcolor,
+                  ),
+                  margin: EdgeInsets.symmetric(horizontal: 1.0),
+                  width: MediaQuery.of(context).size.width,
+                  // height: 45,
+                  // decoration: BoxDecoration(
+                  //   borderRadius: BorderRadius.circular(10.0),
+                  //   color: white,
+                  // ),
+                  child: Row(
+                    children: [
+                      Container(
+                        width: MediaQuery.of(context).size.width - 90,
+                        padding: EdgeInsets.only(left: 5),
+                        child: TextField(
+                          controller: _controller,
+                          textAlign: TextAlign.start,
+                          style: GoogleFonts.poppins(
+                            fontSize: 17,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                          onChanged: (value) {
+                            setState(() {
+                              addressError = false;
+                            });
+                          },
+                          decoration: new InputDecoration(
+                            enabledBorder: OutlineInputBorder(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(12.0)),
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 2),
+                            ),
+                            filled: true,
+                            focusedBorder: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                  color: Colors.transparent, width: 2),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(10.0)),
+                            ),
+                            border: InputBorder.none,
+                            hintStyle: TextStyle(color: Colors.white),
+                            hintText: (lang.length != null && lang.length != 0)
+                                ? "  ${userLanguage['enterAddressLable']}"
+                                : '  Enter the Address',
+                          ),
+
+                          // decoration: InputDecoration(
+                          //     hintText: 'Enter the address',
+                          //     hintStyle: TextStyle(
+                          //         color: theme.textTheme.bodyText1.color),
+                          //     suffixIcon: IconButton(
+                          //       onPressed: () {
+                          //         _scan();
+                          //       },
+                          //       icon: Icon(
+                          //         Icons.qr_code_2,
+                          //         color: theme.textTheme.bodyText1.color,
+                          //         size: 30,
+                          //       ),
+                          //     ),
+                          //     contentPadding:
+                          //         EdgeInsets.only(left: 10, top: 10),
+                          //     border: InputBorder.none),
+                          onTap: () {},
+                        ),
+                      ),
+                      Center(
+                        // alignment: Alignment.topCenter,
+                        child: Padding(
+                          padding: EdgeInsets.only(right: 0),
+                          child: Container(
+                            child: IconButton(
+                              icon: Icon(
+                                FontAwesomeIcons.qrcode,
+                                color: white,
+                                // color: AppColors.loginButton,
+                              ),
+                              onPressed: () {
+                                _scan();
+                              },
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                addressError
+                    ? Container(
+                        alignment: Alignment.centerLeft,
+                        margin: EdgeInsets.only(left: 25),
+                        child: Row(
+                          children: [
+                            Icon(
+                              FontAwesomeIcons.exclamationCircle,
+                              size: 17,
+                              color: Colors.red,
+                            ),
+                            SizedBox(width: 8),
+                            Container(
+                              margin: EdgeInsets.only(top: 5),
+                              child: Text(
+                                errorMessage,
+                                style: TextStyle(
+                                  fontFamily: 'Avenir',
+                                  color: Colors.red,
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w500,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          ],
+                        ))
+                    : Container(),
+                SizedBox(
+                  height: 10,
+                ),
+                Container(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.only(top: 30),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.only(left: 50),
+                              child: Container(
+                                height: 11,
+                                width: 11,
+                                child: Icon(
+                                  Icons.fmd_bad_rounded,
+                                  color: blue1,
+                                  size: 10,
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Text(
+                              (lang.length != null &&
+                                      lang.length != 0 &&
+                                      userLanguage[
+                                              'pleasedoublecheckyourrecipientsinfo'] !=
+                                          null)
+                                  ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
+                                  : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
+                              style: GoogleFonts.poppins(
+                                fontSize: 9,
+                                fontWeight: FontWeight.w500,
+                                color: Colors.grey,
+                              ),
+                            )
+                          ],
+                        ),
+                      ),
+                      SizedBox(
+                        height: 20,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width * 0.8,
+                        height: MediaQuery.of(context).size.height * 0.07,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                            color: blue1),
+                        child: TextButton(
+                          onPressed: sending
+                              ? null
+                              : () {
+                                  if (_amount.text == '') {
+                                    setState(() {
+                                      errorMessage2 = 'Please enter amount';
+                                      amountError = true;
+                                      sending = false;
+                                    });
+                                  } else if (_controller.text == '') {
+                                    setState(() {
+                                      errorMessage = 'Please enter address';
+                                      addressError = true;
+                                    });
+                                  } else if (ValidateETH()
+                                      .isValidEthereumAddress(
+                                          _controller.text)) {
+                                    sendTransaction(_amount.text);
+                                  } else {
+                                    setState(() {
+                                      errorMessage = 'Not a valid address';
+                                      addressError = true;
+                                    });
+                                  }
+                                },
+                          child: Text(
+                            sending ? "SENDING" : "SEND NOW",
+                            style: GoogleFonts.poppins(
+                                color: white,
+                                fontSize: 15,
+                                fontWeight: FontWeight.w700),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ));
+  }
+
+  _showVirutalkeyboardMobile() {
+    showModalBottomSheet(
+      backgroundColor: backgroundcolor,
+      isScrollControlled: true,
+      context: context,
+      shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.vertical(top: Radius.circular(25.0))),
+      builder: (builder) {
+        return new Wrap(
+          children: <Widget>[
+            Container(
+              padding: EdgeInsets.all(18),
+              // color: backgroundcolor,
+              child: receiveContent(),
+            ),
+          ],
+        );
+      },
     );
+  }
+
+  Widget receiveContent() {
+    return Container(
+      color: backgroundcolor,
+      child: VirtualKeyboard(
+          height: 260,
+          textColor: Colors.white,
+          fontSize: 20,
+          type: VirtualKeyboardType.Numeric,
+          onKeyPress: _onKeyPress),
+    );
+  }
+
+  bool shiftEnabled = false;
+  bool isNumericMode = true;
+  _onKeyPress(VirtualKeyboardKey key) {
+    if (key.keyType == VirtualKeyboardKeyType.String) {
+      _amount.text = _amount.text + (shiftEnabled ? key.capsText : key.text);
+    } else if (key.keyType == VirtualKeyboardKeyType.Action) {
+      switch (key.action) {
+        case VirtualKeyboardKeyAction.Backspace:
+          if (_amount.text != '' && _amount.text.length == 0) return;
+          _amount.text = _amount.text.substring(0, _amount.text.length - 1);
+          break;
+        case VirtualKeyboardKeyAction.Return:
+          _amount.text = _amount.text + '\n';
+          break;
+        case VirtualKeyboardKeyAction.Space:
+          _amount.text = _amount.text + key.text;
+          break;
+        case VirtualKeyboardKeyAction.Shift:
+          shiftEnabled = !shiftEnabled;
+          break;
+        default:
+      }
+    }
+    // Update the screen
+    setState(() {});
   }
 
   void transactionAlert(bool success) {
