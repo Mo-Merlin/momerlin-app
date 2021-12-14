@@ -221,7 +221,8 @@ class _WalletScreenState extends State<WalletScreen>
                                           Align(
                                             alignment: Alignment.topLeft,
                                             child: Positioned(
-                                              top: 300,left: 50,
+                                              top: 300,
+                                              left: 50,
                                               child: Column(
                                                 children: [
                                                   SizedBox(
@@ -820,7 +821,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                             height: 20,
                                                           ),
                                                           Container(
-                                                            width: 150,
+                                                            width: 100,
                                                             child: transactions[
                                                                             index]
                                                                         [
@@ -859,7 +860,7 @@ class _WalletScreenState extends State<WalletScreen>
                                                             child: Column(
                                                               crossAxisAlignment:
                                                                   CrossAxisAlignment
-                                                                      .start,
+                                                                      .end,
                                                               children: [
                                                                 Text(
                                                                   amount1

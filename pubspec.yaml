@@ -59,7 +59,7 @@ dependencies:
   flutter_barcode_scanner: ^2.0.0
   #qrflutter
   qr_flutter: ^4.0.0
-  qrscan: ^0.3.2
+  # qrscan: ^0.3.2
   #clipboard
   clipboard: ^0.1.3
   #virutual keyboard

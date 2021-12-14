@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'dart:convert';
 import 'package:decimal/decimal.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,7 @@ import 'package:momerlin/wallet%20api/validate_address.dart';
 import 'package:momerlin/wallet%20api/wallet_api.dart';
 import '/models/ethgas.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
+// import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:http/http.dart' as http;
 import 'package:web3dart/web3dart.dart';
 // import '../../remote/wallet api/validate_address.dart';
@@ -60,14 +62,49 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
     super.dispose();
   }
 
-  Future _scan() async {
-    await Permission.camera.request();
-    String barcode = await scanner.scan();
-    if (barcode == null) {
-    } else {
-      this._controller.text = barcode;
+  // Future _scan() async {
+  Future<void> _scan() async {
+    String barcodeScanRes;
+    var response;
+    // Platform messages may fail, so we use a try/catch PlatformException.
+    try {
+      barcodeScanRes = await FlutterBarcodeScanner.scanBarcode(
+          "#ff6666", "Cancel", true, ScanMode.QR);
+      if (barcodeScanRes == '-1') {
+        setState(() {
+          this._controller.text = '';
+        });
+      } else {
+        response = barcodeScanRes.split(":");
+        if (response.length == 2) {
+          setState(() {
+            this._controller.text = response[1].toString();
+            _controller = TextEditingController(text: this._controller.text);
+          });
+        } else {
+          setState(() {
+            this._controller.text = barcodeScanRes;
+            _controller = TextEditingController(text: barcodeScanRes);
+          });
+        }
+      }
+    } on PlatformException {
+      barcodeScanRes = 'Failed to get platform version.';
     }
   }
+  // If the widget was removed from the tree while the asynchronous platform
+  // message was in flight, we want to discard the reply rather than calling
+  // setState to update our non-existent appearance.
+  // if (!mounted) return;
+  // }
+
+  // await Permission.camera.request();
+  // String barcode = await scanner.scan();
+  // if (barcode == null) {
+  // } else {
+  //   this._controller.text = barcode;
+  // }
+  // }
 
   var etherAmountMain,
       etherAmountTest,
@@ -151,17 +188,15 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
           sending = false;
         });
         Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => WalletFinal()));
+            context, MaterialPageRoute(builder: (context) => WalletFinal()));
         // transactionAlert(true);s
         print("Payment success");
       } else {
         setState(() {
           sending = false;
         });
-       
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text('Payment failed'),
           backgroundColor: Colors.red,
         ));
@@ -172,10 +207,10 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
       setState(() {
         sending = false;
       });
-       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          content: Text('Insufficient balance'),
-          backgroundColor: Colors.red,
-        ));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text('Insufficient balance'),
+        backgroundColor: Colors.red,
+      ));
       // Scaffold
       //   .of(context)
       //   .showSnackBar(SnackBar(content: Text('Insufficient balance'),backgroundColor: Colors.red,));
@@ -483,54 +518,53 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
                                 height: 10,
                               ),
                               Align(
-                                  alignment: Alignment.center,
-                                  child: Container(
-                                      height: 40,
-                                      margin: EdgeInsets.only(top: 15),
-                                      padding:
-                                          EdgeInsets.symmetric(horizontal: 30),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(50),
-                                          color: blue1),
-                                      child: TextButton(
-                                        onPressed: sending
-                                            ? null
-                                            : () {
-                                                if (_amount.text == '') {
-                                                  setState(() {
-                                                    errorMessage2 =
-                                                        'Please enter amount';
-                                                    amountError = true;
-                                                    sending = true;
-                                                  });
-                                                } else if (_controller.text ==
-                                                    '') {
-                                                  setState(() {
-                                                    errorMessage =
-                                                        'Please enter address';
-                                                    addressError = true;
-                                                  });
-                                                } else if (ValidateETH()
-                                                    .isValidEthereumAddress(
-                                                        _controller.text)) {
-                                                   sendTransaction(_amount.text);
-                                                } else {
-                                                  setState(() {
-                                                    errorMessage =
-                                                        'Not a valid address';
-                                                    addressError = true;
-                                                  });
-                                                }
-                                              },
-                                        child: Text(
-                                          sending ? "Sending" : "Send",
-                                          style: GoogleFonts.poppins(
-                                              color: white,
-                                              fontSize: 15,
-                                              fontWeight: FontWeight.w500),
-                                        ),
-                                      ),),),
+                                alignment: Alignment.center,
+                                child: Container(
+                                  height: 40,
+                                  margin: EdgeInsets.only(top: 15),
+                                  padding: EdgeInsets.symmetric(horizontal: 30),
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(50),
+                                      color: blue1),
+                                  child: TextButton(
+                                    onPressed: sending
+                                        ? null
+                                        : () {
+                                            if (_amount.text == '') {
+                                              setState(() {
+                                                errorMessage2 =
+                                                    'Please enter amount';
+                                                amountError = true;
+                                                sending = true;
+                                              });
+                                            } else if (_controller.text == '') {
+                                              setState(() {
+                                                errorMessage =
+                                                    'Please enter address';
+                                                addressError = true;
+                                              });
+                                            } else if (ValidateETH()
+                                                .isValidEthereumAddress(
+                                                    _controller.text)) {
+                                              sendTransaction(_amount.text);
+                                            } else {
+                                              setState(() {
+                                                errorMessage =
+                                                    'Not a valid address';
+                                                addressError = true;
+                                              });
+                                            }
+                                          },
+                                    child: Text(
+                                      sending ? "Sending" : "Send",
+                                      style: GoogleFonts.poppins(
+                                          color: white,
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ),
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -544,7 +578,6 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
     );
   }
 
-  
   void transactionAlert(bool success) {
     ThemeData theme = Theme.of(this.context);
     Navigator.pop(context);
