@@ -714,7 +714,13 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
       }
     }
     // Update the screen
-    setState(() {});
+    setState(() {
+      if (_amount.text != '') {
+        setState(() {
+          amountError = false;
+        });
+      }
+    });
   }
 
   void transactionAlert(bool success) {

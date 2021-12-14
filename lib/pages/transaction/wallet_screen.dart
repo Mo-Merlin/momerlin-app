@@ -301,9 +301,9 @@ class _WalletScreenState extends State<WalletScreen>
                                               (lang.length != null &&
                                                       lang.length != 0 &&
                                                       userLanguage[
-                                                              'yourBalanceIs'] !=
+                                                              'yourBalance'] !=
                                                           null)
-                                                  ? "${userLanguage['yourBalanceIs']}"
+                                                  ? "${userLanguage['yourBalance']}"
                                                   : "Your balance",
                                               style: GoogleFonts.poppins(
                                                 fontSize: 25,
@@ -727,29 +727,27 @@ class _WalletScreenState extends State<WalletScreen>
                                     ),
                                   )
                                 : transactions[0] == 'Empty'
-                                    ? Expanded(
-                                        child: Container(
-                                          padding: EdgeInsets.only(top: 140),
-                                          alignment: Alignment.center,
-                                          child: Column(
-                                            children: [
-                                              Text(
-                                                'No transaction history',
-                                                overflow: TextOverflow.ellipsis,
-                                                style: TextStyle(
-                                                  color: white,
-                                                  fontWeight: FontWeight.normal,
-                                                  fontSize: 16,
-                                                ),
+                                    ? Container(
+                                        padding: EdgeInsets.only(top: 140),
+                                        alignment: Alignment.center,
+                                        child: Column(
+                                          children: [
+                                            Text(
+                                              'No transaction history',
+                                              overflow: TextOverflow.ellipsis,
+                                              style: TextStyle(
+                                                color: white,
+                                                fontWeight: FontWeight.normal,
+                                                fontSize: 16,
                                               ),
-                                              SizedBox(
-                                                height: 200,
-                                              ),
-                                            ],
-                                          ),
+                                            ),
+                                            SizedBox(
+                                              height: 200,
+                                            ),
+                                          ],
                                         ),
                                       )
-                                    : Expanded(
+                                    : Container(
                                         child: ListView.builder(
                                           shrinkWrap: true,
                                           padding: EdgeInsets.only(
