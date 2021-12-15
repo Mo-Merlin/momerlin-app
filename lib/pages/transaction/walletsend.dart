@@ -202,7 +202,7 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
           content: Text('Payment failed'),
           backgroundColor: Colors.red,
         ));
-        transactionAlert(false);
+        //transactionAlert(false);
         print("Payment failed");
       }
     } else {
