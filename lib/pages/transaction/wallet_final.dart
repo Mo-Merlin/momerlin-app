@@ -7,7 +7,8 @@ import 'package:momerlin/theme/theme.dart';
 // import 'package:momerlin/walletcreation.dart/wallethome.dart';
 
 class WalletFinal extends StatefulWidget {
-  const WalletFinal({Key key}) : super(key: key);
+  final res;
+  const WalletFinal({Key key,this.res}) : super(key: key);
 
   @override
   _WalletFinalState createState() => _WalletFinalState();
@@ -49,7 +50,7 @@ class _WalletFinalState extends State<WalletFinal> {
               color: button,
               child: IconButton(
                   onPressed: () {
-                    Navigator.pop(context);
+                    Navigator.pop(context,true);
                   },
                   icon: Icon(
                     Icons.arrow_back,
@@ -73,7 +74,7 @@ class _WalletFinalState extends State<WalletFinal> {
                       right: 40,
                     ),
                     width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.52,
+                    height: MediaQuery.of(context).size.height * 0.62,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(30),
                       color: button,
@@ -121,7 +122,7 @@ class _WalletFinalState extends State<WalletFinal> {
                         ),
                         GestureDetector(
                           onTap: () {
-                            Navigator.pop(context);
+                            Navigator.pop(context,true);
                             // Navigator.push(
                             //     context,
                             //     MaterialPageRoute(

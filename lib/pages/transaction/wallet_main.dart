@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import 'package:momerlin/data/localstorage/userdata_source.dart';
 import 'package:momerlin/data/userrepository.dart';
 import 'package:momerlin/models/transactionmodel.dart';
+import 'package:momerlin/pages/transaction/walletsend.dart';
 //import 'package:momerlin/tabscreen/tabscreen.dart';
 import 'package:momerlin/theme/theme.dart';
 import 'package:plaid_flutter/plaid_flutter.dart';
@@ -545,11 +546,14 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                               children: [
                                 GestureDetector(
                                   onTap: () {
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             WalletSend()));
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => SendWallet(
+                                          myAddress: user[0]["walletaddress"],
+                                          coin: "Ethereum",
+                                        ),
+                                      ));
                                   },
                                   child: Container(
                                       height:
@@ -601,13 +605,13 @@ class _WalletTwoState extends State<WalletTwo> with WidgetsBindingObserver {
                                                     fontWeight: FontWeight.w400,
                                                   ),
                                                 ),
-                                                Text("   (Coming Soon)   ",
-                                                    style: GoogleFonts.poppins(
-                                                      fontSize: 10,
-                                                      color: text1,
-                                                    ),
-                                                    textAlign:
-                                                        TextAlign.center),
+                                                // Text("   (Coming Soon)   ",
+                                                //     style: GoogleFonts.poppins(
+                                                //       fontSize: 10,
+                                                //       color: text1,
+                                                //     ),
+                                                //     textAlign:
+                                                //         TextAlign.center),
                                               ],
                                             ),
                                           )

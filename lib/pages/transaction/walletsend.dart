@@ -26,8 +26,7 @@ import 'package:web3dart/web3dart.dart';
 class SendWallet extends StatefulWidget {
   final myAddress;
   final coin;
-  final encryptedSeed;
-  const SendWallet({Key key, this.myAddress, this.coin, this.encryptedSeed})
+  const SendWallet({Key key, this.myAddress, this.coin, })
       : super(key: key);
 
   @override
@@ -189,8 +188,10 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
         setState(() {
           sending = false;
         });
-        Navigator.push(
-            context, MaterialPageRoute(builder: (context) => WalletFinal()));
+      var res= await  Navigator.push(
+            context, MaterialPageRoute(builder: (context) => WalletFinal(res:false)));
+            res==true?
+            _amount.text="0":  _amount.text="0";
         // transactionAlert(true);s
         print("Payment success");
       } else {
@@ -374,6 +375,7 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
                       // color: Colors.amber,
                       width: MediaQuery.of(context).size.width * 0.25,
                       child: TextField(
+                        readOnly:true,
                         keyboardType: TextInputType.number,
                         controller: _amount,
                         textAlign: TextAlign.center,
@@ -567,43 +569,43 @@ class _SendWalletState extends State<SendWallet> with TickerProviderStateMixin {
                   width: MediaQuery.of(context).size.width,
                   child: Column(
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.only(top: 30),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.only(left: 50),
-                              child: Container(
-                                height: 11,
-                                width: 11,
-                                child: Icon(
-                                  Icons.fmd_bad_rounded,
-                                  color: blue1,
-                                  size: 10,
-                                ),
-                              ),
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              (lang.length != null &&
-                                      lang.length != 0 &&
-                                      userLanguage[
-                                              'pleasedoublecheckyourrecipientsinfo'] !=
-                                          null)
-                                  ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
-                                  : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
-                              style: GoogleFonts.poppins(
-                                fontSize: 9,
-                                fontWeight: FontWeight.w500,
-                                color: Colors.grey,
-                              ),
-                            )
-                          ],
-                        ),
-                      ),
+                      // Padding(
+                      //   padding: const EdgeInsets.only(top: 30),
+                      //   child: Row(
+                      //     mainAxisAlignment: MainAxisAlignment.start,
+                      //     children: [
+                      //       Padding(
+                      //         padding: const EdgeInsets.only(left: 50),
+                      //         child: Container(
+                      //           height: 11,
+                      //           width: 11,
+                      //           child: Icon(
+                      //             Icons.fmd_bad_rounded,
+                      //             color: blue1,
+                      //             size: 10,
+                      //           ),
+                      //         ),
+                      //       ),
+                      //       SizedBox(
+                      //         width: 10,
+                      //       ),
+                      //       Text(
+                      //         (lang.length != null &&
+                      //                 lang.length != 0 &&
+                      //                 userLanguage[
+                      //                         'pleasedoublecheckyourrecipientsinfo'] !=
+                      //                     null)
+                      //             ? "${userLanguage['pleasedoublecheckyourrecipientsinfo']}"
+                      //             : "PLEASE DOUBLE CHECK YOUR RECIPIENTS INFO",
+                      //         style: GoogleFonts.poppins(
+                      //           fontSize: 9,
+                      //           fontWeight: FontWeight.w500,
+                      //           color: Colors.grey,
+                      //         ),
+                      //       )
+                      //     ],
+                      //   ),
+                      // ),
                       SizedBox(
                         height: 20,
                       ),
